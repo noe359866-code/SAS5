@@ -110,7 +110,10 @@ test('landing: renderiza HTML con el nombre del addon', async () => {
   assert.equal(res.status, 200);
   const html = await res.text();
   assert.match(html, /Addon de Stremio/);
-  assert.match(html, /Configurar e instalar/);
+  assert.match(html, /Tendencias/);
+  assert.match(html, /Explorar por/);
+  assert.match(html, /Instalar en Stremio/);
+  assert.match(html, /image\.tmdb\.org/);
 });
 
 test('configure: 200 HTML con plataformas y estudios', async () => {

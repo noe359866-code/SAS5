@@ -8,7 +8,7 @@
     "dev": "nodemon server.js",
     "dev:worker": "wrangler dev",
     "deploy": "wrangler deploy",
-    "test": "node --test test/smoke.test.js test/worker.test.js"
+    "test": "node --test test/smoke.test.js test/worker.test.js test/configurePage.test.js"
   },
   "keywords": [
     "stremio",

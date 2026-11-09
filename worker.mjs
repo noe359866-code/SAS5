@@ -20,8 +20,9 @@
 
 import config from './lib/config.js';
 import core from './lib/core.js';
-import { renderLanding } from './lib/landingPage.js';
+import { renderHome } from './lib/homePage.js';
 import { renderConfigure } from './lib/configurePage.js';
+import tmdbClient from './lib/tmdb.js';
 import { branding } from './lib/branding.js';
 import userConfig from './lib/userConfig.js';
 import catalogs from './lib/catalogs.js';
@@ -69,6 +70,21 @@ async function serveMeta(type, id, cfg) {
   return jsonResponse(result, 200, config.cacheTtl);
 }
 
+/** Tendencias semanales TMDB (solo si hay clave; si no, estáticos). */
+async function loadTrending() {
+  if (!config.tmdbConfigured) return { movies: null, series: null };
+  try {
+    const [movies, series] = await Promise.all([
+      tmdbClient.trending('movie', config.tmdbLanguage),
+      tmdbClient.trending('tv', config.tmdbLanguage),
+    ]);
+    return { movies, series };
+  } catch (err) {
+    console.error('[Trending] ->', err && err.message);
+    return { movies: null, series: null };
+  }
+}
+
 export default {
   async fetch(request, env, _ctx) {
     try {
@@ -90,31 +106,27 @@ export default {
     const origin = url.origin;
     const host = url.host;
 
-    // ── Landing ───────────────────────────────────────────────
+    // ── Portada estilo streaming (tendencias en vivo si hay TMDB) ─
     if (path === '/' || path === '/api') {
       const accept = request.headers.get('accept') || '';
       if (!accept.includes('text/html') && accept.includes('application/json')) {
         return jsonResponse(core.buildManifest(`${origin}/assets/logo.png`), 200, 300);
       }
-      const manifest = core.buildManifest(`${origin}/assets/logo.png`);
-      const html = renderLanding({
-        manifestUrl: `${origin}/manifest.json`,
-        stremioDeepLink: `stremio://${host}/manifest.json`,
-        manifest,
-        apiStatus: {
-          tmdb: config.tmdbConfigured,
-          omdb: config.omdbConfigured,
-          watchmode: config.watchmodeConfigured,
-          tvdb: config.tvdbConfigured,
-          watchRegion: config.watchRegion,
-        },
+      const trending = await loadTrending();
+      const html = renderHome({
+        origin,
+        host,
+        trendingMovies: trending.movies,
+        trendingSeries: trending.series,
+        apiStatus: { tmdb: config.tmdbConfigured },
       });
       return htmlResponse(html);
     }
 
     // ── Página de configuración ───────────────────────────────
     if (path === '/configure') {
-      return htmlResponse(renderConfigure({ origin, host }));
+      const trending = await loadTrending();
+      return htmlResponse(renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series }));
     }
 
     // ── Branding (logos de plataformas/estudios vía TMDB) ─────
@@ -129,7 +141,7 @@ export default {
         {
           ok: true,
           addon: 'org.comunidad.catalogos.plus',
-          version: '1.1.0',
+          version: '1.2.0',
           runtime: 'cloudflare-workers',
           configurable: true,
           catalogs: core.CATALOGS.length,

@@ -67,7 +67,10 @@ test('landing: HTML con botón de instalación', async () => {
   const res = await get('/', { headers: { Accept: 'text/html' } });
   assert.equal(res.status, 200);
   const html = await res.text();
-  assert.match(html, /Configurar e instalar/);
+  assert.match(html, /Tendencias/);
+  assert.match(html, /Explorar por/);
+  assert.match(html, /Instalar en Stremio/);
+  assert.match(html, /image\.tmdb\.org/);
 });
 
 test('meta: id tvdb explícito con clave dummy devuelve ficha válida (sin red)', async () => {

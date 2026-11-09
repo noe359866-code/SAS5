@@ -17,8 +17,9 @@ const { getRouter } = require('stremio-addon-sdk');
 const addonInterface = require('../addon');
 const config = require('../lib/config');
 const core = require('../lib/core');
-const { renderLanding } = require('../lib/landingPage');
+const { renderHome } = require('../lib/homePage');
 const { renderConfigure } = require('../lib/configurePage');
+const tmdb = require('../lib/tmdb');
 const { branding } = require('../lib/branding');
 const userConfig = require('../lib/userConfig');
 const { PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
@@ -59,7 +60,7 @@ app.get('/healthz', (req, res) => {
   res.json({
     ok: true,
     addon: addonInterface.manifest.id,
-    version: '1.1.0',
+    version: '1.2.0',
     catalogs: addonInterface.manifest.catalogs.length,
     configurable: true,
     sources: {
@@ -75,10 +76,11 @@ app.get('/healthz', (req, res) => {
 });
 
 // 4b. Página de configuración + branding (logos vía TMDB)
-app.get('/configure', (req, res) => {
-  const { baseUrl, host, proto } = requestBase(req);
+app.get('/configure', async (req, res) => {
+  const { baseUrl, host } = requestBase(req);
+  const trending = await loadTrending();
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.send(renderConfigure({ origin: baseUrl, host }));
+  res.send(renderConfigure({ origin: baseUrl, host, trendingMovies: trending.movies, trendingSeries: trending.series }));
 });
 
 app.get('/internal/branding.json', async (req, res) => {
@@ -134,24 +136,32 @@ app.get(['/manifest.json', '/api/manifest.json'], (req, res) => {
 });
 
 // 6. Landing page en la raíz (navegador)
-app.get(['/', '/api'], (req, res, next) => {
+async function loadTrending() {
+  if (!config.tmdbConfigured) return { movies: null, series: null };
+  try {
+    const [movies, series] = await Promise.all([
+      tmdb.trending('movie', config.tmdbLanguage),
+      tmdb.trending('tv', config.tmdbLanguage),
+    ]);
+    return { movies, series };
+  } catch (err) {
+    console.error('[Trending] ->', err.message);
+    return { movies: null, series: null };
+  }
+}
+
+app.get(['/', '/api'], async (req, res, next) => {
   const accept = req.headers.accept || '';
   if (accept.includes('application/json') && !accept.includes('text/html')) return next();
 
-  const { host, proto, baseUrl } = requestBase(req);
-  const manifestUrl = `${baseUrl}/manifest.json`;
-  const stremioDeepLink = `stremio://${host}/manifest.json`;
-  const html = renderLanding({
-    manifestUrl,
-    stremioDeepLink,
-    manifest: { ...addonInterface.manifest, catalogs: addonInterface.manifest.catalogs },
-    apiStatus: {
-      tmdb: config.tmdbConfigured,
-      omdb: config.omdbConfigured,
-      watchmode: config.watchmodeConfigured,
-      tvdb: config.tvdbConfigured,
-      watchRegion: config.watchRegion,
-    },
+  const { host, baseUrl } = requestBase(req);
+  const trending = await loadTrending();
+  const html = renderHome({
+    origin: baseUrl,
+    host,
+    trendingMovies: trending.movies,
+    trendingSeries: trending.series,
+    apiStatus: { tmdb: config.tmdbConfigured },
   });
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.send(html);

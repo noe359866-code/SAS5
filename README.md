@@ -142,7 +142,9 @@ Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
 
 1. Abre `https://tu-dominio/configure` y elige **idioma · región · plataformas · estudios** (con sus logos).
 2. Pulsa **🚀 Instalar en Stremio** — se instala tu manifest personal (`https://tu-dominio/<config>/manifest.json`).
-3. O sin configurar: **⚡ Instalación rápida** desde la landing (todo activado).
+3. O sin configurar: el botón de instalación rápida en la portada (todo activado).
+
+La **portada** muestra tendencias en vivo (con `TMDB_API_KEY`) o posters estáticos de respaldo, igual la página de configuración.
 
 > **Consejo de región:** la cobertura JustWatch en Nicaragua es limitada; si ves pocos catálogos de plataformas, prueba **MX** o **US** en /configure — tendrán mucho más contenido.
 

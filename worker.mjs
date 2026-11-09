@@ -26,11 +26,13 @@ import tmdbClient from './lib/tmdb.js';
 import { branding } from './lib/branding.js';
 import userConfig from './lib/userConfig.js';
 import catalogs from './lib/catalogs.js';
+import streams from './lib/streams.js';
 import logoData from './lib/logoData.js';
 
 const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
 const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+)\.json$/;
 const META_RE = /^\/meta\/(movie|series)\/(.+)\.json$/;
+const STREAM_RE = /^\/stream\/(movie|series)\/(.+)\.json$/;
 const CONFIG_PREFIX_RE = /^\/([A-Za-z0-9_-]{8,512})(\/.*)$/;
 
 function corsHeaders(extra = {}) {
@@ -70,18 +72,24 @@ async function serveMeta(type, id, cfg) {
   return jsonResponse(result, 200, config.cacheTtl);
 }
 
+async function serveStream(type, id, cfg) {
+  const result = await core.handleStream(type, decodeURIComponent(id), cfg);
+  return jsonResponse(result, 200, 3600);
+}
+
 /** Tendencias semanales TMDB (solo si hay clave; si no, estáticos). */
 async function loadTrending() {
-  if (!config.tmdbConfigured) return { movies: null, series: null };
+  if (!config.tmdbConfigured) return { movies: null, series: null, anime: null };
   try {
-    const [movies, series] = await Promise.all([
+    const [movies, series, anime] = await Promise.all([
       tmdbClient.trending('movie', config.tmdbLanguage),
       tmdbClient.trending('tv', config.tmdbLanguage),
+      tmdbClient.animeTrending(config.tmdbLanguage),
     ]);
-    return { movies, series };
+    return { movies, series, anime };
   } catch (err) {
     console.error('[Trending] ->', err && err.message);
-    return { movies: null, series: null };
+    return { movies: null, series: null, anime: null };
   }
 }
 
@@ -118,6 +126,7 @@ export default {
         host,
         trendingMovies: trending.movies,
         trendingSeries: trending.series,
+        trendingAnime: trending.anime,
         apiStatus: { tmdb: config.tmdbConfigured },
       });
       return htmlResponse(html);
@@ -135,13 +144,20 @@ export default {
       return jsonResponse(await branding(lang), 200, 3600);
     }
 
+    // ── Diagnóstico de streams (¿por qué no aparecen resultados?) ──
+    if (path === '/internal/streams-test.json') {
+      const type = url.searchParams.get('type') === 'series' ? 'series' : 'movie';
+      const testId = url.searchParams.get('id') || 'tt1160419';
+      return jsonResponse(await streams.diagnose(type, testId, null), 200, 0);
+    }
+
     // ── Healthcheck ───────────────────────────────────────────
     if (path === '/healthz') {
       return jsonResponse(
         {
           ok: true,
           addon: 'org.comunidad.catalogos.plus',
-          version: '1.1.0',
+          version: '1.2.0',
           runtime: 'cloudflare-workers',
           configurable: true,
           catalogs: core.CATALOGS.length,
@@ -153,7 +169,11 @@ export default {
             omdb: config.omdbConfigured,
             watchmode: config.watchmodeConfigured,
             tvdb: config.tvdbConfigured,
+            knaben: streams.activeProviders(null).includes('knaben'),
+            torlock: streams.activeProviders(null).includes('torlock'),
+            blackholebay: streams.activeProviders(null).includes('blackholebay'),
           },
+          streamProviders: streams.activeProviders(null),
           watchRegion: config.watchRegion,
           watchRegionFallback: config.watchRegionFallback,
         },
@@ -183,11 +203,13 @@ export default {
     if (match) return serveCatalog(match[1], match[2], null);
     match = path.match(META_RE);
     if (match) return serveMeta(match[1], match[2], null);
+    match = path.match(STREAM_RE);
+    if (match) return serveStream(match[1], match[2], null);
 
     // ── Rutas con prefijo de config de usuario: /<cfg>/... ────
     const prefixed = path.match(CONFIG_PREFIX_RE);
     if (prefixed) {
-      const cfg = userConfig.decodeConfig(prefixed[1], catalogs.PLATFORM_KEYS, catalogs.STUDIO_KEYS);
+      const cfg = userConfig.decodeConfig(prefixed[1], catalogs.PLATFORM_KEYS, catalogs.STUDIO_KEYS, streams.PROVIDER_KEYS);
       if (cfg) {
         const rest = prefixed[2].replace(/\/+$/, '') || '/';
         const logoUrl = `${origin}/assets/logo.png`;
@@ -198,6 +220,8 @@ export default {
         if (m2) return serveCatalog(m2[1], m2[2], cfg);
         m2 = rest.match(META_RE);
         if (m2) return serveMeta(m2[1], m2[2], cfg);
+        m2 = rest.match(STREAM_RE);
+        if (m2) return serveStream(m2[1], m2[2], cfg);
       }
       // Prefijo con pinta de config pero inválida → 404 limpio
       return jsonResponse({ error: 'invalid_config', message: 'Config inválida. Vuelve a /configure' }, 404, 0);

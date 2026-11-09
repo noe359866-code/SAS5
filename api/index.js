@@ -23,6 +23,7 @@ const tmdb = require('../lib/tmdb');
 const { branding } = require('../lib/branding');
 const userConfig = require('../lib/userConfig');
 const { PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
+const { PROVIDER_KEYS: STREAM_KEYS, activeProviders, diagnose: diagnoseStreams } = require('../lib/streams');
 
 const app = express();
 
@@ -60,7 +61,7 @@ app.get('/healthz', (req, res) => {
   res.json({
     ok: true,
     addon: addonInterface.manifest.id,
-    version: '1.1.0',
+    version: '1.2.0',
     catalogs: addonInterface.manifest.catalogs.length,
     configurable: true,
     sources: {
@@ -69,7 +70,11 @@ app.get('/healthz', (req, res) => {
       omdb: config.omdbConfigured,
       watchmode: config.watchmodeConfigured,
       tvdb: config.tvdbConfigured,
+      knaben: activeProviders(null).includes('knaben'),
+      torlock: activeProviders(null).includes('torlock'),
+      blackholebay: activeProviders(null).includes('blackholebay'),
     },
+    streamProviders: activeProviders(null),
     watchRegion: config.watchRegion,
     watchRegionFallback: config.watchRegionFallback,
   });
@@ -94,9 +99,15 @@ app.get('/internal/branding.json', async (req, res) => {
   }
 });
 
+app.get('/internal/streams-test.json', async (req, res) => {
+  const type = req.query.type === 'series' ? 'series' : 'movie';
+  const testId = req.query.id || 'tt1160419';
+  res.json(await diagnoseStreams(type, testId, null));
+});
+
 // 4c. Manifest personal con config de usuario (/<base64url>/manifest.json)
 function decodeUserConfig(req, res) {
-  const cfg = userConfig.decodeConfig(req.params.cfg, PLATFORM_KEYS, STUDIO_KEYS);
+  const cfg = userConfig.decodeConfig(req.params.cfg, PLATFORM_KEYS, STUDIO_KEYS, STREAM_KEYS);
   if (!cfg) {
     res.status(404).json({ error: 'invalid_config', message: 'Config inválida. Vuelve a /configure' });
     return null;
@@ -128,6 +139,14 @@ app.get('/:cfg/meta/:type/:id.json', async (req, res) => {
   res.json(result);
 });
 
+app.get('/:cfg/stream/:type/:id.json', async (req, res) => {
+  const cfg = decodeUserConfig(req, res);
+  if (!cfg) return;
+  const result = await core.handleStream(req.params.type, decodeURIComponent(req.params.id), cfg);
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.json(result);
+});
+
 // 5. Manifest dinámico: logo apuntando al host actual
 app.get(['/manifest.json', '/api/manifest.json'], (req, res) => {
   const { baseUrl } = requestBase(req);
@@ -137,16 +156,17 @@ app.get(['/manifest.json', '/api/manifest.json'], (req, res) => {
 
 // 6. Landing page en la raíz (navegador)
 async function loadTrending() {
-  if (!config.tmdbConfigured) return { movies: null, series: null };
+  if (!config.tmdbConfigured) return { movies: null, series: null, anime: null };
   try {
-    const [movies, series] = await Promise.all([
+    const [movies, series, anime] = await Promise.all([
       tmdb.trending('movie', config.tmdbLanguage),
       tmdb.trending('tv', config.tmdbLanguage),
+      tmdb.animeTrending(config.tmdbLanguage),
     ]);
-    return { movies, series };
+    return { movies, series, anime };
   } catch (err) {
     console.error('[Trending] ->', err.message);
-    return { movies: null, series: null };
+    return { movies: null, series: null, anime: null };
   }
 }
 
@@ -161,6 +181,7 @@ app.get(['/', '/api'], async (req, res, next) => {
     host,
     trendingMovies: trending.movies,
     trendingSeries: trending.series,
+    trendingAnime: trending.anime,
     apiStatus: { tmdb: config.tmdbConfigured },
   });
   res.setHeader('Content-Type', 'text/html; charset=utf-8');

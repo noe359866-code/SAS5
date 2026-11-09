@@ -14,5 +14,6 @@ const builder = new addonBuilder(core.buildManifest());
 
 builder.defineCatalogHandler(({ type, id }) => core.handleCatalog(type, id));
 builder.defineMetaHandler(({ type, id }) => core.handleMeta(type, id));
+builder.defineStreamHandler(({ type, id }) => core.handleStream(type, id));
 
 module.exports = builder.getInterface();

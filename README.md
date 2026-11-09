@@ -37,6 +37,7 @@ Metadatos enriquecidos en la ficha:
 │   ├── tvdb.js           # Cliente TheTVDB v4 (login JWT; fichas por IMDb id)
 │   ├── omdb.js           # Cliente OMDB (ratings)
 │   ├── watchmode.js      # Cliente Watchmode (plataformas)
+│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay
 │   ├── catalogs.js       # Definición de catálogos (+ filtrado por config)
 │   ├── userConfig.js     # Codec/validación de config de usuario (base64url)
 │   ├── branding.js       # Logos de plataformas/estudios vía TMDB
@@ -176,6 +177,9 @@ Cada entrada genera automáticamente su catálogo en el manifest (`cine_<key>` /
 | `GET /catalog/:type/:id.json` | Catálogos (`movie`/`series`) |
 | `GET /<config>/catalog/:type/:id.json` | Catálogos con tu config |
 | `GET /meta/:type/:id.json` | Ficha enriquecida (`tt…`, `tmdb:movie:123`, `tvmaze:123`, `tvdb:series:123`) |
+| `GET /stream/:type/:id.json` | Streams torrent de Knaben + Torlock + BlackHoleBay (`tt…`, `tt…:T:E` en series) |
+| `GET /<config>/stream/:type/:id.json` | Streams solo con los proveedores elegidos en tu config |
+| `GET /internal/streams-test.json?id=tt…` | Diagnóstico de streams: título resuelto, query y respuesta por proveedor |
 | `GET /healthz` | Estado del addon y de las fuentes configuradas |
 | `GET /assets/logo.png` | Logo del addon |
 | `GET /` | Landing con instalador de 1 clic |
@@ -186,6 +190,8 @@ Cada entrada genera automáticamente su catálogo en el manifest (`cine_<key>` /
 - **Degradación elegante**: si falta una clave, esa fuente se omite sin romper el resto.
 - **TheTVDB (v4)**: se autentica con `POST /login` → JWT cacheado ~24 días. Alimenta las fichas de series/películas por IMDb id (respaldo cuando TMDB/TVMaze no responden) con nombre/argumento en español si existe la traducción. IDs explícitos soportados: `tvdb:series:123`, `tvdb:movie:123`, `tvdb:123`. TVDB no ofrece un chart público de tendencias, por eso no genera catálogos; si quieres un catálogo por género/cadena de TVDB, dímelo y lo montamos con `/v4/filter`.
 - **Región**: los catálogos "por plataforma" usan `watch_region` = `WATCH_REGION` (por defecto `NI`). Cambia a `MX`/`ES`/`US` según tu país.
+- **Proveedores de contenido (streams)**: Knaben, Torlock y BlackHoleBay no requieren clave. Se consultan en paralelo, se deduplican por infoHash y se cachean 1 h. El título se resuelve desde el IMDb id con TMDB (en inglés, que es lo que indexan los torrents; el original va de segunda pasada), con respaldo TVMaze (series) y **Cinemeta** (sin clave). Control con `STREAM_PROVIDERS`/`STREAM_MAX_RESULTS` y por usuario en `/configure`.
+- **¿No aparecen streams?** 1) Redepliega esta versión y **reinstala el addon en Stremio** — el manifest anterior no declaraba el recurso `stream` y Stremio nunca pide streams a un addon sin él. 2) Abre `/internal/streams-test.json?id=tt1160419` en tu despliegue: indica la etapa que falla (título no resuelto, proveedor caído/bloqueado — Torlock bloquea algunas IPs de datacenter y ofrece whitelisting — o 0 resultados relevantes).
 
 ## 📄 Licencia
 

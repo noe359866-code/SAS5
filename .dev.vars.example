@@ -1,0 +1,10 @@
+# Para desarrollo local con `npm run dev:worker` (wrangler dev).
+# COPIA este archivo a `.dev.vars` y rellena tus claves.
+# `.dev.vars` está en .gitignore y NUNCA debe subirse a GitHub.
+TMDB_API_KEY=
+# TMDB_ACCESS_TOKEN=
+OMDB_API_KEY=
+WATCHMODE_API_KEY=
+TVDB_API_KEY=
+# TVDB_PIN=
+WATCH_REGION=NI

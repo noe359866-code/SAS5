@@ -142,6 +142,13 @@ export default {
       return jsonResponse(await branding(lang), 200, 3600);
     }
 
+    // ── Diagnóstico de streams (¿por qué no aparecen resultados?) ──
+    if (path === '/internal/streams-test.json') {
+      const type = url.searchParams.get('type') === 'series' ? 'series' : 'movie';
+      const testId = url.searchParams.get('id') || 'tt1160419';
+      return jsonResponse(await streams.diagnose(type, testId, null), 200, 0);
+    }
+
     // ── Healthcheck ───────────────────────────────────────────
     if (path === '/healthz') {
       return jsonResponse(

@@ -138,6 +138,23 @@ test('config de usuario: campo streams sobrevive al codec base64url', () => {
   assert.deepEqual(decoded.streams, ['knaben']);
 });
 
+test('buildQuery: título alternativo (original) para la 2ª pasada', () => {
+  const resolved = { title: 'Spirited Away', altTitle: 'Sen to Chihiro no Kamikakushi', year: '2001', season: null, episode: null, mediaType: 'movie' };
+  assert.equal(streams.buildQuery(resolved), 'Spirited Away 2001');
+  assert.equal(streams.buildQuery(resolved, resolved.altTitle), 'Sen to Chihiro no Kamikakushi 2001');
+});
+
+test('isRelevant: coincidencia parcial fuerte con año correcto', () => {
+  const movie = { title: 'The Lord of the Rings', year: '2001', season: null, episode: null, mediaType: 'movie' };
+  assert.equal(streams.isRelevant({ title: 'Lord of the Rings (2001) [1080p]' }, movie), true);
+  assert.equal(streams.isRelevant({ title: 'The Matrix (1999) [1080p]' }, movie), false);
+});
+
+test('diagnose: sin proveedores activos no resuelve ni busca', async () => {
+  const result = await streams.diagnose('movie', 'tt1160419', { streams: [] });
+  assert.equal(result.providers.length, 0);
+});
+
 test('formatSize: bytes legibles', () => {
   assert.equal(streams.formatSize(0), '');
   assert.match(streams.formatSize(2952790016), /GB$/);

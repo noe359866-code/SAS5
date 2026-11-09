@@ -23,7 +23,7 @@ const tmdb = require('../lib/tmdb');
 const { branding } = require('../lib/branding');
 const userConfig = require('../lib/userConfig');
 const { PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
-const { PROVIDER_KEYS: STREAM_KEYS, activeProviders } = require('../lib/streams');
+const { PROVIDER_KEYS: STREAM_KEYS, activeProviders, diagnose: diagnoseStreams } = require('../lib/streams');
 
 const app = express();
 
@@ -97,6 +97,12 @@ app.get('/internal/branding.json', async (req, res) => {
     console.error('[Branding] ->', err.message);
     res.json({ providers: {}, studios: {}, tmdbConfigured: config.tmdbConfigured });
   }
+});
+
+app.get('/internal/streams-test.json', async (req, res) => {
+  const type = req.query.type === 'series' ? 'series' : 'movie';
+  const testId = req.query.id || 'tt1160419';
+  res.json(await diagnoseStreams(type, testId, null));
 });
 
 // 4c. Manifest personal con config de usuario (/<base64url>/manifest.json)

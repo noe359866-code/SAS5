@@ -22,7 +22,7 @@ const { renderConfigure } = require('../lib/configurePage');
 const tmdb = require('../lib/tmdb');
 const { branding } = require('../lib/branding');
 const userConfig = require('../lib/userConfig');
-const { PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
+const { PLATFORM_KEYS, STUDIO_KEYS, PLATFORMS, STUDIOS } = require('../lib/catalogs');
 const { PROVIDER_KEYS: STREAM_KEYS, activeProviders, diagnose: diagnoseStreams } = require('../lib/streams');
 
 const app = express();
@@ -61,8 +61,10 @@ app.get('/healthz', (req, res) => {
   res.json({
     ok: true,
     addon: addonInterface.manifest.id,
-    version: '1.2.0',
+    version: addonInterface.manifest.version,
     catalogs: addonInterface.manifest.catalogs.length,
+    platforms: PLATFORMS.length,
+    studios: STUDIOS.length,
     configurable: true,
     sources: {
       tmdb: config.tmdbConfigured,

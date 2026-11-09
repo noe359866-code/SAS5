@@ -6,8 +6,8 @@ Addon **100% gratuito** para Stremio con catálogos de **películas y series**:
 - ⭐ **Top Valoradas** (TMDB, mínimo de votos configurable)
 - 🍿 **Populares** (TMDB)
 - 🎬 **Página de configuración `/configure`** estilo streaming (inspirada en cinejoy.pk): hero cinematográfico, **explorador de plataformas con logos** (CDN público de TMDB — siempre visibles, incluso sin clave), **estudios con monograma/logo**, idioma, región y catálogos base → genera tu **manifest personal** `/<config>/manifest.json`
-- 📺 **Por plataforma**: Netflix, Prime Video, Disney+, Max (HBO), Apple TV+, Paramount+ (`2303`), Crunchyroll, Hulu, AMC+, MUBI, Tubi, Pluto TV, Peacock, **Starz, MGM+ y YouTube Premium** — películas y series (TMDB Discover con JustWatch providers, con **fallback automático MX→US** si tu región no tiene resultados)
-- 🎥 **Por estudio** (solo películas): Marvel Studios, Pixar, A24, DreamWorks Animation, Studio Ghibli, Warner Bros., Universal, Paramount Pictures y Sony Pictures (TMDB Discover con `with_companies`)
+- 📺 **Por plataforma (30)**: Netflix, Prime Video, Disney+, Max (HBO), Apple TV+, Paramount+, Crunchyroll, Hulu, AMC+, MUBI, Tubi, Pluto TV, Peacock, Starz, MGM+, YouTube Premium, **Plex, Amazon Freevee, The Roku Channel, discovery+, ViX, Claro video, DIRECTV GO, Movistar TV, Filmin Latino, Globoplay, Filmin, Atresplayer, SkyShowtime y Movistar Plus+** — películas y series (TMDB Discover con JustWatch providers, con **fallback automático MX→US** si tu región no tiene resultados)
+- 🎥 **Por estudio (21)** · películas **y series**: Marvel Studios, Pixar, Walt Disney Pictures, Disney Animation, Lucasfilm, Warner Bros., New Line Cinema, Universal, Illumination, DreamWorks Animation, Paramount Pictures, Sony Pictures, 20th Century Studios, MGM, Lionsgate, A24, Blumhouse, Studio Ghibli, Toei Animation, MAPPA y Kyoto Animation (TMDB Discover con `with_companies`, en `/discover/movie` y `/discover/tv`)
 - 📡 **Series · En TV hoy** (TVMaze, **gratis y sin clave**)
 
 Metadatos enriquecidos en la ficha:
@@ -161,11 +161,20 @@ El servidor Express (`api/index.js`) también despliega en Vercel tal cual:
 
 Edita `lib/catalogs.js`:
 
-- `PLATFORMS`: añade `{ key, name, providers }` — el `providers` es el **JustWatch provider id** de TMDB (puedes combinar varios con `|`, p. ej. `'1899|384'` para Max). [Lista completa de proveedores TMDB](https://www.themoviedb.org/talk/5-themoviedb-api-v3?page=1) o `/watch/providers/movie` en su API.
+- `PLATFORMS`: añade `{ key, name, providers }` — el `providers` es el **JustWatch provider id** de TMDB (puedes combinar varios con `|`, p. ej. `'1899|384|1825'` para Max). [Lista completa de proveedores TMDB](https://www.themoviedb.org/talk/5-themoviedb-api-v3?page=1) o `/watch/providers/movie` en su API.
 - `STUDIOS`: añade `{ key, name, company }` con el **company id** de TMDB (búscalo en `/search/company`).
 
-Cada entrada genera automáticamente su catálogo en el manifest (`cine_<key>` / `tv_<key>`).
+Cada entrada genera automáticamente **dos** catálogos en el manifest (`cine_<key>` y `tv_<key>`), salvo los estudios,
+que generan `cine_estudio_<key>` + `tv_estudio_<key>`.
 
+Logos: añade el logo en `lib/staticLogos.js` (`STATIC_PROVIDER_LOGOS` por `key`, `STATIC_STUDIO_LOGOS` por
+**company id**) para que se vea en `/configure` incluso sin `TMDB_API_KEY`; si no hay logo estático se usa el
+monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB.
+
+> ⚠️ **Límite de 8 KB del manifest.** La addonCollection API de Stremio rechaza manifests de más de 8 KB, así que
+> el catálogo completo (con todo seleccionado en `/configure`) **no puede crecer indefinidamente**. Ahora mismo son
+> ~121 catálogos / ~7,9 KB: si añades plataformas o estudios, quita otros o acorta nombres, y verifica con
+> `npm test` (el test de tamaño falla si te pasas).
 ## 🔌 Endpoints
 
 | Ruta | Descripción |

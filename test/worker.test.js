@@ -128,7 +128,10 @@ test('manifest personal: filtra catálogos según config', async () => {
   const manifest = await res.json();
   assert.equal(manifest.name, 'Catálogos+ · MX');
   const ids = manifest.catalogs.map((c) => c.id).sort();
-  assert.deepEqual(ids, ['cine_estudio_marvel', 'cine_netflix', 'cine_tendencias', 'tv_netflix', 'tv_tendencias']);
+  assert.deepEqual(ids, [
+    'cine_estudio_marvel', 'cine_netflix', 'cine_tendencias',
+    'tv_estudio_marvel', 'tv_netflix', 'tv_tendencias',
+  ]);
   assert.equal(manifest.behaviorHints.configurable, true);
 });
 

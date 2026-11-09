@@ -213,6 +213,12 @@ export default {
       if (cfg) {
         const rest = prefixed[2].replace(/\/+$/, '') || '/';
         const logoUrl = `${origin}/assets/logo.png`;
+        // Stremio abre /<tu-config>/configure al pulsar "Configurar":
+        // debe abrir el configurador con TU región/selección ya cargada.
+        if (rest === '/configure') {
+          const trending = await loadTrending();
+          return htmlResponse(renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series, initialCfg: cfg }));
+        }
         if (rest === '/manifest.json') {
           return jsonResponse(core.buildManifest(logoUrl, cfg), 200, 300);
         }

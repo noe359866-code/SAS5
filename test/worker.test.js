@@ -142,6 +142,17 @@ test('catalog deshabilitado por config: lista vacía aunque el catálogo exista'
   assert.deepEqual(body.metas, []);
 });
 
+test('configure con config: /<cfg>/configure abre con la región del usuario cargada', async () => {
+  const cfg = Buffer.from(
+    JSON.stringify({ lang: 'es', region: 'MX', platforms: ['netflix'], studios: [], base: ['tendencias'], streams: ['knaben'] })
+  ).toString('base64url');
+  const res = await get('/' + cfg + '/configure', { headers: { Accept: 'text/html' } });
+  assert.equal(res.status, 200);
+  const html = await res.text();
+  assert.match(html, /"region":"MX"/); // INITIAL precargado en la página
+  assert.match(html, /Región de plataformas/);
+});
+
 test('config inválida: 404 invalid_config', async () => {
   const res = await get('/bm90LWpzb24/manifest.json'); // base64url de "not-json"
   assert.equal(res.status, 404);

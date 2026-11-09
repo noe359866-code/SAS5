@@ -19,11 +19,14 @@ Metadatos enriquecidos en la ficha:
 ## 📁 Estructura
 
 ```text
-├── addon.js              # Manifest + handlers catalog/meta
-├── api/index.js          # Express + SDK router + landing + /healthz
-├── server.js             # Arranque local (npm start)
+├── worker.mjs            # Cloudflare Worker (entrypoint principal)
+├── wrangler.toml         # Config del Worker (vars no secretas)
+├── addon.js              # Manifest + handlers SDK (Node/Vercel)
+├── api/index.js          # Express: servidor local / Vercel
+├── server.js             # Arranque local Node (npm start)
 ├── lib/
-│   ├── config.js         # Variables de entorno
+│   ├── config.js         # Config compartida Node/Workers (reload por request)
+│   ├── core.js           # Núcleo agnóstico: manifest + handlers
 │   ├── cache.js          # Caché en memoria con TTL
 │   ├── http.js           # fetch JSON con timeout
 │   ├── tmdb.js           # Cliente TMDB (+ resolución IMDb ids)
@@ -32,11 +35,14 @@ Metadatos enriquecidos en la ficha:
 │   ├── watchmode.js      # Cliente Watchmode (plataformas)
 │   ├── catalogs.js       # Definición de TODOS los catálogos
 │   ├── meta.js           # Constructor de metadatos multi-fuente
+│   ├── logoData.js       # Logo PNG embebido (base64) para el Worker
 │   └── landingPage.js    # Landing visual
 ├── assets/logo.png       # Logo del addon
-├── test/smoke.test.js    # Tests offline (sin claves ni red)
-├── vercel.json           # Despliegue serverless en Vercel
-└── .env.example          # Plantilla de variables
+├── test/                 # Tests offline (smoke + worker)
+├── vercel.json           # Alternativa: despliegue serverless en Vercel
+├── .env.example          # Plantilla de variables (Node)
+├── .dev.vars.example     # Plantilla de secrets (wrangler dev)
+└── README.md
 ```
 
 ## ⚙️ 1. Instalar y configurar
@@ -65,8 +71,9 @@ Edita `.env`:
 ## ▶️ 2. Ejecutar
 
 ```bash
-npm start          # http://localhost:7000
-npm test           # tests offline
+npm start          # servidor Node local → http://localhost:7000
+npm run dev:worker # Worker local (workerd) → http://localhost:8787
+npm test           # tests offline (servidor y Worker)
 ```
 
 - Landing: `http://localhost:7000/` (botón "Instalar en Stremio")
@@ -76,16 +83,62 @@ npm test           # tests offline
 
 Instalación en la app: **Add-ons → pegar la URL del manifest → Instalar**.
 
-## 🚀 3. Desplegar en Vercel (gratis)
+## ☁️ 3. Desplegar en Cloudflare Workers (recomendado)
 
-1. Sube el repo a GitHub.
-2. En [vercel.com](https://vercel.com) → **Add New → Project** → importa el repo.
-3. En **Environment Variables** añade al menos `TMDB_API_KEY` (y las opcionales que uses). `ADDON_BASE_URL=https://tu-proyecto.vercel.app` mejora el logo del manifest.
-4. **Deploy**. Tu manifest público quedará en `https://tu-proyecto.vercel.app/manifest.json`.
+El Worker sirve todo el addon (manifest, catálogos, metadatos, landing y logo embebido) sin dependencias externas. Plan **free** suficiente.
 
-### Instalación con un clic
+### 3.1 Instalar y autenticar wrangler
 
-Visita `https://tu-proyecto.vercel.app/` y pulsa **🚀 Instalar en Stremio**.
+```bash
+npx wrangler login
+```
+
+### 3.2 Configurar tus claves como **secrets**
+
+Las claves **nunca van en `wrangler.toml` ni en Git** — se suben como secrets:
+
+```bash
+npx wrangler secret put TMDB_API_KEY        # obligatoria (o TMDB_ACCESS_TOKEN)
+npx wrangler secret put OMDB_API_KEY        # opcional: ratings
+npx wrangler secret put WATCHMODE_API_KEY   # opcional: dónde ver en streaming
+```
+
+También puedes añadirlas en el dashboard: **Cloudflare → Workers & Pages → catalogos-plus → Settings → Variables and Secrets**.
+
+Las variables **no secretas** van en `wrangler.toml` (`WATCH_REGION = "NI"`, `ADDON_NAME`, `TMDB_MIN_VOTE_COUNT`, `CACHE_TTL_SECONDS`) y puedes editarlas con seguridad.
+
+> **TVMaze no requiere clave** — el catálogo "Series · En TV hoy" funciona sin configurar nada.
+
+### 3.3 Desarrollo local del Worker
+
+```bash
+cp .dev.vars.example .dev.vars   # pon tus claves para desarrollo local
+npm run dev:worker               # http://localhost:8787
+```
+
+### 3.4 Desplegar
+
+```bash
+npm run deploy                   # = npx wrangler deploy
+```
+
+Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
+
+- **Manifest (para instalar en Stremio):** `https://catalogos-plus.tu-subdominio.workers.dev/manifest.json`
+- **Landing con botón de 1 clic:** `https://catalogos-plus.tu-subdominio.workers.dev/`
+- **Healthcheck:** `https://catalogos-plus.tu-subdominio.workers.dev/healthz`
+
+### 3.5 Instalar en Stremio
+
+Abre la landing → **🚀 Instalar en Stremio**, o en la app: **Add-ons → pegar la URL del manifest → Instalar**.
+
+## ▲ Alternativa: Vercel (serverless Node)
+
+El servidor Express (`api/index.js`) también despliega en Vercel tal cual:
+
+1. Sube el repo a GitHub → **vercel.com → Add New → Project** → importa el repo.
+2. Añade `TMDB_API_KEY` (y opcionales) en **Environment Variables**.
+3. Deploy → manifest en `https://tu-proyecto.vercel.app/manifest.json`.
 
 ## 🧰 4. Añadir/quitar plataformas o estudios
 
@@ -100,10 +153,11 @@ Cada entrada genera automáticamente su catálogo en el manifest (`cine_<key>` /
 
 | Ruta | Descripción |
 | :--- | :--- |
-| `GET /manifest.json` | Manifest (logo resuelto contra el host actual) |
+| `GET /manifest.json` | Manifest (logo embebido/resuelto contra el host actual) |
 | `GET /catalog/:type/:id.json` | Catálogos (`movie`/`series`) |
 | `GET /meta/:type/:id.json` | Ficha enriquecida (`tt…`, `tmdb:movie:123`, `tvmaze:123`) |
 | `GET /healthz` | Estado del addon y de las fuentes configuradas |
+| `GET /assets/logo.png` | Logo del addon |
 | `GET /` | Landing con instalador de 1 clic |
 
 ## 📝 Notas

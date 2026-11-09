@@ -16,6 +16,7 @@ const { getRouter } = require('stremio-addon-sdk');
 
 const addonInterface = require('../addon');
 const config = require('../lib/config');
+const core = require('../lib/core');
 const { renderLanding } = require('../lib/landingPage');
 
 const app = express();
@@ -66,12 +67,11 @@ app.get('/healthz', (req, res) => {
   });
 });
 
-// 5. Manifest dinámico: inyecta el logo apuntando al host actual
+// 5. Manifest dinámico: logo apuntando al host actual
 app.get(['/manifest.json', '/api/manifest.json'], (req, res) => {
   const { baseUrl } = requestBase(req);
-  const manifest = { ...addonInterface.manifest, logo: `${baseUrl}/assets/logo.png` };
   res.setHeader('Cache-Control', 'public, max-age=300');
-  res.json(manifest);
+  res.json(core.buildManifest(`${baseUrl}/assets/logo.png`));
 });
 
 // 6. Landing page en la raíz (navegador)

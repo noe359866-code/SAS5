@@ -5,8 +5,8 @@ Addon **100% gratuito** para Stremio con catálogos de **películas y series**:
 - 🔥 **Tendencias** de la semana (TMDB)
 - ⭐ **Top Valoradas** (TMDB, mínimo de votos configurable)
 - 🍿 **Populares** (TMDB)
-- ⚙️ **Página de configuración** (`/configure`): elige **idioma** (es, es-MX, en, pt-BR…), **región** (NI, MX, US, ES, AR y 12 países más), **plataformas** y **estudios con sus logos** (vía TMDB) → genera tu **manifest personal** `/<config>/manifest.json`
-- 📺 **Por plataforma**: Netflix, Prime Video, Disney+, Max (HBO), Apple TV+, Paramount+, Crunchyroll, Hulu, AMC+, MUBI, Tubi, Pluto TV y Peacock — películas y series (TMDB Discover con JustWatch providers, con **fallback automático MX→US** si tu región no tiene resultados)
+- 🎬 **Página de configuración `/configure`** estilo streaming (inspirada en cinejoy.pk): hero cinematográfico, **explorador de plataformas con logos** (CDN público de TMDB — siempre visibles, incluso sin clave), **estudios con monograma/logo**, idioma, región y catálogos base → genera tu **manifest personal** `/<config>/manifest.json`
+- 📺 **Por plataforma**: Netflix, Prime Video, Disney+, Max (HBO), Apple TV+, Paramount+ (`2303`), Crunchyroll, Hulu, AMC+, MUBI, Tubi, Pluto TV, Peacock, **Starz, MGM+ y YouTube Premium** — películas y series (TMDB Discover con JustWatch providers, con **fallback automático MX→US** si tu región no tiene resultados)
 - 🎥 **Por estudio** (solo películas): Marvel Studios, Pixar, A24, DreamWorks Animation, Studio Ghibli, Warner Bros., Universal, Paramount Pictures y Sony Pictures (TMDB Discover con `with_companies`)
 - 📡 **Series · En TV hoy** (TVMaze, **gratis y sin clave**)
 

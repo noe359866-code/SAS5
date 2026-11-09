@@ -141,7 +141,7 @@ export default {
         {
           ok: true,
           addon: 'org.comunidad.catalogos.plus',
-          version: '1.2.0',
+          version: '1.1.0',
           runtime: 'cloudflare-workers',
           configurable: true,
           catalogs: core.CATALOGS.length,

@@ -60,7 +60,7 @@ app.get('/healthz', (req, res) => {
   res.json({
     ok: true,
     addon: addonInterface.manifest.id,
-    version: '1.2.0',
+    version: '1.1.0',
     catalogs: addonInterface.manifest.catalogs.length,
     configurable: true,
     sources: {

@@ -110,5 +110,30 @@ test('landing: renderiza HTML con el nombre del addon', async () => {
   assert.equal(res.status, 200);
   const html = await res.text();
   assert.match(html, /Addon de Stremio/);
-  assert.match(html, /Instalar en Stremio/);
+  assert.match(html, /Configurar e instalar/);
+});
+
+test('configure: 200 HTML con plataformas y estudios', async () => {
+  const res = await fetch(`${baseUrl}/configure`);
+  assert.equal(res.status, 200);
+  const html = await res.text();
+  assert.match(html, /Plataformas/);
+  assert.match(html, /AMC\+/);
+  assert.match(html, /Hulu/);
+});
+
+test('manifest personal: filtra catálogos según config (Express)', async () => {
+  const cfg = Buffer.from(
+    JSON.stringify({ lang: 'es-MX', region: 'MX', platforms: ['netflix'], studios: [], base: ['tendencias'] })
+  ).toString('base64url');
+  const res = await fetch(`${baseUrl}/${cfg}/manifest.json`);
+  assert.equal(res.status, 200);
+  const manifest = await res.json();
+  assert.equal(manifest.catalogs.length, 4);
+  assert.equal(manifest.name, 'Catálogos+ · MX');
+});
+
+test('config inválida: 404 (Express)', async () => {
+  const res = await fetch(`${baseUrl}/bm90LWpzb24/manifest.json`);
+  assert.equal(res.status, 404);
 });

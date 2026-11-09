@@ -18,6 +18,10 @@ const addonInterface = require('../addon');
 const config = require('../lib/config');
 const core = require('../lib/core');
 const { renderLanding } = require('../lib/landingPage');
+const { renderConfigure } = require('../lib/configurePage');
+const { branding } = require('../lib/branding');
+const userConfig = require('../lib/userConfig');
+const { PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
 
 const app = express();
 
@@ -55,8 +59,9 @@ app.get('/healthz', (req, res) => {
   res.json({
     ok: true,
     addon: addonInterface.manifest.id,
-    version: addonInterface.manifest.version,
+    version: '1.1.0',
     catalogs: addonInterface.manifest.catalogs.length,
+    configurable: true,
     sources: {
       tmdb: config.tmdbConfigured,
       tvmaze: true,
@@ -66,6 +71,58 @@ app.get('/healthz', (req, res) => {
     },
     watchRegion: config.watchRegion,
   });
+});
+
+// 4b. Página de configuración + branding (logos vía TMDB)
+app.get('/configure', (req, res) => {
+  const { baseUrl, host, proto } = requestBase(req);
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(renderConfigure({ origin: baseUrl, host }));
+});
+
+app.get('/internal/branding.json', async (req, res) => {
+  try {
+    const lang = req.query.lang;
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.json(await branding(lang));
+  } catch (err) {
+    console.error('[Branding] ->', err.message);
+    res.json({ providers: {}, studios: {}, tmdbConfigured: config.tmdbConfigured });
+  }
+});
+
+// 4c. Manifest personal con config de usuario (/<base64url>/manifest.json)
+function decodeUserConfig(req, res) {
+  const cfg = userConfig.decodeConfig(req.params.cfg, PLATFORM_KEYS, STUDIO_KEYS);
+  if (!cfg) {
+    res.status(404).json({ error: 'invalid_config', message: 'Config inválida. Vuelve a /configure' });
+    return null;
+  }
+  return cfg;
+}
+
+app.get('/:cfg/manifest.json', (req, res) => {
+  const cfg = decodeUserConfig(req, res);
+  if (!cfg) return;
+  const { baseUrl } = requestBase(req);
+  res.setHeader('Cache-Control', 'public, max-age=300');
+  res.json(core.buildManifest(`${baseUrl}/assets/logo.png`, cfg));
+});
+
+app.get('/:cfg/catalog/:type/:id.json', async (req, res) => {
+  const cfg = decodeUserConfig(req, res);
+  if (!cfg) return;
+  const result = await core.handleCatalog(req.params.type, decodeURIComponent(req.params.id), cfg);
+  res.setHeader('Cache-Control', `public, max-age=${config.cacheTtl}`);
+  res.json(result);
+});
+
+app.get('/:cfg/meta/:type/:id.json', async (req, res) => {
+  const cfg = decodeUserConfig(req, res);
+  if (!cfg) return;
+  const result = await core.handleMeta(req.params.type, decodeURIComponent(req.params.id), cfg);
+  res.setHeader('Cache-Control', `public, max-age=${config.cacheTtl}`);
+  res.json(result);
 });
 
 // 5. Manifest dinámico: logo apuntando al host actual

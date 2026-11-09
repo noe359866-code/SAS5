@@ -67,7 +67,7 @@ test('landing: HTML con botón de instalación', async () => {
   const res = await get('/', { headers: { Accept: 'text/html' } });
   assert.equal(res.status, 200);
   const html = await res.text();
-  assert.match(html, /Instalar en Stremio/);
+  assert.match(html, /Configurar e instalar/);
 });
 
 test('meta: id tvdb explícito con clave dummy devuelve ficha válida (sin red)', async () => {
@@ -94,4 +94,54 @@ test('404: ruta inexistente en JSON', async () => {
   assert.equal(res.status, 404);
   const body = await res.json();
   assert.equal(body.error, 'not_found');
+});
+
+test('configure: página con plataformas, estudios, idioma y región', async () => {
+  const res = await get('/configure', { headers: { Accept: 'text/html' } });
+  assert.equal(res.status, 200);
+  const html = await res.text();
+  assert.match(html, /Plataformas/);
+  assert.match(html, /Hulu/);
+  assert.match(html, /AMC\+/);
+  assert.match(html, /Idioma/);
+  assert.match(html, /Región/);
+  assert.match(html, /Instalar en Stremio/);
+});
+
+test('branding: sin TMDB devuelve objetos vacíos sin romper', async () => {
+  const res = await get('/internal/branding.json');
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.ok(body.providers && typeof body.providers === 'object');
+  assert.ok(body.studios && typeof body.studios === 'object');
+});
+
+test('manifest personal: filtra catálogos según config', async () => {
+  const cfg = Buffer.from(
+    JSON.stringify({ lang: 'es-MX', region: 'MX', platforms: ['netflix'], studios: ['marvel'], base: ['tendencias'] })
+  ).toString('base64url');
+  const res = await get('/' + cfg + '/manifest.json');
+  assert.equal(res.status, 200);
+  const manifest = await res.json();
+  assert.equal(manifest.name, 'Catálogos+ · MX');
+  const ids = manifest.catalogs.map((c) => c.id).sort();
+  assert.deepEqual(ids, ['cine_estudio_marvel', 'cine_netflix', 'cine_tendencias', 'tv_netflix', 'tv_tendencias']);
+  assert.equal(manifest.behaviorHints.configurable, true);
+});
+
+test('catalog deshabilitado por config: lista vacía aunque el catálogo exista', async () => {
+  const cfg = Buffer.from(
+    JSON.stringify({ lang: 'es', region: 'MX', platforms: [], studios: [], base: ['tendencias'] })
+  ).toString('base64url');
+  const res = await get('/' + cfg + '/catalog/movie/cine_netflix.json');
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.deepEqual(body.metas, []);
+});
+
+test('config inválida: 404 invalid_config', async () => {
+  const res = await get('/bm90LWpzb24/manifest.json'); // base64url de "not-json"
+  assert.equal(res.status, 404);
+  const body = await res.json();
+  assert.equal(body.error, 'invalid_config');
 });

@@ -2,29 +2,35 @@
  * Catálogos+ — Addon de Stremio para Cloudflare Workers
  *
  * Rutas:
- *   GET /                         Landing con botón "Instalar en Stremio"
- *   GET /manifest.json            Manifest (logo → este Worker)
- *   GET /assets/logo.png          Logo embebido en el bundle (sin KV ni R2)
- *   GET /healthz                  Estado del addon y de las fuentes
- *   GET /catalog/:type/:id.json   Catálogos (movie/series)
- *   GET /meta/:type/:id.json      Metadatos enriquecidos
+ *   GET /                               Landing
+ *   GET /configure                      Configurar idioma/región/plataformas/estudios
+ *   GET /manifest.json                  Manifest por defecto (todo activado)
+ *   GET /<config>/manifest.json         Manifest personal (config base64url)
+ *   GET /catalog/:type/:id.json         Catálogos (config por defecto)
+ *   GET /<config>/catalog/:type/:id.json
+ *   GET /meta/:type/:id.json
+ *   GET /<config>/meta/:type/:id.json
+ *   GET /internal/branding.json         Logos de plataformas/estudios (vía TMDB)
+ *   GET /healthz · GET /assets/logo.png
  *
- * Variables (Settings → Variables and Secrets, o `wrangler secret put`):
- *   TMDB_API_KEY | TMDB_ACCESS_TOKEN  (una de las dos, obligatoria para catálogos)
- *   OMDB_API_KEY                      (ratings IMDb/RT/Metacritic)
- *   WATCHMODE_API_KEY                 (dónde ver en streaming)
- *   TVDB_API_KEY                      (fichas TheTVDB por IMDb id; TVDB_PIN opcional)
- *   WATCH_REGION = NI | MX | ES | US… (región JustWatch)
- *   ADDON_NAME, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS (opcionales)
- * TVMaze no requiere clave.
+ * Secrets/vars del Worker (ver wrangler.toml y README):
+ *   TMDB_API_KEY | TMDB_ACCESS_TOKEN, OMDB_API_KEY, WATCHMODE_API_KEY, TVDB_API_KEY (+TVDB_PIN)
+ *   Vars no secretas: WATCH_REGION, ADDON_NAME, TMDB_LANGUAGE, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS
  */
 
 import config from './lib/config.js';
 import core from './lib/core.js';
 import { renderLanding } from './lib/landingPage.js';
+import { renderConfigure } from './lib/configurePage.js';
+import { branding } from './lib/branding.js';
+import userConfig from './lib/userConfig.js';
+import catalogs from './lib/catalogs.js';
 import logoData from './lib/logoData.js';
 
 const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
+const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+)\.json$/;
+const META_RE = /^\/meta\/(movie|series)\/(.+)\.json$/;
+const CONFIG_PREFIX_RE = /^\/([A-Za-z0-9_-]{8,512})(\/.*)$/;
 
 function corsHeaders(extra = {}) {
   return {
@@ -53,9 +59,18 @@ function htmlResponse(html) {
   });
 }
 
+async function serveCatalog(type, id, cfg) {
+  const result = await core.handleCatalog(type, decodeURIComponent(id), cfg);
+  return jsonResponse(result, 200, config.cacheTtl);
+}
+
+async function serveMeta(type, id, cfg) {
+  const result = await core.handleMeta(type, decodeURIComponent(id), cfg);
+  return jsonResponse(result, 200, config.cacheTtl);
+}
+
 export default {
   async fetch(request, env, _ctx) {
-    // Aplica las vars/secrets del Worker a la configuración compartida
     try {
       config.reload(env || {});
     } catch (err) {
@@ -65,7 +80,6 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, '') || '/';
 
-    // Preflight CORS
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: corsHeaders() });
     }
@@ -74,27 +88,39 @@ export default {
     }
 
     const origin = url.origin;
-    const logoUrl = `${origin}/assets/logo.png`;
+    const host = url.host;
 
     // ── Landing ───────────────────────────────────────────────
     if (path === '/' || path === '/api') {
       const accept = request.headers.get('accept') || '';
       if (!accept.includes('text/html') && accept.includes('application/json')) {
-        return jsonResponse(core.buildManifest(logoUrl), 200, 300);
+        return jsonResponse(core.buildManifest(`${origin}/assets/logo.png`), 200, 300);
       }
-      const manifest = core.buildManifest(logoUrl);
+      const manifest = core.buildManifest(`${origin}/assets/logo.png`);
       const html = renderLanding({
         manifestUrl: `${origin}/manifest.json`,
-        stremioDeepLink: `stremio://${url.host}/manifest.json`,
+        stremioDeepLink: `stremio://${host}/manifest.json`,
         manifest,
         apiStatus: {
           tmdb: config.tmdbConfigured,
           omdb: config.omdbConfigured,
           watchmode: config.watchmodeConfigured,
+          tvdb: config.tvdbConfigured,
           watchRegion: config.watchRegion,
         },
       });
       return htmlResponse(html);
+    }
+
+    // ── Página de configuración ───────────────────────────────
+    if (path === '/configure') {
+      return htmlResponse(renderConfigure({ origin, host }));
+    }
+
+    // ── Branding (logos de plataformas/estudios vía TMDB) ─────
+    if (path === '/internal/branding.json') {
+      const lang = url.searchParams.get('lang') || undefined;
+      return jsonResponse(await branding(lang), 200, 3600);
     }
 
     // ── Healthcheck ───────────────────────────────────────────
@@ -103,10 +129,13 @@ export default {
         {
           ok: true,
           addon: 'org.comunidad.catalogos.plus',
-          version: '1.0.0',
+          version: '1.1.0',
           runtime: 'cloudflare-workers',
-          catalogs: (core.CATALOGS || []).length,
-            sources: {
+          configurable: true,
+          catalogs: core.CATALOGS.length,
+          platforms: catalogs.PLATFORMS.length,
+          studios: catalogs.STUDIOS.length,
+          sources: {
             tmdb: config.tmdbConfigured,
             tvmaze: true,
             omdb: config.omdbConfigured,
@@ -120,11 +149,6 @@ export default {
       );
     }
 
-    // ── Manifest ──────────────────────────────────────────────
-    if (path === '/manifest.json') {
-      return jsonResponse(core.buildManifest(logoUrl), 200, 300);
-    }
-
     // ── Logo embebido ─────────────────────────────────────────
     if (path === '/assets/logo.png' || path === '/logo.png') {
       return new Response(LOGO_BYTES, {
@@ -136,24 +160,38 @@ export default {
       });
     }
 
-    // ── Catálogos ─────────────────────────────────────────────
-    let match = path.match(/^\/catalog\/(movie|series|anime)\/([^/]+)\.json$/);
-    if (match) {
-      const [, type, id] = match;
-      const result = await core.handleCatalog(type, decodeURIComponent(id));
-      return jsonResponse(result, 200, config.cacheTtl);
+    // ── Manifest por defecto ──────────────────────────────────
+    if (path === '/manifest.json') {
+      return jsonResponse(core.buildManifest(`${origin}/assets/logo.png`), 200, 300);
     }
 
-    // ── Metadatos ─────────────────────────────────────────────
-    match = path.match(/^\/meta\/(movie|series)\/(.+)\.json$/);
-    if (match) {
-      const [, type, id] = match;
-      const result = await core.handleMeta(type, decodeURIComponent(id));
-      return jsonResponse(result, 200, config.cacheTtl);
+    // ── Catálogos / Metadatos con config por defecto ──────────
+    let match = path.match(CATALOG_RE);
+    if (match) return serveCatalog(match[1], match[2], null);
+    match = path.match(META_RE);
+    if (match) return serveMeta(match[1], match[2], null);
+
+    // ── Rutas con prefijo de config de usuario: /<cfg>/... ────
+    const prefixed = path.match(CONFIG_PREFIX_RE);
+    if (prefixed) {
+      const cfg = userConfig.decodeConfig(prefixed[1], catalogs.PLATFORM_KEYS, catalogs.STUDIO_KEYS);
+      if (cfg) {
+        const rest = prefixed[2].replace(/\/+$/, '') || '/';
+        const logoUrl = `${origin}/assets/logo.png`;
+        if (rest === '/manifest.json') {
+          return jsonResponse(core.buildManifest(logoUrl, cfg), 200, 300);
+        }
+        let m2 = rest.match(CATALOG_RE);
+        if (m2) return serveCatalog(m2[1], m2[2], cfg);
+        m2 = rest.match(META_RE);
+        if (m2) return serveMeta(m2[1], m2[2], cfg);
+      }
+      // Prefijo con pinta de config pero inválida → 404 limpio
+      return jsonResponse({ error: 'invalid_config', message: 'Config inválida. Vuelve a /configure' }, 404, 0);
     }
 
     return jsonResponse(
-      { error: 'not_found', message: 'Ruta no encontrada. Prueba /manifest.json' },
+      { error: 'not_found', message: 'Ruta no encontrada. Prueba /manifest.json o /configure' },
       404,
       0
     );

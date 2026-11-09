@@ -5,7 +5,8 @@ Addon **100% gratuito** para Stremio con catálogos de **películas y series**:
 - 🔥 **Tendencias** de la semana (TMDB)
 - ⭐ **Top Valoradas** (TMDB, mínimo de votos configurable)
 - 🍿 **Populares** (TMDB)
-- 📺 **Por plataforma**: Netflix, Prime Video, Disney+, Max (HBO), Apple TV+, Paramount+, Star+ y Crunchyroll — películas y series (TMDB Discover con JustWatch providers)
+- ⚙️ **Página de configuración** (`/configure`): elige **idioma** (es, es-MX, en, pt-BR…), **región** (NI, MX, US, ES, AR y 12 países más), **plataformas** y **estudios con sus logos** (vía TMDB) → genera tu **manifest personal** `/<config>/manifest.json`
+- 📺 **Por plataforma**: Netflix, Prime Video, Disney+, Max (HBO), Apple TV+, Paramount+, Star+, Crunchyroll, **Hulu, AMC+, MUBI, Tubi, Pluto TV y Peacock** — películas y series (TMDB Discover con JustWatch providers)
 - 🎥 **Por estudio** (solo películas): Marvel Studios, Pixar, A24, DreamWorks Animation, Studio Ghibli, Warner Bros., Universal, Paramount Pictures y Sony Pictures (TMDB Discover con `with_companies`)
 - 📡 **Series · En TV hoy** (TVMaze, **gratis y sin clave**)
 
@@ -36,7 +37,10 @@ Metadatos enriquecidos en la ficha:
 │   ├── tvdb.js           # Cliente TheTVDB v4 (login JWT; fichas por IMDb id)
 │   ├── omdb.js           # Cliente OMDB (ratings)
 │   ├── watchmode.js      # Cliente Watchmode (plataformas)
-│   ├── catalogs.js       # Definición de TODOS los catálogos
+│   ├── catalogs.js       # Definición de catálogos (+ filtrado por config)
+│   ├── userConfig.js     # Codec/validación de config de usuario (base64url)
+│   ├── branding.js       # Logos de plataformas/estudios vía TMDB
+│   ├── configurePage.js  # Página /configure (elegir idioma/región/plataformas/estudios)
 │   ├── meta.js           # Constructor de metadatos multi-fuente
 │   ├── logoData.js       # Logo PNG embebido (base64) para el Worker
 │   └── landingPage.js    # Landing visual
@@ -65,7 +69,8 @@ Edita `.env`:
 | `WATCHMODE_API_KEY` | Opcional | Dónde ver en streaming — [api.watchmode.com](https://api.watchmode.com/) |
 | `TVDB_API_KEY` | Opcional | Fichas TheTVDB por IMDb id — [thetvdb.com/api-information](https://thetvdb.com/api-information) |
 | `TVDB_PIN` | Opcional | PIN de suscriptor si tu plan de TVDB lo requiere |
-| `WATCH_REGION` | Opcional | Región JustWatch: `NI` (defecto), `MX`, `ES`, `US`, `AR`... |
+| `WATCH_REGION` | Opcional | Región JustWatch por defecto: `NI` (defecto), `MX`, `ES`, `US`, `AR`... El usuario puede cambiarla en /configure |
+| `TMDB_LANGUAGE` | Opcional | Idioma por defecto de fichas/catálogos: `es` (defecto), `es-MX`, `en`, `pt-BR`... |
 | `ADDON_NAME` / `ADDON_BASE_URL` | Opcional | Nombre y URL pública (logo en el manifest) |
 | `TMDB_MIN_VOTE_COUNT` | Opcional | Mínimo de votos para "Top Valoradas" (defecto `500`) |
 | `CACHE_TTL_SECONDS` | Opcional | TTL de caché (defecto `21600` = 6h) |
@@ -135,7 +140,11 @@ Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
 
 ### 3.5 Instalar en Stremio
 
-Abre la landing → **🚀 Instalar en Stremio**, o en la app: **Add-ons → pegar la URL del manifest → Instalar**.
+1. Abre `https://tu-dominio/configure` y elige **idioma · región · plataformas · estudios** (con sus logos).
+2. Pulsa **🚀 Instalar en Stremio** — se instala tu manifest personal (`https://tu-dominio/<config>/manifest.json`).
+3. O sin configurar: **⚡ Instalación rápida** desde la landing (todo activado).
+
+> **Consejo de región:** la cobertura JustWatch en Nicaragua es limitada; si ves pocos catálogos de plataformas, prueba **MX** o **US** en /configure — tendrán mucho más contenido.
 
 ## ▲ Alternativa: Vercel (serverless Node)
 
@@ -158,8 +167,12 @@ Cada entrada genera automáticamente su catálogo en el manifest (`cine_<key>` /
 
 | Ruta | Descripción |
 | :--- | :--- |
-| `GET /manifest.json` | Manifest (logo embebido/resuelto contra el host actual) |
+| `GET /configure` | Página de configuración (idioma, región, plataformas, estudios, logos) |
+| `GET /<config>/manifest.json` | Manifest personal según la config elegida |
+| `GET /internal/branding.json` | Logos de plataformas/estudios (vía TMDB) para /configure |
+| `GET /manifest.json` | Manifest por defecto (todo activado) |
 | `GET /catalog/:type/:id.json` | Catálogos (`movie`/`series`) |
+| `GET /<config>/catalog/:type/:id.json` | Catálogos con tu config |
 | `GET /meta/:type/:id.json` | Ficha enriquecida (`tt…`, `tmdb:movie:123`, `tvmaze:123`, `tvdb:series:123`) |
 | `GET /healthz` | Estado del addon y de las fuentes configuradas |
 | `GET /assets/logo.png` | Logo del addon |

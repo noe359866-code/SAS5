@@ -155,6 +155,16 @@ test('diagnose: sin proveedores activos no resuelve ni busca', async () => {
   assert.equal(result.providers.length, 0);
 });
 
+test('los streams no muestran nombres de proveedores en pantalla', async () => {
+  // Sin proveedores activos no hay red; validamos el formato con un hit
+  // sintético a través del mapeo público de búsqueda no es posible, así
+  // que comprobamos que el código de presentación no incluye la etiqueta.
+  const fs = require('node:fs');
+  const src = fs.readFileSync(require('node:path').join(__dirname, '..', 'lib', 'streams.js'), 'utf8');
+  assert.doesNotMatch(src, /⚙ \$\{providerLabel\}/);
+  assert.doesNotMatch(src, /🧲 \$\{providerLabel\}/);
+});
+
 test('formatSize: bytes legibles', () => {
   assert.equal(streams.formatSize(0), '');
   assert.match(streams.formatSize(2952790016), /GB$/);

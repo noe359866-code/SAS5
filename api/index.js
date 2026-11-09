@@ -115,6 +115,17 @@ function decodeUserConfig(req, res) {
   return cfg;
 }
 
+// Stremio abre /<tu-config>/configure al pulsar "Configurar": el
+// configurador debe abrirse con TU región/selección ya cargada.
+app.get('/:cfg/configure', async (req, res) => {
+  const cfg = decodeUserConfig(req, res);
+  if (!cfg) return;
+  const { baseUrl, host } = requestBase(req);
+  const trending = await loadTrending();
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(renderConfigure({ origin: baseUrl, host, trendingMovies: trending.movies, trendingSeries: trending.series, initialCfg: cfg }));
+});
+
 app.get('/:cfg/manifest.json', (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;

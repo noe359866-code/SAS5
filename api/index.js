@@ -156,16 +156,17 @@ app.get(['/manifest.json', '/api/manifest.json'], (req, res) => {
 
 // 6. Landing page en la raíz (navegador)
 async function loadTrending() {
-  if (!config.tmdbConfigured) return { movies: null, series: null };
+  if (!config.tmdbConfigured) return { movies: null, series: null, anime: null };
   try {
-    const [movies, series] = await Promise.all([
+    const [movies, series, anime] = await Promise.all([
       tmdb.trending('movie', config.tmdbLanguage),
       tmdb.trending('tv', config.tmdbLanguage),
+      tmdb.animeTrending(config.tmdbLanguage),
     ]);
-    return { movies, series };
+    return { movies, series, anime };
   } catch (err) {
     console.error('[Trending] ->', err.message);
-    return { movies: null, series: null };
+    return { movies: null, series: null, anime: null };
   }
 }
 
@@ -180,6 +181,7 @@ app.get(['/', '/api'], async (req, res, next) => {
     host,
     trendingMovies: trending.movies,
     trendingSeries: trending.series,
+    trendingAnime: trending.anime,
     apiStatus: { tmdb: config.tmdbConfigured },
   });
   res.setHeader('Content-Type', 'text/html; charset=utf-8');

@@ -79,16 +79,17 @@ async function serveStream(type, id, cfg) {
 
 /** Tendencias semanales TMDB (solo si hay clave; si no, estáticos). */
 async function loadTrending() {
-  if (!config.tmdbConfigured) return { movies: null, series: null };
+  if (!config.tmdbConfigured) return { movies: null, series: null, anime: null };
   try {
-    const [movies, series] = await Promise.all([
+    const [movies, series, anime] = await Promise.all([
       tmdbClient.trending('movie', config.tmdbLanguage),
       tmdbClient.trending('tv', config.tmdbLanguage),
+      tmdbClient.animeTrending(config.tmdbLanguage),
     ]);
-    return { movies, series };
+    return { movies, series, anime };
   } catch (err) {
     console.error('[Trending] ->', err && err.message);
-    return { movies: null, series: null };
+    return { movies: null, series: null, anime: null };
   }
 }
 
@@ -125,6 +126,7 @@ export default {
         host,
         trendingMovies: trending.movies,
         trendingSeries: trending.series,
+        trendingAnime: trending.anime,
         apiStatus: { tmdb: config.tmdbConfigured },
       });
       return htmlResponse(html);

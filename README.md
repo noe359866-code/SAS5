@@ -12,6 +12,8 @@ Addon **100% gratuito** para Stremio con catálogos de **películas y series**:
 Metadatos enriquecidos en la ficha:
 
 - 🎞️ Ficha principal, póster, fondo, géneros, reparto y dirección → **TMDB**
+- 📡 Argumento, géneros y canales → **TVMaze** (funciona siempre, sin clave)
+- 🗂️ Fichas de series/películas por IMDb id (respaldo multi-fuente, con español) → **TheTVDB v4**
 - ⭐ Valoraciones **IMDb · Rotten Tomatoes · Metacritic** → **OMDB**
 - 📺 **Dónde ver en streaming** ("Disponible en NI: Netflix · Prime Video") → **Watchmode**
 - 📡 Argumento, géneros y canales → **TVMaze** (funciona siempre)
@@ -31,6 +33,7 @@ Metadatos enriquecidos en la ficha:
 │   ├── http.js           # fetch JSON con timeout
 │   ├── tmdb.js           # Cliente TMDB (+ resolución IMDb ids)
 │   ├── tvmaze.js         # Cliente TVMaze (web schedule, lookup por IMDb)
+│   ├── tvdb.js           # Cliente TheTVDB v4 (login JWT; fichas por IMDb id)
 │   ├── omdb.js           # Cliente OMDB (ratings)
 │   ├── watchmode.js      # Cliente Watchmode (plataformas)
 │   ├── catalogs.js       # Definición de TODOS los catálogos
@@ -60,6 +63,8 @@ Edita `.env`:
 | `TMDB_ACCESS_TOKEN` | Alternativa | Token v4 "API Read Access Token" (`eyJ...`) |
 | `OMDB_API_KEY` | Recomendada | Ratings IMDb/RT/Metacritic — [omdbapi.com/apikey.aspx](https://www.omdbapi.com/apikey.aspx) |
 | `WATCHMODE_API_KEY` | Opcional | Dónde ver en streaming — [api.watchmode.com](https://api.watchmode.com/) |
+| `TVDB_API_KEY` | Opcional | Fichas TheTVDB por IMDb id — [thetvdb.com/api-information](https://thetvdb.com/api-information) |
+| `TVDB_PIN` | Opcional | PIN de suscriptor si tu plan de TVDB lo requiere |
 | `WATCH_REGION` | Opcional | Región JustWatch: `NI` (defecto), `MX`, `ES`, `US`, `AR`... |
 | `ADDON_NAME` / `ADDON_BASE_URL` | Opcional | Nombre y URL pública (logo en el manifest) |
 | `TMDB_MIN_VOTE_COUNT` | Opcional | Mínimo de votos para "Top Valoradas" (defecto `500`) |
@@ -155,7 +160,7 @@ Cada entrada genera automáticamente su catálogo en el manifest (`cine_<key>` /
 | :--- | :--- |
 | `GET /manifest.json` | Manifest (logo embebido/resuelto contra el host actual) |
 | `GET /catalog/:type/:id.json` | Catálogos (`movie`/`series`) |
-| `GET /meta/:type/:id.json` | Ficha enriquecida (`tt…`, `tmdb:movie:123`, `tvmaze:123`) |
+| `GET /meta/:type/:id.json` | Ficha enriquecida (`tt…`, `tmdb:movie:123`, `tvmaze:123`, `tvdb:series:123`) |
 | `GET /healthz` | Estado del addon y de las fuentes configuradas |
 | `GET /assets/logo.png` | Logo del addon |
 | `GET /` | Landing con instalador de 1 clic |
@@ -164,6 +169,7 @@ Cada entrada genera automáticamente su catálogo en el manifest (`cine_<key>` /
 
 - **Caché**: catálogos 6h por defecto; ids externos 7 días; OMDB 24h; Watchmode 12h. En serverless cada instancia tiene su propia caché.
 - **Degradación elegante**: si falta una clave, esa fuente se omite sin romper el resto.
+- **TheTVDB (v4)**: se autentica con `POST /login` → JWT cacheado ~24 días. Alimenta las fichas de series/películas por IMDb id (respaldo cuando TMDB/TVMaze no responden) con nombre/argumento en español si existe la traducción. IDs explícitos soportados: `tvdb:series:123`, `tvdb:movie:123`, `tvdb:123`. TVDB no ofrece un chart público de tendencias, por eso no genera catálogos; si quieres un catálogo por género/cadena de TVDB, dímelo y lo montamos con `/v4/filter`.
 - **Región**: los catálogos "por plataforma" usan `watch_region` = `WATCH_REGION` (por defecto `NI`). Cambia a `MX`/`ES`/`US` según tu país.
 
 ## 📄 Licencia

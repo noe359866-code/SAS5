@@ -70,6 +70,19 @@ test('landing: HTML con botón de instalación', async () => {
   assert.match(html, /Instalar en Stremio/);
 });
 
+test('meta: id tvdb explícito con clave dummy devuelve ficha válida (sin red)', async () => {
+  const envTvdb = { ...env, TVDB_API_KEY: 'dummy-key-inexistente' };
+  const res = await worker.fetch(
+    new Request('http://worker.local/meta/series/tvdb:series:121361.json'),
+    envTvdb,
+    {}
+  );
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.equal(body.meta.id, 'tvdb:series:121361');
+  assert.ok(body.meta.name);
+});
+
 test('preflight OPTIONS: 204 con CORS', async () => {
   const res = await get('/manifest.json', { method: 'OPTIONS' });
   assert.equal(res.status, 204);

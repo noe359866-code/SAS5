@@ -62,6 +62,7 @@ app.get('/healthz', (req, res) => {
       tvmaze: true,
       omdb: config.omdbConfigured,
       watchmode: config.watchmodeConfigured,
+      tvdb: config.tvdbConfigured,
     },
     watchRegion: config.watchRegion,
   });
@@ -90,6 +91,7 @@ app.get(['/', '/api'], (req, res, next) => {
       tmdb: config.tmdbConfigured,
       omdb: config.omdbConfigured,
       watchmode: config.watchmodeConfigured,
+      tvdb: config.tvdbConfigured,
       watchRegion: config.watchRegion,
     },
   });

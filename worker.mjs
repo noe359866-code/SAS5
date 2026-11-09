@@ -13,6 +13,7 @@
  *   TMDB_API_KEY | TMDB_ACCESS_TOKEN  (una de las dos, obligatoria para catálogos)
  *   OMDB_API_KEY                      (ratings IMDb/RT/Metacritic)
  *   WATCHMODE_API_KEY                 (dónde ver en streaming)
+ *   TVDB_API_KEY                      (fichas TheTVDB por IMDb id; TVDB_PIN opcional)
  *   WATCH_REGION = NI | MX | ES | US… (región JustWatch)
  *   ADDON_NAME, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS (opcionales)
  * TVMaze no requiere clave.
@@ -105,11 +106,12 @@ export default {
           version: '1.0.0',
           runtime: 'cloudflare-workers',
           catalogs: (core.CATALOGS || []).length,
-          sources: {
+            sources: {
             tmdb: config.tmdbConfigured,
             tvmaze: true,
             omdb: config.omdbConfigured,
             watchmode: config.watchmodeConfigured,
+            tvdb: config.tvdbConfigured,
           },
           watchRegion: config.watchRegion,
         },

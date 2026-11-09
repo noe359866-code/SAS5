@@ -70,6 +70,7 @@ app.get('/healthz', (req, res) => {
       tvdb: config.tvdbConfigured,
     },
     watchRegion: config.watchRegion,
+    watchRegionFallback: config.watchRegionFallback,
   });
 });
 

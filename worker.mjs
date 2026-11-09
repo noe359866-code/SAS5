@@ -143,6 +143,7 @@ export default {
             tvdb: config.tvdbConfigured,
           },
           watchRegion: config.watchRegion,
+          watchRegionFallback: config.watchRegionFallback,
         },
         200,
         0

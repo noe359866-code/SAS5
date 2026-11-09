@@ -76,3 +76,24 @@ test('config completa (todo marcado en /configure) cabe y decodifica', () => {
   assert.deepEqual(decoded.streams.sort(), [...streams.PROVIDER_KEYS].sort());
   assert.equal(decoded.region, 'MX');
 });
+
+test('landing y /configure comparten el sistema de diseño y no dejan plantillas sin resolver', () => {
+  const { renderHome } = require('../lib/homePage');
+  const home = renderHome({ origin: 'https://addon.example', host: 'addon.example', apiStatus: { tmdb: false } });
+  const conf = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  for (const [label, html] of [['landing', home], ['configure', conf]]) {
+    assert.equal(/\$\{/.test(html), false, `${label}: quedan placeholders sin resolver`);
+    assert.match(html, /--brand:\s*#7c5cff/, `${label}: sin tokens del tema`);
+    assert.match(html, /--grad:\s*linear-gradient/, `${label}: sin degradado de marca`);
+    assert.match(html, /class="nav"/, `${label}: sin barra de navegación`);
+    assert.match(html, /class="page-glow"/, `${label}: sin fondo decorativo`);
+    assert.match(html, /prefers-reduced-motion/, `${label}: no respeta reduced-motion`);
+    assert.match(html, /<meta name="viewport"/, `${label}: sin viewport móvil`);
+  }
+  // El control segmentado y el buscador siguen existiendo en la portada.
+  assert.match(home, /class="tab active"/);
+  assert.match(home, /id="homeSearch"/);
+  // La barra fija de instalación sigue existiendo en /configure.
+  assert.match(conf, /id="installBtnFooter"/);
+  assert.match(conf, /id="manifestUrl"/);
+});

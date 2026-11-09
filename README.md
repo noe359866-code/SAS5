@@ -5,7 +5,8 @@ Addon **100% gratuito** para Stremio con catálogos de **películas y series**:
 - 🔥 **Tendencias** de la semana (TMDB)
 - ⭐ **Top Valoradas** (TMDB, mínimo de votos configurable)
 - 🍿 **Populares** (TMDB)
-- 🎬 **Página de configuración `/configure`** estilo streaming (inspirada en cinejoy.pk): hero cinematográfico, **explorador de plataformas con logos** (CDN público de TMDB — siempre visibles, incluso sin clave), **estudios con monograma/logo**, idioma, región y catálogos base → genera tu **manifest personal** `/<config>/manifest.json`
+- 🎬 **Web moderna** con sistema de diseño propio (`lib/theme.js`): tema oscuro *slate*, acento degradado violeta→cian, tarjetas de vidrio, barra superior fija con blur, control segmentado, tipografía del sistema (0 peticiones externas) y animaciones solo como respuesta al usuario (`prefers-reduced-motion` respetado)
+- 🎛️ **Página de configuración `/configure`**: hero cinematográfico, **rejilla de plataformas con logos** (CDN público de TMDB — siempre visibles, incluso sin clave), **estudios con logo/monograma**, pills de idioma y región, catálogos base, proveedores de streams y **barra inferior fija** con el contador de catálogos y la URL → genera tu **manifest personal** `/<config>/manifest.json`
 - 📺 **Por plataforma (30)**: Netflix, Prime Video, Disney+, Max (HBO), Apple TV+, Paramount+, Crunchyroll, Hulu, AMC+, MUBI, Tubi, Pluto TV, Peacock, Starz, MGM+, YouTube Premium, **Plex, Amazon Freevee, The Roku Channel, discovery+, ViX, Claro video, DIRECTV GO, Movistar TV, Filmin Latino, Globoplay, Filmin, Atresplayer, SkyShowtime y Movistar Plus+** — películas y series (TMDB Discover con JustWatch providers, con **fallback automático MX→US** si tu región no tiene resultados)
 - 🎥 **Por estudio (21)** · películas **y series**: Marvel Studios, Pixar, Walt Disney Pictures, Disney Animation, Lucasfilm, Warner Bros., New Line Cinema, Universal, Illumination, DreamWorks Animation, Paramount Pictures, Sony Pictures, 20th Century Studios, MGM, Lionsgate, A24, Blumhouse, Studio Ghibli, Toei Animation, MAPPA y Kyoto Animation (TMDB Discover con `with_companies`, en `/discover/movie` y `/discover/tv`)
 - 📡 **Series · En TV hoy** (TVMaze, **gratis y sin clave**)
@@ -42,6 +43,7 @@ Metadatos enriquecidos en la ficha:
 │   ├── userConfig.js     # Codec/validación de config de usuario (base64url)
 │   ├── branding.js       # Logos de plataformas/estudios vía TMDB
 │   ├── configurePage.js  # Página /configure (elegir idioma/región/plataformas/estudios)
+│   ├── theme.js         # Sistema de diseño compartido (tokens + componentes CSS)
 │   ├── meta.js           # Constructor de metadatos multi-fuente
 │   ├── logoData.js       # Logo PNG embebido (base64) para el Worker
 │   └── landingPage.js    # Landing visual

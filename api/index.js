@@ -23,6 +23,7 @@ const tmdb = require('../lib/tmdb');
 const { branding } = require('../lib/branding');
 const userConfig = require('../lib/userConfig');
 const { PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
+const { PROVIDER_KEYS: STREAM_KEYS, activeProviders } = require('../lib/streams');
 
 const app = express();
 
@@ -60,7 +61,7 @@ app.get('/healthz', (req, res) => {
   res.json({
     ok: true,
     addon: addonInterface.manifest.id,
-    version: '1.1.0',
+    version: '1.2.0',
     catalogs: addonInterface.manifest.catalogs.length,
     configurable: true,
     sources: {
@@ -69,7 +70,11 @@ app.get('/healthz', (req, res) => {
       omdb: config.omdbConfigured,
       watchmode: config.watchmodeConfigured,
       tvdb: config.tvdbConfigured,
+      knaben: activeProviders(null).includes('knaben'),
+      torlock: activeProviders(null).includes('torlock'),
+      blackholebay: activeProviders(null).includes('blackholebay'),
     },
+    streamProviders: activeProviders(null),
     watchRegion: config.watchRegion,
     watchRegionFallback: config.watchRegionFallback,
   });
@@ -96,7 +101,7 @@ app.get('/internal/branding.json', async (req, res) => {
 
 // 4c. Manifest personal con config de usuario (/<base64url>/manifest.json)
 function decodeUserConfig(req, res) {
-  const cfg = userConfig.decodeConfig(req.params.cfg, PLATFORM_KEYS, STUDIO_KEYS);
+  const cfg = userConfig.decodeConfig(req.params.cfg, PLATFORM_KEYS, STUDIO_KEYS, STREAM_KEYS);
   if (!cfg) {
     res.status(404).json({ error: 'invalid_config', message: 'Config inválida. Vuelve a /configure' });
     return null;
@@ -125,6 +130,14 @@ app.get('/:cfg/meta/:type/:id.json', async (req, res) => {
   if (!cfg) return;
   const result = await core.handleMeta(req.params.type, decodeURIComponent(req.params.id), cfg);
   res.setHeader('Cache-Control', `public, max-age=${config.cacheTtl}`);
+  res.json(result);
+});
+
+app.get('/:cfg/stream/:type/:id.json', async (req, res) => {
+  const cfg = decodeUserConfig(req, res);
+  if (!cfg) return;
+  const result = await core.handleStream(req.params.type, decodeURIComponent(req.params.id), cfg);
+  res.setHeader('Cache-Control', 'public, max-age=3600');
   res.json(result);
 });
 

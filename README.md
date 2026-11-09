@@ -37,6 +37,7 @@ Metadatos enriquecidos en la ficha:
 │   ├── tvdb.js           # Cliente TheTVDB v4 (login JWT; fichas por IMDb id)
 │   ├── omdb.js           # Cliente OMDB (ratings)
 │   ├── watchmode.js      # Cliente Watchmode (plataformas)
+│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay
 │   ├── catalogs.js       # Definición de catálogos (+ filtrado por config)
 │   ├── userConfig.js     # Codec/validación de config de usuario (base64url)
 │   ├── branding.js       # Logos de plataformas/estudios vía TMDB
@@ -176,6 +177,8 @@ Cada entrada genera automáticamente su catálogo en el manifest (`cine_<key>` /
 | `GET /catalog/:type/:id.json` | Catálogos (`movie`/`series`) |
 | `GET /<config>/catalog/:type/:id.json` | Catálogos con tu config |
 | `GET /meta/:type/:id.json` | Ficha enriquecida (`tt…`, `tmdb:movie:123`, `tvmaze:123`, `tvdb:series:123`) |
+| `GET /stream/:type/:id.json` | Streams torrent de Knaben + Torlock + BlackHoleBay (`tt…`, `tt…:T:E` en series) |
+| `GET /<config>/stream/:type/:id.json` | Streams solo con los proveedores elegidos en tu config |
 | `GET /healthz` | Estado del addon y de las fuentes configuradas |
 | `GET /assets/logo.png` | Logo del addon |
 | `GET /` | Landing con instalador de 1 clic |

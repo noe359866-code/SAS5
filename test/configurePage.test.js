@@ -53,3 +53,47 @@ test('decodeConfig sin campos opcionales cae a defaults (todo activado)', () => 
   assert.equal(decoded.platforms, null); // null = todas
   assert.equal(decoded.studios, null);
 });
+
+test('config completa (todo marcado en /configure) cabe y decodifica', () => {
+  const streams = require('../lib/streams');
+  // Lo que genera /configure al marcar TODAS las plataformas, estudios,
+  // catálogos base y proveedores: el caso real que rompía (596 caracteres
+  // frente al límite antiguo de 512 → 404 invalid_config → sin streams).
+  const encoded = userConfig.encodeConfig({
+    lang: 'es',
+    region: 'MX',
+    platforms: PLATFORM_KEYS,
+    studios: STUDIO_KEYS,
+    base: userConfig.BASE_KEYS,
+    streams: streams.PROVIDER_KEYS,
+  });
+  assert.ok(encoded.length > 512, `el segmento mide ${encoded.length} caracteres`);
+  assert.ok(encoded.length <= userConfig.MAX_CONFIG_SEGMENT);
+  const decoded = userConfig.decodeConfig(encoded, PLATFORM_KEYS, STUDIO_KEYS, streams.PROVIDER_KEYS);
+  assert.ok(decoded, 'la config completa debe decodificar');
+  assert.deepEqual(decoded.platforms.sort(), [...PLATFORM_KEYS].sort());
+  assert.deepEqual(decoded.studios.sort(), [...STUDIO_KEYS].sort());
+  assert.deepEqual(decoded.streams.sort(), [...streams.PROVIDER_KEYS].sort());
+  assert.equal(decoded.region, 'MX');
+});
+
+test('landing y /configure comparten el sistema de diseño y no dejan plantillas sin resolver', () => {
+  const { renderHome } = require('../lib/homePage');
+  const home = renderHome({ origin: 'https://addon.example', host: 'addon.example', apiStatus: { tmdb: false } });
+  const conf = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  for (const [label, html] of [['landing', home], ['configure', conf]]) {
+    assert.equal(/\$\{/.test(html), false, `${label}: quedan placeholders sin resolver`);
+    assert.match(html, /--brand:\s*#7c5cff/, `${label}: sin tokens del tema`);
+    assert.match(html, /--grad:\s*linear-gradient/, `${label}: sin degradado de marca`);
+    assert.match(html, /class="nav"/, `${label}: sin barra de navegación`);
+    assert.match(html, /class="page-glow"/, `${label}: sin fondo decorativo`);
+    assert.match(html, /prefers-reduced-motion/, `${label}: no respeta reduced-motion`);
+    assert.match(html, /<meta name="viewport"/, `${label}: sin viewport móvil`);
+  }
+  // El control segmentado y el buscador siguen existiendo en la portada.
+  assert.match(home, /class="tab active"/);
+  assert.match(home, /id="homeSearch"/);
+  // La barra fija de instalación sigue existiendo en /configure.
+  assert.match(conf, /id="installBtnFooter"/);
+  assert.match(conf, /id="manifestUrl"/);
+});

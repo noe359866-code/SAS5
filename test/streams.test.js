@@ -21,7 +21,7 @@ const { PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
 test('manifest: declara el recurso stream', () => {
   const manifest = core.buildManifest('http://localhost/assets/logo.png');
   assert.ok(manifest.resources.includes('stream'));
-  assert.equal(manifest.version, '1.2.0');
+  assert.match(manifest.version, /^\d+\.\d+\.\d+$/);
 });
 
 test('proveedores: Knaben, Torlock y BlackHoleBay registrados', () => {

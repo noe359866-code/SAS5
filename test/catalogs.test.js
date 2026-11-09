@@ -29,3 +29,102 @@ test('los catálogos de género son de series y llevan genre id', () => {
   assert.equal(def.kind, 'genre');
   assert.equal(def.genre, '10765');
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Plataformas y estudios: catálogo ampliado (calidad de los datos)
+// ─────────────────────────────────────────────────────────────────────────────
+const { PLATFORMS, STUDIOS, PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
+const { STATIC_PROVIDER_LOGOS, STATIC_STUDIO_LOGOS } = require('../lib/staticLogos');
+const userConfig = require('../lib/userConfig');
+const streams = require('../lib/streams');
+
+test('plataformas: claves únicas, nombres y providers con ids de TMDB', () => {
+  assert.equal(new Set(PLATFORM_KEYS).size, PLATFORM_KEYS.length, 'claves de plataforma duplicadas');
+  for (const p of PLATFORMS) {
+    assert.ok(p.key && /^[a-z0-9]+$/.test(p.key), `key inválida: ${p.key}`);
+    assert.ok(p.name && p.name.length > 1, `nombre inválido: ${p.key}`);
+    assert.match(String(p.providers), /^\d+(\|\d+)*$/, `providers inválidos en ${p.key}: ${p.providers}`);
+  }
+});
+
+test('estudios: claves únicas y company id numérico de TMDB', () => {
+  assert.equal(new Set(STUDIO_KEYS).size, STUDIO_KEYS.length, 'claves de estudio duplicadas');
+  for (const s of STUDIOS) {
+    assert.ok(s.key && /^[a-z0-9]+$/.test(s.key), `key inválida: ${s.key}`);
+    assert.match(String(s.company), /^\d+$/, `company inválido en ${s.key}: ${s.company}`);
+  }
+});
+
+test('plataformas nuevas están en el manifest con fila de películas y de series', () => {
+  const ids = buildDefs(null).map((d) => d.id);
+  for (const key of ['vix', 'clarovideo', 'directvgo', 'movistartv', 'filminlatino', 'globoplay', 'filmin', 'atresplayer', 'skyshowtime', 'movistarplus', 'plex', 'freevee', 'roku', 'discoveryplus']) {
+    assert.ok(ids.includes(`cine_${key}`), `falta cine_${key}`);
+    assert.ok(ids.includes(`tv_${key}`), `falta tv_${key}`);
+  }
+});
+
+test('cada estudio genera fila de películas Y de series', () => {
+  const defs = buildDefs(null);
+  for (const s of STUDIOS) {
+    const movie = defs.find((d) => d.id === `cine_estudio_${s.key}`);
+    const series = defs.find((d) => d.id === `tv_estudio_${s.key}`);
+    assert.ok(movie, `falta cine_estudio_${s.key}`);
+    assert.ok(series, `falta tv_estudio_${s.key}`);
+    assert.equal(movie.company, s.company);
+    assert.equal(movie.type, 'movie');
+    assert.equal(series.type, 'series');
+    assert.equal(series.mediaType, 'series');
+  }
+});
+
+test('Prime Video usa el id de LatAm (119), no solo el de EE. UU. (9)', () => {
+  const prime = PLATFORMS.find((p) => p.key === 'prime');
+  const ids = String(prime.providers).split('|');
+  assert.ok(ids.includes('119'), 'falta 119 (Amazon Prime Video LatAm/ES)');
+  assert.ok(ids.includes('9'), 'falta 9 (Amazon US)');
+});
+
+test('todas las plataformas tienen logo estático (salvo MUBI, que va con inicial)', () => {
+  const missing = PLATFORMS.filter((p) => !STATIC_PROVIDER_LOGOS[p.key]).map((p) => p.key);
+  assert.deepEqual(missing, ['mubi'], `plataformas sin logo: ${missing.join(', ')}`);
+});
+
+test('los logos estáticos de estudio apuntan al CDN de TMDB', () => {
+  for (const [company, url] of Object.entries(STATIC_STUDIO_LOGOS)) {
+    assert.match(String(company), /^\d+$/, `company id no numérico: ${company}`);
+    assert.match(url, /^https:\/\/image\.tmdb\.org\/t\/p\/w500\/.+\.(png|jpg)$/);
+  }
+});
+
+test('la config con TODO seleccionado cabe en la URL del manifest', () => {
+  const segment = userConfig.encodeConfig({
+    lang: 'es',
+    region: 'MX',
+    platforms: PLATFORM_KEYS,
+    studios: STUDIO_KEYS,
+    base: userConfig.BASE_KEYS,
+    streams: streams.PROVIDER_KEYS,
+  });
+  assert.ok(segment.length <= userConfig.MAX_CONFIG_SEGMENT, `segmento de ${segment.length} chars`);
+  const decoded = userConfig.decodeConfig(segment, PLATFORM_KEYS, STUDIO_KEYS, streams.PROVIDER_KEYS);
+  assert.ok(decoded, 'la config completa debe decodificar');
+  assert.equal(decoded.platforms.length, PLATFORMS.length);
+  assert.equal(decoded.studios.length, STUDIOS.length);
+});
+
+test('el manifest completo cabe en el límite de 8 KB de la addonCollection API', () => {
+  // Stremio rechaza manifests de más de 8192 caracteres (stremio-addon-sdk
+  // lo comprueba al construir el AddonBuilder). Si añades plataformas o
+  // estudios y este test falla, hay que quitar otros o acortar nombres.
+  const core = require('../lib/core');
+  const logo = 'https://catalogo.example/assets/logo.png';
+  const def = core.buildManifest(logo);
+  const personal = core.buildManifest(logo, {
+    lang: 'es', region: 'MX', platforms: null, studios: null, base: null, streams: null, isDefault: false,
+  });
+  for (const [label, manifest] of [['por defecto', def], ['personal', personal]]) {
+    const size = JSON.stringify(manifest).length;
+    assert.ok(size <= 8192, `manifest ${label} de ${size} chars (> 8192)`);
+  }
+  assert.ok(def.catalogs.length >= 110, `solo ${def.catalogs.length} catálogos en el manifest`);
+});

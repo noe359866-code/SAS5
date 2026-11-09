@@ -33,7 +33,11 @@ const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0)
 const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+)\.json$/;
 const META_RE = /^\/meta\/(movie|series)\/(.+)\.json$/;
 const STREAM_RE = /^\/stream\/(movie|series)\/(.+)\.json$/;
-const CONFIG_PREFIX_RE = /^\/([A-Za-z0-9_-]{8,512})(\/.*)$/;
+// Mismo límite que lib/userConfig.js: una config "completa" generada por
+// /configure ocupa ~600 caracteres, así que un tope de 512 la rechazaba
+// (404 invalid_config → Stremio sin manifest ni streams).
+const CONFIG_SEGMENT_MAX = userConfig.MAX_CONFIG_SEGMENT || 4096;
+const CONFIG_PREFIX_RE = new RegExp(`^/([A-Za-z0-9_-]{8,${CONFIG_SEGMENT_MAX}})(/.*)$`);
 
 function corsHeaders(extra = {}) {
   return {

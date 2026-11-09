@@ -159,3 +159,29 @@ test('config inválida: 404 invalid_config', async () => {
   const body = await res.json();
   assert.equal(body.error, 'invalid_config');
 });
+
+test('manifest personal con config larga (~600 chars) responde 200 (no 404)', async () => {
+  const userConfig = require('../lib/userConfig');
+  const { PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
+  const streams = require('../lib/streams');
+  const cfg = userConfig.encodeConfig({
+    lang: 'es',
+    region: 'MX',
+    platforms: PLATFORM_KEYS,
+    studios: STUDIO_KEYS,
+    base: userConfig.BASE_KEYS,
+    streams: streams.PROVIDER_KEYS,
+  });
+  assert.ok(cfg.length > 512, `el segmento mide ${cfg.length} caracteres`);
+
+  const res = await get('/' + cfg + '/manifest.json');
+  assert.equal(res.status, 200);
+  const manifest = await res.json();
+  assert.equal(manifest.name, 'Catálogos+ · MX');
+  assert.equal(manifest.resources.includes('stream'), true);
+  assert.ok(manifest.catalogs.length > 40);
+
+  // La misma config debe servir catálogos (sin TMDB: lista vacía, pero 200)
+  const cat = await get('/' + cfg + '/catalog/movie/cine_tendencias.json');
+  assert.equal(cat.status, 200);
+});

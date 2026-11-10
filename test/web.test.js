@@ -21,6 +21,7 @@ const { PLATFORMS, STUDIOS, PLATFORM_KEYS, STUDIO_KEYS, buildDefs } = require('.
 const { icon, iconMask, ICON_NAMES } = require('../lib/icons');
 const { posterThumb } = require('../lib/rails');
 const { supportLink } = require('../lib/layout');
+const { LANGUAGES: WEB_LANGUAGES, PHRASES: WEB_PHRASES, TRANSLATIONS: WEB_TRANSLATIONS, WEB_I18N_BOOTSTRAP, WEB_I18N_SCRIPT, detectWebLanguage } = require('../lib/webI18n');
 
 const ORIGIN = 'https://addon.example';
 const HOST = 'addon.example';
@@ -40,6 +41,8 @@ const home = (extra = {}) => renderHome({ origin: ORIGIN, host: HOST, apiStatus:
 const configure = (extra = {}) => renderConfigure({ origin: ORIGIN, host: HOST, ...extra });
 const count = (text, needle) => text.split(needle).length - 1;
 const decode = (segment) => userConfig.decodeConfig(segment, PLATFORM_KEYS, STUDIO_KEYS, PROVIDER_KEYS);
+const configureScript = (html) => [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)]
+  .map((match) => match[1]).find((script) => script.includes('const PLATFORMS ='));
 
 /**
  * Arranca el script de /configure hasta antes de tocar el DOM (constantes,
@@ -48,7 +51,8 @@ const decode = (segment) => userConfig.decodeConfig(segment, PLATFORM_KEYS, STUD
  */
 function runConfigure({ env = {}, draft = null, initialCfg, actions = '' } = {}) {
   const html = withEnv(env, () => configure({ initialCfg }));
-  const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+  const script = configureScript(html);
+  assert.ok(script, 'no se encuentra el script del configurador');
   const cut = script.indexOf('\nfunction setChecks');
   assert.ok(cut > 0, 'no se encuentra el corte del script');
   const sandbox = {
@@ -114,8 +118,9 @@ test('soporte: SUPPORT_URL cambia el enlace en toda la web y va escapado', () =>
       assert.equal(html.includes('a=1&b='), false, `${label}: «&» sin escapar`);
       assert.match(html, /Abrir soporte/, label);
       assert.match(html, /Contactar con soporte/, label);
-      // Sin marca de Discord cuando el enlace no es de Discord.
-      assert.equal(/Unirme al Discord|Estamos en Discord/.test(html), false, label);
+      // Sin marca de Discord en el contenido visible cuando el enlace no lo es.
+      const visibleHtml = html.replace(/<script>[\s\S]*?<\/script>/g, '');
+      assert.equal(/Unirme al Discord|Estamos en Discord/.test(visibleHtml), false, label);
     }
   });
   // Otra invitación de Discord conserva la presentación de Discord.
@@ -203,9 +208,10 @@ test('/configure: el idioma y la región de partida son los del despliegue', () 
 });
 
 test('/configure: el aviso de región de respaldo nombra las del despliegue', () => {
-  assert.match(withEnv({}, () => configure()), /México y luego Estados Unidos como respaldo/);
-  assert.match(withEnv({ WATCH_REGION_FALLBACK: 'es' }, () => configure()), /usa <strong>España como respaldo/);
-  assert.equal(withEnv({ WATCH_REGION_FALLBACK: ',' }, () => configure()).includes('como respaldo'), false);
+  const visible = (env) => withEnv(env, () => configure()).replace(/<script>[\s\S]*?<\/script>/g, '');
+  assert.match(visible({}), /México y luego Estados Unidos como respaldo/);
+  assert.match(visible({ WATCH_REGION_FALLBACK: 'es' }), /usa <strong>España como respaldo/);
+  assert.equal(visible({ WATCH_REGION_FALLBACK: ',' }).includes('como respaldo'), false);
 });
 
 test('/configure: el contador de catálogos cuenta lo mismo que el manifest', () => {
@@ -384,7 +390,7 @@ test('web: los enlaces internos apuntan a secciones que existen', () => {
       }
     }
     // El script de /configure solo busca ids que la página tiene.
-    const script = pages['/configure'].match(/<script>([\s\S]*?)<\/script>/)[1];
+    const script = configureScript(pages['/configure']);
     const wanted = [...script.matchAll(/(?:getElementById|setText|showSelected)\('([^']+)'/g)].map((m) => m[1]);
     assert.ok(wanted.length >= 10, `solo ${wanted.length} ids en el script`);
     for (const id of wanted) assert.ok(ids['/configure'].has(id), `el script busca #${id} y no existe`);
@@ -399,7 +405,7 @@ test('web: instalar y copiar usan la dirección desde la que se sirve la página
     assert.match(landing, /id="copyManifest"[^>]*data-copy="https:\/\/addon\.example\/manifest\.json"/);
     // /configure: tres botones de instalar; el script les pone la URL personal.
     const conf = configure();
-    const markup = conf.replace(/<script>[\s\S]*?<\/script>/, '');
+    const markup = conf.replace(/<script>[\s\S]*?<\/script>/g, '');
     assert.equal(count(markup, ' data-install'), 3);
     assert.match(conf, /querySelectorAll\('\[data-install\]'\)/);
     assert.match(conf, /id="copyBtn"/);
@@ -435,7 +441,7 @@ test('web: ni la cabecera Host ni los datos de TMDB pueden inyectar HTML', () =>
   // La config instalada entra en un <script>: no puede cerrarlo.
   const html = withEnv({}, () => configure({ initialCfg: { lang: 'es', region: '</script><script>alert(4)</script>', hide: [] } }));
   assert.equal(html.includes('</script><script>alert(4)'), false);
-  assert.equal(count(html, '<script'), 1);
+  assert.equal(count(html, '<script'), 3); // bootstrap de idioma, configurador e i18n local
 });
 
 // ------------------------------------------------------------ Piezas sueltas
@@ -468,4 +474,262 @@ test('pósters: las miniaturas piden a TMDB el tamaño pequeño', () => {
   const html = withEnv({}, () => home());
   assert.match(html, /class="poster"><img src="https:\/\/image\.tmdb\.org\/t\/p\/w342\//);
   assert.equal(/class="poster"><img src="https:\/\/image\.tmdb\.org\/t\/p\/w(500|780)\//.test(html), false);
+});
+
+// ------------------------------------------------------------- Web i18n
+
+class I18nTextNode {
+  constructor(value, parentElement = null) {
+    this.nodeType = 3;
+    this.nodeValue = value;
+    this.parentElement = parentElement;
+  }
+}
+
+class I18nElement {
+  constructor(tagName = 'div', attrs = {}) {
+    this.nodeType = 1;
+    this.tagName = String(tagName).toUpperCase();
+    this.attributes = { ...attrs };
+    this.childNodes = [];
+    this.parentElement = null;
+    this.dataset = {};
+    this.listeners = {};
+  }
+  append(child) {
+    child.parentElement = this;
+    this.childNodes.push(child);
+    return child;
+  }
+  closest() { return null; }
+  matches(selector) { return selector === '[data-sum="idioma"]' && this.dataset.sum === 'idioma'; }
+  hasAttribute(name) { return Object.hasOwn(this.attributes, name); }
+  getAttribute(name) { return this.hasAttribute(name) ? this.attributes[name] : null; }
+  setAttribute(name, value) { this.attributes[name] = String(value); }
+  removeAttribute(name) { delete this.attributes[name]; }
+  addEventListener(name, callback) { this.listeners[name] = callback; }
+  querySelector() { return null; }
+  get textContent() {
+    return this.childNodes.map((child) => child.nodeType === 3 ? child.nodeValue : child.textContent).join('');
+  }
+  set textContent(value) { this.childNodes = [new I18nTextNode(String(value), this)]; }
+}
+
+function runWebI18n({ languages = ['en-US'], language = '', savedLanguage = null } = {}) {
+  const root = new I18nElement('html', { 'data-i18n-pending': '' });
+  const body = root.append(new I18nElement('body'));
+  const text = (value, attrs = {}) => {
+    const el = body.append(new I18nElement('p', attrs));
+    const node = el.append(new I18nTextNode(value, el));
+    return { el, node };
+  };
+  const heading = text('Tendencias');
+  const popular = text('Populares');
+  const otherFormats = text('HDTV · DVD · otras');
+  const message = text('Gratis y sin cuenta.');
+  const counter = text('30 plataformas y 21 estudios');
+  const filterSummary = text('No se oculta nada: verás todos los streams. Orden: Más seeders. Tamaño máximo: 5 GB.');
+  const fallback = text('Nicaragua y luego Estados Unidos como respaldo');
+  const placeholder = text('', { placeholder: 'Filtrar esta portada…' });
+  const meta = body.append(new I18nElement('meta', {
+    content: '121 catálogos para Stremio: tendencias, estrenos, top valoradas, por plataforma (Netflix, Disney+, Max, Hulu, AMC+…) y por estudio (Marvel, Pixar, Ghibli…). Streams con filtros (oculta CAM, 3D, 4K…), 18 idiomas y 44 regiones. Gratis y sin cuenta.',
+  }));
+  const catalogLanguage = body.append(new I18nElement('span'));
+  catalogLanguage.id = 'langCode';
+  catalogLanguage.textContent = 'es';
+  const catalogLanguageName = body.append(new I18nElement('span'));
+  catalogLanguageName.id = 'langName';
+  catalogLanguageName.textContent = 'Español';
+  const catalogRegion = body.append(new I18nElement('span'));
+  catalogRegion.id = 'regionCode';
+  catalogRegion.textContent = 'NI';
+  const catalogRegionName = body.append(new I18nElement('span'));
+  catalogRegionName.id = 'regionName';
+  catalogRegionName.textContent = 'Nicaragua';
+  const summary = body.append(new I18nElement('span'));
+  summary.dataset.sum = 'idioma';
+  summary.textContent = 'Español · NI';
+  const select = body.append(new I18nElement('select'));
+  select.value = 'auto';
+  const autoOption = select.append(new I18nElement('option'));
+  autoOption.textContent = 'Auto';
+  const observerCallbacks = [];
+  const document = {
+    documentElement: root,
+    ready: null,
+    querySelector(selector) { return selector === '[data-web-language]' ? select : null; },
+    querySelectorAll(selector) { return selector === '[data-sum="idioma"]' ? [summary] : []; },
+    getElementById(id) {
+      return ({ langCode: catalogLanguage, langName: catalogLanguageName, regionCode: catalogRegion, regionName: catalogRegionName })[id] || null;
+    },
+    addEventListener(name, callback) { if (name === 'DOMContentLoaded') this.ready = callback; },
+  };
+  const storage = { value: savedLanguage };
+  const context = {
+    document,
+    window: { setTimeout() {} },
+    navigator: { languages, language },
+    localStorage: {
+      getItem() { return storage.value; },
+      setItem(_key, value) { storage.value = value; },
+      removeItem() { storage.value = null; },
+    },
+    MutationObserver: class {
+      constructor(callback) { observerCallbacks.push(callback); }
+      observe() {}
+    },
+    Intl,
+  };
+  vm.runInNewContext(WEB_I18N_SCRIPT, context);
+  document.ready();
+  return {
+    root, body, heading, popular, otherFormats, message, counter, filterSummary, fallback, placeholder, meta, summary,
+    select, autoOption, storage, observer: observerCallbacks[0],
+  };
+}
+
+test('idioma de interfaz: negocia entre las seis opciones, con español como fallback', () => {
+  assert.deepEqual(WEB_LANGUAGES, ['es', 'en', 'pt', 'fr', 'de', 'it']);
+  assert.equal(detectWebLanguage(['ja-JP', 'pt-BR']), 'pt');
+  assert.equal(detectWebLanguage(['fr-CA', 'en-US']), 'fr');
+  assert.equal(detectWebLanguage(['de_DE']), 'de');
+  assert.equal(detectWebLanguage(['nl-NL', 'xx']), 'es');
+  assert.equal(detectWebLanguage([]), 'es');
+  assert.ok(WEB_PHRASES.every((row) => row.length === 6), 'cada frase tiene una versión por idioma');
+  assert.equal(new Set(WEB_PHRASES.map((row) => row[0])).size, WEB_PHRASES.length, 'no hay frases fuente repetidas');
+  assert.deepEqual(Object.keys(WEB_TRANSLATIONS), WEB_LANGUAGES);
+  for (const language of WEB_LANGUAGES) assert.ok(Object.keys(WEB_TRANSLATIONS[language]).length > 200);
+});
+
+test('idioma de interfaz: traduce la página en el navegador, recuerda la elección y permite volver a Auto', () => {
+  const page = runWebI18n({ languages: ['xx-XX', 'fr-CA'] });
+  assert.equal(page.root.lang, 'fr');
+  assert.equal(page.root.hasAttribute('data-i18n-pending'), false);
+  assert.equal(page.heading.node.nodeValue, 'Tendances');
+  assert.equal(page.popular.node.nodeValue, 'Populaires');
+  assert.equal(page.otherFormats.node.nodeValue, 'HDTV · DVD · autres');
+  assert.equal(page.message.node.nodeValue, 'Gratuit, sans compte.');
+  assert.equal(page.counter.node.nodeValue, '30 plateformes et 21 studios');
+  assert.equal(page.filterSummary.node.nodeValue, 'Aucun élément masqué : tous les streams seront affichés. Tri : Plus de seeders. Taille maximale : 5 GB.');
+  assert.equal(page.fallback.node.nodeValue, 'Nicaragua puis États-Unis en secours');
+  assert.equal(page.placeholder.el.getAttribute('placeholder'), 'Filtrer cette page…');
+  assert.match(page.meta.getAttribute('content'), /121 catalogues Stremio/);
+  assert.equal(page.summary.textContent, `${new Intl.DisplayNames(['fr'], { type: 'language' }).of('es')} · NI`);
+  assert.equal(page.autoOption.textContent, 'Automatique');
+
+  page.select.value = 'de';
+  page.select.listeners.change();
+  assert.equal(page.root.lang, 'de');
+  assert.equal(page.heading.node.nodeValue, 'Trends');
+  assert.equal(page.popular.node.nodeValue, 'Beliebt');
+  assert.equal(page.otherFormats.node.nodeValue, 'HDTV · DVD · sonstige');
+  assert.equal(page.message.node.nodeValue, 'Kostenlos und ohne Konto.');
+  assert.equal(page.filterSummary.node.nodeValue, 'Nichts ausgeblendet: Alle Streams werden angezeigt. Sortierung: Meiste Seeders. Maximale Größe: 5 GB.');
+  assert.equal(page.fallback.node.nodeValue, 'Nicaragua danach Vereinigte Staaten als Ersatz');
+  assert.equal(page.storage.value, 'de');
+  assert.equal(page.select.value, 'de');
+
+  // El renderer del configurador escribe sus mensajes en español después de
+  // cargar; el observador los localiza también sin recargar la página.
+  const updated = new I18nElement('span');
+  const updatedText = updated.append(new I18nTextNode('Copiada', updated));
+  page.body.append(updated);
+  page.observer([{ type: 'childList', target: page.body, addedNodes: [updated] }]);
+  assert.equal(updatedText.nodeValue, 'Kopiert');
+
+  page.select.value = 'auto';
+  page.select.listeners.change();
+  assert.equal(page.root.lang, 'fr');
+  assert.equal(page.heading.node.nodeValue, 'Tendances');
+  assert.equal(page.storage.value, null);
+  assert.equal(page.select.value, 'auto');
+});
+
+test('idioma de interfaz: traduce errores dinámicos del proveedor Debrid en los seis idiomas', () => {
+  const serverMessages = [
+    'Espera un minuto antes de volver a conectar.',
+    'Real-Debrid debe conectarse mediante OAuth; no pegues tu token API privado.',
+    'Selecciona un proveedor y pega una clave API válida.',
+    'El servidor debe configurar almacenamiento privado y DEBRID_ENCRYPTION_KEY.',
+    'El proveedor rechazó la clave API. Compruébala en tu cuenta.',
+  ];
+  const providerErrors = {
+    es: 'No se pudo validar TorBox. Inténtalo más tarde.',
+    en: 'Could not validate TorBox. Try again later.',
+    pt: 'Não foi possível validar o TorBox. Tente novamente mais tarde.',
+    fr: 'Impossible de valider TorBox. Réessayez plus tard.',
+    de: 'Der Anbieter TorBox konnte nicht validiert werden. Bitte versuche es später erneut.',
+    it: 'Impossibile convalidare TorBox. Riprova più tardi.',
+  };
+
+  for (const language of WEB_LANGUAGES) {
+    const page = runWebI18n({ languages: [language] });
+    for (const source of serverMessages) {
+      const element = new I18nElement('span');
+      const node = element.append(new I18nTextNode(source, element));
+      page.body.append(element);
+      page.observer([{ type: 'childList', target: page.body, addedNodes: [element] }]);
+      assert.equal(node.nodeValue, WEB_TRANSLATIONS[language][source], `${language}: ${source}`);
+    }
+
+    const dynamic = new I18nElement('span');
+    const dynamicText = dynamic.append(new I18nTextNode('No se pudo validar torbox. Inténtalo más tarde.', dynamic));
+    page.body.append(dynamic);
+    page.observer([{ type: 'childList', target: page.body, addedNodes: [dynamic] }]);
+    assert.equal(dynamicText.nodeValue, providerErrors[language], `${language}: error dinámico de proveedor`);
+  }
+});
+
+test('idioma de interfaz: español predeterminado y preferencia guardada sin cambiar la config del catálogo', () => {
+  const fallback = runWebI18n({ languages: ['ja-JP'] });
+  assert.equal(fallback.root.lang, 'es');
+  assert.equal(fallback.heading.node.nodeValue, 'Tendencias');
+  assert.equal(fallback.root.hasAttribute('data-i18n-pending'), false);
+
+  const saved = runWebI18n({ languages: ['it-IT'], savedLanguage: 'en' });
+  assert.equal(saved.root.lang, 'en');
+  assert.equal(saved.heading.node.nodeValue, 'Trending');
+
+  const invalidSaved = runWebI18n({ languages: ['zh-CN'], savedLanguage: 'nl' });
+  assert.equal(invalidSaved.root.lang, 'es');
+
+  withEnv({ TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'BR' }, () => {
+    const html = configure();
+    assert.match(html, /<span class="code" id="langCode">pt-BR<\/span>/);
+    assert.match(html, /<span class="code" id="regionCode">BR<\/span>/);
+  });
+});
+
+test('idioma de interfaz: ambas páginas incluyen selector accesible y localización local, sin servicios externos', () => {
+  const pages = [home(), configure()];
+  for (const html of pages) {
+    assert.match(html, /<html lang="es">/);
+    assert.match(html, /<script>\s*\(function \(\) \{/);
+    assert.match(html, /<select data-web-language aria-label="Idioma de la web"/);
+    for (const code of ['auto', 'es', 'en', 'pt', 'fr', 'de', 'it']) assert.match(html, new RegExp(`<option value="${code}"`));
+    const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((match) => match[1]);
+    const bootstrapScript = scripts[0];
+    assert.equal(bootstrapScript, WEB_I18N_BOOTSTRAP);
+    assert.doesNotThrow(() => new vm.Script(bootstrapScript));
+    const bootstrapRoot = new I18nElement('html');
+    vm.runInNewContext(bootstrapScript, {
+      document: { documentElement: bootstrapRoot },
+      navigator: { languages: ['xx-XX', 'pt-BR'], language: 'xx-XX' },
+      localStorage: { getItem: () => null },
+    });
+    assert.equal(bootstrapRoot.lang, 'pt');
+    assert.equal(bootstrapRoot.hasAttribute('data-i18n-pending'), true);
+    const spanishRoot = new I18nElement('html');
+    vm.runInNewContext(bootstrapScript, {
+      document: { documentElement: spanishRoot },
+      navigator: { languages: ['en-US'], language: 'en-US' },
+      localStorage: { getItem: () => 'es' },
+    });
+    assert.equal(spanishRoot.lang, 'es');
+    assert.equal(spanishRoot.hasAttribute('data-i18n-pending'), false);
+
+    const localizationScript = scripts.at(-1);
+    assert.doesNotThrow(() => new vm.Script(localizationScript));
+    assert.doesNotMatch(bootstrapScript + localizationScript, /\bfetch\s*\(|XMLHttpRequest|geolocation/i);
+  }
 });

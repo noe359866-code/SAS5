@@ -13,13 +13,15 @@ const path = require('node:path');
 const { renderConfigure } = require('../lib/configurePage');
 const userConfig = require('../lib/userConfig');
 const { PLATFORM_KEYS, STUDIO_KEYS } = require('../lib/catalogs');
+const configureScript = (html) => [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)]
+  .map((match) => match[1]).find((script) => script.includes('const PLATFORMS ='));
 
 test('el <script> inline de /configure es JS válido (node --check)', () => {
   const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
-  const match = html.match(/<script>([\s\S]*?)<\/script>/);
-  assert.ok(match, 'la página debe incluir un <script>');
+  const script = configureScript(html);
+  assert.ok(script, 'la página debe incluir el script del configurador');
   const tmp = path.join(os.tmpdir(), `configure-inline-${process.pid}.js`);
-  fs.writeFileSync(tmp, match[1]);
+  fs.writeFileSync(tmp, script);
   const res = spawnSync(process.execPath, ['--check', tmp], { encoding: 'utf8' });
   assert.equal(res.status, 0, res.stderr || 'el script inline tiene errores de sintaxis');
 });
@@ -106,7 +108,7 @@ test('/configure: Nyaa y YTS son proveedores elegibles y nacen marcados en un bo
   const run = (draft, initialCfg) => {
     const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example', initialCfg });
     for (const key of all) assert.match(html, new RegExp(`data-group="streams" data-key="${key}"`), key);
-    const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+    const script = configureScript(html);
     const setup = script.slice(0, script.indexOf('\nfunction b64url'));
     const sandbox = {
       saved: null,

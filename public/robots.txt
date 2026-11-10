@@ -1,0 +1,11 @@
+# Los catálogos, fichas, streams y endpoints internos son dinámicos y gastan
+# cuota del plan free: no queremos que los crawlers los recorran.
+# La portada y /configure sí se pueden indexar (SEO del addon).
+User-agent: *
+Disallow: /catalog/
+Disallow: /meta/
+Disallow: /stream/
+Disallow: /internal/
+Disallow: /healthz
+Allow: /
+Allow: /configure

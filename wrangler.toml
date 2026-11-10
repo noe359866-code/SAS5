@@ -29,6 +29,18 @@ DEBRID_TIMEOUT_MS = "4500"
 # Node.js compat por si alguna dependencia lo requiere
 compatibility_flags = ["nodejs_compat"]
 
+# ─────────────────────────────────────────────────────────────
+#  Static assets: peticiones GRATIS e ILIMITADAS
+#  Un archivo que existe en ./public se sirve sin ejecutar worker.mjs, así que
+#  no gasta la cuota de 100.000 peticiones/día del plan free. Aquí viven el
+#  logo, public/_headers y los catálogos pregenerados por
+#  `npm run prerender` (public/catalog/<tipo>/<id>.json).
+#  run_worker_first = false → el asset gana; si no existe, atiende el Worker.
+# ─────────────────────────────────────────────────────────────
+[assets]
+directory = "./public"
+run_worker_first = false
+
 # Credenciales debrid (opcional): crea una KV para las credenciales cifradas.
 #   npx wrangler kv namespace create DEBRID_KV
 #   npx wrangler secret put DEBRID_ENCRYPTION_KEY

@@ -5,8 +5,10 @@ Addon **100% gratuito** para Stremio con catálogos de **películas y series**:
 - 🔥 **Tendencias** de la semana (TMDB)
 - ⭐ **Top Valoradas** (TMDB, mínimo de votos configurable)
 - 🍿 **Populares** (TMDB)
-- 🎬 **Web moderna** con sistema de diseño propio (`lib/theme.js`): tema oscuro *slate*, acento degradado violeta→cian, tarjetas de vidrio, barra superior fija con blur, control segmentado, tipografía del sistema (0 peticiones externas) y animaciones solo como respuesta al usuario (`prefers-reduced-motion` respetado)
-- 🎛️ **Página de configuración `/configure`**: hero cinematográfico, **rejilla de plataformas con logos** (CDN público de TMDB — siempre visibles, incluso sin clave), **estudios con logo/monograma**, pills de idioma y región, catálogos base, proveedores de streams y **barra inferior fija** con el contador de catálogos y la URL → genera tu **manifest personal** `/<config>/manifest.json`
+- 🎬 **Web** con sistema de diseño propio (`lib/theme.js`): tema oscuro con acento degradado violeta→cian, iconos SVG en línea (`lib/icons.js`, sin emojis ni fuentes de iconos), tipografía del sistema y **0 peticiones externas** salvo las imágenes de TMDB. La portada tiene un muro de pósters, cifras reales del addon, tendencias con buscador, funciones, instalación en 3 pasos, preguntas frecuentes y botón de copiar la URL. Respeta `prefers-reduced-motion`
+- 🎛️ **Página de configuración `/configure`**: índice lateral con el resumen de cada sección, **idioma (18) y región (44) con buscador**, rejilla de plataformas y estudios con logos (CDN público de TMDB, visibles incluso sin clave), catálogos base, proveedores de streams, **filtros de streams** y una barra inferior fija con el contador de catálogos, la URL y el botón de instalar → genera tu **manifest personal** `/<config>/manifest.json`
+- 🧲 **Filtros de streams por usuario**: cada persona decide qué copias no quiere ver —**CAM/TS, screeners, 3D, 4K**, REMUX, Dolby Vision, HEVC, AV1…—, el orden (seeders, calidad o tamaño) y un tamaño máximo. Ver [Filtros de streams](#-filtros-de-streams)
+- 💬 **Soporte**: enlace al Discord en la barra, en una tarjeta y en el pie de las dos páginas (`SUPPORT_URL`)
 - 📺 **Por plataforma (30)**: Netflix, Prime Video, Disney+, Max (HBO), Apple TV+, Paramount+, Crunchyroll, Hulu, AMC+, MUBI, Tubi, Pluto TV, Peacock, Starz, MGM+, YouTube Premium, **Plex, Amazon Freevee, The Roku Channel, discovery+, ViX, Claro video, DIRECTV GO, Movistar TV, Filmin Latino, Globoplay, Filmin, Atresplayer, SkyShowtime y Movistar Plus+** — películas y series (TMDB Discover con JustWatch providers, con **fallback automático MX→US** si tu región no tiene resultados)
 - 🎥 **Por estudio (21)** · películas **y series**: Marvel Studios, Pixar, Walt Disney Pictures, Disney Animation, Lucasfilm, Warner Bros., New Line Cinema, Universal, Illumination, DreamWorks Animation, Paramount Pictures, Sony Pictures, 20th Century Studios, MGM, Lionsgate, A24, Blumhouse, Studio Ghibli, Toei Animation, MAPPA y Kyoto Animation (TMDB Discover con `with_companies`, en `/discover/movie` y `/discover/tv`)
 - 📡 **Series · En TV hoy** (TVMaze, **gratis y sin clave**)
@@ -38,17 +40,23 @@ Metadatos enriquecidos en la ficha:
 │   ├── tvdb.js           # Cliente TheTVDB v4 (login JWT; fichas por IMDb id)
 │   ├── omdb.js           # Cliente OMDB (ratings)
 │   ├── watchmode.js      # Cliente Watchmode (plataformas)
-│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay
+│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay, Nyaa, YTS
+│   ├── streamFilters.js  # Filtros de streams: clasificador por nombre + preferencias del usuario
 │   ├── catalogs.js       # Definición de catálogos (+ filtrado por config)
 │   ├── userConfig.js     # Codec/validación de config de usuario (base64url)
 │   ├── branding.js       # Logos de plataformas/estudios vía TMDB
-│   ├── configurePage.js  # Página /configure (elegir idioma/región/plataformas/estudios)
-│   ├── theme.js         # Sistema de diseño compartido (tokens + componentes CSS)
+│   ├── homePage.js       # Portada (/)
+│   ├── configurePage.js  # Página /configure (idioma, región, plataformas, estudios, streams y filtros)
+│   ├── theme.js          # Sistema de diseño compartido (tokens + componentes CSS)
+│   ├── layout.js         # Piezas comunes: barra, tarjeta de soporte y pie
+│   ├── icons.js          # Iconos SVG en línea (Lucide + marca de Discord)
+│   ├── rails.js          # Filas de logos y pósters + animación de entrada
+│   ├── staticLogos.js    # Logos de plataformas/estudios de respaldo (URLs de TMDB)
+│   ├── posterData.js     # Pósters de muestra para cuando no hay clave de TMDB
 │   ├── meta.js           # Constructor de metadatos multi-fuente
-│   ├── logoData.js       # Logo PNG embebido (base64) para el Worker
-│   └── landingPage.js    # Landing visual
+│   └── logoData.js       # Logo PNG embebido (base64) para el Worker
 ├── assets/logo.png       # Logo del addon
-├── test/                 # Tests offline (smoke + worker)
+├── test/                 # Tests offline (servidor, Worker, proveedores, filtros y web)
 ├── vercel.json           # Alternativa: despliegue serverless en Vercel
 ├── .env.example          # Plantilla de variables (Node)
 ├── .dev.vars.example     # Plantilla de secrets (wrangler dev)
@@ -72,8 +80,9 @@ Edita `.env`:
 | `WATCHMODE_API_KEY` | Opcional | Dónde ver en streaming — [api.watchmode.com](https://api.watchmode.com/) |
 | `TVDB_API_KEY` | Opcional | Fichas TheTVDB por IMDb id — [thetvdb.com/api-information](https://thetvdb.com/api-information) |
 | `TVDB_PIN` | Opcional | PIN de suscriptor si tu plan de TVDB lo requiere |
-| `WATCH_REGION` | Opcional | Región JustWatch por defecto: `NI` (defecto), `MX`, `ES`, `US`, `AR`... El usuario puede cambiarla en /configure |
-| `TMDB_LANGUAGE` | Opcional | Idioma por defecto de fichas/catálogos: `es` (defecto), `es-MX`, `en`, `pt-BR`... |
+| `WATCH_REGION` | Opcional | Región JustWatch por defecto: `NI` (defecto), `MX`, `ES`, `US`, `AR`... El usuario puede cambiarla en /configure (44 países) |
+| `TMDB_LANGUAGE` | Opcional | Idioma por defecto de fichas/catálogos: `es` (defecto), `es-MX`, `en`, `pt-BR`... El usuario puede cambiarlo en /configure (18 idiomas) |
+| `SUPPORT_URL` | Opcional | Enlace de soporte que muestra la web. Por defecto, la invitación al Discord de Catálogos+. **Las invitaciones normales de Discord caducan**: crea una permanente y ponla aquí |
 | `ADDON_NAME` / `ADDON_BASE_URL` | Opcional | Nombre y URL pública (logo en el manifest) |
 | `TMDB_MIN_VOTE_COUNT` | Opcional | Mínimo de votos para "Top Valoradas" (defecto `500`) |
 | `CACHE_TTL_SECONDS` | Opcional | TTL de caché (defecto `21600` = 6h) |
@@ -143,9 +152,11 @@ Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
 
 ### 3.5 Instalar en Stremio
 
-1. Abre `https://tu-dominio/configure` y elige **idioma · región · plataformas · estudios** (con sus logos).
-2. Pulsa **🚀 Instalar en Stremio** — se instala tu manifest personal (`https://tu-dominio/<config>/manifest.json`).
-3. O sin configurar: el botón de instalación rápida en la portada (todo activado).
+1. Abre `https://tu-dominio/configure` y elige **idioma · región · plataformas · estudios · proveedores y filtros de streams**.
+2. Pulsa **Instalar en Stremio** — se instala tu manifest personal (`https://tu-dominio/<config>/manifest.json`).
+3. O sin configurar: el botón de instalación rápida en la portada (todo activado, sin filtros).
+
+> **Si ya lo tenías instalado:** para Stremio cada URL es un addon distinto. Al instalar una configuración nueva, **desinstala la anterior** (Addons → Catálogos+ → Desinstalar); si no, verás los catálogos repetidos y los streams de la instalación antigua seguirán saliendo sin filtrar.
 
 La **portada** muestra tendencias en vivo (con `TMDB_API_KEY`) o posters estáticos de respaldo, igual la página de configuración.
 
@@ -181,16 +192,17 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 
 | Ruta | Descripción |
 | :--- | :--- |
-| `GET /configure` | Página de configuración (idioma, región, plataformas, estudios, logos) |
+| `GET /configure` | Página de configuración (idioma, región, plataformas, estudios, proveedores y filtros de streams) |
+| `GET /<config>/configure` | La misma página con tu configuración instalada ya cargada (botón «Configurar» de Stremio) |
 | `GET /<config>/manifest.json` | Manifest personal según la config elegida |
 | `GET /internal/branding.json` | Logos de plataformas/estudios (vía TMDB) para /configure |
 | `GET /manifest.json` | Manifest por defecto (todo activado) |
 | `GET /catalog/:type/:id.json` | Catálogos (`movie`/`series`) |
 | `GET /<config>/catalog/:type/:id.json` | Catálogos con tu config |
 | `GET /meta/:type/:id.json` | Ficha enriquecida (`tt…`, `tmdb:movie:123`, `tvmaze:123`, `tvdb:series:123`) |
-| `GET /stream/:type/:id.json` | Streams torrent de Knaben + Torlock + BlackHoleBay (`tt…`, `tt…:T:E` en series) |
-| `GET /<config>/stream/:type/:id.json` | Streams solo con los proveedores elegidos en tu config |
-| `GET /internal/streams-test.json?id=tt…` | Diagnóstico de streams: título resuelto, query y respuesta por proveedor |
+| `GET /stream/:type/:id.json` | Streams torrent de Knaben + Torlock + BlackHoleBay + Nyaa + YTS (`tt…`, `tt…:T:E` en series) |
+| `GET /<config>/stream/:type/:id.json` | Streams con los proveedores, filtros, orden y tamaño máximo de tu config |
+| `GET /internal/streams-test.json?id=tt…` | Diagnóstico de streams: título resuelto, query, respuesta por proveedor y cuántos resultados caen en cada categoría de filtro (`categories`) |
 | `GET /healthz` | Estado del addon y de las fuentes configuradas |
 | `GET /assets/logo.png` | Logo del addon |
 | `GET /` | Landing con instalador de 1 clic |
@@ -200,9 +212,36 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 - **Caché**: catálogos 6h por defecto; ids externos 7 días; OMDB 24h; Watchmode 12h. En serverless cada instancia tiene su propia caché.
 - **Degradación elegante**: si falta una clave, esa fuente se omite sin romper el resto.
 - **TheTVDB (v4)**: se autentica con `POST /login` → JWT cacheado ~24 días. Alimenta las fichas de series/películas por IMDb id (respaldo cuando TMDB/TVMaze no responden) con nombre/argumento en español si existe la traducción. IDs explícitos soportados: `tvdb:series:123`, `tvdb:movie:123`, `tvdb:123`. TVDB no ofrece un chart público de tendencias, por eso no genera catálogos; si quieres un catálogo por género/cadena de TVDB, dímelo y lo montamos con `/v4/filter`.
-- **Región**: los catálogos "por plataforma" usan `watch_region` = `WATCH_REGION` (por defecto `NI`). Cambia a `MX`/`ES`/`US` según tu país.
-- **Proveedores de contenido (streams)**: Knaben, Torlock y BlackHoleBay no requieren clave. Se consultan en paralelo, se deduplican por infoHash y se cachean 1 h. El título se resuelve desde el IMDb id con TMDB (en inglés, que es lo que indexan los torrents; el original va de segunda pasada), con respaldo TVMaze (series) y **Cinemeta** (sin clave). Control con `STREAM_PROVIDERS`/`STREAM_MAX_RESULTS` y por usuario en `/configure`.
-- **¿No aparecen streams?** 1) Comprueba primero que tu manifest personal responde 200: abre `https://tu-dominio/<tu-config>/manifest.json`. Si devuelve `404 invalid_config`, la URL de config está mal formada (el segmento base64url se valida hasta `MAX_CONFIG_SEGMENT` = 4096 caracteres; una config completa ronda los 600, un tope menor la rompía). Vuelve a `/configure` y reinstala. 2) Redepliega esta versión y **reinstala el addon en Stremio** — el manifest anterior no declaraba el recurso `stream` y Stremio nunca pide streams a un addon sin él. 3) Abre `/internal/streams-test.json?id=tt1160419` en tu despliegue: indica la etapa que falla (título no resuelto, proveedor caído/bloqueado — Torlock bloquea algunas IPs de datacenter y ofrece whitelisting — o 0 resultados relevantes).
+- **Idioma y región**: el idioma (18 opciones) se pasa a TMDB y cambia títulos, sinopsis y pósters; los nombres de los catálogos y la web siguen en español. La región (44 países) es el `watch_region` de los catálogos "por plataforma" y el país de «En cines» y «Próximos estrenos». Si una plataforma no tiene resultados en la región elegida se prueba con `WATCH_REGION_FALLBACK` (por defecto `MX,US`). Los valores de partida son `TMDB_LANGUAGE` y `WATCH_REGION`.
+- **Soporte**: el enlace sale de `SUPPORT_URL`. Si es de Discord se muestra con su marca; cualquier otra URL http(s) aparece como «Soporte». La invitación por defecto es temporal: sustitúyela por una permanente.
+- **Proveedores de contenido (streams)**: Knaben, Torlock, BlackHoleBay, Nyaa y YTS no requieren clave. Se consultan en paralelo, se deduplican por infoHash y se cachean 1 h. El título se resuelve desde el IMDb id con TMDB (en inglés, que es lo que indexan los torrents; el original va de segunda pasada), con respaldo TVMaze (series) y **Cinemeta** (sin clave). Control con `STREAM_PROVIDERS`/`STREAM_MAX_RESULTS` y por usuario en `/configure`.
+- **Nyaa y YTS** son fuentes especializadas: solo se consultan cuando aplican.
+  - **YTS** (solo películas) se busca por IMDb id, así que el resultado es exacto. API: [yts.gg/api](https://yts.gg/api).
+  - **Nyaa** (anime y producciones asiáticas: idioma original japonés, coreano, chino o tailandés, o título de origen desconocido) se consulta a través de una API comunitaria no oficial de nyaa.si ([nyaaapi.onrender.com](https://nyaaapi.onrender.com/docs)). Se busca con el título en inglés, el original y los romanizados (romaji) de TMDB — sin clave de TMDB no hay romaji y se pierden los lanzamientos que solo llevan ese nombre. El filtro entiende la numeración de fansub (`Título - 05`, `Título S2 - 05`, `Título 2nd Season - 05`) y los lotes por temporada.
+  - Nyaa **no** cubre: numeración absoluta (`One Piece - 1100`), temporadas que se publican con subtítulo propio en vez de número, ni especiales (temporada 0). La API devuelve como mucho los 75 resultados con más seeders por búsqueda.
+  - En un lote de temporada el addon no sabe qué archivo corresponde a cada episodio (no manda `fileIdx`). El reproductor de Stremio (`stremio-video`) pide entonces al servidor de streaming que lo deduzca a partir de la temporada y el episodio; un cliente que no lo haga abrirá el archivo más grande del torrent. Lo mismo vale para los packs de temporada de los demás proveedores.
+  - Si alguna de las dos APIs cambia de dominio: `NYAA_API_URL` y `YTS_API_URL`.
+  - **Al actualizar**: si tu despliegue define `STREAM_PROVIDERS`, añade `nyaa,yts`. Las URL personales ya instaladas llevan su lista de proveedores: vuelve a `/configure`, marca Nyaa y YTS y reinstala.
+- **¿No aparecen streams?** 1) Comprueba primero que tu manifest personal responde 200: abre `https://tu-dominio/<tu-config>/manifest.json`. Si devuelve `404 invalid_config`, la URL de config está mal formada (el segmento base64url se valida hasta `MAX_CONFIG_SEGMENT` = 4096 caracteres; una config completa ronda los 600, un tope menor la rompía). Vuelve a `/configure` y reinstala. 2) Redepliega esta versión y **reinstala el addon en Stremio** — el manifest anterior no declaraba el recurso `stream` y Stremio nunca pide streams a un addon sin él. 3) Abre `/internal/streams-test.json?id=tt1160419` en tu despliegue (para un episodio: `?type=series&id=tt22248376:1:5`): indica la etapa que falla (título no resuelto, proveedor caído/bloqueado — Torlock bloquea algunas IPs de datacenter y ofrece whitelisting — o 0 resultados relevantes).
+
+## 🧲 Filtros de streams
+
+Cada usuario los elige en `/configure` y viajan en su URL personal (`hide`, `sort` y `maxSize`). Sin filtros la respuesta es exactamente la de siempre, y las URL instaladas antes de esta versión siguen funcionando igual.
+
+| Grupo | Categorías |
+| :--- | :--- |
+| Tipo de copia | WEB-DL · WEBRip, BluRay, REMUX, HDTV · DVD · otras, Screener, CAM · TS |
+| Resolución | 4K · 2160p, 1080p, 720p, SD, sin indicar |
+| Imagen y códec | 3D, HDR, Dolby Vision, HEVC · x265, AV1 |
+
+- **Cómo se clasifica**: por el **nombre del torrent** (`lib/streamFilters.js`). Cada resultado recibe un tipo de copia y una resolución, más las etiquetas de imagen que apliquen, y se oculta si **cualquiera** de sus etiquetas está desmarcada. Una copia mal etiquetada por quien la subió puede colarse o quedar oculta por error.
+- **El título no cuenta**: «Saw 3D», «Cam» o «Charlotte's Web» no se etiquetan a sí mismas; una marca solo vale si aparece en el nombre más veces que en el título de la obra. `TS`/`TC`/`CAM` sueltos solo cuentan si el nombre no declara otra fuente (BluRay, WEB, HDTV…).
+- **Orden**: más seeders (por defecto), mejor calidad (de 4K a SD, con CAM y screeners al final) o menor tamaño.
+- **Tamaño máximo**: se compara con el tamaño del torrent entero, así que un pack de temporada pesa mucho más que un episodio suelto. Los resultados sin tamaño conocido se conservan.
+- **«Recomendado»** oculta CAM · TS, screeners y 3D.
+- **Caché**: la búsqueda se guarda sin filtrar (hasta 100 resultados por título) y los filtros se aplican en cada petición, de modo que dos usuarios con filtros distintos comparten la misma búsqueda. `STREAM_MAX_RESULTS` se aplica **después** de filtrar.
+- **Si todo queda oculto** el addon responde una lista vacía: vuelve a marcar alguna categoría. Un estreno reciente puede existir solo en CAM.
+- **Diagnóstico**: `/internal/streams-test.json?id=tt…` incluye `categories` con el número de resultados de cada categoría para ese título.
 
 ## 📄 Licencia
 
@@ -213,6 +252,6 @@ MIT
 - OMDB puede responder `Request limit reached!` cuando se agota la cuota. El addon pausa nuevas consultas durante 15 minutos por instancia; esto no amplía la cuota. Revisa el plan o espera su renovación.
 - TMDB puede responder HTTP 429: se reduce el paralelismo al resolver IDs y se aplazan consultas por instancia según `Retry-After` (máximo 5 minutos; 30 segundos si no se indica). Las respuestas ya cacheadas siguen disponibles.
 - Un 404 de lookup en TVMaze puede indicar que la serie no existe en su base de datos. Las búsquedas negativas se cachean durante una hora.
-- Los timeouts de Knaben/Torlock indican que el proveedor tardó demasiado; no implican necesariamente un error de configuración.
+- Los timeouts de Knaben/Torlock/Nyaa/YTS indican que el proveedor tardó demasiado; no implican necesariamente un error de configuración. La API de Nyaa es un servicio comunitario gratuito y puede ir lenta o no estar disponible: si agota el tiempo (9 s), los demás proveedores responden igual y esa respuesta no se cachea, para reintentar en la siguiente petición.
 - Los mensajes de error de la aplicación no incluyen parámetros ni cuerpos de respuesta. OMDB y TMDB (con clave v3) aún requieren claves en la URL: configura la plataforma de observabilidad para no guardar parámetros de esas solicitudes. Si una clave apareció en registros, rótala y elimina o restringe el acceso a los registros históricos.
 - Cachés y pausas son locales a cada instancia; no coordinan cuotas entre instancias serverless.

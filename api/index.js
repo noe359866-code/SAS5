@@ -72,9 +72,8 @@ app.get('/healthz', (req, res) => {
       omdb: config.omdbConfigured,
       watchmode: config.watchmodeConfigured,
       tvdb: config.tvdbConfigured,
-      knaben: activeProviders(null).includes('knaben'),
-      torlock: activeProviders(null).includes('torlock'),
-      blackholebay: activeProviders(null).includes('blackholebay'),
+      // knaben, torlock, blackholebay, nyaa, yts: true si está activo
+      ...Object.fromEntries(STREAM_KEYS.map((key) => [key, activeProviders(null).includes(key)])),
     },
     streamProviders: activeProviders(null),
     watchRegion: config.watchRegion,

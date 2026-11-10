@@ -27,6 +27,11 @@ import { branding } from './lib/branding.js';
 import userConfig from './lib/userConfig.js';
 import catalogs from './lib/catalogs.js';
 import streams from './lib/streams.js';
+import cache from './lib/cache.js';
+import debridCredentials from './lib/debridCredentials.js';
+import debridProviders from './lib/debridProviders.js';
+import realDebridOAuth from './lib/realDebridOAuth.js';
+import rateLimit from './lib/rateLimit.js';
 import logoData from './lib/logoData.js';
 
 const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
@@ -42,7 +47,7 @@ const CONFIG_PREFIX_RE = new RegExp(`^/([A-Za-z0-9_-]{8,${CONFIG_SEGMENT_MAX}})(
 function corsHeaders(extra = {}) {
   return {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, HEAD, POST, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': '*',
     'Access-Control-Max-Age': '86400',
     ...extra,
@@ -66,19 +71,89 @@ function htmlResponse(html) {
   });
 }
 
-async function serveCatalog(type, id, cfg) {
-  const result = await core.handleCatalog(type, decodeURIComponent(id), cfg);
-  return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
+/** Cache compartida de Cloudflare para las respuestas públicas repetidas. */
+async function edgeCached(request, ctx, createResponse) {
+  const edge = globalThis.caches && globalThis.caches.default;
+  if (!edge || request.method !== 'GET') return createResponse();
+  const key = new Request(request.url, { method: 'GET' });
+  try {
+    const cached = await edge.match(key);
+    if (cached) return cached;
+  } catch (_) { /* Cache API no disponible en algunos entornos locales */ }
+
+  const response = await createResponse();
+  const policy = response.headers.get('Cache-Control') || '';
+  const cacheable = response.status === 200 && !/(?:no-store|private)/i.test(policy);
+  if (cacheable) {
+    const put = edge.put(key, response.clone()).catch(() => {});
+    if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(put);
+    else await put;
+  }
+  return response;
 }
 
-async function serveMeta(type, id, cfg) {
-  const result = await core.handleMeta(type, decodeURIComponent(id), cfg);
-  return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
+function workerRuntime(env, ctx) {
+  return {
+    env,
+    waitUntil: ctx && typeof ctx.waitUntil === 'function' ? (promise) => ctx.waitUntil(promise) : undefined,
+  };
 }
 
-async function serveStream(type, id, cfg) {
-  const result = await core.handleStream(type, decodeURIComponent(id), cfg);
-  return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
+function sameOrigin(request) {
+  const origin = request.headers.get('origin');
+  if (!origin) return false;
+  try {
+    return new URL(origin).origin === new URL(request.url).origin;
+  } catch (_) {
+    return false;
+  }
+}
+
+async function readJsonBody(request) {
+  const length = Number(request.headers.get('content-length')) || 0;
+  if (length > 4096) {
+    const error = new Error('body_too_large');
+    error.code = 'body_too_large';
+    throw error;
+  }
+  const text = await request.text();
+  if (new TextEncoder().encode(text).length > 4096) {
+    const error = new Error('body_too_large');
+    error.code = 'body_too_large';
+    throw error;
+  }
+  try {
+    const body = JSON.parse(text);
+    if (!body || typeof body !== 'object' || Array.isArray(body)) throw new Error('invalid_body');
+    return body;
+  } catch (_) {
+    const error = new Error('invalid_body');
+    error.code = 'invalid_body';
+    throw error;
+  }
+}
+
+async function serveCatalog(type, id, cfg, request, ctx) {
+  return edgeCached(request, ctx, async () => {
+    const result = await core.handleCatalog(type, decodeURIComponent(id), cfg);
+    return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
+  });
+}
+
+async function serveMeta(type, id, cfg, request, ctx) {
+  return edgeCached(request, ctx, async () => {
+    const result = await core.handleMeta(type, decodeURIComponent(id), cfg);
+    return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
+  });
+}
+
+async function serveStream(type, id, cfg, request, env, ctx) {
+  const create = async () => {
+    const result = await core.handleStream(type, decodeURIComponent(id), cfg, workerRuntime(env, ctx));
+    return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
+  };
+  // Nunca guardar enlaces directos de una cuenta debrid en una caché compartida.
+  return cfg && cfg.debridId ? create() : edgeCached(request, ctx, create);
 }
 
 /** Tendencias semanales TMDB (solo si hay clave; si no, estáticos). */
@@ -98,7 +173,7 @@ async function loadTrending() {
 }
 
 export default {
-  async fetch(request, env, _ctx) {
+  async fetch(request, env, ctx) {
     try {
       config.reload(env || {});
     } catch (err) {
@@ -111,6 +186,107 @@ export default {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: corsHeaders() });
     }
+
+    const redirectConfigure = (query = {}, extraHeaders = {}) => {
+      const destination = new URL('/configure', request.url);
+      for (const [key, value] of Object.entries(query)) destination.searchParams.set(key, String(value));
+      return new Response(null, {
+        status: 302,
+        headers: corsHeaders({ 'Location': destination.toString(), 'Cache-Control': 'no-store', ...extraHeaders }),
+      });
+    };
+
+    if (path === realDebridOAuth.CALLBACK_PATH.replace(/\/$/, '') && request.method === 'GET') {
+      const secure = url.protocol === 'https:';
+      const clearedCookie = realDebridOAuth.clearStateCookie(secure);
+      const state = url.searchParams.get('state') || '';
+      const headers = { 'Referrer-Policy': 'no-referrer', 'Set-Cookie': clearedCookie };
+      if (!realDebridOAuth.verifyState(state, request.headers.get('cookie'))) {
+        return redirectConfigure({ debrid_error: 'oauth_failed' }, headers);
+      }
+      if (url.searchParams.has('error')) {
+        return redirectConfigure({ debrid_error: 'oauth_denied' }, headers);
+      }
+      try {
+        const result = await realDebridOAuth.completeAuthorization(url.searchParams.get('code'), env || {});
+        return redirectConfigure({ debrid_credential: result.credentialId }, headers);
+      } catch (_) {
+        console.error('[Debrid] No se pudo completar OAuth de Real-Debrid.');
+        return redirectConfigure({ debrid_error: 'oauth_failed' }, headers);
+      }
+    }
+
+    if (path === '/internal/debrid/real-debrid/authorize' && request.method === 'GET') {
+      if (!debridCredentials.isConfigured(env || {})) {
+        return redirectConfigure({ debrid_error: 'storage_not_configured' }, { 'Referrer-Policy': 'no-referrer' });
+      }
+      try {
+        const authorization = realDebridOAuth.makeAuthorization({ origin: url.origin, env: env || {} });
+        return new Response(null, {
+          status: 302,
+          headers: corsHeaders({
+            Location: authorization.authorizationUrl,
+            'Cache-Control': 'no-store',
+            'Referrer-Policy': 'no-referrer',
+            'Set-Cookie': realDebridOAuth.stateCookie(authorization.state, url.protocol === 'https:'),
+          }),
+        });
+      } catch (err) {
+        const error = err && err.code === 'realdebrid_oauth_not_configured' ? 'oauth_not_configured' : 'oauth_failed';
+        return redirectConfigure({ debrid_error: error }, { 'Referrer-Policy': 'no-referrer' });
+      }
+    }
+
+    if (path === '/internal/debrid/real-debrid/authorize' || path === realDebridOAuth.CALLBACK_PATH) {
+      return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
+    }
+
+    if ((path === '/internal/debrid/connect') && (request.method === 'POST' || request.method === 'DELETE')) {
+      if (!sameOrigin(request)) return jsonResponse({ error: 'origin_not_allowed' }, 403, 0);
+      const clientIp = request.headers.get('cf-connecting-ip') ||
+        (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
+      if (request.method === 'POST' && !rateLimit.allow(`debrid-connect:${clientIp}`, { limit: 8, windowMs: 60_000 })) {
+        return jsonResponse({ error: 'rate_limited', message: 'Espera un minuto antes de volver a conectar.' }, 429, 0);
+      }
+      try {
+        const body = await readJsonBody(request);
+        if (request.method === 'DELETE') {
+          await debridCredentials.disconnect(body.credentialId, env || {});
+          return jsonResponse({ ok: true }, 200, 0);
+        }
+        const provider = String(body.provider || '').trim().toLowerCase();
+        const token = String(body.token || '').trim();
+        if (provider === 'realdebrid') {
+          return jsonResponse({ error: 'oauth_required', message: 'Real-Debrid debe conectarse mediante OAuth; no pegues tu token API privado.' }, 400, 0);
+        }
+        if (!['torbox', 'easydebrid', 'premiumize'].includes(provider) || !token || token.length > 1024 || /\s/.test(token)) {
+          return jsonResponse({ error: 'invalid_credential', message: 'Selecciona un proveedor y pega una clave API válida.' }, 400, 0);
+        }
+        if (!debridCredentials.isConfigured(env || {})) {
+          return jsonResponse({ error: 'debrid_not_configured', message: 'El servidor debe configurar DEBRID_KV y DEBRID_ENCRYPTION_KEY.' }, 503, 0);
+        }
+        await debridProviders.validateCredential(provider, token);
+        const result = await debridCredentials.createCredential({ provider, token }, env || {});
+        return jsonResponse({ ok: true, credentialId: result.credentialId, provider: result.provider }, 200, 0);
+      } catch (err) {
+        if (err && err.code === 'invalid_body') {
+          return jsonResponse({ error: 'invalid_body', message: 'Envía un objeto JSON válido de hasta 4 KB.' }, 400, 0);
+        }
+        if (err && err.code === 'body_too_large') {
+          return jsonResponse({ error: 'body_too_large', message: 'El cuerpo supera el límite de 4 KB.' }, 413, 0);
+        }
+        if (err && (err.code === 'invalid_credential' || err.status === 401 || err.status === 403)) {
+          return jsonResponse({ error: 'invalid_credential', message: 'El proveedor rechazó la clave API. Compruébala en tu cuenta.' }, 400, 0);
+        }
+        if (err && (err.code === 'debrid_storage_not_configured' || err.code === 'debrid_encryption_not_configured')) {
+          return jsonResponse({ error: 'debrid_not_configured', message: 'El servidor debe configurar DEBRID_KV y DEBRID_ENCRYPTION_KEY.' }, 503, 0);
+        }
+        if (err && err.code === 'provider_invalid') return jsonResponse({ error: 'provider_invalid' }, 400, 0);
+        console.error('[Debrid] No se pudo validar una credencial de proveedor.');
+        return jsonResponse({ error: 'debrid_unavailable', message: 'No se pudo validar el proveedor. Inténtalo más tarde.' }, 502, 0);
+      }
+    }
+    if (path === '/internal/debrid/connect') return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
     }
@@ -142,6 +318,11 @@ export default {
       return htmlResponse(renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series }));
     }
 
+    // ── Estado agregado de la caché (sin claves ni datos por usuario) ──
+    if (path === '/internal/cache.json') {
+      return jsonResponse(cache.stats(), 200, 0);
+    }
+
     // ── Branding (logos de plataformas/estudios vía TMDB) ─────
     if (path === '/internal/branding.json') {
       const lang = url.searchParams.get('lang') || undefined;
@@ -161,7 +342,7 @@ export default {
         {
           ok: true,
           addon: 'org.comunidad.catalogos.plus',
-          version: '1.3.0',
+          version: '1.5.0',
           runtime: 'cloudflare-workers',
           configurable: true,
           catalogs: core.CATALOGS.length,
@@ -179,6 +360,14 @@ export default {
             ),
           },
           streamProviders: streams.activeProviders(null),
+          debrid: { providers: debridProviders.PROVIDERS.map((provider) => provider.key) },
+          realDebrid: {
+            supported: true,
+            mode: 'oauth-personal-library',
+            oauthConfigured: realDebridOAuth.isConfigured(env || {}),
+            credentialStorageReady: debridCredentials.isConfigured(env || {}),
+          },
+          cache: cache.stats(),
           watchRegion: config.watchRegion,
           watchRegionFallback: config.watchRegionFallback,
         },
@@ -200,16 +389,16 @@ export default {
 
     // ── Manifest por defecto ──────────────────────────────────
     if (path === '/manifest.json') {
-      return jsonResponse(core.buildManifest(`${origin}/assets/logo.png`), 200, 300);
+      return edgeCached(request, ctx, async () => jsonResponse(core.buildManifest(`${origin}/assets/logo.png`), 200, 300));
     }
 
     // ── Catálogos / Metadatos con config por defecto ──────────
     let match = path.match(CATALOG_RE);
-    if (match) return serveCatalog(match[1], match[2], null);
+    if (match) return serveCatalog(match[1], match[2], null, request, ctx);
     match = path.match(META_RE);
-    if (match) return serveMeta(match[1], match[2], null);
+    if (match) return serveMeta(match[1], match[2], null, request, ctx);
     match = path.match(STREAM_RE);
-    if (match) return serveStream(match[1], match[2], null);
+    if (match) return serveStream(match[1], match[2], null, request, env, ctx);
 
     // ── Rutas con prefijo de config de usuario: /<cfg>/... ────
     const prefixed = path.match(CONFIG_PREFIX_RE);
@@ -225,14 +414,15 @@ export default {
           return htmlResponse(renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series, initialCfg: cfg }));
         }
         if (rest === '/manifest.json') {
-          return jsonResponse(core.buildManifest(logoUrl, cfg), 200, 300);
+          const createManifest = () => jsonResponse(core.buildManifest(logoUrl, cfg), 200, cfg.debridId ? 0 : 300);
+          return cfg.debridId ? createManifest() : edgeCached(request, ctx, createManifest);
         }
         let m2 = rest.match(CATALOG_RE);
-        if (m2) return serveCatalog(m2[1], m2[2], cfg);
+        if (m2) return serveCatalog(m2[1], m2[2], cfg, request, ctx);
         m2 = rest.match(META_RE);
-        if (m2) return serveMeta(m2[1], m2[2], cfg);
+        if (m2) return serveMeta(m2[1], m2[2], cfg, request, ctx);
         m2 = rest.match(STREAM_RE);
-        if (m2) return serveStream(m2[1], m2[2], cfg);
+        if (m2) return serveStream(m2[1], m2[2], cfg, request, env, ctx);
       }
       // Prefijo con pinta de config pero inválida → 404 limpio
       return jsonResponse({ error: 'invalid_config', message: 'Config inválida. Vuelve a /configure' }, 404, 0);

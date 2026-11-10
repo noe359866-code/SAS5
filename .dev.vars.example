@@ -8,5 +8,11 @@ WATCHMODE_API_KEY=
 TVDB_API_KEY=
 # TVDB_PIN=
 WATCH_REGION=NI
+# Credenciales debrid cifradas (el Worker también necesita binding DEBRID_KV).
+# DEBRID_ENCRYPTION_KEY=
+# OAuth Real-Debrid: registra como callback la URL exacta de tu Worker local.
+# REALDEBRID_CLIENT_ID=
+# REALDEBRID_CLIENT_SECRET=
+# REALDEBRID_REDIRECT_URI=http://127.0.0.1:8787/internal/debrid/real-debrid/callback
 # TMDB_LANGUAGE=es
-# SUPPORT_URL=https://discord.gg/tu-invitacion
+# SUPPORT_URL=https://discord.gg/J6byqsRUfu

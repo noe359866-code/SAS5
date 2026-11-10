@@ -146,6 +146,20 @@ test('config de usuario: campo streams sobrevive al codec base64url', () => {
   assert.deepEqual(decoded.streams, ['knaben']);
 });
 
+test('config de usuario: Real-Debrid guarda una referencia opaca, nunca el token', () => {
+  const credentialId = 'x'.repeat(32);
+  const cfg = userConfig.normalizeConfig(
+    { lang: 'es', region: 'MX', debridId: credentialId },
+    PLATFORM_KEYS,
+    STUDIO_KEYS,
+    streams.PROVIDER_KEYS
+  );
+  const encoded = userConfig.encodeConfig(cfg);
+  assert.equal(userConfig.decodeConfig(encoded, PLATFORM_KEYS, STUDIO_KEYS, streams.PROVIDER_KEYS).debridId, credentialId);
+  const bad = Buffer.from(JSON.stringify({ lang: 'es', debridId: 'secret-token' })).toString('base64url');
+  assert.equal(userConfig.decodeConfig(bad, PLATFORM_KEYS, STUDIO_KEYS, streams.PROVIDER_KEYS), null);
+});
+
 test('buildQuery: título alternativo (original) para la 2ª pasada', () => {
   const resolved = { title: 'Spirited Away', altTitle: 'Sen to Chihiro no Kamikakushi', year: '2001', season: null, episode: null, mediaType: 'movie' };
   assert.equal(streams.buildQuery(resolved), 'Spirited Away 2001');

@@ -16,9 +16,25 @@ ADDON_NAME = "Catálogos+"
 WATCH_REGION = "NI"
 TMDB_MIN_VOTE_COUNT = "500"
 CACHE_TTL_SECONDS = "21600"
-# Enlace de soporte de la web. Por defecto, la invitación al Discord de
-# Catálogos+; como las invitaciones normales caducan, pon aquí una permanente.
-# SUPPORT_URL = "https://discord.gg/tu-invitacion"
+STREAM_PROVIDER_TIMEOUT_MS = "6000"
+STREAM_FALLBACK_TIMEOUT_MS = "2500"
+STREAM_STALE_SECONDS = "21600"
+DEBRID_MAX_CHECKS = "8"
+DEBRID_MAX_RESULTS = "3"
+DEBRID_TIMEOUT_MS = "4500"
+# Enlace de soporte de la web. Por defecto, invitación permanente actual al
+# Discord de Catálogos+. Actualízalo aquí si el enlace cambia.
+# SUPPORT_URL = "https://discord.gg/J6byqsRUfu"
 
 # Node.js compat por si alguna dependencia lo requiere
 compatibility_flags = ["nodejs_compat"]
+
+# Credenciales debrid (opcional): crea una KV para las credenciales cifradas.
+#   npx wrangler kv namespace create DEBRID_KV
+#   npx wrangler secret put DEBRID_ENCRYPTION_KEY
+# Para OAuth Real-Debrid, configura además como secrets:
+#   REALDEBRID_CLIENT_ID, REALDEBRID_CLIENT_SECRET y REALDEBRID_REDIRECT_URI
+# (callback exacto: https://<tu-dominio>/internal/debrid/real-debrid/callback).
+# [[kv_namespaces]]
+# binding = "DEBRID_KV"
+# id = "<ID de la KV creada>"

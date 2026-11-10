@@ -207,3 +207,12 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 ## 📄 Licencia
 
 MIT
+
+### Límites y errores de proveedores
+
+- OMDB puede responder `Request limit reached!` cuando se agota la cuota. El addon pausa nuevas consultas durante 15 minutos por instancia; esto no amplía la cuota. Revisa el plan o espera su renovación.
+- TMDB puede responder HTTP 429: se reduce el paralelismo al resolver IDs y se aplazan consultas por instancia según `Retry-After` (máximo 5 minutos; 30 segundos si no se indica). Las respuestas ya cacheadas siguen disponibles.
+- Un 404 de lookup en TVMaze puede indicar que la serie no existe en su base de datos. Las búsquedas negativas se cachean durante una hora.
+- Los timeouts de Knaben/Torlock indican que el proveedor tardó demasiado; no implican necesariamente un error de configuración.
+- Los mensajes de error de la aplicación no incluyen parámetros ni cuerpos de respuesta. OMDB y TMDB (con clave v3) aún requieren claves en la URL: configura la plataforma de observabilidad para no guardar parámetros de esas solicitudes. Si una clave apareció en registros, rótala y elimina o restringe el acceso a los registros históricos.
+- Cachés y pausas son locales a cada instancia; no coordinan cuotas entre instancias serverless.

@@ -97,3 +97,43 @@ test('landing y /configure comparten el sistema de diseño y no dejan plantillas
   assert.match(conf, /id="installBtnFooter"/);
   assert.match(conf, /id="manifestUrl"/);
 });
+
+test('/configure: Nyaa y YTS son proveedores elegibles y nacen marcados en un borrador antiguo', () => {
+  const vm = require('node:vm');
+  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts'];
+  // Ejecuta el arranque del script (constantes, state, save y restore) con
+  // un localStorage simulado y devuelve los proveedores que quedan marcados.
+  const run = (draft, initialCfg) => {
+    const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example', initialCfg });
+    for (const key of all) assert.match(html, new RegExp(`data-group="streams" data-key="${key}"`), key);
+    const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+    const setup = script.slice(0, script.indexOf('\nfunction b64url'));
+    const sandbox = {
+      saved: null,
+      localStorage: {
+        getItem: () => (draft ? JSON.stringify(draft) : null),
+        setItem: (key, value) => { sandbox.saved = JSON.parse(value); },
+      },
+    };
+    // En JSON: un array creado dentro del contexto no es deepEqual a uno de fuera.
+    vm.runInNewContext(`${setup}\nrestore();\nglobalThis.streams = JSON.stringify([...state.streams]);\nsave();`, sandbox);
+    return { streams: JSON.parse(sandbox.streams), saved: sandbox.saved };
+  };
+
+  // Primera visita: todo marcado.
+  assert.deepEqual(run(null).streams, all);
+  // Borrador guardado antes de existir Nyaa y YTS: los nuevos nacen marcados
+  // y se respeta lo que el usuario había desmarcado.
+  assert.deepEqual(run({ streams: ['knaben', 'torlock', 'blackholebay'] }).streams, all);
+  assert.deepEqual(run({ streams: ['knaben'] }).streams, ['knaben', 'nyaa', 'yts']);
+  assert.deepEqual(run({ streams: [] }).streams, ['nyaa', 'yts']);
+  // Borrador nuevo: si el usuario desmarcó YTS, sigue desmarcado.
+  const draft = run({ streams: ['knaben', 'nyaa'], knownStreams: all });
+  assert.deepEqual(draft.streams, ['knaben', 'nyaa']);
+  // El borrador anota qué proveedores conocía al guardarse.
+  assert.deepEqual(draft.saved.streams, ['knaben', 'nyaa']);
+  assert.deepEqual(draft.saved.knownStreams, all);
+  // Desde Stremio (/<config>/configure) manda la config instalada, tal cual.
+  const installed = { lang: 'es', region: 'MX', platforms: null, studios: null, base: null, streams: ['knaben', 'torlock', 'blackholebay'] };
+  assert.deepEqual(run({ streams: all, knownStreams: all }, installed).streams, ['knaben', 'torlock', 'blackholebay']);
+});

@@ -173,9 +173,10 @@ export default {
             omdb: config.omdbConfigured,
             watchmode: config.watchmodeConfigured,
             tvdb: config.tvdbConfigured,
-            knaben: streams.activeProviders(null).includes('knaben'),
-            torlock: streams.activeProviders(null).includes('torlock'),
-            blackholebay: streams.activeProviders(null).includes('blackholebay'),
+            // knaben, torlock, blackholebay, nyaa, yts: true si está activo
+            ...Object.fromEntries(
+              streams.PROVIDER_KEYS.map((key) => [key, streams.activeProviders(null).includes(key)])
+            ),
           },
           streamProviders: streams.activeProviders(null),
           watchRegion: config.watchRegion,

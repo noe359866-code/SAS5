@@ -68,17 +68,17 @@ function htmlResponse(html) {
 
 async function serveCatalog(type, id, cfg) {
   const result = await core.handleCatalog(type, decodeURIComponent(id), cfg);
-  return jsonResponse(result, 200, config.cacheTtl);
+  return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
 }
 
 async function serveMeta(type, id, cfg) {
   const result = await core.handleMeta(type, decodeURIComponent(id), cfg);
-  return jsonResponse(result, 200, config.cacheTtl);
+  return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
 }
 
 async function serveStream(type, id, cfg) {
   const result = await core.handleStream(type, decodeURIComponent(id), cfg);
-  return jsonResponse(result, 200, 3600);
+  return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
 }
 
 /** Tendencias semanales TMDB (solo si hay clave; si no, estáticos). */

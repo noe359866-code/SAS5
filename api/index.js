@@ -140,7 +140,7 @@ app.get('/:cfg/catalog/:type/:id.json', async (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;
   const result = await core.handleCatalog(req.params.type, decodeURIComponent(req.params.id), cfg);
-  res.setHeader('Cache-Control', `public, max-age=${config.cacheTtl}`);
+  res.setHeader('Cache-Control', result.cacheMaxAge > 0 ? `public, max-age=${result.cacheMaxAge}` : 'no-store');
   res.json(result);
 });
 
@@ -148,7 +148,7 @@ app.get('/:cfg/meta/:type/:id.json', async (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;
   const result = await core.handleMeta(req.params.type, decodeURIComponent(req.params.id), cfg);
-  res.setHeader('Cache-Control', `public, max-age=${config.cacheTtl}`);
+  res.setHeader('Cache-Control', result.cacheMaxAge > 0 ? `public, max-age=${result.cacheMaxAge}` : 'no-store');
   res.json(result);
 });
 
@@ -156,7 +156,7 @@ app.get('/:cfg/stream/:type/:id.json', async (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;
   const result = await core.handleStream(req.params.type, decodeURIComponent(req.params.id), cfg);
-  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.setHeader('Cache-Control', result.cacheMaxAge > 0 ? `public, max-age=${result.cacheMaxAge}` : 'no-store');
   res.json(result);
 });
 

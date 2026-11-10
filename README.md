@@ -65,7 +65,14 @@ Metadatos enriquecidos en la ficha:
 │   ├── posterData.js     # Pósters de muestra para cuando no hay clave de TMDB
 │   ├── meta.js           # Constructor de metadatos multi-fuente
 │   └── logoData.js       # Logo PNG embebido (base64) para el Worker
-├── assets/logo.png       # Logo del addon
+├── assets/logo.png       # Logo del addon (fuente)
+├── public/               # Static assets del Worker: gratis e ilimitados
+│   ├── _headers          # CORS + Cache-Control de los assets
+│   ├── robots.txt        # Bloquea rutas dinámicas para no gastar cuota
+│   ├── assets/logo.png   # Logo servido sin ejecutar el Worker
+│   └── catalog/          # Catálogos pregenerados (npm run prerender; no se commitea)
+├── scripts/
+│   └── prerender-catalogs.mjs # Congela los catálogos por defecto como estáticos
 ├── test/                 # Tests offline (servidor, Worker, proveedores, filtros y web)
 ├── vercel.json           # Alternativa: despliegue serverless en Vercel
 ├── .env.example          # Plantilla de variables (Node)
@@ -125,7 +132,7 @@ Instalación en la app: **Add-ons → pegar la URL del manifest → Instalar**.
 
 ## ☁️ 3. Desplegar en Cloudflare Workers (recomendado)
 
-El Worker sirve todo el addon (manifest, catálogos, metadatos, landing y logo embebido) sin dependencias externas. Plan **free** suficiente.
+El Worker sirve todo el addon (manifest, catálogos, metadatos, landing y logo embebido) sin dependencias externas. Plan **free** suficiente; si tu comunidad crece, mira [Escalar en el plan free](#-escalar-en-el-plan-gratuito-100k--145k-peticionesdía): los catálogos por defecto se sirven como *static assets* (gratis e ilimitados) y no gastan la cuota diaria.
 
 ### 3.1 Instalar y autenticar wrangler
 
@@ -173,8 +180,15 @@ npm run dev:worker               # http://localhost:8787
 ### 3.4 Desplegar
 
 ```bash
-npm run deploy                   # = npx wrangler deploy
+npm run deploy                   # = npm run prerender + npx wrangler deploy
+npx wrangler deploy              # solo el Worker, sin regenerar catálogos estáticos
 ```
+
+`npm run prerender` congela los catálogos del manifest por defecto en `public/catalog/` (necesita
+`TMDB_API_KEY` en el entorno; sin clave no escribe nada y el Worker los sigue resolviendo en vivo).
+Con `[assets]` en `wrangler.toml` esas peticiones las sirve Cloudflare **sin ejecutar el Worker**, así
+que son gratuitas e ilimitadas. Detalles y el resto de palancas en
+[docs/escala-plan-free.md](docs/escala-plan-free.md).
 
 Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
 
@@ -278,6 +292,23 @@ Cada usuario los elige en `/configure` y viajan en su URL personal (`hide`, `sor
 - **Caché**: la búsqueda se guarda sin filtrar (hasta 100 resultados por título) y los filtros se aplican en cada petición, de modo que dos usuarios con filtros distintos comparten la misma búsqueda. `STREAM_MAX_RESULTS` se aplica **después** de filtrar.
 - **Si todo queda oculto** el addon responde una lista vacía: vuelve a marcar alguna categoría. Un estreno reciente puede existir solo en CAM.
 - **Diagnóstico**: `/internal/streams-test.json?id=tt…` incluye `categories` con el número de resultados de cada categoría para ese título.
+
+## 📈 Escalar en el plan gratuito (100K → 145K+ peticiones/día)
+
+El plan free de Workers da **100.000 peticiones/día por cuenta** y devuelve `error 1027` al agotarlas.
+Las peticiones a *static assets* son gratis e ilimitadas, y el addon ya se apoya en eso:
+
+1. **Catálogos por defecto como estáticos** — `npm run prerender` escribe `public/catalog/<tipo>/<id>.json`
+   y Cloudflare los sirve sin ejecutar el Worker (los catálogos suelen ser 60–80 % del tráfico).
+2. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de un
+   manifest personal (6–10× menos peticiones por sesión).
+3. **Logo y `robots.txt` estáticos** — fuera de la cuota; los crawlers no recorren rutas dinámicas.
+4. **Repartir cuota** — la cuota es por cuenta, no por Worker: espejos en otra cuenta o el mismo código
+   en Vercel (`api/index.js`) suman cuotas independientes.
+5. **5 USD/mes** — 10 M peticiones/mes (≈333K/día) si no quieres trocear URLs.
+
+Guía completa con números, comandos de verificación y límites:
+[docs/escala-plan-free.md](docs/escala-plan-free.md).
 
 ## 📄 Licencia
 

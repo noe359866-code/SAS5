@@ -1,0 +1,18 @@
+# Cabeceras para los static assets del Worker.
+#
+# Cloudflare sirve estos archivos SIN ejecutar worker.mjs, así que sus
+# peticiones son gratuitas e ilimitadas (no consumen las 100.000/día del plan
+# free). Los catálogos pregenerados por scripts/prerender-catalogs.mjs caen
+# aquí: /catalog/<tipo>/<id>.json
+
+/catalog/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/assets/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=604800, immutable
+
+/logo.png
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=604800, immutable

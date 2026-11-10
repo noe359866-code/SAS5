@@ -24,7 +24,7 @@ const { supportLink } = require('../lib/layout');
 
 const ORIGIN = 'https://addon.example';
 const HOST = 'addon.example';
-const DISCORD = 'https://discord.gg/eFVFuxg95';
+const DISCORD = 'https://discord.gg/J6byqsRUfu';
 
 /** Ejecuta `fn` con un entorno concreto y deja la config como estaba. */
 function withEnv(env, fn) {
@@ -66,12 +66,28 @@ ${actions}
 save();
 globalThis.out = JSON.stringify({
   lang: state.lang, region: state.region, hide: [...state.hide], sort: state.sort, maxSize: state.maxSize,
-  platforms: [...state.platforms], isDefault: isDefault(), url: personalUrl(),
+  platforms: [...state.platforms], debridId: state.debridId, debridProvider: state.debridProvider,
+  debridSelection: state.debridSelection, isDefault: isDefault(), url: personalUrl(),
 });`, sandbox);
   const out = JSON.parse(sandbox.out);
   const match = out.url.match(/^https:\/\/addon\.example\/([^/]+)\/manifest\.json$/);
   return { ...out, saved: sandbox.saved, segment: match ? match[1] : null };
 }
+
+// ---------------------------------------------------------- Refresh visual
+
+test('la portada y el configurador comparten el refresh oscuro y responsive', () => {
+  const homeHtml = withEnv({}, () => home());
+  const configureHtml = withEnv({}, () => configure());
+  assert.match(homeHtml, /<h1>Stremio, <em>a tu manera\.<\/em><\/h1>/);
+  assert.match(homeHtml, /class="stats hero-stats"/);
+  assert.match(homeHtml, /--bg: #080b12;/);
+  assert.match(homeHtml, /@media \(max-width: 700px\)/);
+  assert.match(configureHtml, /<h1>Tu Stremio, <em>a tu gusto\.<\/em><\/h1>/);
+  assert.match(configureHtml, /Refinamiento visual del configurador/);
+  assert.match(configureHtml, /@media \(max-width: 760px\)/);
+  assert.match(configureHtml, /--bg: #080b12;/);
+});
 
 // ---------------------------------------------------------------- Soporte
 
@@ -208,14 +224,13 @@ test('/configure: el contador de catálogos cuenta lo mismo que el manifest', ()
   ]) {
     assert.equal(total(cfg), buildDefs(cfg).length, JSON.stringify(cfg));
   }
-  // La portada anuncia ese mismo total.
+  // La portada anuncia el mismo total con métricas visuales más breves.
   const landing = withEnv({}, () => home());
-  assert.match(landing, new RegExp(`<b>${buildDefs(null).length}</b> catálogos`));
-  assert.match(landing, new RegExp(`<b>${PLATFORMS.length}</b> plataformas`));
-  assert.match(landing, new RegExp(`<b>${STUDIOS.length}</b> estudios`));
-  assert.match(landing, new RegExp(`<b>${filters.FILTER_KEYS.length}</b> filtros de streams`));
-  assert.match(landing, new RegExp(`<b>${userConfig.LANG_OPTIONS.length}</b> idiomas`));
-  assert.match(landing, new RegExp(`<b>${userConfig.REGION_OPTIONS.length}</b> regiones`));
+  assert.match(landing, new RegExp(`<b>${buildDefs(null).length}</b><span>catálogos</span>`));
+  assert.match(landing, new RegExp(`<b>${PLATFORMS.length}</b><span>plataformas</span>`));
+  assert.match(landing, new RegExp(`<b>${STUDIOS.length}</b><span>estudios</span>`));
+  assert.match(landing, new RegExp(`<b>${filters.FILTER_KEYS.length}</b><span>filtros</span>`));
+  assert.match(landing, new RegExp(`<b>${userConfig.LANG_OPTIONS.length}</b><span>idiomas</span>`));
 });
 
 // ------------------------------------------- Script de /configure (en vm)
@@ -229,6 +244,33 @@ test('/configure: sin tocar nada se instala el manifest general', () => {
   assert.equal(first.maxSize, '0');
   // El borrador guarda también los filtros.
   assert.deepEqual([first.saved.hide, first.saved.sort, first.saved.maxSize], [[], filters.DEFAULT_SORT, 0]);
+});
+
+test('/configure: proveedor debrid e id opaco sobreviven borrador y URL personal', () => {
+  const credentialId = 'r'.repeat(32);
+  const run = runConfigure({ actions: `state.debridId = ${JSON.stringify(credentialId)}; state.debridProvider = 'realdebrid'; state.debridSelection = 'realdebrid';` });
+  assert.equal(run.isDefault, false);
+  assert.equal(run.debridId, credentialId);
+  assert.equal(run.debridProvider, 'realdebrid');
+  assert.equal(run.saved.debridId, credentialId);
+  assert.equal(run.saved.debridProvider, 'realdebrid');
+  assert.equal(run.saved.debridSelection, 'realdebrid');
+  assert.equal(decode(run.segment).debridId, credentialId);
+  assert.equal(decode(run.segment).debridProvider, 'realdebrid');
+  assert.match(run.url, /\/manifest\.json$/);
+  assert.doesNotMatch(run.url, /rd-test-secret-token/);
+
+  const restored = runConfigure({ draft: {
+    debridId: credentialId, debridProvider: 'premiumize', debridSelection: 'premiumize',
+  } });
+  assert.equal(restored.debridProvider, 'premiumize');
+  assert.equal(restored.debridSelection, 'premiumize');
+
+  const html = configure({ initialCfg: { lang: 'es', region: 'NI', debridId: credentialId, debridProvider: 'realdebrid' } });
+  assert.match(html, /id="debridToken" type="password"/);
+  assert.match(html, /id="connectDebrid"/);
+  assert.match(html, /se validan en el servidor y se guardan cifradas/);
+  assert.match(html, new RegExp(credentialId));
 });
 
 test('/configure: los filtros viajan en la URL personal y el servidor los entiende igual', () => {

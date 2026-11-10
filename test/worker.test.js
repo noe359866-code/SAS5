@@ -90,6 +90,231 @@ test('preflight OPTIONS: 204 con CORS', async () => {
   const res = await get('/manifest.json', { method: 'OPTIONS' });
   assert.equal(res.status, 204);
   assert.equal(res.headers.get('access-control-allow-origin'), '*');
+  assert.match(res.headers.get('access-control-allow-methods'), /POST/);
+});
+
+test('TorBox conecta por POST, cifra la clave en KV y permite desconectarla', async () => {
+  const originalFetch = global.fetch;
+  const kvEntries = new Map();
+  const envDebrid = {
+    ...env,
+    DEBRID_ENCRYPTION_KEY: 'worker-test-encryption-key-at-least-32-chars',
+    DEBRID_KV: {
+      async get(key) { return kvEntries.get(key) ?? null; },
+      async put(key, value) { kvEntries.set(key, value); },
+      async delete(key) { kvEntries.delete(key); },
+    },
+  };
+  global.fetch = async (input, options = {}) => {
+    const url = new URL(String(input));
+    assert.equal(url.pathname, '/v1/api/user/me');
+    assert.equal(url.searchParams.get('settings'), 'false');
+    assert.equal(options.headers.Authorization, 'Bearer worker-test-api-secret');
+    assert.equal(url.href.includes('worker-test-api-secret'), false);
+    return new Response(JSON.stringify({ success: true, data: { email: 'test@example.net' } }), { status: 200 });
+  };
+  try {
+    const connected = await worker.fetch(new Request('https://addon.example/internal/debrid/connect', {
+      method: 'POST',
+      headers: { Origin: 'https://addon.example', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ provider: 'torbox', token: 'worker-test-api-secret' }),
+    }), envDebrid, {});
+    assert.equal(connected.status, 200);
+    assert.equal(connected.headers.get('cache-control'), 'no-store');
+    const body = await connected.json();
+    assert.match(body.credentialId, /^[A-Za-z0-9_-]{32}$/);
+    assert.equal(body.provider, 'torbox');
+    assert.equal(JSON.stringify(body).includes('worker-test-api-secret'), false);
+    const [encrypted] = [...kvEntries.values()];
+    assert.match(encrypted, /^v3\./);
+    assert.equal(encrypted.includes('worker-test-api-secret'), false);
+
+    const disconnected = await worker.fetch(new Request('https://addon.example/internal/debrid/connect', {
+      method: 'DELETE',
+      headers: { Origin: 'https://addon.example', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ credentialId: body.credentialId }),
+    }), envDebrid, {});
+    assert.equal(disconnected.status, 200);
+    assert.equal(kvEntries.size, 0);
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test('Real-Debrid rechaza el token privado pegado y exige OAuth', async () => {
+  const originalFetch = global.fetch;
+  let called = false;
+  global.fetch = async () => { called = true; throw new Error('no debe contactar Real-Debrid'); };
+  try {
+    const response = await worker.fetch(new Request('https://addon.example/internal/debrid/connect', {
+      method: 'POST',
+      headers: { Origin: 'https://addon.example', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ provider: 'realdebrid', token: 'private-api-token' }),
+    }), {}, {});
+    assert.equal(response.status, 400);
+    assert.equal((await response.json()).error, 'oauth_required');
+    assert.equal(called, false);
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test('Real-Debrid OAuth usa state/cookie, intercambia el código server-side y guarda tokens cifrados', async () => {
+  const originalFetch = global.fetch;
+  const kvEntries = new Map();
+  const envOAuth = {
+    ...env,
+    DEBRID_ENCRYPTION_KEY: 'worker-oauth-encryption-key-at-least-32-chars',
+    DEBRID_KV: {
+      async get(key) { return kvEntries.get(key) ?? null; },
+      async put(key, value) { kvEntries.set(key, value); },
+      async delete(key) { kvEntries.delete(key); },
+    },
+    REALDEBRID_CLIENT_ID: 'worker-rd-client',
+    REALDEBRID_CLIENT_SECRET: 'worker-rd-client-secret',
+    REALDEBRID_REDIRECT_URI: 'https://addon.example/internal/debrid/real-debrid/callback',
+  };
+  const authorization = await worker.fetch(new Request('https://addon.example/internal/debrid/real-debrid/authorize'), envOAuth, {});
+  assert.equal(authorization.status, 302);
+  assert.equal(authorization.headers.get('cache-control'), 'no-store');
+  assert.equal(authorization.headers.get('referrer-policy'), 'no-referrer');
+  const authorizeUrl = new URL(authorization.headers.get('location'));
+  assert.equal(authorizeUrl.origin, 'https://api.real-debrid.com');
+  assert.equal(authorizeUrl.pathname, '/oauth/v2/auth');
+  assert.equal(authorizeUrl.searchParams.get('client_id'), 'worker-rd-client');
+  assert.equal(authorizeUrl.searchParams.get('redirect_uri'), envOAuth.REALDEBRID_REDIRECT_URI);
+  const state = authorizeUrl.searchParams.get('state');
+  const cookie = authorization.headers.get('set-cookie').split(';', 1)[0];
+  assert.equal(cookie, `rd_oauth_state=${state}`);
+
+  let exchangeCalls = 0;
+  global.fetch = async (input, options = {}) => {
+    const url = new URL(String(input));
+    exchangeCalls++;
+    if (url.pathname === '/oauth/v2/token') {
+      const form = new URLSearchParams(options.body);
+      assert.equal(form.get('grant_type'), 'authorization_code');
+      assert.equal(form.get('client_id'), 'worker-rd-client');
+      assert.equal(form.get('client_secret'), 'worker-rd-client-secret');
+      assert.equal(form.get('code'), 'one-time-code');
+      assert.equal(form.get('redirect_uri'), envOAuth.REALDEBRID_REDIRECT_URI);
+      return new Response(JSON.stringify({ access_token: 'worker-access-secret', refresh_token: 'worker-refresh-secret', expires_in: 3600 }), { status: 200 });
+    }
+    assert.equal(url.pathname, '/rest/1.0/user');
+    assert.equal(options.headers.Authorization, 'Bearer worker-access-secret');
+    return new Response(JSON.stringify({ id: 88, username: 'worker-test' }), { status: 200 });
+  };
+  try {
+    const rejected = await worker.fetch(new Request(`https://addon.example/internal/debrid/real-debrid/callback?code=one-time-code&state=wrong-state`), envOAuth, {});
+    assert.equal(rejected.status, 302);
+    assert.match(rejected.headers.get('location'), /debrid_error=oauth_failed/);
+    assert.equal(exchangeCalls, 0);
+
+    const callback = await worker.fetch(new Request(`https://addon.example/internal/debrid/real-debrid/callback?code=one-time-code&state=${encodeURIComponent(state)}`, {
+      headers: { Cookie: cookie },
+    }), envOAuth, {});
+    assert.equal(callback.status, 302);
+    assert.equal(callback.headers.get('cache-control'), 'no-store');
+    assert.equal(callback.headers.get('referrer-policy'), 'no-referrer');
+    assert.match(callback.headers.get('set-cookie'), /Max-Age=0/);
+    const destination = new URL(callback.headers.get('location'));
+    assert.equal(destination.pathname, '/configure');
+    const credentialId = destination.searchParams.get('debrid_credential');
+    assert.match(credentialId, /^[A-Za-z0-9_-]{32}$/);
+    assert.equal(destination.href.includes('one-time-code'), false);
+    assert.equal(destination.href.includes('worker-access-secret'), false);
+    assert.equal(exchangeCalls, 2);
+    const encrypted = [...kvEntries.values()][0];
+    assert.match(encrypted, /^v3\./);
+    assert.equal(encrypted.includes('worker-access-secret'), false);
+    assert.equal(encrypted.includes('worker-refresh-secret'), false);
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test('Real-Debrid no inicia OAuth si falta almacenamiento cifrado', async () => {
+  const response = await worker.fetch(new Request('https://addon.example/internal/debrid/real-debrid/authorize'), {
+    ...env,
+    DEBRID_ENCRYPTION_KEY: 'oauth-storage-test-key-at-least-32-chars',
+    REALDEBRID_CLIENT_ID: 'worker-client',
+    REALDEBRID_CLIENT_SECRET: 'worker-client-secret',
+    REALDEBRID_REDIRECT_URI: 'https://addon.example/internal/debrid/real-debrid/callback',
+  }, {});
+  assert.equal(response.status, 302);
+  assert.match(response.headers.get('location'), /debrid_error=storage_not_configured/);
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+});
+
+test('debrid connect rechaza cross-origin, exige almacenamiento y limita intentos por IP', async () => {
+  const crossOrigin = await worker.fetch(new Request('https://addon.example/internal/debrid/connect', {
+    method: 'POST',
+    headers: { Origin: 'https://attacker.example', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ provider: 'torbox', token: 'not-used' }),
+  }), {}, {});
+  assert.equal(crossOrigin.status, 403);
+
+  const missingOrigin = await worker.fetch(new Request('https://addon.example/internal/debrid/connect', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ provider: 'torbox', token: 'not-used' }),
+  }), {}, {});
+  assert.equal(missingOrigin.status, 403);
+
+  const notConfigured = await worker.fetch(new Request('https://addon.example/internal/debrid/connect', {
+    method: 'POST',
+    headers: { Origin: 'https://addon.example', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ provider: 'torbox', token: 'not-used' }),
+  }), { DEBRID_ENCRYPTION_KEY: 'test-encryption-key-is-long-enough-123' }, {});
+  assert.equal(notConfigured.status, 503);
+
+  const request = () => new Request('https://addon.example/internal/debrid/connect', {
+    method: 'POST',
+    headers: {
+      Origin: 'https://addon.example',
+      'Content-Type': 'application/json',
+      'CF-Connecting-IP': '192.0.2.188',
+    },
+    body: JSON.stringify({ provider: 'torbox', token: 'not-used' }),
+  });
+  let last;
+  for (let i = 0; i < 8; i++) last = await worker.fetch(request(), {}, {});
+  assert.equal(last.status, 503);
+  const limited = await worker.fetch(request(), {}, {});
+  assert.equal(limited.status, 429);
+});
+
+test('cache endpoint: solo expone métricas agregadas', async () => {
+  const res = await get('/internal/cache.json');
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('cache-control'), 'no-store');
+  const stats = await res.json();
+  assert.equal(typeof stats.entries, 'number');
+  assert.equal(typeof stats.maxEntries, 'number');
+  assert.equal(Object.hasOwn(stats, 'keys'), false);
+});
+
+test('Worker usa Cache API compartida para rutas públicas', async () => {
+  const originalCaches = globalThis.caches;
+  const entries = new Map();
+  let matches = 0;
+  let puts = 0;
+  globalThis.caches = { default: {
+    async match(request) { matches++; return entries.get(request.url)?.clone() || undefined; },
+    async put(request, response) { puts++; entries.set(request.url, response.clone()); },
+  } };
+  try {
+    const first = await worker.fetch(new Request('https://cache.example/manifest.json'), env, {});
+    const second = await worker.fetch(new Request('https://cache.example/manifest.json'), env, {});
+    assert.equal(first.status, 200);
+    assert.equal(second.status, 200);
+    assert.equal(matches, 2);
+    assert.equal(puts, 1);
+    assert.equal((await second.json()).id, 'org.comunidad.catalogos.plus');
+  } finally {
+    if (originalCaches === undefined) delete globalThis.caches;
+    else globalThis.caches = originalCaches;
+  }
 });
 
 test('404: ruta inexistente en JSON', async () => {

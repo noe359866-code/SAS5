@@ -114,6 +114,31 @@ test('caché llena expulsa una entrada menos usada, no todo el contenido', () =>
   assert.equal(cache.get('lru-499'), 499);
 });
 
+test('caché sirve una entrada stale y coalesce cargas concurrentes', async () => {
+  const cache = require('../lib/cache');
+  const originalNow = Date.now;
+  let now = originalNow();
+  Date.now = () => now;
+  try {
+    cache.set('stale-while-test', ['known'], 1, { staleSeconds: 30 });
+    now += 2000;
+    assert.equal(cache.get('stale-while-test'), undefined);
+    assert.deepEqual(cache.getStale('stale-while-test'), ['known']);
+
+    let loads = 0;
+    const loader = () => cache.coalesce('in-flight-test', async () => {
+      loads++;
+      await Promise.resolve();
+      return 'shared';
+    });
+    const values = await Promise.all([loader(), loader(), loader()]);
+    assert.deepEqual(values, ['shared', 'shared', 'shared']);
+    assert.equal(loads, 1);
+  } finally {
+    Date.now = originalNow;
+  }
+});
+
 test('si falla un proveedor de streams se reintenta y no se cachea la respuesta degradada', async () => {
   config.reload({ STREAM_PROVIDERS: 'knaben' });
   const core = require('../lib/core');
@@ -357,12 +382,12 @@ test('Nyaa: no se consulta para títulos que no son anime ni producción asiáti
 test('Nyaa: sin TMDB usa TVMaze, y los especiales (temporada 0) no se buscan', async () => {
   config.reload({ STREAM_PROVIDERS: 'nyaa' });
   const core = require('../lib/core');
-  const nyaaRequests = [];
+  const externalRequests = [];
   global.fetch = async (url) => {
     if (hostOf(url) === 'api.tvmaze.com') {
       return json({ name: 'Alice in Borderland', type: 'Scripted', language: 'Japanese', genres: ['Drama'], premiered: '2020-12-10' });
     }
-    nyaaRequests.push(new URL(url));
+    externalRequests.push(new URL(url));
     return json({
       count: 2,
       data: [
@@ -372,7 +397,10 @@ test('Nyaa: sin TMDB usa TVMaze, y los especiales (temporada 0) no se buscan', a
     });
   };
   const result = await core.handleStream('series', 'tt981307:1:3');
+  const nyaaRequests = externalRequests.filter((url) => hostOf(url) === 'nyaaapi.onrender.com');
   assert.equal(nyaaRequests.length, 1);
+  assert.equal(externalRequests.filter((url) => hostOf(url) === 'v3-cinemeta.strem.io').length, 1,
+    'Cinemeta se consulta en paralelo como respaldo de baja latencia');
   assert.equal(nyaaRequests[0].searchParams.get('category'), 'live_action');
   assert.ok(nyaaRequests[0].searchParams.get('q').endsWith('"DVD" (Alice in Borderland)'));
   assert.deepEqual(result.streams.map((s) => s.infoHash), ['e'.repeat(40)]);

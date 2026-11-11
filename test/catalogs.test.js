@@ -128,3 +128,23 @@ test('el manifest completo cabe en el límite de 8 KB de la addonCollection API'
   }
   assert.ok(def.catalogs.length >= 110, `solo ${def.catalogs.length} catálogos en el manifest`);
 });
+
+test('paginación: catálogos principales anuncian skip y respetan el límite de TMDB', async () => {
+  const catalogs = require('../lib/catalogs');
+  const tmdb = require('../lib/tmdb');
+  const config = require('../lib/config');
+  const original = tmdb.catalogItems;
+  config.reload({ TMDB_API_KEY: 'pagination-test' });
+  try {
+    assert.deepEqual(catalogs.manifestCatalogs(null).find(c => c.id === 'tv_anime').extraSupported, ['skip']);
+    tmdb.catalogItems = async (def, options) => {
+      assert.equal(options.page, 3);
+      return Array.from({ length: 20 }, (_, i) => ({ id: String(40 + i) }));
+    };
+    const items = await catalogs.resolveCatalog('series', 'tv_anime', null, { skip: '45' });
+    assert.equal(items[0].id, '45');
+    assert.equal(items.length, 15);
+    for (const skip of ['-1', 'NaN', '1.5', '10000']) assert.deepEqual(await catalogs.resolveCatalog('series', 'tv_anime', null, { skip }), []);
+    assert.deepEqual(await catalogs.resolveCatalog('series', 'tvmaze_hoy', null, { skip: 20 }), []);
+  } finally { tmdb.catalogItems = original; config.reload(process.env); }
+});

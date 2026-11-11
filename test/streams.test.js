@@ -614,3 +614,15 @@ test('parseRarbg: normaliza resultados y descarta lo que no es vídeo', () => {
   }]);
   assert.deepEqual(streams.parseRarbg({ error: 'rate limit exceeded' }), []);
 });
+
+test('episodios: separa correctamente TMDB y TVMaze sin confundir el episodio con el id', () => {
+  for (const baseId of ['tmdb:tv:1399', 'tmdb:series:1399', 'tvmaze:82', 'tvdb:series:121361']) {
+    const parsed = streams.parseStreamId('series', `${baseId}:2:7`);
+    assert.equal(parsed.baseId, baseId);
+    assert.equal(parsed.season, 2);
+    assert.equal(parsed.episode, 7);
+  }
+  assert.doesNotThrow(() => streams.parseStreamId('series', '%E0%A4%A'));
+  assert.equal(streams.parseStreamId('movie', 'tmdb:movie:550').baseId, 'tmdb:movie:550');
+  assert.equal(streams.parseStreamId('series', 'tt123:0:1').season, 0, 'conserva especiales');
+});

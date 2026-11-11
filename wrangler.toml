@@ -25,6 +25,9 @@ DEBRID_TIMEOUT_MS = "4500"
 # Enlace de soporte de la web. Por defecto, invitación permanente actual al
 # Discord de Catálogos+. Actualízalo aquí si el enlace cambia.
 # SUPPORT_URL = "https://discord.gg/J6byqsRUfu"
+# Donaciones: botón de Ko-fi en la barra, tarjeta propia y pie (dentro de Ko-fi
+# se paga con PayPal o tarjeta). Cambia el usuario por el tuyo; "off" lo oculta.
+KOFI_USERNAME = "noe359866"
 
 # Node.js compat por si alguna dependencia lo requiere
 compatibility_flags = ["nodejs_compat"]

@@ -15,7 +15,8 @@
  *
  * Secrets/vars del Worker (ver wrangler.toml y README):
  *   TMDB_API_KEY | TMDB_ACCESS_TOKEN, OMDB_API_KEY, WATCHMODE_API_KEY, TVDB_API_KEY (+TVDB_PIN)
- *   Vars no secretas: WATCH_REGION, ADDON_NAME, TMDB_LANGUAGE, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS
+ *   Vars no secretas: WATCH_REGION, ADDON_NAME, TMDB_LANGUAGE, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS,
+ *                     SUPPORT_URL (soporte) y KOFI_USERNAME (botón de donaciones)
  */
 
 import config from './lib/config.js';
@@ -367,6 +368,8 @@ export default {
             oauthConfigured: realDebridOAuth.isConfigured(env || {}),
             credentialStorageReady: debridCredentials.isConfigured(env || {}),
           },
+          // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
+          donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
           cache: cache.stats(),
           watchRegion: config.watchRegion,
           watchRegionFallback: config.watchRegionFallback,

@@ -375,8 +375,15 @@ independiente de la portada de instalación. Funciona en Node/Vercel y en Cloudf
   los proveedores actuales. Para packs, puede ser necesario elegir el archivo en Webtor.
 - **Mi lista** local por navegador, con hasta 200 títulos. No requiere cuenta ni sincroniza dispositivos.
 - Reproducción opcional por Webtor, con versión del SDK fijada a `0.2.19` y carga solo al elegir
-  un torrent. El servicio externo recibe el magnet y el título, no credenciales debrid ni
-  la URL de configuración. No se añaden scripts de Webtor a `/configure`.
+  un torrent. El servicio externo recibe el magnet, el título y la imagen de fondo del título,
+  no credenciales debrid ni la URL de configuración. No se añaden scripts de Webtor a `/configure`.
+- Si el reproductor integrado no responde, la vista lo explica y ofrece **Abrir en Webtor**
+  (el mismo magnet en una pestaña de webtor.io), **Reintentar** y **Copiar magnet**.
+- Aviso flotante **Extensiones recomendadas** con enlaces a la Chrome Web Store (uBlock Origin
+  Lite, Poper Blocker y AdBlock). Se abre solo, sin tomar el foco, únicamente en navegadores
+  de escritorio basados en Chromium, que es donde pueden instalarse; se cierra con su X y ese
+  navegador lo recuerda. El enlace **Extensiones recomendadas** del pie lo abre en cualquier
+  dispositivo. La lista está en `public/watch/index.html`; son extensiones de terceros.
 
 **Configuración:** requiere `TMDB_API_KEY` o `TMDB_ACCESS_TOKEN` en el servidor y los proveedores
 habituales de streams. Sin TMDB, se muestra un mensaje de configuración; no se utilizan títulos
@@ -384,17 +391,50 @@ ficticios. La biblioteca usa la configuración pública por defecto, no importa 
 personales ni cuentas debrid. La etiqueta de una plataforma no significa que su suscripción
 permita reproducir el torrent.
 
-**Aislamiento:** el SDK se ejecuta en un iframe con sandbox sin `allow-same-origin`; recibe
-solo magnet/título por mensajes con comprobación de ventana emisora. Este aislamiento es
-importante porque el SDK externo admite instrucciones dinámicas. Webtor sigue siendo un
-tercero de confianza para la reproducción y puede cambiar su disponibilidad o comportamiento.
-El reproductor interno conserva su interfaz; el diseño Apple TV corresponde a nuestra web.
+**Aislamiento:** el SDK de Webtor ejecuta, en la página que lo carga, instrucciones enviadas
+por webtor.io; esa página no debe compartir nunca el origen de la aplicación. `watch.js` la
+crea como documento `data:` (origen opaco por definición) dentro del iframe del reproductor,
+y `player.js` se niega a arrancar en cualquier otro origen. El código externo no alcanza el
+DOM, el almacenamiento ni las credenciales de la aplicación, y el documento recibe solo el
+magnet, el título y la imagen de fondo por mensajes con comprobación de ventana emisora. El
+iframe mantiene un sandbox sin ventanas emergentes, sin navegación de la página principal y
+sin diálogos.
 
-**Verificación:** `npm test` incluye pruebas sin red del API de navegación y del aislamiento;
-`npx wrangler deploy --dry-run` valida el empaquetado. Para validar reproducción real abre
-`/watch/`, elige contenido autorizado y una fuente con seeders. La carga del CDN, Webtor,
-los codecs y la reproducción dentro del sandbox deben comprobarse en un navegador con
-acceso a esos servicios. No se garantiza reproducción de todas las fuentes.
+El sandbox lleva `allow-same-origin` únicamente para que el marco de webtor.io anidado
+conserve su propio origen. El diseño anterior anulaba el origen de todo el iframe, y con él
+el del marco de Webtor, que no llegaba a iniciarse: lee su almacenamiento al arrancar y sigue
+su tarea por una conexión con credenciales. El resultado era un recuadro negro con el botón
+de reproducción cortado. Dos consecuencias del diseño actual:
+
+- No debe existir ninguna página del propio sitio que cargue el SDK (por eso no hay
+  `player.html`), ni cargarse en ese iframe otra cosa que el documento `data:`.
+- En Chromium un documento `data:` no es un contexto seguro, y tampoco los marcos que
+  contiene, aunque la página sea https. Dentro del reproductor de Webtor pueden faltar las
+  funciones que lo exigen, como compartir o copiar al portapapeles; la reproducción no
+  depende de ellas.
+
+La aplicación no envía `Content-Security-Policy`. Si se añade una, el documento `data:` la
+hereda y el reproductor debe volver a probarse.
+
+**Disponibilidad:** Webtor es un tercero y puede cambiar su comportamiento. Su documentación
+pública (`https://webtor.io/llms.txt`, consultada el 11 de noviembre de 2026) dice que el
+reproductor para sitios de terceros lo sirve la instancia de Webtor del propio sitio y que
+webtor.io no sirve reproductores integrados. El reproductor integrado puede, por tanto, no
+responder o dejar de hacerlo en cualquier momento. Webtor no avisa de ello a la página: si
+su marco no confirma que está listo pocos segundos después de cargar, la vista muestra el
+aviso con las alternativas, y **Abrir en Webtor** sigue funcionando porque usa la web de
+Webtor y no el reproductor integrado. Usar una instancia propia exigiría pasar su dirección
+al SDK (`baseUrl`), algo que esta web no configura. El reproductor interno conserva su
+interfaz; el diseño Apple TV corresponde a nuestra web.
+
+**Verificación:** `npm test` incluye pruebas sin red del API de navegación, del aislamiento
+(documento `data:`, negativa de `player.js` fuera de un origen opaco) y de los estados del
+reproductor; `npx wrangler deploy --dry-run` valida el empaquetado. El aislamiento y la vista
+se comprobaron además en Chromium contra un webtor.io simulado que servía el SDK y la
+compilación de producción de Webtor, no contra el servicio real ni en otros navegadores.
+Para validar reproducción real abre `/watch/`, elige contenido autorizado y una fuente con
+seeders. La carga del CDN, Webtor, los codecs y la reproducción deben comprobarse en un
+navegador con acceso a esos servicios. No se garantiza reproducción de todas las fuentes.
 
 ### Mejoras de compatibilidad del addon
 
@@ -432,6 +472,11 @@ se pulsa «Elegir fuente», no al recorrer la portada.
 
 La reproducción ocupa un diálogo de cine independiente de la ficha; al volver a las
 fuentes se descarga el iframe y se conserva la selección de temporada y episodio.
-El iframe interno se adapta al contenedor sin alturas fijas. Las pruebas DOM en
-`test/watchUi.test.js` usan datos simulados y cubren navegación, selección y cierre;
-no certifican reproducción externa ni sustituyen una revisión visual en navegador.
+El escenario es un recuadro 16:9 cuyo ancho se calcula a partir de la altura de la
+ventana, de modo que el reproductor cabe entero en pantalla; el iframe interno se adapta
+a él sin alturas fijas. Mientras Webtor carga se ve la imagen del título con un
+indicador, y el reproductor solo se da por listo cuando Webtor lo confirma. Cada
+reproducción usa un iframe nuevo para no llenar el historial del navegador. Las pruebas
+DOM en `test/watchUi.test.js` usan datos simulados y cubren navegación, selección, estados
+del reproductor y cierre; no certifican reproducción externa ni sustituyen una revisión
+visual en navegador.

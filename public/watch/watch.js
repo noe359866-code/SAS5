@@ -45,7 +45,7 @@ async function load(append = false) {
   } catch (e) { if (run === state.listRun) { $('status').textContent = e.message; $('more').disabled = false; if (append) { state.page--; $('more').hidden = false; $('more').textContent = 'Reintentar'; } } }
 }
 function updateSave() { $('save').textContent = saved.some(m => m.id === state.selected?.id && m.type === state.selected?.type) ? '✓ En mi lista' : '＋ Mi lista'; }
-function stopPlayer() { $('player').removeAttribute('src'); if ($('playback').open) $('playback').close(); $('player-status').textContent = ''; playingData = null; }
+function stopPlayer() { clearTimeout(playerTimer); loadPlayer(); if ($('playback').open) $('playback').close(); $('player-status').textContent = ''; playingData = null; playingStream = null; }
 async function openDetail(m) {
   const run = ++state.detailRun; ++state.streamRun; ++state.episodeRun; state.selected = m;
   stopPlayer(); $('detail-title').textContent = m.name; $('detail-kind').textContent = m.type === 'series' ? 'SERIE · ELIGE UN EPISODIO' : 'PELÍCULA';
@@ -102,25 +102,78 @@ async function loadStreams(detailRun = state.detailRun) {
     const retry = text('button', 'Volver a buscar'); retry.onclick = () => loadStreams(); $('sources').append(retry);
   } catch (e) { if (run === state.streamRun && detailRun === state.detailRun) { $('source-status').textContent = e.message; const retry = text('button', 'Reintentar'); retry.onclick = () => loadStreams(); $('sources').append(retry); } }
 }
-let playingData = null;
+let playingData = null, playingStream = null, playerTimer;
+// The Webtor SDK runs code sent by webtor.io in the page that loads it. That page is built here as a
+// data: document: its origin is always opaque, so it cannot reach this application's DOM or storage,
+// and player.js refuses to start anywhere else. The webtor.io frame nested inside keeps its own origin
+// (its player needs its storage and its job log), which sandboxing the origin of #player would take away.
+function playerUrl() {
+  return 'data:text/html;charset=utf-8,' + encodeURIComponent('<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="referrer" content="no-referrer"><title>Reproductor aislado</title><style>html,body{height:100%;margin:0;overflow:hidden;background:#000;color:#ccc;font:14px system-ui,sans-serif}#webtor{width:100%;height:100%}#webtor iframe{display:block;width:100%;height:100%;border:0}p{position:absolute;inset:0;margin:0;padding:16px;pointer-events:none}</style><script defer src="' + location.origin + '/watch/player.js"></script></head><body><div id="webtor"></div><p id="status">Preparando reproductor externo…</p></body></html>');
+}
+// Each playback gets a new frame, and stopping leaves an empty one. The first document of a new frame
+// adds no entry to the browser history, so Back keeps leaving the title instead of replaying old players.
+function loadPlayer(url) {
+  if (!url && !$('player').hasAttribute('src')) return;
+  const frame = $('player').cloneNode();
+  if (url) frame.src = url; else frame.removeAttribute('src');
+  $('player').replaceWith(frame);
+}
+const PLAYER_ERRORS = {
+  sdk: ['No se pudo cargar Webtor', 'Comprueba tu conexión o si un bloqueador de contenido impide cargar el reproductor.'],
+  timeout: ['Webtor tarda demasiado en cargar', 'Comprueba tu conexión y vuelve a intentarlo, o abre el contenido en una pestaña de Webtor.'],
+  torrent: ['Webtor no pudo abrir este torrent', 'Vuelve a las fuentes y prueba otra copia, o ábrelo en una pestaña de Webtor.'],
+  silent: ['El reproductor integrado no respondió', 'Puede que Webtor no ofrezca ahora la reproducción integrada o que el navegador la bloquee. Ábrelo en una pestaña de Webtor o prueba otra fuente.'],
+};
+function playerState(name, message) { $('playback').dataset.state = name; $('player-status').textContent = message; }
+function playerFailed(reason) {
+  clearTimeout(playerTimer);
+  const [title, detail] = PLAYER_ERRORS[Object.hasOwn(PLAYER_ERRORS, reason) ? reason : 'silent'];
+  $('stage-error-title').textContent = title; $('stage-error-text').textContent = detail;
+  playerState('error', title + '.');
+}
+// Webtor reports nothing when its embed is switched off or blocked: silence is the only sign.
+function expectPlayer(ms) { clearTimeout(playerTimer); playerTimer = setTimeout(() => playerFailed('silent'), ms); }
 function play(stream) {
-  const params = new URLSearchParams({ xt: `urn:btih:${stream.infoHash}`, dn: state.selected.name });
-  for (const source of stream.sources || []) if (source.startsWith('tracker:')) params.append('tr', source.slice(8));
-  playingData = { magnet: 'magnet:?' + params, title: state.selected.name };
-  if (!$('playback').open) $('playback').showModal(); $('playing-episode').textContent = $('selected-episode').textContent; $('playing').textContent = state.selected.name; $('player-status').textContent = 'Conectando con Webtor… Si no inicia, prueba otra fuente.';
-  $('player').src = '/watch/player.html';
+  const name = state.selected.name;
+  // A literal urn:btih: keeps the magnet readable by every torrent client, not only by Webtor.
+  let magnet = `magnet:?xt=urn:btih:${stream.infoHash.toLowerCase()}&dn=${encodeURIComponent(name)}`;
+  for (const source of stream.sources || []) if (source.startsWith('tracker:')) magnet += '&tr=' + encodeURIComponent(source.slice(8));
+  const art = imageUrl(state.selected.background);
+  playingStream = stream; playingData = { magnet, title: name, poster: art };
+  const details = String(stream.title || '').split('\n');
+  $('playing-source').textContent = [stream.name, details.length > 1 ? details.at(-1) : ''].filter(Boolean).join(' · '); $('playing-source').title = details[0]; $('playing-source').hidden = !$('playing-source').textContent;
+  for (const link of document.querySelectorAll('.open-webtor')) link.href = 'https://webtor.io/' + magnet;
+  $('playback').style.setProperty('--art', art ? `url(${JSON.stringify(art)})` : 'none');
+  if (!$('playback').open) $('playback').showModal(); $('playing-episode').textContent = $('selected-episode').textContent; $('playing').textContent = name;
+  playerState('loading', 'Conectando con Webtor…'); expectPlayer(30000);
+  loadPlayer(playerUrl());
   $('playback').focus({ preventScroll: true });
-  $('playback').scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
 }
 window.addEventListener('message', event => {
   if (event.source !== $('player').contentWindow || !$('playback').open || !playingData) return;
-  if (event.data?.type === 'watch-ready' && playingData) $('player').contentWindow.postMessage({ type: 'watch-play', ...playingData }, '*');
-  if (event.data?.type === 'watch-error') $('player-status').textContent = 'Webtor no pudo cargar. Prueba otra fuente o abre el contenido en Stremio.';
-  if (event.data?.type === 'watch-torrent-ready') $('player-status').textContent = 'Torrent localizado. Pulsa reproducir en Webtor; la reproducción depende de los seeders y del formato.';
-  if (event.data?.type === 'watch-loaded') $('player-status').textContent = 'Webtor cargado. El inicio depende de la disponibilidad del torrent.';
+  // The frame runs third-party code: its messages only ever select one of our own texts.
+  const type = event.data?.type, loading = $('playback').dataset.state === 'loading';
+  if (type === 'watch-ready') $('player').contentWindow.postMessage({ type: 'watch-play', ...playingData }, '*');
+  if (type === 'watch-loaded' && loading) expectPlayer(20000);
+  if (type === 'watch-frame' && loading) expectPlayer(6000);
+  if (type === 'watch-inited') { clearTimeout(playerTimer); playerState('ready', 'Reproductor listo. Pulsa ▶ para empezar.'); }
+  if (type === 'watch-playing') playerState('ready', 'Reproduciendo con Webtor. El arranque depende de los seeders; si no avanza, prueba otra fuente.');
+  if (type === 'watch-torrent-ready') playerState('ready', 'Torrent localizado. La reproducción depende de los seeders y del formato.');
+  if (type === 'watch-error') playerFailed(event.data.reason);
 });
 $('stop').onclick = () => { stopPlayer(); scrollToSources(); $('sources').querySelector('button')?.focus(); };
-$('playback').addEventListener('close', () => { if ($('playback').open) return; $('player').removeAttribute('src'); playingData = null; });
+$('retry-player').onclick = () => { if (playingStream) play(playingStream); };
+$('copy-magnet').onclick = async () => {
+  if (!playingData) return;
+  let copied = false;
+  try { await navigator.clipboard.writeText(playingData.magnet); copied = true; } catch (_) {
+    // No clipboard permission or plain http: copy from a field inside the dialog (the rest of the page is inert).
+    const field = document.createElement('textarea'); field.value = playingData.magnet; field.readOnly = true; field.className = 'sr-only';
+    $('playback').append(field); field.select(); try { copied = document.execCommand('copy'); } catch (_) { /* reported below */ } field.remove();
+  }
+  $('copy-magnet').textContent = copied ? '✓ Magnet copiado' : 'No se pudo copiar'; setTimeout(() => { $('copy-magnet').textContent = 'Copiar magnet'; }, 2200);
+};
+$('playback').addEventListener('close', () => { if ($('playback').open) return; clearTimeout(playerTimer); loadPlayer(); playingData = null; playingStream = null; });
 function closeDetail() { ++state.detailRun; ++state.streamRun; ++state.episodeRun; stopPlayer(); state.selected = null; $('detail').hidden = true; $('browse').hidden = false; }
 $('close').onclick = () => { closeDetail(); history.pushState(null, '', location.pathname + location.search); window.scrollTo(0, 0); };
 window.addEventListener('popstate', route);
@@ -196,4 +249,28 @@ async function loadExtras(m, run) {
     $('trailer-section').hidden = !$('trailers').children.length;
     draw(data.recommendations || [], false, $('recommendations')); $('recommendation-section').hidden = !data.recommendations?.length;
   } catch (_) { /* Optional sections stay hidden; the title and sources remain usable. */ }
+}
+
+// Recommended extensions (Chrome Web Store). The card opens by itself only where they can be installed,
+// a desktop Chromium browser, and only until the visitor closes it; the footer button opens it anywhere.
+// Kept last: the library above is already running whatever happens here.
+const EXTENSIONS_CLOSED = 'catalogos-extensions-closed';
+let extensionsOpener = null;
+function installsChromeExtensions() {
+  const data = navigator.userAgentData;
+  if (data) return !data.mobile && data.platform !== 'Android';
+  return /Chrome\//.test(navigator.userAgent) && !/Mobi|Android|TV|Web0S/.test(navigator.userAgent);
+}
+$('extensions-open').onclick = () => { extensionsOpener = $('extensions-open'); $('extensions').hidden = false; $('extensions').focus(); };
+$('extensions-close').onclick = () => {
+  $('extensions').hidden = true;
+  try { localStorage.setItem(EXTENSIONS_CLOSED, '1'); } catch (_) { /* no storage: closed for this visit only */ }
+  // Opened from the footer: give the focus back. Opened by itself: it never took the focus.
+  if (extensionsOpener) { extensionsOpener.focus({ preventScroll: true }); extensionsOpener = null; }
+};
+$('extensions').onkeydown = event => { if (event.key === 'Escape') $('extensions-close').click(); };
+{
+  let closed = false;
+  try { closed = localStorage.getItem(EXTENSIONS_CLOSED) === '1'; } catch (_) { /* no storage: offer it */ }
+  if (!closed && installsChromeExtensions()) setTimeout(() => { $('extensions').hidden = false; }, 1500);
 }

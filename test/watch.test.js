@@ -108,3 +108,26 @@ test('watch extras: maps real TMDB cast, recommendations and safe trailer links'
     assert.equal(data.body.trailers[0].url, 'https://www.youtube.com/watch?v=abcdefghijk');
   } finally { tmdb.tmdbGet = original; config.reload(process.env); }
 });
+
+test('watch page carries the recommended extensions in a floating card that starts closed', () => {
+  const html = fs.readFileSync('public/watch/index.html', 'utf8');
+  const css = fs.readFileSync('public/watch/watch.css', 'utf8');
+  const card = /<aside id="extensions"[\s\S]*?<\/aside>/.exec(html)[0];
+  // Closed in the markup: nothing flashes before watch.js decides whether to offer it.
+  assert.match(card, /^<aside id="extensions" class="float-note" aria-labelledby="extensions-title" tabindex="-1" hidden>/);
+  assert.match(card, /<button id="extensions-close" class="float-close" type="button" aria-label="Cerrar extensiones recomendadas">×<\/button>/);
+  assert.match(card, /<h2 id="extensions-title">Extensiones recomendadas<\/h2>/);
+  // The three extensions the owner chose, by their Chrome Web Store id, each in a new tab without opener.
+  const links = [...card.matchAll(/<a href="([^"]+)" target="_blank" rel="noopener noreferrer"><strong>([^<]+)<\/strong>/g)].map(m => [m[1], m[2]]);
+  assert.deepEqual(links, [
+    ['https://chromewebstore.google.com/detail/ddkjiahejlhfcafbddmgiahcphecmpfh?utm_source=item-share-cb', 'uBlock Origin Lite'],
+    ['https://chromewebstore.google.com/detail/bkkbcggnhapdmkeljlodobbkopceiche?utm_source=item-share-cb', 'Poper Blocker'],
+    ['https://chromewebstore.google.com/detail/gighmmpiobklfepjocnamgkkbiglidom?utm_source=item-share-cb', 'AdBlock'],
+  ]);
+  assert.equal((card.match(/<a /g) || []).length, 3);
+  // It lives outside the playback dialog and after the footer, whose button reopens it.
+  assert.ok(html.indexOf('</dialog>') < html.indexOf('<footer>') && html.indexOf('</footer>') < html.indexOf('<aside id="extensions"'));
+  assert.match(html, /<button id="extensions-open" type="button">Extensiones recomendadas<\/button><\/p><\/footer>/);
+  assert.match(css, /\.float-note\{position:fixed;/);
+  assert.match(css, /\[hidden\]\{display:none!important\}/);
+});

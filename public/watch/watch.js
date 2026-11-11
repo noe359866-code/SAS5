@@ -250,3 +250,27 @@ async function loadExtras(m, run) {
     draw(data.recommendations || [], false, $('recommendations')); $('recommendation-section').hidden = !data.recommendations?.length;
   } catch (_) { /* Optional sections stay hidden; the title and sources remain usable. */ }
 }
+
+// Recommended extensions (Chrome Web Store). The card opens by itself only where they can be installed,
+// a desktop Chromium browser, and only until the visitor closes it; the footer button opens it anywhere.
+// Kept last: the library above is already running whatever happens here.
+const EXTENSIONS_CLOSED = 'catalogos-extensions-closed';
+let extensionsOpener = null;
+function installsChromeExtensions() {
+  const data = navigator.userAgentData;
+  if (data) return !data.mobile && data.platform !== 'Android';
+  return /Chrome\//.test(navigator.userAgent) && !/Mobi|Android|TV|Web0S/.test(navigator.userAgent);
+}
+$('extensions-open').onclick = () => { extensionsOpener = $('extensions-open'); $('extensions').hidden = false; $('extensions').focus(); };
+$('extensions-close').onclick = () => {
+  $('extensions').hidden = true;
+  try { localStorage.setItem(EXTENSIONS_CLOSED, '1'); } catch (_) { /* no storage: closed for this visit only */ }
+  // Opened from the footer: give the focus back. Opened by itself: it never took the focus.
+  if (extensionsOpener) { extensionsOpener.focus({ preventScroll: true }); extensionsOpener = null; }
+};
+$('extensions').onkeydown = event => { if (event.key === 'Escape') $('extensions-close').click(); };
+{
+  let closed = false;
+  try { closed = localStorage.getItem(EXTENSIONS_CLOSED) === '1'; } catch (_) { /* no storage: offer it */ }
+  if (!closed && installsChromeExtensions()) setTimeout(() => { $('extensions').hidden = false; }, 1500);
+}

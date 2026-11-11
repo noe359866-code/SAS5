@@ -12,5 +12,11 @@
 <div class="playback-footer"><p id="player-status" role="status" aria-live="polite"></p><div class="playback-actions"><button id="copy-magnet">Copiar magnet</button><a class="open-webtor" target="_blank" rel="noopener noreferrer">Abrir en Webtor ↗</a></div></div>
 <p class="fine playback-note">Reproducción con Webtor. Se comparte el magnet seleccionado, nunca tus credenciales debrid.</p>
 </div></dialog>
-<footer><strong>Catálogos+</strong><p>Una forma de descubrir. Tú eliges la historia.</p><p>Las plataformas indican pertenencia al catálogo, no acceso mediante tu suscripción. Reproduce solo contenido autorizado o de dominio público. <a href="/">Sobre el addon</a></p></footer>
+<footer><strong>Catálogos+</strong><p>Una forma de descubrir. Tú eliges la historia.</p><p>Las plataformas indican pertenencia al catálogo, no acceso mediante tu suscripción. Reproduce solo contenido autorizado o de dominio público. <a href="/">Sobre el addon</a> · <button id="extensions-open" type="button">Extensiones recomendadas</button></p></footer>
+<!-- Floating recommendation. Hidden until watch.js decides: it opens by itself only where these extensions can be installed and until it is closed; the footer button opens it anywhere. -->
+<aside id="extensions" class="float-note" aria-labelledby="extensions-title" tabindex="-1" hidden><button id="extensions-close" class="float-close" type="button" aria-label="Cerrar extensiones recomendadas">×</button><p class="eyebrow">CHROME WEB STORE</p><h2 id="extensions-title">Extensiones recomendadas</h2><p class="fine">Bloquean anuncios y ventanas emergentes.</p>
+<ul><li><a href="https://chromewebstore.google.com/detail/ddkjiahejlhfcafbddmgiahcphecmpfh?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer"><strong>uBlock Origin Lite</strong><span>Bloquea anuncios y rastreadores</span></a></li>
+<li><a href="https://chromewebstore.google.com/detail/bkkbcggnhapdmkeljlodobbkopceiche?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer"><strong>Poper Blocker</strong><span>Bloquea ventanas emergentes</span></a></li>
+<li><a href="https://chromewebstore.google.com/detail/gighmmpiobklfepjocnamgkkbiglidom?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer"><strong>AdBlock</strong><span>Bloquea anuncios y banners</span></a></li></ul>
+<p class="fine">Son de terceros: revisa sus permisos antes de instalarlas.</p></aside>
 </body></html>

@@ -16,7 +16,7 @@ function playerDocument(frame, options = {}) {
 }
 const movie = { id: 'tmdb:movie:12', type: 'movie', name: 'Película de prueba', releaseInfo: '2025', description: 'Una historia de prueba' };
 const series = { id: 'tmdb:tv:42', type: 'series', name: 'Serie de prueba' };
-function setup({ streams = [{ infoHash: 'a'.repeat(40), name: 'Fuente de prueba', title: '1080p' }] } = {}) {
+function setup({ streams = [{ infoHash: 'a'.repeat(40), name: 'Fuente de prueba', title: '1080p' }], prepare } = {}) {
   const dom = new JSDOM(html, { url: 'https://example.test/watch/', runScripts: 'outside-only' });
   const w = dom.window; const requests = [];
   w.scrollTo = () => {}; w.HTMLElement.prototype.scrollIntoView = () => {};
@@ -34,6 +34,7 @@ function setup({ streams = [{ infoHash: 'a'.repeat(40), name: 'Fuente de prueba'
     if (action === 'streams') body = { streams };
     return { ok: true, json: async () => body };
   };
+  if (prepare) prepare(w); // the browser this page runs in: user agent, storage, timers
   w.eval(script);
   return { dom, w, requests, $: id => w.document.getElementById(id) };
 }
@@ -264,4 +265,117 @@ test('player: refuses to load third-party code in a document that shares the app
     assert.equal(timers.length, 0);
     assert.equal(messages.length, 1);
   } finally { w.close(); }
+});
+
+// --- Floating card with the recommended extensions ---
+const EXTENSIONS_CLOSED = 'catalogos-extensions-closed';
+const uaData = value => w => Object.defineProperty(w.navigator, 'userAgentData', { value, configurable: true });
+const uaString = value => w => Object.defineProperty(w.navigator, 'userAgent', { value, configurable: true });
+const chromeDesktop = uaData({ mobile: false, platform: 'Windows' });
+// Opens the page in the given browser and returns the timers it set while starting.
+function visit(browser, before) {
+  const timers = [];
+  const page = setup({ prepare: w => { browser(w); if (before) before(w); w.setTimeout = (fn, ms) => { timers.push({ fn, ms }); return timers.length; }; } });
+  return { ...page, timers };
+}
+
+test('web: the extensions card opens by itself on desktop Chromium, without taking the focus, and stays closed once dismissed', async () => {
+  const first = visit(chromeDesktop);
+  try {
+    const { w, $, timers } = first;
+    await flush();
+    assert.equal($('extensions').hidden, true, 'not before its delay');
+    assert.deepEqual(timers.map(t => t.ms), [1500]);
+    const focused = w.document.activeElement;
+    timers[0].fn();
+    assert.equal($('extensions').hidden, false);
+    assert.equal(w.document.activeElement, focused, 'appearing by itself does not move the focus');
+    assert.deepEqual([...$('extensions').querySelectorAll('a')].map(a => [a.target, a.rel, a.hostname]), Array(3).fill(['_blank', 'noopener noreferrer', 'chromewebstore.google.com']));
+    $('extensions-close').click();
+    assert.equal($('extensions').hidden, true);
+    assert.equal(w.localStorage.getItem(EXTENSIONS_CLOSED), '1');
+    assert.equal(w.document.activeElement, focused, 'closing it does not send the focus to the footer');
+  } finally { first.dom.window.close(); }
+  // The next visit remembers it: nothing is scheduled.
+  const next = visit(chromeDesktop, w => w.localStorage.setItem(EXTENSIONS_CLOSED, '1'));
+  try {
+    await flush();
+    assert.deepEqual(next.timers, []);
+    assert.equal(next.$('extensions').hidden, true);
+  } finally { next.dom.window.close(); }
+});
+
+test('web: the extensions card is only pushed where the Chrome Web Store can install', async () => {
+  const chrome = 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0';
+  const browsers = [
+    ['Chromium desktop', uaData({ mobile: false, platform: 'macOS' }), true],
+    ['Chromium phone', uaData({ mobile: true, platform: 'Android' }), false],
+    ['Chromium tablet', uaData({ mobile: false, platform: 'Android' }), false],
+    // Without userAgentData (plain http, other engines) the user agent string decides.
+    ['Chrome desktop', uaString(`Mozilla/5.0 (Windows NT 10.0; Win64; x64) ${chrome} Safari/537.36`), true],
+    ['Edge desktop', uaString(`Mozilla/5.0 (Windows NT 10.0; Win64; x64) ${chrome} Safari/537.36 Edg/141.0.0.0`), true],
+    ['Chrome on Android', uaString(`Mozilla/5.0 (Linux; Android 14; Pixel 8) ${chrome} Mobile Safari/537.36`), false],
+    ['Android tablet', uaString(`Mozilla/5.0 (Linux; Android 13; SM-X710) ${chrome} Safari/537.36`), false],
+    ['Chrome on iOS', uaString('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/141.0.0.0 Mobile/15E148 Safari/604.1'), false],
+    ['Firefox', uaString('Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0'), false],
+    ['Safari', uaString('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15'), false],
+    ['Smart TV', uaString(`Mozilla/5.0 (Web0S; Linux/SmartTV) ${chrome} Safari/537.36 WebAppManager`), false],
+  ];
+  for (const [name, browser, offered] of browsers) {
+    const page = visit(browser);
+    try {
+      await flush();
+      assert.equal(page.timers.length, offered ? 1 : 0, name);
+      assert.equal(page.$('extensions').hidden, true, name);
+      // Whatever the browser, the footer keeps the list one click away.
+      page.$('extensions-open').click();
+      assert.equal(page.$('extensions').hidden, false, name);
+    } finally { page.dom.window.close(); }
+  }
+});
+
+test('web: the extensions card opened from the footer takes the focus and gives it back; Escape closes it', async () => {
+  const page = visit(() => {});
+  try {
+    const { w, $, timers } = page;
+    await flush();
+    assert.deepEqual(timers, [], 'not pushed in this browser');
+    $('extensions-open').focus(); $('extensions-open').click();
+    assert.equal($('extensions').hidden, false);
+    assert.equal(w.document.activeElement, $('extensions'));
+    const link = $('extensions').querySelector('a'); link.focus();
+    link.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    assert.equal($('extensions').hidden, false, 'only Escape closes from the keyboard');
+    link.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    assert.equal($('extensions').hidden, true);
+    assert.equal(w.document.activeElement, $('extensions-open'));
+    assert.equal(w.localStorage.getItem(EXTENSIONS_CLOSED), '1');
+    // Dismissed is not gone: the footer opens it again.
+    $('extensions-open').click();
+    assert.equal($('extensions').hidden, false);
+    // The playback dialog and its controls are not part of the card.
+    assert.equal($('playback').contains($('extensions')), false);
+    assert.equal(w.document.querySelectorAll('.open-webtor').length, 2);
+  } finally { page.dom.window.close(); }
+});
+
+test('web: the extensions card works without storage', async () => {
+  const blocked = w => Object.defineProperty(w, 'localStorage', { get() { throw new w.DOMException('The operation is insecure.', 'SecurityError'); }, configurable: true });
+  const page = visit(chromeDesktop, blocked);
+  try {
+    const { w, $, timers } = page;
+    // An exception inside a click handler does not reach the caller: jsdom reports it on the window.
+    const errors = []; w.addEventListener('error', event => errors.push(event.message));
+    await flush();
+    assert.throws(() => w.localStorage, /insecure/);
+    assert.equal($('status').textContent.length > 0, true, 'the page itself started');
+    assert.deepEqual(timers.map(t => t.ms), [1500], 'nothing remembered: offered');
+    timers[0].fn();
+    assert.equal($('extensions').hidden, false);
+    $('extensions-close').click();
+    assert.equal($('extensions').hidden, true, 'closed for this visit');
+    $('extensions-open').focus(); $('extensions-open').click(); $('extensions-close').click();
+    assert.equal(w.document.activeElement, $('extensions-open'), 'the rest of closing still runs');
+    assert.deepEqual(errors, []);
+  } finally { page.dom.window.close(); }
 });

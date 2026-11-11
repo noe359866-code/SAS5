@@ -379,6 +379,11 @@ independiente de la portada de instalación. Funciona en Node/Vercel y en Cloudf
   no credenciales debrid ni la URL de configuración. No se añaden scripts de Webtor a `/configure`.
 - Si el reproductor integrado no responde, la vista lo explica y ofrece **Abrir en Webtor**
   (el mismo magnet en una pestaña de webtor.io), **Reintentar** y **Copiar magnet**.
+- Aviso flotante **Extensiones recomendadas** con enlaces a la Chrome Web Store (uBlock Origin
+  Lite, Poper Blocker y AdBlock). Se abre solo, sin tomar el foco, únicamente en navegadores
+  de escritorio basados en Chromium, que es donde pueden instalarse; se cierra con su X y ese
+  navegador lo recuerda. El enlace **Extensiones recomendadas** del pie lo abre en cualquier
+  dispositivo. La lista está en `public/watch/index.html`; son extensiones de terceros.
 
 **Configuración:** requiere `TMDB_API_KEY` o `TMDB_ACCESS_TOKEN` en el servidor y los proveedores
 habituales de streams. Sin TMDB, se muestra un mensaje de configuración; no se utilizan títulos

@@ -43,20 +43,30 @@ test('watch API: paginated catalog, search, IMDb episodes and stream ids', async
   } finally { Object.assign(tmdb, { catalogItems: original.catalogItems, tmdbGet: original.tmdbGet, findByImdbId: original.findByImdbId }); core.handleStream = original.handleStream; config.reload(process.env); }
 });
 
-test('watch player is pinned and isolated without same-origin sandbox permission', () => {
+test('watch player is pinned and its SDK host can never share the application origin', () => {
   const html = fs.readFileSync('public/watch/index.html', 'utf8');
   const player = fs.readFileSync('public/watch/player.js', 'utf8');
-  assert.match(html, /sandbox="allow-scripts allow-forms allow-presentation allow-downloads"/);
-  assert.doesNotMatch(html, /allow-same-origin/);
+  const client = fs.readFileSync('public/watch/watch.js', 'utf8');
+  // The webtor.io frame nested in the player keeps its own origin: without it Webtor's embed
+  // cannot start (it reads its storage) nor follow its job log. Everything else stays shut.
+  assert.match(html, /sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-downloads"/);
+  assert.doesNotMatch(html, /allow-(popups|top-navigation|modals|pointer-lock)/);
+  // So the page that runs the SDK must be opaque by construction: a data: document built by
+  // the application, the only thing ever loaded in the frame, and no same-origin page at all.
+  assert.equal(fs.existsSync('public/watch/player.html'), false, 'a same-origin page must not host the SDK');
+  assert.doesNotMatch(html, /<iframe[^>]*\ssrc(doc)?=/);
+  assert.deepEqual([...new Set(client.match(/loadPlayer\((?!url\))[^;]*;/g))].sort(), ['loadPlayer();', 'loadPlayer(playerUrl());']);
+  assert.doesNotMatch(client, /\$\('player'\)\.src\s*=|setAttribute\('src'/);
+  assert.match(client, /return 'data:text\/html;charset=utf-8,' \+ encodeURIComponent\(/);
+  assert.match(player, /const isolated = \(self\.origin \|\| location\.origin\) === 'null';/);
   assert.match(player, /@webtor\/embed-sdk-js@0\.2\.19/);
   assert.match(player, /referer: ''/);
   assert.match(player, /event.source !== parent/);
 });
 
-test('watch player has a dedicated cinema dialog and responsive nested frames', () => {
+test('watch player has a dedicated cinema dialog and a 16:9 stage that fits the viewport', () => {
   const html = fs.readFileSync('public/watch/index.html', 'utf8');
   const css = fs.readFileSync('public/watch/watch.css', 'utf8');
-  const inner = fs.readFileSync('public/watch/player.html', 'utf8');
   const player = fs.readFileSync('public/watch/player.js', 'utf8');
   const client = fs.readFileSync('public/watch/watch.js', 'utf8');
   assert.ok(html.indexOf('id="detail-title"') < html.indexOf('id="playback"'));
@@ -66,9 +76,18 @@ test('watch player has a dedicated cinema dialog and responsive nested frames', 
   assert.match(html, /id="home-rails"/);
   assert.equal((html.match(/id="stop"/g) || []).length, 1);
   assert.match(html, /aria-labelledby="playing" tabindex="-1"/);
+  assert.match(html, /<div id="stage"><iframe id="player"/);
   assert.match(css, /#player\{[^}]*aspect-ratio:16\/9;height:auto/);
+  // A fixed or capped height on the frame breaks the ratio; the column is narrowed from the
+  // viewport height instead, so the stage stays 16:9 and the whole player fits on screen.
   assert.doesNotMatch(css, /#player\{[^}]*height:\d+px/);
-  assert.match(inner, /#webtor iframe\{[^}]*height:100%/);
+  assert.doesNotMatch(css, /#player\{[^}]*max-height/);
+  assert.match(css, /\.cinema-shell\{[^}]*calc\(\(100dvh - var\(--chrome\)\)\*16\/9/);
+  // The stage never shows an unexplained empty box: loading and error are explicit states.
+  assert.match(css, /#playback\[data-state=loading\] #stage-loading,#playback\[data-state=error\] #stage-error\{[^}]*visibility:visible/);
+  // A layer that is fading out must not swallow the click on Webtor's play button underneath.
+  assert.match(css, /\.stage-layer\{[^}]*pointer-events:none/);
+  assert.match(client, /#webtor iframe\{[^}]*height:100%/);
   assert.match(player, /height: '100%'/);
   assert.match(client, /\$\('playback'\)\.focus\(\{ preventScroll: true \}\)/);
 });

@@ -7,6 +7,8 @@ OMDB_API_KEY=
 WATCHMODE_API_KEY=
 TVDB_API_KEY=
 # TVDB_PIN=
+# Clave gratuita de The RarBg (opcional): sube su límite de peticiones.
+# RARBG_API_KEY=
 WATCH_REGION=NI
 # Credenciales debrid cifradas (el Worker también necesita binding DEBRID_KV).
 # DEBRID_ENCRYPTION_KEY=

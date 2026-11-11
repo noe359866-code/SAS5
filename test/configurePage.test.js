@@ -101,9 +101,9 @@ test('landing y /configure comparten el sistema de diseño y no dejan plantillas
   assert.match(conf, /id="manifestUrl"/);
 });
 
-test('/configure: Nyaa y YTS son proveedores elegibles y nacen marcados en un borrador antiguo', () => {
+test('/configure: los proveedores añadidos después son elegibles y nacen marcados en un borrador antiguo', () => {
   const vm = require('node:vm');
-  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts'];
+  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg'];
   // Ejecuta el arranque del script (constantes, state, save y restore) con
   // un localStorage simulado y devuelve los proveedores que quedan marcados.
   const run = (draft, initialCfg) => {
@@ -128,8 +128,14 @@ test('/configure: Nyaa y YTS son proveedores elegibles y nacen marcados en un bo
   // Borrador guardado antes de existir Nyaa y YTS: los nuevos nacen marcados
   // y se respeta lo que el usuario había desmarcado.
   assert.deepEqual(run({ streams: ['knaben', 'torlock', 'blackholebay'] }).streams, all);
-  assert.deepEqual(run({ streams: ['knaben'] }).streams, ['knaben', 'nyaa', 'yts']);
-  assert.deepEqual(run({ streams: [] }).streams, ['nyaa', 'yts']);
+  assert.deepEqual(run({ streams: ['knaben'] }).streams, ['knaben', 'nyaa', 'yts', 'eztv', 'rarbg']);
+  assert.deepEqual(run({ streams: [] }).streams, ['nyaa', 'yts', 'eztv', 'rarbg']);
+  // Borrador guardado cuando había cinco proveedores, con YTS desmarcado:
+  // EZTV y The RarBg nacen marcados y YTS sigue desmarcado.
+  assert.deepEqual(
+    run({ streams: ['knaben', 'nyaa'], knownStreams: all.slice(0, 5) }).streams,
+    ['knaben', 'nyaa', 'eztv', 'rarbg']
+  );
   // Borrador nuevo: si el usuario desmarcó YTS, sigue desmarcado.
   const draft = run({ streams: ['knaben', 'nyaa'], knownStreams: all });
   assert.deepEqual(draft.streams, ['knaben', 'nyaa']);

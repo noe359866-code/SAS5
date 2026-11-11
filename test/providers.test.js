@@ -23,6 +23,27 @@ test('errores HTTP no incluyen credenciales ni cuerpo del proveedor', async () =
   await assert.rejects(http.fetchText('https://example.com/?token=secret-test'), /HTTP 401 al consultar https:\/\/example.com\//);
 });
 
+test('un timeout se informa con plazo y URL, sin parámetros ni el genérico «aborted»', async () => {
+  // Como fetch real: la petición no termina hasta que se aborta su señal.
+  global.fetch = (url, init) => new Promise((_, reject) => {
+    init.signal.addEventListener('abort', () => reject(new DOMException('The operation was aborted', 'AbortError')));
+  });
+  for (const fetcher of [http.fetchJson, http.fetchText]) {
+    await assert.rejects(fetcher('https://example.com/api/search?apikey=secret-test', { timeoutMs: 20 }), (err) => {
+      assert.equal(err.message, 'Timeout de 20 ms al consultar https://example.com/api/search');
+      assert.equal(err.timeout, true);
+      return true;
+    });
+  }
+  // Un fallo de red que no es timeout se propaga tal cual.
+  global.fetch = async () => { throw new Error('socket hang up'); };
+  await assert.rejects(http.fetchJson('https://example.com/', { timeoutMs: 20 }), (err) => {
+    assert.equal(err.message, 'socket hang up');
+    assert.equal(err.timeout, undefined);
+    return true;
+  });
+});
+
 test('TVMaze usa schedule/web y normaliza sus episodios', async () => {
   const urls = [];
   global.fetch = async (url) => {
@@ -154,6 +175,83 @@ test('si falla un proveedor de streams se reintenta y no se cachea la respuesta 
   const second = await core.handleStream('movie', 'tt981238');
   assert.equal(second.cacheMaxAge, 3600);
   assert.equal(calls, 2);
+});
+
+test('un proveedor que agota el plazo varias veces se pausa, y se reintenta al acabar la pausa', async () => {
+  config.reload({ STREAM_PROVIDERS: 'knaben,blackholebay' });
+  const core = require('../lib/core');
+  const streams = require('../lib/streams');
+  const calls = { knaben: 0, blackholebay: 0 };
+  let down = true;
+  global.fetch = async (url) => {
+    const { hostname } = new URL(url);
+    if (hostname.includes('cinemeta')) return json({ meta: { name: 'Example Film', year: '2020' } });
+    if (hostname === 'api.knaben.org') {
+      calls.knaben++;
+      return json({ hits: [{ title: 'Example Film 2020 1080p WEB-DL', hash: 'a'.repeat(40), seeders: 10 }] });
+    }
+    calls.blackholebay++;
+    if (down) throw Object.assign(new Error('Timeout de prueba'), { timeout: true });
+    return json({ results: [] });
+  };
+  const originalNow = Date.now;
+  try {
+    // Los primeros timeouts se esperan y la respuesta degradada no se cachea.
+    for (const id of ['tt981320', 'tt981321', 'tt981322']) {
+      const degraded = await core.handleStream('movie', id);
+      assert.equal(degraded.streams.length, 1);
+      assert.equal(degraded.cacheMaxAge, 0);
+    }
+    assert.deepEqual(calls, { knaben: 3, blackholebay: 3 });
+    assert.deepEqual(streams.pausedProviders(), ['blackholebay']);
+
+    // En pausa: ya no se consulta y la respuesta se cachea lo que dura la pausa.
+    const quick = await core.handleStream('movie', 'tt981323');
+    assert.equal(quick.streams.length, 1);
+    assert.equal(quick.cacheMaxAge, 300);
+    assert.equal((await core.handleStream('movie', 'tt981323')).cacheMaxAge, 300);
+    assert.deepEqual(calls, { knaben: 4, blackholebay: 3 });
+
+    // El diagnóstico sí lo consulta, y avisa de que está en pausa.
+    const report = await streams.diagnose('movie', 'tt981323', null);
+    assert.deepEqual(report.pausedProviders, ['blackholebay']);
+    assert.deepEqual(report.providers.blackholebay, { ok: false, error: 'Timeout de prueba' });
+    assert.equal(calls.blackholebay, 4);
+
+    // Acabada la pausa se vuelve a probar: sigue caído → otra pausa sin esperar a 3 fallos.
+    Date.now = () => originalNow() + 301 * 1000;
+    assert.equal((await core.handleStream('movie', 'tt981324')).cacheMaxAge, 0);
+    assert.equal(calls.blackholebay, 5);
+    assert.deepEqual(streams.pausedProviders(), ['blackholebay']);
+
+    // Y cuando responde de nuevo, vuelve a la normalidad.
+    Date.now = () => originalNow() + 602 * 1000;
+    down = false;
+    assert.equal((await core.handleStream('movie', 'tt981325')).cacheMaxAge, 3600);
+    assert.equal(calls.blackholebay, 6);
+    assert.deepEqual(streams.pausedProviders(), []);
+  } finally {
+    Date.now = originalNow;
+  }
+});
+
+test('con STREAM_PROVIDER_COOLDOWN_SECONDS=0 ningún proveedor se pausa', async () => {
+  config.reload({ STREAM_PROVIDERS: 'torlock', STREAM_PROVIDER_COOLDOWN_SECONDS: '0' });
+  const core = require('../lib/core');
+  const streams = require('../lib/streams');
+  let calls = 0;
+  let down = true;
+  global.fetch = async (url) => {
+    if (String(url).includes('cinemeta')) return json({ meta: { name: 'Example Film', year: '2020' } });
+    calls++;
+    if (down) throw Object.assign(new Error('Timeout de prueba'), { timeout: true });
+    return new Response('<rss><channel></channel></rss>');
+  };
+  for (let i = 0; i < 4; i++) assert.equal((await core.handleStream('movie', 'tt981326')).cacheMaxAge, 0);
+  assert.equal(calls, 4);
+  assert.deepEqual(streams.pausedProviders(), []);
+  down = false; // una respuesta correcta deja el contador a cero para el resto de tests
+  assert.equal((await core.handleStream('movie', 'tt981326')).cacheMaxAge, 3600);
 });
 
 test('si falla detalle de TMDB continúa el fallback a OMDB', async () => {
@@ -511,10 +609,230 @@ test('diagnóstico de streams: explica la consulta de Nyaa y por qué se omite u
   assert.deepEqual(report.providers.yts, { ok: true, skipped: 'solo películas' });
 });
 
-test('healthz: informa de los cinco proveedores de streams', async () => {
+// ─────────────────────────────────────────────────────────────────────────────
+// EZTV y The RarBg
+// ─────────────────────────────────────────────────────────────────────────────
+const hash = (n) => String(n).padStart(40, '0');
+const eztvTorrent = (title, n, extra = {}) => ({
+  hash: hash(n),
+  title: `${title} EZTV`,
+  magnet_url: `magnet:?xt=urn:btih:${hash(n)}&dn=x&tr=udp://tracker.opentrackr.org:1337/announce`,
+  imdb_id: '981330',
+  season: '0', // como la API real: a menudo vienen a 0
+  episode: '0',
+  seeds: n,
+  peers: 1,
+  size_bytes: '479545240',
+  ...extra,
+});
+const sinnerShow = { name: 'The Sinner', premiered: '2017-08-02', language: 'English', type: 'Scripted', genres: ['Drama'] };
+
+test('EZTV: lista la serie por IMDb id y se queda con el episodio pedido', async () => {
+  config.reload({ STREAM_PROVIDERS: 'eztv' });
+  const core = require('../lib/core');
+  const requests = [];
+  const pages = {
+    1: [
+      eztvTorrent('The Sinner S04E08 1080p HEVC x265-MeGusta', 11, { season: '4', episode: '8' }),
+      eztvTorrent('The Sinner S04E08 720p WEB H264-GGEZ', 12),
+      eztvTorrent('The Sinner S04E07 1080p HEVC x265-MeGusta', 13),
+      eztvTorrent('The Sinner S03E08 720p WEB h264-TBS', 14),
+    ],
+    2: [
+      eztvTorrent('The Sinner S02E04 WEBRip x264-TBS', 21),
+      eztvTorrent('The Sinner S02E04 720p WEBRip x264-TBS', 22),
+      eztvTorrent('The Sinner S02E03 HDTV x264-KILLERS', 23),
+      eztvTorrent('The Sinner S02 COMPLETE 720p WEB x264-TBS', 24),
+      eztvTorrent('The Sinner S02E03-E05 720p WEB x264', 25),
+      // EZTV asigna a veces a una serie torrents de otra de nombre parecido.
+      eztvTorrent('The Winner S02E04 Part Four 480p x264-mSD', 26),
+      // Y por si la API devolviera torrents de otro IMDb id.
+      eztvTorrent('The Sinner S02E04 1080p WEB', 27, { imdb_id: '1' }),
+    ],
+  };
+  global.fetch = async (url) => {
+    const u = new URL(url);
+    if (u.hostname === 'api.tvmaze.com') return json(sinnerShow);
+    if (u.hostname.includes('cinemeta')) return json({ meta: null });
+    requests.push(u);
+    return json({ imdb_id: '981330', torrents_count: 129, limit: 100, page: Number(u.searchParams.get('page')), torrents: pages[u.searchParams.get('page')] });
+  };
+
+  // Episodio antiguo: no está en la 1ª página, así que se leen las dos.
+  const old = await core.handleStream('series', 'tt981330:2:4');
+  assert.deepEqual(requests.map((u) => u.searchParams.get('page')), ['1', '2']);
+  assert.equal(requests[0].origin + requests[0].pathname, 'https://eztv1.xyz/api/get-torrents');
+  assert.equal(requests[0].searchParams.get('imdb_id'), '981330'); // sin «tt»
+  assert.equal(requests[0].searchParams.get('limit'), '100');
+  assert.equal(old.cacheMaxAge, 3600);
+  // El episodio, el lote que lo incluye y el pack de temporada; por seeders.
+  assert.deepEqual(old.streams.map((s) => s.infoHash), [hash(25), hash(24), hash(22), hash(21)]);
+  const last = old.streams[3];
+  assert.match(last.title, /^The Sinner S02E04 WEBRip x264-TBS\n/); // sin la firma «EZTV»
+  assert.ok(last.sources.includes('tracker:udp://tracker.opentrackr.org:1337/announce'));
+
+  // Episodio reciente: la 1ª página ya lo trae y llega a episodios anteriores.
+  requests.length = 0;
+  const recent = await core.handleStream('series', 'tt981330:4:8');
+  assert.deepEqual(requests.map((u) => u.searchParams.get('page')), ['1']);
+  assert.deepEqual(recent.streams.map((s) => s.infoHash), [hash(12), hash(11)]);
+});
+
+test('EZTV: solo series, como mucho 4 páginas, y una respuesta inesperada no se cachea', async () => {
+  config.reload({ STREAM_PROVIDERS: 'eztv', EZTV_API_URL: 'https://eztv.example/api/' });
+  const core = require('../lib/core');
+  const requests = [];
+  let respond = () => json({ imdb_id: '981331', torrents_count: 0, limit: 100, page: 1 }); // sin `torrents`
+  global.fetch = async (url) => {
+    const u = new URL(url);
+    if (u.hostname === 'api.tvmaze.com') return json({ ...sinnerShow, name: 'Example Show' });
+    if (u.hostname.includes('cinemeta')) return json({ meta: { name: 'Example Film', year: '2020' } });
+    requests.push(u.toString());
+    return respond(u);
+  };
+  const movie = await core.handleStream('movie', 'tt981331');
+  assert.deepEqual(movie.streams, []);
+  assert.equal(movie.cacheMaxAge, 3600); // no aplicar no es un fallo
+  assert.deepEqual(requests, []);
+
+  // Serie que EZTV no tiene: respuesta vacía, se puede cachear.
+  const unknown = await core.handleStream('series', 'tt981331:1:1');
+  assert.deepEqual(unknown.streams, []);
+  assert.equal(unknown.cacheMaxAge, 3600);
+  // EZTV_API_URL permite seguir a EZTV cuando cambia de dominio.
+  assert.deepEqual(requests, ['https://eztv.example/api/get-torrents?imdb_id=981331&limit=100&page=1']);
+
+  // Los especiales (temporada 0) no se buscan.
+  requests.length = 0;
+  assert.equal((await core.handleStream('series', 'tt981331:0:1')).cacheMaxAge, 3600);
+  assert.deepEqual(requests, []);
+
+  // Serie muy larga: se leen las 4 páginas más recientes y no más.
+  respond = (u) => json({
+    imdb_id: '981331', torrents_count: 2467, limit: 100, page: Number(u.searchParams.get('page')),
+    torrents: [eztvTorrent('Example Show S38E06 1080p WEB', 30 + Number(u.searchParams.get('page')), { imdb_id: '981331' })],
+  });
+  const long = await core.handleStream('series', 'tt981331:20:1');
+  assert.deepEqual(long.streams, []);
+  assert.equal(long.cacheMaxAge, 3600);
+  assert.deepEqual(requests.map((url) => new URL(url).searchParams.get('page')), ['1', '2', '3', '4']);
+
+  respond = () => json({ error: 'maintenance' });
+  assert.equal((await core.handleStream('series', 'tt981331:1:2')).cacheMaxAge, 0);
+});
+
+const rarbgResult = (name, n, extra = {}) => ({
+  name,
+  infoHash: hash(n),
+  magnet: `magnet:?xt=urn:btih:${hash(n).toUpperCase()}&dn=x&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce`,
+  category: 'Movies',
+  size: 2952790016,
+  seeders: n,
+  leechers: 2,
+  ...extra,
+});
+
+test('The RarBg: las películas se piden por IMDb id y se aceptan aunque el nombre esté traducido', async () => {
+  config.reload({ STREAM_PROVIDERS: 'rarbg', RARBG_API_KEY: 'trb_test' });
+  const core = require('../lib/core');
+  const requests = [];
+  global.fetch = async (url, init) => {
+    const u = new URL(url);
+    if (u.hostname.includes('cinemeta')) return json({ meta: { name: 'The Godfather', year: '1972' } });
+    requests.push({ url: u, headers: init.headers });
+    return json({
+      total: 4, page: 1, pageSize: 50, pages: 1,
+      results: [
+        rarbgResult('The Godfather 1972 1080p BluRay x264', 41, { imdb: 'tt981340' }),
+        rarbgResult('El Padrino (1972) [BluRay 1080p][Castellano]', 42, { imdb: 'tt981340' }),
+        rarbgResult('The Godfather Part II 1974 1080p BluRay', 43, { imdb: 'tt0000002' }),
+        rarbgResult('The Godfather OST FLAC', 44, { imdb: 'tt981340', category: 'Music' }),
+      ],
+    });
+  };
+  const result = await core.handleStream('movie', 'tt981340');
+  assert.equal(requests.length, 1);
+  const { url, headers } = requests[0];
+  assert.equal(url.origin + url.pathname, 'https://rarbg.ninjaproxy1.com/api/v1/search/');
+  assert.equal(url.searchParams.get('imdb'), 'tt981340');
+  assert.equal(url.searchParams.get('q'), null);
+  assert.equal(url.searchParams.get('sort'), 'seeders');
+  assert.equal(url.searchParams.get('limit'), '50');
+  // La clave opcional viaja en una cabecera, nunca en la URL.
+  assert.equal(headers['X-Api-Key'], 'trb_test');
+  assert.ok(!url.toString().includes('trb_test'));
+  assert.equal(result.cacheMaxAge, 3600);
+  assert.deepEqual(result.streams.map((s) => s.infoHash), [hash(42), hash(41)]);
+  assert.match(result.streams[0].title, /^El Padrino \(1972\) \[BluRay 1080p\]\[Castellano\]\n/);
+});
+
+test('The RarBg: los episodios se buscan por texto y se descartan los de otra serie', async () => {
+  config.reload({ STREAM_PROVIDERS: 'rarbg', RARBG_API_URL: 'https://rarbg.example/' });
+  const core = require('../lib/core');
+  const requests = [];
+  global.fetch = async (url, init) => {
+    const u = new URL(url);
+    if (u.hostname === 'api.tvmaze.com') return json({ ...sinnerShow, name: 'Breaking Bad' });
+    if (u.hostname.includes('cinemeta')) return json({ meta: null });
+    requests.push({ url: u, headers: init.headers });
+    return json({
+      total: 4, page: 1, pageSize: 50, pages: 1,
+      results: [
+        rarbgResult('Breaking Bad S05E05 Dead Freight 2160p NF WEB-DL', 51, { imdb: 'tt981341', category: 'TV' }),
+        rarbgResult('Breaking Bad S05E05 FRENCH LD HDTV XviD MiND', 52, { category: 'TV' }), // sin IMDb id en el índice
+        rarbgResult('Breaking Bad Canada S05E05 720p WEB', 53, { imdb: 'tt0000003', category: 'TV' }),
+        rarbgResult('Breaking Bad S04E05 1080p BluRay', 54, { imdb: 'tt981341', category: 'TV' }),
+      ],
+    });
+  };
+  const result = await core.handleStream('series', 'tt981341:5:5');
+  assert.equal(requests.length, 1);
+  const { url, headers } = requests[0];
+  assert.equal(url.origin + url.pathname, 'https://rarbg.example/api/v1/search/');
+  assert.equal(url.searchParams.get('q'), 'Breaking Bad S05E05');
+  assert.equal(url.searchParams.get('clean'), '1');
+  assert.equal(url.searchParams.get('category'), 'movies,tv,anime');
+  assert.equal(url.searchParams.get('imdb'), null);
+  assert.equal(headers['X-Api-Key'], undefined); // sin RARBG_API_KEY
+  assert.equal(result.cacheMaxAge, 3600);
+  assert.deepEqual(result.streams.map((s) => s.infoHash), [hash(52), hash(51)]);
+});
+
+test('The RarBg: con HTTP 429 se pausa lo que pide Retry-After y una respuesta rara no se cachea', async () => {
+  config.reload({ STREAM_PROVIDERS: 'rarbg' });
+  const core = require('../lib/core');
+  const streams = require('../lib/streams');
+  let calls = 0;
+  let respond = () => json({ error: 'rate limit exceeded', scope: 'minute', retry_after: 40 }, 429, { 'Retry-After': '40' });
+  global.fetch = async (url) => {
+    if (hostOf(url).includes('cinemeta')) return json({ meta: { name: 'Example Film', year: '2020' } });
+    calls++;
+    return respond();
+  };
+  const originalNow = Date.now;
+  try {
+    assert.equal((await core.handleStream('movie', 'tt981342')).cacheMaxAge, 0);
+    assert.deepEqual(streams.pausedProviders(), ['rarbg']);
+    // En pausa no se insiste, y la respuesta sin él se cachea un rato.
+    assert.equal((await core.handleStream('movie', 'tt981343')).cacheMaxAge, 300);
+    assert.equal(calls, 1);
+    // Pasados los 40 s se vuelve a consultar.
+    Date.now = () => originalNow() + 41 * 1000;
+    respond = () => json({ error: "unknown sort 'x'" }, 400);
+    assert.equal((await core.handleStream('movie', 'tt981344')).cacheMaxAge, 0);
+    assert.equal(calls, 2);
+    assert.deepEqual(streams.pausedProviders(), []);
+    respond = () => json({ total: 0, page: 1, pageSize: 50, pages: 0, results: [] });
+    assert.equal((await core.handleStream('movie', 'tt981344')).cacheMaxAge, 3600);
+  } finally {
+    Date.now = originalNow;
+  }
+});
+
+test('healthz: informa de los siete proveedores de streams', async () => {
   const worker = (await import('../worker.mjs')).default;
   const all = await (await worker.fetch(new Request('https://addon.example/healthz'), {}, {})).json();
-  assert.deepEqual(all.streamProviders, ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts']);
+  assert.deepEqual(all.streamProviders, ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg']);
   for (const key of all.streamProviders) assert.equal(all.sources[key], true, key);
   const some = await (await worker.fetch(new Request('https://addon.example/healthz'), { STREAM_PROVIDERS: 'yts,knaben' }, {})).json();
   assert.deepEqual(some.streamProviders, ['yts', 'knaben']);

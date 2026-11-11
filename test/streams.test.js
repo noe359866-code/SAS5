@@ -2,7 +2,8 @@
 
 /**
  * Tests offline de los proveedores de contenido (streams):
- * parsers de Knaben / Torlock (Torznab) / BlackHoleBay / Nyaa / YTS,
+ * parsers de Knaben / Torlock (Torznab) / BlackHoleBay / Nyaa / YTS / EZTV /
+ * The RarBg,
  * relevancia (general y la propia de Nyaa), consulta de Nyaa,
  * codec de config de usuario y contrato del recurso `stream`.
  * Sin red: no se llama a searchStreams con proveedores activos.
@@ -25,8 +26,8 @@ test('manifest: declara el recurso stream', () => {
   assert.match(manifest.version, /^\d+\.\d+\.\d+$/);
 });
 
-test('proveedores: Knaben, Torlock, BlackHoleBay, Nyaa y YTS registrados', () => {
-  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts'];
+test('proveedores: Knaben, Torlock, BlackHoleBay, Nyaa, YTS, EZTV y The RarBg registrados', () => {
+  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg'];
   assert.deepEqual(streams.PROVIDER_KEYS, all);
   assert.deepEqual(streams.activeProviders(null), all);
   assert.deepEqual(streams.activeProviders({ streams: ['torlock'] }), ['torlock']);
@@ -515,4 +516,101 @@ test('parseYts: un stream por torrent, con nombre y magnet compuestos', () => {
   // Sin resultados la API omite `movies`.
   assert.deepEqual(streams.parseYts({ status: 'ok', data: { movie_count: 0 } }), []);
   assert.deepEqual(streams.parseYts(null), []);
+});
+
+test('releaseEpisode: temporada y episodio que declara el nombre de un lanzamiento', () => {
+  const cases = [
+    ['The Sinner S04E08 1080p HEVC x265-MeGusta', [4, 8, 8]],
+    ['Show S01 E05 WEB', [1, 5, 5]],
+    ['The Sinner 1x05 HDTV', [1, 5, 5]],
+    // Varios episodios en un torrent.
+    ['Breaking.Bad.S05E01-16.1080p.NF.WEB-DL', [5, 1, 16]],
+    ['Show S01E01E02 720p', [1, 1, 2]],
+    ['Show S01E01-E03 720p', [1, 1, 3]],
+    // Lo que sigue al episodio no es un rango: resolución o título del capítulo.
+    ['Show.S04E08-1080p.x265', [4, 8, 8]],
+    ['Show S02E03 - 24 Hours 720p', [2, 3, 3]],
+    // Packs de temporada.
+    ['Show S02 COMPLETE 1080p', [2, null, null]],
+    ['Breaking Bad Season 3 Extras', [3, null, null]],
+  ];
+  for (const [name, [season, episode, lastEpisode]] of cases) {
+    assert.deepEqual(streams.releaseEpisode(name), { season, episode, lastEpisode }, name);
+  }
+  for (const name of ['The Daily Show 2025 11 10 720p', 'Movie 1920x1080 x264', 'Show H 264 5 1 x265', '']) {
+    assert.equal(streams.releaseEpisode(name), null, name);
+  }
+});
+
+test('parseEztv: el episodio se lee del nombre y se quita la firma de EZTV', () => {
+  const hits = streams.parseEztv({
+    imdb_id: '6048596',
+    torrents_count: 129,
+    torrents: [
+      {
+        hash: 'F6B983C6DC14FCCD0741790CC3FB51FBF5D8C932',
+        filename: 'The.Sinner.S04E08.1080p.HEVC.x265-MeGusta[eztv.re].mkv',
+        magnet_url: 'magnet:?xt=urn:btih:f6b983c6dc14fccd0741790cc3fb51fbf5d8c932&dn=x&tr=udp://tracker.opentrackr.org:1337/announce',
+        title: 'The Sinner S04E08 1080p HEVC x265-MeGusta EZTV',
+        imdb_id: '6048596', season: '4', episode: '8', seeds: 12, peers: 3, size_bytes: '479545240',
+      },
+      // La API deja a menudo season/episode a 0: manda el nombre.
+      {
+        hash: '7e38a15b3c861ec7f7885257cc7d8c85dafe8f8b',
+        title: 'The Sinner S02E04 WEBRip x264-TBS EZTV',
+        imdb_id: '6048596', season: '0', episode: '0', seeds: 0, peers: 0, size_bytes: '193268657',
+      },
+      // Sin `title`: se usa el nombre de archivo, sin extensión ni firma.
+      { hash: '2c58cb239acd6053de544adb4468bfa6fb72b1f8', filename: 'The.Sinner.S04E07.720p.HEVC.x265-MeGusta[eztv.re].mkv', imdb_id: '6048596' },
+      // Nombre sin numeración: valen los campos de la API.
+      { hash: 'a'.repeat(40), title: 'The Sinner 2021 12 01 720p WEB EZTV', imdb_id: '6048596', season: '4', episode: '8' },
+      { hash: 'no-es-un-hash', title: 'The Sinner S04E08 EZTV', imdb_id: '6048596' },
+    ],
+  });
+  assert.equal(hits.length, 4);
+  assert.deepEqual(hits[0], {
+    provider: 'eztv',
+    imdbId: 'tt6048596',
+    title: 'The Sinner S04E08 1080p HEVC x265-MeGusta',
+    infoHash: 'f6b983c6dc14fccd0741790cc3fb51fbf5d8c932',
+    magnet: 'magnet:?xt=urn:btih:f6b983c6dc14fccd0741790cc3fb51fbf5d8c932&dn=x&tr=udp://tracker.opentrackr.org:1337/announce',
+    seeders: 12,
+    peers: 3,
+    size: 479545240,
+    season: 4,
+    episode: 8,
+    lastEpisode: 8,
+  });
+  assert.deepEqual([hits[1].title, hits[1].season, hits[1].episode], ['The Sinner S02E04 WEBRip x264-TBS', 2, 4]);
+  assert.deepEqual([hits[2].title, hits[2].season, hits[2].episode], ['The.Sinner.S04E07.720p.HEVC.x265-MeGusta', 4, 7]);
+  assert.deepEqual([hits[3].season, hits[3].episode], [4, 8]);
+  // Serie sin torrents: la API no manda `torrents`.
+  assert.deepEqual(streams.parseEztv({ imdb_id: '99999999', torrents_count: 0, limit: 100, page: 1 }), []);
+});
+
+test('parseRarbg: normaliza resultados y descarta lo que no es vídeo', () => {
+  const hits = streams.parseRarbg({
+    total: 3,
+    results: [
+      {
+        name: 'Dune 2021 1080p web YTS',
+        infoHash: 'ed0da850c273e3e15a819bdcbbf418bc85107ec8',
+        magnet: 'magnet:?xt=urn:btih:ED0DA850C273E3E15A819BDCBBF418BC85107EC8&dn=Dune&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce',
+        category: 'Movies', size: 2952790016, seeders: 1118, leechers: 375, imdb: 'tt1160419', qualityScore: 66,
+      },
+      { name: 'Dune (Original Motion Picture Soundtrack) FLAC', infoHash: 'b'.repeat(40), category: 'Music', imdb: 'tt1160419' },
+      { name: 'Dune 2021 2160p', infoHash: 'corto', category: 'Movies' },
+    ],
+  });
+  assert.deepEqual(hits, [{
+    provider: 'rarbg',
+    imdbId: 'tt1160419',
+    title: 'Dune 2021 1080p web YTS',
+    infoHash: 'ed0da850c273e3e15a819bdcbbf418bc85107ec8',
+    magnet: 'magnet:?xt=urn:btih:ED0DA850C273E3E15A819BDCBBF418BC85107EC8&dn=Dune&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce',
+    seeders: 1118,
+    peers: 375,
+    size: 2952790016,
+  }]);
+  assert.deepEqual(streams.parseRarbg({ error: 'rate limit exceeded' }), []);
 });

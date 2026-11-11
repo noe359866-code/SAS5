@@ -101,7 +101,25 @@ test('la portada y el configurador comparten la piel Apple TV y el diseño respo
     assert.match(html, /Piel Apple TV/, label);
     // El acento violeta→cian de la capa anterior no vuelve en ninguna regla.
     assert.equal(html.includes('rgba(124,92,255'), false, `${label}: queda violeta de marca`);
+    // Cápsula de pestañas: donación y soporte van marcados para poder
+    // sacarlos de ella cuando el idioma no cabe (.nav-fit-2).
+    assert.equal((html.match(/<a class="nav-ext" /g) || []).length, 2, label);
+    assert.match(html, /\.nav-fit-2 \.nav-links \.nav-ext \{ display: none; \}/, label);
+    // Los estantes llevan su marco (.rail-view), donde el script cuelga las flechas.
+    assert.match(html, /<div class="rail-view"><div class="rail-scroll" data-autoscroll="1">/, label);
   }
+  // Hero cinematográfico: el muro va de fondo, fuera de la rejilla de texto,
+  // con seis columnas y cada una con su lista dos veces (bucle sin salto).
+  const backdrop = homeHtml.match(/<div class="hero-backdrop" aria-hidden="true">([\s\S]*?)<div class="wrap">/);
+  assert.ok(backdrop, 'falta .hero-backdrop');
+  const columns = backdrop[1].split('<div class="wall-col">').slice(1);
+  assert.equal(columns.length, 6);
+  for (const column of columns) {
+    const posters = [...column.matchAll(/<img src="([^"]+)"/g)].map((m) => m[1]);
+    assert.equal(posters.length, 10);
+    assert.deepEqual(posters.slice(0, 5), posters.slice(5));
+  }
+  assert.equal(/class="hero-visual"[^>]*>\s*<div class="hero-wall"/.test(homeHtml), false);
 });
 
 // ---------------------------------------------------------------- Soporte

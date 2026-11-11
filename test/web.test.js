@@ -80,17 +80,28 @@ globalThis.out = JSON.stringify({
 
 // ---------------------------------------------------------- Refresh visual
 
-test('la portada y el configurador comparten el refresh oscuro y responsive', () => {
+test('la portada y el configurador comparten la piel Apple TV y el diseño responsive', () => {
   const homeHtml = withEnv({}, () => home());
   const configureHtml = withEnv({}, () => configure());
   assert.match(homeHtml, /<h1>Stremio, <em>a tu manera\.<\/em><\/h1>/);
   assert.match(homeHtml, /class="stats hero-stats"/);
-  assert.match(homeHtml, /--bg: #080b12;/);
   assert.match(homeHtml, /@media \(max-width: 700px\)/);
   assert.match(configureHtml, /<h1>Tu Stremio, <em>a tu gusto\.<\/em><\/h1>/);
   assert.match(configureHtml, /Refinamiento visual del configurador/);
   assert.match(configureHtml, /@media \(max-width: 760px\)/);
-  assert.match(configureHtml, /--bg: #080b12;/);
+  for (const [label, html] of [['portada', homeHtml], ['configure', configureHtml]]) {
+    // Negro profundo, SF primero y barra translúcida con blur.
+    assert.match(html, /--bg: #000;/, label);
+    assert.match(html, /<meta name="theme-color" content="#000000" \/>/, label);
+    assert.match(html, /-apple-system,BlinkMacSystemFont,'SF Pro Display'/, label);
+    assert.match(html, /backdrop-filter: saturate\(180%\) blur\(20px\)/, label);
+    // Botones y controles de píldora; la acción principal es blanca sobre negro.
+    assert.match(html, /border-radius: 980px/, label);
+    assert.match(html, /\.btn-primary \{ color: #000;/, label);
+    assert.match(html, /Piel Apple TV/, label);
+    // El acento violeta→cian de la capa anterior no vuelve en ninguna regla.
+    assert.equal(html.includes('rgba(124,92,255'), false, `${label}: queda violeta de marca`);
+  }
 });
 
 // ---------------------------------------------------------------- Soporte

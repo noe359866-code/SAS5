@@ -413,3 +413,19 @@ test('manifest personal con config larga (~600 chars) responde 200 (no 404)', as
   const cat = await get('/' + cfg + '/catalog/movie/cine_tendencias.json');
   assert.equal(cat.status, 200);
 });
+
+test('catálogos paginados: Worker acepta extra skip en la ruta de Stremio', async () => {
+  const core = require('../lib/core');
+  const original = core.handleCatalog;
+  try {
+    core.handleCatalog = async (type, id, cfg, extra) => {
+      assert.equal(type, 'series');
+      assert.equal(id, 'tv_anime');
+      assert.equal(extra.skip, '20');
+      return { metas: [], cacheMaxAge: 0 };
+    };
+    const response = await get('/catalog/series/tv_anime/skip=20.json');
+    assert.equal(response.status, 200);
+    assert.deepEqual((await response.json()).metas, []);
+  } finally { core.handleCatalog = original; }
+});

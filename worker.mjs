@@ -20,6 +20,7 @@
  */
 
 import config from './lib/config.js';
+import watchApiModule from './lib/watchApi.js';
 import core from './lib/core.js';
 import { renderHome } from './lib/homePage.js';
 import { renderConfigure } from './lib/configurePage.js';
@@ -36,7 +37,7 @@ import rateLimit from './lib/rateLimit.js';
 import logoData from './lib/logoData.js';
 
 const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
-const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+)\.json$/;
+const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+?)(?:\/([^/]+))?\.json$/;
 const META_RE = /^\/meta\/(movie|series)\/(.+)\.json$/;
 const STREAM_RE = /^\/stream\/(movie|series)\/(.+)\.json$/;
 // Mismo límite que lib/userConfig.js: una config "completa" generada por
@@ -134,9 +135,9 @@ async function readJsonBody(request) {
   }
 }
 
-async function serveCatalog(type, id, cfg, request, ctx) {
+async function serveCatalog(type, id, cfg, request, ctx, extraPath = '') {
   return edgeCached(request, ctx, async () => {
-    const result = await core.handleCatalog(type, decodeURIComponent(id), cfg);
+    const result = await core.handleCatalog(type, decodeURIComponent(id), cfg, { ...Object.fromEntries(new URL(request.url).searchParams), ...Object.fromEntries(new URLSearchParams(extraPath)) });
     return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
   });
 }
@@ -292,6 +293,13 @@ export default {
       return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
     }
 
+    if (path.startsWith('/internal/watch/')) {
+      try {
+        const { body, status } = await watchApiModule.watchApi(url);
+        return jsonResponse(body, status, 0);
+      } catch (_) { return jsonResponse({ error: 'La fuente no respondió. Inténtalo de nuevo.' }, 502, 0); }
+    }
+
     const origin = url.origin;
     const host = url.host;
 
@@ -397,7 +405,7 @@ export default {
 
     // ── Catálogos / Metadatos con config por defecto ──────────
     let match = path.match(CATALOG_RE);
-    if (match) return serveCatalog(match[1], match[2], null, request, ctx);
+    if (match) return serveCatalog(match[1], match[2], null, request, ctx, match[3]);
     match = path.match(META_RE);
     if (match) return serveMeta(match[1], match[2], null, request, ctx);
     match = path.match(STREAM_RE);
@@ -421,7 +429,7 @@ export default {
           return cfg.debridId ? createManifest() : edgeCached(request, ctx, createManifest);
         }
         let m2 = rest.match(CATALOG_RE);
-        if (m2) return serveCatalog(m2[1], m2[2], cfg, request, ctx);
+        if (m2) return serveCatalog(m2[1], m2[2], cfg, request, ctx, m2[3]);
         m2 = rest.match(META_RE);
         if (m2) return serveMeta(m2[1], m2[2], cfg, request, ctx);
         m2 = rest.match(STREAM_RE);

@@ -12,7 +12,7 @@ const core = require('./lib/core');
 
 const builder = new addonBuilder(core.buildManifest());
 
-builder.defineCatalogHandler(({ type, id }) => core.handleCatalog(type, id));
+builder.defineCatalogHandler(({ type, id, extra }) => core.handleCatalog(type, id, null, extra));
 builder.defineMetaHandler(({ type, id }) => core.handleMeta(type, id));
 builder.defineStreamHandler(({ type, id }) => core.handleStream(type, id));
 

@@ -360,3 +360,58 @@ MIT
 - Los timeouts de un indexador (`Timeout de 6000 ms al consultar …`) indican que tardó más que `STREAM_PROVIDER_TIMEOUT_MS` (6 s por defecto); los demás se consultan en paralelo y responden igualmente. Tras 3 timeouts seguidos, o un HTTP 429, ese indexador se pausa (`STREAM_PROVIDER_COOLDOWN_SECONDS`, 5 min por defecto) y las respuestas sin él se cachean solo ese rato. Una respuesta incompleta no sustituye la caché buena. Si queda una entrada vieja, se sirve al instante mientras se renueva en segundo plano.
 - Los mensajes de error de la aplicación no incluyen parámetros ni cuerpos de respuesta. OMDB y TMDB (con clave v3) aún requieren claves en la URL: configura la plataforma de observabilidad para no guardar parámetros de esas solicitudes. Si una clave apareció en registros, rótala y elimina o restringe el acceso a los registros históricos.
 - Cachés y pausas son locales a cada instancia; no coordinan cuotas entre instancias serverless.
+
+## ▶ Web de reproducción (`/watch/`)
+
+La sección **Ver ahora** de la navegación abre una biblioteca con diseño oscuro tipo Apple TV,
+independiente de la portada de instalación. Funciona en Node/Vercel y en Cloudflare Workers
+(archivos estáticos en `public/watch/` y API compartida en `lib/watchApi.js`).
+
+- Películas, series y anime; selector con todos los catálogos declarados por el addon
+  (plataformas, estudios, géneros y listas base).
+- Catálogos y búsqueda TMDB paginados mediante **Cargar más**, hasta el límite de 500 páginas
+  de TMDB, sin limitar la biblioteca a los títulos destacados de la portada.
+- Fichas con información real, selector de temporada/episodio y búsqueda de torrents usando
+  los proveedores actuales. Para packs, puede ser necesario elegir el archivo en Webtor.
+- **Mi lista** local por navegador, con hasta 200 títulos. No requiere cuenta ni sincroniza dispositivos.
+- Reproducción opcional por Webtor, con versión del SDK fijada a `0.2.19` y carga solo al elegir
+  un torrent. El servicio externo recibe el magnet y el título, no credenciales debrid ni
+  la URL de configuración. No se añaden scripts de Webtor a `/configure`.
+
+**Configuración:** requiere `TMDB_API_KEY` o `TMDB_ACCESS_TOKEN` en el servidor y los proveedores
+habituales de streams. Sin TMDB, se muestra un mensaje de configuración; no se utilizan títulos
+ficticios. La biblioteca usa la configuración pública por defecto, no importa configuraciones
+personales ni cuentas debrid. La etiqueta de una plataforma no significa que su suscripción
+permita reproducir el torrent.
+
+**Aislamiento:** el SDK se ejecuta en un iframe con sandbox sin `allow-same-origin`; recibe
+solo magnet/título por mensajes con comprobación de ventana emisora. Este aislamiento es
+importante porque el SDK externo admite instrucciones dinámicas. Webtor sigue siendo un
+tercero de confianza para la reproducción y puede cambiar su disponibilidad o comportamiento.
+El reproductor interno conserva su interfaz; el diseño Apple TV corresponde a nuestra web.
+
+**Verificación:** `npm test` incluye pruebas sin red del API de navegación y del aislamiento;
+`npx wrangler deploy --dry-run` valida el empaquetado. Para validar reproducción real abre
+`/watch/`, elige contenido autorizado y una fuente con seeders. La carga del CDN, Webtor,
+los codecs y la reproducción dentro del sandbox deben comprobarse en un navegador con
+acceso a esos servicios. No se garantiza reproducción de todas las fuentes.
+
+### Mejoras de compatibilidad del addon
+
+- **Paginación en Stremio:** Tendencias, Populares, Top Valoradas y Anime (películas y
+  series) anuncian `skip` en el manifest. Node/Vercel y Workers aceptan rutas como
+  `/catalog/series/tv_anime/skip=20.json`, también con prefijo de configuración personal.
+  El servidor traduce el desplazamiento a páginas de TMDB y valida límites.
+  Solo se anuncia en esos ocho catálogos para conservar los 121 catálogos dentro del
+  límite estricto de 8 KB del SDK. Los demás siguen disponibles como antes.
+- **Series sin IMDb:** las tarjetas generan identificadores canónicos `tmdb:tv:…`.
+  Se conservan las fichas con identificadores antiguos `tmdb:series:…`.
+- **Streams por episodio:** se separan correctamente temporada y episodio de los IDs
+  TMDB/TVMaze; antes el número de episodio podía confundirse con el ID de la serie.
+  Se conservan los episodios especiales (temporada 0) y se toleran escapes malformados
+  sin lanzar errores en el parser.
+
+Para que Stremio detecte los cambios de capacidades, actualiza o reinstala el addon
+usando tu URL de configuración habitual. Los resultados siguen dependiendo de las
+claves, proveedores y disponibilidad del contenido; estas correcciones no añaden
+fuentes ni requieren compartir credenciales.

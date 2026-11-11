@@ -16,3 +16,8 @@
 /logo.png
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=604800, immutable
+
+/watch/*
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  Cache-Control: no-cache

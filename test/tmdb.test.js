@@ -20,3 +20,11 @@ test('tmdbMediaType mapea Stremio -> TMDB', () => {
   assert.equal(tmdbMediaType('movie'), 'movie');
   assert.equal(tmdbMediaType('anything-else'), 'movie'); // nunca 'undefined' en URL
 });
+
+test('metas TMDB de series generan ids canónicos tv, no series', () => {
+  const { mapTmdbItem } = require('../lib/tmdb');
+  const meta = mapTmdbItem({ id: 1399, name: 'Una serie' }, 'series');
+  assert.equal(meta.id, 'tmdb:tv:1399');
+  assert.equal(meta.type, 'series');
+  assert.equal(mapTmdbItem({ id: 550, title: 'Una película' }, 'movie').id, 'tmdb:movie:550');
+});

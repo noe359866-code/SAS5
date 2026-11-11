@@ -72,6 +72,16 @@ function sameOrigin(req) {
 // 3. Assets estáticos (logo)
 app.use('/assets', express.static(path.join(__dirname, '..', 'assets'), { maxAge: '7d' }));
 
+// Streaming web assets and shared browsing API.
+app.use('/watch', express.static(path.join(__dirname, '..', 'public', 'watch'), { maxAge: 0 }));
+app.get('/internal/watch/:action', async (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  try {
+    const { body, status } = await require('../lib/watchApi').watchApi(new URL(req.originalUrl, 'http://internal'));
+    res.status(status).json(body);
+  } catch (_) { res.status(502).json({ error: 'La fuente no respondió. Inténtalo de nuevo.' }); }
+});
+
 // 4. Healthcheck
 app.get('/healthz', (req, res) => {
   res.json({
@@ -264,10 +274,10 @@ app.get('/:cfg/manifest.json', (req, res) => {
   res.json(core.buildManifest(`${baseUrl}/assets/logo.png`, cfg));
 });
 
-app.get('/:cfg/catalog/:type/:id.json', async (req, res) => {
+app.get(['/:cfg/catalog/:type/:id.json', '/:cfg/catalog/:type/:id/:extra.json'], async (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;
-  const result = await core.handleCatalog(req.params.type, decodeURIComponent(req.params.id), cfg);
+  const result = await core.handleCatalog(req.params.type, req.params.id, cfg, { ...req.query, ...Object.fromEntries(new URLSearchParams(req.params.extra || '')) });
   res.setHeader('Cache-Control', result.cacheMaxAge > 0 ? `public, max-age=${result.cacheMaxAge}` : 'no-store');
   res.json(result);
 });

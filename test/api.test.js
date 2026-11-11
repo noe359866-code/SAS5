@@ -175,3 +175,20 @@ test('API Express completa Real-Debrid OAuth con cookie state y no filtra el có
   assert.equal(destination.href.includes('api-one-time-code'), false);
   assert.deepEqual(originalCalls, ['/oauth/v2/token', '/rest/1.0/user']);
 });
+
+test('API Express entrega extras de paginación para catálogos personales', async () => {
+  const core = require('../lib/core');
+  const original = core.handleCatalog;
+  const cfg = userConfig.encodeConfig({ lang: 'es', region: 'NI' });
+  try {
+    core.handleCatalog = async (type, id, decoded, extra) => {
+      assert.equal(type, 'series');
+      assert.equal(id, 'tv_anime');
+      assert.equal(extra.skip, '40');
+      return { metas: [], cacheMaxAge: 0 };
+    };
+    const response = await request(`/${cfg}/catalog/series/tv_anime/skip=40.json`);
+    assert.equal(response.status, 200);
+    assert.deepEqual(response.json().metas, []);
+  } finally { core.handleCatalog = original; }
+});

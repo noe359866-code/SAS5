@@ -9,6 +9,7 @@ Addon gratuito para Stremio con catálogos de **películas y series**. Los servi
 - 🎛️ **Página de configuración `/configure`**: índice lateral con el resumen de cada sección, **idioma (18) y región (44) con buscador**, rejilla de plataformas y estudios con logos (CDN público de TMDB, visibles incluso sin clave), catálogos base, proveedores de streams, **filtros de streams** y una barra inferior fija con el contador de catálogos, la URL y el botón de instalar → genera tu **manifest personal** `/<config>/manifest.json`
 - 🧲 **Filtros de streams por usuario**: cada persona decide qué copias no quiere ver —**CAM/TS, screeners, 3D, 4K**, REMUX, Dolby Vision, HEVC, AV1…—, el orden (seeders, calidad o tamaño) y un tamaño máximo. Ver [Filtros de streams](#-filtros-de-streams)
 - ⚡ **Servicios debrid opcionales**: TorBox, EasyDebrid, Premiumize y Real-Debrid añaden enlaces directos según la disponibilidad del proveedor; las credenciales se cifran en el servidor y los magnets públicos siguen como alternativa. Real-Debrid usa OAuth y solo la biblioteca personal completada; no consulta disponibilidad global ni añade torrents.
+- 🏷️ **Etiquetas técnicas de stream** (`lib/badges.js`): cada stream lleva una línea con sus datos detectados del nombre (4K · DV · HEVC · Atmos · 7.1 · WEB-DL · MKV · ESP…), configurable por grupos en `/configure` con vista previa de tres estilos (Glass, Split, Icon Dark). En Stremio se leen como texto; en **Nuvio** esas mismas palabras son las que un pack de insignias con imágenes (p. ej. [FR-Badges](https://github.com/farizmohd70/FR-Badges), en *Perfil → Layout → Streams → «Fusion badge URLs»*) convierte en sus dibujos.
 - 🚀 **Respuestas más rápidas**: proveedores en paralelo con timeout configurable, búsquedas repetidas coalescidas, caché stale-while-revalidate y caché compartida de Cloudflare para catálogos y fichas.
 - 💬 **Soporte**: enlace al Discord en la barra, en una tarjeta y en el pie de las dos páginas (`SUPPORT_URL`)
 - ☕ **Donaciones**: botón de Ko-fi en la barra, una tarjeta propia («Invítame un café») y un enlace en el pie de las dos páginas. El donante paga con **PayPal** o tarjeta dentro de Ko-fi (`KOFI_USERNAME`)
@@ -73,7 +74,8 @@ Metadatos enriquecidos en la ficha:
 │   ├── assets/logo.png   # Logo servido sin ejecutar el Worker
 │   └── catalog/          # Catálogos pregenerados (npm run prerender; no se commitea)
 ├── scripts/
-│   └── prerender-catalogs.mjs # Congela los catálogos por defecto como estáticos
+│   ├── prerender-catalogs.mjs # Congela los catálogos por defecto como estáticos
+│   └── build-web.mjs          # Congela / y /configure como estáticos (PUBLIC_ORIGIN)
 ├── test/                 # Tests offline (servidor, Worker, proveedores, filtros y web)
 ├── vercel.json           # Alternativa: despliegue serverless en Vercel
 ├── .env.example          # Plantilla de variables (Node)
@@ -182,7 +184,7 @@ npm run dev:worker               # http://localhost:8787
 ### 3.4 Desplegar
 
 ```bash
-npm run deploy                   # = npm run prerender + npx wrangler deploy
+npm run deploy                   # = prerender catálogos + prerender web + wrangler deploy
 npx wrangler deploy              # solo el Worker, sin regenerar catálogos estáticos
 ```
 
@@ -197,6 +199,35 @@ Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
 - **Manifest (para instalar en Stremio):** `https://catalogos-plus.tu-subdominio.workers.dev/manifest.json`
 - **Landing con botón de 1 clic:** `https://catalogos-plus.tu-subdominio.workers.dev/`
 - **Healthcheck:** `https://catalogos-plus.tu-subdominio.workers.dev/healthz`
+
+#### Capacidad del plan free: 160K+ peticiones/día
+
+El plan gratuito de Workers permite **100.000 invocaciones/día** (Error 1027 al
+pasarse, reset a las 00:00 UTC); ese contador no se puede subir desde código.
+Lo que sí se puede es hacer que gran parte del tráfico **no invoque al Worker**:
+
+1. **Web y catálogos como static assets (ilimitados y gratis).** Con
+   `[assets]` en `wrangler.toml`, todo archivo de `public/` se sirve desde el
+   edge sin ejecutar `worker.mjs`: logo, favicon (`public/_redirects`), los
+   catálogos por defecto (`npm run prerender`) y, si quieres, también la web:
+   `PUBLIC_ORIGIN=https://tu-dominio.example npm run build:web` escribe
+   `public/index.html` y `public/configure/index.html` con tus tendencias y
+   enlaces absolutos horneados. Sin `PUBLIC_ORIGIN` (o sin clave de TMDB) el
+   script no escribe nada y la web sigue sirviéndose en caliente.
+2. **Caché edge para la API (dominio propio).** Las respuestas del Worker ya
+   salen con `Cache-Control` y se guardan en la Cache API del edge
+   (`edgeCached` en `worker.mjs`). Con un dominio propio en Cloudflare, añade
+   **Cache Rules** para que los hits los sirva el CDN sin invocar el Worker:
+   - `(starts_with(http.request.uri.path, "/stream"))` → Edge TTL 600 s
+   - `(starts_with(http.request.uri.path, "/catalog"))` → Edge TTL 600 s
+   - `(starts_with(http.request.uri.path, "/manifest"))` → Edge TTL 86400 s
+3. **Matemática.** 160K peticiones/día ≈ 60K humanas (web estática, no cuenta)
+   + 100K de API (tope del plan). Con dominio propio y ~40 % de hit rate en las
+   reglas de arriba, ~166K peticiones de API equivalen a ≤100K invocaciones.
+   El consumo se ve en *Cloudflare → Workers & Pages → catalogos-plus →
+   Analytics/Invocations*. Si un día se llega a 1027, la web estática y los
+   catálogos pregenerados **siguen sirviéndose**: solo degrada la API dinámica
+   hasta el reset de medianoche.
 
 ### 3.5 Instalar en Stremio
 

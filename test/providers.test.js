@@ -357,9 +357,9 @@ test('Nyaa: episodio de anime con título romaji de TMDB, categoría y filtro pr
   assert.equal(result.cacheMaxAge, 3600);
   const [episode, batch] = result.streams;
   assert.equal(episode.name, '🧲 1080p');
-  assert.equal(episode.title, '[SubsPlease] Sousou no Frieren - 05 (1080p) [8E3F8FA5].mkv\n💾 1.40 GB  👤 800  ⬇ 2');
+  assert.equal(episode.title, '[SubsPlease] Sousou no Frieren - 05 (1080p) [8E3F8FA5].mkv\n1080p · MKV\n💾 1.40 GB  👤 800  ⬇ 2');
   assert.deepEqual(episode.sources, ['tracker:http://nyaa.tracker.wf:7777/announce', `dht:${'a'.repeat(40)}`]);
-  assert.match(batch.title, /\(Batch\)\n💾 16\.80 GB/);
+  assert.match(batch.title, /\(Batch\)\n[^\n]*\n💾 16\.80 GB/);
 });
 
 test('Nyaa: no se consulta para títulos que no son anime ni producción asiática', async () => {

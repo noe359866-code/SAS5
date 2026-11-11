@@ -373,7 +373,7 @@ test('handleStream: cada usuario ve su selección y la búsqueda se hace una sol
   assert.equal(plain.cacheMaxAge, 3600);
   assert.deepEqual(plain.streams[1], {
     name: '🧲 1080p',
-    title: 'Example.Movie.2023.1080p.WEB-DL.DDP5.1.H.264-GRP\n💾 4.00 GB  👤 900  ⬇ 3',
+    title: 'Example.Movie.2023.1080p.WEB-DL.DDP5.1.H.264-GRP\n1080p · AVC · DD+ · 5.1 · WEB-DL\n💾 4.00 GB  👤 900  ⬇ 3',
     infoHash: WEB,
     sources: ['tracker:udp://tracker.example:1337', `dht:${WEB}`],
     behaviorHints: { bingeGroup: 'catalogos-plus-22222222' },

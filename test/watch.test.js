@@ -52,3 +52,40 @@ test('watch player is pinned and isolated without same-origin sandbox permission
   assert.match(player, /referer: ''/);
   assert.match(player, /event.source !== parent/);
 });
+
+test('watch player has a dedicated cinema dialog and responsive nested frames', () => {
+  const html = fs.readFileSync('public/watch/index.html', 'utf8');
+  const css = fs.readFileSync('public/watch/watch.css', 'utf8');
+  const inner = fs.readFileSync('public/watch/player.html', 'utf8');
+  const player = fs.readFileSync('public/watch/player.js', 'utf8');
+  const client = fs.readFileSync('public/watch/watch.js', 'utf8');
+  assert.ok(html.indexOf('id="detail-title"') < html.indexOf('id="playback"'));
+  assert.match(html, /<section id="detail" hidden/);
+  assert.match(html, /<dialog id="playback"/);
+  assert.match(html, /id="episode-cards"/);
+  assert.match(html, /id="home-rails"/);
+  assert.equal((html.match(/id="stop"/g) || []).length, 1);
+  assert.match(html, /aria-labelledby="playing" tabindex="-1"/);
+  assert.match(css, /#player\{[^}]*aspect-ratio:16\/9;height:auto/);
+  assert.doesNotMatch(css, /#player\{[^}]*height:\d+px/);
+  assert.match(inner, /#webtor iframe\{[^}]*height:100%/);
+  assert.match(player, /height: '100%'/);
+  assert.match(client, /\$\('playback'\)\.focus\(\{ preventScroll: true \}\)/);
+});
+
+test('watch extras: maps real TMDB cast, recommendations and safe trailer links', async () => {
+  config.reload({ TMDB_API_KEY: 'extras-test' });
+  const original = tmdb.tmdbGet;
+  try {
+    tmdb.tmdbGet = async (path, params) => {
+      assert.equal(path, '/tv/42');
+      assert.equal(params.append_to_response, 'credits,recommendations,videos');
+      return { genres: [{ name: 'Drama' }], number_of_seasons: 2, credits: { cast: [{ name: 'Actriz', character: 'Personaje', profile_path: '/test.jpg' }] }, recommendations: { results: [{ id: 9, name: 'Otra serie' }] }, videos: { results: [{ site: 'YouTube', type: 'Trailer', key: 'abcdefghijk', name: 'Oficial' }, { site: 'YouTube', type: 'Trailer', key: '<bad>' }] } };
+    };
+    const data = await watchApi(url('extras', { id: 'tmdb:tv:42', type: 'series' }));
+    assert.equal(data.body.cast[0].name, 'Actriz');
+    assert.equal(data.body.recommendations[0].id, 'tmdb:tv:9');
+    assert.equal(data.body.trailers.length, 1);
+    assert.equal(data.body.trailers[0].url, 'https://www.youtube.com/watch?v=abcdefghijk');
+  } finally { tmdb.tmdbGet = original; config.reload(process.env); }
+});

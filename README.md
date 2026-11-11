@@ -415,3 +415,23 @@ Para que Stremio detecte los cambios de capacidades, actualiza o reinstala el ad
 usando tu URL de configuración habitual. Los resultados siguen dependiendo de las
 claves, proveedores y disponibilidad del contenido; estas correcciones no añaden
 fuentes ni requieren compartir credenciales.
+
+### Navegación cinematográfica de la web
+
+`/watch/` incorpora una portada con destacado real, accesos a plataformas y cuatro
+filas horizontales independientes. «Ver todo» abre el catálogo completo paginado.
+Las fichas se abren como páginas dentro de la biblioteca, con una URL de fragmento
+`#title/movie/<id>` o `#title/series/<id>` compatible con recarga y navegación atrás.
+
+Las fichas muestran géneros, datos técnicos, reparto, enlaces de tráileres oficiales
+cuando TMDB los identifica como tráileres de YouTube, y recomendaciones. No se importan
+comentarios, marcas ni datos de sitios de referencia. Las secciones sin información
+se ocultan. Las series presentan tarjetas de episodio con imagen, duración y sinopsis
+cuando están disponibles. Los torrents solo se buscan cuando se elige un episodio o
+se pulsa «Elegir fuente», no al recorrer la portada.
+
+La reproducción ocupa un diálogo de cine independiente de la ficha; al volver a las
+fuentes se descarga el iframe y se conserva la selección de temporada y episodio.
+El iframe interno se adapta al contenedor sin alturas fijas. Las pruebas DOM en
+`test/watchUi.test.js` usan datos simulados y cubren navegación, selección y cierre;
+no certifican reproducción externa ni sustituyen una revisión visual en navegador.

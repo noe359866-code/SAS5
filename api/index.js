@@ -99,6 +99,8 @@ app.get('/healthz', (req, res) => {
       oauthConfigured: realDebridOAuth.isConfigured(),
       credentialStorageReady: debridCredentials.isConfigured(),
     },
+    // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
+    donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
     cache: cache.stats(),
     watchRegion: config.watchRegion,
     watchRegionFallback: config.watchRegionFallback,

@@ -1,0 +1,3 @@
+# Redirecciones servidas por el edge de Cloudflare (sin ejecutar el Worker,
+# así no gastan cuota del plan free). El favicon vive en /assets/logo.png.
+/favicon.ico /assets/logo.png 302

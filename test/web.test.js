@@ -20,7 +20,7 @@ const { PROVIDER_KEYS } = require('../lib/streams');
 const { PLATFORMS, STUDIOS, PLATFORM_KEYS, STUDIO_KEYS, buildDefs } = require('../lib/catalogs');
 const { icon, iconMask, ICON_NAMES } = require('../lib/icons');
 const { posterThumb } = require('../lib/rails');
-const { supportLink } = require('../lib/layout');
+const { supportLink, donationLink, donateCardHtml } = require('../lib/layout');
 const { LANGUAGES: WEB_LANGUAGES, PHRASES: WEB_PHRASES, TRANSLATIONS: WEB_TRANSLATIONS, WEB_I18N_BOOTSTRAP, WEB_I18N_SCRIPT, detectWebLanguage } = require('../lib/webI18n');
 
 const ORIGIN = 'https://addon.example';
@@ -80,17 +80,28 @@ globalThis.out = JSON.stringify({
 
 // ---------------------------------------------------------- Refresh visual
 
-test('la portada y el configurador comparten el refresh oscuro y responsive', () => {
+test('la portada y el configurador comparten la piel Apple TV y el diseño responsive', () => {
   const homeHtml = withEnv({}, () => home());
   const configureHtml = withEnv({}, () => configure());
   assert.match(homeHtml, /<h1>Stremio, <em>a tu manera\.<\/em><\/h1>/);
   assert.match(homeHtml, /class="stats hero-stats"/);
-  assert.match(homeHtml, /--bg: #080b12;/);
   assert.match(homeHtml, /@media \(max-width: 700px\)/);
   assert.match(configureHtml, /<h1>Tu Stremio, <em>a tu gusto\.<\/em><\/h1>/);
   assert.match(configureHtml, /Refinamiento visual del configurador/);
   assert.match(configureHtml, /@media \(max-width: 760px\)/);
-  assert.match(configureHtml, /--bg: #080b12;/);
+  for (const [label, html] of [['portada', homeHtml], ['configure', configureHtml]]) {
+    // Negro profundo, SF primero y barra translúcida con blur.
+    assert.match(html, /--bg: #000;/, label);
+    assert.match(html, /<meta name="theme-color" content="#000000" \/>/, label);
+    assert.match(html, /-apple-system,BlinkMacSystemFont,'SF Pro Display'/, label);
+    assert.match(html, /backdrop-filter: saturate\(180%\) blur\(20px\)/, label);
+    // Botones y controles de píldora; la acción principal es blanca sobre negro.
+    assert.match(html, /border-radius: 980px/, label);
+    assert.match(html, /\.btn-primary \{ color: #000;/, label);
+    assert.match(html, /Piel Apple TV/, label);
+    // El acento violeta→cian de la capa anterior no vuelve en ninguna regla.
+    assert.equal(html.includes('rgba(124,92,255'), false, `${label}: queda violeta de marca`);
+  }
 });
 
 // ---------------------------------------------------------------- Soporte
@@ -144,6 +155,92 @@ test('soporte: una SUPPORT_URL que no es http(s) se ignora', () => {
   withEnv({ SUPPORT_URL: 'https://discord.gg.example.org/x' }, () => assert.equal(supportLink().discord, false));
   withEnv({ SUPPORT_URL: 'https://notdiscord.gg/x' }, () => assert.equal(supportLink().discord, false));
   withEnv({ SUPPORT_URL: 'https://www.discord.com/invite/x' }, () => assert.equal(supportLink().discord, true));
+});
+
+// ------------------------------------------------------------ Donaciones
+
+const KOFI = 'https://ko-fi.com/hydratorrents';
+
+test('donaciones: Ko-fi sale en la barra, en su tarjeta y en el pie de las dos páginas', () => {
+  withEnv({}, () => {
+    assert.equal(config.kofiUrl, KOFI);
+    assert.equal(donationLink().name, 'Ko-fi');
+    assert.equal(donationLink().iconName, 'kofi');
+    for (const [label, html] of [['portada', home()], ['configure', configure()]]) {
+      // Enlace de la barra, botón de icono (móvil), botón de la tarjeta y pie.
+      assert.equal(count(html, `href="${KOFI}" target="_blank" rel="noopener noreferrer"`), 4, label);
+      assert.match(html, /class="support donate reveal" id="donar"/, label);
+      assert.match(html, /Invítame un café/, label);
+      assert.match(html, /Donar con Ko-fi/, label);
+      assert.match(html, /aria-label="Donar en Ko-fi"/, label);
+      // La pasarela se anuncia con su marca (PayPal), que no se traduce.
+      assert.equal(count(html, ' PayPal</span>'), 1, label);
+    }
+  });
+});
+
+test('donaciones: KOFI_USERNAME acepta el usuario o la URL y solo enlaza a ko-fi.com', () => {
+  const urlFor = (value) => withEnv({ KOFI_USERNAME: value }, () => config.kofiUrl);
+  assert.equal(urlFor(undefined), KOFI);
+  assert.equal(urlFor('   '), KOFI);
+  assert.equal(urlFor('amiga'), 'https://ko-fi.com/amiga');
+  assert.equal(urlFor('@amiga'), 'https://ko-fi.com/amiga');
+  assert.equal(urlFor('ko-fi.com/amiga'), 'https://ko-fi.com/amiga');
+  assert.equal(urlFor('https://www.ko-fi.com/amiga/'), 'https://ko-fi.com/amiga');
+  // off y cualquier valor que no sea de Ko-fi desactivan las donaciones, para
+  // que un error de tipeo no enlace a la página de otra persona.
+  for (const value of [
+    'off', 'OFF', 'none', 'disabled', '0', 'false',
+    'https://paypal.me/amiga', 'https://ko-fi.com.evil.example/x', 'javascript:alert(1)',
+    'con espacios', 'a'.repeat(51), '<img src=x>', 'https://ko-fi.com/a" onload="alert(1)',
+  ]) {
+    assert.equal(urlFor(value), '', `KOFI_USERNAME=${value}`);
+  }
+});
+
+test('donaciones: con KOFI_USERNAME=off no queda rastro en la web y el soporte sigue igual', () => {
+  withEnv({ KOFI_USERNAME: 'off' }, () => {
+    assert.equal(config.kofiEnabled, false);
+    assert.equal(donationLink().enabled, false);
+    assert.equal(donateCardHtml(), '');
+    for (const [label, html] of [['portada', home()], ['configure', configure()]]) {
+      // Sin script (el diccionario i18n siempre lleva las frases) ni estilos
+      // (las clases de la tarjeta quedan definidas aunque no se use).
+      const markup = html.replace(/<script>[\s\S]*?<\/script>/g, '').replace(/<style>[\s\S]*?<\/style>/g, '');
+      assert.equal(markup.includes('ko-fi'), false, label);
+      assert.equal(markup.includes('Donar'), false, label);
+      assert.equal(markup.includes('nav-donate'), false, label);
+      assert.equal(markup.includes('btn-kofi'), false, label);
+      assert.equal(markup.includes('pay-badge'), false, label);
+      assert.equal(markup.includes('support donate'), false, label);
+      // El Discord conserva sus cuatro enlaces de siempre.
+      assert.equal(count(html, `href="${DISCORD}" target="_blank" rel="noopener noreferrer"`), 4, label);
+    }
+  });
+  // Otra página cambia el enlace en toda la web y borra el usuario por defecto.
+  withEnv({ KOFI_USERNAME: 'amiga' }, () => {
+    for (const html of [home(), configure()]) {
+      assert.equal(count(html, 'href="https://ko-fi.com/amiga"'), 4);
+      assert.equal(html.includes('hydratorrents'), false);
+    }
+  });
+});
+
+test('donaciones: las frases nuevas se traducen a los seis idiomas de la web', () => {
+  const sources = [
+    'Donar',
+    'Donar en Ko-fi',
+    'Donar con Ko-fi',
+    '¿Te sirve Catálogos+? Invítame un café',
+  ];
+  for (const source of sources) {
+    assert.ok(WEB_PHRASES.some((row) => row[0] === source), `falta la frase «${source}»`);
+    for (const language of WEB_LANGUAGES) {
+      assert.ok(WEB_TRANSLATIONS[language][source], `${language}: ${source}`);
+    }
+  }
+  const cardText = WEB_PHRASES.find((row) => row[0].startsWith('El addon es gratis y no tiene anuncios'));
+  assert.ok(cardText && cardText.every((value) => value.length > 40), 'el texto de la tarjeta va traducido entero');
 });
 
 // ------------------------------------------------- Controles de /configure
@@ -450,6 +547,9 @@ test('iconos: un nombre desconocido falla en vez de dejar un hueco', () => {
   assert.throws(() => icon('no-existe'), /Icono desconocido/);
   assert.throws(() => iconMask('no-existe'), /Icono desconocido/);
   assert.ok(ICON_NAMES.includes('discord'));
+  // Marcas de las donaciones: Ko-fi y PayPal (Simple Icons, figura rellena).
+  assert.ok(ICON_NAMES.includes('kofi') && ICON_NAMES.includes('paypal'));
+  for (const brand of ['kofi', 'paypal']) assert.match(icon(brand, 18), /class="ic ic-fill"/);
   for (const name of ICON_NAMES) {
     const svg = icon(name, 20);
     assert.match(svg, /^<svg class="ic[^"]*" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"/, name);

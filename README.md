@@ -5,12 +5,14 @@ Addon gratuito para Stremio con catálogos de **películas y series**. Los servi
 - 🔥 **Tendencias** de la semana (TMDB)
 - ⭐ **Top Valoradas** (TMDB, mínimo de votos configurable)
 - 🍿 **Populares** (TMDB)
-- 🎬 **Web** con sistema de diseño propio (`lib/theme.js`): tema oscuro con acento degradado violeta→cian, iconos SVG en línea (`lib/icons.js`, sin emojis ni fuentes de iconos), tipografía del sistema y **0 peticiones externas** salvo las imágenes de TMDB. La portada tiene un muro de pósters, cifras reales del addon, tendencias con buscador, funciones, instalación en 3 pasos, preguntas frecuentes y botón de copiar la URL. Respeta `prefers-reduced-motion`
+- 🎬 **Web** con sistema de diseño propio (`lib/theme.js`): piel tipo Apple TV —negro profundo, tipografía SF, barra translúcida con blur, botones de píldora (blanco sobre negro para la acción principal), superficies de vidrio con hairline y rails de pósters limpios— con iconos SVG en línea (`lib/icons.js`, sin emojis ni fuentes de iconos) y **0 peticiones externas** salvo las imágenes de TMDB. La portada tiene un muro de pósters, cifras reales del addon, tendencias con buscador, funciones, instalación en 3 pasos, preguntas frecuentes y botón de copiar la URL. Respeta `prefers-reduced-motion`
 - 🎛️ **Página de configuración `/configure`**: índice lateral con el resumen de cada sección, **idioma (18) y región (44) con buscador**, rejilla de plataformas y estudios con logos (CDN público de TMDB, visibles incluso sin clave), catálogos base, proveedores de streams, **filtros de streams** y una barra inferior fija con el contador de catálogos, la URL y el botón de instalar → genera tu **manifest personal** `/<config>/manifest.json`
 - 🧲 **Filtros de streams por usuario**: cada persona decide qué copias no quiere ver —**CAM/TS, screeners, 3D, 4K**, REMUX, Dolby Vision, HEVC, AV1…—, el orden (seeders, calidad o tamaño) y un tamaño máximo. Ver [Filtros de streams](#-filtros-de-streams)
 - ⚡ **Servicios debrid opcionales**: TorBox, EasyDebrid, Premiumize y Real-Debrid añaden enlaces directos según la disponibilidad del proveedor; las credenciales se cifran en el servidor y los magnets públicos siguen como alternativa. Real-Debrid usa OAuth y solo la biblioteca personal completada; no consulta disponibilidad global ni añade torrents.
+- 🏷️ **Etiquetas técnicas de stream** (`lib/badges.js`): cada stream lleva una línea con sus datos detectados del nombre (4K · DV · HEVC · Atmos · 7.1 · WEB-DL · MKV · ESP…), configurable por grupos en `/configure` con vista previa de tres estilos (Glass, Split, Icon Dark). En Stremio se leen como texto; en **Nuvio** esas mismas palabras son las que un pack de insignias con imágenes (p. ej. [FR-Badges](https://github.com/farizmohd70/FR-Badges), en *Perfil → Layout → Streams → «Fusion badge URLs»*) convierte en sus dibujos.
 - 🚀 **Respuestas más rápidas**: proveedores en paralelo con timeout configurable, búsquedas repetidas coalescidas, caché stale-while-revalidate y caché compartida de Cloudflare para catálogos y fichas.
 - 💬 **Soporte**: enlace al Discord en la barra, en una tarjeta y en el pie de las dos páginas (`SUPPORT_URL`)
+- ☕ **Donaciones**: botón de Ko-fi en la barra, una tarjeta propia («Invítame un café») y un enlace en el pie de las dos páginas. El donante paga con **PayPal** o tarjeta dentro de Ko-fi (`KOFI_USERNAME`)
 - 📺 **Por plataforma (30)**: Netflix, Prime Video, Disney+, Max (HBO), Apple TV+, Paramount+, Crunchyroll, Hulu, AMC+, MUBI, Tubi, Pluto TV, Peacock, Starz, MGM+, YouTube Premium, **Plex, Amazon Freevee, The Roku Channel, discovery+, ViX, Claro video, DIRECTV GO, Movistar TV, Filmin Latino, Globoplay, Filmin, Atresplayer, SkyShowtime y Movistar Plus+** — películas y series (TMDB Discover con JustWatch providers, con **fallback automático MX→US** si tu región no tiene resultados)
 - 🎥 **Por estudio (21)** · películas **y series**: Marvel Studios, Pixar, Walt Disney Pictures, Disney Animation, Lucasfilm, Warner Bros., New Line Cinema, Universal, Illumination, DreamWorks Animation, Paramount Pictures, Sony Pictures, 20th Century Studios, MGM, Lionsgate, A24, Blumhouse, Studio Ghibli, Toei Animation, MAPPA y Kyoto Animation (TMDB Discover con `with_companies`, en `/discover/movie` y `/discover/tv`)
 - 📡 **Series · En TV hoy** (TVMaze, **gratis y sin clave**)
@@ -58,8 +60,8 @@ Metadatos enriquecidos en la ficha:
 │   ├── homePage.js       # Portada (/)
 │   ├── configurePage.js  # Página /configure (idioma, región, plataformas, estudios, streams y filtros)
 │   ├── theme.js          # Sistema de diseño compartido (tokens + componentes CSS)
-│   ├── layout.js         # Piezas comunes: barra, tarjeta de soporte y pie
-│   ├── icons.js          # Iconos SVG en línea (Lucide + marca de Discord)
+│   ├── layout.js         # Piezas comunes: barra, tarjetas de soporte y donación y pie
+│   ├── icons.js          # Iconos SVG en línea (Lucide + marcas de Discord, Ko-fi y PayPal)
 │   ├── rails.js          # Filas de logos y pósters + animación de entrada
 │   ├── staticLogos.js    # Logos de plataformas/estudios de respaldo (URLs de TMDB)
 │   ├── posterData.js     # Pósters de muestra para cuando no hay clave de TMDB
@@ -72,7 +74,8 @@ Metadatos enriquecidos en la ficha:
 │   ├── assets/logo.png   # Logo servido sin ejecutar el Worker
 │   └── catalog/          # Catálogos pregenerados (npm run prerender; no se commitea)
 ├── scripts/
-│   └── prerender-catalogs.mjs # Congela los catálogos por defecto como estáticos
+│   ├── prerender-catalogs.mjs # Congela los catálogos por defecto como estáticos
+│   └── build-web.mjs          # Congela / y /configure como estáticos (PUBLIC_ORIGIN)
 ├── test/                 # Tests offline (servidor, Worker, proveedores, filtros y web)
 ├── vercel.json           # Alternativa: despliegue serverless en Vercel
 ├── .env.example          # Plantilla de variables (Node)
@@ -100,6 +103,7 @@ Edita `.env`:
 | `WATCH_REGION` | Opcional | Región JustWatch por defecto: `NI` (defecto), `MX`, `ES`, `US`, `AR`... El usuario puede cambiarla en /configure (44 países) |
 | `TMDB_LANGUAGE` | Opcional | Idioma por defecto de fichas/catálogos: `es` (defecto), `es-MX`, `en`, `pt-BR`... El usuario puede cambiarlo en /configure (18 idiomas) |
 | `SUPPORT_URL` | Opcional | Enlace de soporte que muestra la web. Por defecto, la invitación permanente al [Discord de Catálogos+](https://discord.gg/J6byqsRUfu); si cambia, actualiza esta variable |
+| `KOFI_USERNAME` | Opcional | Usuario de Ko-fi para el botón de donar (por defecto `hydratorrents`). Acepta el usuario, `ko-fi.com/usuario` o la URL completa. Con `KOFI_USERNAME=off` desaparecen el botón, la tarjeta y el enlace del pie |
 | `ADDON_NAME` / `ADDON_BASE_URL` | Opcional | Nombre y URL pública (logo en el manifest) |
 | `TMDB_MIN_VOTE_COUNT` | Opcional | Mínimo de votos para "Top Valoradas" (defecto `500`) |
 | `CACHE_TTL_SECONDS` | Opcional | TTL de catálogos y metadatos (defecto `21600` = 6h) |
@@ -180,7 +184,7 @@ npm run dev:worker               # http://localhost:8787
 ### 3.4 Desplegar
 
 ```bash
-npm run deploy                   # = npm run prerender + npx wrangler deploy
+npm run deploy                   # = prerender catálogos + prerender web + wrangler deploy
 npx wrangler deploy              # solo el Worker, sin regenerar catálogos estáticos
 ```
 
@@ -195,6 +199,35 @@ Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
 - **Manifest (para instalar en Stremio):** `https://catalogos-plus.tu-subdominio.workers.dev/manifest.json`
 - **Landing con botón de 1 clic:** `https://catalogos-plus.tu-subdominio.workers.dev/`
 - **Healthcheck:** `https://catalogos-plus.tu-subdominio.workers.dev/healthz`
+
+#### Capacidad del plan free: 160K+ peticiones/día
+
+El plan gratuito de Workers permite **100.000 invocaciones/día** (Error 1027 al
+pasarse, reset a las 00:00 UTC); ese contador no se puede subir desde código.
+Lo que sí se puede es hacer que gran parte del tráfico **no invoque al Worker**:
+
+1. **Web y catálogos como static assets (ilimitados y gratis).** Con
+   `[assets]` en `wrangler.toml`, todo archivo de `public/` se sirve desde el
+   edge sin ejecutar `worker.mjs`: logo, favicon (`public/_redirects`), los
+   catálogos por defecto (`npm run prerender`) y, si quieres, también la web:
+   `PUBLIC_ORIGIN=https://tu-dominio.example npm run build:web` escribe
+   `public/index.html` y `public/configure/index.html` con tus tendencias y
+   enlaces absolutos horneados. Sin `PUBLIC_ORIGIN` (o sin clave de TMDB) el
+   script no escribe nada y la web sigue sirviéndose en caliente.
+2. **Caché edge para la API (dominio propio).** Las respuestas del Worker ya
+   salen con `Cache-Control` y se guardan en la Cache API del edge
+   (`edgeCached` en `worker.mjs`). Con un dominio propio en Cloudflare, añade
+   **Cache Rules** para que los hits los sirva el CDN sin invocar el Worker:
+   - `(starts_with(http.request.uri.path, "/stream"))` → Edge TTL 600 s
+   - `(starts_with(http.request.uri.path, "/catalog"))` → Edge TTL 600 s
+   - `(starts_with(http.request.uri.path, "/manifest"))` → Edge TTL 86400 s
+3. **Matemática.** 160K peticiones/día ≈ 60K humanas (web estática, no cuenta)
+   + 100K de API (tope del plan). Con dominio propio y ~40 % de hit rate en las
+   reglas de arriba, ~166K peticiones de API equivalen a ≤100K invocaciones.
+   El consumo se ve en *Cloudflare → Workers & Pages → catalogos-plus →
+   Analytics/Invocations*. Si un día se llega a 1027, la web estática y los
+   catálogos pregenerados **siguen sirviéndose**: solo degrada la API dinámica
+   hasta el reset de medianoche.
 
 ### 3.5 Instalar en Stremio
 
@@ -263,6 +296,7 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 - **TheTVDB (v4)**: se autentica con `POST /login` → JWT cacheado ~24 días. Alimenta las fichas de series/películas por IMDb id (respaldo cuando TMDB/TVMaze no responden) con nombre/argumento en español si existe la traducción. IDs explícitos soportados: `tvdb:series:123`, `tvdb:movie:123`, `tvdb:123`. TVDB no ofrece un chart público de tendencias, por eso no genera catálogos; si quieres un catálogo por género/cadena de TVDB, dímelo y lo montamos con `/v4/filter`.
 - **Idioma y región**: el idioma (18 opciones) se pasa a TMDB y cambia títulos, sinopsis y pósters; los nombres de los catálogos y la web siguen en español. La región (44 países) es el `watch_region` de los catálogos "por plataforma" y el país de «En cines» y «Próximos estrenos». Si una plataforma no tiene resultados en la región elegida se prueba con `WATCH_REGION_FALLBACK` (por defecto `MX,US`). Los valores de partida son `TMDB_LANGUAGE` y `WATCH_REGION`.
 - **Soporte**: el enlace sale de `SUPPORT_URL`. Si es de Discord se muestra con su marca; cualquier otra URL http(s) aparece como «Soporte». Por defecto se usa la invitación permanente actual; si cambia, actualiza `SUPPORT_URL`.
+- **Donaciones (Ko-fi → PayPal)**: la web muestra tu página de Ko-fi (`KOFI_USERNAME`) en la barra, en una tarjeta propia y en el pie; Ko-fi es quien cobra, con PayPal o tarjeta, y no cobra comisión por donaciones. No hace falta ninguna clave: **Ko-fi no tiene API pública de lectura** —su única superficie para desarrolladores es un webhook que notifica cada pago completado (`POST` con campo `data` en JSON y `verification_token`)—, así que este addon no guarda ni consulta donaciones. Si más adelante quieres un contador de agradecimiento o los últimos apoyos públicos, hace falta ese webhook (`KOFI_WEBHOOK_VERIFICATION_TOKEN`) y un sitio donde guardarlos; dímelo y lo montamos. `/healthz` informa del estado con `donations`.
 - **Proveedores de contenido (streams)**: Knaben, Torlock, BlackHoleBay, Nyaa y YTS no requieren clave. Se consultan en paralelo, se deduplican por infoHash y se cachean 1 h; el timeout es configurable (6 s por indexador por defecto) y una segunda búsqueda por título alternativo solo recibe 2,5 s. El título se resuelve desde IMDb con TMDB (en inglés, que es lo que indexan los torrents), con respaldo TVMaze (series) y **Cinemeta** (sin clave). Control con `STREAM_PROVIDERS`/`STREAM_MAX_RESULTS` y por usuario en `/configure`.
 - **Servicios debrid**: se conecta una sola cuenta por configuración. TorBox comprueba la caché antes de crear el torrent con `add_only_if_cached=true` y manda `seed=false`; un hit puede quedar listado en la cuenta. EasyDebrid solo llama a `link/generate` tras un lookup positivo. Premiumize solo llama a `transfer/directdl` tras `cache/check` positivo; esa comprobación es best-effort y el proveedor puede aplicar fair-use. Real-Debrid usa OAuth, renueva tokens en servidor y solo busca hashes entre torrents con estado `downloaded` de la biblioteca personal: no consulta la caché global, no añade ni selecciona torrents. Cada petición revisa como máximo 8 hashes y genera hasta 3 enlaces. Los magnets públicos siempre permanecen como respaldo. La URL/manifest personal contiene un ID opaco que da acceso a esa conexión: no compartas esa URL. En Cloudflare se requiere KV + `DEBRID_ENCRYPTION_KEY`; RD también necesita client ID/secret y callback OAuth. Node local guarda en memoria efímera; Vercel no tiene almacenamiento persistente configurado y no permite conectar cuentas en producción. Las pruebas mock no sustituyen una verificación en vivo con cuentas de proveedor.
 - **Nyaa y YTS** son fuentes especializadas: solo se consultan cuando aplican.

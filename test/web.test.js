@@ -148,7 +148,7 @@ test('soporte: una SUPPORT_URL que no es http(s) se ignora', () => {
 
 // ------------------------------------------------------------ Donaciones
 
-const KOFI = 'https://ko-fi.com/noe359866';
+const KOFI = 'https://ko-fi.com/hydratorrents';
 
 test('donaciones: Ko-fi sale en la barra, en su tarjeta y en el pie de las dos páginas', () => {
   withEnv({}, () => {
@@ -210,7 +210,7 @@ test('donaciones: con KOFI_USERNAME=off no queda rastro en la web y el soporte s
   withEnv({ KOFI_USERNAME: 'amiga' }, () => {
     for (const html of [home(), configure()]) {
       assert.equal(count(html, 'href="https://ko-fi.com/amiga"'), 4);
-      assert.equal(html.includes('noe359866'), false);
+      assert.equal(html.includes('hydratorrents'), false);
     }
   });
 });

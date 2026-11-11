@@ -101,7 +101,7 @@ Edita `.env`:
 | `WATCH_REGION` | Opcional | Región JustWatch por defecto: `NI` (defecto), `MX`, `ES`, `US`, `AR`... El usuario puede cambiarla en /configure (44 países) |
 | `TMDB_LANGUAGE` | Opcional | Idioma por defecto de fichas/catálogos: `es` (defecto), `es-MX`, `en`, `pt-BR`... El usuario puede cambiarlo en /configure (18 idiomas) |
 | `SUPPORT_URL` | Opcional | Enlace de soporte que muestra la web. Por defecto, la invitación permanente al [Discord de Catálogos+](https://discord.gg/J6byqsRUfu); si cambia, actualiza esta variable |
-| `KOFI_USERNAME` | Opcional | Usuario de Ko-fi para el botón de donar (por defecto `noe359866`). Acepta el usuario, `ko-fi.com/usuario` o la URL completa. Con `KOFI_USERNAME=off` desaparecen el botón, la tarjeta y el enlace del pie |
+| `KOFI_USERNAME` | Opcional | Usuario de Ko-fi para el botón de donar (por defecto `hydratorrents`). Acepta el usuario, `ko-fi.com/usuario` o la URL completa. Con `KOFI_USERNAME=off` desaparecen el botón, la tarjeta y el enlace del pie |
 | `ADDON_NAME` / `ADDON_BASE_URL` | Opcional | Nombre y URL pública (logo en el manifest) |
 | `TMDB_MIN_VOTE_COUNT` | Opcional | Mínimo de votos para "Top Valoradas" (defecto `500`) |
 | `CACHE_TTL_SECONDS` | Opcional | TTL de catálogos y metadatos (defecto `21600` = 6h) |

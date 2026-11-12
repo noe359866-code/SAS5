@@ -186,11 +186,12 @@ muestra ahora el motivo concreto (y el mensaje público del proveedor, si lo tra
 | `invalid_credential` | El proveedor rechazó la clave (401/403 con JSON, `BAD_TOKEN` en TorBox, `Wrong API key…` en Premiumize) | Copia la API key desde la web del proveedor (TorBox: `torbox.app/settings` → apartado API; Premiumize: `premiumize.me/account` → API key, no el Customer ID). Si la acabas de resetear, espera un minuto |
 | `provider_blocked` | El borde del proveedor (Cloudflare/anti-bot) cortó la petición antes de leer la clave | No es tu clave. Los clientes salen con `User-Agent` explícito (sin él, Cloudflare Workers mandan el agente vacío y TorBox/RD/Premiumize responden 403 con HTML); si persiste, revisa las reglas de Firewall de Cloudflare y la IP de salida del Worker |
 | `provider_timeout` / `provider_unreachable` | El proveedor no respondió a tiempo o el Worker no tuvo salida | Reintenta; si es recurrente sube `DEBRID_VALIDATE_TIMEOUT_MS` (p. ej. `12000`) |
+| `provider_unavailable` | El proveedor está caído o en mantenimiento (5xx) | Espera; el addon ya reintenta una vez y deja los magnets públicos funcionando |
 | `provider_rate_limited` | Límite del proveedor (TorBox 300/min, Real-Debrid 250/min) o el tuyo propio (8 intentos/min por IP en `/connect`) | Espera un minuto |
 | `provider_login_redirect` | El proveedor redirigió su API al login en vez de responder en JSON (pasa con EasyDebrid cuando no te trata como API) | Reintenta desde `/configure`; si persiste, la ruta de la API cambió y hay que actualizar `lib/easyDebrid.js` |
 | `provider_endpoint_missing` | El endpoint de validación cambió de ruta (404) | Actualizar el adaptador (`lib/<proveedor>.js`) |
 | `debrid_not_configured` | Falta `DEBRID_KV` o `DEBRID_ENCRYPTION_KEY` | Crea la KV y el secreto; `/healthz` → `realDebrid.credentialStorageReady` debe ser `true` |
-| `credential_format` | La clave pegada tiene una forma imposible | Copia la clave entera (16–256 caracteres, sin espacios) |
+| `credential_format` | La clave pegada tiene una forma imposible | Copia la clave entera (entre 12 y 256 caracteres, sin espacios) |
 
 Para separar «mi clave está mal» de «mi Worker no llega al proveedor», usa la autocomprobación —
 primero contra el proveedor y luego contra tu despliegue (la clave va por variable de entorno para

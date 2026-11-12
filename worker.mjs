@@ -16,7 +16,9 @@
  * Secrets/vars del Worker (ver wrangler.toml y README):
  *   TMDB_API_KEY | TMDB_ACCESS_TOKEN, OMDB_API_KEY, WATCHMODE_API_KEY, TVDB_API_KEY (+TVDB_PIN)
  *   Vars no secretas: WATCH_REGION, ADDON_NAME, TMDB_LANGUAGE, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS,
- *                     SUPPORT_URL (soporte) y KOFI_USERNAME (botón de donaciones)
+ *                     SUPPORT_URL (soporte), KOFI_USERNAME (botón de donaciones) y
+ *                     DEBRID_VALIDATE_TIMEOUT_MS (plazo al validar claves debrid en /configure)
+ * Rutas debrid: ver lib/debridConnect.js (validación + mensajes) y lib/debridShared.js (red).
  */
 
 import config from './lib/config.js';

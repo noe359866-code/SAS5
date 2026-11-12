@@ -621,6 +621,51 @@ test('connect() avisa cuando la clave vale pero el plan está inactivo', async (
   assert.equal(result.payload.warning, 'plan_inactive');
 });
 
+test('una 3xx opaca (así la ve el Worker con redirect:manual) se reporta como redirección, no como clave inválida', async () => {
+  global.fetch = async () => ({ type: 'opaqueredirect', status: 0, ok: false, headers: new Headers(), text: async () => '' });
+  await assert.rejects(
+    () => providers.validateCredential('torbox', 'f'.repeat(40)),
+    (err) => {
+      const diagnostic = debridShared.describeError(err);
+      assert.equal(diagnostic.code, 'provider_login_redirect');
+      assert.match(diagnostic.message, /redirigió/);
+      return true;
+    }
+  );
+});
+
+test('un 500 vacío del proveedor tampoco se disfraza de problema de la clave', async () => {
+  global.fetch = async () => new Response('', { status: 500 });
+  await assert.rejects(
+    () => providers.validateCredential('torbox', 'e'.repeat(40)),
+    (err) => {
+      const diagnostic = debridShared.describeError(err);
+      assert.equal(diagnostic.code, 'provider_unavailable');
+      assert.match(diagnostic.message, /caído o en mantenimiento/);
+      return true;
+    }
+  );
+});
+
+test('un 5xx con HTML del proveedor se reporta como proveedor caído, no como bloqueo ni como clave inválida', async () => {
+  global.fetch = async () => new Response('<html><head><title>502 Bad Gateway</title></head><body></body></html>', {
+    status: 502, headers: { 'Content-Type': 'text/html' },
+  });
+  await assert.rejects(
+    () => providers.validateCredential('torbox', 'd'.repeat(40)),
+    (err) => {
+      assert.equal(err.code, 'provider_unavailable');
+      assert.equal(err.status, 502);
+      return true;
+    }
+  );
+});
+
+test('normalizeApiKey no rompe una clave que empieza por las letras «Bearer»', () => {
+  assert.equal(debridShared.normalizeApiKey('BearerToken1234567890abcdef'), 'BearerToken1234567890abcdef');
+  assert.equal(debridShared.normalizeApiKey('bearer: Token1234567890abcdef'), 'Token1234567890abcdef');
+});
+
 test('la redirección 3xx no se sigue: el Bearer no sale hacia otro origen', async () => {
   const seen = [];
   global.fetch = async (input, options = {}) => {

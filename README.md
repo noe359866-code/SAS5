@@ -179,7 +179,9 @@ Las claves API de los usuarios se introducen en `/configure`; no son secretos gl
 
 El botón **Validar y conectar** hace un `POST /internal/debrid/connect`; el Worker comprueba la
 clave contra el proveedor y solo la guarda si el proveedor la acepta. Cuando falla, `/configure`
-muestra ahora el motivo concreto (y el mensaje público del proveedor, si lo trae). Los códigos:
+muestra el motivo concreto en su bloque de estado —rojo si es tu clave, amarillo si es la cuenta,
+azul si el servicio no respondió— y debajo, en gris, el mensaje público del proveedor si lo trae.
+Los códigos:
 
 | `code` en la respuesta | Qué significa | Qué hacer |
 | --- | --- | --- |
@@ -520,3 +522,34 @@ reproducción usa un iframe nuevo para no llenar el historial del navegador. Las
 DOM en `test/watchUi.test.js` usan datos simulados y cubren navegación, selección, estados
 del reproductor y cierre; no certifican reproducción externa ni sustituyen una revisión
 visual en navegador.
+
+### Diseño de la portada y de `/configure`
+
+Ambas páginas comparten un único sistema de diseño (`lib/theme.js`): negro profundo, tipografía
+del sistema (SF Pro donde existe), barra de navegación de cristal con `backdrop-filter`, botones
+de píldora y superficies de vidrio con hairline. El color lo aporta el contenido, no la interfaz;
+no se cargan fuentes, CSS ni scripts de terceros (cero peticiones y cero FOUC). Los iconos son SVG
+en línea (`lib/icons.js`, Lucide/ISC), nunca emoji: se ven igual en todos los sistemas y heredan el
+color del texto. `lib/layout.js` pone las piezas comunes (fondo decorativo, isla de navegación,
+tarjetas de soporte y donación, pie).
+
+Idiomas: la página se escribe en castellano y `lib/webI18n.js` la traduce en el navegador con un
+diccionario de **frases exactas** (`PHRASES`, seis columnas: es/en/pt/fr/de/it) más unas reglas para
+texto compuesto («121 catálogos», «Validar y conectar TorBox», nombres de país e idioma vía
+`Intl.DisplayNames`). Esto condiciona el marcado, y es la norma a respetar al tocar el diseño:
+
+- Un texto visible que se escriba con `textContent` desde el script **no se traduce** si su frase no
+  está en el diccionario. Por eso los estados de la tarjeta debrid son variantes pre-renderizadas
+  (`data-status` + `data-tone`) y el script solo cambia cuál está visible.
+- Un `<code>` o un `<a>` dentro de una frase parte el nodo de texto y la deja sin traducir: se
+  mantienen fuera de las frases que deban traducirse (el detalle técnico del proveedor va en
+  `#debridDetail`, marcado `translate="no"` porque es texto literal del servicio).
+- `test/configurePage.test.js` audita la tarjeta debrid y falla si aparece una frase sin entrada.
+
+La tarjeta «06 · Servicios debrid» sigue el mismo lenguaje visual que las fichas de plataformas y
+estudios: `.provider-tile` con `radio` en lugar de `<select>` (se conecta un solo servicio, y la
+elección se ve de un vistazo), campo de clave con botón «Mostrar/Ocultar» (la mayoría de rechazos
+son un espacio o un carácter de más al pegar), una línea de ayuda **solo del servicio elegido** con
+dónde está su clave, y un estado con color por gravedad —neutro, buscando, correcto, aviso de plan
+sin suscribir y error— en lugar de un párrafo gris que decía lo mismo cuando funcionaba y cuando
+fallaba. El `maxlength` del campo coincide con el límite real de validación (256).

@@ -75,3 +75,116 @@ Ambos tienen flujos de autorización aptos para usuarios (PIN en AllDebrid; OAut
 
 - [Incidente de endpoint deshabilitado en rdt-client](https://github.com/rogerfar/rdt-client/issues/617)
 - [Análisis contemporáneo de TorrentFreak, noviembre de 2024](https://torrentfreak.com/real-debrid-implements-extreme-anti-piracy-filters-to-appease-film-companies-241122/)
+
+
+---
+
+## Verificación documental del 2026-11-12 (contra las documentaciones oficiales)
+
+Se volvieron a consultar las documentaciones citadas y se corrigieron tres cosas
+del adaptador TorBox y de la capa común de red. Lo de abajo es lo que dicen hoy las
+fuentes oficiales y qué se hizo con cada dato.
+
+### TorBox — `https://api-docs.torbox.app/` (y SDKs oficiales `TorBox-App/*`)
+
+- Base real: `https://api.torbox.app` + versión `v1`, es decir `https://api.torbox.app/v1/api` ✅ ( coincide con el adaptador).
+- Envoltorio estándar: `{ success, error, detail, data }`. La documentación dice
+  literalmente que **el código 200 siempre es éxito y el 403 es un error de
+  autenticación**; 400 = entrada incorrecta; 500 = cosa de TorBox. La tabla de
+  errores publica `NO_AUTH` (sin credenciales), `BAD_TOKEN` (token inválido),
+  `AUTH_ERROR`, `ENDPOINT_NOT_FOUND`, `PLAN_RESTRICTED_FEATURE`, `DUPLICATE_ITEM`,
+  `MONTHLY_LIMIT`, `COOLDOWN_LIMIT`, `ACTIVE_LIMIT`, etc.
+  → **Cambio:** un 403/401 ya no se traduce a ciegas en «clave inválida»: si el
+  cuerpo es JSON del proveedor, sí lo es; si es HTML (bloqueo del borde), se
+  reporta como `provider_blocked`.
+- `POST /torrents/createtorrent` acepta: `magnet` o `file`, `name`, `as_queued`,
+  `allow_zip`, `add_only_if_cached` y **`seed`, que es un entero: 1=auto,
+  2=sembrar, 3=no sembrar**. El adaptador mandaba `seed=false`.
+  → **Cambio:** se envía `seed=3`, que es lo que la documentación entiende como
+  «no sembrar». `add_only_if_cached=true` queda confirmado como parámetro real.
+- `GET /torrents/requestdl` exige el `token` como parámetro de consulta (documentado
+  así) y su enlace caduca (≈3 h para empezar la descarga). La documentación recomienda
+  el *permalink* `…/requestdl?token=…&redirect=true` para ahorrar llamadas: **no** se
+  usa, porque metería la API key del usuario en el manifest/URL de Stremio.
+- Límites: **300 peticiones/minuto** por token; `createtorrent` 300/min para
+  elementos cacheados y **60/h** para los no cacheados. `checkcached` se cachea
+  una hora en su lado (por eso el TTL local de disponibilidad es de 30 min).
+- `/user/me?settings=false` es el endpoint de identidad y devuelve `id`, `plan`,
+  `is_subscribed`, `premium_expires_at`, `total_downloaded`… → la validación ahora
+  aprovecha `is_subscribed`/`premium_expires_at` para avisar de «clave válida,
+  cuenta sin plan» en vez de dejar que el fallo aparezca después, sin streams.
+
+### Real-Debrid — `https://api.real-debrid.com/`
+
+- **Confirmado**: la documentación actual no publica `GET /torrents/instantAvailability`.
+  La sección `/torrents` solo lista `GET /torrents`, `GET /torrents/info/{id}`,
+  `activeCount`, `availableHosts`, `addTorrent`, `addMagnet`, `selectFiles`, `delete`.
+  Seguir limitándose a la biblioteca personal es, por tanto, lo correcto.
+- **Corrección a la nota de investigación previa**: `GET /torrents` sí documenta
+  `limit` («must be within 0 and 5000, default: 100») y `page`, y **no** se puede usar
+  `offset` y `page` a la vez (gana `page`). El tope de 500 por página que usa el
+  adaptador queda dentro de lo documentado; la advertencia anterior («no verificado»)
+  queda zanjada.
+- Autenticación: `Authorization: Bearer your_api_token`, y se admite `?auth_token=` como
+  último recurso — no lo usamos. La propia documentación avisa: «Never ever use your
+  private API token for public applications» ✅ (coherente con exigir OAuth).
+- Límite: **250 peticiones/minuto**; los rechazos cuentan y puede bloquear la IP.
+- Códigos `error_code` publicados (útiles para no dar un diagnóstico falso): 8 *Bad token*,
+  9 *Permission denied*, 14 *Account locked*, 22 *IP Address not allowed*,
+  25 *Service unavailable*, 34 *Too many requests*, 36 *Fair Usage Limit*,
+  **37 *Disabled endpoint*** (el del cambio de noviembre de 2024).
+  → `lib/debridShared.js` traduce estos números a códigos propios.
+
+### Premiumize — `https://www.premiumize.me/api`
+
+- Autenticación: **Bearer con la API key a secas** (`Authorization: Bearer KEY`); el
+  `customer_id` solo se necesita en las variantes legacy `?apikey=`/`?pin=`. El
+  adaptador ya lo hacía bien; lo que fallaba era la interpretación del error.
+- El error llega como `{ "status": "error", "message": "…", "code": … }` — con
+  `message`, no con un `code` de texto. Antes solo se reconocía
+  `code === 'authentication_failed'`, así que «Wrong API key or other credentials»
+  se convertía en un 502 genérico. → Ahora el mensaje manda.
+- `GET /account/info` → `customer_id`, `premium_until` (`null` en cuentas gratis) y
+  `limit_used`; `POST /api/cache/check` → arrays paralelos `response[]`,
+  `filename[]`, `filesize[]` ✅ (como los lee el adaptador).
+
+### EasyDebrid — `https://easydebrid.com/apidoc/index.html` (OpenAPI 1.2.0)
+
+- Servidor real: **`https://easydebrid.com/api/v1`** ✅ (no `api.easydebrid.com`).
+- `GET /user/details` → `{ "id": 123123123, "paid_until": "2023-10-01" }`;
+  `POST /link/lookup` → `{ "cached": [true, false] }`;
+  `POST /link/lookupdetails` → `{ "result": [ { "cached": true, "files": [ { "size", "name", "folder" } ] } ] }`;
+  `POST /link/generate` → `{ "files": [ { "filename", "directory": [], "size", "url" } ] }`.
+  El adaptador lee exactamente esas formas ✅.
+- La especificación declara **solo OAuth2** como autenticación y no publica límites de
+  tasa. En la práctica el panel entrega una API key que se manda como Bearer; si el
+  proveedor empieza a responder 3xx/HTML en lugar de JSON, el addon ahora lo dice
+  (`provider_login_redirect`) en vez de culpar a la clave del usuario.
+- `paid_until` se usa para avisar de suscripción caducada.
+- Comprobado en vivo contra `https://easydebrid.com/api/v1/user/details`: cuando la
+  petición no se reconoce como llamada de API, EasyDebrid **redirige al login HTML**
+  en vez de responder 401 en JSON. Con `redirect: 'error'` eso era un `TypeError`
+  opaco; ahora la 3xx se reporta como `provider_login_redirect` y la redirección no
+  se sigue (el `Bearer` no puede salir hacia otro origen).
+
+### Capa común (`lib/debridShared.js`)
+
+- **`User-Agent` explícito en todas las llamadas a proveedores.** Cloudflare Workers
+  no envían `User-Agent` en `fetch()`, y TorBox/Real-Debrid/Premiumize están detrás de
+  Cloudflare: un agente vacío es el patrón que cortan las reglas anti-bots, con 403 +
+  HTML. Ese 403 **no** es una credencial inválida, pero el código anterior lo
+  presentaba así (`err.status === 403` → «El proveedor rechazó la clave API»). Es la
+  causa más probable de un «no me valida TorBox» con una clave buena.
+- `redirect: 'manual'`: no se sigue ninguna redirección (el Bearer no puede salir del
+  origen) y una 3xx se reporta como lo que es.
+- Clasificación de fallos: `provider_timeout`, `provider_unreachable`,
+  `provider_blocked`, `provider_rate_limited`, `provider_endpoint_missing`,
+  `provider_login_redirect`, `provider_account_locked`, `provider_ip_blocked`,
+  `provider_fair_usage`, `provider_endpoint_disabled`, `invalid_credential`.
+- Un reintento corto **solo** en validación de credenciales y solo para fallos de
+  transporte; nunca para «clave inválida» (no se debe martillar la cuota del proveedor).
+- Plazo propio para validar (`DEBRID_VALIDATE_TIMEOUT_MS`, 9 s) frente al plazo corto de
+  resolución de streams (`DEBRID_TIMEOUT_MS`, 4,5 s).
+- Normalización de la clave pegada (espacios interiores, comillas, prefijo `Bearer `),
+  con rechazo por **forma** (`credential_format`) antes de gastar una llamada.
+

@@ -41,6 +41,8 @@ Metadatos enriquecidos en la ficha:
 │   ├── debridCredentials.js # Credenciales multi-proveedor cifradas y referencias opacas
 │   ├── debridProviders.js # Registro y validación de adaptadores debrid
 │   ├── debridStreams.js  # Dispatcher de enlaces directos (degrada a magnets)
+│   ├── debridShared.js   # Red común de proveedores (UA, plazos, clasificación de errores)
+│   ├── debridConnect.js  # Lógica compartida de POST /internal/debrid/connect (Worker + Express)
 │   ├── realDebridOAuth.js # OAuth server-side y renovación de tokens
 │   ├── realDebrid.js     # Resolución solo de torrents descargados en biblioteca personal
 │   ├── torbox.js         # Cache check + add_only_if_cached + file link
@@ -117,6 +119,7 @@ Edita `.env`:
 | `REALDEBRID_REDIRECT_URI` | Solo con Real-Debrid | URL pública exacta del callback `/internal/debrid/real-debrid/callback` |
 | `DEBRID_MAX_CHECKS` / `DEBRID_MAX_RESULTS` | Opcional | Máximo de hashes consultados (8) y enlaces directos generados (3) por petición |
 | `DEBRID_TIMEOUT_MS` | Opcional | Tiempo máximo de espera antes de devolver los magnets públicos (4500 ms) |
+| `DEBRID_VALIDATE_TIMEOUT_MS` | Opcional | Plazo al validar la clave debrid en `/configure` (9000 ms); sube a 12000–15000 si el proveedor responde lento |
 | `PORT` | Opcional | Puerto local (defecto `7000`) |
 
 > **TVMaze no requiere clave.** Sin TMDB el addon arranca igualmente, pero los catálogos de películas/series TMDB aparecerán vacíos; el catálogo "Series · En TV hoy" siempre funciona.
@@ -171,6 +174,38 @@ Copia el `id` que devuelve Wrangler al bloque `[[kv_namespaces]]` de `wrangler.t
 En local, copia `.dev.vars.example` a `.dev.vars`, rellena los secretos OAuth si vas a probar RD y crea/configura también una KV de desarrollo. `/healthz` muestra `debrid.providers`, `realDebrid.oauthConfigured` y `realDebrid.credentialStorageReady`. Sin la KV y la clave de cifrado, los streams públicos siguen funcionando, pero no se pueden conectar cuentas debrid.
 
 Las claves API de los usuarios se introducen en `/configure`; no son secretos globales del despliegue. También puedes configurar secretos OAuth y las claves de TMDB/OMDB/Watchmode en **Cloudflare → Workers & Pages → catalogos-plus → Settings → Variables and Secrets**. El servidor Node local usa almacenamiento en memoria efímero; el despliegue Vercel no tiene un backend KV configurado en este repositorio, por lo que la conexión debrid queda deshabilitada allí.
+
+##### Si «no valida» la clave debrid
+
+El botón **Validar y conectar** hace un `POST /internal/debrid/connect`; el Worker comprueba la
+clave contra el proveedor y solo la guarda si el proveedor la acepta. Cuando falla, `/configure`
+muestra el motivo concreto en su bloque de estado —rojo si es tu clave, amarillo si es la cuenta,
+azul si el servicio no respondió— y debajo, en gris, el mensaje público del proveedor si lo trae.
+Los códigos:
+
+| `code` en la respuesta | Qué significa | Qué hacer |
+| --- | --- | --- |
+| `invalid_credential` | El proveedor rechazó la clave (401/403 con JSON, `BAD_TOKEN` en TorBox, `Wrong API key…` en Premiumize) | Copia la API key desde la web del proveedor (TorBox: `torbox.app/settings` → apartado API; Premiumize: `premiumize.me/account` → API key, no el Customer ID). Si la acabas de resetear, espera un minuto |
+| `provider_blocked` | El borde del proveedor (Cloudflare/anti-bot) cortó la petición antes de leer la clave | No es tu clave. Los clientes salen con `User-Agent` explícito (sin él, Cloudflare Workers mandan el agente vacío y TorBox/RD/Premiumize responden 403 con HTML); si persiste, revisa las reglas de Firewall de Cloudflare y la IP de salida del Worker |
+| `provider_timeout` / `provider_unreachable` | El proveedor no respondió a tiempo o el Worker no tuvo salida | Reintenta; si es recurrente sube `DEBRID_VALIDATE_TIMEOUT_MS` (p. ej. `12000`) |
+| `provider_unavailable` | El proveedor está caído o en mantenimiento (5xx) | Espera; el addon ya reintenta una vez y deja los magnets públicos funcionando |
+| `provider_rate_limited` | Límite del proveedor (TorBox 300/min, Real-Debrid 250/min) o el tuyo propio (8 intentos/min por IP en `/connect`) | Espera un minuto |
+| `provider_login_redirect` | El proveedor redirigió su API al login en vez de responder en JSON (pasa con EasyDebrid cuando no te trata como API) | Reintenta desde `/configure`; si persiste, la ruta de la API cambió y hay que actualizar `lib/easyDebrid.js` |
+| `provider_endpoint_missing` | El endpoint de validación cambió de ruta (404) | Actualizar el adaptador (`lib/<proveedor>.js`) |
+| `debrid_not_configured` | Falta `DEBRID_KV` o `DEBRID_ENCRYPTION_KEY` | Crea la KV y el secreto; `/healthz` → `realDebrid.credentialStorageReady` debe ser `true` |
+| `credential_format` | La clave pegada tiene una forma imposible | Copia la clave entera (entre 12 y 256 caracteres, sin espacios) |
+
+Para separar «mi clave está mal» de «mi Worker no llega al proveedor», usa la autocomprobación —
+primero contra el proveedor y luego contra tu despliegue (la clave va por variable de entorno para
+que no quede en el historial del shell):
+
+```bash
+DEBRID_KEY=«tu-api-key» npm run debrid:selftest -- torbox   # igual que el script directo
+DEBRID_KEY=«tu-api-key» node scripts/debrid-selftest.mjs torbox
+DEBRID_KEY=«tu-api-key» node scripts/debrid-selftest.mjs torbox --url https://catalogo.tu-usuario.workers.dev
+# opcional: comprueba un hash concreto y si el proveedor devuelve enlace directo
+DEBRID_KEY=«tu-api-key» node scripts/debrid-selftest.mjs torbox --hash 0123456789abcdef0123456789abcdef01234567
+```
 
 Las variables **no secretas** van en `wrangler.toml` (`WATCH_REGION = "NI"`, `ADDON_NAME`, `TMDB_MIN_VOTE_COUNT`, `CACHE_TTL_SECONDS`) y puedes editarlas con seguridad.
 
@@ -300,7 +335,7 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 - **Soporte**: el enlace sale de `SUPPORT_URL`. Si es de Discord se muestra con su marca; cualquier otra URL http(s) aparece como «Soporte». Por defecto se usa la invitación permanente actual; si cambia, actualiza `SUPPORT_URL`.
 - **Donaciones (Ko-fi → PayPal)**: la web muestra tu página de Ko-fi (`KOFI_USERNAME`) en la barra, en una tarjeta propia y en el pie; Ko-fi es quien cobra, con PayPal o tarjeta, y no cobra comisión por donaciones. No hace falta ninguna clave: **Ko-fi no tiene API pública de lectura** —su única superficie para desarrolladores es un webhook que notifica cada pago completado (`POST` con campo `data` en JSON y `verification_token`)—, así que este addon no guarda ni consulta donaciones. Si más adelante quieres un contador de agradecimiento o los últimos apoyos públicos, hace falta ese webhook (`KOFI_WEBHOOK_VERIFICATION_TOKEN`) y un sitio donde guardarlos; dímelo y lo montamos. `/healthz` informa del estado con `donations`.
 - **Proveedores de contenido (streams)**: Knaben, Torlock, BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR y Torrentio ES/Latino no requieren clave. Se consultan en paralelo, se deduplican por infoHash y se cachean 1 h; el timeout es configurable (6 s por indexador por defecto) y una segunda búsqueda por título alternativo solo recibe 2,5 s. El título se resuelve desde IMDb con TMDB (en inglés, que es lo que indexan los torrents), con respaldo TVMaze (series) y **Cinemeta** (sin clave). Control con `STREAM_PROVIDERS`/`STREAM_MAX_RESULTS` y por usuario en `/configure`.
-- **Servicios debrid**: se conecta una sola cuenta por configuración. TorBox comprueba la caché antes de crear el torrent con `add_only_if_cached=true` y manda `seed=false`; un hit puede quedar listado en la cuenta. EasyDebrid solo llama a `link/generate` tras un lookup positivo. Premiumize solo llama a `transfer/directdl` tras `cache/check` positivo; esa comprobación es best-effort y el proveedor puede aplicar fair-use. Real-Debrid usa OAuth, renueva tokens en servidor y solo busca hashes entre torrents con estado `downloaded` de la biblioteca personal: no consulta la caché global, no añade ni selecciona torrents. Cada petición revisa como máximo 8 hashes y genera hasta 3 enlaces. Real-Debrid recorre la biblioteca personal en páginas de 500 entradas, con un tope defensivo de 20 páginas (10.000 torrents) y un presupuesto total de hasta 15 s; las respuestas incompletas por alcanzar el tope o el tiempo no se cachean como misses definitivos. Los magnets públicos siempre permanecen como respaldo. La URL/manifest personal contiene un ID opaco que da acceso a esa conexión: no compartas esa URL. En Cloudflare se requiere KV + `DEBRID_ENCRYPTION_KEY`; RD también necesita client ID/secret y callback OAuth. Node local guarda en memoria efímera; Vercel no tiene almacenamiento persistente configurado y no permite conectar cuentas en producción. Las pruebas mock no sustituyen una verificación en vivo con cuentas de proveedor.
+- **Servicios debrid**: se conecta una sola cuenta por configuración. TorBox comprueba la caché antes de crear el torrent con `add_only_if_cached=true` y `seed=3` («don't seed», el parámetro documentado por TorBox es 1=auto, 2=sembrar, 3=no sembrar); un hit puede quedar listado en la cuenta. Los clientes mandan `User-Agent` propio: Cloudflare Workers salen sin él y el borde anti-bots de los proveedores responde 403 antes de mirar la clave. EasyDebrid solo llama a `link/generate` tras un lookup positivo. Premiumize solo llama a `transfer/directdl` tras `cache/check` positivo; esa comprobación es best-effort y el proveedor puede aplicar fair-use. Real-Debrid usa OAuth, renueva tokens en servidor y solo busca hashes entre torrents con estado `downloaded` de la biblioteca personal: no consulta la caché global, no añade ni selecciona torrents. Cada petición revisa como máximo 8 hashes y genera hasta 3 enlaces. Real-Debrid recorre la biblioteca personal en páginas de 500 entradas, con un tope defensivo de 20 páginas (10.000 torrents) y un presupuesto total de hasta 15 s; las respuestas incompletas por alcanzar el tope o el tiempo no se cachean como misses definitivos. Los magnets públicos siempre permanecen como respaldo. La URL/manifest personal contiene un ID opaco que da acceso a esa conexión: no compartas esa URL. En Cloudflare se requiere KV + `DEBRID_ENCRYPTION_KEY`; RD también necesita client ID/secret y callback OAuth. Node local guarda en memoria efímera; Vercel no tiene almacenamiento persistente configurado y no permite conectar cuentas en producción. Las pruebas mock no sustituyen una verificación en vivo con cuentas de proveedor.
 - **Nyaa, YTS y EZTV** son fuentes especializadas: solo se consultan cuando aplican.
   - **YTS** (solo películas) se busca por IMDb id, así que el resultado es exacto. API: [yts.gg/api](https://yts.gg/api).
   - **Nyaa** (anime y producciones asiáticas: idioma original japonés, coreano, chino o tailandés, o título de origen desconocido) se consulta a través de una API comunitaria no oficial de nyaa.si ([nyaaapi.onrender.com](https://nyaaapi.onrender.com/docs)). Se busca con el título en inglés, el original y los romanizados (romaji) de TMDB — sin clave de TMDB no hay romaji y se pierden los lanzamientos que solo llevan ese nombre. El filtro entiende la numeración de fansub (`Título - 05`, `Título S2 - 05`, `Título 2nd Season - 05`) y los lotes por temporada.
@@ -487,3 +522,34 @@ reproducción usa un iframe nuevo para no llenar el historial del navegador. Las
 DOM en `test/watchUi.test.js` usan datos simulados y cubren navegación, selección, estados
 del reproductor y cierre; no certifican reproducción externa ni sustituyen una revisión
 visual en navegador.
+
+### Diseño de la portada y de `/configure`
+
+Ambas páginas comparten un único sistema de diseño (`lib/theme.js`): negro profundo, tipografía
+del sistema (SF Pro donde existe), barra de navegación de cristal con `backdrop-filter`, botones
+de píldora y superficies de vidrio con hairline. El color lo aporta el contenido, no la interfaz;
+no se cargan fuentes, CSS ni scripts de terceros (cero peticiones y cero FOUC). Los iconos son SVG
+en línea (`lib/icons.js`, Lucide/ISC), nunca emoji: se ven igual en todos los sistemas y heredan el
+color del texto. `lib/layout.js` pone las piezas comunes (fondo decorativo, isla de navegación,
+tarjetas de soporte y donación, pie).
+
+Idiomas: la página se escribe en castellano y `lib/webI18n.js` la traduce en el navegador con un
+diccionario de **frases exactas** (`PHRASES`, seis columnas: es/en/pt/fr/de/it) más unas reglas para
+texto compuesto («121 catálogos», «Validar y conectar TorBox», nombres de país e idioma vía
+`Intl.DisplayNames`). Esto condiciona el marcado, y es la norma a respetar al tocar el diseño:
+
+- Un texto visible que se escriba con `textContent` desde el script **no se traduce** si su frase no
+  está en el diccionario. Por eso los estados de la tarjeta debrid son variantes pre-renderizadas
+  (`data-status` + `data-tone`) y el script solo cambia cuál está visible.
+- Un `<code>` o un `<a>` dentro de una frase parte el nodo de texto y la deja sin traducir: se
+  mantienen fuera de las frases que deban traducirse (el detalle técnico del proveedor va en
+  `#debridDetail`, marcado `translate="no"` porque es texto literal del servicio).
+- `test/configurePage.test.js` audita la tarjeta debrid y falla si aparece una frase sin entrada.
+
+La tarjeta «06 · Servicios debrid» sigue el mismo lenguaje visual que las fichas de plataformas y
+estudios: `.provider-tile` con `radio` en lugar de `<select>` (se conecta un solo servicio, y la
+elección se ve de un vistazo), campo de clave con botón «Mostrar/Ocultar» (la mayoría de rechazos
+son un espacio o un carácter de más al pegar), una línea de ayuda **solo del servicio elegido** con
+dónde está su clave, y un estado con color por gravedad —neutro, buscando, correcto, aviso de plan
+sin suscribir y error— en lugar de un párrafo gris que decía lo mismo cuando funcionaba y cuando
+fallaba. El `maxlength` del campo coincide con el límite real de validación (256).

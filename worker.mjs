@@ -16,7 +16,9 @@
  * Secrets/vars del Worker (ver wrangler.toml y README):
  *   TMDB_API_KEY | TMDB_ACCESS_TOKEN, OMDB_API_KEY, WATCHMODE_API_KEY, TVDB_API_KEY (+TVDB_PIN)
  *   Vars no secretas: WATCH_REGION, ADDON_NAME, TMDB_LANGUAGE, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS,
- *                     SUPPORT_URL (soporte) y KOFI_USERNAME (botón de donaciones)
+ *                     SUPPORT_URL (soporte), KOFI_USERNAME (botón de donaciones) y
+ *                     DEBRID_VALIDATE_TIMEOUT_MS (plazo al validar claves debrid en /configure)
+ * Rutas debrid: ver lib/debridConnect.js (validación + mensajes) y lib/debridShared.js (red).
  */
 
 import config from './lib/config.js';
@@ -32,6 +34,7 @@ import streams from './lib/streams.js';
 import cache from './lib/cache.js';
 import debridCredentials from './lib/debridCredentials.js';
 import debridProviders from './lib/debridProviders.js';
+import debridConnect from './lib/debridConnect.js';
 import realDebridOAuth from './lib/realDebridOAuth.js';
 import rateLimit from './lib/rateLimit.js';
 import logoData from './lib/logoData.js';
@@ -103,12 +106,29 @@ function workerRuntime(env, ctx) {
 
 function sameOrigin(request) {
   const origin = request.headers.get('origin');
-  if (!origin) return false;
-  try {
-    return new URL(origin).origin === new URL(request.url).origin;
-  } catch (_) {
-    return false;
+  if (origin) {
+    try {
+      return new URL(origin).origin === new URL(request.url).origin;
+    } catch (_) {
+      return false;
+    }
   }
+  // Algunos navegadores integrados (el webview de Stremio, QtWebEngine,
+  // algunas WebViews de Android) no mandan `Origin` en un POST same-origin.
+  // Sin comprobar el mismo sitio, /configure devolvía 403 y el usuario solo veía
+  // «No se pudo conectar TorBox». `Sec-Fetch-Site` es la señal moderna y fiable;
+  // el `Referer` queda como respaldo.
+  const secFetchSite = String(request.headers.get('sec-fetch-site') || '').toLowerCase();
+  if (secFetchSite === 'same-origin' || secFetchSite === 'none') return true;
+  const referer = request.headers.get('referer');
+  if (referer) {
+    try {
+      return new URL(referer).origin === new URL(request.url).origin;
+    } catch (_) {
+      return false;
+    }
+  }
+  return false;
 }
 
 async function readJsonBody(request) {
@@ -244,7 +264,12 @@ export default {
     }
 
     if ((path === '/internal/debrid/connect') && (request.method === 'POST' || request.method === 'DELETE')) {
-      if (!sameOrigin(request)) return jsonResponse({ error: 'origin_not_allowed' }, 403, 0);
+      if (!sameOrigin(request)) {
+        return jsonResponse({
+          error: 'origin_not_allowed',
+          message: 'La petición no se ve venir de este dominio. Abre /configure de este Worker en el navegador (pega la URL, no la abras desde otra página) y vuelve a intentarlo.',
+        }, 403, 0);
+      }
       const clientIp = request.headers.get('cf-connecting-ip') ||
         (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
       if (request.method === 'POST' && !rateLimit.allow(`debrid-connect:${clientIp}`, { limit: 8, windowMs: 60_000 })) {
@@ -256,20 +281,10 @@ export default {
           await debridCredentials.disconnect(body.credentialId, env || {});
           return jsonResponse({ ok: true }, 200, 0);
         }
-        const provider = String(body.provider || '').trim().toLowerCase();
-        const token = String(body.token || '').trim();
-        if (provider === 'realdebrid') {
-          return jsonResponse({ error: 'oauth_required', message: 'Real-Debrid debe conectarse mediante OAuth; no pegues tu token API privado.' }, 400, 0);
-        }
-        if (!['torbox', 'easydebrid', 'premiumize'].includes(provider) || !token || token.length > 1024 || /\s/.test(token)) {
-          return jsonResponse({ error: 'invalid_credential', message: 'Selecciona un proveedor y pega una clave API válida.' }, 400, 0);
-        }
-        if (!debridCredentials.isConfigured(env || {})) {
-          return jsonResponse({ error: 'debrid_not_configured', message: 'El servidor debe configurar DEBRID_KV y DEBRID_ENCRYPTION_KEY.' }, 503, 0);
-        }
-        await debridProviders.validateCredential(provider, token);
-        const result = await debridCredentials.createCredential({ provider, token }, env || {});
-        return jsonResponse({ ok: true, credentialId: result.credentialId, provider: result.provider }, 200, 0);
+        // Validación, almacenamiento cifrado y mensajes de error viven en
+        // lib/debridConnect.js, compartidos con el servidor Express/Vercel.
+        const result = await debridConnect.connect(body, { env: env || {} });
+        return jsonResponse(result.payload, result.status, 0);
       } catch (err) {
         if (err && err.code === 'invalid_body') {
           return jsonResponse({ error: 'invalid_body', message: 'Envía un objeto JSON válido de hasta 4 KB.' }, 400, 0);
@@ -277,14 +292,7 @@ export default {
         if (err && err.code === 'body_too_large') {
           return jsonResponse({ error: 'body_too_large', message: 'El cuerpo supera el límite de 4 KB.' }, 413, 0);
         }
-        if (err && (err.code === 'invalid_credential' || err.status === 401 || err.status === 403)) {
-          return jsonResponse({ error: 'invalid_credential', message: 'El proveedor rechazó la clave API. Compruébala en tu cuenta.' }, 400, 0);
-        }
-        if (err && (err.code === 'debrid_storage_not_configured' || err.code === 'debrid_encryption_not_configured')) {
-          return jsonResponse({ error: 'debrid_not_configured', message: 'El servidor debe configurar DEBRID_KV y DEBRID_ENCRYPTION_KEY.' }, 503, 0);
-        }
-        if (err && err.code === 'provider_invalid') return jsonResponse({ error: 'provider_invalid' }, 400, 0);
-        console.error('[Debrid] No se pudo validar una credencial de proveedor.');
+        console.error('[Debrid] No se pudo procesar la conexión.');
         return jsonResponse({ error: 'debrid_unavailable', message: 'No se pudo validar el proveedor. Inténtalo más tarde.' }, 502, 0);
       }
     }

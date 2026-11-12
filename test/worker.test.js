@@ -429,3 +429,63 @@ test('catálogos paginados: Worker acepta extra skip en la ruta de Stremio', asy
     assert.deepEqual((await response.json()).metas, []);
   } finally { core.handleCatalog = original; }
 });
+
+test('debrid connect: un POST same-origin sin cabecera Origin (webviews) se admite, y cada fallo del proveedor tiene su propio código', async () => {
+  const originalFetch = global.fetch;
+  const kv = new Map();
+  const env = {
+    DEBRID_ENCRYPTION_KEY: 'test-encryption-key-is-long-enough-123',
+    DEBRID_KV: {
+      async get(key) { return kv.get(key) ?? null; },
+      async put(key, value) { kv.set(key, value); },
+      async delete(key) { kv.delete(key); },
+    },
+  };
+  let edgeBlocked = false;
+  global.fetch = async () => (edgeBlocked
+    ? new Response('<html><title>Attention Required!</title></html>', { status: 403, headers: { 'Content-Type': 'text/html' } })
+    : new Response(JSON.stringify({ success: true, data: { id: 7, is_subscribed: true, plan: 2 } }), {
+      status: 200, headers: { 'Content-Type': 'application/json' },
+    }));
+  const post = (ip, extraHeaders = {}) => new Request('https://addon.example/internal/debrid/connect', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'CF-Connecting-IP': ip,
+      ...extraHeaders,
+    },
+    body: JSON.stringify({ provider: 'torbox', token: 'k'.repeat(40) }),
+  });
+  try {
+    // navegadores que omiten Origin en un POST same-origin
+    const noOrigin = await worker.fetch(post('192.0.2.91', { 'Sec-Fetch-Site': 'same-origin' }), env, {});
+    assert.equal(noOrigin.status, 200);
+    const payload = await noOrigin.json();
+    assert.match(payload.credentialId, /^[A-Za-z0-9_-]{32}$/);
+    assert.equal(JSON.stringify(payload).includes('k'.repeat(40)), false);
+
+    // un origen de otro sitio sí se rechaza
+    const cross = await worker.fetch(post('192.0.2.92', { Origin: 'https://attacker.example' }), env, {});
+    assert.equal(cross.status, 403);
+
+    // bloqueo anti-bots del borde: 502 + provider_blocked, NUNCA «tu clave está mal»
+    edgeBlocked = true;
+    const blocked = await worker.fetch(post('192.0.2.93', { 'Sec-Fetch-Site': 'same-origin' }), env, {});
+    assert.equal(blocked.status, 502);
+    const diagnostic = await blocked.json();
+    assert.equal(diagnostic.code, 'provider_blocked');
+    assert.match(diagnostic.message, /bloque/);
+
+    // clave corta: se responde sin ni siquiera llamar al proveedor
+    edgeBlocked = false;
+    const short = await worker.fetch(new Request('https://addon.example/internal/debrid/connect', {
+      method: 'POST',
+      headers: { Origin: 'https://addon.example', 'Content-Type': 'application/json', 'CF-Connecting-IP': '192.0.2.94' },
+      body: JSON.stringify({ provider: 'torbox', token: '  abcd  ' }),
+    }), env, {});
+    assert.equal(short.status, 400);
+    assert.equal((await short.json()).error, 'credential_format');
+  } finally {
+    global.fetch = originalFetch;
+  }
+});

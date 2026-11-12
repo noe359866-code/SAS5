@@ -167,3 +167,97 @@ test('/configure: los proveedores añadidos después son elegibles y nacen marca
   const installed = { lang: 'es', region: 'MX', platforms: null, studios: null, base: null, streams: ['knaben', 'torlock', 'blackholebay'] };
   assert.deepEqual(run({ streams: all, knownStreams: all }, installed).streams, ['knaben', 'torlock', 'blackholebay']);
 });
+
+// ─────────────────────────────────────────────────────── diseño de la tarjeta 06
+
+/**
+ * La tarjeta debrid se rediseñó sobre el sistema de fichas ya existente y sobre
+ * estados pre-renderizados. Estas pruebas fijan las decisiones para que no
+ * vuelvan atrás (el `<select>` y el `<p>` de texto plano ya se colaron dos veces).
+ */
+test('/configure: el servicio debrid se elige con fichas (radio), no con un <select>', () => {
+  const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  const card = html.slice(html.indexOf('id="debrid"'), html.indexOf('id="filtros"'));
+  assert.equal(card.includes('<select'), false, 'el selector de servicio debe ser un grupo de fichas');
+  assert.match(card, /role="radiogroup" aria-labelledby="debridProviderLabel"/);
+  const radios = [...card.matchAll(/<input type="radio" name="debridProvider" value="([a-z]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(radios, ['torbox', 'easydebrid', 'premiumize', 'realdebrid']);
+  // Cada ficha lleva nombre, tipo de acceso y la marca de elección (.tile-check).
+  for (const provider of radios) {
+    const tile = card.slice(card.indexOf(`data-key="${provider}"`), card.indexOf(`data-key="${provider}"`) + 700);
+    assert.match(tile, /class="tile-name"/, provider);
+    assert.match(tile, /class="tile-sub"/, provider);
+    assert.match(tile, /class="tile-check"/, provider);
+  }
+  // La clave: campo a 256 (el límite real de la validación) con botón de mostrar.
+  assert.match(html, /id="debridToken"[^>]*type="password"/);
+  assert.match(html, /id="debridToken"[^>]*maxlength="256"/);
+  assert.match(html, /id="toggleToken"[^>]*aria-pressed="false"[^>]*aria-controls="debridToken"/);
+});
+
+test('/configure: cada estado de la conexión debrid es una variante traducible con su tono', () => {
+  const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  const statuses = [...html.matchAll(/data-status="([a-z-]+)" data-tone="(idle|busy|ok|warn|error)"/g)];
+  const byName = new Map(statuses.map((m) => [m[1], m[2]]));
+  // Solo se ve la variante neutra al cargar; el resto espera su turno.
+  const visible = [...html.matchAll(/data-status="([a-z-]+)"[^>]*?( hidden)?>/g)].filter((m) => !m[2]).map((m) => m[1]);
+  assert.deepEqual(visible, ['idle'], 'debe arrancar mostrando solo el estado inicial');
+  for (const provider of ['torbox', 'easydebrid', 'premiumize', 'realdebrid']) {
+    assert.equal(byName.get(`ok-${provider}`), 'ok', provider);
+    assert.ok(html.includes(`data-help-for="${provider}"`), `falta la ayuda de ${provider}`);
+  }
+  for (const name of ['busy', 'warn-plan', 'reconnect', 'empty-key', 'err-key', 'err-format', 'err-provider', 'err-rate', 'err-storage', 'err-network', 'disconnecting', 'rd-oauth', 'err-disconnect']) {
+    assert.ok(byName.has(name), `falta la variante ${name}`);
+  }
+  // Ninguna frase de estado se arma en el script con +=: si se escribiera a mano,
+  // el idioma del usuario se quedaría fuera.
+  const script = configureScript(html);
+  assert.equal(/setText\('debridStatus'/.test(script), false, 'el estado no debe escribirse con setText');
+  assert.match(script, /function showDebridStatus\(/);
+  // El detalle técnico del proveedor va aparte y marcado como no traducible.
+  assert.match(html, /id="debridDetail" translate="no"/);
+});
+
+test('/configure: todo código que devuelve /internal/debrid/connect tiene variante en la tarjeta', () => {
+  const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  const script = configureScript(html);
+  const table = script.match(/const DEBRID_ERROR_STATUS = \{([\s\S]*?)\n\};/);
+  assert.ok(table, 'falta la tabla de códigos a variantes de estado');
+  const mapped = [...table[1].matchAll(/^\s*([a-z_]+): '([a-z-]+)'/gm)].map((m) => [m[1], m[2]]);
+  assert.ok(mapped.length >= 6, 'la tabla debe cubrir los códigos del connect');
+  for (const [code, variant] of mapped) {
+    assert.ok(html.includes(`data-status="${variant}"`), `${code} apunta a ${variant}, que no existe`);
+  }
+  // Los que no se traducen a un mensaje propio caen en el honesto «el servicio
+  // no respondió», nunca en «clave inválida».
+  const debridShared = require('../lib/debridShared');
+  for (const code of Object.keys(debridShared.PROVIDER_MESSAGES || {})) {
+    if (code === 'provider_error') continue;
+    // Todo código de proveedor tiene o bien frase propia en la tarjeta, bien el
+    // paraguas honesto «el servicio no respondió» (err-provider).
+    const handled = mapped.some(([from]) => from === code) || code.startsWith('provider_');
+    assert.ok(handled, `el código ${code} no tiene tratamiento en /configure`);
+  }
+});
+
+test('/configure: la tarjeta debrid no deja frases sin entrada de diccionario', () => {
+  const { PHRASES } = require('../lib/webI18n');
+  const known = new Set(PHRASES.map((row) => row[0]));
+  const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  const card = html.slice(html.indexOf('id="debrid"'), html.indexOf('id="filtros"'));
+  const runs = [
+    ...[...card.matchAll(/>([^<>]+)</g)].map((m) => m[1]),
+    ...[...card.matchAll(/(?:title|aria-label|placeholder)="([^"]+)"/g)].map((m) => m[1]),
+  ];
+  const seen = new Set();
+  for (const raw of runs) {
+    const text = raw.replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+    if (!text || text.length < 3 || seen.has(text)) continue;
+    seen.add(text);
+    // Marcas y datos no se traducen; el resto del texto visible debe tener frase.
+    // Marcas: no se traducen ni se inventan.
+    if (/^(?:TorBox|EasyDebrid|Premiumize|Real-Debrid|OAuth|Clave API)$/.test(text)) continue;
+    assert.ok(known.has(text), `sin traducir: «${text}»`);
+  }
+  assert.ok(seen.size > 20, 'la tarjeta debrid debería tener texto que auditar');
+});

@@ -26,6 +26,27 @@ test('el <script> inline de /configure es JS válido (node --check)', () => {
   assert.equal(res.status, 0, res.stderr || 'el script inline tiene errores de sintaxis');
 });
 
+test('/configure: guía rápida orienta la configuración y adapta la navegación a móvil', () => {
+  const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  assert.match(html, /aria-labelledby="quickGuideTitle"/);
+  assert.match(html, /href="#idioma"[^>]*class="quick-step"|class="quick-step" href="#idioma"/);
+  assert.match(html, /href="#plataformas"[^>]*class="quick-step"|class="quick-step" href="#plataformas"/);
+  assert.match(html, /href="#filtros"[^>]*class="quick-step"|class="quick-step" href="#filtros"/);
+  assert.match(html, /Debrid es opcional/);
+  assert.match(html, /@media \(max-width: 760px\)[\s\S]*?\.side \{[\s\S]*?position: sticky; top: 74px/);
+  assert.match(html, /scroll-snap-type: x proximity/);
+  const { PHRASES, TRANSLATIONS, LANGUAGES } = require('../lib/webI18n');
+  for (const source of [
+    'Empieza aquí',
+    '3 pasos · sin complicaciones',
+    'Sugerencia: empieza por «Recomendado» para ocultar CAM, screener y 3D. Debrid es opcional.',
+  ]) {
+    const row = PHRASES.find((phrase) => phrase[0] === source);
+    assert.ok(row, `falta traducción para «${source}»`);
+    for (const language of LANGUAGES) assert.ok(TRANSLATIONS[language][source], `${language}: ${source}`);
+  }
+});
+
 test('config region MX/es-MX sobrevive roundtrip base64url', () => {
   const encoded = userConfig.encodeConfig({
     lang: 'es-MX',
@@ -103,7 +124,7 @@ test('landing y /configure comparten el sistema de diseño y no dejan plantillas
 
 test('/configure: los proveedores añadidos después son elegibles y nacen marcados en un borrador antiguo', () => {
   const vm = require('node:vm');
-  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg'];
+  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes'];
   // Ejecuta el arranque del script (constantes, state, save y restore) con
   // un localStorage simulado y devuelve los proveedores que quedan marcados.
   const run = (draft, initialCfg) => {
@@ -128,13 +149,13 @@ test('/configure: los proveedores añadidos después son elegibles y nacen marca
   // Borrador guardado antes de existir Nyaa y YTS: los nuevos nacen marcados
   // y se respeta lo que el usuario había desmarcado.
   assert.deepEqual(run({ streams: ['knaben', 'torlock', 'blackholebay'] }).streams, all);
-  assert.deepEqual(run({ streams: ['knaben'] }).streams, ['knaben', 'nyaa', 'yts', 'eztv', 'rarbg']);
-  assert.deepEqual(run({ streams: [] }).streams, ['nyaa', 'yts', 'eztv', 'rarbg']);
+  assert.deepEqual(run({ streams: ['knaben'] }).streams, ['knaben', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes']);
+  assert.deepEqual(run({ streams: [] }).streams, ['nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes']);
   // Borrador guardado cuando había cinco proveedores, con YTS desmarcado:
-  // EZTV y The RarBg nacen marcados y YTS sigue desmarcado.
+  // EZTV, The RarBg e Índice BR nacen marcados y YTS sigue desmarcado.
   assert.deepEqual(
     run({ streams: ['knaben', 'nyaa'], knownStreams: all.slice(0, 5) }).streams,
-    ['knaben', 'nyaa', 'eztv', 'rarbg']
+    ['knaben', 'nyaa', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes']
   );
   // Borrador nuevo: si el usuario desmarcó YTS, sigue desmarcado.
   const draft = run({ streams: ['knaben', 'nyaa'], knownStreams: all });

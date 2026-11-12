@@ -331,7 +331,8 @@ test('Real-Debrid resuelve solo la biblioteca personal y no añade ni comprueba 
     assert.equal(options.headers.Authorization, 'Bearer rd-oauth-access');
     assert.equal(url.href.includes('rd-oauth-access'), false);
     if (url.pathname === '/rest/1.0/torrents') {
-      assert.equal(url.searchParams.get('limit'), '5000');
+      assert.equal(url.searchParams.get('limit'), '500');
+      assert.equal(url.searchParams.get('page'), '1');
       return json([{ id: 'rd-torrent-9', hash, status: 'downloaded' }]);
     }
     if (url.pathname.endsWith('/torrents/info/rd-torrent-9')) {
@@ -359,6 +360,62 @@ test('Real-Debrid resuelve solo la biblioteca personal y no añade ni comprueba 
   assert.equal(calls.some((call) => call.url.pathname.endsWith('/torrents/addMagnet')), false);
   assert.equal(calls.some((call) => call.url.pathname.includes('/selectFiles/')), false);
   assert.equal(realDebrid.validateAccessToken instanceof Function, true);
+});
+
+test('Real-Debrid pagina la biblioteca y no reutiliza una lista parcial para hashes distintos', async () => {
+  const env = rdEnv();
+  const { credentialId } = await credentials.createCredential({
+    provider: 'realdebrid', accessToken: 'rd-pages-access', refreshToken: 'rd-pages-refresh', expiresAt: Date.now() + 3600_000,
+  }, env);
+  const firstHash = 'a'.repeat(40);
+  const secondHash = 'b'.repeat(40);
+  const calls = [];
+  global.fetch = async (input, options = {}) => {
+    const url = new URL(String(input));
+    assert.equal(options.headers.Authorization, 'Bearer rd-pages-access');
+    assert.equal(url.searchParams.get('limit'), '500');
+    calls.push({ page: Number(url.searchParams.get('page')), path: url.pathname });
+    if (url.pathname === '/rest/1.0/torrents') {
+      const page = Number(url.searchParams.get('page'));
+      if (page === 1) {
+        return json(Array.from({ length: 500 }, (_, index) => ({
+          id: `filler-${index}`, hash: String(index + 1).padStart(40, '0'), status: 'downloaded',
+        })));
+      }
+      if (page === 2 && calls.filter((call) => call.path === '/rest/1.0/torrents').length <= 2) {
+        return json([{ id: 'rd-page-2-a', hash: firstHash, status: 'downloaded' }]);
+      }
+      return json([]);
+    }
+    throw new Error(`No se esperaba ${url.pathname}`);
+  };
+
+  const first = await realDebrid.checkCached('rd-pages-access', credentialId, [hit(firstHash)]);
+  assert.equal(first.get(firstHash).id, 'rd-page-2-a', 'busca el hash más allá de la primera página');
+  const second = await realDebrid.checkCached('rd-pages-access', credentialId, [hit(secondHash)]);
+  assert.equal(second.get(secondHash), null, 'no reutiliza como completa la página parcial del otro batch');
+  assert.deepEqual(calls.filter((call) => call.path === '/rest/1.0/torrents').map((call) => call.page), [1, 2, 1, 2]);
+});
+
+test('Real-Debrid no cachea misses cuando la paginación alcanza su tope defensivo', async () => {
+  const hash = 'c'.repeat(40);
+  const repeatedPage = Array.from({ length: 500 }, (_, index) => ({
+    id: `large-library-${index}`, hash: String(index + 1).padStart(40, '0'), status: 'downloaded',
+  }));
+  const credentialId = 'P'.repeat(32);
+  let listCalls = 0;
+  global.fetch = async (input) => {
+    const url = new URL(String(input));
+    assert.equal(url.pathname, '/rest/1.0/torrents');
+    assert.ok(Number(url.searchParams.get('page')) <= 20);
+    listCalls++;
+    return json(repeatedPage);
+  };
+
+  assert.equal((await realDebrid.checkCached('rd-access', credentialId, [hit(hash)])).get(hash), null);
+  assert.equal(listCalls, 20);
+  assert.equal((await realDebrid.checkCached('rd-access', credentialId, [hit(hash)])).get(hash), null);
+  assert.equal(listCalls, 40, 'el miss parcial no se guarda como definitivo durante el TTL');
 });
 
 test('un hash ausente de la biblioteca RD no produce enlace directo', async () => {

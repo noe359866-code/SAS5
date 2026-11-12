@@ -829,10 +829,12 @@ test('The RarBg: con HTTP 429 se pausa lo que pide Retry-After y una respuesta r
   }
 });
 
-test('healthz: informa de los siete proveedores de streams', async () => {
+test('healthz: informa de los nueve proveedores de streams', async () => {
   const worker = (await import('../worker.mjs')).default;
   const all = await (await worker.fetch(new Request('https://addon.example/healthz'), {}, {})).json();
-  assert.deepEqual(all.streamProviders, ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg']);
+  assert.deepEqual(all.streamProviders, [
+    'knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes',
+  ]);
   for (const key of all.streamProviders) assert.equal(all.sources[key], true, key);
   const some = await (await worker.fetch(new Request('https://addon.example/healthz'), { STREAM_PROVIDERS: 'yts,knaben' }, {})).json();
   assert.deepEqual(some.streamProviders, ['yts', 'knaben']);
@@ -840,4 +842,202 @@ test('healthz: informa de los siete proveedores de streams', async () => {
   assert.equal(some.sources.nyaa, false);
   assert.equal(some.sources.torlock, false);
   assert.equal(some.sources.tvmaze, true);
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Torrentio ES/Latino — proveedores españoles y latinoamericanos
+// ─────────────────────────────────────────────────────────────────────────────
+test('Torrentio ES/Latino: busca por IMDb en los indexadores hispanos y preserva fileIdx', async () => {
+  config.reload({ STREAM_PROVIDERS: 'torrentioes' });
+  const core = require('../lib/core');
+  const requests = [];
+  global.fetch = async (url) => {
+    const u = new URL(url);
+    if (u.hostname.includes('cinemeta')) return json({ meta: { name: 'Avengers: Endgame', year: '2019' } });
+    requests.push(u);
+    return json({
+      streams: [
+        {
+          name: 'Torrentio\n1080p',
+          title: 'Avengers.endgame.2019.1080p-dual-lat\n👤 88 💾 2.90 GB ⚙️ Cinecalidad\nDual Audio / 🇲🇽',
+          infoHash: 'a'.repeat(40), fileIdx: 1,
+          behaviorHints: { filename: 'Avengers.endgame.2019.1080p-dual-lat.mkv' },
+        },
+        { name: 'Torrentio\n1080p', title: 'English only release\n👤 20 💾 1 GB', infoHash: 'b'.repeat(40) },
+      ],
+    });
+  };
+  const result = await core.handleStream('movie', 'tt4154796');
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].origin, 'https://torrentio.strem.fun');
+  assert.match(decodeURIComponent(requests[0].pathname), /providers=mejortorrent,wolfmax4k,cinecalidad\|language=spanish,latino\|sort=qualitysize/);
+  assert.match(requests[0].pathname, /stream\/movie\/tt4154796\.json$/);
+  assert.deepEqual(result.streams.map((s) => s.infoHash), ['a'.repeat(40)]);
+  assert.equal(result.streams[0].fileIdx, 1);
+  assert.match(result.streams[0].title, /DUAL/);
+  assert.match(result.streams[0].title, /👤 88/);
+  assert.ok(result.streams[0].sources.some((source) => source.startsWith('tracker:')));
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Índice BR (torrent-indexer)
+// ─────────────────────────────────────────────────────────────────────────────
+const brItem = (title, hash, size, seeds, extra = {}) => ({
+  title,
+  original_title: `${title} Torrent`,
+  details: 'https://comando1.com/x/',
+  year: '2019',
+  imdb: '',
+  audio: ['Português', 'Inglês'],
+  magnet_link: `magnet:?xt=urn:btih:${hash.toUpperCase()}&dn=${encodeURIComponent(title)}`,
+  date: '2019-08-31T00:00:00Z',
+  info_hash: hash,
+  trackers: ['udp://tracker.opentrackr.org:1337/announce', 'udp://open.demonii.com:1337/announce'],
+  size,
+  leech_count: 2,
+  seed_count: seeds,
+  similarity: 0.16,
+  ...extra,
+});
+
+test('Torrentio ES/Latino: solo el episodio/rango correcto del pack de temporada', async () => {
+  config.reload({ STREAM_PROVIDERS: 'torrentioes', TMDB_API_KEY: 'tmdb-spanish-test' });
+  const core = require('../lib/core');
+  let request;
+  global.fetch = async (url) => {
+    const u = new URL(url);
+    if (u.hostname === 'api.themoviedb.org') {
+      return json({ movie_results: [], tv_results: [{
+        id: 1399, name: 'Breaking Bad', original_name: 'Breaking Bad',
+        original_language: 'en', genre_ids: [18], first_air_date: '2008-01-20',
+      }] });
+    }
+    request = u;
+    return json({ streams: [
+      {
+        name: 'Torrentio\n1080p',
+        title: 'Breaking Bad - Temporada 1 Completa [Cap. 101_107][Castellano]\nBreaking_Bad_1x01_Pilot.mkv\n👤 3 💾 2.14 GB ⚙️ MejorTorrent\n🇬🇧 / 🇪🇸',
+        infoHash: 'c'.repeat(40), fileIdx: 0,
+        behaviorHints: { filename: 'Breaking_Bad_1x01_Pilot.mkv' },
+      },
+      {
+        name: 'Torrentio\n1080p', title: 'Breaking Bad 1x03 [Castellano]\n👤 12 💾 1 GB',
+        infoHash: 'd'.repeat(40), fileIdx: 2,
+      },
+      {
+        name: 'Torrentio\n1080p', title: 'Breaking Bad S02E02 [Español]\n👤 9 💾 1 GB',
+        infoHash: 'e'.repeat(40), fileIdx: 4,
+      },
+    ] });
+  };
+  const result = await core.handleStream('series', 'tt0903747:1:2');
+  assert.match(decodeURIComponent(request.pathname), /stream\/series\/tt0903747:1:2\.json$/);
+  assert.deepEqual(result.streams.map((stream) => stream.infoHash), ['c'.repeat(40)]);
+  assert.equal(result.streams[0].fileIdx, 0);
+});
+
+test('Índice BR: película por IMDb id, magnet en hex con los trackers del índice', async () => {
+  config.reload({ STREAM_PROVIDERS: 'torrentindexer' });
+  const core = require('../lib/core');
+  const requests = [];
+  global.fetch = async (url) => {
+    const u = new URL(url);
+    if (u.hostname.includes('cinemeta')) return json({ meta: { name: 'Example Film', year: '2020' } });
+    requests.push(u);
+    return json({
+      count: 2,
+      results: [
+        brItem('[ACESSE comando1.com] Filme 2019 [1080p] [BluRay] [DUAL]', 'a'.repeat(40), '4.6 GB', 12, {
+          imdb: 'https://www.imdb.com/title/tt981350/',
+        }),
+        // Otro título que el índice devuelve de más: no declara este IMDb id.
+        brItem('Outro Filme 2019 720p Dublado', 'b'.repeat(40), '900 MB', 99, {
+          imdb: 'https://www.imdb.com/title/tt0000001/',
+        }),
+      ],
+    });
+  };
+  const result = await core.handleStream('movie', 'tt981350');
+
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].origin + requests[0].pathname, 'https://torrent-indexer.darklyn.org/search');
+  assert.equal(requests[0].searchParams.get('q'), 'tt981350');
+  // Una consulta por id no lleva filtro de similitud (el índice la puntúa 0).
+  assert.equal(requests[0].searchParams.get('filter_results'), 'false');
+  assert.equal(requests[0].searchParams.get('sortBy'), 'seed_count');
+  assert.equal(result.cacheMaxAge, 3600);
+  assert.deepEqual(result.streams.map((s) => s.infoHash), ['a'.repeat(40)]);
+  const [stream] = result.streams;
+  assert.equal(stream.name, '🧲 1080p');
+  assert.match(stream.title, /💾 4\.60 GB {2}👤 12/);
+  assert.ok(stream.sources.includes('tracker:udp://tracker.opentrackr.org:1337/announce'));
+  assert.ok(stream.sources.includes(`dht:${'a'.repeat(40)}`));
+});
+
+test('Índice BR: episodio de serie por el título en portugués de TMDB, solo el lote de su temporada', async () => {
+  config.reload({ STREAM_PROVIDERS: 'torrentindexer', TMDB_API_KEY: 'tmdb-br-test' });
+  const core = require('../lib/core');
+  const tmdbCalls = [];
+  const searches = [];
+  global.fetch = async (url) => {
+    const u = new URL(url);
+    if (u.hostname === 'api.themoviedb.org') {
+      tmdbCalls.push(u.pathname);
+      if (u.pathname.includes('/find/')) {
+        return json({
+          movie_results: [],
+          tv_results: [{
+            id: 981351, name: 'Squid Game', original_name: '오징어 게임',
+            original_language: 'ko', genre_ids: [10759], first_air_date: '2021-09-17',
+          }],
+        });
+      }
+      assert.equal(u.searchParams.get('language'), 'pt-BR');
+      return json({ id: 981351, name: 'Round 6', original_name: '오징어 게임' });
+    }
+    searches.push(u);
+    return json({
+      count: 2,
+      results: [
+        brItem('Round.6.S02.1080p.WEB-DL.DUAL.5.1', 'c'.repeat(40), '18.58 GB', 22, {
+          imdb: 'https://www.imdb.com/pt/title/tt981351/', year: '2024',
+        }),
+        // Otra temporada de la misma serie.
+        brItem('Round.6.S01.1080p.WEB-DL.DD5.1.H.264.DUAL', 'd'.repeat(40), '12.00 GB', 5, {
+          imdb: 'https://www.imdb.com/pt/title/tt981351/', year: '2021',
+        }),
+      ],
+    });
+  };
+  const result = await core.handleStream('series', 'tt981351:2:3');
+
+  assert.deepEqual(tmdbCalls, ['/3/find/tt981351', '/3/tv/981351']);
+  // Dos consultas en paralelo: el IMDb id (exacta) y el título en portugués.
+  assert.deepEqual(searches.map((u) => u.searchParams.get('q')), ['tt981351', 'Round 6']);
+  assert.deepEqual(searches.map((u) => u.searchParams.get('filter_results')), ['false', 'true']);
+  assert.deepEqual(result.streams.map((s) => s.infoHash), ['c'.repeat(40)]);
+  // El nombre del release está en portugués y aun así se clasifica bien.
+  assert.match(result.streams[0].title, /\n1080p · 5\.1 · WEB-DL · DUAL\n/);
+});
+
+test('Índice BR: sin IMDb id ni título en portugués no se consulta; una respuesta rara no se cachea', async () => {
+  config.reload({ STREAM_PROVIDERS: 'torrentindexer' });
+  const core = require('../lib/core');
+  const hosts = [];
+  global.fetch = async (url) => {
+    hosts.push(hostOf(url));
+    if (hostOf(url).includes('cinemeta')) return json({ meta: { name: 'Example Film', year: '2020' } });
+    if (hostOf(url) === 'api.tvmaze.com') return json({ name: 'Example Show', premiered: '2020-01-01', language: 'English', type: 'Scripted', genres: [] });
+    return json({ error: 'boom' });
+  };
+  // Serie sin TMDB: no hay título en portugués ni IMDb id que buscar.
+  const episode = await core.handleStream('series', 'tvmaze:981352:1:1');
+  assert.deepEqual(episode.streams, []);
+  assert.equal(episode.cacheMaxAge, 3600);
+  assert.ok(!hosts.includes('torrent-indexer.darklyn.org'));
+
+  // Respuesta sin `results`: el proveedor falla y la respuesta no se cachea.
+  const broken = await core.handleStream('movie', 'tt981353');
+  assert.deepEqual(broken.streams, []);
+  assert.equal(broken.cacheMaxAge, 0);
 });

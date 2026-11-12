@@ -98,7 +98,7 @@ app.get('/healthz', (req, res) => {
       omdb: config.omdbConfigured,
       watchmode: config.watchmodeConfigured,
       tvdb: config.tvdbConfigured,
-      // knaben, torlock, blackholebay, nyaa, yts, eztv, rarbg: true si está activo
+      // knaben, torlock, blackholebay, nyaa, yts, eztv, rarbg, torrentindexer, torrentioes: true si está activo
       ...Object.fromEntries(STREAM_KEYS.map((key) => [key, activeProviders(null).includes(key)])),
     },
     streamProviders: activeProviders(null),

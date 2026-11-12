@@ -173,6 +173,18 @@ test('classify: 3D, HDR, Dolby Vision, HEVC y AV1', () => {
   assert.deepEqual(extras('[Grupo] Serie 3DCG - 01 [1080p]'), []);
 });
 
+test('classify: doblaje al español o al portugués («Sin doblaje»)', () => {
+  const extras = (name, titles) => tagsOf(name, titles).slice(2);
+  assert.deepEqual(extras('Vingadores.Ultimato.2019.1080p.BluRay.Dublado'), ['dub']);
+  assert.deepEqual(extras('Round.6.S02.1080p.WEB-DL.DUAL.5.1'), ['dub']);
+  assert.deepEqual(extras('Filme 2019 [BluRay] [1080p] [DUAL]'), ['dub']);
+  assert.deepEqual(extras('Pelicula.2020.1080p.WEB-DL.Dual.Latino'), ['dub']);
+  assert.deepEqual(extras('Pelicula.2020.BRRip.Nacional.XviD'), ['dub']);
+  // «Dual» como parte del título no cuenta.
+  assert.deepEqual(extras('Dual.2022.1080p.WEB-DL', ['Dual']), []);
+  assert.deepEqual(extras('Filme.2019.1080p.WEB-DL.Legendado'), []);
+});
+
 test('classify: el título de la obra no se etiqueta a sí mismo', () => {
   // «Saw 3D» en 2D y en 3D de verdad.
   assert.deepEqual(tagsOf('Saw.3D.2010.1080p.BluRay.x264', ['Saw 3D']), ['bluray', '1080p']);

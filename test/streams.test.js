@@ -3,7 +3,7 @@
 /**
  * Tests offline de los proveedores de contenido (streams):
  * parsers de Knaben / Torlock (Torznab) / BlackHoleBay / Nyaa / YTS / EZTV /
- * The RarBg,
+ * The RarBg / Índice BR,
  * relevancia (general y la propia de Nyaa), consulta de Nyaa,
  * codec de config de usuario y contrato del recurso `stream`.
  * Sin red: no se llama a searchStreams con proveedores activos.
@@ -26,8 +26,8 @@ test('manifest: declara el recurso stream', () => {
   assert.match(manifest.version, /^\d+\.\d+\.\d+$/);
 });
 
-test('proveedores: Knaben, Torlock, BlackHoleBay, Nyaa, YTS, EZTV y The RarBg registrados', () => {
-  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg'];
+test('proveedores: los nueve indexadores quedan registrados', () => {
+  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes'];
   assert.deepEqual(streams.PROVIDER_KEYS, all);
   assert.deepEqual(streams.activeProviders(null), all);
   assert.deepEqual(streams.activeProviders({ streams: ['torlock'] }), ['torlock']);
@@ -126,7 +126,12 @@ test('isRelevant: filtra secuelas y episodios equivocados', () => {
   const ep = { title: 'Dark', year: '2017', season: 1, episode: 2, mediaType: 'series' };
   assert.equal(streams.isRelevant({ title: 'Dark S01E02 1080p' }, ep), true);
   assert.equal(streams.isRelevant({ title: 'Dark S01 COMPLETE 1080p' }, ep), true);
+  assert.equal(streams.isRelevant({ title: 'Dark S01E03 1080p' }, ep), false);
   assert.equal(streams.isRelevant({ title: 'Dark S02E02 1080p' }, ep), false);
+  assert.equal(streams.isRelevant({ title: 'Dark 1x02 HDTV' }, ep), true);
+  assert.equal(streams.isRelevant({ title: 'Dark 1x03 HDTV' }, ep), false);
+  assert.equal(streams.isRelevant({ title: 'Dark Cap. 101_107 Castellano' }, ep), true);
+  assert.equal(streams.isRelevant({ title: 'Dark Cap. 108 Castellano' }, ep), false);
 });
 
 test('handleStream: sin proveedores activos devuelve [] sin tocar la red', async () => {
@@ -533,6 +538,8 @@ test('releaseEpisode: temporada y episodio que declara el nombre de un lanzamien
     // Packs de temporada.
     ['Show S02 COMPLETE 1080p', [2, null, null]],
     ['Breaking Bad Season 3 Extras', [3, null, null]],
+    ['Breaking Bad Cap. 510 Castellano', [5, 10, 10]],
+    ['Breaking Bad Cap. 101_107 Castellano', [1, 1, 7]],
   ];
   for (const [name, [season, episode, lastEpisode]] of cases) {
     assert.deepEqual(streams.releaseEpisode(name), { season, episode, lastEpisode }, name);
@@ -625,4 +632,98 @@ test('episodios: separa correctamente TMDB y TVMaze sin confundir el episodio co
   assert.doesNotThrow(() => streams.parseStreamId('series', '%E0%A4%A'));
   assert.equal(streams.parseStreamId('movie', 'tmdb:movie:550').baseId, 'tmdb:movie:550');
   assert.equal(streams.parseStreamId('series', 'tt123:0:1').season, 0, 'conserva especiales');
+});
+
+test('parseTorrentioSpanish: reconoce audio castellano/latino, seeders, tamaño e índice de archivo', () => {
+  const hits = streams.parseTorrentioSpanish({
+    streams: [
+      {
+        name: 'Torrentio\n1080p',
+        title: 'Avengers.endgame.2019.1080p-dual-lat\n👤 88 💾 2.90 GB ⚙️ Cinecalidad\nDual Audio / 🇲🇽',
+        infoHash: 'A'.repeat(40), fileIdx: 3,
+        behaviorHints: { filename: 'Avengers.endgame.2019.1080p-dual-lat.mkv' },
+      },
+      {
+        name: 'Torrentio\n1080p',
+        title: 'Vengadores Endgame [BluRay 1080p][Castellano][ES-EN]\n👤 9 💾 8 GB ⚙️ MejorTorrent\n🇬🇧 / 🇪🇸',
+        infoHash: 'b'.repeat(40), fileIdx: 0,
+      },
+      { name: 'Torrentio\n1080p', title: 'English only\n👤 99 💾 2 GB', infoHash: 'c'.repeat(40) },
+      { name: 'Torrentio', title: 'Malformed hash Español', infoHash: 'not-a-hash' },
+    ],
+  });
+  assert.equal(hits.length, 2);
+  assert.equal(hits[0].infoHash, 'a'.repeat(40));
+  assert.equal(hits[0].seeders, 88);
+  assert.equal(hits[0].size, Math.round(2.9 * 1024 ** 3));
+  assert.equal(hits[0].fileIdx, 3);
+  assert.match(hits[0].magnet, /urn:btih:a{40}/);
+  assert.match(hits[0].title, /dual-lat/);
+  assert.doesNotMatch(hits[0].title, /Pilot\.mkv/);
+  assert.equal(hits[1].seeders, 9);
+  assert.equal(hits[1].fileIdx, 0);
+  assert.match(hits[1].title, /ESP/);
+});
+
+test('parseTorrentIndexer: info_hash en hex, magnet propio y base32 descartado', () => {
+  const hits = streams.parseTorrentIndexer({
+    results: [
+      {
+        title: 'Round 6 S02 2024 WEB-DL 1080p x264 DUAL 5.1 (brazilian, kor)',
+        original_title: 'Round 6 2ª Temporada',
+        // BluDV publica el magnet en base32 y no da trackers.
+        magnet_link: 'magnet:?xt=urn:btih:F8E69B75D2BAAB&dn=x',
+        info_hash: 'F8E69B75D2BAAE8D5B2DB89B5893361BA6015E96',
+        imdb: 'https://www.imdb.com/pt/title/tt10919420/',
+        size: '18.61 GB',
+        seed_count: 22,
+        leech_count: 7,
+        trackers: null,
+        audio: ['Português', 'Coreano'],
+      },
+      // Con trackers propios: se copian al magnet.
+      {
+        title: 'Filme 2019 1080p BluRay DUAL',
+        info_hash: 'a'.repeat(40),
+        size: '4,6 GB',
+        seed_count: 3,
+        leech_count: 0,
+        trackers: ['udp://tracker.opentrackr.org:1337/announce', 'javascript:alert(1)'],
+        audio: [],
+        imdb: '',
+      },
+      // Sin info_hash válido, fuera.
+      { title: 'Sin hash', info_hash: 'corto', size: '1 GB' },
+      { title: '', info_hash: 'b'.repeat(40) },
+    ],
+  });
+  assert.equal(hits.length, 2);
+  const [show, movie] = hits;
+  assert.equal(show.provider, 'torrentindexer');
+  assert.equal(show.imdbId, 'tt10919420');
+  assert.equal(show.infoHash, 'f8e69b75d2baae8d5b2db89b5893361ba6015e96');
+  assert.equal(show.seeders, 22);
+  assert.equal(show.peers, 7);
+  assert.equal(show.size, 19982335345); // 18.61 GiB
+  // Magnet reconstruido en hex, con los trackers de respaldo si el sitio no da.
+  assert.match(show.magnet, /^magnet:\?xt=urn:btih:f8e69b75d2baae8d5b2db89b5893361ba6015e96&dn=/);
+  assert.match(show.magnet, /tr=udp%3A%2F%2Ftracker\.opentrackr\.org%3A1337%2Fannounce/);
+  assert.doesNotMatch(show.magnet, /CF76LOCCN4KEC/);
+  assert.equal(movie.imdbId, null);
+  assert.equal(movie.size, Math.round(4.6 * 1024 ** 3));
+  assert.match(movie.magnet, /tr=udp%3A%2F%2Ftracker\.opentrackr\.org%3A1337%2Fannounce/);
+  assert.doesNotMatch(movie.magnet, /javascript/);
+  assert.deepEqual(streams.parseTorrentIndexer({ error: 'boom' }), []);
+});
+
+test('etiquetas: «(brazilian, kor)» de los sitios brasileños es POR', () => {
+  const { badgeTokens } = require('../lib/badges');
+  assert.deepEqual(
+    badgeTokens('Round 6 S02 2024 WEB-DL 1080p x264 DUAL 5.1 (brazilian, kor)', ['Round 6'], ['language']),
+    ['POR']
+  );
+  assert.deepEqual(
+    badgeTokens('Filme 2019 BluRay 1080p Dublado', ['Filme'], ['language']),
+    ['POR']
+  );
 });

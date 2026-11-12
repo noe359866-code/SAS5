@@ -10,6 +10,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const vm = require('node:vm');
+const { JSDOM } = require('jsdom');
 
 const config = require('../lib/config');
 const { renderHome } = require('../lib/homePage');
@@ -120,6 +121,43 @@ test('la portada y el configurador comparten la piel Apple TV y el diseño respo
     assert.deepEqual(posters.slice(0, 5), posters.slice(5));
   }
   assert.equal(/class="hero-visual"[^>]*>\s*<div class="hero-wall"/.test(homeHtml), false);
+});
+
+test('diseño accesible: salto al contenido, tabs enlazados y navegación por teclado', () => {
+  const homeHtml = withEnv({}, () => home());
+  const configureHtml = withEnv({}, () => configure());
+  for (const html of [homeHtml, configureHtml]) {
+    assert.match(html, /class="skip-link" href="#contenido">Saltar al contenido<\/a>/);
+    assert.match(html, /<main[^>]*id="contenido"/);
+  }
+
+  const dom = new JSDOM(homeHtml, { runScripts: 'outside-only', url: ORIGIN });
+  try {
+    const script = [...dom.window.document.scripts].find((node) => node.textContent.includes('function activateTab'));
+    assert.ok(script, 'no se encontró el controlador de pestañas');
+    dom.window.eval(script.textContent);
+    const tabs = [...dom.window.document.querySelectorAll('[role="tab"]')];
+    assert.equal(tabs.length, 3);
+    assert.equal(dom.window.document.querySelector('#panel-movies').getAttribute('aria-labelledby'), 'tab-movies');
+    tabs[0].dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    assert.equal(tabs[1].getAttribute('aria-selected'), 'true');
+    assert.equal(tabs[1].tabIndex, 0);
+    assert.equal(dom.window.document.activeElement, tabs[1]);
+    assert.equal(dom.window.document.querySelector('#panel-series').hidden, false);
+    assert.equal(dom.window.document.querySelector('#panel-movies').hidden, true);
+    tabs[1].dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'End', bubbles: true }));
+    assert.equal(tabs[2].getAttribute('aria-selected'), 'true');
+    assert.equal(dom.window.document.querySelector('#panel-anime').hidden, false);
+  } finally {
+    dom.window.close();
+  }
+
+  const configureDom = new JSDOM(configureHtml);
+  try {
+    assert.equal(configureDom.window.document.querySelector('#debrid .debrid-controls .debrid-controls'), null, 'los bloques de debrid no deben anidarse');
+  } finally {
+    configureDom.window.close();
+  }
 });
 
 // ---------------------------------------------------------------- Soporte

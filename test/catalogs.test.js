@@ -112,21 +112,31 @@ test('la config con TODO seleccionado cabe en la URL del manifest', () => {
   assert.equal(decoded.studios.length, STUDIOS.length);
 });
 
-test('el manifest completo cabe en el límite de 8 KB de la addonCollection API', () => {
-  // Stremio rechaza manifests de más de 8192 caracteres (stremio-addon-sdk
-  // lo comprueba al construir el AddonBuilder). Si añades plataformas o
-  // estudios y este test falla, hay que quitar otros o acortar nombres.
+test('el manifest deja margen bajo los 8 KB de la addonCollection API, incluso con URL larga', () => {
+  // El SDK rechaza manifests de más de 8192 caracteres. Reservamos ~190 chars
+  // para hosts personalizados/flags futuros; las 121 filas no deben consumirlo.
   const core = require('../lib/core');
-  const logo = 'https://catalogo.example/assets/logo.png';
-  const def = core.buildManifest(logo);
-  const personal = core.buildManifest(logo, {
-    lang: 'es', region: 'MX', platforms: null, studios: null, base: null, streams: null, isDefault: false,
-  });
-  for (const [label, manifest] of [['por defecto', def], ['personal', personal]]) {
-    const size = JSON.stringify(manifest).length;
-    assert.ok(size <= 8192, `manifest ${label} de ${size} chars (> 8192)`);
+  const logos = [
+    ['normal', 'https://catalogo.example/assets/logo.png'],
+    ['host largo', 'https://addon-preview-long-tenant.hosting.example/assets/logo.png'],
+  ];
+  for (const [host, logo] of logos) {
+    const def = core.buildManifest(logo);
+    const personal = core.buildManifest(logo, {
+      lang: 'es', region: 'MX', platforms: null, studios: null, base: null, streams: null, isDefault: false,
+    });
+    for (const [label, manifest] of [['por defecto', def], ['personal', personal]]) {
+      const size = JSON.stringify(manifest).length;
+      assert.ok(size <= 8000, `manifest ${host}/${label} de ${size} chars (máximo preventivo 8000)`);
+      const { addonBuilder } = require('stremio-addon-sdk');
+      const builder = new addonBuilder(manifest);
+      builder.defineCatalogHandler(async () => ({ metas: [] }));
+      builder.defineMetaHandler(async () => ({ meta: { id: 'tt0000001', type: 'movie', name: 'Prueba' } }));
+      builder.defineStreamHandler(async () => ({ streams: [] }));
+      assert.ok(builder.getInterface().manifest, `SDK rechazó el manifest ${host}/${label}`);
+    }
+    assert.ok(def.catalogs.length >= 110, `solo ${def.catalogs.length} catálogos en el manifest`);
   }
-  assert.ok(def.catalogs.length >= 110, `solo ${def.catalogs.length} catálogos en el manifest`);
 });
 
 test('paginación: catálogos principales anuncian skip y respetan el límite de TMDB', async () => {

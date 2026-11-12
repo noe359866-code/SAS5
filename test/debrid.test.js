@@ -198,7 +198,8 @@ test('TorBox devuelve link solo con cache hit, y usa add_only_if_cached y reques
     if (url.pathname.endsWith('/torrents/createtorrent')) {
       assert.equal(options.method, 'POST');
       assert.equal(options.body.get('add_only_if_cached'), 'true');
-      assert.equal(options.body.get('seed'), 'false', 'el addon no debe sembrar contenido');
+      // TorBox documenta seed como 1=auto, 2=sembrar, 3=no sembrar.
+      assert.equal(options.body.get('seed'), '3', 'el addon no debe sembrar contenido');
       assert.match(options.body.get('magnet'), /urn%3Abtih%3A|urn:btih:/);
       return json({ success: true, data: { torrent_id: 77 } });
     }
@@ -480,4 +481,158 @@ test('links con cuenta no se sirven desde caché pública y conservan magnets', 
   assert.equal(result.cacheMaxAge, 0);
   assert.equal(result.streams.some((item) => item.name === '⚡ EasyDebrid'), true);
   assert.equal(result.streams.some((item) => item.infoHash === hash), true);
+});
+
+// ── Diagnóstico de validación (lo que ve el usuario cuando algo falla) ──────
+
+const blockedPage = () => new Response('<html><head><title>Attention Required! | Cloudflare</title></head><body>Sorry, you have been blocked</body></html>', {
+  status: 403,
+  headers: { 'Content-Type': 'text/html; charset=UTF-8' },
+});
+
+test('los proveedores reciben User-Agent: sin él, Cloudflare responde 403 y eso no es una clave inválida', async () => {
+  const seen = [];
+  global.fetch = async (input, options = {}) => {
+    seen.push({ url: String(input), headers: options.headers || {} });
+    return blockedPage();
+  };
+  await assert.rejects(
+    () => providers.validateCredential('torbox', 'k'.repeat(40)),
+    (err) => {
+      assert.equal(err.code, 'provider_blocked', 'un 403 con HTML es un bloqueo del borde, no BAD_TOKEN');
+      return true;
+    }
+  );
+  assert.ok(seen.length >= 2, 'el bloqueo por transporte se reintenta una vez');
+  for (const call of seen) {
+    assert.match(String(call.headers['User-Agent'] || ''), /CatalogosPlus/, 'Cloudflare Workers no manda UA: hay que ponerla');
+    assert.equal(String(call.headers.Accept), 'application/json');
+    assert.equal(call.url.includes('k'.repeat(40)), false, 'la clave no viaja en la URL');
+  }
+});
+
+test('TorBox 403 con BAD_TOKEN se reporta como credencial inválida y se conserva su mensaje público', async () => {
+  global.fetch = async () => new Response(JSON.stringify({
+    success: false, error: 'BAD_TOKEN', detail: 'The token provided is invalid.', data: null,
+  }), { status: 403, headers: { 'Content-Type': 'application/json' } });
+  await assert.rejects(
+    () => providers.validateCredential('torbox', 'bad'.repeat(14)),
+    (err) => {
+      const diagnostic = debridShared.describeError(err);
+      assert.equal(diagnostic.code, 'invalid_credential');
+      assert.equal(diagnostic.providerMessage, 'The token provided is invalid.');
+      return true;
+    }
+  );
+});
+
+test('un timeout al validar se distingue de una clave mala y reintenta una sola vez', async () => {
+  const urls = [];
+  global.fetch = async (input) => {
+    urls.push(String(input));
+    // Simula el AbortError del runtime al vencer el plazo.
+    const error = new Error('This operation was aborted');
+    error.name = 'AbortError';
+    throw error;
+  };
+  await assert.rejects(
+    () => providers.validateCredential('torbox', 't'.repeat(40)),
+    (err) => {
+      const diagnostic = debridShared.describeError(err);
+      assert.equal(diagnostic.code, 'provider_timeout');
+      assert.match(diagnostic.message, /tardó demasiado/);
+      return true;
+    }
+  );
+  assert.equal(urls.filter((url) => url.includes('/user/me')).length, 2, 'un solo reintento: no se martillea la cuota del proveedor');
+  assert.ok(urls.every((url) => url.startsWith('https://api.torbox.app/v1/api/')));
+});
+
+test('si /user/me está caído pero la cuenta responde por mylist, la clave se acepta', async () => {
+  const calls = [];
+  global.fetch = async (input) => {
+    const url = new URL(String(input));
+    calls.push(url.pathname + url.search);
+    if (url.pathname.endsWith('/user/me')) return new Response('<html>502 Bad Gateway</html>', { status: 502 });
+    if (url.pathname.endsWith('/torrents/mylist')) return json({ success: true, data: [] });
+    throw new Error(`ruta inesperada ${url.pathname}`);
+  };
+  const result = await providers.validateCredential('torbox', 'v'.repeat(40));
+  assert.equal(result.provider, 'torbox');
+  assert.ok(calls.some((call) => call.startsWith('/v1/api/torrents/mylist')), 'usa el endpoint de respaldo documentado');
+});
+
+test('Premiumize responde status:error con message y eso es credencial inválida (no 502 genérico)', async () => {
+  global.fetch = async () => json({ status: 'error', message: 'Wrong API key or other credentials' });
+  await assert.rejects(
+    () => providers.validateCredential('premiumize', 'p'.repeat(40)),
+    (err) => {
+      assert.equal(err.code, 'invalid_credential');
+      assert.match(err.detail, /Wrong API key/);
+      return true;
+    }
+  );
+});
+
+test('las claves pegadas se normalizan y las formas imposibles se detectan sin llamar al proveedor', () => {
+  assert.equal(debridShared.normalizeApiKey('  Bearer abc123\n'), 'abc123');
+  assert.equal(debridShared.normalizeApiKey('"abc 123"\n'), 'abc123');
+  assert.equal(debridShared.normalizeApiKey('Authorization: Bearer abc123'), 'abc123');
+  assert.equal(debridShared.apiKeyShapeError(''), 'empty');
+  assert.equal(debridShared.apiKeyShapeError('abc'), 'too_short');
+  assert.equal(debridShared.apiKeyShapeError('x'.repeat(300)), 'too_long');
+  assert.equal(debridShared.apiKeyShapeError('x'.repeat(40)), null);
+});
+
+test('el formato de la clave se rechaza antes de gastar una llamada al proveedor', async () => {
+  let called = 0;
+  global.fetch = async () => { called++; return json({ success: true, data: {} }); };
+  const connect = require('../lib/debridConnect');
+  const env = makeEnv();
+  const tooShort = await connect.connect({ provider: 'torbox', token: 'corta' }, { env });
+  assert.equal(tooShort.status, 400);
+  assert.equal(tooShort.payload.error, 'credential_format');
+  assert.match(tooShort.payload.message, /demasiado corta/);
+  const noKey = await connect.connect({ provider: 'torbox' }, { env });
+  assert.equal(noKey.payload.code, 'empty');
+  assert.equal(called, 0, 'no se llama al proveedor con una clave obviously inválida');
+});
+
+test('connect() exige almacenamiento antes que nada y devuelve solo el id opaco', async () => {
+  global.fetch = async () => json({ success: true, data: { id: 1, email: 'privada@example.net', is_subscribed: true, plan: 2 } });
+  const connect = require('../lib/debridConnect');
+  const missing = await connect.connect({ provider: 'torbox', token: 'k'.repeat(40) }, { env: {} });
+  assert.equal(missing.status, 503);
+  const env = makeEnv();
+  const ok = await connect.connect({ provider: 'torbox', token: 'k'.repeat(40) }, { env });
+  assert.equal(ok.status, 200);
+  assert.match(ok.payload.credentialId, /^[A-Za-z0-9_-]{32}$/);
+  assert.equal(ok.payload.account.subscribed, true);
+  const serialized = JSON.stringify(ok.payload);
+  assert.equal(serialized.includes('k'.repeat(40)), false, 'la clave nunca sale en la respuesta');
+  assert.equal(serialized.includes('privada@example.net'), false, 'ni el correo de la cuenta');
+});
+
+test('connect() avisa cuando la clave vale pero el plan está inactivo', async () => {
+  global.fetch = async () => json({ success: true, data: { id: 1, is_subscribed: false, plan: 0 } });
+  const connect = require('../lib/debridConnect');
+  const result = await connect.connect({ provider: 'torbox', token: 'k'.repeat(40) }, { env: makeEnv() });
+  assert.equal(result.status, 200);
+  assert.equal(result.payload.warning, 'plan_inactive');
+});
+
+test('la redirección 3xx no se sigue: el Bearer no sale hacia otro origen', async () => {
+  const seen = [];
+  global.fetch = async (input, options = {}) => {
+    seen.push(options.redirect);
+    return new Response(null, { status: 302, headers: { Location: 'https://evil.example/' } });
+  };
+  await assert.rejects(
+    () => providers.validateCredential('torbox', 'r'.repeat(40)),
+    (err) => {
+      assert.equal(err.code, 'provider_login_redirect', 'una 302 de la API no es una clave invalida: es un problema de endpoint');
+      return true;
+    }
+  );
+  assert.deepEqual([...new Set(seen)], ['manual'], 'no se sigue la redireccion: el Bearer no sale del origen');
 });

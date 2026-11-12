@@ -12,6 +12,8 @@ TVDB_API_KEY=
 WATCH_REGION=NI
 # Credenciales debrid cifradas (el Worker también necesita binding DEBRID_KV).
 # DEBRID_ENCRYPTION_KEY=
+# Plazo (ms) para validar la clave al conectar desde /configure (por defecto 9000).
+# DEBRID_VALIDATE_TIMEOUT_MS=9000
 # OAuth Real-Debrid: registra como callback la URL exacta de tu Worker local.
 # REALDEBRID_CLIENT_ID=
 # REALDEBRID_CLIENT_SECRET=

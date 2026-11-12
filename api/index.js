@@ -27,6 +27,7 @@ const { PROVIDER_KEYS: STREAM_KEYS, activeProviders, diagnose: diagnoseStreams }
 const cache = require('../lib/cache');
 const debridCredentials = require('../lib/debridCredentials');
 const debridProviders = require('../lib/debridProviders');
+const debridConnect = require('../lib/debridConnect');
 const realDebridOAuth = require('../lib/realDebridOAuth');
 const rateLimit = require('../lib/rateLimit');
 
@@ -61,12 +62,27 @@ function requestBase(req) {
 
 function sameOrigin(req) {
   const origin = req.headers.origin;
-  if (!origin) return false;
-  try {
-    return new URL(origin).origin === new URL(requestBase(req).baseUrl).origin;
-  } catch (_) {
-    return false;
+  if (origin) {
+    try {
+      return new URL(origin).origin === new URL(requestBase(req).baseUrl).origin;
+    } catch (_) {
+      return false;
+    }
   }
+  // Igual que en el Worker: los navegadores integrados (webview de Stremio,
+  // QtWebEngine, WebViews de Android) a veces omiten `Origin` en POST
+  // same-origin; `Sec-Fetch-Site` y `Referer` son señales válidas del mismo sitio.
+  const secFetchSite = String(req.headers['sec-fetch-site'] || '').toLowerCase();
+  if (secFetchSite === 'same-origin' || secFetchSite === 'none') return true;
+  const referer = req.headers.referer;
+  if (referer) {
+    try {
+      return new URL(referer).origin === new URL(requestBase(req).baseUrl).origin;
+    } catch (_) {
+      return false;
+    }
+  }
+  return false;
 }
 
 // 3. Assets estáticos (logo)
@@ -197,36 +213,20 @@ app.get('/internal/debrid/real-debrid/callback', async (req, res) => {
 
 app.post('/internal/debrid/connect', async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
-  if (!sameOrigin(req)) return res.status(403).json({ error: 'origin_not_allowed' });
+  if (!sameOrigin(req)) {
+    return res.status(403).json({
+      error: 'origin_not_allowed',
+      message: 'La petición no se ve venir de este dominio. Abre /configure de este servidor en el navegador y vuelve a intentarlo.',
+    });
+  }
   if (!rateLimit.allow(`debrid-connect:${req.ip || 'unknown'}`, { limit: 8, windowMs: 60_000 })) {
     return res.status(429).json({ error: 'rate_limited', message: 'Espera un minuto antes de volver a conectar.' });
   }
-  const provider = String(req.body && req.body.provider || '').trim().toLowerCase();
-  const token = String(req.body && req.body.token || '').trim();
-  if (provider === 'realdebrid') {
-    return res.status(400).json({ error: 'oauth_required', message: 'Real-Debrid debe conectarse mediante OAuth; no pegues tu token API privado.' });
-  }
-  if (!['torbox', 'easydebrid', 'premiumize'].includes(provider) || !token || token.length > 1024 || /\s/.test(token)) {
-    return res.status(400).json({ error: 'invalid_credential', message: 'Selecciona un proveedor y pega una clave API válida.' });
-  }
-  if (!debridCredentials.isConfigured()) {
-    return res.status(503).json({ error: 'debrid_not_configured', message: 'El servidor debe configurar almacenamiento privado y DEBRID_ENCRYPTION_KEY.' });
-  }
-  try {
-    await debridProviders.validateCredential(provider, token);
-    const result = await debridCredentials.createCredential({ provider, token });
-    return res.json({ ok: true, credentialId: result.credentialId, provider: result.provider });
-  } catch (err) {
-    if (err && (err.code === 'invalid_credential' || err.status === 401 || err.status === 403)) {
-      return res.status(400).json({ error: 'invalid_credential', message: 'El proveedor rechazó la clave API. Compruébala en tu cuenta.' });
-    }
-    if (err && (err.code === 'debrid_storage_not_configured' || err.code === 'debrid_encryption_not_configured')) {
-      return res.status(503).json({ error: 'debrid_not_configured', message: 'El servidor debe configurar almacenamiento privado y DEBRID_ENCRYPTION_KEY.' });
-    }
-    if (err && err.code === 'provider_invalid') return res.status(400).json({ error: 'provider_invalid' });
-    console.error('[Debrid] No se pudo validar una credencial de proveedor.');
-    return res.status(502).json({ error: 'debrid_unavailable', message: `No se pudo validar ${provider}. Inténtalo más tarde.` });
-  }
+  // Misma validación, mismo cifrado y mismos mensajes que el Worker de Cloudflare.
+  const { status, payload } = await debridConnect.connect(req.body || {}, {
+    storageMessage: 'El servidor debe configurar almacenamiento privado y DEBRID_ENCRYPTION_KEY.',
+  });
+  return res.status(status).json(payload);
 });
 
 app.delete('/internal/debrid/connect', async (req, res) => {

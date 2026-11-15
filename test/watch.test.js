@@ -131,3 +131,31 @@ test('watch page carries the recommended extensions in a floating card that star
   assert.match(css, /\.float-note\{position:fixed;/);
   assert.match(css, /\[hidden\]\{display:none!important\}/);
 });
+
+test('watch page: profiles and settings stay in the browser and add no outside requests', () => {
+  const html = fs.readFileSync('public/watch/index.html', 'utf8');
+  const css = fs.readFileSync('public/watch/watch.css', 'utf8');
+  const js = fs.readFileSync('public/watch/watch.js', 'utf8');
+  // The picker is a modal dialog, the settings a page of the library; both start closed.
+  assert.match(html, /<dialog id="profiles"[^>]* aria-labelledby="profiles-title"/);
+  assert.match(html, /<section id="settings"[^>]* hidden/);
+  assert.match(html, /<button id="profile-button"[^>]* aria-expanded="false" aria-controls="profile-menu"/);
+  assert.match(html, /<div id="profile-menu"[^>]* hidden/);
+  assert.match(html, /<p id="settings-status"[^>]* role="status"/);
+  // No profile field is a password or is sent anywhere: there is no account behind a profile.
+  assert.doesNotMatch(html, /type="password"|<form[^>]* action=/);
+  // Icons are an inline sprite with its licence notice: every <use> the page draws has its symbol.
+  assert.match(html, /Lucide[^>]*ISC License/);
+  const symbols = new Set([...html.matchAll(/<symbol id="i-([a-z-]+)"/g)].map(m => m[1]));
+  for (const [, name] of html.matchAll(/<use href="#i-([a-z-]+)"/g)) assert.ok(symbols.has(name), name);
+  for (const name of /const SYMBOLS = \{([^}]*)\}/.exec(js)[1].matchAll(/(\w+): '/g)) assert.ok(symbols.has(name[1]), name[1]);
+  for (const name of ['check', 'plus', 'pencil']) assert.ok(symbols.has(name), name);
+  assert.doesNotMatch(html.replace(/<aside id="extensions"[\s\S]*?<\/aside>/, ''), /(?:src|href)="https?:(?!\/\/(?:www\.w3\.org|lucide\.dev))/);
+  // Every colour a profile can take has its tones, and every preference its control.
+  for (const color of /const COLORS = \{([^}]*)\}/.exec(js)[1].matchAll(/(\w+): '/g)) assert.ok(css.includes(`[data-color=${color[1]}]`) && css.includes(`[data-accent=${color[1]}]`), color[1]);
+  for (const pref of ['home', 'searchType', 'player', 'posters', 'autoSources', 'reduceMotion']) assert.ok(html.includes(`data-pref="${pref}"`), pref);
+  assert.match(css, /html\[data-reduce-motion\] \*[^{]*\{transition:none!important;animation:none!important/);
+  // Profile data never travels: the only request the page makes is the public browsing API.
+  assert.equal((js.match(/\bfetch\(/g) || []).length, 1);
+  assert.doesNotMatch(js, /document\.cookie|XMLHttpRequest|sendBeacon/);
+});

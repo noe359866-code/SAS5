@@ -415,7 +415,9 @@ independiente de la portada de instalación. Funciona en Node/Vercel y en Cloudf
   de TMDB, sin limitar la biblioteca a los títulos destacados de la portada.
 - Fichas con información real, selector de temporada/episodio y búsqueda de torrents usando
   los proveedores actuales. Para packs, puede ser necesario elegir el archivo en Webtor.
-- **Mi lista** local por navegador, con hasta 200 títulos. No requiere cuenta ni sincroniza dispositivos.
+- **Perfiles** locales (hasta cinco por navegador), cada uno con su **Mi lista** de hasta 200
+  títulos y sus ajustes. No requieren cuenta ni sincronizan dispositivos.
+- Página de **Ajustes** (`/watch/#settings`) para el perfil activo y para el navegador.
 - Reproducción opcional por Webtor, con versión del SDK fijada a `0.2.19` y carga solo al elegir
   un torrent. El servicio externo recibe el magnet, el título y la imagen de fondo del título,
   no credenciales debrid ni la URL de configuración. No se añaden scripts de Webtor a `/configure`.
@@ -510,7 +512,8 @@ cuando TMDB los identifica como tráileres de YouTube, y recomendaciones. No se 
 comentarios, marcas ni datos de sitios de referencia. Las secciones sin información
 se ocultan. Las series presentan tarjetas de episodio con imagen, duración y sinopsis
 cuando están disponibles. Los torrents solo se buscan cuando se elige un episodio o
-se pulsa «Elegir fuente», no al recorrer la portada.
+se pulsa «Elegir fuente», no al recorrer la portada (un perfil puede pedir en Ajustes que se
+busquen al abrir la ficha).
 
 La reproducción ocupa un diálogo de cine independiente de la ficha; al volver a las
 fuentes se descarga el iframe y se conserva la selección de temporada y episodio.
@@ -520,8 +523,48 @@ a él sin alturas fijas. Mientras Webtor carga se ve la imagen del título con u
 indicador, y el reproductor solo se da por listo cuando Webtor lo confirma. Cada
 reproducción usa un iframe nuevo para no llenar el historial del navegador. Las pruebas
 DOM en `test/watchUi.test.js` usan datos simulados y cubren navegación, selección, estados
-del reproductor y cierre; no certifican reproducción externa ni sustituyen una revisión
+del reproductor, cierre, perfiles y ajustes; no certifican reproducción externa ni sustituyen una revisión
 visual en navegador.
+
+### Perfiles y ajustes de `/watch/`
+
+Los perfiles son para quienes comparten un navegador: no son cuentas. No hay contraseña, PIN ni
+servidor detrás, y cualquiera que use ese navegador puede cambiar de perfil. Todo se guarda en
+`localStorage` y nada de ello se envía al servidor.
+
+- **Selector «¿Quién está viendo?»** a pantalla completa. Con más de un perfil aparece al empezar
+  cada sesión (se puede desactivar en Ajustes); el menú de la cabecera cambia de perfil en un clic.
+- **Cada perfil** tiene nombre (20 caracteres, sin repetir), uno de ocho colores y una inicial o
+  uno de siete símbolos. El color es también el acento de la interfaz para ese perfil: focos,
+  interruptores y opciones elegidas.
+- **Gestionar perfiles** permite crear, editar y eliminar. Eliminar pide una segunda pulsación y se
+  lleva la lista del perfil; el último perfil no se puede eliminar.
+- La lista guardada antes de que existieran los perfiles pasa al primer perfil, «Principal».
+
+La página de Ajustes tiene un índice lateral (una fila de píldoras en móvil) y cada cambio se
+aplica y se guarda al momento:
+
+| Grupo | Ajustes | Alcance |
+| --- | --- | --- |
+| Perfil | Editar perfil, cambiar de perfil | Perfil |
+| Inicio y búsqueda | Sección al abrir; buscar películas o series por defecto | Perfil |
+| Reproducción | Reproductor integrado o pestaña de Webtor; buscar fuentes al abrir la ficha | Perfil |
+| Apariencia | Tamaño de los pósters; reducir movimiento; color de acento | Perfil |
+| Mi lista y datos | Exportar e importar la lista (JSON); vaciar la lista; restablecer ajustes | Perfil |
+| Este navegador | Preguntar quién ve al abrir; sugerir extensiones; borrar todos los datos | Navegador |
+| Addon de Stremio | Enlace a `/configure` | — |
+
+«Buscar fuentes al abrir la ficha» está apagado de fábrica: mientras no se active, los torrents
+solo se buscan al pulsar «Elegir fuente». Los ajustes del addon (catálogos, idioma, debrid) siguen
+en `/configure` y no dependen del perfil: la biblioteca de `/watch/` usa siempre la configuración
+pública por defecto.
+
+Claves de `localStorage`: `catalogos-watch-profiles` (perfiles, perfil activo y ajustes),
+`catalogos-watch-list:<id>` (la lista de cada perfil) y `catalogos-extensions-closed`. Lo que se
+lee de ahí o de un archivo importado se valida antes de usarse. Si el navegador bloquea el
+almacenamiento, la página funciona igual y los cambios duran solo esa visita.
+
+Los iconos de esta parte son de Lucide (licencia ISC), en línea en `public/watch/index.html`.
 
 ### Diseño de la portada y de `/configure`
 

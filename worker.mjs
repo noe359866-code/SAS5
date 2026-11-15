@@ -59,28 +59,42 @@ function corsHeaders(extra = {}) {
   };
 }
 
-function jsonResponse(data, status = 200, cacheSeconds = 3600) {
+function buildCacheControl(cacheSeconds, staleSeconds = 86400) {
+  if (!cacheSeconds || cacheSeconds <= 0) return 'no-store';
+  const swr = Math.max(cacheSeconds, staleSeconds);
+  return `public, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}, stale-while-revalidate=${swr}, stale-if-error=604800`;
+}
+
+function jsonResponse(data, status = 200, cacheSeconds = 3600, explicitCacheControl) {
   return new Response(JSON.stringify(data), {
     status,
     headers: corsHeaders({
       'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': cacheSeconds > 0 ? `public, max-age=${cacheSeconds}` : 'no-store',
+      'Cache-Control': explicitCacheControl || buildCacheControl(cacheSeconds),
     }),
   });
 }
 
-function htmlResponse(html) {
+function htmlResponse(html, cacheSeconds = 0) {
   return new Response(html, {
     status: 200,
-    headers: corsHeaders({ 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' }),
+    headers: corsHeaders({
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': cacheSeconds > 0 ? buildCacheControl(cacheSeconds, 86400) : 'no-store',
+    }),
   });
 }
 
-/** Cache compartida de Cloudflare para las respuestas públicas repetidas. */
-async function edgeCached(request, ctx, createResponse) {
+/**
+ * Cache compartida de Cloudflare para las respuestas públicas repetidas.
+ * Permite pasar una URL canónica (`cacheUrl`) para que usuarios con distinto
+ * prefijo `/<cfg>/` (p. ej. distinto debridId o distintos filtros de streams)
+ * compartan la misma entrada de catálogo/meta/stream-público en el PoP local.
+ */
+async function edgeCached(request, ctx, createResponse, cacheUrl) {
   const edge = globalThis.caches && globalThis.caches.default;
   if (!edge || request.method !== 'GET') return createResponse();
-  const key = new Request(request.url, { method: 'GET' });
+  const key = new Request(cacheUrl || request.url, { method: 'GET' });
   try {
     const cached = await edge.match(key);
     if (cached) return cached;
@@ -90,7 +104,9 @@ async function edgeCached(request, ctx, createResponse) {
   const policy = response.headers.get('Cache-Control') || '';
   const cacheable = response.status === 200 && !/(?:no-store|private)/i.test(policy);
   if (cacheable) {
-    const put = edge.put(key, response.clone()).catch(() => {});
+    const put = Promise.resolve()
+      .then(() => edge.put(key, response.clone()))
+      .catch(() => {});
     if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(put);
     else await put;
   }
@@ -155,27 +171,74 @@ async function readJsonBody(request) {
   }
 }
 
+function canonicalCatalogCacheUrl(requestUrl, type, id, cfg, extra) {
+  const u = new URL(requestUrl);
+  const lang = (cfg && cfg.lang) || config.tmdbLanguage || 'es';
+  const region = (cfg && cfg.region) || config.watchRegion || 'NI';
+  const skip = Number(extra && extra.skip ? extra.skip : 0) || 0;
+  return `${u.origin}/__edge/catalog/${type}/${encodeURIComponent(id)}?lang=${encodeURIComponent(lang)}&region=${encodeURIComponent(region)}&skip=${skip}`;
+}
+
+function canonicalMetaCacheUrl(requestUrl, type, id, cfg) {
+  const u = new URL(requestUrl);
+  const lang = (cfg && cfg.lang) || config.tmdbLanguage || 'es';
+  const region = (cfg && cfg.region) || config.watchRegion || 'NI';
+  return `${u.origin}/__edge/meta/${type}/${encodeURIComponent(id)}?lang=${encodeURIComponent(lang)}&region=${encodeURIComponent(region)}`;
+}
+
+function canonicalStreamCacheUrl(requestUrl, type, id, cfg) {
+  const u = new URL(requestUrl);
+  const active = streams.activeProviders(cfg).slice().sort().join(',');
+  const hide = Array.isArray(cfg && cfg.hide) ? cfg.hide.slice().sort().join(',') : '';
+  const badges = Array.isArray(cfg && cfg.badges) ? cfg.badges.slice().sort().join(',') : 'all';
+  const sort = (cfg && cfg.sort) || 'peers';
+  const maxSize = Number(cfg && cfg.maxSize) || 0;
+  return `${u.origin}/__edge/stream/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&h=${encodeURIComponent(hide)}&b=${encodeURIComponent(badges)}&s=${encodeURIComponent(sort)}&m=${maxSize}`;
+}
+
+function safeDecode(value) {
+  try { return decodeURIComponent(value); } catch (_) { return null; }
+}
+
 async function serveCatalog(type, id, cfg, request, ctx, extraPath = '') {
+  const decodedId = safeDecode(id);
+  if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
+  if (cfg) {
+    const visible = catalogs.buildDefs(cfg);
+    if (!visible.some((d) => d.id === decodedId && d.type === type)) {
+      const empty = await core.handleCatalog(type, decodedId, cfg, {});
+      return jsonResponse(empty, 200, 0);
+    }
+  }
+  const extra = { ...Object.fromEntries(new URL(request.url).searchParams), ...Object.fromEntries(new URLSearchParams(extraPath)) };
+  const cacheUrl = canonicalCatalogCacheUrl(request.url, type, decodedId, cfg, extra);
   return edgeCached(request, ctx, async () => {
-    const result = await core.handleCatalog(type, decodeURIComponent(id), cfg, { ...Object.fromEntries(new URL(request.url).searchParams), ...Object.fromEntries(new URLSearchParams(extraPath)) });
+    const result = await core.handleCatalog(type, decodedId, cfg, extra);
     return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
-  });
+  }, cacheUrl);
 }
 
 async function serveMeta(type, id, cfg, request, ctx) {
+  const decodedId = safeDecode(id);
+  if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
+  const cacheUrl = canonicalMetaCacheUrl(request.url, type, decodedId, cfg);
   return edgeCached(request, ctx, async () => {
-    const result = await core.handleMeta(type, decodeURIComponent(id), cfg);
+    const result = await core.handleMeta(type, decodedId, cfg);
     return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
-  });
+  }, cacheUrl);
 }
 
 async function serveStream(type, id, cfg, request, env, ctx) {
+  const decodedId = safeDecode(id);
+  if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
   const create = async () => {
-    const result = await core.handleStream(type, decodeURIComponent(id), cfg, workerRuntime(env, ctx));
+    const result = await core.handleStream(type, decodedId, cfg, workerRuntime(env, ctx));
     return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
   };
   // Nunca guardar enlaces directos de una cuenta debrid en una caché compartida.
-  return cfg && cfg.debridId ? create() : edgeCached(request, ctx, create);
+  if (cfg && cfg.debridId) return create();
+  const cacheUrl = canonicalStreamCacheUrl(request.url, type, decodedId, cfg);
+  return edgeCached(request, ctx, create, cacheUrl);
 }
 
 /** Tendencias semanales TMDB (solo si hay clave; si no, estáticos). */
@@ -301,38 +364,64 @@ export default {
       return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
     }
 
-    if (path.startsWith('/internal/watch/')) {
-      try {
-        const { body, status } = await watchApiModule.watchApi(url);
-        return jsonResponse(body, status, 0);
-      } catch (_) { return jsonResponse({ error: 'La fuente no respondió. Inténtalo de nuevo.' }, 502, 0); }
-    }
-
     const origin = url.origin;
     const host = url.host;
+
+    if (path.startsWith('/internal/watch/')) {
+      const watchCacheUrl = `${origin}/__edge${path}?${url.searchParams.toString()}&_r=${encodeURIComponent(config.watchRegion)}&_l=${encodeURIComponent(config.tmdbLanguage)}&_t=${config.tmdbConfigured ? 1 : 0}`;
+      return edgeCached(request, ctx, async () => {
+        try {
+          const { body, status, cacheControl } = await watchApiModule.watchApi(url);
+          return jsonResponse(body, status, 0, cacheControl || 'no-store');
+        } catch (_) {
+          return jsonResponse({ error: 'La fuente no respondió. Inténtalo de nuevo.' }, 502, 0);
+        }
+      }, watchCacheUrl);
+    }
 
     // ── Portada estilo streaming (tendencias en vivo si hay TMDB) ─
     if (path === '/' || path === '/api') {
       const accept = request.headers.get('accept') || '';
       if (!accept.includes('text/html') && accept.includes('application/json')) {
-        return jsonResponse(core.buildManifest(`${origin}/assets/logo.png`), 200, 300);
+        return edgeCached(
+          request,
+          ctx,
+          async () => jsonResponse(core.buildManifest(`${origin}/assets/logo.png`), 200, 300),
+          `${origin}/__edge/root-manifest.json`
+        );
       }
-      const trending = await loadTrending();
-      const html = renderHome({
-        origin,
-        host,
-        trendingMovies: trending.movies,
-        trendingSeries: trending.series,
-        trendingAnime: trending.anime,
-        apiStatus: { tmdb: config.tmdbConfigured },
-      });
-      return htmlResponse(html);
+      return edgeCached(request, ctx, async () => {
+        const trending = await loadTrending();
+        const html = renderHome({
+          origin,
+          host,
+          trendingMovies: trending.movies,
+          trendingSeries: trending.series,
+          trendingAnime: trending.anime,
+          apiStatus: { tmdb: config.tmdbConfigured },
+        });
+        return htmlResponse(html, 1800);
+      }, `${origin}/__edge/home.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}`);
     }
 
     // ── Página de configuración ───────────────────────────────
     if (path === '/configure') {
-      const trending = await loadTrending();
-      return htmlResponse(renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series }));
+      const hasOAuthParams = url.searchParams.has('debrid_credential') || url.searchParams.has('debrid_error');
+      const createConfigure = async () => {
+        const trending = await loadTrending();
+        return htmlResponse(
+          renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series }),
+          hasOAuthParams ? 0 : 1800
+        );
+      };
+      return hasOAuthParams
+        ? createConfigure()
+        : edgeCached(
+            request,
+            ctx,
+            createConfigure,
+            `${origin}/__edge/configure.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}&kofi=${encodeURIComponent(config.kofiUrl || '')}&sup=${encodeURIComponent(config.supportUrl || '')}`
+          );
     }
 
     // ── Estado agregado de la caché (sin claves ni datos por usuario) ──
@@ -342,15 +431,33 @@ export default {
 
     // ── Branding (logos de plataformas/estudios vía TMDB) ─────
     if (path === '/internal/branding.json') {
-      const lang = url.searchParams.get('lang') || undefined;
-      return jsonResponse(await branding(lang), 200, 3600);
+      const lang = url.searchParams.get('lang') || config.tmdbLanguage || 'es';
+      return edgeCached(
+        request,
+        ctx,
+        async () => jsonResponse(await branding(lang), 200, 86400),
+        `${origin}/__edge/branding.json?lang=${encodeURIComponent(lang)}`
+      );
     }
 
     // ── Diagnóstico de streams (¿por qué no aparecen resultados?) ──
     if (path === '/internal/streams-test.json') {
+      const clientIp = request.headers.get('cf-connecting-ip') ||
+        (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
+      if (!rateLimit.allow(`streams-test:${clientIp}`, { limit: 6, windowMs: 60_000 })) {
+        return jsonResponse({ error: 'rate_limited', message: 'Demasiadas pruebas seguidas. Espera un minuto.' }, 429, 0);
+      }
       const type = url.searchParams.get('type') === 'series' ? 'series' : 'movie';
       const testId = url.searchParams.get('id') || 'tt1160419';
-      return jsonResponse(await streams.diagnose(type, testId, null), 200, 0);
+      const diagKey = `diag:${type}:${testId}`;
+      const diag = await cache.coalesce(diagKey, async () => {
+        const cached = cache.get(diagKey);
+        if (cached) return cached;
+        const fresh = await streams.diagnose(type, testId, null);
+        cache.set(diagKey, fresh, 30);
+        return fresh;
+      });
+      return jsonResponse(diag, 200, 0);
     }
 
     // ── Healthcheck ───────────────────────────────────────────

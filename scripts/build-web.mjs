@@ -33,9 +33,9 @@ const require = createRequire(import.meta.url);
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const libPath = (name) => path.join(ROOT, 'lib', name);
 
-const origin = String(process.env.PUBLIC_ORIGIN || '').trim().replace(/\/+$/, '');
+const origin = String(process.env.PUBLIC_ORIGIN || process.env.ADDON_BASE_URL || '').trim().replace(/\/+$/, '');
 if (!origin) {
-  console.log('[build-web] Sin PUBLIC_ORIGIN: no se pregenera la web (el Worker la servirá en caliente).');
+  console.log('[build-web] Sin PUBLIC_ORIGIN ni ADDON_BASE_URL: no se pregenera la web (el Worker la servirá en caliente).');
   process.exit(0);
 }
 let host;
@@ -47,7 +47,9 @@ try {
 }
 
 const config = require(libPath('config.js'));
+const core = require(libPath('core.js'));
 const tmdbClient = require(libPath('tmdb.js'));
+const { branding } = require(libPath('branding.js'));
 const { renderHome } = require(libPath('homePage.js'));
 const { renderConfigure } = require(libPath('configurePage.js'));
 
@@ -63,8 +65,19 @@ if (config.tmdbConfigured) {
     console.error('[build-web] Tendencias ->', err && err.message);
   }
 }
-if (!Array.isArray(trending.movies) || !trending.movies.length) {
-  console.log('[build-web] Sin tendencias de TMDB: no se pregenera la web (el Worker la servirá en caliente).');
+
+const moviesList = trending.movies && Array.isArray(trending.movies.results)
+  ? trending.movies.results
+  : (Array.isArray(trending.movies) ? trending.movies : []);
+if (!moviesList.length) {
+  console.log('[build-web] Sin tendencias de TMDB: se pregenera manifest/branding estático y la web seguirá en SSR.');
+  const outDir = path.join(ROOT, 'public');
+  await mkdir(path.join(outDir, 'internal'), { recursive: true });
+  const manifestJson = JSON.stringify(core.buildManifest(`${origin}/assets/logo.png`));
+  const brandingJson = JSON.stringify(await branding(config.tmdbLanguage));
+  await writeFile(path.join(outDir, 'manifest.json'), manifestJson, 'utf8');
+  await writeFile(path.join(outDir, 'internal', 'branding.json'), brandingJson, 'utf8');
+  console.log(`[build-web] manifest.json (${(Buffer.byteLength(manifestJson) / 1024).toFixed(1)} KB) e internal/branding.json generados.`);
   process.exit(0);
 }
 
@@ -82,13 +95,19 @@ const configure = renderConfigure({
   trendingMovies: trending.movies,
   trendingSeries: trending.series,
 });
+const manifestJson = JSON.stringify(core.buildManifest(`${origin}/assets/logo.png`));
+const brandingJson = JSON.stringify(await branding(config.tmdbLanguage));
 
 const outDir = path.join(ROOT, 'public');
 await mkdir(path.join(outDir, 'configure'), { recursive: true });
+await mkdir(path.join(outDir, 'internal'), { recursive: true });
 await writeFile(path.join(outDir, 'index.html'), home, 'utf8');
 await writeFile(path.join(outDir, 'configure', 'index.html'), configure, 'utf8');
+await writeFile(path.join(outDir, 'manifest.json'), manifestJson, 'utf8');
+await writeFile(path.join(outDir, 'internal', 'branding.json'), brandingJson, 'utf8');
 console.log(
-  `[build-web] Web pregenerada para ${origin}: ` +
+  `[build-web] Web y assets estáticos pregenerados para ${origin}: ` +
   `index.html ${(Buffer.byteLength(home) / 1024).toFixed(0)} KB · ` +
-  `configure/index.html ${(Buffer.byteLength(configure) / 1024).toFixed(0)} KB`
+  `configure/index.html ${(Buffer.byteLength(configure) / 1024).toFixed(0)} KB · ` +
+  `manifest.json ${(Buffer.byteLength(manifestJson) / 1024).toFixed(1)} KB`
 );

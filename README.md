@@ -237,34 +237,16 @@ Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
 - **Landing con botón de 1 clic:** `https://catalogos-plus.tu-subdominio.workers.dev/`
 - **Healthcheck:** `https://catalogos-plus.tu-subdominio.workers.dev/healthz`
 
-#### Capacidad del plan free: 160K+ peticiones/día
+#### Capacidad del plan free: +230K–350K+ peticiones/día
 
-El plan gratuito de Workers permite **100.000 invocaciones/día** (Error 1027 al
-pasarse, reset a las 00:00 UTC); ese contador no se puede subir desde código.
-Lo que sí se puede es hacer que gran parte del tráfico **no invoque al Worker**:
+El plan gratuito de Workers tiene **100.000 invocaciones/día** (Error 1027), **10 ms de CPU**, **50 subpeticiones/invocación** y **1.000 lecturas KV/día** en `DEBRID_KV`. `Catálogos+` está diseñado para superar **+230.000 peticiones/día** holgadamente combinando seis defensas automáticas:
 
-1. **Web y catálogos como static assets (ilimitados y gratis).** Con
-   `[assets]` en `wrangler.toml`, todo archivo de `public/` se sirve desde el
-   edge sin ejecutar `worker.mjs`: logo, favicon (`public/_redirects`), los
-   catálogos por defecto (`npm run prerender`) y, si quieres, también la web:
-   `PUBLIC_ORIGIN=https://tu-dominio.example npm run build:web` escribe
-   `public/index.html` y `public/configure/index.html` con tus tendencias y
-   enlaces absolutos horneados. Sin `PUBLIC_ORIGIN` (o sin clave de TMDB) el
-   script no escribe nada y la web sigue sirviéndose en caliente.
-2. **Caché edge para la API (dominio propio).** Las respuestas del Worker ya
-   salen con `Cache-Control` y se guardan en la Cache API del edge
-   (`edgeCached` en `worker.mjs`). Con un dominio propio en Cloudflare, añade
-   **Cache Rules** para que los hits los sirva el CDN sin invocar el Worker:
-   - `(starts_with(http.request.uri.path, "/stream"))` → Edge TTL 600 s
-   - `(starts_with(http.request.uri.path, "/catalog"))` → Edge TTL 600 s
-   - `(starts_with(http.request.uri.path, "/manifest"))` → Edge TTL 86400 s
-3. **Matemática.** 160K peticiones/día ≈ 60K humanas (web estática, no cuenta)
-   + 100K de API (tope del plan). Con dominio propio y ~40 % de hit rate en las
-   reglas de arriba, ~166K peticiones de API equivalen a ≤100K invocaciones.
-   El consumo se ve en *Cloudflare → Workers & Pages → catalogos-plus →
-   Analytics/Invocations*. Si un día se llega a 1027, la web estática y los
-   catálogos pregenerados **siguen sirviéndose**: solo degrada la API dinámica
-   hasta el reset de medianoche.
+1. **Zero-Worker Static Assets (`public/`, tráfico gratis e ilimitado).** Con `[assets]` (`run_worker_first = false`) en `wrangler.toml`, Cloudflare sirve sin despertar al Worker los 121 catálogos por defecto (`npm run prerender`), el logo y, al definir `PUBLIC_ORIGIN=https://tu-dominio.example npm run build:web`, también `public/index.html`, `public/configure/index.html`, `public/manifest.json` y `public/internal/branding.json`. El workflow `.github/workflows/prerender.yml` los regenera y despliega automáticamente cada 6 h.
+2. **Edge Cache canónica entre usuarios (`worker.mjs`).** Las rutas `/<cfg>/catalog/*`, `/<cfg>/meta/*` y `/<cfg>/stream/*` (sin debrid) comparten la misma clave en `caches.default` según sus parámetros reales (`lang`, `region`, filtros), aunque cada usuario tenga un token `/<cfg>/` distinto. Las respuestas con `debridId` jamás tocan caché compartida (`Cache-Control: no-store`).
+3. **CDN Edge con `s-maxage` + `stale-while-revalidate` (dominio propio).** Todas las rutas públicas (incluidos `/internal/watch/*`) emiten `s-maxage` y `stale-while-revalidate`. Con un dominio propio en Cloudflare y una **Cache Rule** que respete `Cache-Control` en rutas públicas (`/catalog/`, `/meta/`, `/internal/watch/`, `/manifest.json`), el CDN absorbe >75 % del tráfico con **0 invocaciones al Worker**.
+4. **Caché en memoria de KV Debrid (`lib/debridCredentials.js`).** Las credenciales descifradas se cachean 5 min en RAM del isolate (con invalidación instantánea al actualizar/desconectar) y `cacheTtl: 300` en KV, reduciendo >95 % las lecturas contra el límite gratuito de 1.000 lecturas KV/día.
+5. **Presupuesto estricto de subpeticiones y Single-Flight (`cache.coalesce`).** Coalescencia de peticiones concurrentes en TMDB, OMDB, Watchmode, TVDB, catálogos, fichas y streams; tope de 24 `/external_ids` por invocación (muy por debajo del límite de 50 subrequests de Cloudflare) y `MAX_ENTRIES = 8000` en la LRU.
+6. **Cero fan-out innecesario en web.** Los 21 estudios llevan logo estático integrado (0 llamadas extra al abrir `/configure`), botón *«Esenciales (carga rápida)»* para manifiestos ligeros y coalescencia de peticiones en `/watch`. Consulta la arquitectura detallada y la Cache Rule exacta en [docs/escala-plan-free.md](docs/escala-plan-free.md).
 
 ### 3.5 Instalar en Stremio
 

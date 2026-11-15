@@ -3,11 +3,40 @@ const $ = id => document.getElementById(id);
 const state = { catalogs: [], tab: 'all', page: 1, search: '', items: [], selected: null, listRun: 0, detailRun: 0, streamRun: 0, episodeRun: 0 };
 let saved = [];
 try { saved = JSON.parse(localStorage.getItem('catalogos-watch-list') || '[]'); if (!Array.isArray(saved)) saved = []; } catch (_) { saved = []; }
+const apiInflight = new Map();
+const apiCache = new Map();
+const API_MEMO_TTL = {
+  catalogs: 5 * 60 * 1000,
+  catalog: 3 * 60 * 1000,
+  search: 60 * 1000,
+  meta: 5 * 60 * 1000,
+  extras: 5 * 60 * 1000,
+  episodes: 5 * 60 * 1000,
+};
 async function api(action, params = {}) {
-  const response = await fetch('/internal/watch/' + action + '?' + new URLSearchParams(params));
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.error || 'No se pudo consultar la fuente.');
-  return data;
+  const entries = Object.entries(params)
+    .filter(([k, v]) => v !== undefined && v !== null && !(action === 'catalog' && k === 'page' && String(v) === '1'))
+    .sort(([a], [b]) => a.localeCompare(b));
+  const qs = new URLSearchParams(params).toString();
+  const normKey = `${action}?${new URLSearchParams(entries).toString()}`;
+  const ttl = API_MEMO_TTL[action] || 0;
+  if (ttl > 0) {
+    const hit = apiCache.get(normKey);
+    if (hit && hit.exp > Date.now()) return hit.data;
+  }
+  if (apiInflight.has(normKey)) return apiInflight.get(normKey);
+  const p = (async () => {
+    const response = await fetch('/internal/watch/' + action + '?' + qs);
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'No se pudo consultar la fuente.');
+    if (ttl > 0) {
+      if (apiCache.size >= 120) apiCache.delete(apiCache.keys().next().value);
+      apiCache.set(normKey, { data, exp: Date.now() + ttl });
+    }
+    return data;
+  })();
+  apiInflight.set(normKey, p);
+  try { return await p; } finally { apiInflight.delete(normKey); }
 }
 function text(tag, value, cls) { const el = document.createElement(tag); el.textContent = value || ''; if (cls) el.className = cls; return el; }
 function imageUrl(value) { try { const u = new URL(value); return u.protocol === 'https:' ? u.href : ''; } catch (_) { return ''; } }
@@ -44,6 +73,13 @@ async function load(append = false) {
     if (!append && metas[0] && state.tab === 'all' && !state.search) setHero(metas[0]);
   } catch (e) { if (run === state.listRun) { $('status').textContent = e.message; $('more').disabled = false; if (append) { state.page--; $('more').hidden = false; $('more').textContent = 'Reintentar'; } } }
 }
+function swapViews(fn) {
+  if (typeof document.startViewTransition === 'function' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.startViewTransition(fn);
+    return;
+  }
+  fn();
+}
 function updateSave() { $('save').textContent = saved.some(m => m.id === state.selected?.id && m.type === state.selected?.type) ? '✓ En mi lista' : '＋ Mi lista'; }
 function stopPlayer() { clearTimeout(playerTimer); loadPlayer(); if ($('playback').open) $('playback').close(); $('player-status').textContent = ''; playingData = null; playingStream = null; }
 async function openDetail(m) {
@@ -51,7 +87,7 @@ async function openDetail(m) {
   stopPlayer(); $('detail-title').textContent = m.name; $('detail-kind').textContent = m.type === 'series' ? 'SERIE · ELIGE UN EPISODIO' : 'PELÍCULA';
   $('description').textContent = m.description || ''; $('detail-info').textContent = [m.releaseInfo, m.imdbRating && `★ ${m.imdbRating}`].filter(Boolean).join(' · ');
   backdrop($('detail-art'), m.background); $('sources').replaceChildren(); $('source-status').textContent = 'Cargando ficha…'; $('episodes').hidden = true; updateSave();
-  $('browse').hidden = true; $('detail').hidden = false;
+  swapViews(() => { $('browse').hidden = true; $('detail').hidden = false; });
   $('episode-cards').replaceChildren(); $('selected-episode').textContent = '';
   for (const id of ['cast-section', 'trailer-section', 'recommendation-section']) $(id).hidden = true;
   $('facts').replaceChildren(); $('genres').replaceChildren();
@@ -174,7 +210,11 @@ $('copy-magnet').onclick = async () => {
   $('copy-magnet').textContent = copied ? '✓ Magnet copiado' : 'No se pudo copiar'; setTimeout(() => { $('copy-magnet').textContent = 'Copiar magnet'; }, 2200);
 };
 $('playback').addEventListener('close', () => { if ($('playback').open) return; clearTimeout(playerTimer); loadPlayer(); playingData = null; playingStream = null; });
-function closeDetail() { ++state.detailRun; ++state.streamRun; ++state.episodeRun; stopPlayer(); state.selected = null; $('detail').hidden = true; $('browse').hidden = false; }
+function closeDetail() {
+  ++state.detailRun; ++state.streamRun; ++state.episodeRun; stopPlayer(); state.selected = null;
+  if ($('detail').hidden && !$('browse').hidden) return;
+  swapViews(() => { $('detail').hidden = true; $('browse').hidden = false; });
+}
 $('close').onclick = () => { closeDetail(); history.pushState(null, '', location.pathname + location.search); window.scrollTo(0, 0); };
 window.addEventListener('popstate', route);
 function route() {

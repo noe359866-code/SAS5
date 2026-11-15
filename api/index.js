@@ -88,14 +88,23 @@ function sameOrigin(req) {
 // 3. Assets estáticos (logo)
 app.use('/assets', express.static(path.join(__dirname, '..', 'assets'), { maxAge: '7d' }));
 
+function buildCacheControl(cacheSeconds, staleSeconds = 86400) {
+  if (!cacheSeconds || cacheSeconds <= 0) return 'no-store';
+  const swr = Math.max(cacheSeconds, staleSeconds);
+  return `public, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}, stale-while-revalidate=${swr}, stale-if-error=604800`;
+}
+
 // Streaming web assets and shared browsing API.
-app.use('/watch', express.static(path.join(__dirname, '..', 'public', 'watch'), { maxAge: 0 }));
+app.use('/watch', express.static(path.join(__dirname, '..', 'public', 'watch'), { maxAge: '1h' }));
 app.get('/internal/watch/:action', async (req, res) => {
-  res.setHeader('Cache-Control', 'no-store');
   try {
-    const { body, status } = await require('../lib/watchApi').watchApi(new URL(req.originalUrl, 'http://internal'));
+    const { body, status, cacheControl } = await require('../lib/watchApi').watchApi(new URL(req.originalUrl, 'http://internal'));
+    res.setHeader('Cache-Control', cacheControl || 'no-store');
     res.status(status).json(body);
-  } catch (_) { res.status(502).json({ error: 'La fuente no respondió. Inténtalo de nuevo.' }); }
+  } catch (_) {
+    res.setHeader('Cache-Control', 'no-store');
+    res.status(502).json({ error: 'La fuente no respondió. Inténtalo de nuevo.' });
+  }
 });
 
 // 4. Healthcheck
@@ -136,8 +145,9 @@ app.get('/healthz', (req, res) => {
 // 4b. Página de configuración + branding (logos vía TMDB)
 app.get('/configure', async (req, res) => {
   const { baseUrl, host } = requestBase(req);
+  const hasOAuthParams = Boolean(req.query.debrid_credential || req.query.debrid_error);
   const trending = await loadTrending();
-  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Cache-Control', hasOAuthParams ? 'no-store' : buildCacheControl(1800, 86400));
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.send(renderConfigure({ origin: baseUrl, host, trendingMovies: trending.movies, trendingSeries: trending.series }));
 });
@@ -145,18 +155,32 @@ app.get('/configure', async (req, res) => {
 app.get('/internal/branding.json', async (req, res) => {
   try {
     const lang = req.query.lang;
-    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('Cache-Control', buildCacheControl(86400, 604800));
     res.json(await branding(lang));
   } catch (err) {
     console.error('[Branding] ->', err.message);
+    res.setHeader('Cache-Control', 'no-store');
     res.json({ providers: {}, studios: {}, tmdbConfigured: config.tmdbConfigured });
   }
 });
 
 app.get('/internal/streams-test.json', async (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.ip || 'unknown';
+  if (!rateLimit.allow(`streams-test:${clientIp}`, { limit: 6, windowMs: 60_000 })) {
+    return res.status(429).json({ error: 'rate_limited', message: 'Demasiadas pruebas seguidas. Espera un minuto.' });
+  }
   const type = req.query.type === 'series' ? 'series' : 'movie';
   const testId = req.query.id || 'tt1160419';
-  res.json(await diagnoseStreams(type, testId, null));
+  const diagKey = `diag:${type}:${testId}`;
+  const diag = await cache.coalesce(diagKey, async () => {
+    const cached = cache.get(diagKey);
+    if (cached) return cached;
+    const fresh = await diagnoseStreams(type, testId, null);
+    cache.set(diagKey, fresh, 30);
+    return fresh;
+  });
+  return res.json(diag);
 });
 
 app.get('/internal/cache.json', (req, res) => {
@@ -270,38 +294,44 @@ app.get('/:cfg/manifest.json', (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;
   const { baseUrl } = requestBase(req);
-  res.setHeader('Cache-Control', cfg.debridId ? 'no-store' : 'public, max-age=300');
+  res.setHeader('Cache-Control', cfg.debridId ? 'no-store' : buildCacheControl(300, 3600));
   res.json(core.buildManifest(`${baseUrl}/assets/logo.png`, cfg));
 });
 
 app.get(['/:cfg/catalog/:type/:id.json', '/:cfg/catalog/:type/:id/:extra.json'], async (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;
-  const result = await core.handleCatalog(req.params.type, req.params.id, cfg, { ...req.query, ...Object.fromEntries(new URLSearchParams(req.params.extra || '')) });
-  res.setHeader('Cache-Control', result.cacheMaxAge > 0 ? `public, max-age=${result.cacheMaxAge}` : 'no-store');
+  let id;
+  try { id = decodeURIComponent(req.params.id); } catch (_) { id = req.params.id; }
+  const result = await core.handleCatalog(req.params.type, id, cfg, { ...req.query, ...Object.fromEntries(new URLSearchParams(req.params.extra || '')) });
+  res.setHeader('Cache-Control', buildCacheControl(result.cacheMaxAge));
   res.json(result);
 });
 
 app.get('/:cfg/meta/:type/:id.json', async (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;
-  const result = await core.handleMeta(req.params.type, decodeURIComponent(req.params.id), cfg);
-  res.setHeader('Cache-Control', result.cacheMaxAge > 0 ? `public, max-age=${result.cacheMaxAge}` : 'no-store');
+  let id;
+  try { id = decodeURIComponent(req.params.id); } catch (_) { return res.status(400).json({ error: 'invalid_id' }); }
+  const result = await core.handleMeta(req.params.type, id, cfg);
+  res.setHeader('Cache-Control', buildCacheControl(result.cacheMaxAge));
   res.json(result);
 });
 
 app.get('/:cfg/stream/:type/:id.json', async (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;
-  const result = await core.handleStream(req.params.type, decodeURIComponent(req.params.id), cfg);
-  res.setHeader('Cache-Control', result.cacheMaxAge > 0 ? `public, max-age=${result.cacheMaxAge}` : 'no-store');
+  let id;
+  try { id = decodeURIComponent(req.params.id); } catch (_) { return res.status(400).json({ error: 'invalid_id' }); }
+  const result = await core.handleStream(req.params.type, id, cfg);
+  res.setHeader('Cache-Control', cfg.debridId ? 'no-store' : buildCacheControl(result.cacheMaxAge));
   res.json(result);
 });
 
 // 5. Manifest dinámico: logo apuntando al host actual
 app.get(['/manifest.json', '/api/manifest.json'], (req, res) => {
   const { baseUrl } = requestBase(req);
-  res.setHeader('Cache-Control', 'public, max-age=300');
+  res.setHeader('Cache-Control', buildCacheControl(300, 3600));
   res.json(core.buildManifest(`${baseUrl}/assets/logo.png`));
 });
 
@@ -335,6 +365,7 @@ app.get(['/', '/api'], async (req, res, next) => {
     trendingAnime: trending.anime,
     apiStatus: { tmdb: config.tmdbConfigured },
   });
+  res.setHeader('Cache-Control', buildCacheControl(1800, 86400));
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.send(html);
 });

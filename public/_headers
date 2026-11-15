@@ -2,12 +2,29 @@
 #
 # Cloudflare sirve estos archivos SIN ejecutar worker.mjs, así que sus
 # peticiones son gratuitas e ilimitadas (no consumen las 100.000/día del plan
-# free). Los catálogos pregenerados por scripts/prerender-catalogs.mjs caen
-# aquí: /catalog/<tipo>/<id>.json
+# free). Los catálogos y endpoints estáticos generados por build-web.mjs y
+# prerender-catalogs.mjs caen aquí con 0 invocaciones de Worker.
 
 /catalog/*
   Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Allow-Headers: *
+  Cache-Control: public, max-age=3600, s-maxage=21600, stale-while-revalidate=86400, stale-if-error=604800
+
+/manifest.json
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Allow-Headers: *
+  Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=604800
+
+/internal/branding.json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800
+
+/internal/watch/catalogs
+  Access-Control-Allow-Origin: *
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: public, max-age=3600, s-maxage=21600, stale-while-revalidate=86400
 
 /assets/*
   Access-Control-Allow-Origin: *
@@ -20,4 +37,5 @@
 /watch/*
   Referrer-Policy: no-referrer
   X-Content-Type-Options: nosniff
-  Cache-Control: no-cache
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+

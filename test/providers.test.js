@@ -127,12 +127,13 @@ test('Watchmode no mezcla fuentes de países distintos en el fallback', async ()
 
 test('caché llena expulsa una entrada menos usada, no todo el contenido', () => {
   const cache = require('../lib/cache');
-  for (let i = 0; i < 500; i++) cache.set(`lru-${i}`, i, 3600);
+  const max = cache.MAX_ENTRIES || cache.stats().maxEntries;
+  for (let i = 0; i < max; i++) cache.set(`lru-${i}`, i, 3600);
   assert.equal(cache.get('lru-0'), 0);
   cache.set('lru-new', 999, 3600);
   assert.equal(cache.get('lru-0'), 0);
   assert.equal(cache.get('lru-1'), undefined);
-  assert.equal(cache.get('lru-499'), 499);
+  assert.equal(cache.get(`lru-${max - 1}`), max - 1);
 });
 
 test('caché sirve una entrada stale y coalesce cargas concurrentes', async () => {

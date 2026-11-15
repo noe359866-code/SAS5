@@ -7,3 +7,8 @@ node_modules/
 .DS_Store
 npm-debug.log*
 public/catalog/
+public/index.html
+public/configure/
+public/manifest.json
+public/internal/
+

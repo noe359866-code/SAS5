@@ -1,0 +1,48 @@
+name: Prerender Static Assets & Deploy Worker
+
+on:
+  schedule:
+    # Cada 6 horas refresca los 121 catálogos por defecto y la web estática
+    # en Cloudflare Assets (0 invocaciones del Worker por petición servida).
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: prerender-deploy
+  cancel-in-progress: true
+
+jobs:
+  prerender-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prerender default catalogs and static web
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          TMDB_ACCESS_TOKEN: ${{ secrets.TMDB_ACCESS_TOKEN }}
+          PUBLIC_ORIGIN: ${{ vars.PUBLIC_ORIGIN || secrets.PUBLIC_ORIGIN }}
+          WATCH_REGION: ${{ vars.WATCH_REGION || 'NI' }}
+          WATCH_REGION_FALLBACK: ${{ vars.WATCH_REGION_FALLBACK || 'MX,US' }}
+          TMDB_LANGUAGE: ${{ vars.TMDB_LANGUAGE || 'es' }}
+        run: |
+          npm run build:web
+          npm run prerender
+
+      - name: Deploy Worker & Static Assets to Cloudflare
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy

@@ -379,3 +379,269 @@ test('web: the extensions card works without storage', async () => {
     assert.deepEqual(errors, []);
   } finally { page.dom.window.close(); }
 });
+
+// Profiles and settings. Everything is kept in the browser: these tests read localStorage as the page leaves it.
+const PROFILES = 'catalogos-watch-profiles';
+const listKey = id => 'catalogos-watch-list:' + id;
+const person = (id, name, extra = {}) => ({ id, name, color: 'blue', symbol: '', prefs: {}, ...extra });
+const seed = (profiles, extra = {}) => w => w.localStorage.setItem(PROFILES, JSON.stringify({ version: 1, active: profiles[0].id, ask: true, profiles, ...extra }));
+const stored = w => JSON.parse(w.localStorage.getItem(PROFILES));
+const press = (w, el) => el.dispatchEvent(new w.Event('change', { bubbles: true }));
+const choose = (w, name, value) => { const input = w.document.querySelector(`input[name="${name}"][value="${value}"]`); input.checked = true; press(w, input); };
+
+test('profiles: the list saved before profiles existed moves into a first profile', async () => {
+  const old = [{ ...movie, seasons: [1, 2] }, { id: 'javascript:alert(1)', type: 'movie', name: 'No es un título' }];
+  const { dom, w, $ } = setup({ prepare: w => w.localStorage.setItem('catalogos-watch-list', JSON.stringify(old)) });
+  try {
+    await flush();
+    const data = stored(w);
+    assert.equal(data.profiles.length, 1);
+    assert.equal(data.profiles[0].name, 'Principal');
+    assert.equal(data.active, data.profiles[0].id);
+    assert.equal(w.localStorage.getItem('catalogos-watch-list'), null, 'the old key is not left behind');
+    // Only real titles survive, without the fields the cards do not need.
+    assert.deepEqual(JSON.parse(w.localStorage.getItem(listKey(data.active))), [{ id: movie.id, type: 'movie', name: movie.name, releaseInfo: '2025', description: movie.description }]);
+    assert.equal($('profiles').open, false, 'one profile: nobody is asked who is watching');
+    assert.equal($('profile-name').textContent, 'Principal');
+    assert.equal(w.document.documentElement.dataset.accent, 'blue');
+    w.document.querySelector('[data-tab="saved"]').click();
+    assert.equal($('grid').children.length, 1);
+  } finally { dom.window.close(); }
+});
+
+test('profiles: a session with several profiles starts by asking who is watching, and each one has its own list', async () => {
+  const people = [person('p1', 'Noé'), person('p2', 'Mamá', { color: 'pink', symbol: 'heart', prefs: { home: 'series', searchType: 'series', posters: 'large', reduceMotion: true } })];
+  const { dom, w, $ } = setup({ prepare: w => { seed(people)(w); w.localStorage.setItem(listKey('p1'), JSON.stringify([movie])); } });
+  try {
+    await flush();
+    assert.equal($('profiles').open, true);
+    const tiles = [...$('profile-tiles').querySelectorAll('.profile-tile')];
+    assert.deepEqual(tiles.map(t => t.querySelector('strong').textContent), ['Noé', 'Mamá', 'Añadir perfil']);
+    assert.equal(tiles[1].querySelector('.avatar use').getAttribute('href'), '#i-heart');
+    assert.equal(tiles[0].querySelector('.avatar').textContent, 'N');
+    tiles[1].click(); await flush();
+    assert.equal($('profiles').open, false);
+    assert.equal(stored(w).active, 'p2');
+    assert.equal(w.sessionStorage.getItem('catalogos-watch-profile-chosen'), '1');
+    // The profile brings its accent, its poster size, its motion preference and its start section.
+    const root = w.document.documentElement;
+    assert.equal(root.dataset.accent, 'pink');
+    assert.equal(root.dataset.posters, 'large');
+    assert.equal(root.hasAttribute('data-reduce-motion'), true);
+    assert.equal(w.document.querySelector('[data-tab="series"]').getAttribute('aria-pressed'), 'true');
+    assert.equal($('search-type').value, 'series');
+    assert.equal($('grid').querySelector('strong').textContent, series.name);
+    w.document.querySelector('[data-tab="saved"]').click();
+    assert.equal($('grid').children.length, 0, 'Mamá starts with an empty list');
+    // Saving a title writes to the list of the profile that is watching.
+    w.document.querySelector('[data-tab="series"]').click(); await flush();
+    $('grid').querySelector('button').click(); await flush();
+    $('save').click();
+    assert.equal(JSON.parse(w.localStorage.getItem(listKey('p2')))[0].id, series.id);
+    assert.equal(JSON.parse(w.localStorage.getItem(listKey('p1')))[0].id, movie.id);
+    // The header menu switches profile without the picker.
+    $('profile-button').click();
+    assert.equal($('profile-menu').hidden, false);
+    assert.equal($('profile-button').getAttribute('aria-expanded'), 'true');
+    const entries = [...$('menu-profiles').children];
+    assert.equal(entries[1].getAttribute('aria-current'), 'true');
+    entries[0].click(); await flush();
+    assert.equal($('profile-menu').hidden, true);
+    assert.equal(stored(w).active, 'p1');
+    assert.equal(root.dataset.accent, 'blue');
+    assert.equal(root.hasAttribute('data-reduce-motion'), false);
+    assert.match($('save').textContent, /Mi lista/);
+    assert.doesNotMatch($('save').textContent, /✓/, 'the open sheet shows the list of the new profile');
+  } finally { dom.window.close(); }
+});
+
+test('profiles: the picker is skipped once chosen in the session, or when the browser is told not to ask', async () => {
+  const people = [person('p1', 'Noé'), person('p2', 'Mamá')];
+  const again = setup({ prepare: w => { seed(people)(w); w.sessionStorage.setItem('catalogos-watch-profile-chosen', '1'); } });
+  try { await flush(); assert.equal(again.$('profiles').open, false); } finally { again.dom.window.close(); }
+  const quiet = setup({ prepare: seed(people, { ask: false, active: 'p2' }) });
+  try { await flush(); assert.equal(quiet.$('profiles').open, false); assert.equal(quiet.$('profile-name').textContent, 'Mamá'); } finally { quiet.dom.window.close(); }
+});
+
+test('profiles: create, rename and delete from the manage screen', async () => {
+  const { dom, w, $ } = setup({ prepare: w => { seed([person('p1', 'Noé')])(w); w.localStorage.setItem(listKey('p1'), JSON.stringify([movie])); } });
+  try {
+    await flush();
+    $('profile-button').click(); $('menu-manage').click();
+    assert.equal($('profiles').open, true);
+    assert.equal($('profiles').hasAttribute('data-managing'), true);
+    $('profile-add').click();
+    assert.equal($('profile-form').hidden, false);
+    assert.equal($('profile-delete').hidden, true);
+    assert.equal(w.document.querySelector('input[name="profile-color"]:checked').value, 'violet', 'a new profile starts with a colour nobody uses');
+    const submit = () => $('profile-form').dispatchEvent(new w.Event('submit', { cancelable: true }));
+    const type = value => { $('profile-name-input').value = value; $('profile-name-input').dispatchEvent(new w.Event('input')); };
+    submit(); assert.match($('profile-error').textContent, /Escribe un nombre/);
+    type(' noé '); submit(); assert.match($('profile-error').textContent, /Ya hay un perfil/);
+    type('  Los   peques  '); assert.equal($('editor-avatar').textContent, 'L');
+    choose(w, 'profile-color', 'orange'); choose(w, 'profile-symbol', 'rocket');
+    assert.equal($('editor-avatar').dataset.color, 'orange');
+    assert.equal($('editor-avatar').querySelector('use').getAttribute('href'), '#i-rocket');
+    submit();
+    assert.equal($('profile-form').hidden, true);
+    let data = stored(w);
+    assert.deepEqual(data.profiles.map(p => [p.name, p.color, p.symbol]), [['Noé', 'blue', ''], ['Los peques', 'orange', 'rocket']]);
+    assert.equal(data.active, 'p1', 'creating a profile does not switch to it');
+    // Rename the active one: the header follows.
+    $('profile-tiles').querySelector('[data-profile="p1"]').click();
+    assert.equal($('profile-name-input').value, 'Noé');
+    assert.equal($('profile-delete').hidden, false);
+    type('Noelia'); submit();
+    assert.equal($('profile-name').textContent, 'Noelia');
+    // Deleting asks twice, takes the list with it and hands over to another profile.
+    $('profile-tiles').querySelector('[data-profile="p1"]').click();
+    $('profile-delete').click();
+    assert.equal($('profile-delete').hasAttribute('data-armed'), true);
+    assert.equal(stored(w).profiles.length, 2, 'the first press only asks');
+    $('profile-delete').click(); await flush();
+    data = stored(w);
+    assert.deepEqual(data.profiles.map(p => p.name), ['Los peques']);
+    assert.equal(data.active, data.profiles[0].id);
+    assert.equal(w.localStorage.getItem(listKey('p1')), null);
+    assert.equal($('profile-name').textContent, 'Los peques');
+    assert.equal(w.document.documentElement.dataset.accent, 'orange');
+    // The last profile cannot be deleted.
+    $('profile-tiles').querySelector('.profile-tile').click();
+    assert.equal($('profile-delete').hidden, true);
+    assert.equal($('profile-delete').hasAttribute('data-armed'), false);
+  } finally { dom.window.close(); }
+});
+
+test('profiles: five at most, and stored data is read back as untrusted', async () => {
+  const people = ['Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis'].map((name, i) => person('p' + i, name));
+  people[1] = { id: '../x', name: 'Mala' }; people[2] = { ...people[2], color: 'url(x)', symbol: '<b>', prefs: { home: 'nope', posters: 7, autoSources: 'yes' } };
+  const { dom, w, $ } = setup({ prepare: seed(people, { active: 'nobody' }) });
+  try {
+    await flush();
+    const names = [...$('profile-tiles').querySelectorAll('strong')].map(n => n.textContent);
+    assert.deepEqual(names, ['Uno', 'Tres', 'Cuatro', 'Cinco', 'Seis'], 'the broken entry is dropped and no «Añadir perfil» is offered at five');
+    assert.equal($('profile-add'), null);
+    assert.equal($('profile-name').textContent, 'Uno', 'an unknown active profile falls back to the first');
+    $('profile-tiles').querySelector('[data-profile="p2"]').click(); await flush();
+    assert.equal(w.document.documentElement.dataset.accent, 'blue');
+    assert.equal(w.document.documentElement.dataset.posters, 'medium');
+    assert.equal($('profile-avatar').textContent, 'T');
+    assert.deepEqual(stored(w).profiles[1].prefs, { home: 'all', searchType: 'movie', player: 'embed', posters: 'medium', autoSources: false, reduceMotion: false });
+  } finally { dom.window.close(); }
+});
+
+test('settings: its own page, with every preference saved for the profile and applied at once', async () => {
+  const { dom, w, requests, $ } = setup({ prepare: seed([person('p1', 'Noé')]) });
+  try {
+    await flush();
+    $('profile-button').click(); $('menu-settings').click();
+    assert.equal(w.location.hash, '#settings');
+    assert.equal($('settings').hidden, false);
+    assert.equal($('browse').hidden, true);
+    assert.equal($('set-profile-title').textContent, 'Noé');
+    assert.equal(w.document.querySelector('input[name="pref-home"]:checked').value, 'all');
+    assert.equal($('device-ask').disabled, true, 'asking who is watching needs a second profile');
+    choose(w, 'pref-home', 'saved'); choose(w, 'pref-searchType', 'series'); choose(w, 'pref-player', 'tab'); choose(w, 'pref-posters', 'small');
+    $('pref-auto').checked = true; press(w, $('pref-auto'));
+    $('pref-motion').checked = true; press(w, $('pref-motion'));
+    assert.deepEqual(stored(w).profiles[0].prefs, { home: 'saved', searchType: 'series', player: 'tab', posters: 'small', autoSources: true, reduceMotion: true });
+    assert.match($('settings-status').textContent, /Guardado/);
+    assert.equal(w.document.documentElement.dataset.posters, 'small');
+    assert.equal(w.document.documentElement.hasAttribute('data-reduce-motion'), true);
+    assert.equal($('search-type').value, 'series');
+    assert.match(w.document.querySelector('[data-summary="playback"]').textContent, /Webtor/);
+    // Leaving goes back to the library; the sheet then looks for sources by itself and plays in a Webtor tab.
+    $('settings-close').click(); w.dispatchEvent(new w.PopStateEvent('popstate')); await flush();
+    w.history.replaceState(null, '', w.location.pathname); w.dispatchEvent(new w.PopStateEvent('popstate')); await flush();
+    assert.equal($('settings').hidden, true);
+    assert.equal($('browse').hidden, false);
+    $('grid').querySelector('button').click(); await flush();
+    assert.equal(requests.filter(u => u.pathname.endsWith('/streams')).length, 1, 'sources are searched on opening the sheet');
+    let opened = null; w.HTMLAnchorElement.prototype.click = function () { opened = this; };
+    $('sources').querySelector('.source').click();
+    assert.equal($('playback').open, false);
+    assert.equal($('player').hasAttribute('src'), false, 'no embedded player is loaded');
+    assert.match(opened.href, /^https:\/\/webtor\.io\/magnet:\?xt=urn:btih:a{40}/);
+    assert.equal(opened.target, '_blank'); assert.equal(opened.rel, 'noopener noreferrer');
+    // Restoring keeps the list and the profile, and only resets the preferences.
+    $('profile-button').click(); $('menu-settings').click();
+    $('prefs-reset').click();
+    assert.deepEqual(stored(w).profiles[0].prefs, { home: 'all', searchType: 'movie', player: 'embed', posters: 'medium', autoSources: false, reduceMotion: false });
+    assert.equal(w.document.querySelector('input[name="pref-player"]:checked').value, 'embed');
+    assert.equal(w.document.documentElement.hasAttribute('data-reduce-motion'), false);
+  } finally { dom.window.close(); }
+});
+
+test('settings: a direct visit to #settings opens them, and the start section of the profile is honoured', async () => {
+  const { dom, w, $ } = setup({ prepare: w => { seed([person('p1', 'Noé', { prefs: { home: 'saved' } })])(w); w.localStorage.setItem(listKey('p1'), JSON.stringify([movie])); w.location.hash = '#settings'; } });
+  try {
+    await flush();
+    assert.equal($('settings').hidden, false);
+    assert.equal($('browse').hidden, true);
+    assert.equal(w.document.querySelector('input[name="pref-home"]:checked').value, 'saved');
+    $('settings-close').click(); await flush();
+    assert.equal(w.location.hash, '');
+    assert.equal($('settings').hidden, true);
+    assert.equal(w.document.querySelector('[data-tab="saved"]').getAttribute('aria-pressed'), 'true');
+    assert.equal($('grid').children.length, 1);
+  } finally { dom.window.close(); }
+});
+
+test('settings: the list is exported, imported and emptied per profile; wiping starts over', async () => {
+  const people = [person('p1', 'Noé'), person('p2', 'Mamá')];
+  const { dom, w, $ } = setup({ prepare: w => { seed(people)(w); w.sessionStorage.setItem('catalogos-watch-profile-chosen', '1'); w.localStorage.setItem(listKey('p1'), JSON.stringify([movie])); w.localStorage.setItem(listKey('p2'), JSON.stringify([series])); } });
+  try {
+    await flush();
+    $('profile-button').click(); $('menu-settings').click();
+    assert.match($('list-count').textContent, /^1 título guardado de 200/);
+    assert.equal($('device-ask').checked, true);
+    $('device-ask').checked = false; press(w, $('device-ask'));
+    assert.equal(stored(w).ask, false);
+    // Export: a JSON file made in the browser.
+    let exported = null, name = '';
+    w.URL.createObjectURL = blob => { exported = blob; return 'blob:test'; }; w.URL.revokeObjectURL = () => {};
+    w.HTMLAnchorElement.prototype.click = function () { name = this.download; };
+    $('list-export').click();
+    assert.equal(name, 'mi-lista-noé.json');
+    assert.equal(exported.type, 'application/json');
+    assert.match($('settings-status').textContent, /Lista exportada: 1 título/);
+    // Import: new titles are added, known ones and anything that is not a title are left out.
+    const file = items => { Object.defineProperty($('list-file'), 'files', { configurable: true, value: [new w.File([JSON.stringify(items)], 'lista.json', { type: 'application/json' })] }); press(w, $('list-file')); };
+    const wait = async () => { for (let i = 0; i < 5; i++) { await new Promise(resolve => setTimeout(resolve, 10)); await flush(); } };
+    file({ items: [movie, series, { id: 'x', type: 'movie' }, { id: 'tt0111161', type: 'movie', name: 'Otra', poster: 'https://image.tmdb.org/t/p/w342/a.jpg', extra: { big: true } }] }); await wait();
+    assert.match($('settings-status').textContent, /2 títulos añadidos a Mi lista\. 1 ya estaba\./);
+    assert.deepEqual(JSON.parse(w.localStorage.getItem(listKey('p1'))).map(i => i.id), [movie.id, series.id, 'tt0111161']);
+    assert.equal(JSON.parse(w.localStorage.getItem(listKey('p1')))[2].extra, undefined);
+    file('nada'); await wait();
+    assert.match($('settings-status').textContent, /no contiene una lista/);
+    // Emptying asks twice and touches this profile only.
+    $('list-clear').click();
+    assert.equal(JSON.parse(w.localStorage.getItem(listKey('p1'))).length, 3);
+    $('list-clear').click();
+    assert.deepEqual(JSON.parse(w.localStorage.getItem(listKey('p1'))), []);
+    assert.equal(JSON.parse(w.localStorage.getItem(listKey('p2'))).length, 1);
+    assert.equal($('list-clear').disabled, true);
+    // Wiping removes every profile and list, and the page goes on with a fresh profile.
+    $('wipe-all').click(); $('wipe-all').click(); await flush();
+    assert.equal(w.localStorage.getItem(listKey('p1')), null);
+    assert.equal(w.localStorage.getItem(listKey('p2')), null);
+    assert.deepEqual(stored(w).profiles.map(p => p.name), ['Principal']);
+    assert.equal($('profile-name').textContent, 'Principal');
+    assert.equal($('set-profile-title').textContent, 'Principal');
+  } finally { dom.window.close(); }
+});
+
+test('profiles: with storage blocked the page still works for the visit', async () => {
+  const { dom, w, $ } = setup({ prepare: w => { for (const name of ['localStorage', 'sessionStorage']) Object.defineProperty(w, name, { configurable: true, get() { throw new w.DOMException('blocked', 'SecurityError'); } }); } });
+  try {
+    await flush();
+    assert.equal($('profile-name').textContent, 'Principal');
+    assert.equal($('hero-title').textContent, movie.name);
+    $('grid').querySelector('button').click(); await flush();
+    $('save').click(); assert.match($('save').textContent, /En mi lista/);
+    $('profile-button').click(); $('menu-settings').click();
+    choose(w, 'pref-posters', 'large');
+    assert.equal(w.document.documentElement.dataset.posters, 'large');
+    assert.match($('settings-status').textContent, /no permite guardar/);
+  } finally { dom.window.close(); }
+});

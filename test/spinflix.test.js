@@ -102,8 +102,10 @@ test('spinflix -> stream de Stremio: URL directa HLS con proxyHeaders y notWebRe
   const s = streams.toStream({
     title: 'Tombstone 1993 1080p WEB-DL Dual Latino SpinFlix', titles: ['Tombstone'],
     quality: '1080p', tags: ['web', '1080p', 'dub'], url: 'https://spinoff.link/pelis/proxy.php?url=x',
+    audioLabel: 'Lat + Inglés',
     subtitles: [{ url: 'https://x/es.vtt', lang: 'es' }],
   }, null);
+  assert.match(s.title, /🎧 Lat \+ Inglés/);
   assert.equal(s.url, 'https://spinoff.link/pelis/proxy.php?url=x');
   assert.equal(s.infoHash, undefined);
   assert.equal(s.behaviorHints.notWebReady, true);
@@ -118,4 +120,15 @@ test('spinflix: utilidades de resolución e idioma', () => {
   assert.equal(spinflix.languageToken('latino - inglés'), 'Dual Latino');
   assert.equal(spinflix.languageToken('castellano'), 'Castellano');
   assert.equal(spinflix.languageToken('subtitulado'), 'Subtitulado');
+});
+
+test('spinflix: la etiqueta de audio se lee Lat / ES / Inglés según la ficha', () => {
+  assert.equal(spinflix.audioLabel('latino'), 'Lat');
+  assert.equal(spinflix.audioLabel('castellano'), 'ES');
+  assert.equal(spinflix.audioLabel('español'), 'ES');
+  assert.equal(spinflix.audioLabel('inglés'), 'Inglés');
+  assert.equal(spinflix.audioLabel('latino - inglés'), 'Lat + Inglés');
+  assert.equal(spinflix.audioLabel('castellano - inglés'), 'ES + Inglés');
+  assert.equal(spinflix.audioLabel('subtitulado'), 'Subtitulado');
+  assert.equal(spinflix.audioLabel(''), '');
 });

@@ -124,7 +124,7 @@ test('landing y /configure comparten el sistema de diseño y no dejan plantillas
 
 test('/configure: los proveedores añadidos después son elegibles y nacen marcados en un borrador antiguo', () => {
   const vm = require('node:vm');
-  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol'];
+  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix'];
   // Ejecuta el arranque del script (constantes, state, save y restore) con
   // un localStorage simulado y devuelve los proveedores que quedan marcados.
   const run = (draft, initialCfg) => {
@@ -149,13 +149,13 @@ test('/configure: los proveedores añadidos después son elegibles y nacen marca
   // Borrador guardado antes de existir Nyaa y YTS: los nuevos nacen marcados
   // y se respeta lo que el usuario había desmarcado.
   assert.deepEqual(run({ streams: ['knaben', 'torlock', 'blackholebay'] }).streams, all);
-  assert.deepEqual(run({ streams: ['knaben'] }).streams, ['knaben', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol']);
-  assert.deepEqual(run({ streams: [] }).streams, ['nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol']);
+  assert.deepEqual(run({ streams: ['knaben'] }).streams, ['knaben', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix']);
+  assert.deepEqual(run({ streams: [] }).streams, ['nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix']);
   // Borrador guardado cuando había cinco proveedores, con YTS desmarcado:
   // EZTV, The RarBg e Índice BR nacen marcados y YTS sigue desmarcado.
   assert.deepEqual(
     run({ streams: ['knaben', 'nyaa'], knownStreams: all.slice(0, 5) }).streams,
-    ['knaben', 'nyaa', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol']
+    ['knaben', 'nyaa', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix']
   );
   // Borrador nuevo: si el usuario desmarcó YTS, sigue desmarcado.
   const draft = run({ streams: ['knaben', 'nyaa'], knownStreams: all });

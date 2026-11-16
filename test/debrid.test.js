@@ -681,3 +681,90 @@ test('la redirección 3xx no se sigue: el Bearer no sale hacia otro origen', asy
   );
   assert.deepEqual([...new Set(seen)], ['manual'], 'no se sigue la redireccion: el Bearer no sale del origen');
 });
+
+// ── Respaldo sin KV: Cache API de Cloudflare ────────────────────────────────
+// Sin binding DEBRID_KV (wrangler.toml lo trae comentado) nadie podía
+// conectar debrid: el 503 era para todos. En Workers, `caches.default`
+// sirve de almacén sin configuración externa.
+
+function makeEdgeCache() {
+  const entries = new Map();
+  const keyOf = (request) => (typeof request === 'string' ? request : request.url);
+  return {
+    entries,
+    async match(request) {
+      const hit = entries.get(keyOf(request));
+      return hit ? hit.clone() : undefined;
+    },
+    async put(request, response) {
+      entries.set(keyOf(request), response.clone());
+    },
+    async delete(request) {
+      return entries.delete(keyOf(request));
+    },
+  };
+}
+
+test('sin KV pero con Cache API, las credenciales se guardan cifradas y se leen/desconectan', async () => {
+  const edge = makeEdgeCache();
+  const previousCaches = globalThis.caches;
+  globalThis.caches = { default: edge };
+  try {
+    const env = { DEBRID_ENCRYPTION_KEY: 'test-only-encryption-secret-at-least-32-chars' };
+    assert.equal(credentials.isConfigured(env), true, 'con Cache API basta la clave de cifrado');
+    const { credentialId, provider } = await credentials.createCredential({ provider: 'torbox', token: 'cache-api-secret' }, env);
+    assert.equal(provider, 'torbox');
+    assert.equal(edge.entries.size, 1, 'el registro vive en la Cache API, no en KV');
+    const [storedResponse] = [...edge.entries.values()];
+    const storedText = await storedResponse.clone().text();
+    assert.match(storedText, /^v3\./);
+    assert.equal(storedText.includes('cache-api-secret'), false, 'sigue cifrado, no en claro');
+    assert.deepEqual(await credentials.getCredential(credentialId, env), {
+      version: 2,
+      provider: 'torbox',
+      token: 'cache-api-secret',
+    });
+    assert.equal(await credentials.disconnect(credentialId, env), true);
+    assert.equal(edge.entries.size, 0, 'desconectar borra el registro de la Cache API');
+    assert.equal(await credentials.getCredential(credentialId, env), null);
+  } finally {
+    if (previousCaches === undefined) delete globalThis.caches;
+    else globalThis.caches = previousCaches;
+  }
+});
+
+test('con KV configurada, la KV sigue siendo el almacén preferido (no se usa la Cache API)', async () => {
+  const edge = makeEdgeCache();
+  const previousCaches = globalThis.caches;
+  globalThis.caches = { default: edge };
+  try {
+    const env = makeEnv();
+    const { credentialId } = await credentials.createCredential({ provider: 'easydebrid', token: 'kv-preferred-secret' }, env);
+    assert.equal(env.DEBRID_KV.entries.size, 1);
+    assert.equal(edge.entries.size, 0, 'con KV no se toca la Cache API');
+    assert.equal((await credentials.getCredential(credentialId, env)).token, 'kv-preferred-secret');
+  } finally {
+    if (previousCaches === undefined) delete globalThis.caches;
+    else globalThis.caches = previousCaches;
+  }
+});
+
+test('connect() funciona sin KV cuando hay Cache API: el usuario puede añadir debrid', async () => {
+  const edge = makeEdgeCache();
+  const previousCaches = globalThis.caches;
+  globalThis.caches = { default: edge };
+  global.fetch = async () => json({ success: true, data: { id: 7, is_subscribed: true } });
+  try {
+    const connect = require('../lib/debridConnect');
+    const env = { DEBRID_ENCRYPTION_KEY: 'test-only-encryption-secret-at-least-32-chars' };
+    const result = await connect.connect({ provider: 'torbox', token: 'k'.repeat(40) }, { env });
+    assert.equal(result.status, 200);
+    assert.match(result.payload.credentialId, /^[A-Za-z0-9_-]{32}$/);
+    assert.equal(edge.entries.size, 1, 'la credencial quedó guardada en la Cache API');
+    const record = await credentials.getCredential(result.payload.credentialId, env);
+    assert.equal(record.provider, 'torbox');
+  } finally {
+    if (previousCaches === undefined) delete globalThis.caches;
+    else globalThis.caches = previousCaches;
+  }
+});

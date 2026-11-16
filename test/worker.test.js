@@ -294,7 +294,7 @@ test('cache endpoint: solo expone métricas agregadas', async () => {
   assert.equal(Object.hasOwn(stats, 'keys'), false);
 });
 
-test('Worker usa Cache API compartida para rutas públicas', async () => {
+test('Worker usa Cache API compartida para rutas públicas (la memoria del isolate va primero)', async () => {
   const originalCaches = globalThis.caches;
   const entries = new Map();
   let matches = 0;
@@ -303,15 +303,38 @@ test('Worker usa Cache API compartida para rutas públicas', async () => {
     async match(request) { matches++; return entries.get(request.url)?.clone() || undefined; },
     async put(request, response) { puts++; entries.set(request.url, response.clone()); },
   } };
+  const config = require('../lib/config');
+  const responseCache = require('../lib/responseCache');
+  responseCache.reset();
+  config.reload({ ...env, RESPONSE_CACHE_MB: '24' });
   try {
+    // 1ª petición: memoria → fallo, Cache API → fallo, handler → se guarda
+    // en la Cache API y en la memoria del isolate.
     const first = await worker.fetch(new Request('https://cache.example/manifest.json'), env, {});
-    const second = await worker.fetch(new Request('https://cache.example/manifest.json'), env, {});
     assert.equal(first.status, 200);
-    assert.equal(second.status, 200);
-    assert.equal(matches, 2);
+    assert.equal(matches, 1);
     assert.equal(puts, 1);
+
+    // 2ª petición: responde la memoria del isolate. Importa porque
+    // `cache.match` cuenta como subpetición (límite de 50 en Workers Free) y
+    // porque en `*.workers.dev` la Cache API no funciona: sin esta capa, cada
+    // repetición volvería a ejecutar el handler completo.
+    const second = await worker.fetch(new Request('https://cache.example/manifest.json'), env, {});
+    assert.equal(second.status, 200);
+    assert.equal(matches, 1, 'la memoria evita consultar la Cache API');
+    assert.equal(second.headers.get('x-catalogos-cache'), 'memory');
     assert.equal((await second.json()).id, 'org.comunidad.catalogos.plus');
+
+    // Con la caché de memoria desactivada (RESPONSE_CACHE_MB=0) se vuelve al
+    // comportamiento clásico: dos consultas a la Cache API y una escritura.
+    config.reload({ ...env, RESPONSE_CACHE_MB: '0' });
+    const third = await worker.fetch(new Request('https://cache.example/manifest.json'), env, {});
+    assert.equal(third.status, 200);
+    assert.equal(matches, 2);
+    assert.equal(puts, 1, 'la entrada seguía en la Cache API');
   } finally {
+    config.reload(env);
+    responseCache.reset();
     if (originalCaches === undefined) delete globalThis.caches;
     else globalThis.caches = originalCaches;
   }

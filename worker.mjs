@@ -23,6 +23,7 @@
 
 import config from './lib/config.js';
 import watchApiModule from './lib/watchApi.js';
+import responseCache from './lib/responseCache.js';
 import core from './lib/core.js';
 import { renderHome } from './lib/homePage.js';
 import { renderConfigure } from './lib/configurePage.js';
@@ -91,24 +92,108 @@ function htmlResponse(html, cacheSeconds = 0) {
  * prefijo `/<cfg>/` (p. ej. distinto debridId o distintos filtros de streams)
  * compartan la misma entrada de catálogo/meta/stream-público en el PoP local.
  */
+/**
+ * Segundos de vida de una respuesta según el `Cache-Control` que publicamos.
+ * Así la caché en memoria y la Cache API no contradicen la promesa pública.
+ */
+function cacheTtl(policy) {
+  const swr = /(?:^|,\s*)stale-while-revalidate=(\d+)/i.exec(policy || '');
+  const fresh = /(?:^|,\s*)s-maxage=(\d+)/i.exec(policy || '')
+    || /(?:^|,\s*)max-age=(\d+)/i.exec(policy || '');
+  return {
+    ttl: fresh ? Number(fresh[1]) : 0,
+    stale: swr ? Number(swr[1]) : 0,
+  };
+}
+
+/**
+ * Tres niveles, en orden de coste:
+ *  1. Memoria del isolate (funciona siempre, incluido `*.workers.dev`).
+ *  2. Cache API del borde (solo opera en dominio propio).
+ *  3. Ejecutar el handler (fan-out real: TMDB, indexadores…).
+ *
+ * Las respuestas `no-store`/`private` (Debrid, degradadas) nunca se guardan.
+ */
 async function edgeCached(request, ctx, createResponse, cacheUrl) {
   const edge = globalThis.caches && globalThis.caches.default;
-  if (!edge || request.method !== 'GET') return createResponse();
-  const key = new Request(cacheUrl || request.url, { method: 'GET' });
-  try {
-    const cached = await edge.match(key);
-    if (cached) return cached;
-  } catch (_) { /* Cache API no disponible en algunos entornos locales */ }
+  const key = cacheUrl || request.url;
+  if (request.method !== 'GET') return createResponse();
 
+  // 1) Memoria del isolate (gratis: ni CPU ni subpeticiones).
+  const fromMemory = responseCache.get(key);
+  if (fromMemory) return rebuildResponse(fromMemory);
+
+  // 1b) Caducado pero en su ventana de gracia: se sirve y se recalcula en
+  //     segundo plano (stale-while-revalidate), como promete la cabecera.
+  const stale = responseCache.getStale(key);
+  if (stale) {
+    const refresh = responseCache.coalesce(key, () => runAndCache(key, createResponse, ctx, edge)).catch(() => {});
+    if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(refresh);
+    return rebuildResponse(stale);
+  }
+
+  // 2) Cache API del borde. `match` cuenta como subpetición, así que solo se
+  //    consulta cuando la memoria no tiene nada.
+  if (!edge) return responseCache.coalesce(key, () => runAndCache(key, createResponse, ctx, null));
+
+  try {
+    const cached = await edge.match(new Request(key, { method: 'GET' }));
+    if (cached) {
+      try {
+        cached.headers.set('X-Catalogos-Cache', 'edge');
+      } catch (_) { /* cabeceras inmutables: solo instrumentación */ }
+      return cached;
+    }
+  } catch (_) { /* Cache API no disponible (p. ej. en local) */ }
+
+  // 3) Ejecutar el handler una sola vez para las peticiones concurrentes.
+  return responseCache.coalesce(key, () => runAndCache(key, createResponse, ctx, edge));
+}
+
+/** Reconstruye una respuesta guardada como texto + cabeceras. */
+function rebuildResponse(entry, level = 'memory') {
+  const stored = JSON.parse(entry);
+  const response = new Response(stored.body, { status: stored.status, headers: stored.headers });
+  try {
+    response.headers.set('X-Catalogos-Cache', level);
+  } catch (_) { /* cabeceras inmutables: solo instrumentación */ }
+  return response;
+}
+
+/** Serializa una respuesta para guardarla en la memoria del isolate. */
+async function serializeResponse(response) {
+  const clone = response.clone();
+  const body = await clone.text();
+  return JSON.stringify({
+    status: response.status,
+    headers: [...response.headers],
+    body,
+  });
+}
+
+async function runAndCache(key, createResponse, ctx, edge) {
   const response = await createResponse();
+  try {
+    response.headers.set('X-Catalogos-Cache', 'miss');
+  } catch (_) { /* cabeceras inmutables: solo instrumentación */ }
   const policy = response.headers.get('Cache-Control') || '';
   const cacheable = response.status === 200 && !/(?:no-store|private)/i.test(policy);
-  if (cacheable) {
+  if (!cacheable) return response;
+  const { ttl, stale } = cacheTtl(policy);
+  if (edge) {
     const put = Promise.resolve()
-      .then(() => edge.put(key, response.clone()))
+      .then(() => edge.put(new Request(key, { method: 'GET' }), response.clone()))
       .catch(() => {});
     if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(put);
     else await put;
+  }
+  if (ttl > 0) {
+    const store = Promise.resolve()
+      .then(() => serializeResponse(response))
+      .then((entry) => responseCache.set(key, entry, ttl, { staleSeconds: Math.min(stale, 3600) }))
+      .catch(() => {});
+    if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(store);
+    else await store;
   }
   return response;
 }
@@ -257,8 +342,13 @@ async function loadTrending() {
   }
 }
 
-export default {
-  async fetch(request, env, ctx) {
+/**
+ * Todas las respuestas del Worker llevan `X-Catalogos-Runtime: worker`. Los
+ * static assets de `public/` se sirven sin pasar por aquí, así que una
+ * respuesta SIN esa cabecera no consumió invocación: es la forma de auditar
+ * desde fuera qué parte del tráfico es gratis (scripts/scale-audit.mjs).
+ */
+async function handleRequest(request, env, ctx) {
     try {
       config.reload(env || {});
     } catch (err) {
@@ -426,7 +516,7 @@ export default {
 
     // ── Estado agregado de la caché (sin claves ni datos por usuario) ──
     if (path === '/internal/cache.json') {
-      return jsonResponse(cache.stats(), 200, 0);
+      return jsonResponse({ ...cache.stats(), responseCache: responseCache.stats() }, 200, 0);
     }
 
     // ── Branding (logos de plataformas/estudios vía TMDB) ─────
@@ -490,10 +580,16 @@ export default {
             mode: 'oauth-personal-library',
             oauthConfigured: realDebridOAuth.isConfigured(env || {}),
             credentialStorageReady: debridCredentials.isConfigured(env || {}),
+            // 'kv' es duradero; 'cache' (Cache API) funciona sin configurar
+            // pero es por datacenter, así que conviene crear la KV.
+            credentialStorage: debridCredentials.storageKind(env || {}),
           },
           // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
           donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
           cache: cache.stats(),
+          // Caché de respuestas del isolate: la única que funciona en
+          // *.workers.dev, donde la Cache API de Cloudflare no hace nada.
+          responseCache: responseCache.stats(),
           watchRegion: config.watchRegion,
           watchRegionFallback: config.watchRegionFallback,
         },
@@ -559,5 +655,14 @@ export default {
       404,
       0
     );
+}
+
+export default {
+  async fetch(request, env, ctx) {
+    const response = await handleRequest(request, env, ctx);
+    try {
+      response.headers.set('X-Catalogos-Runtime', 'worker');
+    } catch (_) { /* cabeceras inmutables: no pasa nada, es solo instrumentación */ }
+    return response;
   },
 };

@@ -28,6 +28,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Crea (una sola vez) la KV de credenciales debrid y la enlaza en
+      # wrangler.toml. Sin token avisa y sigue: el Worker cae en la Cache API.
+      - name: Asegura la KV de credenciales debrid (DEBRID_KV)
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node scripts/debrid-kv.mjs
+
       - name: Prerender default catalogs and static web
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}

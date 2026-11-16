@@ -490,6 +490,9 @@ export default {
             mode: 'oauth-personal-library',
             oauthConfigured: realDebridOAuth.isConfigured(env || {}),
             credentialStorageReady: debridCredentials.isConfigured(env || {}),
+            // 'kv' es duradero; 'cache' (Cache API) funciona sin configurar
+            // pero es por datacenter, así que conviene crear la KV.
+            credentialStorage: debridCredentials.storageKind(env || {}),
           },
           // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
           donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },

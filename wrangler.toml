@@ -48,9 +48,13 @@ compatibility_flags = ["nodejs_compat"]
 directory = "./public"
 run_worker_first = false
 
-# Credenciales debrid (opcional): crea una KV para las credenciales cifradas.
-#   npx wrangler kv namespace create DEBRID_KV
+# Credenciales debrid: el único secreto imprescindible es la clave de cifrado.
 #   npx wrangler secret put DEBRID_ENCRYPTION_KEY
+# Sin KV, las credenciales se guardan en la Cache API de Cloudflare (funciona
+# sin configurar nada, pero es por datacenter y Cloudflare puede expulsarlas).
+# Para el almacén duradero, ejecuta una vez (crea la KV y rellena este bloque):
+#   npm run debrid:kv          # = npx wrangler kv namespace create DEBRID_KV
+# `npm run deploy` ya lo intenta solo; sin sesión de Cloudflare avisa y sigue.
 # Para OAuth Real-Debrid, configura además como secrets:
 #   REALDEBRID_CLIENT_ID, REALDEBRID_CLIENT_SECRET y REALDEBRID_REDIRECT_URI
 # (callback exacto: https://<tu-dominio>/internal/debrid/real-debrid/callback).

@@ -133,6 +133,7 @@ app.get('/healthz', (req, res) => {
       mode: 'oauth-personal-library',
       oauthConfigured: realDebridOAuth.isConfigured(),
       credentialStorageReady: debridCredentials.isConfigured(),
+      credentialStorage: debridCredentials.storageKind(),
     },
     // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
     donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },

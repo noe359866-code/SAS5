@@ -830,11 +830,11 @@ test('The RarBg: con HTTP 429 se pausa lo que pide Retry-After y una respuesta r
   }
 });
 
-test('healthz: informa de los nueve proveedores de streams', async () => {
+test('healthz: informa de los diez proveedores de streams', async () => {
   const worker = (await import('../worker.mjs')).default;
   const all = await (await worker.fetch(new Request('https://addon.example/healthz'), {}, {})).json();
   assert.deepEqual(all.streamProviders, [
-    'knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes',
+    'knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol',
   ]);
   for (const key of all.streamProviders) assert.equal(all.sources[key], true, key);
   const some = await (await worker.fetch(new Request('https://addon.example/healthz'), { STREAM_PROVIDERS: 'yts,knaben' }, {})).json();
@@ -1041,4 +1041,127 @@ test('Índice BR: sin IMDb id ni título en portugués no se consulta; una respu
   const broken = await core.handleStream('movie', 'tt981353');
   assert.deepEqual(broken.streams, []);
   assert.equal(broken.cacheMaxAge, 0);
+});
+
+// ── Fuentes en español (ES/LAT) ───────────────────────────────────────────
+// Los lanzamientos hispanos se publican con el título en español, así que los
+// indexadores generales solo los encuentran si se les pregunta en español.
+
+/** Knaben/BHB devuelven sus resultados en `hits`/`results` con hash e info_hash. */
+function esHit(title, hash, seeders, extra = {}) {
+  return { title, hash, magnetUrl: `magnet:?xt=urn:btih:${hash}`, seeders, peers: 3, bytes: 2 * 1024 ** 3, ...extra };
+}
+
+test('Español ES/LAT: busca con el título en español y solo devuelve lanzamientos hispanos', async () => {
+  config.reload({ STREAM_PROVIDERS: 'espanol', TMDB_API_KEY: 'tmdb-es-test' });
+  const core = require('../lib/core');
+  const knaben = [];
+  global.fetch = async (url) => {
+    const u = new URL(url);
+    if (u.hostname === 'api.themoviedb.org') {
+      if (u.pathname.includes('/find/')) {
+        return json({ movie_results: [{ id: 981360, title: 'Dune: Part Two', original_title: 'Dune: Part Two', release_date: '2024-02-27' }], tv_results: [] });
+      }
+      // Detalle en español: España y México titulan igual, así que solo hay
+      // una consulta nueva.
+      return json({ id: 981360, title: 'Duna: Parte Dos' });
+    }
+    if (u.hostname === 'api.knaben.org') {
+      knaben.push(u.searchParams.get('q'));
+      return json({
+        hits: [
+          esHit('Duna Parte Dos 2024 1080p WEB-DL', 'a'.repeat(40), 40),
+          // Otro estreno: no es la película pedida ni en español.
+          esHit('Otra Pelicula 2024 1080p', 'b'.repeat(40), 990),
+        ],
+      });
+    }
+    if (u.hostname === 'theblackholebay.lol') {
+      return json({ results: [{ name: 'Dune Part Two 2024 1080p [Castellano]', info_hash: 'c'.repeat(40), magnet: `magnet:?xt=urn:btih:${'c'.repeat(40)}`, seeders: 25, leechers: 5, size: 3 * 1024 ** 3 }] });
+    }
+    if (u.hostname === 'www.torlock.com') {
+      // En inglés y sin marca de audio: no es contenido en español.
+      return new Response('<rss><channel><item><title>Dune Part Two 2024 2160p</title><link>magnet:?xt=urn:btih:dddddddddddddddddddddddddddddddddddddddd</link></item></channel></rss>', { status: 200, headers: { 'Content-Type': 'text/xml' } });
+    }
+    return json({});
+  };
+  const result = await core.handleStream('movie', 'tt981360');
+  // La consulta viaja con el título en español y el año.
+  assert.deepEqual(knaben, ['Duna: Parte Dos 2024']);
+  assert.deepEqual(
+    result.streams.map((s) => s.infoHash),
+    ['a'.repeat(40), 'c'.repeat(40)], // por seeders; el inglés sin audio hispano queda fuera
+  );
+  assert.equal(result.cacheMaxAge, 3600);
+  const [castellano] = result.streams.filter((s) => s.infoHash === 'c'.repeat(40));
+  assert.match(castellano.title, /Dune Part Two 2024 1080p \[Castellano\]/);
+});
+
+test('Español ES/LAT: en series exige el episodio pedido, también en formato hispano', async () => {
+  config.reload({ STREAM_PROVIDERS: 'espanol', TMDB_API_KEY: 'tmdb-es-test' });
+  const core = require('../lib/core');
+  const queries = [];
+  global.fetch = async (url) => {
+    const u = new URL(url);
+    if (u.hostname === 'api.themoviedb.org') {
+      if (u.pathname.includes('/find/')) {
+        return json({ movie_results: [], tv_results: [{ id: 981361, name: 'The Last of Us', original_name: 'The Last of Us', first_air_date: '2023-01-15' }] });
+      }
+      return json({ id: 981361, name: 'The Last of Us' }); // mismo título: sin consulta extra
+    }
+    if (u.hostname === 'api.knaben.org') {
+      queries.push(u.searchParams.get('q'));
+      return json({ hits: [] });
+    }
+    return json({ results: [] });
+  };
+  const result = await core.handleStream('series', 'tt981361:1:2');
+  assert.deepEqual(result.streams, []);
+  // Sin título en español distinto, el proveedor se omite: no repite la
+  // búsqueda en inglés que ya hacen los proveedores generales.
+  assert.deepEqual(queries, []);
+  assert.equal(result.cacheMaxAge, 3600); // omitir no es un fallo
+});
+
+test('Español ES/LAT: sin TMDB el proveedor se omite y no cuenta como fallo', async () => {
+  config.reload({ STREAM_PROVIDERS: 'espanol', TMDB_API_KEY: '' });
+  const core = require('../lib/core');
+  const hosts = [];
+  global.fetch = async (url) => {
+    hosts.push(hostOf(url));
+    if (hostOf(url).includes('cinemeta')) return json({ meta: { name: 'Example Film', year: '2020' } });
+    return json({ hits: [] });
+  };
+  const result = await core.handleStream('movie', 'tt981362');
+  assert.deepEqual(result.streams, []);
+  assert.equal(result.cacheMaxAge, 3600);
+  assert.ok(!hosts.includes('api.knaben.org'), 'sin clave de TMDB no hay título en español que buscar');
+});
+
+test('Español ES/LAT: si las tres fuentes fallan el proveedor falla y no se cachea', async () => {
+  config.reload({ STREAM_PROVIDERS: 'espanol', TMDB_API_KEY: 'tmdb-es-test' });
+  const core = require('../lib/core');
+  global.fetch = async (url) => {
+    const u = new URL(url);
+    if (u.hostname === 'api.themoviedb.org') {
+      if (u.pathname.includes('/find/')) {
+        return json({ movie_results: [{ id: 981363, title: 'The Batman', original_title: 'The Batman', release_date: '2022-03-01' }], tv_results: [] });
+      }
+      return json({ id: 981363, title: 'El Batman' });
+    }
+    throw new Error('caída de prueba');
+  };
+  const result = await core.handleStream('movie', 'tt981363');
+  assert.deepEqual(result.streams, []);
+  assert.equal(result.cacheMaxAge, 0);
+});
+
+test('Español ES/LAT: audio latino y castellano se reconocen como españoles', () => {
+  const streams = require('../lib/streams');
+  const titles = ['The Batman', 'El Batman'];
+  assert.equal(streams.spanishAudio('El Batman 2022 1080p [Castellano]', titles), true);
+  assert.equal(streams.spanishAudio('The Batman 2022 1080p [Español Latino]', titles), true);
+  assert.equal(streams.spanishAudio('The Batman 2022 1080p [Latino]', titles), true);
+  // Sin marca de audio hispano no basta: eso ya lo cubren los generales.
+  assert.equal(streams.spanishAudio('The Batman 2022 1080p WEB-DL', titles), false);
 });

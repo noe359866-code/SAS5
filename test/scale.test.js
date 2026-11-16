@@ -264,3 +264,127 @@ test('escala: decodeConfig memoizado devuelve copias independientes sin contamin
   const second = userConfig.decodeConfig(seg, ['netflix', 'disney'], ['marvel', 'pixar'], ['knaben', 'yts']);
   assert.deepEqual(second.platforms, ['netflix']);
 });
+
+// ── Caché del isolate: la que salva un despliegue en `*.workers.dev` ─────
+// La Cache API de Cloudflare no hace nada en `*.workers.dev` (docs: «any
+// Cache API operations … in *.workers.dev deployments will have no impact»).
+// Sin dominio propio, cada petición repetida volvía a ejecutar el fan-out
+// completo: CPU, subpeticiones y cuota de APIs externas. La caché de
+// respuestas del isolate funciona en cualquier entorno.
+
+test('escala: sin Cache API (como en *.workers.dev) la memoria del isolate evita repetir el fan-out', async () => {
+  const worker = await loadWorker();
+  const responseCache = require('../lib/responseCache');
+  const core = require('../lib/core');
+  const originalCaches = globalThis.caches;
+  const originalFetch = global.fetch;
+  const originalHandler = core.handleCatalog;
+  let handlerCalls = 0;
+
+  delete globalThis.caches; // simula workers.dev: sin Cache API en absoluto
+  responseCache.reset();
+  config.reload({ TMDB_API_KEY: 'tmdb-scale-test', RESPONSE_CACHE_MB: '24' });
+  core.handleCatalog = async (...args) => {
+    handlerCalls++;
+    return originalHandler.apply(core, args);
+  };
+  global.fetch = async (url) => {
+    const u = new URL(String(url));
+    if (u.hostname === 'api.themoviedb.org') {
+      if (u.pathname.includes('/discover/')) {
+        return new Response(JSON.stringify({ page: 1, total_pages: 1, results: [{ id: 1, title: 'Película de prueba', release_date: '2024-01-01' }] }), { status: 200 });
+      }
+      return new Response(JSON.stringify({ movie_results: [], tv_results: [] }), { status: 200 });
+    }
+    return new Response(JSON.stringify({ hits: [] }), { status: 200 });
+  };
+
+  const request = () => worker.fetch(new Request('https://scale.example/catalog/movie/cine_tendencias.json'), {}, {});
+  try {
+    const first = await request();
+    assert.equal(first.status, 200);
+    assert.equal(first.headers.get('x-catalogos-cache'), 'miss');
+    assert.equal(handlerCalls, 1);
+
+    // 25 repeticiones del mismo catálogo (lo que hace Stremio al abrir la app
+    // en cada equipo del mismo PoP): ninguna vuelve a ejecutar el handler.
+    for (let i = 0; i < 25; i++) {
+      const res = await request();
+      assert.equal(res.headers.get('x-catalogos-cache'), 'memory');
+    }
+    assert.equal(handlerCalls, 1, 'la memoria del isolate absorbió las 25 repeticiones');
+
+    // Sin esta capa, cada repetición reejecutaría el handler completo: es lo
+    // que pasa hoy en un workers.dev, donde la Cache API no funciona.
+    config.reload({ TMDB_API_KEY: 'tmdb-scale-test', RESPONSE_CACHE_MB: '0' });
+    const cold = await request();
+    assert.equal(cold.headers.get('x-catalogos-cache'), 'miss');
+    assert.equal(handlerCalls, 2, 'sin caché de respuestas se repite el trabajo');
+  } finally {
+    core.handleCatalog = originalHandler;
+    config.reload({ RESPONSE_CACHE_MB: '24' });
+    responseCache.reset();
+    global.fetch = originalFetch;
+    if (originalCaches === undefined) delete globalThis.caches;
+    else globalThis.caches = originalCaches;
+  }
+});
+
+test('escala: 20 peticiones simultáneas del mismo recurso frío ejecutan el fan-out una sola vez', async () => {
+  const worker = await loadWorker();
+  const responseCache = require('../lib/responseCache');
+  const core = require('../lib/core');
+  const originalCaches = globalThis.caches;
+  const originalFetch = global.fetch;
+  const originalHandler = core.handleCatalog;
+  let handlerCalls = 0;
+
+  delete globalThis.caches;
+  responseCache.reset();
+  config.reload({ TMDB_API_KEY: 'tmdb-scale-test', RESPONSE_CACHE_MB: '24' });
+  core.handleCatalog = async (...args) => {
+    handlerCalls++;
+    return originalHandler.apply(core, args);
+  };
+  global.fetch = async (url) => {
+    const u = new URL(String(url));
+    if (u.hostname === 'api.themoviedb.org' && u.pathname.includes('/discover/')) {
+      return new Response(JSON.stringify({ page: 1, total_pages: 1, results: [{ id: 1, title: 'Película de prueba', release_date: '2024-01-01' }] }), { status: 200 });
+    }
+    return new Response(JSON.stringify({ movie_results: [], tv_results: [] }), { status: 200 });
+  };
+
+  try {
+    const responses = await Promise.all(
+      Array.from({ length: 20 }, () => worker.fetch(new Request('https://scale.example/catalog/movie/cine_tendencias.json'), {}, {}))
+    );
+    assert.deepEqual([...new Set(responses.map((r) => r.status))], [200]);
+    // Single-flight: 20 llegadas simultáneas sobre el mismo recurso frío
+    // ejecutan UNA sola carga (las demás esperan el mismo resultado).
+    assert.equal(handlerCalls, 1);
+    await worker.fetch(new Request('https://scale.example/catalog/movie/cine_tendencias.json'), {}, {});
+    assert.equal(handlerCalls, 1, 'la 21ª ya sale de memoria');
+  } finally {
+    core.handleCatalog = originalHandler;
+    config.reload({ RESPONSE_CACHE_MB: '24' });
+    responseCache.reset();
+    global.fetch = originalFetch;
+    if (originalCaches === undefined) delete globalThis.caches;
+    else globalThis.caches = originalCaches;
+  }
+});
+
+test('escala: las respuestas del Worker se marcan para poder auditar qué tráfico es gratis', async () => {
+  const worker = await loadWorker();
+  const responseCache = require('../lib/responseCache');
+  responseCache.reset();
+  const res = await worker.fetch(new Request('https://scale.example/healthz'), {}, {});
+  assert.equal(res.status, 200);
+  // Los static assets de public/ se sirven SIN ejecutar el Worker, así que
+  // una respuesta sin esta cabecera no consumió invocación: es lo que mide
+  // scripts/scale-audit.mjs contra el despliegue real.
+  assert.equal(res.headers.get('x-catalogos-runtime'), 'worker');
+  const body = await res.json();
+  assert.equal(typeof body.responseCache.entries, 'number');
+  assert.equal(typeof body.responseCache.budgetBytes, 'number');
+});

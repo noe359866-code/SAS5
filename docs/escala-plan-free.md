@@ -1,6 +1,19 @@
-# 📈 Arquitectura de Alta Escala: cómo sostener +230.000–350.000+ peticiones/día
+# 📈 Arquitectura de Alta Escala: cómo sostener +230.000–500.000 peticiones/día
 
-Guía técnica y operativa para sostener **+230.000 peticiones/día** (~2,66 req/s sostenidos, picos de **15–35 req/s** en prime time y ~7M–10M peticiones/mes) sin caídas (`Error 1027`, `Error 1102` de CPU, límite de 50 subpeticiones ni bloqueo 429 en proveedores externos).
+Guía técnica y operativa para sostener **+500.000 peticiones/día** (~5,8 req/s sostenidos, picos de **30–70 req/s** en prime time y ~15M peticiones/mes) en el **plan gratuito** de Cloudflare Workers, sin caídas (`Error 1027`, `Error 1102` de CPU, límite de 50 subpeticiones ni bloqueo 429 en proveedores externos).
+
+> ### ⚠️ Los dos datos que deciden todo (verificados en la documentación de 2026)
+> 1. **Workers Free = 100.000 invocaciones/día por CUENTA** (no por Worker). Al pasarlas, Cloudflare
+>    responde `Error 1027` directamente: el Worker ni se ejecuta, así que ningún código puede
+>    «defender» el servicio llegado ese punto. Hay que evitar llegar.
+> 2. **La Cache API (`caches.default`) NO funciona en `*.workers.dev`**. Los docs lo dicen literalmente:
+>    «any Cache API operations in … any *.workers.dev deployments will have no impact. Only Workers
+>    deployed to custom domains have access to functional cache operations». Lo mismo aplica a las
+>    Cache Rules: no existen en un subdominio `workers.dev` porque no es tu zona.
+>
+> Consecuencia: sin dominio propio, **lo único gratis e ilimitado son los static assets** de `public/`
+> (con tope de **20.000 archivos por versión**). Todo lo demás cuenta. Por eso el orden de esta guía es:
+> primero static assets, después caché del isolate, y solo al final la Cache API del borde.
 
 ---
 
@@ -24,15 +37,38 @@ En un addon de Stremio + reproductor web (`/watch`), el tráfico típico se repa
 | CPU por invocación | **10 ms** | **< 2,5 ms** en hits de caché/catálogos (`config.reload` por huella, `decodeConfig` memoizado, `prune` amortizado O(1)) y **4–7 ms** en `/stream` |
 | Subpeticiones (`fetch`) por invocación | **50 máx.** | **≤ 25** en catálogos fríos (tope de 24 `/external_ids` + 1 `/discover`), **≤ 7** en `/internal/branding.json` (concurrencia 5 + caché 24 h), **≤ 12** en `/stream` |
 | Cloudflare KV `get` (`DEBRID_KV`) | **1.000 lecturas / día** (Free) | **~150 – 400 lecturas / día** incluso con miles de reproducciones debrid, gracias a la caché en RAM de 5 min + `cacheTtl: 300` en el PoP de KV |
-| Memoria por isolate | **128 MB** | **~25 – 40 MB** con `MAX_ENTRIES = 8000` (cubre las 3.630 claves `tmdb:ext:*` de los 121 catálogos + páginas + pools de streams sin thrashing LRU) |
+| Memoria por isolate | **128 MB** | **~25 – 40 MB** de cachés de datos + **hasta `RESPONSE_CACHE_MB` (24 MB por defecto)** para respuestas completas; el presupuesto se mide en **bytes**, no en entradas |
+| Archivos por versión (static assets) | **20.000** (Free) | **~130 de catálogos + hasta 1.500 fichas + ~40 de web**: el prerender se detiene y avisa antes de pasar el tope (`scripts/prerender-catalogs.mjs`) |
+| Cache API (`caches.default`) | Funcional **solo en dominio propio** | En `*.workers.dev` es un **no-op**: por eso la caché de respuestas del isolate (`lib/responseCache.js`) va **antes** y es la que sostiene esos despliegues |
 
 ---
 
 ## 2. Las 6 capas de defensa implementadas en el código
 
+### Capa 0 · Caché de respuestas en el isolate (`lib/responseCache.js`)
+
+Es la capa nueva y la que más cambia las cuentas en un `*.workers.dev`. Guarda la **respuesta HTTP
+completa** (estado + cabeceras + cuerpo) en la memoria del isolate:
+
+- **Va antes que la Cache API.** `cache.match()` cuenta como subpetición (límite de 50) y además no
+  funciona en `workers.dev`; la memoria no gasta ni CPU ni subpeticiones.
+- **Presupuesto por bytes** (`RESPONSE_CACHE_MB`, 24 MB por defecto, `0` la desactiva): un catálogo
+  pesa ~100 veces una ficha, así que limitar por número de entradas no protegería los 128 MB.
+- **TTL derivado del `Cache-Control`** que ya publicamos, más ventana *stale-while-revalidate*: si la
+  entrada caducó pero sigue en su gracia, se sirve al instante y se recalcula en segundo plano.
+- **Single-flight**: 20 peticiones simultáneas del mismo recurso frío ejecutan **una sola** carga.
+- **Nunca guarda `no-store`/`private`** (Debrid, respuestas degradadas).
+
+Ojo con lo que **no** hace: no reduce invocaciones —eso solo lo consiguen los static assets y una
+Cache Rule del CDN—, pero convierte una petición de ~5 ms y 25 subpeticiones en una de ~0,1 ms y 0
+subpeticiones, que es lo que evita el `Error 1102` de CPU y el agotamiento de TMDB/OMDB/Watchmode.
+
 ### Capa 1 · Zero-Worker Static Offloading (`public/` + GitHub Actions cada 6 h)
 En `wrangler.toml`, `[assets] directory = "./public"` con `run_worker_first = false` hace que Cloudflare sirva cualquier archivo estático **antes de facturar o contar una invocación del Worker** (tráfico gratuito e ilimitado):
 - `scripts/prerender-catalogs.mjs` genera los 121 JSON en `public/catalog/<type>/<id>.json`.
+- Ese mismo script pregenera las **fichas** de los títulos que aparecen en esos catálogos
+  (`public/meta/<type>/<tt…>.json`, hasta `--max-metas=1500`): las fichas son el segundo bloque de
+  tráfico (~15 %) y así dejan de ejecutar el Worker en las instalaciones sin personalizar.
 - `scripts/build-web.mjs` (cuando defines `PUBLIC_ORIGIN` o `ADDON_BASE_URL`) pregenera:
   - `public/index.html` (portada con tendencias horneadas)
   - `public/configure/index.html` (configurador completo)
@@ -133,7 +169,45 @@ El archivo `.github/workflows/prerender.yml` ya está listo en el repositorio. S
   - `PUBLIC_ORIGIN` → `https://tu-dominio.com` (o tu URL `https://catalogos-stremio.<subdominio>.workers.dev`)
   - `WATCH_REGION` → `NI` (o tu país principal, p. ej. `MX`, `ES`)
 
-### C) Cuándo pasar a Workers Paid ($5 USD/mes)
+### C) Verificar si TU despliegue aguanta 500.000 peticiones/día
+
+No hay que creerse la tabla: se mide. `scripts/scale-audit.mjs` pregunta al despliegue real y
+proyecta cuántas de esas peticiones ejecutarían el Worker. El truco es la cabecera
+`X-Catalogos-Runtime: worker`, que el Worker añade a **todas** sus respuestas: lo que llegue sin ella
+fue servido por un static asset o por el CDN, es decir, **gratis**.
+
+```bash
+node scripts/scale-audit.mjs --url https://tu-dominio            # proyección a 500.000/día
+PUBLIC_ORIGIN=https://tu-dominio npm run scale:audit             # lo mismo, con la variable del repo
+node scripts/scale-audit.mjs --url https://tu-dominio --requests 800000
+node scripts/scale-audit.mjs --url https://tu-dominio --json     # para CI
+```
+
+Sale del script con código `0` si cabe en las 100.000 invocaciones y `2` si no, así que se puede usar
+como comprobación automática después de cada despliegue.
+
+### D) Las tres cuentas que importan (500.000 peticiones/día)
+
+| Escenario | Catálogos + fichas + web (90 %) | Streams (10 %) | Invocaciones/día | ¿Cabe en Free? |
+| --- | --- | --- | --- | --- |
+| **A. Dominio propio + Cache Rule** | CDN y static assets → **0** | Worker (no se cachean: son por título, y con Debrid además `no-store`) | **~50.000** | ✅ **Sí** (50 % del presupuesto libre) |
+| **B. `*.workers.dev` con prerender** | Gratis **solo sin configuración**; con `/<cfg>/` ejecutan el Worker | Worker | **~50.000 – 500.000** según cuántos usuarios instalen el manifest personal | ⚠️ Depende: si más del ~20 % del tráfico lleva `/<cfg>/`, te pasas |
+| **C. `*.workers.dev` sin prerender** | Todo ejecuta el Worker | Worker | **~500.000** | ❌ No (5× por encima) |
+
+Por qué cambia tanto: sin Cache Rule, cada petición con configuración propia (`/<cfg>/…`, que es lo
+que instala `/configure`) pasa sí o sí por el Worker. En el escenario B, la caché de respuestas del
+isolate evita que eso se convierta en un fan-out a TMDB en cada repetición, pero **no** evita la
+invocación.
+
+**Recomendación, en orden de impacto:**
+1. **Conecta un dominio propio** (gratis) y crea la Cache Rule de la sección 3. Es el único paso que
+   convierte el 90 % del tráfico en gratis *incluso con configuración personal*.
+2. **Pregenera** (`PUBLIC_ORIGIN=… npm run deploy`): catálogos, fichas, portada y `/configure`.
+3. **Deja la caché del isolate activa** (`RESPONSE_CACHE_MB=24`): es la red de seguridad para el
+   tráfico que sí llega al Worker.
+4. Compruébalo con `npm run scale:audit -- --url https://tu-dominio`.
+
+### E) Cuándo pasar a Workers Paid ($5 USD/mes)
 Si decides **no** usar dominio propio con Cache Rules, o si tu comunidad supera las **~80.000 búsquedas únicas de `/stream` al día** (>600.000–800.000 peticiones totales/día):
 - **Workers Paid ($5/mes)** sube las cuotas a **10.000.000 invocaciones/mes** (~333.000 invocaciones puras de Worker al día, equivalentes a **>1,5 millones de peticiones totales/día** sumando Static Assets + CDN), **30 s de CPU** por invocación y **1.000 subpeticiones** por invocación, además de **10 millones de lecturas KV/mes**.
 

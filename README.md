@@ -237,16 +237,28 @@ Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
 - **Landing con botón de 1 clic:** `https://catalogos-plus.tu-subdominio.workers.dev/`
 - **Healthcheck:** `https://catalogos-plus.tu-subdominio.workers.dev/healthz`
 
-#### Capacidad del plan free: +230K–350K+ peticiones/día
+#### Capacidad del plan free: +230K–500K peticiones/día
 
-El plan gratuito de Workers tiene **100.000 invocaciones/día** (Error 1027), **10 ms de CPU**, **50 subpeticiones/invocación** y **1.000 lecturas KV/día** en `DEBRID_KV`. `Catálogos+` está diseñado para superar **+230.000 peticiones/día** holgadamente combinando seis defensas automáticas:
+El plan gratuito de Workers tiene **100.000 invocaciones/día por cuenta** (Error 1027), **10 ms de CPU**, **50 subpeticiones/invocación**, **1.000 lecturas KV/día** y **20.000 archivos estáticos** por versión. `Catálogos+` está diseñado para **+500.000 peticiones/día** combinando siete defensas automáticas:
 
-1. **Zero-Worker Static Assets (`public/`, tráfico gratis e ilimitado).** Con `[assets]` (`run_worker_first = false`) en `wrangler.toml`, Cloudflare sirve sin despertar al Worker los 121 catálogos por defecto (`npm run prerender`), el logo y, al definir `PUBLIC_ORIGIN=https://tu-dominio.example npm run build:web`, también `public/index.html`, `public/configure/index.html`, `public/manifest.json` y `public/internal/branding.json`. El workflow `.github/workflows/prerender.yml` los regenera y despliega automáticamente cada 6 h.
-2. **Edge Cache canónica entre usuarios (`worker.mjs`).** Las rutas `/<cfg>/catalog/*`, `/<cfg>/meta/*` y `/<cfg>/stream/*` (sin debrid) comparten la misma clave en `caches.default` según sus parámetros reales (`lang`, `region`, filtros), aunque cada usuario tenga un token `/<cfg>/` distinto. Las respuestas con `debridId` jamás tocan caché compartida (`Cache-Control: no-store`).
+> **Aviso importante para `*.workers.dev`:** la Cache API de Cloudflare **no funciona** en esos
+> subdominios («any Cache API operations … in *.workers.dev deployments will have no impact») y allí
+> no se pueden crear Cache Rules. Sin dominio propio, lo único gratis son los static assets, así que
+> el paso 3 (dominio propio) es el que decide si llegas a 500K.
+
+1. **Zero-Worker Static Assets (`public/`, tráfico gratis e ilimitado).** Con `[assets]` (`run_worker_first = false`) en `wrangler.toml`, Cloudflare sirve sin despertar al Worker los 121 catálogos por defecto (`npm run prerender`), **las fichas de sus títulos** (`public/meta/`, hasta 1.500), el logo y, al definir `PUBLIC_ORIGIN=https://tu-dominio.example npm run build:web`, también `public/index.html`, `public/configure/index.html`, `public/manifest.json` y `public/internal/branding.json`. El workflow `.github/workflows/prerender.yml` los regenera y despliega automáticamente cada 6 h, y el script se detiene antes de superar los 20.000 archivos del plan free.
+2. **Caché de respuestas en el isolate (`lib/responseCache.js`).** Va **antes** que la Cache API porque esta última no hace nada en `*.workers.dev`. Guarda la respuesta completa en memoria (presupuesto por bytes, `RESPONSE_CACHE_MB`, 24 MB por defecto), respeta el `Cache-Control` publicado, sirve *stale* mientras revalida y ejecuta **una sola** carga para las peticiones simultáneas del mismo recurso. No ahorra invocaciones, pero sí CPU, subpeticiones y cuota de TMDB/OMDB/Watchmode.
+3. **Edge Cache canónica entre usuarios (`worker.mjs`).** Las rutas `/<cfg>/catalog/*`, `/<cfg>/meta/*` y `/<cfg>/stream/*` (sin debrid) comparten la misma clave en `caches.default` según sus parámetros reales (`lang`, `region`, filtros), aunque cada usuario tenga un token `/<cfg>/` distinto. Las respuestas con `debridId` jamás tocan caché compartida (`Cache-Control: no-store`).
 3. **CDN Edge con `s-maxage` + `stale-while-revalidate` (dominio propio).** Todas las rutas públicas (incluidos `/internal/watch/*`) emiten `s-maxage` y `stale-while-revalidate`. Con un dominio propio en Cloudflare y una **Cache Rule** que respete `Cache-Control` en rutas públicas (`/catalog/`, `/meta/`, `/internal/watch/`, `/manifest.json`), el CDN absorbe >75 % del tráfico con **0 invocaciones al Worker**.
 4. **Caché en memoria de KV Debrid (`lib/debridCredentials.js`).** Las credenciales descifradas se cachean 5 min en RAM del isolate (con invalidación instantánea al actualizar/desconectar) y `cacheTtl: 300` en KV, reduciendo >95 % las lecturas contra el límite gratuito de 1.000 lecturas KV/día.
 5. **Presupuesto estricto de subpeticiones y Single-Flight (`cache.coalesce`).** Coalescencia de peticiones concurrentes en TMDB, OMDB, Watchmode, TVDB, catálogos, fichas y streams; tope de 24 `/external_ids` por invocación (muy por debajo del límite de 50 subrequests de Cloudflare) y `MAX_ENTRIES = 8000` en la LRU.
 6. **Cero fan-out innecesario en web.** Los 21 estudios llevan logo estático integrado (0 llamadas extra al abrir `/configure`), botón *«Esenciales (carga rápida)»* para manifiestos ligeros y coalescencia de peticiones en `/watch`. Consulta la arquitectura detallada y la Cache Rule exacta en [docs/escala-plan-free.md](docs/escala-plan-free.md).
+7. **Auditoría medible (`npm run scale:audit`).** El Worker marca sus respuestas con `X-Catalogos-Runtime: worker`: lo que llegue sin esa cabecera no consumió invocación. Con eso, `node scripts/scale-audit.mjs --url https://tu-dominio` mide qué parte de tu tráfico es gratis y proyecta cuántas invocaciones/día necesitarías (sale con código `2` si te pasas de las 100.000).
+
+```bash
+npm run scale:audit -- --url https://tu-dominio            # proyección a 500.000 peticiones/día
+npm run scale:audit -- --url https://tu-dominio --requests 800000
+```
 
 ### 3.5 Instalar en Stremio
 
@@ -365,7 +377,7 @@ Cada usuario los elige en `/configure` y viajan en su URL personal (`hide`, `sor
 El plan free de Workers da **100.000 peticiones/día por cuenta** y devuelve `error 1027` al agotarlas.
 Las peticiones a *static assets* son gratis e ilimitadas, y el addon ya se apoya en eso:
 
-1. **Catálogos por defecto como estáticos** — `npm run prerender` escribe `public/catalog/<tipo>/<id>.json`
+1. **Catálogos y fichas por defecto como estáticos** — `npm run prerender` escribe `public/catalog/<tipo>/<id>.json` y `public/meta/<tipo>/<tt…>.json`
    y Cloudflare los sirve sin ejecutar el Worker (los catálogos suelen ser 60–80 % del tráfico).
 2. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de un
    manifest personal (6–10× menos peticiones por sesión).

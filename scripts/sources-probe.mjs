@@ -211,6 +211,17 @@ async function dump(url) {
   const hosts = [...new Set((html.match(/https?:\/\/[a-z0-9.-]+/gi) || []).map(hostOf))]
     .filter((host) => !/image\.tmdb|doramasflix|googletag|gstatic|fonts\./i.test(host));
   out.push(`\nhosts en el payload: ${hosts.slice(0, 20).join(', ') || '(ninguno)'}`);
+
+  // Contexto alrededor de los hosts que sirven vídeo: es lo que decide si la
+  // URL de un servidor está en el HTML o si la pide el navegador por AJAX.
+  const SERVERS = /vidhide|filemoon|streamwish|uqload|voe\.|streamtape|mixdrop|waaw|upstream|streamhub|embedwish/i;
+  for (const host of hosts) {
+    if (!SERVERS.test(host)) continue;
+    const at = html.search(new RegExp(`https?://${host.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i'));
+    if (at < 0) continue;
+    const context = redact(html.slice(Math.max(0, at - 160), at + 260)).replace(/\s+/g, ' ');
+    out.push(`\n[${host}] …${context}…`);
+  }
   return out.join('\n');
 }
 

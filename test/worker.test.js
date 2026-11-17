@@ -542,3 +542,43 @@ test('/internal/cache.json publica qué configuraciones pregenerar (sin credenci
     config.reload(env);
   }
 });
+
+test('/hls: el proxy sirve playlists y segmentos, y rechaza lo que no es media', async () => {
+  const originalFetch = global.fetch;
+  const seen = [];
+  global.fetch = async (url, options) => {
+    seen.push({ url: String(url), referer: options && options.headers && options.headers.Referer });
+    if (/master\.m3u8/.test(String(url))) {
+      return new Response('#EXTM3U\n#EXTINF:10,\nhttps://s10.vimeos.net/a/seg-1.ts?t=x\n', {
+        status: 200,
+        headers: { 'content-type': 'application/vnd.apple.mpegurl' },
+      });
+    }
+    if (/seg-1\.ts/.test(String(url))) {
+      return new Response('TS', { status: 200, headers: { 'content-type': 'video/mp2t' } });
+    }
+    return new Response('no', { status: 403 });
+  };
+  try {
+    const master = `https://addon.example/hls?ref=${encodeURIComponent('https://vimeos.net/')}&u=${encodeURIComponent('https://s10.vimeos.net/a/master.m3u8?t=x')}`;
+    let res = await worker.fetch(new Request(master), env, {});
+    assert.equal(res.status, 200);
+    const body = await res.text();
+    assert.match(body, /\/hls\?ref=/);
+    assert.equal(seen[0].referer, 'https://vimeos.net/');
+
+    // El segmento reescrito del cuerpo también funciona.
+    const rewritten = body.split('\n').find((line) => line.startsWith('/hls?'));
+    res = await worker.fetch(new Request(`https://addon.example${rewritten}`), env, {});
+    assert.equal(res.status, 200);
+    assert.equal(await res.text(), 'TS');
+
+    // Fuera de la lista blanca: 403 y sin tocar la red desde ahí.
+    const before = seen.length;
+    res = await worker.fetch(new Request(`https://addon.example/hls?u=${encodeURIComponent('https://evil.example/x.m3u8')}`), env, {});
+    assert.equal(res.status, 403);
+    assert.equal(seen.length, before);
+  } finally {
+    global.fetch = originalFetch;
+  }
+});

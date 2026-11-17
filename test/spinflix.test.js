@@ -44,8 +44,18 @@ test('spinflix película: search → detalle verificado → streamurl → HLS po
   assert.equal(hit.relevant, true);
   assert.match(hit.title, /1080p/);
   assert.match(hit.title, /Dual Latino/);
-  assert.ok(hit.url.startsWith('https://spinoff.link/pelis/proxy.php?url='));
-  assert.ok(decodeURIComponent(hit.url).includes(MASTER));
+  // Por defecto va por el proxy PROPIO del addon: pone el Referer en cada
+  // segmento y no depende de que el proxy de la web siga arriba. Sin dominio
+  // público configurado (tests), cae al CDN directo.
+  const config = require('../lib/config');
+  const originalBase = config.addonBaseUrl;
+  config.addonBaseUrl = 'https://addon.example';
+  const proxied = spinflix.proxiedHls(MASTER);
+  config.addonBaseUrl = originalBase;
+  assert.ok(proxied.startsWith('https://addon.example/hls?ref='), proxied);
+  assert.ok(decodeURIComponent(proxied).includes(MASTER));
+  // Y el stream que devuelve el buscador es reproducible con él.
+  assert.ok(hit.url === MASTER || decodeURIComponent(hit.url).includes(MASTER));
   assert.equal(calls.filter((u) => u.includes('/streamurl')).length, 1);
 });
 

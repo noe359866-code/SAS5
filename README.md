@@ -316,6 +316,7 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 | `GET /stream/:type/:id.json` | Streams torrent de Knaben + Torlock + BlackHoleBay + Nyaa + YTS + EZTV + The RarBg + Índice BR + Torrentio ES/Latino + Español (ES/LAT) + SpinFlix (`tt…`, `tt…:T:E` en series) |
 | `GET /<config>/stream/:type/:id.json` | Streams con proveedores/filtros y, si hay cuenta conectada, los enlaces directos que el adaptador confirme; respuesta `no-store` |
 | `GET /internal/streams-test.json?id=tt…` | Diagnóstico de streams: título resuelto, query, respuesta por proveedor y cuántos resultados caen en cada categoría de filtro (`categories`) |
+| `GET /hls?u=…&ref=…` | Proxy HLS de los streams directos de SpinFlix (lista blanca de hosts y extensiones de media) |
 | `GET /healthz` | Estado del addon y de las fuentes configuradas |
 | `GET /assets/logo.png` | Logo del addon |
 | `GET /` | Landing con instalador de 1 clic |
@@ -347,7 +348,10 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
   - No añade dependencias nuevas: son las mismas APIs públicas ya usadas, así que respeta sus límites y no requiere configuración. Desactívalo en `/configure` o exclúyelo de `STREAM_PROVIDERS` si no te interesa.
 - **SpinFlix** ([spinoff.link](https://spinoff.link/pelis/)) sirve **streams directos** (HLS, sin torrent ni debrid) en español latino, desde la API de su fuente LaMovie.
   - Su buscador indexa **solo títulos en español**: `interstellar` devuelve 0 resultados e `interestelar` devuelve la ficha. Por eso se consulta primero con el título de TMDB en `es-ES`/`es-MX` y después con el de la petición; sin ese primer paso el proveedor apenas daba resultados.
-  - El `.m3u8` de vimeos.net exige `Referer` y su token dura 12 h, así que el stream se sirve por el proxy de su web (`SPINFLIX_PROXY_URL`, por defecto `https://spinoff.link/pelis/proxy.php`), que añade el `Referer` y reescribe las playlists. El `/streamproxy` de su API devuelve 403 en los segmentos: no sirve como respaldo.
+  - El `.m3u8` de vimeos.net lleva token de 12 h (no ligado a IP). El CDN sirve las playlists con **200 y sin `Referer`**, pero los segmentos `.ts` son el eslabón débil: si el CDN los cierra o el proxy de su web se cae, la reproducción se queda a medias sin aviso.
+  - Por eso el stream se sirve por el **proxy propio del addon**: `GET /hls?u=<url del CDN>&ref=<referer>`. Pone el `Referer` en **cada** petición (no solo en la primera playlist porque reescribe las URI de dentro) y no depende de terceros. El `/streamproxy` de su API devuelve 403 en los segmentos.
+  - `/hls` solo acepta HTTPS, hosts de una lista blanca (`vimeos.net`/`vimeos.com` + `HLS_PROXY_HOSTS`) y extensiones de media (`.m3u8`, `.ts`, `.m4s`, `.mp4`, `.vtt`, `.key`): no es un proxy abierto. `SPINFLIX_PROXY_URL` permite volver al proxy de su web o a otro.
+  - **Cuota:** cada segmento servido por `/hls` sí ejecuta el Worker (el vídeo no es un static asset). Para no gastar el plan free, deja `SPINFLIX_PROXY_URL` apuntando al proxy de la web y usa el propio solo como rescate.
   - Un fallo puntual con uno de los títulos ya no aborta la búsqueda: se prueba el siguiente. Si **ninguna** consulta responde, el proveedor falla (y se pausa como los demás); si responden vacías, simplemente no tiene la obra.
   - No requiere clave ni cuenta. Desactívalo en `/configure` o exclúyelo de `STREAM_PROVIDERS`.
 - **Índice BR** ([torrent-indexer](https://github.com/felipemarinho97/torrent-indexer), de felipemarinho97) agrega los sitios brasileños **Comando Torrents, BluDV, Torrent dos Filmes, Starck Filmes, Rede Torrent y Vaca Torrent** en una sola API JSON. Es la vía para el contenido en portugués: lanzamientos `Dublado`, `Dual Áudio` o `Nacional` que los índices generales no tienen, con el nombre del release en portugués. Se consulta de dos formas en paralelo:

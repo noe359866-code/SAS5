@@ -38,6 +38,9 @@ import debridProviders from './lib/debridProviders.js';
 import debridConnect from './lib/debridConnect.js';
 import realDebridOAuth from './lib/realDebridOAuth.js';
 import rateLimit from './lib/rateLimit.js';
+// Proxy HLS propio: evita depender del proxy de la web de SpinFlix y pone el
+// Referer en CADA segmento, no solo en la primera playlist.
+import hlsProxy from './lib/hlsProxy.js';
 import logoData from './lib/logoData.js';
 import configRegistry from './lib/configRegistry.js';
 
@@ -459,6 +462,12 @@ async function handleRequest(request, env, ctx) {
 
     const origin = url.origin;
     const host = url.host;
+
+    // ── Proxy HLS (streams directos de SpinFlix) ───────────────
+    // /hls?u=<url del CDN>&ref=<referer>: 0 HTML, solo media y playlists.
+    if (path === '/hls') {
+      return hlsProxy.handleHlsProxy(request, url, env || {});
+    }
 
     if (path.startsWith('/internal/watch/')) {
       const watchCacheUrl = `${origin}/__edge${path}?${url.searchParams.toString()}&_r=${encodeURIComponent(config.watchRegion)}&_l=${encodeURIComponent(config.tmdbLanguage)}&_t=${config.tmdbConfigured ? 1 : 0}`;

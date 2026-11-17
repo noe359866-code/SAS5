@@ -20,7 +20,8 @@
     "videoapi:check": "node scripts/videoapi-check.mjs",
     "sources:probe": "node scripts/sources-probe.mjs",
     "vidurl:check": "node scripts/vidurl-format.mjs",
-    "playlatin:check": "node scripts/playlatinsrc-check.mjs"
+    "playlatin:check": "node scripts/playlatinsrc-check.mjs",
+    "fanpelis:check": "node scripts/fanpelis-check.mjs"
   },
   "keywords": [
     "stremio",

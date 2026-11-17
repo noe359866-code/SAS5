@@ -8,6 +8,7 @@
  *   node scripts/sources-probe.mjs --gql           # ¿sigue viva la API de Doramasflix?
  *   node scripts/sources-probe.mjs --dump <url>    # qué hay dentro de `servidores`/`links_online`
  *   node scripts/sources-probe.mjs --chain <url>   # sigue el iframe del reproductor un paso más
+ *   node scripts/sources-probe.mjs --media <url>   # ¿ese embed entrega el .m3u8 sin navegador?
  *
  * Existe porque evaluar una web desde un sandbox sin salida a Internet acaba en
  * suposiciones: esto se ejecuta donde sí hay red (un runner de GitHub Actions,
@@ -299,6 +300,73 @@ async function chain(url) {
   return out.join('\n');
 }
 
+/** Desempaquetador de Dean Edwards (`eval(function(p,a,c,k,e,d)…)`). */
+function unpackPacked(html) {
+  const m = String(html || '').match(
+    /eval\(function\(p,a,c,k,e,d\)\{[\s\S]*?\}\('((?:\\'|[^'])*)',(\d+),(\d+),'((?:\\'|[^'])*)'\.split\('\|'\)/
+  );
+  if (!m) return '';
+  let payload = m[1].replace(/\\'/g, "'");
+  const radix = Number(m[2]);
+  let count = Number(m[3]);
+  const keywords = m[4].split('|');
+  const encode = (n) => {
+    let out = '';
+    let v = n;
+    do {
+      const d = v % radix;
+      out = (d < 36 ? d.toString(36) : String.fromCharCode(d + 29)) + out;
+      v = Math.floor(v / radix);
+    } while (v > 0);
+    return out;
+  };
+  while (count--) {
+    if (keywords[count]) payload = payload.replace(new RegExp(`\\b${encode(count)}\\b`, 'g'), keywords[count]);
+  }
+  return payload;
+}
+
+/**
+ * ¿Un embed concreto entrega el vídeo sin navegador?
+ *
+ * Es la última pregunta de la cadena de evaluación: puede saberse la URL del
+ * embed y aun así no haber nada jugable, porque el reproductor monte el
+ * `.m3u8` por JavaScript. Aquí se mira el HTML tal cual y, si viene
+ * empaquetado con el `eval(function(p,a,c,k,e,d)…)` de Dean Edwards (lo que
+ * hace vimeos.net), se desempaqueta sin ejecutar nada.
+ *
+ *   node scripts/sources-probe.mjs --media https://vimeos.net/embed-x.html
+ */
+async function media(url) {
+  const out = [];
+  let res;
+  try {
+    res = await fetch(url, {
+      headers: { 'User-Agent': UA, Accept: 'text/html,*/*', 'Accept-Language': 'es-ES,es;q=0.9' },
+      redirect: 'follow',
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+  } catch (err) {
+    return `✘ ${safe(url)} · ${(err && err.name) || 'Error'}: ${(err && err.message) || err}`;
+  }
+  const html = await res.text();
+  const unpacked = unpackPacked(html);
+  const text = unpacked || html;
+  const hls = [...new Set((text.match(/https?:\/\/[^\s"'\\]+\.m3u8[^\s"'\\]*/g) || []))];
+  const vtt = [...new Set((text.match(/https?:\/\/[^\s"'\\]+\.vtt[^\s"'\\]*/g) || []))];
+  const mp4 = [...new Set((text.match(/https?:\/\/[^\s"'\\]+\.mp4[^\s"'\\]*/g) || []))];
+  const players = ['jwplayer', 'hls\.js|hlsjs', 'videojs', 'plyr', 'clappr', 'dplayer']
+    .filter((name) => new RegExp(name, 'i').test(text));
+  out.push(`${res.ok ? '✔' : '✘'} ${safe(url)} · HTTP ${res.status} · ${html.length} B · desempacado=${Boolean(unpacked)}`);
+  if (players.length) out.push(`    reproductor: ${players.join(', ')}`);
+  out.push(`    m3u8×${hls.length} · mp4×${mp4.length} · vtt×${vtt.length}`);
+  for (const item of hls.slice(0, 3)) out.push(`      · ${safe(item)}`);
+  for (const item of mp4.slice(0, 2)) out.push(`      · ${safe(item)}`);
+  const hosts = [...new Set([...hls, ...vtt, ...mp4].map(hostOf))].slice(0, 6);
+  out.push(`    hosts de vídeo: ${hosts.join(', ') || '(ninguno)'}`);
+  return out.join('\n');
+}
+
 function line(item) {
   if (item.error) return `✘ ${item.url} · ${item.error} (${item.ms} ms)`;
   const bits = [
@@ -339,6 +407,16 @@ async function main() {
       return;
     }
     console.log(await chain(target));
+    return;
+  }
+  if (args[0] === '--media') {
+    const target = args.find((arg) => /^https?:\/\//i.test(arg));
+    if (!target) {
+      console.error('Uso: node scripts/sources-probe.mjs --media <url>');
+      process.exitCode = 2;
+      return;
+    }
+    console.log(await media(target));
     return;
   }
   if (args[0] === '--dump') {

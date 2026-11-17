@@ -36,6 +36,8 @@ on:
       - 'scripts/sources-probe.mjs'
       - 'lib/hlsProxy.js'
       - 'scripts/providers-check.mjs'
+      - 'scripts/fanpelis-check.mjs'
+      - 'scripts/sources-probe.mjs'
       - 'scripts/embed69-pow.mjs'
       - '.github/workflows/providers.yml'
   schedule:
@@ -167,6 +169,52 @@ jobs:
           summary="$(grep -E '^[✔✘]|^      ·|viable|No integrar' /tmp/playlatin.txt | tr '\n' '|' | cut -c1-900)"
           echo "::notice title=PlayLatinSRC (código $status)::$summary"
 
+
+      # Fanpelis: API JSON pública con embeds ya resueltos. Se prueba en serio
+      # porque es la candidata que menos cuesta (3 GET, sin PoW): lo que decide
+      # es si el embed entrega un .m3u8 en su HTML (stream directo) o solo un
+      # iframe que el navegador rellena.
+      - name: Fanpelis · API, reproductor y embed
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if node scripts/fanpelis-check.mjs --query fractal --deep > /tmp/fanpelis.txt 2>&1; then
+            status=0
+          else
+            status=$?
+          fi
+          cat /tmp/fanpelis.txt
+          cat /tmp/fanpelis.txt >> "$GITHUB_STEP_SUMMARY"
+          summary="$(grep -E '^[✔✘]|^      ·|^      idiomas|viable|No integrar|iframe' /tmp/fanpelis.txt | tr '\n' '|' | cut -c1-900)"
+          echo "::notice title=Fanpelis (código $status)::$summary"
+
+      - name: Fanpelis · serie (API de episodios)
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if node scripts/fanpelis-check.mjs --tv --query "breaking bad" --deep > /tmp/fanpelis-tv.txt 2>&1; then
+            status=0
+          else
+            status=$?
+          fi
+          cat /tmp/fanpelis-tv.txt
+          cat /tmp/fanpelis-tv.txt >> "$GITHUB_STEP_SUMMARY"
+          summary="$(grep -E '^[✔✘]|^      ·|^      idiomas|viable|No integrar|iframe' /tmp/fanpelis-tv.txt | tr '\n' '|' | cut -c1-900)"
+          echo "::notice title=Fanpelis serie (código $status)::$summary"
+
+      # Rivales de la misma liga, para no casarse con una sola: PoseidonHD2
+      # expone servidores en su __NEXT_DATA__ (los trae el HTML, sin AJAX).
+      - name: Rivales · PoseidonHD2 y Gnula One
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node scripts/sources-probe.mjs "https://www.poseidonhd2.co/pelicula/603/matrix" "https://ver.gnula.one/movies/the-last-temptation-of-becky/" > /tmp/rivals.txt 2>&1
+          status=$?
+          cat /tmp/rivals.txt
+          cat /tmp/rivals.txt >> "$GITHUB_STEP_SUMMARY"
+          summary="$(grep -E '^[✔✘]|^    ·' /tmp/rivals.txt | tr '\n' '|' | cut -c1-900)"
+          echo "::notice title=Rivales (código $status)::$summary"
+
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.
       - name: Publicar informes
@@ -180,6 +228,9 @@ jobs:
             /tmp/pow.txt
             /tmp/videoapi.txt
             /tmp/playlatin.txt
+            /tmp/fanpelis.txt
+            /tmp/fanpelis-tv.txt
+            /tmp/rivals.txt
             /tmp/dump.txt
             /tmp/e2e.txt
           if-no-files-found: warn

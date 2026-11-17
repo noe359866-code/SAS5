@@ -21,3 +21,8 @@ La sonda reproducible está en `scripts/animeflv-probe.mjs` y se ejecuta en `.gi
 ## Implementación experimental
 
 El adaptador busca una ficha de slug exacto, solo procesa la primera temporada y requiere que el número y la ruta del episodio coincidan. Extrae exclusivamente la opción HLS del host observado y comprueba que responda con una playlist. En la ejecución 44188779134 el adaptador devolvió un resultado real para Sora wa Akai Kawa no Hotori S01E20; no se ha probado la reproducción de los segmentos ni el contenido del vídeo. La equivalencia entre la numeración de la ficha y la primera temporada sigue siendo una hipótesis conservadora, no una garantía universal.
+
+
+## Comprobación posterior de segmentos
+
+En la ejecución 44190460501 las playlists respondieron, pero `init.html` y `000.html` devolvieron 403 desde GitHub Actions con varios perfiles de Referer y User-Agent; no se identificó un challenge en la respuesta de inicialización. No demuestra lo que ocurre desde el Worker ni en el cliente. El adaptador ahora comprueba el fragmento de inicialización fMP4 con lectura limitada y omite esa variante si falla. Esto no valida todos los segmentos ni demuestra el contenido o reproducción completa. La primera temporada sigue siendo una hipótesis y las temporadas posteriores no se mapean automáticamente. El sitio también ofrece en algunos títulos una opción identificada explícitamente LAT/Dub; se etiqueta latino, mientras que Sub conserva audio desconocido.

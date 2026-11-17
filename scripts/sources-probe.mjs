@@ -6,6 +6,7 @@
  *
  *   node scripts/sources-probe.mjs https://flixlatam.com/pelicula/interstellar
  *   node scripts/sources-probe.mjs --gql           # ¿sigue viva la API de Doramasflix?
+ *   node scripts/sources-probe.mjs --dump <url>    # qué hay dentro de `servidores`/`links_online`
  *
  * Existe porque evaluar una web desde un sandbox sin salida a Internet acaba en
  * suposiciones: esto se ejecuta donde sí hay red (un runner de GitHub Actions,
@@ -142,6 +143,41 @@ async function probeDoramasGql() {
   }
 }
 
+/**
+ * Enseña lo que hay DENTRO de las claves que sirven los enlaces (payload RSC o
+ * JSON incrustado). Sin esto, «servidores×6» no dice si son nombres de host o
+ * URLs jugables. Se redacta cualquier cadena con pinta de token, y las URLs se
+ * muestran sin query.
+ */
+async function dump(url) {
+  const res = await fetch(url, {
+    headers: { 'User-Agent': UA, Accept: 'text/html,*/*', 'Accept-Language': 'es-ES,es;q=0.9' },
+    redirect: 'follow',
+    signal: AbortSignal.timeout(TIMEOUT_MS),
+  });
+  const html = await res.text();
+  const out = [`HTTP ${res.status} · ${html.length} B · ${safe(res.url || url)}`];
+  const redact = (text) => text
+    .replace(/("(?:token|hash|sig|signature|key|pass|password|jwt)"\s*:\s*")[^"]{4,}/gi, '$1<redactado>')
+    .replace(/\?[^"'\\\s]{16,}/g, '?<redactado>');
+  for (const key of ['servidores', 'links_online', 'stream_urls', 'players']) {
+    let from = 0;
+    let shown = 0;
+    while (shown < 2) {
+      const at = html.indexOf(key, from);
+      if (at < 0) break;
+      from = at + key.length;
+      const chunk = redact(html.slice(at, at + 900)).replace(/\s+/g, ' ');
+      out.push(`\n[${key}] …${chunk}…`);
+      shown++;
+    }
+  }
+  const hosts = [...new Set((html.match(/https?:\/\/[a-z0-9.-]+/gi) || []).map(hostOf))]
+    .filter((host) => !/image\.tmdb|doramasflix|googletag|gstatic|fonts\./i.test(host));
+  out.push(`\nhosts en el payload: ${hosts.slice(0, 20).join(', ') || '(ninguno)'}`);
+  return out.join('\n');
+}
+
 function line(item) {
   if (item.error) return `✘ ${item.url} · ${item.error} (${item.ms} ms)`;
   const bits = [
@@ -170,6 +206,16 @@ async function main() {
       ? `✔ Doramasflix GQL vivo · HTTP ${gql.status} · ${gql.ms} ms · ${gql.detail}`
       : `✘ Doramasflix GQL · HTTP ${gql.status || '-'} · ${gql.error || gql.detail || ''}${gql.note ? ` · ${gql.note}` : ''}`);
     process.exitCode = gql.ok ? 0 : 1;
+    return;
+  }
+  if (args[0] === '--dump') {
+    const target = args.find((arg) => /^https?:\/\//i.test(arg));
+    if (!target) {
+      console.error('Uso: node scripts/sources-probe.mjs --dump <url>');
+      process.exitCode = 2;
+      return;
+    }
+    console.log(await dump(target));
     return;
   }
   const urls = args.filter((arg) => /^https?:\/\//i.test(arg));

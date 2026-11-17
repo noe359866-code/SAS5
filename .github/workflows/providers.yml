@@ -164,6 +164,9 @@ jobs:
             node scripts/sources-probe.mjs $urls || true
             node scripts/sources-probe.mjs --gql || true
             echo '```'
+            echo '### Doramasflix · qué hay en `servidores`'
+            node scripts/sources-probe.mjs --dump https://doramasflix.in/episodios/doctor-x-mafia-in-white-1x12 > /tmp/dump.txt 2>&1 || true
+            cat /tmp/dump.txt
           } | tee /tmp/fuentes.txt
           cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"
           # Anotación: una línea por fuente, sin los ejemplos de URL.
@@ -172,6 +175,10 @@ jobs:
               *http*) echo "::notice title=Fuentes candidatas::$l" ;;
             esac
           done < /tmp/fuentes.txt
+          # El volcado va partido en trozos de 4000 caracteres (límite de anotación).
+          while IFS= read -r l; do
+            [ -n "$l" ] && echo "::notice title=Doramasflix payload::$l"
+          done < /tmp/dump.txt
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.
@@ -186,6 +193,7 @@ jobs:
             /tmp/pow.txt
             /tmp/videoapi.txt
             /tmp/fuentes.txt
+            /tmp/dump.txt
             /tmp/e2e.txt
           if-no-files-found: warn
           retention-days: 14

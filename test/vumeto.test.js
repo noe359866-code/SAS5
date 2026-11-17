@@ -8,6 +8,8 @@ const meta={title:'Breaking Bad',mediaType:'series',tmdbId:1396,season:1,episode
 test('limita la extracción a identidad, idioma y medio esperado',()=>{
  assert.equal(sessionFromPage('<meta name="vumeto-session" content="abc.def-123">'),'abc.def-123');
  assert.equal(candidates(data,meta).length,1);
+ assert.equal(candidates({...data,sources:[{...source,language:'English, Spanish'}]},meta).length,1);
+ assert.equal(candidates({...data,sources:[{...source,language:'Not English'}]},meta).length,0);
  assert.equal(candidates({...data,target:{...data.target,episode:2}},meta).length,0);
  for(const s of [{...source,language:'Spanish'},{...source,directUrl:'https://macdn.hakunaymatata.com.evil.test/resource/a/a.mp4'},{...source,directUrl:'https://macdn.hakunaymatata.com/resource/a/embed.html'},{...source,type:'text/html'}]) assert.equal(candidates({...data,sources:[s]},meta).length,0);
 });

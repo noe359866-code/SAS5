@@ -50,6 +50,7 @@ on:
       - 'scripts/multiidioma-probe.mjs'
       - 'scripts/animeflv-probe.mjs'
       - 'scripts/shinchaneros-probe.mjs'
+      - 'scripts/animeav1-probe.mjs'
       - 'scripts/fanpelis-check.mjs'
       - 'scripts/sources-probe.mjs'
       - 'scripts/embed69-pow.mjs'
@@ -277,6 +278,14 @@ jobs:
           cat /tmp/shinchaneros.txt
           summary="$(tr '\n' '|' < /tmp/shinchaneros.txt | cut -c1-5000)"
           echo "::notice title=ShinChaneros diagnóstico::$summary"
+
+      - name: AnimeAV1 · diagnóstico inicial
+        continue-on-error: true
+        run: |
+          node scripts/animeav1-probe.mjs > /tmp/animeav1.txt 2>&1
+          cat /tmp/animeav1.txt
+          summary="$(tr '\n' '|' < /tmp/animeav1.txt | cut -c1-3000)"
+          echo "::notice title=AnimeAV1 diagnóstico::$summary"
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.

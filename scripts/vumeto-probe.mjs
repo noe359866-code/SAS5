@@ -58,6 +58,6 @@ for(const [type,id,season,episode] of [['movie',603,null,null],['tv',1396,1,1]])
 try {
  const {searchVumeto}=await import('../lib/vumeto.js');
  for(const item of [{title:'The Matrix',mediaType:'movie',tmdbId:603},{title:'Breaking Bad',mediaType:'series',tmdbId:1396,season:1,episode:1}]) {
-  try {const result=await searchVumeto('',item,item.title,15000);console.log(`Adaptador ${item.mediaType}: resultados=${result.hits?.length||0}; fase=${result.query||result.skipped}`);}catch(e){console.log(`Adaptador ${item.mediaType}: ${e.name}; HTTP=${e.status||'n/a'}`);}
+  try {const start=Date.now();const result=await searchVumeto('',item,item.title,6000);console.log(`Adaptador ${item.mediaType}: resultados=${result.hits?.length||0}; fase=${result.query||result.skipped}; ms=${Date.now()-start}`);}catch(e){console.log(`Adaptador ${item.mediaType}: ${e.name}; HTTP=${e.status||'n/a'}`);}
  }
 } catch(e) {console.log('Adaptador: '+e.name)}

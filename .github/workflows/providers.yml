@@ -154,10 +154,10 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
-          urls="https://pelispedia.mov/vidurl/tt0816692/
-          https://pelispedia.mov/vidurl/tt0903747-1x1/
-          https://flixlatam.com/vidurl/tt0816692/
-          https://embed69.org/f/tt0816692/"
+          urls="https://playlatinsrc.co/custom/serial/tt0108778/1/1
+          https://playlatinsrc.co/custom/movie/tt0110357
+          https://playlatinsrc.co/serial/tt0108778
+          https://playlatinsrc.co/download/tt0110357"
           {
             echo '### Fuentes candidatas'
             echo '```'
@@ -165,12 +165,12 @@ jobs:
             node scripts/sources-probe.mjs --gql || true
             echo '```'
             echo '### Encadenado: página → iframe del reproductor'
-            for u in "https://pelispedia.mov/vidurl/tt0816692/" "https://flixlatam.com/vidurl/tt0816692/"; do
+            for u in "https://playlatinsrc.co/custom/serial/tt0108778/1/1" "https://playlatinsrc.co/custom/movie/tt0110357"; do
               node scripts/sources-probe.mjs --chain "$u" || true
             done
             echo
             echo '### vidurl: formato de los enlaces'
-            node scripts/vidurl-format.mjs 2>&1 | tee /tmp/vidurl.txt
+            node scripts/vidurl-format.mjs --url https://playlatinsrc.co/custom/serial/tt0108778/1/1 2>&1 | tee /tmp/vidurl.txt
           } | tee /tmp/fuentes.txt
           cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"
           # Lo primero y más corto: es lo que decide, y las anotaciones tienen

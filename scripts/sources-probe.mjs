@@ -40,6 +40,11 @@ const PLAYER_HINTS = {
   dooood: /dooood|dood\./i,
   uqload: /uqload/i,
   vidhide: /vidhide|luluvdo|minochinos/i,
+  dropload: /dropload|dr0pstream/i,
+  doodstream: /doodstream|dood\.(?:re|sh|to|watch|so)/i,
+  unlimplay: /unlimplay/i,
+  // Muros que NO se pueden pasar desde un Worker.
+  captcha: /captcha|hcaptcha|recaptcha|turnstile|no es un robot|verify you are human/i,
   m3u8: /\.m3u8/i,
   goto: /goto\.php/i,
   cryptojs: /CryptoJS|AES\.decrypt|Salted__/,

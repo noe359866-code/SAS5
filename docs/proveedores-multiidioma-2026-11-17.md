@@ -26,3 +26,12 @@ No se integran enlaces de iframe como si fueran vídeo directo ni se atribuye au
 ### Corrección tras revisar el código upstream
 
 FrenchStream busca con `POST /engine/ajax/search.php` (formulario `query` y `page`), no con el POST DLE genérico especulado anteriormente. Su cliente envía `fsschal=1`; después hay que seleccionar una coincidencia inequívoca y resolver los hosts de vídeo. Los episodios usan `GET /engine/ajax/sx.php?id=…`. Estas rutas están confirmadas en código upstream, pero no se ha validado el flujo POST y la reproducción real desde el Worker, por lo que FrenchStream aún no está integrado. Filmo se declara alemán (`language = "de"`) en la versión consultada de upstream y su búsqueda suggest es GET, no italiano ni POST.
+
+### Nuevas sondas reales (GitHub Actions)
+
+- [Run 44172532707](https://github.com/noe359866-code/SAS5/actions/runs/44172532707): el POST de búsqueda de FrenchStream respondió 200 con Matrix (1999), Matrix Resurrections y otras coincidencias. Otro [run](https://github.com/noe359866-code/SAS5/actions/runs/44172796761) agotó 12 segundos: la disponibilidad no es consistente. Falta conectar la búsqueda al ID de ficha y validar extracción y reproducción.
+- MStream/Moflix: el buscador web mostró Matrix; `api/v1/watch/1625240` respondió 401 al lector de páginas y **403 desde GitHub Actions incluso con Referer**. No extrapolar esto a todos los entornos, pero no hay vía ligera validada.
+- JKAnime: la página de One Piece 1 mostró varios hosts en el lector de páginas, pero respondió **403 desde GitHub Actions**. Sin acceso directo al HTML no se puede verificar un extractor apto para Worker.
+- En FrenchStream, el JSON de una película incluyó Vidzy y otros embeds. El lector de Vidzy informó error al solicitar HLS; otro embed devolvió 404. Un redirect de Kokoflix abrió un reproductor, pero esto no demuestra un stream directo reproducible.
+
+El diagnóstico reproducible está en `scripts/multiidioma-probe.mjs`; el paso de CI es informativo, no confirma reproducción. Ninguno de estos tres se ha añadido como proveedor.

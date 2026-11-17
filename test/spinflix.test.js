@@ -132,3 +132,20 @@ test('spinflix: la etiqueta de audio se lee Lat / ES / Inglés según la ficha',
   assert.equal(spinflix.audioLabel('subtitulado'), 'Subtitulado');
   assert.equal(spinflix.audioLabel(''), '');
 });
+
+test('SpinFlix: busca primero con el título en español, que es el único que indexa', () => {
+  // Verificado contra la API real: «interstellar» → 0 resultados,
+  // «interestelar» → 1. Antes se buscaba solo con el título principal (inglés)
+  // y el proveedor no devolvía nada para casi todo.
+  const resolved = { title: 'Interstellar', altTitle: null, mediaType: 'movie', year: '2014' };
+  assert.deepEqual(
+    spinflix.searchQueries(resolved, null, ['Interestelar', 'Interestelar']),
+    ['Interestelar', 'Interstellar'],
+    'el título en español va primero y sin repetir'
+  );
+  // Sin TMDB (o en un título que ya viene en español) queda el de la petición.
+  assert.deepEqual(spinflix.searchQueries(resolved, 'Interstellar 2014', []), ['Interstellar 2014', 'Interstellar']);
+  // Y los títulos de contraste incluyen el español, o la ficha se descartaría.
+  const titles = spinflix.searchTitles(resolved, null, ['Interestelar']);
+  assert.ok(titles.includes('Interestelar') && titles.includes('Interstellar'));
+});

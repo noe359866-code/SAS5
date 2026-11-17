@@ -13,7 +13,8 @@
     "debrid:selftest": "node scripts/debrid-selftest.mjs",
     "debrid:kv": "node scripts/debrid-kv.mjs",
     "build:web": "node scripts/build-web.mjs",
-    "scale:audit": "node scripts/scale-audit.mjs"
+    "scale:audit": "node scripts/scale-audit.mjs",
+    "providers:check": "node scripts/providers-check.mjs"
   },
   "keywords": [
     "stremio",

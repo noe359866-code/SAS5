@@ -727,3 +727,21 @@ test('etiquetas: «(brazilian, kor)» de los sitios brasileños es POR', () => {
     ['POR']
   );
 });
+
+test('resolveTitle guarda el id de TMDB aunque no haya clave de TMDB', async () => {
+  // Con `tmdb:157336` el id ya viene en la petición: antes solo se guardaba si
+  // la ficha respondía, así que sin clave los buscadores hispanos se quedaban
+  // sin título en español (y sin id) con el que buscar.
+  const config = require('../lib/config');
+  const original = config.tmdbConfigured;
+  config.tmdbConfigured = false;
+  try {
+    const resolved = await streams.resolveTitle('movie', 'tmdb:157336');
+    if (resolved) {
+      assert.equal(resolved.tmdbId, 157336);
+      assert.equal(resolved.tmdbType, 'movie');
+    }
+  } finally {
+    config.tmdbConfigured = original;
+  }
+});

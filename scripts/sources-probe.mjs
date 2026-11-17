@@ -202,7 +202,7 @@ async function dump(url) {
   const redact = (text) => text
     .replace(/("(?:token|hash|sig|signature|key|pass|password|jwt)"\s*:\s*")[^"]{4,}/gi, '$1<redactado>')
     .replace(/\?[^"'\\\s]{16,}/g, '?<redactado>');
-  for (const key of ['servidores', 'links_online', 'stream_urls', 'players']) {
+  for (const key of ['dataLink', 'sortedEmbeds', 'servidores', 'links_online', 'stream_urls', 'players']) {
     let from = 0;
     let shown = 0;
     while (shown < 2) {
@@ -308,6 +308,7 @@ function line(item) {
   for (const key of ['links_online', 'stream_urls', 'players', 'servidores', 'reproductores']) {
     if (item[key]) bits.push(`${key}×${item[key]}`);
   }
+  if (item.dotted) bits.push(`dotted(a.b64.c)×${item.dotted}`);
   if (item.hints && item.hints.length) bits.push(`pistas ${item.hints.join(',')}`);
   return `${item.ok ? '✔' : '✘'} ${item.url} · ${bits.join(' · ')}`;
 }

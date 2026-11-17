@@ -187,8 +187,8 @@ jobs:
           grep -E '^\[2\]' /tmp/fuentes.txt | while IFS= read -r l; do
             echo "::notice title=Encadenado::$l"
           done
-          grep -E '^\[(vidhide|filemoon|streamwish|uqload|voe|streamtape|mixdrop)' /tmp/dump.txt | head -4 | while IFS= read -r l; do
-            echo "::notice title=PelisPedia servidor::$(echo "$l" | cut -c1-350)"
+          grep -E '^\[dataLink\]|^\[sortedEmbeds\]' /tmp/dump.txt | head -2 | while IFS= read -r l; do
+            echo "::notice title=vidurl dataLink::$(echo "$l" | cut -c1-380)"
           done
           hosts_line="$(grep -m1 'hosts en el payload' /tmp/dump.txt || true)"
           [ -n "$hosts_line" ] && echo "::notice title=PelisPedia hosts::$hosts_line"

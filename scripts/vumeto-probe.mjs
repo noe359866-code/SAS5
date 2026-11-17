@@ -26,6 +26,11 @@ for(const path of ['/embed/movie/603','/embed/tv/1396/1/1']) {
   console.log('  scripts: '+scripts.map(u=>u.pathname).join(','));
   const blobs=[html];for(const u of scripts){try{const sr=await fetch(u,{signal:AbortSignal.timeout(10000)});blobs.push(await sr.text());}catch{}}
   const page=html;
+  const input=/(?:const|let)\s+input\s*=.{0,350}/.exec(page);console.log('  input declarado: '+(input?.[0]||'no').replace(/[A-Za-z0-9_-]{32,}/g,'[dato]'));
+  const session=/<meta\s+name=["']vumeto-session["']\s+content=["']([^"']+)["']/.exec(page)?.[1];
+  if(path==='/embed/movie/603' && session) {
+   for(const api of ['/_player/health','/_player/map?type=movie&id=603','/_player/resolve?type=movie&id=603&provider=moviebox-0930']) try {const rr=await fetch(base+api,{headers:{'X-Vumeto-Session':session,Referer:base+path},signal:AbortSignal.timeout(35000)});let data=await rr.json();console.log('API con sesión '+api.split('?')[0]+': HTTP '+rr.status+'; claves='+Object.keys(data).join(',')+'; fuentes='+(Array.isArray(data.sources)?data.sources.length:'n/a')+'; error='+String(data.error||'').slice(0,100));if(Array.isArray(data.providers)) console.log('  disponibles: '+JSON.stringify(data.providers.map(p=>({id:p.id,configured:p.configured}))));if(Array.isArray(data.sources)) console.log('  tipos: '+JSON.stringify(data.sources.map(x=>({keys:Object.keys(x),host:(()=>{try{return new URL(x.url||x.directUrl).hostname}catch{return ''}})()}))));} catch(e){console.log('API con sesión: '+e.name)}
+  }
   for(const line of page.split('\n')) if(/const input\s*=|let input\s*=|headers\s*=|\/_player\/resolve|providerNames/.test(line)) console.log('  config: '+line.trim().replace(/https?:[^\s"'`<>]+/g,'[URL]').replace(/[A-Za-z0-9_-]{32,}/g,'[dato]').slice(0,300));
   for(const line of page.split('\n')) if(/\b(?:get|fetch)\s*\(|\/api\/|providers|sourceEndpoint/i.test(line) && !/sourceGeneration|currentSource|autoplay|querySelector/.test(line)) console.log('  petición: '+line.trim().replace(/https?:[^\s"'`<>]+/g,'[URL]').replace(/[A-Za-z0-9_-]{32,}/g,'[dato]').slice(0,220));
   for(const js of blobs) {

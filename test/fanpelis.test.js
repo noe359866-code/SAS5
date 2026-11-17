@@ -224,7 +224,7 @@ test('fanpelis: la API solo indexa el título traducido, así que se prueba sin 
     if (q === 'Matrix') return json(SEARCH_MOVIE);
     return json({ data: { posts: [] } });
   };
-  const out = await fanpelis.searchFanpelis('The Matrix', MOVIE, 'The Matrix', 1000);
+  const out = await fanpelis.searchFanpelis('The Matrix', { ...MOVIE, title: 'The Matrix', altTitle: null }, 'The Matrix', 1000);
   // El player y el embed no están simulados en este caso (responden 404): lo
   // que se prueba es que la consulta sin artículo encuentra la ficha.
   assert.deepEqual(out.hits || [], []);

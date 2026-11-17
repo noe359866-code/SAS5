@@ -8,13 +8,20 @@
     "dev": "nodemon server.js",
     "dev:worker": "wrangler dev",
     "deploy": "node scripts/debrid-kv.mjs && node scripts/build-web.mjs && node scripts/prerender-catalogs.mjs --from-url && wrangler deploy",
-    "test": "node --test test/staticPlan.test.js test/edgeRoutes.test.js test/configRegistry.test.js test/smoke.test.js test/worker.test.js test/prerender.test.js test/api.test.js test/configurePage.test.js test/tmdb.test.js test/streams.test.js test/spinflix.test.js test/hlsProxy.test.js test/catalogs.test.js test/providers.test.js test/debrid.test.js test/debridKv.test.js test/streamFilters.test.js test/badges.test.js test/web.test.js test/watch.test.js test/watchUi.test.js test/scale.test.js test/scaleAudit.test.js test/responseCache.test.js",
+    "test": "node --test test/staticPlan.test.js test/edgeRoutes.test.js test/configRegistry.test.js test/smoke.test.js test/worker.test.js test/prerender.test.js test/api.test.js test/configurePage.test.js test/tmdb.test.js test/streams.test.js test/spinflix.test.js test/fanpelis.test.js test/hlsProxy.test.js test/embed69.test.js test/videoapi.test.js test/catalogs.test.js test/providers.test.js test/debrid.test.js test/debridKv.test.js test/streamFilters.test.js test/badges.test.js test/web.test.js test/watch.test.js test/watchUi.test.js test/scale.test.js test/scaleAudit.test.js test/responseCache.test.js",
     "prerender": "node scripts/prerender-catalogs.mjs",
     "debrid:selftest": "node scripts/debrid-selftest.mjs",
     "debrid:kv": "node scripts/debrid-kv.mjs",
     "build:web": "node scripts/build-web.mjs",
     "scale:audit": "node scripts/scale-audit.mjs",
-    "providers:check": "node scripts/providers-check.mjs"
+    "providers:check": "node scripts/providers-check.mjs",
+    "embed69:pow": "node scripts/embed69-pow.mjs",
+    "providers:e2e": "node scripts/providers-e2e.mjs",
+    "videoapi:check": "node scripts/videoapi-check.mjs",
+    "sources:probe": "node scripts/sources-probe.mjs",
+    "vidurl:check": "node scripts/vidurl-format.mjs",
+    "playlatin:check": "node scripts/playlatinsrc-check.mjs",
+    "fanpelis:check": "node scripts/fanpelis-check.mjs"
   },
   "keywords": [
     "stremio",

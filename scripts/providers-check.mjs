@@ -21,16 +21,24 @@ const require = createRequire(import.meta.url);
 const config = require('../lib/config.js');
 const streams = require('../lib/streams.js');
 const spinflix = require('../lib/spinflix.js');
+const videoapi = require('../lib/videoapi.js');
+const fanpelis = require('../lib/fanpelis.js');
 
 const TIMEOUT_MS = Number(process.env.CHECK_TIMEOUT_MS) || 12_000;
 
 function parseArgs(argv) {
-  const options = { imdb: 'tt0816692', series: null, query: null, lang: 'es', json: false };
-  for (const arg of argv) {
-    if (arg.startsWith('--imdb=')) options.imdb = arg.split('=')[1];
-    else if (arg.startsWith('--series=')) options.series = arg.split('=')[1];
-    else if (arg.startsWith('--query=')) options.query = arg.split('=')[1];
-    else if (arg === '--json') options.json = true;
+  const options = { imdb: 'tt0133093', series: null, query: null, lang: 'es', json: false };
+  // Se aceptan `--imdb=x` y `--imdb x`: en el workflow la forma con espacio se
+  // lee mejor y antes se ignoraba en silencio (siempre probaba Interstellar).
+  const valued = { '--imdb': 'imdb', '--series': 'series', '--query': 'query', '--lang': 'lang' };
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    const eq = arg.indexOf('=');
+    if (eq > 0 && valued[arg.slice(0, eq)]) {
+      options[valued[arg.slice(0, eq)]] = arg.slice(eq + 1);
+    } else if (valued[arg] && i + 1 < argv.length) {
+      options[valued[arg]] = argv[++i];
+    } else if (arg === '--json') options.json = true;
     else if (arg === '--help' || arg === '-h') options.help = true;
   }
   return options;
@@ -101,6 +109,74 @@ async function checkSpinFlix(options) {
   };
 }
 
+/**
+ * VideoAPI: no busca por texto, se le pregunta por el TMDB id. Dos pasos y el
+ * contrato queda verificado: `exists` responde y la página del reproductor
+ * trae un iframe del host final (lamovie.link / vimeos.net).
+ */
+async function checkVideoApi(resolved) {
+  const url = videoapi.existsUrl(resolved);
+  if (!url) return { skipped: 'sin TMDB id: no hay nada que preguntar' };
+  const response = await fetch(url, { headers: { Referer: 'https://videoapi.la/api' }, signal: AbortSignal.timeout(TIMEOUT_MS) });
+  if (!response.ok) throw new Error(`exists respondió HTTP ${response.status}`);
+  const payload = await response.json();
+  const path = videoapi.playerPath(payload);
+  if (!path) return { exists: false, path: null, movieless: true };
+  const pageUrl = `${String(config.videoapiUrl || 'https://videoapi.la').replace(/\/+$/, '')}${path}`;
+  const html = await (await fetch(pageUrl, { headers: { Referer: 'https://videoapi.la/' }, signal: AbortSignal.timeout(TIMEOUT_MS) })).text();
+  const frames = videoapi.playerFrames(html, pageUrl);
+  return {
+    exists: true,
+    path,
+    iframes: frames.length,
+    primero: frames[0] ? frames[0].url.slice(0, 70) : null,
+    aviso: frames.length ? null : 'la página no trajo iframe del reproductor',
+  };
+}
+
+/**
+ * Fanpelis: la prueba de extremo a extremo que de verdad importa, porque aquí
+ * SÍ se busca por título y se resuelve el .m3u8 del embed. Si devuelve hits,
+ * el stream que verá Stremio existe.
+ */
+async function checkFanpelis(resolved, timeoutMs) {
+  const started = Date.now();
+  // Igual que en producción: primero el título en español de TMDB y, si no
+  // hay, el inglés. El proveedor solo usa `resolved.title` para puntuar, pero
+  // es lo que se le pasa para buscar cuando no hay título español.
+  let spanish = [];
+  try {
+    if (typeof streams.spanishTitles === 'function') spanish = await streams.spanishTitles(resolved);
+  } catch (_) { /* sin TMDB se prueba solo con el de la petición */ }
+  const queryTitle = spanish[0] || resolved.title;
+  // Varios intentos, igual que en producción cuando TMDB no está configurado
+  // (que es el caso de este workflow): título de la petición, alternativo y
+  // el español. Se informa de cuál funcionó.
+  const tried = [...new Set([queryTitle, resolved.title, resolved.altTitle].filter(Boolean))];
+  let result = { hits: [] };
+  let used = tried[0];
+  for (const q of tried) {
+    result = await fanpelis.searchFanpelis(q, resolved, q, timeoutMs);
+    used = q;
+    if ((result && result.hits && result.hits.length)) break;
+  }
+  const hits = (result && result.hits) || [];
+  return {
+    hits: hits.length,
+    ms: Date.now() - started,
+    query: result && result.query,
+    probado: tried,
+    acerto: used,
+    skipped: result && result.skipped,
+    samples: hits.slice(0, 2).map((hit) => ({
+      title: String(hit.title || '').slice(0, 90),
+      url: String(hit.url || '').slice(0, 70),
+      directo: hit.directUrl ? String(hit.directUrl).split('?')[0].slice(0, 70) : null,
+      subtitulos: Array.isArray(hit.subtitles) ? hit.subtitles.length : 0,
+    })),
+  };
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
@@ -124,6 +200,8 @@ async function main() {
   const results = [];
   results.push(await timed('torrentioes (manifest)', checkTorrentioSpanish));
   results.push(await timed('spinflix (buscador)', () => checkSpinFlix(options)));
+  results.push(await timed('videoapi (exists + reproductor)', () => checkVideoApi(resolved)));
+  results.push(await timed('fanpelis (búsqueda → .m3u8)', () => checkFanpelis(resolved, TIMEOUT_MS)));
   // Los tres buscadores que alimentan «Español (ES/ES)» y el propio agregado.
   // El agregado «Español (ES/LAT)»: busca con el título en español de TMDB en
   // Knaben, Torlock y BlackHoleBay y se queda solo lo que declara audio español.

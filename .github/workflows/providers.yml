@@ -1,0 +1,266 @@
+name: Proveedores (sonda real)
+
+# Comprueba contra los servicios reales que los proveedores en español siguen
+# respondiendo y que sus URLs no han cambiado. Los runners de GitHub sí llegan
+# a embed69.org, cuevana, knaben, etc., así que esto es la única prueba "de
+# verdad" de extremo a extremo: no usa dobles ni datos de ejemplo.
+#
+# No necesita secretos. Todo lo que imprime son conteos y nombres de release,
+# nunca claves: el passkey de UIndex, si algún día se usa, va como secreto.
+
+on:
+  workflow_dispatch:
+    inputs:
+      imdb:
+        description: 'IMDb de la película de prueba'
+        required: false
+        default: 'tt0133093'
+      series:
+        description: 'IMDb de la serie de prueba'
+        required: false
+        default: 'tt0903747'
+      movie:
+        description: 'TMDB de la película de prueba (vacío = Interstellar)'
+        required: false
+        default: ''
+      provider_url:
+        description: 'URL desplegada para probar /stream (opcional)'
+        required: false
+        default: ''
+  push:
+    paths:
+      - 'lib/streams.js'
+      - 'lib/spinflix.js'
+      - 'lib/embed69.js'
+      - 'lib/videoapi.js'
+      - 'lib/fanpelis.js'
+      - 'lib/spinflix.js'
+      - 'test/fanpelis.test.js'
+      - 'scripts/sources-probe.mjs'
+      - 'lib/hlsProxy.js'
+      - 'scripts/providers-check.mjs'
+      - 'scripts/fanpelis-check.mjs'
+      - 'scripts/sources-probe.mjs'
+      - 'scripts/embed69-pow.mjs'
+      - '.github/workflows/providers.yml'
+  schedule:
+    # Una vez al día: detecta dominios caídos o cambios de formato sin que
+    # nadie tenga que acordarse de lanzarlo.
+    - cron: '41 6 * * *'
+
+concurrency:
+  group: providers-check
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Tests offline
+        run: npm test
+
+      # Informe de las tres fuentes hispanas + indexadores. `continue-on-error`
+      # porque una caída puntual de un tercero no debe poner rojo el repo: el
+      # resumen del job dice qué falló exactamente.
+      - name: Sonda de proveedores (película y serie)
+        continue-on-error: true
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          CHECK_TIMEOUT_MS: '15000'
+          MOVIE_IMDB: ${{ inputs.imdb || 'tt0133093' }}
+          SERIES_IMDB: ${{ inputs.series || 'tt0903747' }}
+        run: |
+          set -o pipefail
+          echo "### Película (${MOVIE_IMDB})" >> "$GITHUB_STEP_SUMMARY"
+          node scripts/providers-check.mjs --imdb "$MOVIE_IMDB" | tee /tmp/movie.txt
+          # Lo decisivo en una línea: ¿el proveedor Fanpelis devuelve hits
+          # reproducibles con el código real del addon? (no solo la API).
+          fan="$(grep -A4 'fanpelis' /tmp/movie.txt | tr '\n' '|' | cut -c1-400 || true)"
+          echo "::notice title=Fanpelis (addon)::$fan"
+          {
+            echo '```'
+            cat /tmp/movie.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "### Serie (${SERIES_IMDB})" >> "$GITHUB_STEP_SUMMARY"
+          node scripts/providers-check.mjs --series "$SERIES_IMDB" | tee /tmp/series.txt
+          {
+            echo '```'
+            cat /tmp/series.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Embed69 necesita resolver el PoW: aquí (runner, sin límite de CPU) se
+      # comprueba que el algoritmo sigue siendo el mismo y, si sale, se deja el
+      # valor listo para usar como EMBED69_POW.
+      - name: Embed69 · PoW y enlaces
+        continue-on-error: true
+        env:
+          EMBED69_IMDB: ${{ inputs.imdb || 'tt0133093' }}
+        run: |
+          set -o pipefail
+          node scripts/embed69-pow.mjs --imdb "$EMBED69_IMDB" | tee /tmp/pow.txt
+          {
+            echo '### Embed69 · PoW'
+            echo '```'
+            cat /tmp/pow.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # VideoAPI no tiene PoW: si esto falla es que cambiaron el contrato de
+      # /exists o el reproductor dejó de devolver el iframe. Este paso va
+      # ESTRICTO (sin continue-on-error) a propósito: su color es la respuesta
+      # legible cuando los logs no se pueden leer desde fuera.
+      - name: VideoAPI · catálogo y reproductor
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          VIDEOAPI_MOVIE: ${{ inputs.movie }}
+          VIDEOAPI_IMDB: ${{ inputs.imdb || 'tt0133093' }}
+        run: |
+          set -o pipefail
+          # El motivo se publica como anotación: es lo único del run que se
+          # puede leer por la API cuando los logs devuelven EOF.
+          # Sin TMDB_API_KEY la sonda va por TMDB id y sigue valiendo: mide
+          # VideoAPI, no la configuración del entorno.
+          args="--imdb $VIDEOAPI_IMDB"
+          if [ -n "$VIDEOAPI_MOVIE" ]; then args="--movie $VIDEOAPI_MOVIE $args"; fi
+          if node scripts/videoapi-check.mjs $args > /tmp/videoapi.txt 2>&1; then
+            status=0
+          else
+            status=$?
+          fi
+          cat /tmp/videoapi.txt
+          if [ "$status" -ne 0 ]; then
+            reason="$(grep -v '^$' /tmp/videoapi.txt | grep -vE '^VideoAPI ·' | tail -4 | tr '\n' '|')"
+            echo "::error title=VideoAPI (código $status)::$reason"
+          fi
+          {
+            echo '### VideoAPI'
+            echo '```'
+            cat /tmp/videoapi.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # Webs candidatas: se mira el HTML crudo para ver si el reproductor es
+      # propio o son embeds de terceros. Es la decisión que separa «merece un
+      # proveedor» de «esto ya lo cubre Embed69». El resumen se publica como
+      # anotación porque los logs no se pueden leer desde fuera del repo.
+      # PlayLatinSRC es el único candidato con API por IMDb, así que se sondea
+      # aparte y en serio: ¿el embed trae la URL del host en el HTML?
+      - name: PlayLatinSRC · embed y hosts
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if node scripts/playlatinsrc-check.mjs > /tmp/playlatin.txt 2>&1; then
+            status=0
+          else
+            status=$?
+          fi
+          cat /tmp/playlatin.txt
+          cat /tmp/playlatin.txt >> "$GITHUB_STEP_SUMMARY"
+          # Anotación corta y decisiva (las anotaciones tienen tope global).
+          summary="$(grep -E '^[✔✘]|^      ·|viable|No integrar' /tmp/playlatin.txt | tr '\n' '|' | cut -c1-900)"
+          echo "::notice title=PlayLatinSRC (código $status)::$summary"
+
+
+      # Fanpelis: API JSON pública con embeds ya resueltos. Se prueba en serio
+      # porque es la candidata que menos cuesta (3 GET, sin PoW): lo que decide
+      # es si el embed entrega un .m3u8 en su HTML (stream directo) o solo un
+      # iframe que el navegador rellena.
+      - name: Fanpelis · API, reproductor y embed
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if node scripts/fanpelis-check.mjs --query matrix --deep > /tmp/fanpelis.txt 2>&1; then
+            status=0
+          else
+            status=$?
+          fi
+          cat /tmp/fanpelis.txt
+          cat /tmp/fanpelis.txt >> "$GITHUB_STEP_SUMMARY"
+          summary="$(grep -E '^[✔✘]|^      ·|^      idiomas|viable|No integrar|iframe' /tmp/fanpelis.txt | tr '\n' '|' | cut -c1-900)"
+          echo "::notice title=Fanpelis (código $status)::$summary"
+
+      - name: Fanpelis · serie (API de episodios)
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if node scripts/fanpelis-check.mjs --tv --query "breaking bad" --deep > /tmp/fanpelis-tv.txt 2>&1; then
+            status=0
+          else
+            status=$?
+          fi
+          cat /tmp/fanpelis-tv.txt
+          cat /tmp/fanpelis-tv.txt >> "$GITHUB_STEP_SUMMARY"
+          summary="$(grep -E '^[✔✘]|^      ·|^      idiomas|viable|No integrar|iframe' /tmp/fanpelis-tv.txt | tr '\n' '|' | cut -c1-900)"
+          echo "::notice title=Fanpelis serie (código $status)::$summary"
+
+      # Rivales de la misma liga, para no casarse con una sola: PoseidonHD2
+      # expone servidores en su __NEXT_DATA__ (los trae el HTML, sin AJAX).
+      - name: Rivales · PoseidonHD2 y Gnula One
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          {
+            node scripts/sources-probe.mjs "https://www.poseidonhd2.co/pelicula/603/matrix" "https://ver.gnula.one/movies/the-last-temptation-of-becky/"
+            echo
+            node scripts/sources-probe.mjs --dump "https://www.poseidonhd2.co/pelicula/603/matrix"
+          } > /tmp/rivals.txt 2>&1
+          status=$?
+          cat /tmp/rivals.txt
+          cat /tmp/rivals.txt >> "$GITHUB_STEP_SUMMARY"
+          # El iframe de Gnula es de su propio dominio (?trembed=): se sigue.
+          node scripts/sources-probe.mjs --media "https://ver.gnula.one/movies/the-last-temptation-of-becky/?trembed=1&trid=1" > /tmp/gnula-media.txt 2>&1 || true
+          cat /tmp/gnula-media.txt >> "$GITHUB_STEP_SUMMARY"
+          # Lo decisivo: si el __NEXT_DATA__ de PoseidonHD2 trae las URLs de sus
+          # servidores, ese HTML basta para un proveedor (sin AJAX ni navegador).
+          summary="$(grep -E '^[✔✘]|^      ·|\[videos\]|\[result\]|\[cyberlocker\]|hosts en el payload' /tmp/rivals.txt | tr '\n' '|' | cut -c1-900)"
+          echo "::notice title=Rivales (código $status)::$summary"
+          # Segundo aviso, solo para el embed de Gnula (los avisos son escasos).
+          media_summary="$(grep -E '^[✔✘]|^    ' /tmp/gnula-media.txt | tr '\n' '|' | cut -c1-600)"
+          echo "::notice title=Gnula embed::$media_summary"
+
+      # Los informes también como artefacto: los logs y el resumen de Actions
+      # no siempre se pueden leer desde fuera del repo, el artefacto sí.
+      - name: Publicar informes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proveedores-informe
+          path: |
+            /tmp/movie.txt
+            /tmp/series.txt
+            /tmp/pow.txt
+            /tmp/videoapi.txt
+            /tmp/playlatin.txt
+            /tmp/fanpelis.txt
+            /tmp/fanpelis-tv.txt
+            /tmp/rivals.txt
+            /tmp/gnula-media.txt
+            /tmp/dump.txt
+            /tmp/e2e.txt
+          if-no-files-found: warn
+          retention-days: 14
+
+      # End-to-end opcional: si se indica la URL del despliegue, se pide un
+      # /stream real y se cuentan los resultados por proveedor.
+      - name: End-to-end contra el despliegue
+        if: ${{ inputs.provider_url != '' }}
+        env:
+          ADDON_URL: ${{ inputs.provider_url }}
+          MOVIE_IMDB: ${{ inputs.imdb || 'tt0133093' }}
+        run: node scripts/providers-e2e.mjs --url "$ADDON_URL" --imdb "$MOVIE_IMDB" | tee /tmp/e2e.txt

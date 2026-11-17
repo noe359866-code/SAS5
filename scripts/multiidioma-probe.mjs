@@ -17,6 +17,12 @@ try {
   console.log(`DeVideoSRC Matrix: ${r.hits?.length || 0} URLs directas; ${r.skipped || 'consulta completada'}`);
 } catch (e) { console.log(`DeVideoSRC Matrix: ${e.message}`); }
 
+try {
+  const { createRequire } = await import('node:module');
+  const { searchFrenchStream } = createRequire(import.meta.url)('../lib/frenchstream');
+  const r = await searchFrenchStream('', { mediaType:'movie', title:'Matrix', year:'1999' }, 'Matrix', 12000);
+  console.log(`FrenchStream intégré: ${r.hits?.length || 0} HLS extrait(s)`);
+} catch (e) { console.log(`FrenchStream intégré: ${e.message}`); }
 const fr = await request('FrenchStream búsqueda POST Matrix', 'https://fs16.lol/engine/ajax/search.php', {
   method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest', Cookie: 'fsschal=1; dle_skin=VFV1', Referer: 'https://fs16.lol/' }, body: new URLSearchParams({ query: 'Matrix', page: '1' }),
 });

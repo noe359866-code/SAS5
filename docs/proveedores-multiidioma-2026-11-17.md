@@ -41,3 +41,9 @@ El diagnóstico reproducible está en `scripts/multiidioma-probe.mjs`; el paso d
 Se añadió `devideosrc` para probar el flujo por IMDb: GET del shell y POST al resolver, sin PoW ni WebView. Solo devuelve fuentes que el servicio declare `hls` o `mp4`; se descartan los embeds HTML. Por tanto puede no devolver ningún resultado aunque el servicio tenga servidores. No se ha comprobado su reproducción real en Worker: el contrato de resolve se infiere por similitud con PlayLatinSRC y la API indica que necesita token. La sonda de CI informa si devuelve fuentes directas, no prueba que reproduzcan. `DEVIDEOSRC=off` lo desactiva; seleccionar en `/configure` y probar en el despliegue real.
 
 Un tercer intento de búsqueda de FrenchStream devolvió HTTP 200 con página de verificación, no resultados. No se resuelve el desafío.
+
+### FrenchStream experimental
+
+Añadido para pruebas a petición del usuario. Solo películas con título y año coincidentes exactamente; como máximo POST búsqueda, GET API y GET de Vidzy. Se devuelven únicamente URLs HLS de vidzy.org, nunca embeds. El audio de la fuente default no está etiquetado. Los challenges no se resuelven y la respuesta puede estar vacía. La búsqueda y extracción se prueban offline; la reproducción y acceso desde el Worker siguen pendientes. `FRENCHSTREAM=off` lo desactiva.
+
+La sonda real de DeVideoSRC para Matrix devolvió cero fuentes directas: [run 44174270479](https://github.com/noe359866-code/SAS5/actions/runs/44174270479).

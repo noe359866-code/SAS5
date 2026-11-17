@@ -34,6 +34,8 @@ on:
       - 'lib/embed69.js'
       - 'lib/playlatin.js'
       - 'lib/vixsrc.js'
+      - 'lib/devideosrc.js'
+      - 'lib/frenchstream.js'
       - 'lib/videoapi.js'
       - 'lib/fanpelis.js'
       - 'lib/spinflix.js'

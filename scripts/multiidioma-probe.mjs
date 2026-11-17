@@ -9,6 +9,25 @@ async function request(label, url, opts = {}) {
     return { response: r, content };
   } catch (e) { console.log(`${label}: error ${e.name}`); return null; }
 }
+// Metadatos mínimos para distinguir errores de origen y páginas de challenge.
+// No se registran cookies, identificadores, URL firmadas ni cuerpos HTTP.
+for (const [label, url, referer] of [
+  ['MStream', 'https://moflix-stream.xyz/api/v1/watch/1625240', 'https://moflix-stream.xyz/'],
+  ['JKAnime', 'https://jkanime.net/one-piece/1/', 'https://jkanime.net/'],
+]) {
+  for (const [profile, headers] of [
+    ['mínimo', { 'User-Agent': 'CatalogosPlus/1.5' }],
+    ['navegador+referer', { 'User-Agent': ua, Referer: referer, Accept: '*/*' }],
+  ]) {
+    try {
+      const res = await fetch(url, { headers, redirect:'manual', signal:AbortSignal.timeout(10000) });
+      const contentType = (res.headers.get('content-type') || '').split(';')[0].slice(0, 60);
+      const challenge = res.headers.get('cf-mitigated') === 'challenge';
+      console.log(`403 ${label} ${profile}: HTTP ${res.status}; cf-challenge=${challenge}; tipo=${contentType || 'ausente'}`);
+      await res.body?.cancel();
+    } catch (err) { console.log(`403 ${label} ${profile}: ${err.name}`); }
+  }
+}
 try {
   const { createRequire } = await import('node:module');
   const require = createRequire(import.meta.url);

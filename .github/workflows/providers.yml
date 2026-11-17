@@ -43,6 +43,7 @@ on:
       - 'scripts/sources-probe.mjs'
       - 'lib/hlsProxy.js'
       - 'scripts/providers-check.mjs'
+      - 'scripts/multiidioma-probe.mjs'
       - 'scripts/fanpelis-check.mjs'
       - 'scripts/sources-probe.mjs'
       - 'scripts/embed69-pow.mjs'
@@ -245,6 +246,15 @@ jobs:
       - name: VixSrc · API, embed y playlist
         run: node scripts/vixsrc-check.mjs
 
+      - name: Diagnóstico multiidioma · FrenchStream, MStream, JKAnime
+        continue-on-error: true
+        run: |
+          node scripts/multiidioma-probe.mjs > /tmp/multiidioma.txt 2>&1
+          cat /tmp/multiidioma.txt
+          cat /tmp/multiidioma.txt >> "$GITHUB_STEP_SUMMARY"
+          summary="$(tr '\n' '|' < /tmp/multiidioma.txt | cut -c1-900)"
+          echo "::notice title=Diagnóstico multiidioma::$summary"
+
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.
       - name: Publicar informes
@@ -253,6 +263,7 @@ jobs:
         with:
           name: proveedores-informe
           path: |
+            /tmp/multiidioma.txt
             /tmp/movie.txt
             /tmp/series.txt
             /tmp/pow.txt

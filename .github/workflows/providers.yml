@@ -175,10 +175,9 @@ jobs:
               *http*) echo "::notice title=Fuentes candidatas::$l" ;;
             esac
           done < /tmp/fuentes.txt
-          # El volcado va partido en trozos de 4000 caracteres (límite de anotación).
-          while IFS= read -r l; do
-            [ -n "$l" ] && echo "::notice title=Doramasflix payload::$l"
-          done < /tmp/dump.txt
+          # Lo único que decide es qué hosts sirve el payload: se emite solo eso.
+          hosts_line="$(grep -m1 'hosts en el payload' /tmp/dump.txt || true)"
+          [ -n "$hosts_line" ] && echo "::notice title=Doramasflix hosts::$hosts_line"
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.

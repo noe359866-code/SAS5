@@ -178,7 +178,7 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
-          if node scripts/fanpelis-check.mjs --query fractal --deep > /tmp/fanpelis.txt 2>&1; then
+          if node scripts/fanpelis-check.mjs --query matrix --deep > /tmp/fanpelis.txt 2>&1; then
             status=0
           else
             status=$?
@@ -208,12 +208,24 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
-          node scripts/sources-probe.mjs "https://www.poseidonhd2.co/pelicula/603/matrix" "https://ver.gnula.one/movies/the-last-temptation-of-becky/" > /tmp/rivals.txt 2>&1
+          {
+            node scripts/sources-probe.mjs "https://www.poseidonhd2.co/pelicula/603/matrix" "https://ver.gnula.one/movies/the-last-temptation-of-becky/"
+            echo
+            node scripts/sources-probe.mjs --dump "https://www.poseidonhd2.co/pelicula/603/matrix"
+          } > /tmp/rivals.txt 2>&1
           status=$?
           cat /tmp/rivals.txt
           cat /tmp/rivals.txt >> "$GITHUB_STEP_SUMMARY"
-          summary="$(grep -E '^[✔✘]|^    ·' /tmp/rivals.txt | tr '\n' '|' | cut -c1-900)"
+          # El iframe de Gnula es de su propio dominio (?trembed=): se sigue.
+          node scripts/sources-probe.mjs --media "https://ver.gnula.one/movies/the-last-temptation-of-becky/?trembed=1&trid=1" > /tmp/gnula-media.txt 2>&1 || true
+          cat /tmp/gnula-media.txt >> "$GITHUB_STEP_SUMMARY"
+          # Lo decisivo: si el __NEXT_DATA__ de PoseidonHD2 trae las URLs de sus
+          # servidores, ese HTML basta para un proveedor (sin AJAX ni navegador).
+          summary="$(grep -E '^[✔✘]|^      ·|\[videos\]|\[result\]|\[cyberlocker\]|hosts en el payload' /tmp/rivals.txt | tr '\n' '|' | cut -c1-900)"
           echo "::notice title=Rivales (código $status)::$summary"
+          # Segundo aviso, solo para el embed de Gnula (los avisos son escasos).
+          media_summary="$(grep -E '^[✔✘]|^    ' /tmp/gnula-media.txt | tr '\n' '|' | cut -c1-600)"
+          echo "::notice title=Gnula embed::$media_summary"
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.
@@ -231,6 +243,7 @@ jobs:
             /tmp/fanpelis.txt
             /tmp/fanpelis-tv.txt
             /tmp/rivals.txt
+            /tmp/gnula-media.txt
             /tmp/dump.txt
             /tmp/e2e.txt
           if-no-files-found: warn

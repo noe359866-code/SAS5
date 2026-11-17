@@ -208,7 +208,7 @@ async function dump(url) {
   const redact = (text) => text
     .replace(/("(?:token|hash|sig|signature|key|pass|password|jwt)"\s*:\s*")[^"]{4,}/gi, '$1<redactado>')
     .replace(/\?[^"'\\\s]{16,}/g, '?<redactado>');
-  for (const key of ['dataLink', 'sortedEmbeds', 'dropload', 'unlimplay', 'sources', 'streams', 'servers', 'embed_url', 'servidores', 'links_online', 'stream_urls', 'players']) {
+  for (const key of ['dataLink', 'sortedEmbeds', 'dropload', 'unlimplay', 'videos', 'cyberlocker', 'result', 'sources', 'streams', 'servers', 'embed_url', 'servidores', 'links_online', 'stream_urls', 'players']) {
     let from = 0;
     let shown = 0;
     while (shown < 2) {

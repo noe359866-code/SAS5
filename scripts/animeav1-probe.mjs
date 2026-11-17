@@ -13,6 +13,11 @@ for(const path of ['/catalogo?search=Sora%20wa%20Akai%20Kawa%20no%20Hotori&page=
 const embed=/embeds:\{[\s\S]{0,1500}?server:"HLS",url:"([^"]+)"/i.exec(episode)?.[1];
 if(embed) {
  try {const u=new URL(embed);console.log(`HLS inicial: host=${u.hostname}; ext=${u.pathname.endsWith('.m3u8')}; ruta=${u.pathname.split('/').slice(0,2).join('/')}`);
+ if(u.hostname==='player.zilla-networks.com') {
+  const rr=await fetch(u,{headers:{'User-Agent':ua,Referer:base+'/'},signal:AbortSignal.timeout(12000)});const body=await rr.text();
+  console.log(`  player Zilla: HTTP ${rr.status}; tipo=${rr.headers.get('content-type')}; bytes=${body.length}; m3u=${body.startsWith('#EXTM3U')}`);
+  for(const x of [...body.matchAll(/.{0,100}(?:m3u8|source|playlist|hls|segment).{0,130}/gi)].slice(0,8)) console.log('  player texto: '+x[0].replace(/https?:[^"'\s<>]+/g,'[URL]').replace(/\s+/g,' ').slice(0,200));
+ }
  if(u.hostname==='animeav1.uns.bio' && /^[A-Za-z0-9]{1,40}$/.test(u.hash.slice(1))) {
   const response=await fetch('https://animeav1.uns.bio/api/v1/video?id='+encodeURIComponent(u.hash.slice(1))+'&w=1680&h=1050&r=animeav1.com',{headers:{'User-Agent':ua,Referer:'https://animeav1.uns.bio/'},signal:AbortSignal.timeout(12000)});const hex=(await response.text()).trim();console.log('  API UPN: HTTP '+response.status+'; hex='+/^[a-f0-9]+$/i.test(hex));
   if(response.ok && /^[a-f0-9]+$/i.test(hex)){const decipher=createDecipheriv('aes-128-cbc',Buffer.from('kiemtienmua911ca'),Buffer.from('1234567890oiuytr'));const obj=JSON.parse(Buffer.concat([decipher.update(Buffer.from(hex,'hex')),decipher.final()]).toString()); const stream=obj.cfNative||obj.source; const p=new URL(stream);console.log(`  fuente UPN: host=${p.hostname}; extensión=${p.pathname.split('.').pop()}`);

@@ -19,13 +19,13 @@ Guía técnica y operativa para sostener **+500.000 peticiones/día** (~5,8 req/
 
 ## 1. Radiografía real de cuellos de botella a 230K req/día
 
-En un addon de Stremio + reproductor web (`/watch`), el tráfico típico se reparte así:
+En un addon de Stremio, el tráfico típico se reparte así:
 
 | Ruta / Tráfico | Peso típico | Volumen a 230K/día | Riesgo sin optimización | Cómo lo resuelve `Catálogos+` |
 | --- | --- | --- | --- | --- |
 | Catálogos (`/catalog/*` y `/<cfg>/catalog/*`) | ~62 % | ~142.600/día | Agota las 100K invocaciones/día de Workers Free y dispara >30 subrequests TMDB por catálogo | **Static Assets (0 invocaciones)** para el manifest general + **Edge Cache canónica** compartida entre usuarios con distinto `<cfg>` + caché de página en RAM |
-| Web (`/`, `/configure`, `/watch/*`, `/manifest.json`, logos) | ~13 % | ~29.900/día | Cada apertura de `/configure` y `/watch` lanzaba 2–6 llamadas extra sin caché | **HTML/JSON pregenerados en `public/` (0 invocaciones)** + 21/21 estudios con logo estático + coalescencia cliente + `s-maxage` en `/internal/watch/*` |
-| Fichas (`/meta/*` y `/<cfg>/meta/*`) | ~15 % | ~34.500/día | Re-consulta TMDB + OMDB (1.000/día free) + Watchmode (1.000/mes free) por usuario | **Edge Cache canónica (`lang + region`)** + caché `meta:v1:*` coalescida en RAM + circuit-breaker 429/402 en OMDB/Watchmode |
+| Web (`/`, `/configure`, `/manifest.json`, logos) | ~13 % | ~29.900/día | Cada apertura de `/configure` lanzaba 2–6 llamadas extra sin caché | **HTML/JSON pregenerados en `public/` (0 invocaciones)** + 21/21 estudios con logo estático + coalescencia cliente + `s-maxage` en `/internal/branding.json` |
+| Fichas (`/meta/*` y `/<cfg>/meta/*`) | ~15 % | ~34.500/día | Re-consulta TMDB + OMDB (1.000/día free) por usuario | **Edge Cache canónica (`lang + region`)** + caché `meta:v1:*` coalescida en RAM + circuit-breaker 429/402 en OMDB |
 | Streams públicos (`/stream/*` sin debrid) | ~7 % | ~16.100/día | 10 indexadores en paralelo (Español ES/LAT añade hasta 3 consultas con el título en español), timeouts y CPU | **Edge Cache canónica por filtros/proveedores** + pool SWR (`stale-while-revalidate` 6 h) + cooldown automático por proveedor |
 | Streams privados Debrid (`/<cfg>/stream/*` con `debridId`) | ~3 % | ~6.900/día | Cloudflare KV Free solo permite **1.000 lecturas/día** (a las 1.001 falla debrid) | **Caché cifrada/descifrada en memoria del isolate + `cacheTtl: 300` en KV** (reduce lecturas KV >95 %) y `Cache-Control: no-store` estricto |
 
@@ -40,7 +40,7 @@ En un addon de Stremio + reproductor web (`/watch`), el tráfico típico se repa
 | Memoria por isolate | **128 MB** | **~25 – 40 MB** de cachés de datos + **hasta `RESPONSE_CACHE_MB` (24 MB por defecto)** para respuestas completas; el presupuesto se mide en **bytes**, no en entradas |
 | Archivos por versión (static assets) | **20.000** (Free) | **~130 de catálogos + hasta 1.500 fichas + ~40 de web + N configuraciones populares**: `lib/staticPlan.js` reparte el presupuesto y el prerender se detiene y avisa antes de pasar el tope (`scripts/prerender-catalogs.mjs`) |
 | Configurador por región (`/configure/r/XX`) | 1 archivo por región usada (~500 KB) | **3–10 archivos**: solo las regiones que aparecen en el informe más la del despliegue |
-| Reglas de `_redirects` | **2.000 estáticas + 100 dinámicas** | **6 fijas + 1 por configuración conocida** (~40–200): `/watch`, barras finales y `/manifest.json/`. Si se pasara, se recortan por prioridad y avisa |
+| Reglas de `_redirects` | **2.000 estáticas + 100 dinámicas** | **5 fijas + 1 por configuración conocida** (~40–200): barras finales y `/manifest.json/`. Si se pasara, se recortan por prioridad y avisa |
 | Cache API (`caches.default`) | Funcional **solo en dominio propio** | En `*.workers.dev` es un **no-op**: por eso la caché de respuestas del isolate (`lib/responseCache.js`) va **antes** y es la que sostiene esos despliegues |
 
 ---
@@ -63,7 +63,7 @@ completa** (estado + cabeceras + cuerpo) en la memoria del isolate:
 
 Ojo con lo que **no** hace: no reduce invocaciones —eso solo lo consiguen los static assets y una
 Cache Rule del CDN—, pero convierte una petición de ~5 ms y 25 subpeticiones en una de ~0,1 ms y 0
-subpeticiones, que es lo que evita el `Error 1102` de CPU y el agotamiento de TMDB/OMDB/Watchmode.
+subpeticiones, que es lo que evita el `Error 1102` de CPU y el agotamiento de TMDB/OMDB.
 
 ### Capa 1 · Zero-Worker Static Offloading (`public/` + GitHub Actions cada 6 h)
 En `wrangler.toml`, `[assets] directory = "./public"` con `run_worker_first = false` hace que Cloudflare sirva cualquier archivo estático **antes de facturar o contar una invocación del Worker** (tráfico gratuito e ilimitado):
@@ -95,11 +95,11 @@ Todas las respuestas públicas del Worker y de Express/Vercel emiten ahora:
 ```http
 Cache-Control: public, max-age=..., s-maxage=..., stale-while-revalidate=86400, stale-if-error=604800
 ```
-Esto incluye `/internal/watch/*` (`catalogs`, `catalog`, `search`, `meta`, `extras`, `episodes`, `streams` públicos), `/internal/branding.json`, `/` y `/configure` (salvo cuando trae parámetros OAuth de Real-Debrid).
+Esto incluye `/internal/branding.json`, `/` y `/configure` (salvo cuando trae parámetros OAuth de Real-Debrid).
 
 ### Capa 4 · Single-Flight Coalescing (`cache.coalesce`) extremo a extremo
 Si una película entra en tendencia y 80 usuarios piden simultáneamente el mismo catálogo, ficha o stream en frío:
-- `lib/catalogs.js`, `lib/meta.js`, `lib/tmdb.js`, `lib/omdb.js`, `lib/watchmode.js`, `lib/tvdb.js`, `lib/branding.js`, `lib/streams.js` y `lib/debridCredentials.js` **coalescen** las promesas en vuelo.
+- `lib/catalogs.js`, `lib/meta.js`, `lib/tmdb.js`, `lib/omdb.js`, `lib/branding.js`, `lib/streams.js` y `lib/debridCredentials.js` **coalescen** las promesas en vuelo.
 - Las 80 peticiones comparten **1 sola llamada HTTP** al proveedor externo. Las métricas agregadas en `/internal/cache.json` exponen el contador `coalesced`.
 
 ### Capa 5 · Presupuesto de Subpeticiones, Cuotas Externas y CPU
@@ -108,10 +108,10 @@ Si una película entra en tendencia y 80 usuarios piden simultáneamente el mism
 - **CPU (`lib/config.js`, `lib/userConfig.js`, `lib/cache.js`)**: `config.reload(env)` calcula una huella ligera y evita re-parsear variables en cada request; `decodeConfig` guarda hasta 512 configs normalizadas clonadas en memoria; `cache.js` sube a `8.000` entradas con barrido amortizado cada 250 escrituras.
 - **Protección anti-abuso (`worker.mjs`, `api/index.js`)**: `/internal/streams-test.json` aplica `rateLimit` por IP (6 req/min) y coalescencia de 30 s.
 
-### Capa 6 · Reducción de Fan-Out en el Navegador (`/configure` y `/watch`)
+### Capa 6 · Reducción de Fan-Out en el Navegador (`/configure`)
 - **21/21 estudios con logo estático** en `lib/staticLogos.js`: abrir `/configure` ya **no necesita disparar** `fetch('/internal/branding.json')`.
 - **Botón «Esenciales (carga rápida)»** en `/configure`: permite instalar con un clic las 8 plataformas y 6 estudios principales (~38 catálogos frente a 121, reduciendo >3× las peticiones por sesión de Stremio).
-- **Deduplicación en `/watch/watch.js`**: coalescencia y memoización en cliente para que la carga inicial (`load()` + `loadHomeRails()`) no pida `cine_tendencias` por duplicado ni repita llamadas al cambiar de pestaña.
+- **Deduplicación en el cliente de `/configure`**: coalescencia y memoización para que la carga inicial no pida el mismo catálogo por duplicado ni repita llamadas al cambiar de sección.
 
 ---
 
@@ -147,8 +147,8 @@ Cuatro detalles que hacen que esto funcione de verdad:
   copia sirve a todas las configuraciones.
 
 Además, `public/_redirects` se regenera en cada despliegue (`lib/edgeRoutes.js`) con las rutas que
-el Worker resolvía **gastando una invocación para devolver un 404**: `/watch` sin barra final
-(el enlace del menú y del botón «Ver ahora»), `/configure/`, `/manifest.json/`. `_redirects` se
+el Worker resolvía **gastando una invocación para devolver un 404**: `/configure/` y
+`/manifest.json/` sin barra final. `_redirects` se
 evalúa antes de los assets y del Worker: **0 invocaciones**. Se respeta el tope de Cloudflare
 (2.000 estáticas + 100 dinámicas) y se conservan las reglas manuales.
 
@@ -171,8 +171,8 @@ curl -s https://tu-dominio/internal/cache.json | head -c 600
 # 2. Pregenerar con ese informe y ver el plan y la proyección
 PUBLIC_ORIGIN=https://tu-dominio npm run prerender -- --from-url
 
-# 3. Que /watch ya no invoca al Worker (debe responder 301 sin marca)
-curl -sI https://tu-dominio/watch | grep -iE '^(HTTP|location|x-catalogos-runtime)'
+# 3. Que las barras finales no invocan al Worker (301 sin marca)
+curl -sI https://tu-dominio/configure/ | grep -iE '^(HTTP|location|x-catalogos-runtime)'
 ```
 
 La proyección del script se calcula con `TRAFFIC` (catálogos 62 %, fichas 15 %, web 13 %; los
@@ -188,7 +188,7 @@ Es una **proyección**, no una medición: los números reales los da
 ## 3. Regla de Caché en Cloudflare CDN (clave para superar 230K–500K req/día en Plan Free)
 
 > **Importante sobre Cloudflare:** En un subdominio `*.workers.dev`, la petición entra primero al Worker (contando contra las 100.000 invocaciones/día) incluso cuando `caches.default` hace HIT.  
-> En cambio, si conectas el Worker a un **dominio propio** en Cloudflare (gratis) y activas **1 Cache Rule**, el CDN de Cloudflare responde desde el borde **antes de despertar al Worker (0 invocaciones consumidas)**, igual que un archivo estático, pero también para rutas `/<cfg>/catalog/*`, `/<cfg>/meta/*` y `/internal/watch/*`.
+> En cambio, si conectas el Worker a un **dominio propio** en Cloudflare (gratis) y activas **1 Cache Rule**, el CDN de Cloudflare responde desde el borde **antes de despertar al Worker (0 invocaciones consumidas)**, igual que un archivo estático, pero también para rutas `/<cfg>/catalog/*`, `/<cfg>/meta/*` y `/internal/branding.json`.
 
 ### Configuración exacta en Cloudflare Dashboard → Caching → Cache Rules
 
@@ -199,7 +199,6 @@ Crea una regla llamada **`Catalogos+ Public Edge Cache`**:
   (http.request.method eq "GET") and (
     starts_with(http.request.uri.path, "/catalog/") or
     starts_with(http.request.uri.path, "/meta/") or
-    starts_with(http.request.uri.path, "/internal/watch/") or
     http.request.uri.path eq "/internal/branding.json" or
     http.request.uri.path eq "/manifest.json" or
     ends_with(http.request.uri.path, "/catalog/movie/") eq false and (
@@ -208,7 +207,7 @@ Crea una regla llamada **`Catalogos+ Public Edge Cache`**:
     )
   )
   ```
-  *(Más simple en el editor visual: `URI Path` contains `/catalog/` OR `URI Path` contains `/meta/` OR `URI Path` starts with `/internal/watch/` OR `URI Path` equals `/manifest.json`)*
+  *(Más simple en el editor visual: `URI Path` contains `/catalog/` OR `URI Path` contains `/meta/` OR `URI Path` equals `/manifest.json`)*
 - **Then:**
   - **Cache eligibility:** `Eligible for cache`
   - **Edge TTL:** `Use cache-control header if present, bypass cache if not`
@@ -306,11 +305,11 @@ Si decides **no** usar dominio propio con Cache Rules, o si tu comunidad supera 
 ## 5. Verificación rápida en producción
 
 ```bash
-# 0. ¿Qué plan pide /watch? Debe ser un 301 del borde, sin marca del Worker.
-curl -sI https://TU-DOMINIO/watch | grep -iE '^(HTTP|location|x-catalogos-runtime)'
-# 1. Comprobar que catálogos y Watch API devuelven s-maxage y stale-while-revalidate
+# 0. Que las barras finales no despierten al Worker (301 del borde).
+curl -sI https://TU-DOMINIO/configure/ | grep -iE '^(HTTP|location|x-catalogos-runtime)'
+# 1. Comprobar que catálogos y logos devuelven s-maxage y stale-while-revalidate
 curl -sI https://TU-DOMINIO/catalog/movie/cine_tendencias.json | grep -iE 'cache-control|cf-cache'
-curl -sI https://TU-DOMINIO/internal/watch/catalogs | grep -iE 'cache-control|cf-cache'
+curl -sI https://TU-DOMINIO/internal/branding.json | grep -iE 'cache-control|cf-cache'
 # 2. Configuraciones vistas (lo que usará el prerender) y modo ahorro
 curl -s https://TU-DOMINIO/internal/cache.json | head -c 800
 curl -s https://TU-DOMINIO/healthz | grep -o '"quota":{[^}]*}'

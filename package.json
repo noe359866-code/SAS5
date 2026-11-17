@@ -1,14 +1,14 @@
 {
   "name": "stremio-addon-catalogos",
   "version": "1.5.0",
-  "description": "Addon de Stremio con catálogos de películas y series: Tendencias, Populares, Top Valoradas, por plataforma de streaming (Netflix, Prime Video, Disney+, Max, Apple TV+, Paramount+, Star+, Crunchyroll) y por estudio (Marvel, Pixar, A24, Ghibli...). TMDB + TVMaze + OMDB + Watchmode.",
+  "description": "Addon de Stremio con catálogos de películas y series: Tendencias, Populares, Top Valoradas, por plataforma de streaming (Netflix, Prime Video, Disney+, Max, Apple TV+, Paramount+, Star+, Crunchyroll) y por estudio (Marvel, Pixar, A24, Ghibli...). TMDB + TVMaze + OMDB.",
   "main": "api/index.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
     "dev:worker": "wrangler dev",
     "deploy": "node scripts/debrid-kv.mjs && node scripts/build-web.mjs && node scripts/prerender-catalogs.mjs --from-url && wrangler deploy",
-    "test": "node --test test/staticPlan.test.js test/edgeRoutes.test.js test/configRegistry.test.js test/smoke.test.js test/worker.test.js test/prerender.test.js test/api.test.js test/configurePage.test.js test/tmdb.test.js test/streams.test.js test/spinflix.test.js test/fanpelis.test.js test/hlsProxy.test.js test/embed69.test.js test/videoapi.test.js test/catalogs.test.js test/providers.test.js test/debrid.test.js test/debridKv.test.js test/streamFilters.test.js test/badges.test.js test/web.test.js test/watch.test.js test/watchUi.test.js test/scale.test.js test/scaleAudit.test.js test/responseCache.test.js",
+    "test": "node --test test/staticPlan.test.js test/edgeRoutes.test.js test/configRegistry.test.js test/smoke.test.js test/worker.test.js test/prerender.test.js test/api.test.js test/configurePage.test.js test/tmdb.test.js test/streams.test.js test/spinflix.test.js test/fanpelis.test.js test/hlsProxy.test.js test/embed69.test.js test/videoapi.test.js test/catalogs.test.js test/providers.test.js test/debrid.test.js test/debridKv.test.js test/streamFilters.test.js test/badges.test.js test/web.test.js test/scale.test.js test/scaleAudit.test.js test/responseCache.test.js",
     "prerender": "node scripts/prerender-catalogs.mjs",
     "debrid:selftest": "node scripts/debrid-selftest.mjs",
     "debrid:kv": "node scripts/debrid-kv.mjs",
@@ -30,7 +30,6 @@
     "tmdb",
     "tvmaze",
     "omdb",
-    "watchmode",
     "netflix",
     "series",
     "peliculas"

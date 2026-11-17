@@ -43,7 +43,6 @@ const PROBES = [
   { group: 'web', path: '/configure', label: 'Configurador' },
   { group: 'web', path: '/manifest.json', label: 'Manifest general' },
   { group: 'web', path: '/internal/branding.json', label: 'Logos de plataformas' },
-  { group: 'web', path: '/internal/watch/catalogs', label: 'Catálogos del reproductor' },
   { group: 'catalog', path: '/catalog/movie/cine_tendencias.json', label: 'Catálogo por defecto' },
   { group: 'meta', path: '/meta/movie/tt1160419.json', label: 'Ficha por defecto' },
   { group: 'stream', path: '/stream/movie/tt1160419.json', label: 'Streams públicos' },

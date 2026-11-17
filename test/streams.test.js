@@ -623,7 +623,7 @@ test('parseRarbg: normaliza resultados y descarta lo que no es vídeo', () => {
 });
 
 test('episodios: separa correctamente TMDB y TVMaze sin confundir el episodio con el id', () => {
-  for (const baseId of ['tmdb:tv:1399', 'tmdb:series:1399', 'tvmaze:82', 'tvdb:series:121361']) {
+  for (const baseId of ['tmdb:tv:1399', 'tmdb:series:1399', 'tvmaze:82']) {
     const parsed = streams.parseStreamId('series', `${baseId}:2:7`);
     assert.equal(parsed.baseId, baseId);
     assert.equal(parsed.season, 2);

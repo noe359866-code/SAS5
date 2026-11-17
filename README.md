@@ -372,22 +372,45 @@ Cada usuario los elige en `/configure` y viajan en su URL personal (`hide`, `sor
 - **Si todo queda oculto** el addon responde una lista vacía: vuelve a marcar alguna categoría. Un estreno reciente puede existir solo en CAM.
 - **Diagnóstico**: `/internal/streams-test.json?id=tt…` incluye `categories` con el número de resultados de cada categoría para ese título.
 
-## 📈 Escalar en el plan gratuito (100K → 145K+ peticiones/día)
+## 📈 Escalar en el plan gratuito (100K → aguanta el doble sin pagar)
 
-El plan free de Workers da **100.000 peticiones/día por cuenta** y devuelve `error 1027` al agotarlas.
-Las peticiones a *static assets* son gratis e ilimitadas, y el addon ya se apoya en eso:
+El plan free de Workers da **100.000 invocaciones/día por cuenta**: no es un número que se pueda
+subir por código (al agotarlo Cloudflare devuelve `error 1027` y no ejecuta el Worker). Lo que sí se
+puede hacer es **bajar cuántas peticiones ejecutan el Worker**. Un addon con 178.000 peticiones/día
+cabe de sobra si la mayoría llegan como *static assets*, que son gratis e ilimitados:
 
-1. **Catálogos y fichas por defecto como estáticos** — `npm run prerender` escribe `public/catalog/<tipo>/<id>.json` y `public/meta/<tipo>/<tt…>.json`
-   y Cloudflare los sirve sin ejecutar el Worker (los catálogos suelen ser 60–80 % del tráfico).
-2. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de un
+1. **Catálogos y fichas por defecto como estáticos** — `npm run prerender` escribe
+   `public/catalog/<tipo>/<id>.json` **y sus páginas 2 y 3** (`page-2.json`, `page-3.json`, que es
+   como pagina Stremio) y `public/meta/<tipo>/<tt…>.json`.
+2. **Plan por configuración (`npm run prerender --from-url`)** — los usuarios instalan
+   `/<cfg>/manifest.json` y esos catálogos NO eran estáticos. El Worker anota qué configuraciones ve
+   (`/internal/cache.json` → `configs`), el script reparte el tope de **20.000 archivos** de
+   Cloudflare Free (`lib/staticPlan.js`) y escribe el manifest y los catálogos de las más usadas.
+   El segmento `<cfg>` es **canónico**, así que dos usuarios con la misma configuración comparten
+   archivo. Ejemplo real: *«el Worker ejecuta ~26.700 de 178.000 peticiones/día (27 % del plan
+   free) → aguanta ~666.000 peticiones/día»*.
+3. **`_redirects` en el borde** — `/watch` (sin barra, el enlace del menú y del botón «Ver ahora»)
+   ejecutaba el Worker **para devolver un 404**: 1 invocación por clic. Ahora es un 301 del borde y
+   cuesta 0. Igual `/configure/` y `/manifest.json/`.
+4. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de un
    manifest personal (6–10× menos peticiones por sesión).
-3. **Logo y `robots.txt` estáticos** — fuera de la cuota; los crawlers no recorren rutas dinámicas.
-4. **Repartir cuota** — la cuota es por cuenta, no por Worker: espejos en otra cuenta o el mismo código
+5. **Logo y `robots.txt` estáticos** — fuera de la cuota; los crawlers no recorren rutas dinámicas.
+6. **Repartir cuota** — la cuota es por cuenta, no por Worker: espejos en otra cuenta o el mismo código
    en Vercel (`api/index.js`) suman cuotas independientes.
-5. **5 USD/mes** — 10 M peticiones/mes (≈333K/día) si no quieres trocear URLs.
+7. **5 USD/mes** — 10 M peticiones/mes (≈333K/día) si algún día no quieres trocear URLs.
 
-Guía completa con números, comandos de verificación y límites:
-[docs/escala-plan-free.md](docs/escala-plan-free.md).
+Todo esto se regenera y despliega solo cada 6 h (`.github/workflows/prerender.yml`). Guía completa
+con números, comandos de verificación y límites: [docs/escala-plan-free.md](docs/escala-plan-free.md).
+
+```bash
+# Qué configuraciones ha visto tu despliegue y qué conviene pregenerar
+curl -s https://tu-dominio/internal/cache.json | head -c 600
+PUBLIC_ORIGIN=https://tu-dominio npm run prerender -- --from-url
+npm run deploy            # ya incluye --from-url
+
+# Auditoría: cuántas de tus peticiones ejecutan el Worker
+npm run scale:audit -- --url https://tu-dominio --requests 178000
+```
 
 ## 📄 Licencia
 

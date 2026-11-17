@@ -889,3 +889,39 @@ test('idioma de interfaz: ambas páginas incluyen selector accesible y localizac
     assert.doesNotMatch(bootstrapScript + localizationScript, /\bfetch\s*\(|XMLHttpRequest|geolocation/i);
   }
 });
+
+test('/configure: dos selecciones iguales producen exactamente la misma URL', () => {
+  // La URL de instalación es la identidad del usuario: si dependiera del orden
+  // en que se marcaron las casillas, sus catálogos no se podrían pregenerar.
+  const install = (actions) => runConfigure({ actions }).url;
+  const a = install(`state.platforms = new Set(['disney','netflix']); state.studios = new Set(['pixar','marvel']);
+    state.hide = new Set(['3d','cam']); state.lang = 'es'; state.region = 'NI';`);
+  const b = install(`state.platforms = new Set(['netflix','disney']); state.studios = new Set(['marvel','pixar']);
+    state.hide = new Set(['cam','3d']); state.lang = 'es'; state.region = 'NI';`);
+  assert.equal(a, b);
+
+  // Y el servidor decodifica esa URL a la misma configuración.
+  const segment = a.split('/')[3];
+  const cfg = decode(segment);
+  assert.deepEqual(cfg.platforms, ['netflix', 'disney']);
+  assert.deepEqual(cfg.studios, ['marvel', 'pixar']);
+  assert.equal(cfg.lang, 'es');
+  assert.equal(cfg.region, 'NI');
+});
+
+test('/configure: el idioma omitido en la URL se rellena con el del despliegue', () => {
+  // Un despliegue en portugués: si el servidor rellenara "es" (la constante),
+  // los catálogos pregenerados saldrían en el idioma equivocado.
+  const pt = runConfigure({ env: { TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'BR' }, actions: `state.platforms = new Set(['netflix']);` });
+  const cfg = decode(pt.segment);
+  assert.equal(cfg.lang, 'pt-BR');
+  assert.equal(cfg.region, 'BR');
+
+  // En un despliegue en español (por defecto) sigue siendo "es".
+  const es = runConfigure({ actions: `state.platforms = new Set(['netflix']);` });
+  assert.equal(decode(es.segment).lang, 'es');
+
+  // Y si el usuario elige OTRO idioma, sí viaja en la URL.
+  const other = runConfigure({ env: { TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'BR' }, actions: `state.platforms = new Set(['netflix']); state.lang = 'en';` });
+  assert.equal(decode(other.segment).lang, 'en');
+});

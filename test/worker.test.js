@@ -512,3 +512,33 @@ test('debrid connect: un POST same-origin sin cabecera Origin (webviews) se admi
     global.fetch = originalFetch;
   }
 });
+
+test('/internal/cache.json publica qué configuraciones pregenerar (sin credenciales)', async () => {
+  const config = require('../lib/config');
+  const registry = require('../lib/configRegistry');
+  const userConfig = require('../lib/userConfig');
+  const catalogs = require('../lib/catalogs');
+  const streams = require('../lib/streams');
+  registry.reset();
+  try {
+    const segment = userConfig.encodeConfig({ lang: 'es', region: 'NI', platforms: ['netflix'], studios: [], base: ['tendencias'] });
+    const res = await get(`/${segment}/manifest.json`);
+    assert.equal(res.status, 200);
+
+    const stats = await (await get('/internal/cache.json')).json();
+    assert.equal(Array.isArray(stats.configs.configs), true);
+    const entry = stats.configs.configs.find((c) => c.segment === segment);
+    assert.ok(entry, 'la config visitada debe aparecer en el informe');
+    assert.equal(entry.popularity, 1);
+    assert.deepEqual(Object.keys(entry.cfg).sort(), ['base', 'lang', 'platforms', 'region', 'studios']);
+
+    // Una config con debrid no se registra: es por usuario.
+    const debridSegment = userConfig.encodeConfig({ lang: 'es', region: 'NI', debridId: 'd'.repeat(32) });
+    await get(`/${debridSegment}/manifest.json`);
+    const after = await (await get('/internal/cache.json')).json();
+    assert.equal(after.configs.configs.some((c) => c.segment === debridSegment), false);
+  } finally {
+    registry.reset();
+    config.reload(env);
+  }
+});

@@ -61,8 +61,15 @@ async function probe(url, timeoutMs) {
       redirect: 'manual',
     });
     const ms = Date.now() - started;
-    await response.arrayBuffer().catch(() => null); // drenar el cuerpo
-    return { status: response.status, headers: response.headers, ms };
+    // Se guarda el cuerpo (además de drenarlo): la auditoría necesita leer
+    // /internal/cache.json para proyectar sobre el plan real.
+    const text = await response.text().catch(() => '');
+    return {
+      status: response.status,
+      headers: response.headers,
+      ms,
+      json: () => { try { return JSON.parse(text); } catch (_) { return null; } },
+    };
   } catch (err) {
     return { status: 0, headers: new Headers(), ms: Date.now() - started, error: (err && err.message) || String(err) };
   } finally {
@@ -157,6 +164,12 @@ export async function audit({ url, requests = 500_000, timeoutMs = 15_000, fetch
   }
 
   const estimation = estimate({ servedBy, total: requests });
+
+  // 4) Plan de estáticos REAL: qué configuraciones ha visto el despliegue y
+  //    cuántas caben en el presupuesto de 20.000 archivos. Con esto la
+  //    proyección deja de suponer y usa lo que hay publicado de verdad.
+  const plan = await loadPlan({ doProbe, requests });
+
   return {
     url: origin.origin,
     host: origin.host,
@@ -165,7 +178,51 @@ export async function audit({ url, requests = 500_000, timeoutMs = 15_000, fetch
     probes: results,
     servedBy,
     estimate: estimation,
+    plan,
     advice: advise({ servedBy, host: origin.host, estimate: estimation }),
+  };
+}
+
+/**
+ * Plan de estáticos a partir de lo que el despliegue ha visto de verdad.
+ *
+ * Lee `/internal/cache.json?configs=N` (el registro de configuraciones que
+ * publica el Worker) y aplica `lib/staticPlan.js` con el presupuesto de
+ * Cloudflare Free. Con eso la auditoría deja de suponer y proyecta sobre el
+ * plan que hay publicado.
+ *
+ * @param {object} args
+ * @param {(path: string) => Promise<object>} args.doProbe sonda HTTP
+ * @param {number} args.requests peticiones/día a proyectar
+ */
+async function loadPlan({ doProbe, requests }) {
+  const { buildPlan, ASSET_FILE_LIMIT, BASE_RESERVE } = require('../lib/staticPlan.js');
+  const { projectPlan, capacityWithPlan } = require('../lib/scaleAudit.js');
+  const catalogs = require('../lib/catalogs.js');
+  let report = null;
+  try {
+    const response = await doProbe('/internal/cache.json?configs=100');
+    if (response.status !== 200) return null;
+    const body = await response.json();
+    report = body && body.configs ? body.configs : null;
+  } catch (_) {
+    return null;
+  }
+  if (!report) return null;
+
+  const plan = buildPlan({
+    configs: report.configs || [],
+    defs: catalogs.buildDefs(null),
+    defsFor: (cfg) => catalogs.buildDefs(cfg),
+    budget: ASSET_FILE_LIMIT - BASE_RESERVE,
+  });
+  return {
+    configsSeen: report.totalSegments || 0,
+    configsPlanned: new Set(plan.files.filter((file) => file.segment).map((file) => file.segment)).size,
+    byKind: plan.byKind,
+    files: plan.files.length,
+    projection: projectPlan({ plan, total: requests }),
+    capacity: capacityWithPlan({ files: plan.files }),
   };
 }
 
@@ -195,6 +252,21 @@ function printReport(report) {
       ? `margen libre: ${est.headroom.toLocaleString('es')}`
       : `EXCEDE el plan por ${Math.abs(est.headroom).toLocaleString('es')}`)
   );
+  if (report.plan) {
+    const p = report.plan;
+    console.log(
+      `\nPlan de estáticos (configuraciones vistas: ${p.configsSeen.toLocaleString('es')}):` +
+      `\n  ${p.files.toLocaleString('es')} archivos · ${p.configsPlanned} configuraciones pregeneradas` +
+      `\n  ${p.byKind['catalog-default'] || 0} catálogos por defecto, ${p.byKind.meta || 0} fichas, ` +
+      `${(p.byKind['catalog-configured'] || 0) + (p.byKind['catalog-configured-page'] || 0)} catálogos por configuración, ` +
+      `${p.byKind.manifest || 0} manifest` +
+      `\n  Con ese plan el Worker ejecutaría ~${p.projection.workerRequests.toLocaleString('es')} ` +
+      `de ${p.projection.total.toLocaleString('es')} peticiones/día ` +
+      `(${Math.round(p.projection.usage * 100)} % del plan free) → techo ~${p.capacity.toLocaleString('es')}/día`
+    );
+  } else {
+    console.log('\nPlan de estáticos: no se pudo leer /internal/cache.json (¿despliegue sin esta versión?).');
+  }
   if (report.advice.length) {
     console.log('\nQué hacer:');
     for (const tip of report.advice) console.log(`  • ${tip}`);

@@ -171,3 +171,116 @@ test('countFiles cuenta el árbol para no superar el tope de archivos del plan f
     assert.equal(await countFiles(outDir), 3);
   });
 });
+
+// ------------------------------------------------ Páginas y configuraciones
+
+test('prerenderPages escribe /page-2.json y /page-3.json con el skip correcto', async () => {
+  const { prerenderPages } = await load();
+  await withTmpDir(async (outDir) => {
+    const { mkdir, writeFile } = require('node:fs/promises');
+    await mkdir(path.join(outDir, 'catalog', 'movie'), { recursive: true });
+    await writeFile(path.join(outDir, 'catalog', 'movie', 'cine_tendencias.json'), '{"metas":[]}');
+
+    const skips = [];
+    const result = await prerenderPages({
+      outDir,
+      pages: 3,
+      log: () => {},
+      resolve: async (type, id, skip) => {
+        skips.push(skip);
+        // La página 3 no tiene resultados: no debe dejar archivo.
+        return { metas: skip === 40 ? [] : [{ id: `tt${skip}`, type, name: 'x' }], cacheMaxAge: 60 };
+      },
+    });
+
+    assert.deepEqual(skips.sort((a, b) => a - b), [20, 40]);
+    assert.deepEqual(result.written, ['movie/cine_tendencias/page-2']);
+
+    const page2 = JSON.parse(await readFile(path.join(outDir, 'catalog', 'movie', 'cine_tendencias', 'page-2.json'), 'utf8'));
+    assert.equal(page2.metas[0].id, 'tt20');
+    // La página 3 vacía se queda sin archivo para que el Worker responda.
+    await assert.rejects(readFile(path.join(outDir, 'catalog', 'movie', 'cine_tendencias', 'page-3.json')));
+  });
+});
+
+test('prerenderConfigs escribe el manifest y solo los catálogos que pidió el plan', async () => {
+  const { prerenderConfigs } = await load();
+  await withTmpDir(async (outDir) => {
+    const userConfig = require('../lib/userConfig');
+    const catalogs = require('../lib/catalogs');
+    const segment = userConfig.encodeConfig({
+      lang: 'es', region: 'NI', platforms: ['netflix'], studios: [], base: ['tendencias'],
+    });
+    const cfg = userConfig.decodeConfig(segment, catalogs.PLATFORM_KEYS, catalogs.STUDIO_KEYS, require('../lib/streams').PROVIDER_KEYS);
+
+    const result = await prerenderConfigs({
+      outDir,
+      log: () => {},
+      configs: [{
+        segment,
+        cfg,
+        // El planificador decidió: manifest + un único catálogo de la página 1.
+        files: [
+          { path: `/${segment}/manifest.json` },
+          { path: `/${segment}/catalog/movie/cine_tendencias.json`, page: 1 },
+        ],
+      }],
+      resolve: async (type, id) => ({ metas: [{ id: 'tt1', type, name: 'Uno' }], cacheMaxAge: 21600 }),
+      manifest: (c) => ({ id: 'org.comunidad.catalogos.plus', name: `Catálogos+ · ${c.region}` }),
+    });
+
+    assert.deepEqual(result.manifests, [`/${segment}/manifest.json`]);
+    assert.deepEqual(result.written, [`${segment}/catalog/movie/cine_tendencias.json`]);
+
+    const manifest = JSON.parse(await readFile(path.join(outDir, segment, 'manifest.json'), 'utf8'));
+    assert.equal(manifest.name, 'Catálogos+ · NI');
+    // Un catálogo que no estaba en el plan no se escribe.
+    await assert.rejects(readFile(path.join(outDir, segment, 'catalog', 'movie', 'cine_netflix.json')));
+  });
+});
+
+test('prerenderConfigs ignora configs con debrid (segmento por usuario)', async () => {
+  const { prerenderConfigs } = await load();
+  await withTmpDir(async (outDir) => {
+    const result = await prerenderConfigs({
+      outDir,
+      log: () => {},
+      configs: [{ segment: 'abc123def456', cfg: { lang: 'es', region: 'NI', debridId: 'c'.repeat(32) } }],
+      resolve: async () => ({ metas: [{ id: 'tt1' }] }),
+    });
+    assert.deepEqual(result.written, []);
+    assert.deepEqual(result.manifests, []);
+  });
+});
+
+test('un fallo de TMDB no borra los catálogos que ya estaban publicados', async () => {
+  const { prerender } = await load();
+  await withTmpDir(async (outDir) => {
+    const { mkdir, writeFile } = require('node:fs/promises');
+    await mkdir(path.join(outDir, 'catalog', 'movie'), { recursive: true });
+    await writeFile(path.join(outDir, 'catalog', 'movie', 'cine_tendencias.json'), '{"metas":[{"id":"tt9"}]}');
+
+    // Sin resultados (clave caducada, TMDB caído…): no se toca nada.
+    const empty = await prerender({
+      outDir,
+      log: () => {},
+      resolve: async () => ({ metas: [] }),
+    });
+    assert.deepEqual(empty.written, []);
+    const kept = JSON.parse(await readFile(path.join(outDir, 'catalog', 'movie', 'cine_tendencias.json'), 'utf8'));
+    assert.equal(kept.metas[0].id, 'tt9', 'el catálogo anterior debe seguir en su sitio');
+
+    // Sin directorio temporal huérfano.
+    assert.equal((await readdir(outDir)).includes('catalog.tmp'), false);
+
+    // Y con datos buenos sí sustituye.
+    const ok = await prerender({
+      outDir,
+      log: () => {},
+      resolve: async (type, id) => (id === 'cine_tendencias' ? { metas: [{ id: 'tt10' }], cacheMaxAge: 60 } : { metas: [] }),
+    });
+    assert.deepEqual(ok.written, ['cine_tendencias']);
+    const fresh = JSON.parse(await readFile(path.join(outDir, 'catalog', 'movie', 'cine_tendencias.json'), 'utf8'));
+    assert.equal(fresh.metas[0].id, 'tt10');
+  });
+});

@@ -39,6 +39,7 @@ import debridConnect from './lib/debridConnect.js';
 import realDebridOAuth from './lib/realDebridOAuth.js';
 import rateLimit from './lib/rateLimit.js';
 import logoData from './lib/logoData.js';
+import configRegistry from './lib/configRegistry.js';
 
 const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
 const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+?)(?:\/([^/]+))?\.json$/;
@@ -516,7 +517,15 @@ async function handleRequest(request, env, ctx) {
 
     // ── Estado agregado de la caché (sin claves ni datos por usuario) ──
     if (path === '/internal/cache.json') {
-      return jsonResponse({ ...cache.stats(), responseCache: responseCache.stats() }, 200, 0);
+      // `configs` es el registro de configuraciones vistas: qué pregenerar.
+      // Solo lleva el segmento base64url (que ya viaja en la URL del manifest)
+      // y la selección; nunca credenciales (las configs con debridId no entran).
+      const limit = Math.min(200, Math.max(1, Number(url.searchParams.get('configs')) || 40));
+      return jsonResponse(
+        { ...cache.stats(), responseCache: responseCache.stats(), configs: configRegistry.report({ limit }) },
+        200,
+        0
+      );
     }
 
     // ── Branding (logos de plataformas/estudios vía TMDB) ─────
@@ -590,6 +599,15 @@ async function handleRequest(request, env, ctx) {
           // Caché de respuestas del isolate: la única que funciona en
           // *.workers.dev, donde la Cache API de Cloudflare no hace nada.
           responseCache: responseCache.stats(),
+          // Ahorro de cuota: cuánto del plan de estáticos está en marcha.
+          // `configsTracked` son las configuraciones vistas desde este isolate;
+          // `npm run prerender -- --from-url` las usa para pregenerar.
+          quota: {
+            freeDailyInvocations: 100_000,
+            configsTracked: configRegistry.report({ limit: 1 }).totalSegments,
+            staticPlan: 'static-assets + _redirects + por-configuracion',
+            hint: 'npm run prerender -- --from-url=https://tu-dominio',
+          },
           watchRegion: config.watchRegion,
           watchRegionFallback: config.watchRegionFallback,
         },
@@ -629,6 +647,17 @@ async function handleRequest(request, env, ctx) {
       if (cfg) {
         const rest = prefixed[2].replace(/\/+$/, '') || '/';
         const logoUrl = `${origin}/assets/logo.png`;
+        // Registro de configuraciones vistas: alimenta el planificador de
+        // estáticos (`npm run prerender -- --from-url` lo lee de
+        // /internal/cache.json). Se anota en las rutas de Stremio (manifest,
+        // catálogo, ficha y stream) porque son las que se repiten en cada
+        // sesión; /configure es una visita humana y no aporta señal.
+        // Nunca registra configs con debridId: su segmento es por usuario.
+        if (rest !== '/configure') configRegistry.note(prefixed[1], cfg);
+
+        // Si alguna de estas rutas está pregenerada en public/, la petición ni
+        // siquiera llega aquí (los static assets van primero): llegar significa
+        // que el archivo falta y hay que resolverlo en caliente, como siempre.
         // Stremio abre /<tu-config>/configure al pulsar "Configurar":
         // debe abrir el configurador con TU región/selección ya cargada.
         if (rest === '/configure') {

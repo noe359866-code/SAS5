@@ -135,7 +135,15 @@ async function checkVideoApi(resolved) {
  */
 async function checkFanpelis(resolved, timeoutMs) {
   const started = Date.now();
-  const result = await fanpelis.searchFanpelis(resolved.title, resolved, resolved.title, timeoutMs);
+  // Igual que en producción: primero el título en español de TMDB y, si no
+  // hay, el inglés. El proveedor solo usa `resolved.title` para puntuar, pero
+  // es lo que se le pasa para buscar cuando no hay título español.
+  let spanish = [];
+  try {
+    if (typeof streams.spanishTitles === 'function') spanish = await streams.spanishTitles(resolved);
+  } catch (_) { /* sin TMDB se prueba solo con el de la petición */ }
+  const queryTitle = spanish[0] || resolved.title;
+  const result = await fanpelis.searchFanpelis(queryTitle, resolved, queryTitle, timeoutMs);
   const hits = (result && result.hits) || [];
   return {
     hits: hits.length,

@@ -6,7 +6,7 @@ Fuente: [directorio Streamflix](https://git.gay/streamflix-reborn2/streamflix/sr
 
 Se pide por ID TMDB película o episodio. Dos GET: API y embed; no se ejecuta JavaScript remoto. Se extrae la URL HLS y se envía Referer al reproductor. El Worker no retransmite los segmentos. Ante 410 se reintenta una sola vez (máximo cuatro GET). `VIXSRC=off` desactiva el buscador. Es necesario que el título resuelto tenga TMDB ID. Los tokens tienen caducidad; la caché del pool se limita a esa caducidad, sin stale. La disponibilidad y audio dependen de cada título y cliente.
 
-Comprobaciones externas con fetch de páginas: API de Matrix y Breaking Bad devolvió `src`; el reproductor de Matrix mostró pistas italiana e inglesa. Esto **no demuestra reproducción en Stremio ni que el Worker pueda acceder a la playlist**. La sonda `npm run vixsrc:check` prueba API, extracción y master HLS desde el runner de GitHub; las pruebas unitarias usan HTML sintético basado en el extractor upstream.
+Comprobaciones externas con fetch de páginas: API de Matrix y Breaking Bad devolvió `src`; el reproductor de Matrix mostró pistas italiana e inglesa. La sonda `npm run vixsrc:check` probó API, extracción y master HLS para ambas obras desde GitHub Actions: [run 44163855449](https://github.com/noe359866-code/SAS5/actions/runs/44163855449), paso VixSrc exitoso. Esto **no demuestra reproducción en Stremio ni acceso desde el Worker desplegado**. Las pruebas unitarias usan HTML sintético basado en el extractor upstream.
 
 ## Evaluación y límites
 

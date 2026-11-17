@@ -1,0 +1,115 @@
+name: Proveedores (sonda real)
+
+# Comprueba contra los servicios reales que los proveedores en español siguen
+# respondiendo y que sus URLs no han cambiado. Los runners de GitHub sí llegan
+# a embed69.org, cuevana, knaben, etc., así que esto es la única prueba "de
+# verdad" de extremo a extremo: no usa dobles ni datos de ejemplo.
+#
+# No necesita secretos. Todo lo que imprime son conteos y nombres de release,
+# nunca claves: el passkey de UIndex, si algún día se usa, va como secreto.
+
+on:
+  workflow_dispatch:
+    inputs:
+      imdb:
+        description: 'IMDb de la película de prueba'
+        required: false
+        default: 'tt0816692'
+      series:
+        description: 'IMDb de la serie de prueba'
+        required: false
+        default: 'tt0903747'
+      provider_url:
+        description: 'URL desplegada para probar /stream (opcional)'
+        required: false
+        default: ''
+  push:
+    paths:
+      - 'lib/streams.js'
+      - 'lib/spinflix.js'
+      - 'lib/embed69.js'
+      - 'lib/hlsProxy.js'
+      - 'scripts/providers-check.mjs'
+      - 'scripts/embed69-pow.mjs'
+      - '.github/workflows/providers.yml'
+  schedule:
+    # Una vez al día: detecta dominios caídos o cambios de formato sin que
+    # nadie tenga que acordarse de lanzarlo.
+    - cron: '41 6 * * *'
+
+concurrency:
+  group: providers-check
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Tests offline
+        run: npm test
+
+      # Informe de las tres fuentes hispanas + indexadores. `continue-on-error`
+      # porque una caída puntual de un tercero no debe poner rojo el repo: el
+      # resumen del job dice qué falló exactamente.
+      - name: Sonda de proveedores (película y serie)
+        continue-on-error: true
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          CHECK_TIMEOUT_MS: '15000'
+          MOVIE_IMDB: ${{ inputs.imdb || 'tt0816692' }}
+          SERIES_IMDB: ${{ inputs.series || 'tt0903747' }}
+        run: |
+          set -o pipefail
+          echo "### Película (${MOVIE_IMDB})" >> "$GITHUB_STEP_SUMMARY"
+          node scripts/providers-check.mjs --imdb "$MOVIE_IMDB" | tee /tmp/movie.txt
+          {
+            echo '```'
+            cat /tmp/movie.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "### Serie (${SERIES_IMDB})" >> "$GITHUB_STEP_SUMMARY"
+          node scripts/providers-check.mjs --series "$SERIES_IMDB" | tee /tmp/series.txt
+          {
+            echo '```'
+            cat /tmp/series.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Embed69 necesita resolver el PoW: aquí (runner, sin límite de CPU) se
+      # comprueba que el algoritmo sigue siendo el mismo y, si sale, se deja el
+      # valor listo para usar como EMBED69_POW.
+      - name: Embed69 · PoW y enlaces
+        continue-on-error: true
+        env:
+          EMBED69_IMDB: ${{ inputs.imdb || 'tt0816692' }}
+        run: |
+          set -o pipefail
+          node scripts/embed69-pow.mjs --imdb "$EMBED69_IMDB" | tee /tmp/pow.txt
+          {
+            echo '### Embed69 · PoW'
+            echo '```'
+            cat /tmp/pow.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # End-to-end opcional: si se indica la URL del despliegue, se pide un
+      # /stream real y se cuentan los resultados por proveedor.
+      - name: End-to-end contra el despliegue
+        if: ${{ inputs.provider_url != '' }}
+        env:
+          ADDON_URL: ${{ inputs.provider_url }}
+          MOVIE_IMDB: ${{ inputs.imdb || 'tt0816692' }}
+        run: node scripts/providers-e2e.mjs --url "$ADDON_URL" --imdb "$MOVIE_IMDB" | tee /tmp/e2e.txt

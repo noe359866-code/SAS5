@@ -22,3 +22,7 @@ Comprobaciones externas con fetch de páginas: API de Matrix y Breaking Bad devo
 | Ruso/turco y otros | Sin candidato directo suficientemente probado para Worker; Vavoo usa resolución pesada. |
 
 No se integran enlaces de iframe como si fueran vídeo directo ni se atribuye audio sin evidencia. La cobertura de todos los idiomas solicitados **sigue incompleta**. La prueba externa se hizo con el lector de páginas; las conexiones directas desde este sandbox a estos dominios no funcionan. No se han probado los streams finales de los candidatos descartados.
+
+### Corrección tras revisar el código upstream
+
+FrenchStream busca con `POST /engine/ajax/search.php` (formulario `query` y `page`), no con el POST DLE genérico especulado anteriormente. Su cliente envía `fsschal=1`; después hay que seleccionar una coincidencia inequívoca y resolver los hosts de vídeo. Los episodios usan `GET /engine/ajax/sx.php?id=…`. Estas rutas están confirmadas en código upstream, pero no se ha validado el flujo POST y la reproducción real desde el Worker, por lo que FrenchStream aún no está integrado. Filmo se declara alemán (`language = "de"`) en la versión consultada de upstream y su búsqueda suggest es GET, no italiano ni POST.

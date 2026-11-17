@@ -17,6 +17,8 @@ if (fr) {
   const names = [...text.matchAll(/class=["'][^"']*search-title[^"']*["'][^>]*>([^<]*)/gi)].slice(0, 5).map(x => x[1].trim());
   const ids = [...text.matchAll(/newsid(?:=|%3[dD])(\d+)/g)].map(x => x[1]);
   console.log(`  títulos: ${names.join(' | ') || '(sin coincidencias parseables)'}; ids newsid: ${ids.length}`);
+  const paths = [...text.matchAll(/onclick=["']([^"']*(?:[\s\S]*?))(?=\sclass=|>)/gi)].slice(0, 3).map(x => x[1].slice(0, 160));
+  console.log(`  onclick: ${paths.join(' | ') || 'no encontrado'}`);
 }
 for (const [label, url, headers] of [
   ['MStream watch con Referer', 'https://moflix-stream.xyz/api/v1/watch/1625240', { Referer: 'https://moflix-stream.xyz/', Accept: 'application/json' }],

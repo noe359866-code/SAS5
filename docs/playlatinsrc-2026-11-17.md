@@ -48,7 +48,7 @@ Comprobaciones hechas contra el servicio en vivo:
 |---|---|
 | `GET /api/resolve` sin parámetros | `{"ok":false,"error":"missing_id"}` |
 | `POST /api/resolve` sin token válido | `{"ok":false,"error":"invalid_token","message":"Missing or expired resolve token — load the embed page first."}` |
-| `GET /custom/movie/tt0110357` (El rey león) | «Playback unavailable» — no está en su catálogo |
+| `GET /custom/movie/tt0110357` (El rey león) | cáscara + token (el resolve sí devuelve fuentes, ver §4) |
 | `GET /custom/serial/tt0108778/1/2` (Friends) | cáscara + selector de versiones |
 
 **Conclusión del contrato:** el token es obligatorio y caduca con la sesión del reproductor. Sin
@@ -92,11 +92,39 @@ caché, pausa por fallos y los filtros de `/configure`.
   junto a las demás fuentes hispanas.
 - `npx wrangler deploy --dry-run` → 778,86 KiB / 229,87 KiB gzip, dentro del límite del plan Free.
 
+### 4.1. Ejecución real en la CI del PR #26
+
+El workflow `probe` (run `44160555886`) ejecutó el paso **estricto** con el código de producción y
+salió en verde:
+
+```
+✔ película tt0110357 · /custom/movie/tt0110357
+    4 stream(s) · Latino, Castellano · embed
+    hosts: Dropload, Doodstream, Mixdrop
+    resolve ok=true · sources=9
+✔ serie tt0108778 S1E1 · /custom/serial/tt0108778/1/1
+    2 stream(s) · Latino · embed
+    hosts: Dropload, Doodstream
+✔ buscador del addon · 4 hit(s) en 459 ms
+    idiomas: Latino, Castellano · referer: true
+```
+
+Y la sonda agregada `providers-check` añadió su línea:
+
+```
+✔ playlatin (página → resolve por IMDb) (899 ms)
+    4 resultados · consulta playlatin tt0133093
+```
+
+Eso confirma de punta a punta el contrato: página con token → resolve con `sources` → hit con
+`audioLabel` y `Referer`. La vista renderizada del sitio en un navegador puede mostrar «Playback
+unavailable» (el reproductor necesita su propio JS); el addon no depende de eso.
+
 ## 5. Límites conocidos
 
-- **El catálogo no es completo.** `tt0110357` (El rey león) y `tt3521164` (Moana) devolvieron
-  «Playback unavailable» desde aquí, aunque sus portadas están en la home. Cuando el título no
-  está, el proveedor devuelve 0 streams en silencio (correcto: no es una caída).
+- **El catálogo no es completo.** Un título que no esté indexado devuelve una página sin token y
+  el proveedor responde 0 streams en silencio (correcto: no es una caída). `tt0110357` sí estaba
+  en el catálogo cuando lo comprobó la CI, así que la cobertura cambia a diario.
 - **Las series tienen una sola versión de idioma** (así lo indica el propio sitio), a diferencia
   de las películas.
 - **Los enlaces de los hosts caducan.** De ahí el TTL de 30 min y el `notWebReady`.

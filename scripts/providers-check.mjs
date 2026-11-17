@@ -196,10 +196,12 @@ async function checkPlayLatin(resolved) {
     skipped: result && result.skipped,
     idiomas: [...new Set(hits.map((hit) => hit.audioLabel))],
     hosts: [...new Set(hits.map((hit) => hit.server))].slice(0, 4),
+    // Mismas claves que el resto de sondas: el impresor común lee
+    // `title`/`seeders`/`url` (seeders no aplica: son embeds).
     samples: hits.slice(0, 2).map((hit) => ({
-      titulo: String(hit.title || '').slice(0, 80),
+      title: String(hit.title || '').slice(0, 80),
+      quality: hit.quality,
       url: String(hit.url || '').split('?')[0].slice(0, 70),
-      tipo: hit.quality,
     })),
   };
 }

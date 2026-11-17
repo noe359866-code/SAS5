@@ -107,38 +107,18 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       # VideoAPI no tiene PoW: si esto falla es que cambiaron el contrato de
-      # /exists o el reproductor dejó de devolver el iframe.
+      # /exists o el reproductor dejó de devolver el iframe. Este paso va
+      # ESTRICTO (sin continue-on-error) a propósito: su color es la respuesta
+      # legible cuando los logs no se pueden leer desde fuera.
       - name: VideoAPI · catálogo y reproductor
-        continue-on-error: true
         env:
           VIDEOAPI_IMDB: ${{ inputs.imdb || 'tt0816692' }}
           VIDEOAPI_SERIES: ${{ inputs.series || 'tt0903747' }}
         run: |
           set -o pipefail
+          node scripts/videoapi-check.mjs --imdb "$VIDEOAPI_IMDB" --series "$VIDEOAPI_SERIES" | tee /tmp/videoapi.txt
           {
-            echo '### VideoAPI (película)'
-            node -e "
-              const streams = require('./lib/streams.js');
-              const videoapi = require('./lib/videoapi.js');
-              (async () => {
-                for (const [type, id] of [['movie', process.env.VIDEOAPI_IMDB], ['series', process.env.VIDEOAPI_SERIES + ':1:1']]) {
-                  const resolved = await streams.resolveTitle(type, id);
-                  if (!resolved) { console.log(type, 'no se pudo resolver'); continue; }
-                  const url = videoapi.existsUrl(resolved);
-                  if (!url) { console.log(type, 'sin TMDB id'); continue; }
-                  const payload = await (await fetch(url, { headers: { Referer: 'https://videoapi.la/api' } })).json();
-                  const path = videoapi.playerPath(payload);
-                  console.log(type, 'tmdb', resolved.tmdbId, 'exists', payload.exists, 'path', path || '-');
-                  if (!path) continue;
-                  const pageUrl = 'https://videoapi.la' + path;
-                  const html = await (await fetch(pageUrl, { headers: { Referer: 'https://videoapi.la/' } })).text();
-                  const frames = videoapi.playerFrames(html, pageUrl);
-                  console.log(type, 'iframes', frames.length, frames[0] ? frames[0].url : '');
-                }
-              })().catch((err) => { console.error('fallo:', err.message); process.exitCode = 1; });
-            "
-          } | tee /tmp/videoapi.txt
-          {
+            echo '### VideoAPI'
             echo '```'
             cat /tmp/videoapi.txt
             echo '```'

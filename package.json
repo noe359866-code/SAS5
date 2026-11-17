@@ -16,7 +16,8 @@
     "scale:audit": "node scripts/scale-audit.mjs",
     "providers:check": "node scripts/providers-check.mjs",
     "embed69:pow": "node scripts/embed69-pow.mjs",
-    "providers:e2e": "node scripts/providers-e2e.mjs"
+    "providers:e2e": "node scripts/providers-e2e.mjs",
+    "videoapi:check": "node scripts/videoapi-check.mjs"
   },
   "keywords": [
     "stremio",

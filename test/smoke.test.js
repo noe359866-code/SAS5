@@ -14,9 +14,6 @@ const assert = require('node:assert/strict');
 delete process.env.TMDB_API_KEY;
 delete process.env.TMDB_ACCESS_TOKEN;
 delete process.env.OMDB_API_KEY;
-delete process.env.WATCHMODE_API_KEY;
-delete process.env.TVDB_API_KEY;
-delete process.env.TVDB_PIN;
 
 let server;
 let baseUrl;

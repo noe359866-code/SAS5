@@ -223,14 +223,10 @@ test('robustez: secuencias URI malformadas (%E0%A4%A) responden 400 limpio sin U
   assert.equal(body.error, 'invalid_id');
 });
 
-test('escala: /internal/watch/* emite cabeceras Cache-Control públicas con s-maxage y stale-while-revalidate', async () => {
+test('escala: /internal/watch/* ya no existe (se eliminó la web de reproductor)', async () => {
   const worker = await loadWorker();
   const res = await worker.fetch(new Request('https://scale.example/internal/watch/catalogs'), {}, {});
-  assert.equal(res.status, 200);
-  const cc = res.headers.get('cache-control') || '';
-  assert.match(cc, /public/);
-  assert.match(cc, /s-maxage=21600/);
-  assert.match(cc, /stale-while-revalidate=/);
+  assert.equal(res.status, 404);
 });
 
 test('escala: /internal/streams-test.json aplica rate limit por IP para impedir amplificación de búsquedas', async () => {

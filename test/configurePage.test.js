@@ -124,7 +124,7 @@ test('landing y /configure comparten el sistema de diseño y no dejan plantillas
 
 test('/configure: los proveedores añadidos después son elegibles y nacen marcados en un borrador antiguo', () => {
   const vm = require('node:vm');
-  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi'];
+  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc', 'devideosrc', 'frenchstream'];
   // Ejecuta el arranque del script (constantes, state, save y restore) con
   // un localStorage simulado y devuelve los proveedores que quedan marcados.
   const run = (draft, initialCfg) => {
@@ -149,13 +149,13 @@ test('/configure: los proveedores añadidos después son elegibles y nacen marca
   // Borrador guardado antes de existir Nyaa y YTS: los nuevos nacen marcados
   // y se respeta lo que el usuario había desmarcado.
   assert.deepEqual(run({ streams: ['knaben', 'torlock', 'blackholebay'] }).streams, all);
-  assert.deepEqual(run({ streams: ['knaben'] }).streams, ['knaben', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi']);
-  assert.deepEqual(run({ streams: [] }).streams, ['nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi']);
+  assert.deepEqual(run({ streams: ['knaben'] }).streams, ['knaben', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc', 'devideosrc', 'frenchstream']);
+  assert.deepEqual(run({ streams: [] }).streams, ['nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc', 'devideosrc', 'frenchstream']);
   // Borrador guardado cuando había cinco proveedores, con YTS desmarcado:
   // EZTV, The RarBg e Índice BR nacen marcados y YTS sigue desmarcado.
   assert.deepEqual(
     run({ streams: ['knaben', 'nyaa'], knownStreams: all.slice(0, 5) }).streams,
-    ['knaben', 'nyaa', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi']
+    ['knaben', 'nyaa', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc', 'devideosrc', 'frenchstream']
   );
   // Borrador nuevo: si el usuario desmarcó YTS, sigue desmarcado.
   const draft = run({ streams: ['knaben', 'nyaa'], knownStreams: all });
@@ -260,4 +260,28 @@ test('/configure: la tarjeta debrid no deja frases sin entrada de diccionario', 
     assert.ok(known.has(text), `sin traducir: «${text}»`);
   }
   assert.ok(seen.size > 20, 'la tarjeta debrid debería tener texto que auditar');
+});
+
+
+test('/configure: tipo e idioma filtran proveedores y sobreviven a la URL', () => {
+  const { JSDOM, VirtualConsole } = require('jsdom');
+  const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  const dom = new JSDOM(html, { url: 'https://addon.example/configure', runScripts: 'outside-only', virtualConsole: new VirtualConsole() });
+  try {
+    const w = dom.window, d = w.document;
+    w.eval(configureScript(html));
+    const toggle = (group, key, checked) => {
+      const input = d.querySelector(`input[data-group="${group}"][data-key="${key}"]`);
+      input.checked = checked; input.dispatchEvent(new w.Event('change', { bubbles: true }));
+    };
+    toggle('streamTypes', 'torrent', false);
+    assert.equal(d.querySelector('input[data-group="streams"][data-key="knaben"]').closest('label').hidden, true);
+    assert.equal(d.querySelector('input[data-group="streams"][data-key="vixsrc"]').closest('label').hidden, false);
+    toggle('streamLanguages', 'fr', false);
+    const href = d.querySelector('[data-install]').getAttribute('href');
+    const segment = new URL(href.replace('stremio://', 'https://')).pathname.split('/')[1];
+    const cfg = userConfig.decodeConfig(segment, PLATFORM_KEYS, STUDIO_KEYS, require('../lib/streams').PROVIDER_KEYS);
+    assert.deepEqual(cfg.streamTypes, ['direct']);
+    assert.ok(!cfg.streamLanguages.includes('fr'));
+  } finally { dom.window.close(); }
 });

@@ -21,9 +21,7 @@ Metadatos enriquecidos en la ficha:
 
 - 🎞️ Ficha principal, póster, fondo, géneros, reparto y dirección → **TMDB**
 - 📡 Argumento, géneros y canales → **TVMaze** (funciona siempre, sin clave)
-- 🗂️ Fichas de series/películas por IMDb id (respaldo multi-fuente, con español) → **TheTVDB v4**
 - ⭐ Valoraciones **IMDb · Rotten Tomatoes · Metacritic** → **OMDB**
-- 📺 **Dónde ver en streaming** ("Disponible en NI: Netflix · Prime Video") → **Watchmode**
 - 📡 Argumento, géneros y canales → **TVMaze** (funciona siempre)
 
 ## 📁 Estructura
@@ -51,10 +49,8 @@ Metadatos enriquecidos en la ficha:
 │   ├── http.js           # fetch JSON con timeout
 │   ├── tmdb.js           # Cliente TMDB (+ resolución IMDb ids)
 │   ├── tvmaze.js         # Cliente TVMaze (web schedule, lookup por IMDb)
-│   ├── tvdb.js           # Cliente TheTVDB v4 (login JWT; fichas por IMDb id)
 │   ├── omdb.js           # Cliente OMDB (ratings)
-│   ├── watchmode.js      # Cliente Watchmode (plataformas)
-│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino, Español (ES/LAT), SpinFlix, Fanpelis, Embed69, VideoAPI
+│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino, Español (ES/LAT), SpinFlix, Fanpelis, Embed69, VideoAPI, PlayLatinSRC
 │   ├── streamFilters.js  # Filtros de streams: clasificador por nombre + preferencias del usuario
 │   ├── catalogs.js       # Definición de catálogos (+ filtrado por config)
 │   ├── userConfig.js     # Codec/validación de config de usuario (base64url)
@@ -99,9 +95,6 @@ Edita `.env`:
 | `TMDB_API_KEY` | **Sí** (o `TMDB_ACCESS_TOKEN`) | Clave v3 de [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api) |
 | `TMDB_ACCESS_TOKEN` | Alternativa | Token v4 "API Read Access Token" (`eyJ...`) |
 | `OMDB_API_KEY` | Recomendada | Ratings IMDb/RT/Metacritic — [omdbapi.com/apikey.aspx](https://www.omdbapi.com/apikey.aspx) |
-| `WATCHMODE_API_KEY` | Opcional | Dónde ver en streaming — [api.watchmode.com](https://api.watchmode.com/) |
-| `TVDB_API_KEY` | Opcional | Fichas TheTVDB por IMDb id — [thetvdb.com/api-information](https://thetvdb.com/api-information) |
-| `TVDB_PIN` | Opcional | PIN de suscriptor si tu plan de TVDB lo requiere |
 | `WATCH_REGION` | Opcional | Región JustWatch por defecto: `NI` (defecto), `MX`, `ES`, `US`, `AR`... El usuario puede cambiarla en /configure (44 países) |
 | `TMDB_LANGUAGE` | Opcional | Idioma por defecto de fichas/catálogos: `es` (defecto), `es-MX`, `en`, `pt-BR`... El usuario puede cambiarlo en /configure (18 idiomas) |
 | `SUPPORT_URL` | Opcional | Enlace de soporte que muestra la web. Por defecto, la invitación permanente al [Discord de Catálogos+](https://discord.gg/J6byqsRUfu); si cambia, actualiza esta variable |
@@ -120,6 +113,10 @@ Edita `.env`:
 | `DEBRID_MAX_CHECKS` / `DEBRID_MAX_RESULTS` | Opcional | Máximo de hashes consultados (8) y enlaces directos generados (3) por petición |
 | `DEBRID_TIMEOUT_MS` | Opcional | Tiempo máximo de espera antes de devolver los magnets públicos (4500 ms) |
 | `DEBRID_VALIDATE_TIMEOUT_MS` | Opcional | Plazo al validar la clave debrid en `/configure` (9000 ms); sube a 12000–15000 si el proveedor responde lento |
+| `FRENCHSTREAM` | Opcional | `off` desactiva FrenchStream experimental |
+| `DEVIDEOSRC` | Opcional | `off` desactiva DeVideoSRC experimental (solo URLs directas, puede no devolver resultados) |
+| `VIXSRC` | Opcional | `off` desactiva el extractor VixSrc (activo por defecto; experimental) |
+| `PLAYLATIN_URL` | Opcional | Dominio de PlayLatinSRC (defecto `https://playlatinsrc.co`) |
 | `PORT` | Opcional | Puerto local (defecto `7000`) |
 
 > **TVMaze no requiere clave.** Sin TMDB el addon arranca igualmente, pero los catálogos de películas/series TMDB aparecerán vacíos; el catálogo "Series · En TV hoy" siempre funciona.
@@ -173,7 +170,7 @@ npm run debrid:kv                        # crea la KV y la enlaza en wrangler.to
 
 En local, copia `.dev.vars.example` a `.dev.vars`, rellena los secretos OAuth si vas a probar RD y crea/configura también una KV de desarrollo. `/healthz` muestra `debrid.providers`, `realDebrid.oauthConfigured`, `realDebrid.credentialStorageReady` y `realDebrid.credentialStorage` (`kv` duradero, `cache` Cache API del Worker o `memory` en local). Se puede conectar cuentas en cuanto existe `DEBRID_ENCRYPTION_KEY`; sin la KV las credenciales viven en la Cache API (por datacenter y expulsables), así que conviene crearla para que no se pierdan.
 
-Las claves API de los usuarios se introducen en `/configure`; no son secretos globales del despliegue. También puedes configurar secretos OAuth y las claves de TMDB/OMDB/Watchmode en **Cloudflare → Workers & Pages → catalogos-plus → Settings → Variables and Secrets**. El servidor Node local usa almacenamiento en memoria efímero; el despliegue Vercel no tiene un backend KV configurado en este repositorio, por lo que la conexión debrid queda deshabilitada allí.
+Las claves API de los usuarios se introducen en `/configure`; no son secretos globales del despliegue. También puedes configurar secretos OAuth y las claves de TMDB/OMDB en **Cloudflare → Workers & Pages → catalogos-plus → Settings → Variables and Secrets**. El servidor Node local usa almacenamiento en memoria efímero; el despliegue Vercel no tiene un backend KV configurado en este repositorio, por lo que la conexión debrid queda deshabilitada allí.
 
 ##### Si «no valida» la clave debrid
 
@@ -247,13 +244,26 @@ El plan gratuito de Workers tiene **100.000 invocaciones/día por cuenta** (Erro
 > el paso 3 (dominio propio) es el que decide si llegas a 500K.
 
 1. **Zero-Worker Static Assets (`public/`, tráfico gratis e ilimitado).** Con `[assets]` (`run_worker_first = false`) en `wrangler.toml`, Cloudflare sirve sin despertar al Worker los 121 catálogos por defecto (`npm run prerender`), **las fichas de sus títulos** (`public/meta/`, hasta 1.500), el logo y, al definir `PUBLIC_ORIGIN=https://tu-dominio.example npm run build:web`, también `public/index.html`, `public/configure/index.html`, `public/manifest.json` y `public/internal/branding.json`. El workflow `.github/workflows/prerender.yml` los regenera y despliega automáticamente cada 6 h, y el script se detiene antes de superar los 20.000 archivos del plan free.
-2. **Caché de respuestas en el isolate (`lib/responseCache.js`).** Va **antes** que la Cache API porque esta última no hace nada en `*.workers.dev`. Guarda la respuesta completa en memoria (presupuesto por bytes, `RESPONSE_CACHE_MB`, 24 MB por defecto), respeta el `Cache-Control` publicado, sirve *stale* mientras revalida y ejecuta **una sola** carga para las peticiones simultáneas del mismo recurso. No ahorra invocaciones, pero sí CPU, subpeticiones y cuota de TMDB/OMDB/Watchmode.
+2. **Caché de respuestas en el isolate (`lib/responseCache.js`).** Va **antes** que la Cache API porque esta última no hace nada en `*.workers.dev`. Guarda la respuesta completa en memoria (presupuesto por bytes, `RESPONSE_CACHE_MB`, 24 MB por defecto), respeta el `Cache-Control` publicado, sirve *stale* mientras revalida y ejecuta **una sola** carga para las peticiones simultáneas del mismo recurso. No ahorra invocaciones, pero sí CPU, subpeticiones y cuota de TMDB/OMDB.
 3. **Edge Cache canónica entre usuarios (`worker.mjs`).** Las rutas `/<cfg>/catalog/*`, `/<cfg>/meta/*` y `/<cfg>/stream/*` (sin debrid) comparten la misma clave en `caches.default` según sus parámetros reales (`lang`, `region`, filtros), aunque cada usuario tenga un token `/<cfg>/` distinto. Las respuestas con `debridId` jamás tocan caché compartida (`Cache-Control: no-store`).
-3. **CDN Edge con `s-maxage` + `stale-while-revalidate` (dominio propio).** Todas las rutas públicas (incluidos `/internal/watch/*`) emiten `s-maxage` y `stale-while-revalidate`. Con un dominio propio en Cloudflare y una **Cache Rule** que respete `Cache-Control` en rutas públicas (`/catalog/`, `/meta/`, `/internal/watch/`, `/manifest.json`), el CDN absorbe >75 % del tráfico con **0 invocaciones al Worker**.
+3. **CDN Edge con `s-maxage` + `stale-while-revalidate` (dominio propio).** Todas las rutas públicas emiten `s-maxage` y `stale-while-revalidate`. Con un dominio propio en Cloudflare y una **Cache Rule** que respete `Cache-Control` en rutas públicas (`/catalog/`, `/meta/`, `/manifest.json`), el CDN absorbe >75 % del tráfico con **0 invocaciones al Worker**.
 4. **Caché en memoria de KV Debrid (`lib/debridCredentials.js`).** Las credenciales descifradas se cachean 5 min en RAM del isolate (con invalidación instantánea al actualizar/desconectar) y `cacheTtl: 300` en KV, reduciendo >95 % las lecturas contra el límite gratuito de 1.000 lecturas KV/día.
-5. **Presupuesto estricto de subpeticiones y Single-Flight (`cache.coalesce`).** Coalescencia de peticiones concurrentes en TMDB, OMDB, Watchmode, TVDB, catálogos, fichas y streams; tope de 24 `/external_ids` por invocación (muy por debajo del límite de 50 subrequests de Cloudflare) y `MAX_ENTRIES = 8000` en la LRU.
-6. **Cero fan-out innecesario en web.** Los 21 estudios llevan logo estático integrado (0 llamadas extra al abrir `/configure`), botón *«Esenciales (carga rápida)»* para manifiestos ligeros y coalescencia de peticiones en `/watch`. Consulta la arquitectura detallada y la Cache Rule exacta en [docs/escala-plan-free.md](docs/escala-plan-free.md).
+5. **Presupuesto estricto de subpeticiones y Single-Flight (`cache.coalesce`).** Coalescencia de peticiones concurrentes en TMDB, OMDB, catálogos, fichas y streams; tope de 24 `/external_ids` por invocación (muy por debajo del límite de 50 subrequests de Cloudflare) y `MAX_ENTRIES = 8000` en la LRU.
+6. **Cero fan-out innecesario en web.** Los 21 estudios llevan logo estático integrado (0 llamadas extra al abrir `/configure`), botón *«Esenciales (carga rápida)»* para manifiestos ligeros y coalescencia de peticiones en `/configure`. Consulta la arquitectura detallada y la Cache Rule exacta en [docs/escala-plan-free.md](docs/escala-plan-free.md).
 7. **Auditoría medible (`npm run scale:audit`).** El Worker marca sus respuestas con `X-Catalogos-Runtime: worker`: lo que llegue sin esa cabecera no consumió invocación. Con eso, `node scripts/scale-audit.mjs --url https://tu-dominio` mide qué parte de tu tráfico es gratis y proyecta cuántas invocaciones/día necesitarías (sale con código `2` si te pasas de las 100.000).
+
+### Corregido tras las pruebas en vivo del 17/11/2026
+
+Ver [docs/pruebas-en-vivo-2026-11-17.md](docs/pruebas-en-vivo-2026-11-17.md). Los cinco fallos que se veían en el
+cliente y su estado:
+
+| Fallo | Corrección |
+|---|---|
+| Streams de otras series dentro de una ficha («The Bad Guys Breaking In» en Breaking Bad) | `isRelevant()` exige que el título aparezca como frase contigua, además de temporada y episodio. |
+| Publicidad de «vercineo.net» en descripciones **y en títulos** de TMDB/TVMaze | Nuevo `lib/sanitize.js`, aplicado en catálogos, fichas, portada y TVMaze. |
+| `tvdb:` y `tmdb:<id>` sin tipo devolvían `[]` o una serie equivocada en silencio | Se señalan con un motivo (`stage: parseId` en `/internal/streams-test.json`) y `meta` desambigua `tmdb:<id>` con el tipo de la petición. |
+| Debrid: la credencial desaparecía a los 5 minutos sin avisar | El servidor devuelve `durable: false` y `/configure` lo advierte. Para que sea duradero sigue haciendo falta crear `DEBRID_KV`. |
+
 
 ```bash
 npm run scale:audit -- --url https://tu-dominio            # proyección a 500.000 peticiones/día
@@ -313,7 +323,7 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 | `GET /catalog/:type/:id.json` | Catálogos (`movie`/`series`) |
 | `GET /<config>/catalog/:type/:id.json` | Catálogos con tu config |
 | `GET /meta/:type/:id.json` | Ficha enriquecida (`tt…`, `tmdb:movie:123`, `tvmaze:123`, `tvdb:series:123`) |
-| `GET /stream/:type/:id.json` | Streams torrent de Knaben + Torlock + BlackHoleBay + Nyaa + YTS + EZTV + The RarBg + Índice BR + Torrentio ES/Latino + Español (ES/LAT) + SpinFlix + Embed69 + VideoAPI (`tt…`, `tt…:T:E` en series) |
+| `GET /stream/:type/:id.json` | Streams torrent de Knaben + Torlock + BlackHoleBay + Nyaa + YTS + EZTV + The RarBg + Índice BR + Torrentio ES/Latino + Español (ES/LAT) + SpinFlix + Fanpelis + Embed69 + VideoAPI + PlayLatinSRC (`tt…`, `tt…:T:E` en series) |
 | `GET /<config>/stream/:type/:id.json` | Streams con proveedores/filtros y, si hay cuenta conectada, los enlaces directos que el adaptador confirme; respuesta `no-store` |
 | `GET /internal/streams-test.json?id=tt…` | Diagnóstico de streams: título resuelto, query, respuesta por proveedor y cuántos resultados caen en cada categoría de filtro (`categories`) |
 | `GET /hls?u=…&ref=…` | Proxy HLS de los streams directos de SpinFlix (lista blanca de hosts y extensiones de media) |
@@ -323,13 +333,12 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 
 ## 📝 Notas
 
-- **Caché**: catálogos 6h por defecto; ids externos 7 días; OMDB 24h; Watchmode 12h. La caché en memoria usa LRU, coalesce cargas repetidas y sirve streams conocidos hasta 6h más mientras los renueva. En Cloudflare, `/catalog`, `/meta` y streams públicos pasan por Cache API; cualquier stream personalizado con credencial debrid es `no-store` para no compartir enlaces personales.
+- **Caché**: catálogos 6h por defecto; ids externos 7 días; OMDB 24h. La caché en memoria usa LRU, coalesce cargas repetidas y sirve streams conocidos hasta 6h más mientras los renueva. En Cloudflare, `/catalog`, `/meta` y streams públicos pasan por Cache API; cualquier stream personalizado con credencial debrid es `no-store` para no compartir enlaces personales.
 - **Degradación elegante**: si falta una clave, esa fuente se omite sin romper el resto.
-- **TheTVDB (v4)**: se autentica con `POST /login` → JWT cacheado ~24 días. Alimenta las fichas de series/películas por IMDb id (respaldo cuando TMDB/TVMaze no responden) con nombre/argumento en español si existe la traducción. IDs explícitos soportados: `tvdb:series:123`, `tvdb:movie:123`, `tvdb:123`. TVDB no ofrece un chart público de tendencias, por eso no genera catálogos; si quieres un catálogo por género/cadena de TVDB, dímelo y lo montamos con `/v4/filter`.
 - **Idioma y región**: el idioma (18 opciones) se pasa a TMDB y cambia títulos, sinopsis y pósters; los nombres de los catálogos y la web siguen en español. La región (44 países) es el `watch_region` de los catálogos "por plataforma" y el país de «En cines» y «Próximos estrenos». Si una plataforma no tiene resultados en la región elegida se prueba con `WATCH_REGION_FALLBACK` (por defecto `MX,US`). Los valores de partida son `TMDB_LANGUAGE` y `WATCH_REGION`.
 - **Soporte**: el enlace sale de `SUPPORT_URL`. Si es de Discord se muestra con su marca; cualquier otra URL http(s) aparece como «Soporte». Por defecto se usa la invitación permanente actual; si cambia, actualiza `SUPPORT_URL`.
 - **Donaciones (Ko-fi → PayPal)**: la web muestra tu página de Ko-fi (`KOFI_USERNAME`) en la barra, en una tarjeta propia y en el pie; Ko-fi es quien cobra, con PayPal o tarjeta, y no cobra comisión por donaciones. No hace falta ninguna clave: **Ko-fi no tiene API pública de lectura** —su única superficie para desarrolladores es un webhook que notifica cada pago completado (`POST` con campo `data` en JSON y `verification_token`)—, así que este addon no guarda ni consulta donaciones. Si más adelante quieres un contador de agradecimiento o los últimos apoyos públicos, hace falta ese webhook (`KOFI_WEBHOOK_VERIFICATION_TOKEN`) y un sitio donde guardarlos; dímelo y lo montamos. `/healthz` informa del estado con `donations`.
-- **Proveedores de contenido (streams)**: Knaben, Torlock, BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino, Español (ES/LAT), SpinFlix, Embed69 y VideoAPI no requieren clave. Se consultan en paralelo, se deduplican por infoHash y se cachean 1 h; el timeout es configurable (6 s por indexador por defecto) y una segunda búsqueda por título alternativo solo recibe 2,5 s. El título se resuelve desde IMDb con TMDB (en inglés, que es lo que indexan los torrents), con respaldo TVMaze (series) y **Cinemeta** (sin clave). Control con `STREAM_PROVIDERS`/`STREAM_MAX_RESULTS` y por usuario en `/configure`.
+- **Proveedores de contenido (streams)**: Knaben, Torlock, BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino, Español (ES/LAT), SpinFlix, Fanpelis, Embed69, VideoAPI y PlayLatinSRC no requieren clave. Se consultan en paralelo, se deduplican por infoHash y se cachean 1 h; el timeout es configurable (6 s por indexador por defecto) y una segunda búsqueda por título alternativo solo recibe 2,5 s. El título se resuelve desde IMDb con TMDB (en inglés, que es lo que indexan los torrents), con respaldo TVMaze (series) y **Cinemeta** (sin clave). Control con `STREAM_PROVIDERS`/`STREAM_MAX_RESULTS` y por usuario en `/configure`.
 - **Servicios debrid**: se conecta una sola cuenta por configuración. TorBox comprueba la caché antes de crear el torrent con `add_only_if_cached=true` y `seed=3` («don't seed», el parámetro documentado por TorBox es 1=auto, 2=sembrar, 3=no sembrar); un hit puede quedar listado en la cuenta. Los clientes mandan `User-Agent` propio: Cloudflare Workers salen sin él y el borde anti-bots de los proveedores responde 403 antes de mirar la clave. EasyDebrid solo llama a `link/generate` tras un lookup positivo. Premiumize solo llama a `transfer/directdl` tras `cache/check` positivo; esa comprobación es best-effort y el proveedor puede aplicar fair-use. Real-Debrid usa OAuth, renueva tokens en servidor y solo busca hashes entre torrents con estado `downloaded` de la biblioteca personal: no consulta la caché global, no añade ni selecciona torrents. Cada petición revisa como máximo 8 hashes y genera hasta 3 enlaces. Real-Debrid recorre la biblioteca personal en páginas de 500 entradas, con un tope defensivo de 20 páginas (10.000 torrents) y un presupuesto total de hasta 15 s; las respuestas incompletas por alcanzar el tope o el tiempo no se cachean como misses definitivos. Los magnets públicos siempre permanecen como respaldo. La URL/manifest personal contiene un ID opaco que da acceso a esa conexión: no compartas esa URL. En Cloudflare se requiere `DEBRID_ENCRYPTION_KEY`; con la KV `DEBRID_KV` las credenciales son duraderas y, sin ella, el Worker usa su Cache API (por datacenter y expulsable, conviene la KV); RD también necesita client ID/secret y callback OAuth. Node local guarda en memoria efímera; Vercel no tiene almacenamiento persistente configurado y no permite conectar cuentas en producción. Las pruebas mock no sustituyen una verificación en vivo con cuentas de proveedor.
 - **Nyaa, YTS y EZTV** son fuentes especializadas: solo se consultan cuando aplican.
   - **YTS** (solo películas) se busca por IMDb id, así que el resultado es exacto. API: [yts.gg/api](https://yts.gg/api).
@@ -377,6 +386,20 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
   - Lo que la web lista como `downloads[]` (Mega, Mediafire, 1fichier, magnet) **se ignora a propósito**: no se reproduce desde un Worker.
   - `FANPELIS=off` lo desactiva sin tocar el resto; `FANPELIS_URL` cambia el dominio. En `/configure` se puede desmarcar como cualquier otro.
   - Sonda real: `npm run fanpelis:check -- --query matrix --deep` (búsqueda → reproductor → embed → `.m3u8`).
+- **FrenchStream (FR, experimental)**: películas con título y año exactos; busca Vidzy y solo devuelve HLS extraído. Hasta tres solicitudes; puede fallar por verificación o bloqueos. Sin validación de reproducción. `FRENCHSTREAM=off` lo desactiva.
+
+- **DeVideoSRC (DE, experimental)**: shell y resolver por IMDb, solo fuentes marcadas HLS o MP4; puede devolver cero resultados. Sin verificación de reproducción en el Worker. `DEVIDEOSRC=off` lo desactiva.
+
+- **VixSrc (IT/EN)**: extractor usado por StreamingCommunity, por ID TMDB, con dos GET habituales y hasta cuatro ante un 410. Devuelve HLS con Referer; la disponibilidad de audio depende del título. Sin WebView ni PoW. `npm run vixsrc:check` comprueba API, embed y master HLS; estado y límites en [evaluación multiidioma](docs/proveedores-multiidioma-2026-11-17.md). La reproducción final aún requiere validación en Stremio.
+
+- **PlayLatinSRC** ([playlatinsrc.co](https://playlatinsrc.co)) es una API de streaming en español que identifica por **ID de IMDb** y sirve las tres versiones (Latino, Castellano y Subtitulado) desde el mismo embed. Declara 21.615 películas, 290 series y 11.568 episodios.
+  - Es la única fuente hispana del addon que funciona **solo con IMDb**: VideoAPI exige TMDB y Fanpelis busca por texto, así que cuando TMDB no responde o el título no está en su catálogo, este proveedor sigue teniendo con qué preguntar. No hay PoW ni clave.
+  - Verificado en la CI: `tt0110357` → 4 streams (Latino y Castellano, 9 `sources` en el resolve) en ~900 ms y `tt0108778` S1E1 → 2 streams, con el buscador del addon devolviendo 4 hits.
+  - Flujo: `GET /custom/movie/{imdb}` (películas) o `GET /custom/serial/{imdb}/{temporada}/{episodio}` (series) devuelve una cáscara con `data-id` y `data-resolve-token`; después `POST /api/resolve` con `{type, id, season, episode, mode, token}` en el **cuerpo** devuelve `sources[]` (`url`, `version`, `kind`). Los `kind` `mp4`/`hls` se reproducen directos; los `embed` se entregan con `proxyHeaders` porque Dropload, Doodstream y Mixdrop validan `Referer`.
+  - El token caduca con la sesión del reproductor: viaja de la página al resolve dentro de la misma invocación, no se guarda y no se reenvía a ningún tercero. Si la página no trae token (título fuera de catálogo o captcha), el proveedor devuelve 0 streams sin marcarse como caído.
+  - Las fuentes se cachean 30 min por ruta, y se recortan a 4 por título para no inundar la lista de streams: el mismo enlace en tres idiomas ya son tres entradas.
+  - `PLAYLATIN=off` lo desactiva sin tocar el resto; `PLAYLATIN_URL` cambia el dominio. En `/configure` se puede desmarcar como cualquier otro.
+  - Sonda real, con el código de producción y código de salida: `npm run playlatin:check -- --imdb tt0110357 --series tt0108778 --season 1 --episode 1 --stream`. Es el paso estricto de la CI: si el sitio cambia el contrato del embed o del resolve, el run se pone rojo.
 - **Índice BR** ([torrent-indexer](https://github.com/felipemarinho97/torrent-indexer), de felipemarinho97) agrega los sitios brasileños **Comando Torrents, BluDV, Torrent dos Filmes, Starck Filmes, Rede Torrent y Vaca Torrent** en una sola API JSON. Es la vía para el contenido en portugués: lanzamientos `Dublado`, `Dual Áudio` o `Nacional` que los índices generales no tienen, con el nombre del release en portugués. Se consulta de dos formas en paralelo:
   - **Por IMDb id** (películas; también series cuando el sitio enlaza el id). El índice guarda el enlace de IMDb dentro de cada ficha, así que la búsqueda es exacta aunque el título esté traducido («Vingadores: Ultimato»). Como la similitud de una consulta por id se puntúa 0, se pide con `filter_results=false` y el IMDb id declarado en cada resultado decide qué vale.
   - **Por el título en portugués de TMDB** (`language=pt-BR`, sin clave no hay este paso). En series se busca el título solo (los sitios publican el lote de la temporada) y la relevancia normal descarta las demás temporadas; en películas, título + año.
@@ -422,9 +445,8 @@ cabe de sobra si la mayoría llegan como *static assets*, que son gratis e ilimi
    El segmento `<cfg>` es **canónico**, así que dos usuarios con la misma configuración comparten
    archivo. Ejemplo real: *«el Worker ejecuta ~26.700 de 178.000 peticiones/día (27 % del plan
    free) → aguanta ~666.000 peticiones/día»*.
-3. **`_redirects` en el borde** — `/watch` (sin barra, el enlace del menú y del botón «Ver ahora»)
-   ejecutaba el Worker **para devolver un 404**: 1 invocación por clic. Ahora es un 301 del borde y
-   cuesta 0. Igual `/configure/` y `/manifest.json/`. La barra final del manifest se cubre con
+3. **`_redirects` en el borde** — `/configure/` y `/manifest.json/` ejecutaban el Worker
+   **para devolver un 404**: 1 invocación por clic. Ahora son un 301 del borde y cuestan 0. La barra final del manifest se cubre con
    **una sola regla dinámica** (`/:path/manifest.json/`), así que no gasta cupo por usuario.
 4. **Configurador pregenerado por región** — el botón «Configurar» de Stremio (`/<cfg>/configure`)
    renderizaba la página entera en el Worker en cada clic. `_redirects` lo manda a
@@ -463,81 +485,6 @@ MIT
 - Los mensajes de error de la aplicación no incluyen parámetros ni cuerpos de respuesta. OMDB y TMDB (con clave v3) aún requieren claves en la URL: configura la plataforma de observabilidad para no guardar parámetros de esas solicitudes. Si una clave apareció en registros, rótala y elimina o restringe el acceso a los registros históricos.
 - Cachés y pausas son locales a cada instancia; no coordinan cuotas entre instancias serverless.
 
-## ▶ Web de reproducción (`/watch/`)
-
-La sección **Ver ahora** de la navegación abre una biblioteca con diseño oscuro tipo Apple TV,
-independiente de la portada de instalación. Funciona en Node/Vercel y en Cloudflare Workers
-(archivos estáticos en `public/watch/` y API compartida en `lib/watchApi.js`).
-
-- Películas, series y anime; selector con todos los catálogos declarados por el addon
-  (plataformas, estudios, géneros y listas base).
-- Catálogos y búsqueda TMDB paginados mediante **Cargar más**, hasta el límite de 500 páginas
-  de TMDB, sin limitar la biblioteca a los títulos destacados de la portada.
-- Fichas con información real, selector de temporada/episodio y búsqueda de torrents usando
-  los proveedores actuales. Para packs, puede ser necesario elegir el archivo en Webtor.
-- **Mi lista** local por navegador, con hasta 200 títulos. No requiere cuenta ni sincroniza dispositivos.
-- Reproducción opcional por Webtor, con versión del SDK fijada a `0.2.19` y carga solo al elegir
-  un torrent. El servicio externo recibe el magnet, el título y la imagen de fondo del título,
-  no credenciales debrid ni la URL de configuración. No se añaden scripts de Webtor a `/configure`.
-- Si el reproductor integrado no responde, la vista lo explica y ofrece **Abrir en Webtor**
-  (el mismo magnet en una pestaña de webtor.io), **Reintentar** y **Copiar magnet**.
-- Aviso flotante **Extensiones recomendadas** con enlaces a la Chrome Web Store (uBlock Origin
-  Lite, Poper Blocker y AdBlock). Se abre solo, sin tomar el foco, únicamente en navegadores
-  de escritorio basados en Chromium, que es donde pueden instalarse; se cierra con su X y ese
-  navegador lo recuerda. El enlace **Extensiones recomendadas** del pie lo abre en cualquier
-  dispositivo. La lista está en `public/watch/index.html`; son extensiones de terceros.
-
-**Configuración:** requiere `TMDB_API_KEY` o `TMDB_ACCESS_TOKEN` en el servidor y los proveedores
-habituales de streams. Sin TMDB, se muestra un mensaje de configuración; no se utilizan títulos
-ficticios. La biblioteca usa la configuración pública por defecto, no importa configuraciones
-personales ni cuentas debrid. La etiqueta de una plataforma no significa que su suscripción
-permita reproducir el torrent.
-
-**Aislamiento:** el SDK de Webtor ejecuta, en la página que lo carga, instrucciones enviadas
-por webtor.io; esa página no debe compartir nunca el origen de la aplicación. `watch.js` la
-crea como documento `data:` (origen opaco por definición) dentro del iframe del reproductor,
-y `player.js` se niega a arrancar en cualquier otro origen. El código externo no alcanza el
-DOM, el almacenamiento ni las credenciales de la aplicación, y el documento recibe solo el
-magnet, el título y la imagen de fondo por mensajes con comprobación de ventana emisora. El
-iframe mantiene un sandbox sin ventanas emergentes, sin navegación de la página principal y
-sin diálogos.
-
-El sandbox lleva `allow-same-origin` únicamente para que el marco de webtor.io anidado
-conserve su propio origen. El diseño anterior anulaba el origen de todo el iframe, y con él
-el del marco de Webtor, que no llegaba a iniciarse: lee su almacenamiento al arrancar y sigue
-su tarea por una conexión con credenciales. El resultado era un recuadro negro con el botón
-de reproducción cortado. Dos consecuencias del diseño actual:
-
-- No debe existir ninguna página del propio sitio que cargue el SDK (por eso no hay
-  `player.html`), ni cargarse en ese iframe otra cosa que el documento `data:`.
-- En Chromium un documento `data:` no es un contexto seguro, y tampoco los marcos que
-  contiene, aunque la página sea https. Dentro del reproductor de Webtor pueden faltar las
-  funciones que lo exigen, como compartir o copiar al portapapeles; la reproducción no
-  depende de ellas.
-
-La aplicación no envía `Content-Security-Policy`. Si se añade una, el documento `data:` la
-hereda y el reproductor debe volver a probarse.
-
-**Disponibilidad:** Webtor es un tercero y puede cambiar su comportamiento. Su documentación
-pública (`https://webtor.io/llms.txt`, consultada el 11 de noviembre de 2026) dice que el
-reproductor para sitios de terceros lo sirve la instancia de Webtor del propio sitio y que
-webtor.io no sirve reproductores integrados. El reproductor integrado puede, por tanto, no
-responder o dejar de hacerlo en cualquier momento. Webtor no avisa de ello a la página: si
-su marco no confirma que está listo pocos segundos después de cargar, la vista muestra el
-aviso con las alternativas, y **Abrir en Webtor** sigue funcionando porque usa la web de
-Webtor y no el reproductor integrado. Usar una instancia propia exigiría pasar su dirección
-al SDK (`baseUrl`), algo que esta web no configura. El reproductor interno conserva su
-interfaz; el diseño Apple TV corresponde a nuestra web.
-
-**Verificación:** `npm test` incluye pruebas sin red del API de navegación, del aislamiento
-(documento `data:`, negativa de `player.js` fuera de un origen opaco) y de los estados del
-reproductor; `npx wrangler deploy --dry-run` valida el empaquetado. El aislamiento y la vista
-se comprobaron además en Chromium contra un webtor.io simulado que servía el SDK y la
-compilación de producción de Webtor, no contra el servicio real ni en otros navegadores.
-Para validar reproducción real abre `/watch/`, elige contenido autorizado y una fuente con
-seeders. La carga del CDN, Webtor, los codecs y la reproducción deben comprobarse en un
-navegador con acceso a esos servicios. No se garantiza reproducción de todas las fuentes.
-
 ### Mejoras de compatibilidad del addon
 
 - **Paginación en Stremio:** Tendencias, Populares, Top Valoradas y Anime (películas y
@@ -557,31 +504,6 @@ Para que Stremio detecte los cambios de capacidades, actualiza o reinstala el ad
 usando tu URL de configuración habitual. Los resultados siguen dependiendo de las
 claves, proveedores y disponibilidad del contenido; estas correcciones no añaden
 fuentes ni requieren compartir credenciales.
-
-### Navegación cinematográfica de la web
-
-`/watch/` incorpora una portada con destacado real, accesos a plataformas y cuatro
-filas horizontales independientes. «Ver todo» abre el catálogo completo paginado.
-Las fichas se abren como páginas dentro de la biblioteca, con una URL de fragmento
-`#title/movie/<id>` o `#title/series/<id>` compatible con recarga y navegación atrás.
-
-Las fichas muestran géneros, datos técnicos, reparto, enlaces de tráileres oficiales
-cuando TMDB los identifica como tráileres de YouTube, y recomendaciones. No se importan
-comentarios, marcas ni datos de sitios de referencia. Las secciones sin información
-se ocultan. Las series presentan tarjetas de episodio con imagen, duración y sinopsis
-cuando están disponibles. Los torrents solo se buscan cuando se elige un episodio o
-se pulsa «Elegir fuente», no al recorrer la portada.
-
-La reproducción ocupa un diálogo de cine independiente de la ficha; al volver a las
-fuentes se descarga el iframe y se conserva la selección de temporada y episodio.
-El escenario es un recuadro 16:9 cuyo ancho se calcula a partir de la altura de la
-ventana, de modo que el reproductor cabe entero en pantalla; el iframe interno se adapta
-a él sin alturas fijas. Mientras Webtor carga se ve la imagen del título con un
-indicador, y el reproductor solo se da por listo cuando Webtor lo confirma. Cada
-reproducción usa un iframe nuevo para no llenar el historial del navegador. Las pruebas
-DOM en `test/watchUi.test.js` usan datos simulados y cubren navegación, selección, estados
-del reproductor y cierre; no certifican reproducción externa ni sustituyen una revisión
-visual en navegador.
 
 ### Diseño de la portada y de `/configure`
 
@@ -622,4 +544,10 @@ npm run providers:check -- --series=tt0903747        # una serie (Breaking Bad)
 npm run providers:check -- --query=interestelar      # sin clave de TMDB
 ```
 
-Comprueba contra los servicios reales las fuentes hispanas (**Torrentio ES/Latino**, **Español (ES/LAT)**, **SpinFlix** y **VideoAPI**) y dice si el problema es de la fuente (caída, dominio cambiado) o del addon (filtro, URL mal formada). Recuerda: ninguno de ellos busca por el título en inglés.
+Comprueba contra los servicios reales las fuentes hispanas (**Torrentio ES/Latino**, **Español (ES/LAT)**, **SpinFlix**, **VideoAPI**, **Fanpelis** y **PlayLatinSRC**) y dice si el problema es de la fuente (caída, dominio cambiado) o del addon (filtro, URL mal formada). Recuerda: ninguna busca por el título en inglés, y las dos últimas van por id (TMDB e IMDb respectivamente).
+
+### Fuentes e idioma de audio
+
+En `/configure`, la sección de proveedores permite elegir **streaming directo**, **torrents** o ambos; después, uno o varios idiomas de audio y los proveedores visibles compatibles. Las selecciones se guardan en la URL personal. Las instalaciones antiguas sin estos campos mantienen todos los tipos e idiomas activos.
+
+La lista de idiomas de cada proveedor es orientativa. El filtro de audio utiliza únicamente etiquetas disponibles: un resultado sin audio identificado se clasifica como **Desconocido**; los subtítulos por sí solos no garantizan el idioma del audio. Elegir idiomas y quitar Desconocido puede ocultar fuentes válidas sin etiquetar. Debrid sigue aplicado a torrents seleccionados. Si no se selecciona tipo o idioma, no hay streams.

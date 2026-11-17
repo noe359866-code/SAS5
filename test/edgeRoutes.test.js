@@ -3,9 +3,9 @@
 /**
  * `public/_redirects`: rutas que el Worker resolvía gastando una invocación.
  *
- * En `*.workers.dev` `/watch` (sin barra) no coincide con ningún archivo, así
- * que ejecutaba el Worker… para devolver un 404. `_redirects` se evalúa antes
- * de los assets y del Worker: 0 invocaciones.
+ * En `*.workers.dev` una ruta como `/configure/` (con barra) no coincide con
+ * ningún archivo, así que ejecutaba el Worker… para devolver un 404.
+ * `_redirects` se evalúa antes de los assets y del Worker: 0 invocaciones.
  */
 
 const { test } = require('node:test');
@@ -13,11 +13,11 @@ const assert = require('node:assert/strict');
 
 const { MAX_REDIRECTS, STATIC_ROUTES, buildRedirects, renderRedirects } = require('../lib/edgeRoutes');
 
-test('/watch se resuelve en el borde, no en el Worker', () => {
+test('las barras finales que no existen como archivo se resuelven en el borde', () => {
   const { rules, dropped } = buildRedirects();
   assert.equal(dropped, 0);
-  const watch = rules.find((rule) => rule.from === '/watch');
-  assert.deepEqual(watch, { from: '/watch', to: '/watch/', status: 301 });
+  // /watch ya no existe: eliminado junto con la web de reproductor.
+  assert.equal(rules.find((rule) => rule.from === '/watch'), undefined);
   // Las barras finales que tampoco existen como archivo.
   assert.ok(rules.some((rule) => rule.from === '/configure/' && rule.to === '/configure'));
   assert.ok(rules.some((rule) => rule.from === '/manifest.json/' && rule.to === '/manifest.json'));
@@ -53,10 +53,10 @@ test('renderRedirects conserva las reglas manuales y es idempotente', () => {
   const { rules } = buildRedirects();
   const first = renderRedirects(rules, manual);
   assert.ok(first.includes('/favicon.ico /assets/logo.png 302'));
-  assert.ok(first.includes('/watch /watch/ 301'));
+  assert.ok(first.includes('/configure/ /configure 301'));
   assert.equal(renderRedirects(rules, first), first, 'regenerar no debe duplicar el bloque');
   // Y sin contenido previo también funciona.
-  assert.ok(renderRedirects(rules, '').includes('/watch /watch/ 301'));
+  assert.ok(renderRedirects(rules, '').includes('/configure/ /configure 301'));
 });
 
 test('el bloque generado queda comentado y delimitado para poder sustituirlo', () => {

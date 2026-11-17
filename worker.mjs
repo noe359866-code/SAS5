@@ -14,7 +14,7 @@
  *   GET /healthz · GET /assets/logo.png
  *
  * Secrets/vars del Worker (ver wrangler.toml y README):
- *   TMDB_API_KEY | TMDB_ACCESS_TOKEN, OMDB_API_KEY, WATCHMODE_API_KEY, TVDB_API_KEY (+TVDB_PIN)
+ *   TMDB_API_KEY | TMDB_ACCESS_TOKEN, OMDB_API_KEY
  *   Vars no secretas: WATCH_REGION, ADDON_NAME, TMDB_LANGUAGE, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS,
  *                     SUPPORT_URL (soporte), KOFI_USERNAME (botón de donaciones) y
  *                     DEBRID_VALIDATE_TIMEOUT_MS (plazo al validar claves debrid en /configure)
@@ -22,7 +22,6 @@
  */
 
 import config from './lib/config.js';
-import watchApiModule from './lib/watchApi.js';
 import responseCache from './lib/responseCache.js';
 import core from './lib/core.js';
 import { renderHome } from './lib/homePage.js';
@@ -469,18 +468,6 @@ async function handleRequest(request, env, ctx) {
       return hlsProxy.handleHlsProxy(request, url, env || {});
     }
 
-    if (path.startsWith('/internal/watch/')) {
-      const watchCacheUrl = `${origin}/__edge${path}?${url.searchParams.toString()}&_r=${encodeURIComponent(config.watchRegion)}&_l=${encodeURIComponent(config.tmdbLanguage)}&_t=${config.tmdbConfigured ? 1 : 0}`;
-      return edgeCached(request, ctx, async () => {
-        try {
-          const { body, status, cacheControl } = await watchApiModule.watchApi(url);
-          return jsonResponse(body, status, 0, cacheControl || 'no-store');
-        } catch (_) {
-          return jsonResponse({ error: 'La fuente no respondió. Inténtalo de nuevo.' }, 502, 0);
-        }
-      }, watchCacheUrl);
-    }
-
     // ── Portada estilo streaming (tendencias en vivo si hay TMDB) ─
     if (path === '/' || path === '/api') {
       const accept = request.headers.get('accept') || '';
@@ -586,8 +573,6 @@ async function handleRequest(request, env, ctx) {
             tmdb: config.tmdbConfigured,
             tvmaze: true,
             omdb: config.omdbConfigured,
-            watchmode: config.watchmodeConfigured,
-            tvdb: config.tvdbConfigured,
             // knaben, torlock, blackholebay, nyaa, yts, eztv, rarbg, torrentindexer, torrentioes: true si está activo
             ...Object.fromEntries(
               streams.PROVIDER_KEYS.map((key) => [key, streams.activeProviders(null).includes(key)])

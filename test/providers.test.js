@@ -5,10 +5,8 @@ const assert = require('node:assert/strict');
 const config = require('../lib/config');
 const http = require('../lib/http');
 const tvmaze = require('../lib/tvmaze');
-const watchmode = require('../lib/watchmode');
 const omdb = require('../lib/omdb');
 const tmdb = require('../lib/tmdb');
-const tvdb = require('../lib/tvdb');
 const originalFetch = global.fetch;
 after(() => { global.fetch = originalFetch; });
 const json = (data, status = 200, headers = {}) => new Response(JSON.stringify(data), { status, headers });
@@ -63,24 +61,6 @@ test('TVMaze trata 404 de lookup como ausencia y la cachea', async () => {
   assert.equal(calls, 1);
 });
 
-test('Watchmode usa search IMDb, lee title_results y consulta fuentes', async () => {
-  config.reload({ WATCHMODE_API_KEY: 'test-watch' });
-  const urls = [];
-  global.fetch = async (url, opts) => {
-    urls.push(new URL(url));
-    assert.equal(opts.headers['X-API-Key'], 'test-watch');
-    assert.ok(!String(url).includes('test-watch'));
-    return urls.length === 1 ? json({ title_results: [{ id: 4321 }] }) : json([{ name: 'Netflix', type: 'sub', region: 'US' }]);
-  };
-  assert.deepEqual(await watchmode.availabilityByImdb('tt981232', 'US'), { region: 'US', names: ['Netflix'] });
-  assert.equal(urls[0].pathname, '/v1/search/');
-  assert.equal(urls[0].searchParams.get('search_field'), 'imdb_id');
-  assert.equal(urls[0].searchParams.get('search_value'), 'tt981232');
-  assert.equal(urls[1].pathname, '/v1/title/4321/sources/');
-  await watchmode.availabilityByImdb('tt981232', 'US');
-  assert.equal(urls.length, 2);
-});
-
 test('OMDB pausa tras cuota agotada y no cachea fallos transitorios', async () => {
   config.reload({ OMDB_API_KEY: 'test-omdb' });
   let calls = 0;
@@ -105,25 +85,6 @@ test('TMDB frena después de 429 sin cachear el fallo como resultado', async () 
   assert.deepEqual(await tmdb.tmdbGet('/example-a'), { ok: true });
 });
 
-test('TVDB resuelve remoteid y filtra el tipo aunque aparezcan episodios primero', async () => {
-  config.reload({ TVDB_API_KEY: 'test-tvdb' });
-  const urls = [];
-  global.fetch = async (url) => {
-    urls.push(String(url));
-    return String(url).endsWith('/login') ? json({ data: { token: 'token' } }) : json({ data: [{ episode: { id: 1 } }, { series: { id: 99 } }] });
-  };
-  assert.equal((await tvdb.searchByRemoteId('tt981235', 'series')).id, 99);
-  assert.match(urls[1], /\/search\/remoteid\/tt981235$/);
-});
-
-
-test('Watchmode no mezcla fuentes de países distintos en el fallback', async () => {
-  config.reload({ WATCHMODE_API_KEY: 'test-regions' });
-  global.fetch = async (url) => String(url).includes('/search/')
-    ? json({ title_results: [{ id: 4455 }] })
-    : json([{ name: 'Canada', type: 'sub', region: 'CA' }, { name: 'Mexico', type: 'sub', region: 'MX' }]);
-  assert.deepEqual(await watchmode.availabilityByImdb('tt981237', 'NI'), { region: 'CA', names: ['Canada'] });
-});
 
 test('caché llena expulsa una entrada menos usada, no todo el contenido', () => {
   const cache = require('../lib/cache');
@@ -278,22 +239,6 @@ test('Worker marca no-store una respuesta de streams degradada', async () => {
   assert.equal(res.status, 200);
   assert.equal(res.headers.get('cache-control'), 'no-store');
   assert.equal((await res.json()).cacheMaxAge, 0);
-});
-
-test('TVDB usa un token distinto al cambiar de credenciales', async () => {
-  let logins = 0;
-  global.fetch = async (url, opts) => {
-    if (String(url).endsWith('/login')) {
-      logins++;
-      return json({ data: { token: JSON.parse(opts.body).apikey } });
-    }
-    return json({ data: [{ movie: { id: 88, name: opts.headers.Authorization } }] });
-  };
-  config.reload({ TVDB_API_KEY: 'tvdb-key-first' });
-  assert.equal((await tvdb.searchByRemoteId('tt981241', 'movie')).name, 'Bearer tvdb-key-first');
-  config.reload({ TVDB_API_KEY: 'tvdb-key-second' });
-  assert.equal((await tvdb.searchByRemoteId('tt981242', 'movie')).name, 'Bearer tvdb-key-second');
-  assert.equal(logins, 2);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -830,11 +775,11 @@ test('The RarBg: con HTTP 429 se pausa lo que pide Retry-After y una respuesta r
   }
 });
 
-test('healthz: informa de los catorce proveedores de streams', async () => {
+test('healthz: informa de los dieciocho proveedores de streams', async () => {
   const worker = (await import('../worker.mjs')).default;
   const all = await (await worker.fetch(new Request('https://addon.example/healthz'), {}, {})).json();
   assert.deepEqual(all.streamProviders, [
-    'knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi',
+    'knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc', 'devideosrc', 'frenchstream',
   ]);
   for (const key of all.streamProviders) assert.equal(all.sources[key], true, key);
   const some = await (await worker.fetch(new Request('https://addon.example/healthz'), { STREAM_PROVIDERS: 'yts,knaben' }, {})).json();

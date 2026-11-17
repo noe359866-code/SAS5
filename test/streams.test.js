@@ -26,8 +26,8 @@ test('manifest: declara el recurso stream', () => {
   assert.match(manifest.version, /^\d+\.\d+\.\d+$/);
 });
 
-test('proveedores: los catorce proveedores quedan registrados', () => {
-  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi'];
+test('proveedores: los dieciocho proveedores quedan registrados', () => {
+  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc', 'devideosrc', 'frenchstream'];
   assert.deepEqual(streams.PROVIDER_KEYS, all);
   assert.deepEqual(streams.activeProviders(null), all);
   assert.deepEqual(streams.activeProviders({ streams: ['torlock'] }), ['torlock']);
@@ -132,6 +132,66 @@ test('isRelevant: filtra secuelas y episodios equivocados', () => {
   assert.equal(streams.isRelevant({ title: 'Dark 1x03 HDTV' }, ep), false);
   assert.equal(streams.isRelevant({ title: 'Dark Cap. 101_107 Castellano' }, ep), true);
   assert.equal(streams.isRelevant({ title: 'Dark Cap. 108 Castellano' }, ep), false);
+});
+
+test('parseStreamId: acepta tvmaze y señala tvdb/tmdb sin tipo', () => {
+  // tvmaze con temporada: es lo que emite el catálogo «En TV hoy».
+  assert.equal(streams.parseStreamId('series', 'tvmaze:72988:1:1').baseId, 'tvmaze:72988');
+  assert.equal(streams.parseStreamId('series', 'tvmaze:72988:1:1').season, 1);
+  assert.equal(streams.parseStreamId('series', 'tvmaze:72988:1:1').episode, 1);
+  // Los que no se pueden resolver se marcan, en vez de fallar en silencio.
+  assert.equal(streams.parseStreamId('series', 'tvdb:series:81189:1:1').invalid, 'tvdb_not_supported');
+  assert.equal(streams.parseStreamId('series', 'tvdb:81189').invalid, 'tvdb_not_supported');
+  assert.equal(streams.parseStreamId('movie', 'tmdb:603').invalid, 'tmdb_id_without_type');
+  // Con tipo explícito, ningún problema.
+  assert.equal(streams.parseStreamId('series', 'tmdb:tv:1396:1:1').baseId, 'tmdb:tv:1396');
+  assert.equal(streams.parseStreamId('movie', 'tmdb:movie:603').invalid, undefined);
+});
+
+test('diagnose: explica por qué un id no soportado no tiene streams', async () => {
+  const cfg = { streams: ['knaben'] };
+  const tvdb = await streams.diagnose('series', 'tvdb:series:81189:1:1', cfg);
+  assert.equal(tvdb.ok, false);
+  assert.equal(tvdb.stage, 'parseId');
+  assert.equal(tvdb.reason, 'tvdb_not_supported');
+  const bare = await streams.diagnose('movie', 'tmdb:603', cfg);
+  assert.equal(bare.reason, 'tmdb_id_without_type');
+});
+
+test('isRelevant: no cuela otra serie con el mismo SxxEyy', () => {
+  // Regresión de docs/pruebas-en-vivo-2026-11-17.md: la ficha de Breaking Bad
+  // S01E01 mostraba «The Bad Guys Breaking In S01E01» porque la rama de series
+  // solo comparaba temporada y episodio.
+  const bb = { title: 'Breaking Bad', altTitle: null, year: '2008', season: 1, episode: 1, mediaType: 'series' };
+  const q = 'Breaking Bad 2008';
+  assert.equal(streams.isRelevant({ title: 'Breaking.Bad.S01E01.Pilot.1080p.HEVC.x265-MeGusta' }, bb, q), true);
+  assert.equal(streams.isRelevant({ title: 'Breaking Bad S01E01-07 1080p NF WEB-DL ITA-ENG DDP5.1 AV1-G66' }, bb, q), true);
+  assert.equal(streams.isRelevant({ title: 'Breaking.Bad.S01E01.HDTV.XviD-BiA' }, bb, q), true);
+  // Título en otro alfabeto que repite el romanizado.
+  assert.equal(streams.isRelevant({ title: '绝命毒师 Breaking Bad S01E01 中英字幕 BDrip 1080p-人人影视' }, bb, q), true);
+  // Otra serie, mismo episodio: fuera.
+  assert.equal(streams.isRelevant({ title: 'The Bad Guys Breaking In S01E01 1080p HEVC x265-MeGusta' }, bb, q), false);
+  assert.equal(streams.isRelevant({ title: 'The Bad Guys Breaking In S01E01 1080p WEB h264-DOLORES' }, bb, q), false);
+  assert.equal(streams.isRelevant({ title: 'Better.Call.Saul.S01E01.1080p.WEB-DL' }, bb, q), false);
+  assert.equal(streams.isRelevant({ title: 'El.Chavo.S01E01.720p' }, bb, q), false);
+});
+
+test('isRelevant: títulos cortos, artículos y temporada equivocada', () => {
+  const loki = { title: 'Loki', altTitle: null, year: '2021', season: 1, episode: 1, mediaType: 'series' };
+  assert.equal(streams.isRelevant({ title: 'Loki.S01E01.1080p' }, loki, 'Loki 2021'), true);
+  assert.equal(streams.isRelevant({ title: 'Loki.S02E01.1080p' }, loki, 'Loki 2021'), false);
+
+  const hotd = { title: 'House of the Dragon', altTitle: null, year: '2022', season: 1, episode: 1, mediaType: 'series' };
+  assert.equal(streams.isRelevant({ title: 'House.of.the.Dragon.S01E01.1080p' }, hotd, 'House of the Dragon 2022'), true);
+  assert.equal(streams.isRelevant({ title: 'The.House.S01E01.1080p' }, hotd, 'House of the Dragon 2022'), false);
+
+  const lou = { title: 'The Last of Us', altTitle: null, year: '2023', season: 1, episode: 3, mediaType: 'series' };
+  assert.equal(streams.isRelevant({ title: 'The.Last.of.Us.S01E03.1080p' }, lou, 'The Last of Us 2023'), true);
+  assert.equal(streams.isRelevant({ title: 'The.Last.of.Us.S02E03.1080p' }, lou, 'The Last of Us 2023'), false);
+
+  // El título original (altTitle) también vale como referencia.
+  const dark = { title: 'Dark', altTitle: 'Dark', year: '2017', season: 1, episode: 2, mediaType: 'series' };
+  assert.equal(streams.isRelevant({ title: 'Dark.S01E02.1080p.NF.WEB-DL' }, dark, 'Dark 2017'), true);
 });
 
 test('handleStream: sin proveedores activos devuelve [] sin tocar la red', async () => {
@@ -623,7 +683,7 @@ test('parseRarbg: normaliza resultados y descarta lo que no es vídeo', () => {
 });
 
 test('episodios: separa correctamente TMDB y TVMaze sin confundir el episodio con el id', () => {
-  for (const baseId of ['tmdb:tv:1399', 'tmdb:series:1399', 'tvmaze:82', 'tvdb:series:121361']) {
+  for (const baseId of ['tmdb:tv:1399', 'tmdb:series:1399', 'tvmaze:82']) {
     const parsed = streams.parseStreamId('series', `${baseId}:2:7`);
     assert.equal(parsed.baseId, baseId);
     assert.equal(parsed.season, 2);

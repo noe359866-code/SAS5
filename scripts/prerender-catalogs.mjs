@@ -530,7 +530,7 @@ export async function prerenderConfigPages(options = {}) {
 
 /**
  * Escribe `public/_redirects` con las rutas que el Worker resolvía gastando
- * una invocación (`/watch`, barras finales…). Se conserva lo que no gestiona
+ * una invocación (barras finales…). Se conserva lo que no gestiona
  * este script, para no pisar reglas manuales.
  */
 export async function writeRedirects(options = {}) {

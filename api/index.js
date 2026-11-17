@@ -94,19 +94,6 @@ function buildCacheControl(cacheSeconds, staleSeconds = 86400) {
   return `public, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}, stale-while-revalidate=${swr}, stale-if-error=604800`;
 }
 
-// Streaming web assets and shared browsing API.
-app.use('/watch', express.static(path.join(__dirname, '..', 'public', 'watch'), { maxAge: '1h' }));
-app.get('/internal/watch/:action', async (req, res) => {
-  try {
-    const { body, status, cacheControl } = await require('../lib/watchApi').watchApi(new URL(req.originalUrl, 'http://internal'));
-    res.setHeader('Cache-Control', cacheControl || 'no-store');
-    res.status(status).json(body);
-  } catch (_) {
-    res.setHeader('Cache-Control', 'no-store');
-    res.status(502).json({ error: 'La fuente no respondió. Inténtalo de nuevo.' });
-  }
-});
-
 // 4. Healthcheck
 app.get('/healthz', (req, res) => {
   res.json({
@@ -121,8 +108,6 @@ app.get('/healthz', (req, res) => {
       tmdb: config.tmdbConfigured,
       tvmaze: true,
       omdb: config.omdbConfigured,
-      watchmode: config.watchmodeConfigured,
-      tvdb: config.tvdbConfigured,
       // knaben, torlock, blackholebay, nyaa, yts, eztv, rarbg, torrentindexer, torrentioes: true si está activo
       ...Object.fromEntries(STREAM_KEYS.map((key) => [key, activeProviders(null).includes(key)])),
     },

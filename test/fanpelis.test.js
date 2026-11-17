@@ -197,3 +197,16 @@ test('fanpelis: utilidades de selección e idioma', () => {
   assert.equal(fanpelis.pickEpisode(EPISODES.data, 1, 2)._id, 26787);
   assert.equal(fanpelis.pickEpisode(EPISODES.data, 9, 1), null);
 });
+
+test('fanpelis: vimeos rota de dominio y el proxy acepta todos sus TLD', () => {
+  // El mismo embed devolvió `s9.vimeos.net` en una pasada y `p3.vimeos.zip`
+  // en la siguiente: si el proxy solo permite .net, ese stream no reproduce.
+  const hls = require('../lib/hlsProxy');
+  const allowed = hls.allowedHosts({});
+  for (const host of ['s9.vimeos.net', 'p3.vimeos.zip', 'vimeos.com', 's1.vimeos.xyz']) {
+    assert.equal(hls.hostAllowed(host, allowed), true, host);
+  }
+  // Y sigue sin ser un proxy abierto: un dominio ajeno no pasa.
+  assert.equal(hls.hostAllowed('vimeos.net.evil.example', allowed), false);
+  assert.equal(hls.hostAllowed('cdn.example', allowed), false);
+});

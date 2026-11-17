@@ -169,9 +169,22 @@ jobs:
               node scripts/sources-probe.mjs --chain "$u" || true
             done
             echo
-            echo '### PelisPedia · qué hay alrededor de vidhide/filemoon'
-            node scripts/sources-probe.mjs --dump https://pelispedia.mov/vidurl/tt0816692/ > /tmp/dump.txt 2>&1 || true
-            cat /tmp/dump.txt
+            echo '### vidurl: formato de los enlaces'
+            node -e "
+              (async () => {
+                const url = 'https://pelispedia.mov/vidurl/tt0816692/';
+                const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0', Referer: 'https://pelispedia.mov/' }, signal: AbortSignal.timeout(20000) });
+                const h = await r.text();
+                const count = (re) => (h.match(re) || []).length;
+                const dotted = count(/a\.[A-Za-z0-9+/=_-]{20,}\.c/g);
+                const pow = count(/POW_CHALLENGE|POW_DIFFICULTY|POW_SALT/g);
+                const dl = h.indexOf('dataLink');
+                const snippet = dl < 0 ? '(sin dataLink)' : h.slice(dl, dl + 420).replace(/\s+/g, ' ');
+                console.log(JSON.stringify({ bytes: h.length, pow, dotted, tiene_dataLink: dl >= 0 }));
+                console.log('snip=' + snippet);
+              })().catch((e) => console.log('ERROR ' + e.message));
+            " > /tmp/vidurl.txt 2>&1 || true
+            cat /tmp/vidurl.txt
           } | tee /tmp/fuentes.txt
           cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"
           # Anotaciones selectivas: la sonda completa son ~60 líneas y cada
@@ -180,15 +193,12 @@ jobs:
           grep -E '^[✔✘]' /tmp/fuentes.txt | while IFS= read -r l; do
             echo "::notice title=Fuente::$l"
           done
-          grep -E '^\[1\]|^    sin iframes' /tmp/fuentes.txt | while IFS= read -r l; do
-            echo "::notice title=Fuentes\::$l"
-          done
           # Lo único que decide es qué hosts sirve el payload: se emite solo eso.
           grep -E '^\[2\]' /tmp/fuentes.txt | while IFS= read -r l; do
             echo "::notice title=Encadenado::$l"
           done
-          grep -E '^\[dataLink\]|^\[sortedEmbeds\]' /tmp/dump.txt | head -2 | while IFS= read -r l; do
-            echo "::notice title=vidurl dataLink::$(echo "$l" | cut -c1-380)"
+          head -2 /tmp/vidurl.txt | tr '\n' ' ' | cut -c1-900 | while IFS= read -r l; do
+            echo "::notice title=vidurl formato::$l"
           done
           hosts_line="$(grep -m1 'hosts en el payload' /tmp/dump.txt || true)"
           [ -n "$hosts_line" ] && echo "::notice title=PelisPedia hosts::$hosts_line"

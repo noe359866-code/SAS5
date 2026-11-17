@@ -37,11 +37,18 @@ const PLAYER_HOSTS = /^(?:https:\/\/)?(?:vimeos\.net|lamovie\.link|filemoon|vidh
 const NOT_PLAYER = /^(?:magnet:|https:\/\/(?:mega\.nz|megaup|mediafire|1fichier|pixeldrain|uptobox|youtube|youtu\.be))/i;
 
 function parseArgs(argv) {
+  // Se aceptan las dos formas: `--query=matrix` y `--query matrix` (en el
+  // workflow la segunda, entre comillas, se lee mejor).
   const options = { query: 'matrix', tv: false, json: false, deep: false, lang: '' };
-  for (const arg of argv) {
-    if (arg.startsWith('--query=')) options.query = arg.split('=').slice(1).join('=');
-    else if (arg.startsWith('--lang=')) options.lang = arg.split('=')[1];
-    else if (arg === '--tv') options.tv = true;
+  const valued = { '--query': 'query', '--lang': 'lang' };
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    const eq = arg.indexOf('=');
+    if (eq > 0 && valued[arg.slice(0, eq)]) {
+      options[valued[arg.slice(0, eq)]] = arg.slice(eq + 1);
+    } else if (valued[arg] && i + 1 < argv.length) {
+      options[valued[arg]] = argv[++i];
+    } else if (arg === '--tv') options.tv = true;
     else if (arg === '--json') options.json = true;
     else if (arg === '--deep') options.deep = true;
   }

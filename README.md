@@ -54,7 +54,7 @@ Metadatos enriquecidos en la ficha:
 │   ├── tvdb.js           # Cliente TheTVDB v4 (login JWT; fichas por IMDb id)
 │   ├── omdb.js           # Cliente OMDB (ratings)
 │   ├── watchmode.js      # Cliente Watchmode (plataformas)
-│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino, Español (ES/LAT), SpinFlix, Embed69, VideoAPI
+│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino, Español (ES/LAT), SpinFlix, Fanpelis, Embed69, VideoAPI
 │   ├── streamFilters.js  # Filtros de streams: clasificador por nombre + preferencias del usuario
 │   ├── catalogs.js       # Definición de catálogos (+ filtrado por config)
 │   ├── userConfig.js     # Codec/validación de config de usuario (base64url)
@@ -370,6 +370,13 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
   - `VIDEOAPI=off` lo desactiva sin tocar el resto; `VIDEOAPI_URL` cambia el dominio. En `/configure` se puede desmarcar como cualquier otro.
   - **Depende de TMDB** para traducir el IMDb de Stremio a TMDB. Sin `TMDB_API_KEY` (o sin `tmdb:<id>` en la petición) el proveedor no tiene llave con la que preguntar y se salta: es la única pieza de configuración que necesita.
   - Sonda real, sin claves y con código de salida: `npm run videoapi:check`. Habla con VideoAPI por TMDB id (Interstellar 157336, Breaking Bad 1396) y verifica el contrato completo (`exists` → `path` → iframe de vimeos.net). Es el paso estricto de la CI: si la fuente cambia, el run se pone rojo.
+- **Fanpelis** ([fanpelis.to](https://fanpelis.to)) es una web hispana con **API JSON pública**: no hay que scrapear HTML ni resolver ningún PoW. Es la fuente que menos cuesta de todas las hispanas evaluadas (tres `GET` y ~10 ms de CPU).
+  - `GET /api/rest/search?query=…&post_type=movies|tvshows,animes` → fichas con `_id`, título traducido, original y año; `GET /api/rest/episodes?post_id={serie}` → episodios por temporada; `GET /api/rest/player?post_id={obra|episodio}&_any=1` → `embeds[]` ya resueltos (`url`, `lang`, `quality`).
+  - El embed es de **vimeos.net**, el mismo host que ya reproduce SpinFlix, y su HTML viene empaquetado con el `eval(function(p,a,c,k,e,d)…)` de Dean Edwards: de ahí sale el `.m3u8` (y las pistas `.vtt`) **sin ejecutar nada**, reutilizando el desempaquetador de `lib/spinflix.js`. El stream se sirve por el **proxy HLS propio** (`/hls?u=…`), que pone el `Referer` en cada segmento.
+  - **La API solo indexa el título traducido**: «The Matrix» devuelve 0 fichas y «Matrix» devuelve 3. Por eso, además del título de la petición, se prueba siempre **sin el artículo inicial** (`the/el/la/los/las`). Con TMDB configurado, el título en español se usa primero.
+  - Lo que la web lista como `downloads[]` (Mega, Mediafire, 1fichier, magnet) **se ignora a propósito**: no se reproduce desde un Worker.
+  - `FANPELIS=off` lo desactiva sin tocar el resto; `FANPELIS_URL` cambia el dominio. En `/configure` se puede desmarcar como cualquier otro.
+  - Sonda real: `npm run fanpelis:check -- --query matrix --deep` (búsqueda → reproductor → embed → `.m3u8`).
 - **Índice BR** ([torrent-indexer](https://github.com/felipemarinho97/torrent-indexer), de felipemarinho97) agrega los sitios brasileños **Comando Torrents, BluDV, Torrent dos Filmes, Starck Filmes, Rede Torrent y Vaca Torrent** en una sola API JSON. Es la vía para el contenido en portugués: lanzamientos `Dublado`, `Dual Áudio` o `Nacional` que los índices generales no tienen, con el nombre del release en portugués. Se consulta de dos formas en paralelo:
   - **Por IMDb id** (películas; también series cuando el sitio enlaza el id). El índice guarda el enlace de IMDb dentro de cada ficha, así que la búsqueda es exacta aunque el título esté traducido («Vingadores: Ultimato»). Como la similitud de una consulta por id se puntúa 0, se pide con `filter_results=false` y el IMDb id declarado en cada resultado decide qué vale.
   - **Por el título en portugués de TMDB** (`language=pt-BR`, sin clave no hay este paso). En series se busca el título solo (los sitios publican el lote de la temporada) y la relevancia normal descarta las demás temporadas; en películas, título + año.

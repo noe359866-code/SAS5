@@ -47,3 +47,5 @@ Un tercer intento de búsqueda de FrenchStream devolvió HTTP 200 con página de
 Añadido para pruebas a petición del usuario. Solo películas con título y año coincidentes exactamente; como máximo POST búsqueda, GET API y GET de Vidzy. Se devuelven únicamente URLs HLS de vidzy.org, nunca embeds. El audio de la fuente default no está etiquetado. Los challenges no se resuelven y la respuesta puede estar vacía. La búsqueda y extracción se prueban offline; la reproducción y acceso desde el Worker siguen pendientes. `FRENCHSTREAM=off` lo desactiva.
 
 La sonda real de DeVideoSRC para Matrix devolvió cero fuentes directas: [run 44174270479](https://github.com/noe359866-code/SAS5/actions/runs/44174270479).
+
+En [run 44174627973](https://github.com/noe359866-code/SAS5/actions/runs/44174627973), el código integrado de FrenchStream extrajo una URL HLS de Matrix desde GitHub Actions. La sonda no descargó ni reprodujo esa playlist; sigue pendiente probar el Worker y Stremio. DeVideoSRC devolvió cero fuentes directas en esa misma ejecución.

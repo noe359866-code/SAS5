@@ -38,3 +38,13 @@ try {
  const r = await searchAnimeflv('', {title:'Sora wa Akai Kawa no Hotori', mediaType:'series', season:1, episode:20}, 'Sora wa Akai Kawa no Hotori', 12000);
  console.log('Adaptador real: resultados='+ (r.hits || []).length + '; fase=' + (r.query || r.skipped));
 } catch(e) { console.log('Adaptador real: error='+e.message); }
+
+try {
+ const url='https://animeflv.or.at/2026/07/28/kimetsu-no-yaiba-movie-1-mugenjou-hen-akaza-sairai-episodio-1/';
+ const r=await fetch(url,{headers:{'User-Agent':ua},signal:AbortSignal.timeout(12000)}); const text=await r.text();
+ const buttons=[...text.matchAll(/<span\b[^>]*class=["'][^"']*\btooltip-text\b[^"']*["'][^>]*>\s*HLS\s*<\/span>\s*<button\b([^>]*)>([^<]*)/gi)].map(m=>({app: /app_type=["']([^"']+)/i.exec(m[1])?.[1], label:m[2].trim(), host:(()=>{try{return new URL(atob(/data-src=["']([^"']+)/i.exec(m[1])[1])).hostname}catch{return 'invalid'}})()}));
+ console.log('Botones HLS película: '+JSON.stringify(buttons));
+} catch(e) {console.log('Botones: '+e.name)}
+for(const path of ['init.html','000.html']) {
+ try {const r=await fetch('https://player.zilla-networks.com/segs/d162842f22067dde8e52a91b2c3695e6/'+path,{headers:{'User-Agent':ua,Referer:base+'/'},signal:AbortSignal.timeout(12000)});const reader=r.body?.getReader();const part=reader?await reader.read():{};const bytes=part.value || new Uint8Array();if(reader)await reader.cancel(); console.log(`Segmento ${path}: HTTP ${r.status}; tipo=${r.headers.get('content-type')}; marca=${String.fromCharCode(...bytes.slice(4,8))}; bytes iniciales=${bytes.length}`);}catch(e){console.log('Segmento '+path+': '+e.name)}
+}

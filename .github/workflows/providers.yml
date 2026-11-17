@@ -32,10 +32,12 @@ on:
       - 'lib/streams.js'
       - 'lib/spinflix.js'
       - 'lib/embed69.js'
+      - 'lib/playlatin.js'
       - 'lib/videoapi.js'
       - 'lib/fanpelis.js'
       - 'lib/spinflix.js'
       - 'test/fanpelis.test.js'
+      - 'test/playlatin.test.js'
       - 'scripts/sources-probe.mjs'
       - 'lib/hlsProxy.js'
       - 'scripts/providers-check.mjs'
@@ -155,27 +157,31 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 
-      # Webs candidatas: se mira el HTML crudo para ver si el reproductor es
-      # propio o son embeds de terceros. Es la decisión que separa «merece un
-      # proveedor» de «esto ya lo cubre Embed69». El resumen se publica como
-      # anotación porque los logs no se pueden leer desde fuera del repo.
-      # PlayLatinSRC es el único candidato con API por IMDb, así que se sondea
-      # aparte y en serio: ¿el embed trae la URL del host en el HTML?
-      - name: PlayLatinSRC · embed y hosts
-        continue-on-error: true
+      # PlayLatinSRC: proveedor integrado (identifica por IMDb, sin PoW ni
+      # clave). Esta sonda usa el MISMO código que producción, así que lo que
+      # decide es si la página sigue trayendo el token del resolve y si el
+      # resolve devuelve sources jugables. Va ESTRICTA (sin continue-on-error):
+      # es la señal legible cuando el sitio cambia el contrato.
+      - name: PlayLatinSRC · embed, resolve y buscador
+        env:
+          PLAY_IMDB: ${{ inputs.imdb || 'tt0110357' }}
         run: |
           set -o pipefail
-          if node scripts/playlatinsrc-check.mjs > /tmp/playlatin.txt 2>&1; then
+          if node scripts/playlatin-check.mjs --imdb "$PLAY_IMDB" --series tt0108778 --season 1 --episode 1 --stream > /tmp/playlatin.txt 2>&1; then
             status=0
           else
             status=$?
           fi
           cat /tmp/playlatin.txt
           cat /tmp/playlatin.txt >> "$GITHUB_STEP_SUMMARY"
-          # Anotación corta y decisiva (las anotaciones tienen tope global).
-          summary="$(grep -E '^[✔✘]|^      ·|viable|No integrar' /tmp/playlatin.txt | tr '\n' '|' | cut -c1-900)"
-          echo "::notice title=PlayLatinSRC (código $status)::$summary"
-
+          if [ "$status" -ne 0 ]; then
+            reason="$(grep -v '^$' /tmp/playlatin.txt | tail -4 | tr '\n' '|' | cut -c1-400)"
+            echo "::error title=PlayLatinSRC (código $status)::$reason"
+          else
+            summary="$(grep -E '^[✔✘]|^    ' /tmp/playlatin.txt | tr '\n' '|' | cut -c1-600)"
+            echo "::notice title=PlayLatinSRC::$summary"
+          fi
+          exit "$status"
 
       # Fanpelis: API JSON pública con embeds ya resueltos. Se prueba en serio
       # porque es la candidata que menos cuesta (3 GET, sin PoW): lo que decide

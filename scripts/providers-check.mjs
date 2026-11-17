@@ -23,6 +23,7 @@ const streams = require('../lib/streams.js');
 const spinflix = require('../lib/spinflix.js');
 const videoapi = require('../lib/videoapi.js');
 const fanpelis = require('../lib/fanpelis.js');
+const playlatin = require('../lib/playlatin.js');
 
 const TIMEOUT_MS = Number(process.env.CHECK_TIMEOUT_MS) || 12_000;
 
@@ -177,6 +178,32 @@ async function checkFanpelis(resolved, timeoutMs) {
   };
 }
 
+/**
+ * PlayLatinSRC: como VideoAPI, no busca por texto: el IMDb id ES la consulta.
+ * Se prueba el camino completo del proveedor (página → token → resolve) y se
+ * cuentan los streams normalizados, que es lo que verá Stremio.
+ */
+async function checkPlayLatin(resolved) {
+  if (!resolved.imdbId) return { skipped: 'sin IMDb id: no hay nada que preguntar' };
+  const path = playlatin.pagePath(resolved);
+  if (!path) return { skipped: 'sin temporada/episodio' };
+  const result = await playlatin.searchPlayLatin(resolved.title, resolved, resolved.title, TIMEOUT_MS);
+  const hits = (result && result.hits) || [];
+  return {
+    ruta: path,
+    hits: hits.length,
+    query: result && result.query,
+    skipped: result && result.skipped,
+    idiomas: [...new Set(hits.map((hit) => hit.audioLabel))],
+    hosts: [...new Set(hits.map((hit) => hit.server))].slice(0, 4),
+    samples: hits.slice(0, 2).map((hit) => ({
+      titulo: String(hit.title || '').slice(0, 80),
+      url: String(hit.url || '').split('?')[0].slice(0, 70),
+      tipo: hit.quality,
+    })),
+  };
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
@@ -202,6 +229,7 @@ async function main() {
   results.push(await timed('spinflix (buscador)', () => checkSpinFlix(options)));
   results.push(await timed('videoapi (exists + reproductor)', () => checkVideoApi(resolved)));
   results.push(await timed('fanpelis (búsqueda → .m3u8)', () => checkFanpelis(resolved, TIMEOUT_MS)));
+  results.push(await timed('playlatin (página → resolve por IMDb)', () => checkPlayLatin(resolved)));
   // Los tres buscadores que alimentan «Español (ES/ES)» y el propio agregado.
   // El agregado «Español (ES/LAT)»: busca con el título en español de TMDB en
   // Knaben, Torlock y BlackHoleBay y se queda solo lo que declara audio español.

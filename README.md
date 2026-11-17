@@ -113,6 +113,7 @@ Edita `.env`:
 | `DEBRID_MAX_CHECKS` / `DEBRID_MAX_RESULTS` | Opcional | Máximo de hashes consultados (8) y enlaces directos generados (3) por petición |
 | `DEBRID_TIMEOUT_MS` | Opcional | Tiempo máximo de espera antes de devolver los magnets públicos (4500 ms) |
 | `DEBRID_VALIDATE_TIMEOUT_MS` | Opcional | Plazo al validar la clave debrid en `/configure` (9000 ms); sube a 12000–15000 si el proveedor responde lento |
+| `DEVIDEOSRC` | Opcional | `off` desactiva DeVideoSRC experimental (solo URLs directas, puede no devolver resultados) |
 | `VIXSRC` | Opcional | `off` desactiva el extractor VixSrc (activo por defecto; experimental) |
 | `PLAYLATIN_URL` | Opcional | Dominio de PlayLatinSRC (defecto `https://playlatinsrc.co`) |
 | `PORT` | Opcional | Puerto local (defecto `7000`) |
@@ -384,6 +385,8 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
   - Lo que la web lista como `downloads[]` (Mega, Mediafire, 1fichier, magnet) **se ignora a propósito**: no se reproduce desde un Worker.
   - `FANPELIS=off` lo desactiva sin tocar el resto; `FANPELIS_URL` cambia el dominio. En `/configure` se puede desmarcar como cualquier otro.
   - Sonda real: `npm run fanpelis:check -- --query matrix --deep` (búsqueda → reproductor → embed → `.m3u8`).
+- **DeVideoSRC (DE, experimental)**: shell y resolver por IMDb, solo fuentes marcadas HLS o MP4; puede devolver cero resultados. Sin verificación de reproducción en el Worker. `DEVIDEOSRC=off` lo desactiva.
+
 - **VixSrc (IT/EN)**: extractor usado por StreamingCommunity, por ID TMDB, con dos GET habituales y hasta cuatro ante un 410. Devuelve HLS con Referer; la disponibilidad de audio depende del título. Sin WebView ni PoW. `npm run vixsrc:check` comprueba API, embed y master HLS; estado y límites en [evaluación multiidioma](docs/proveedores-multiidioma-2026-11-17.md). La reproducción final aún requiere validación en Stremio.
 
 - **PlayLatinSRC** ([playlatinsrc.co](https://playlatinsrc.co)) es una API de streaming en español que identifica por **ID de IMDb** y sirve las tres versiones (Latino, Castellano y Subtitulado) desde el mismo embed. Declara 21.615 películas, 290 series y 11.568 episodios.

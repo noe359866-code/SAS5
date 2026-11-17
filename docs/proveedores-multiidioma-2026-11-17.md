@@ -35,3 +35,9 @@ FrenchStream busca con `POST /engine/ajax/search.php` (formulario `query` y `pag
 - En FrenchStream, el JSON de una película incluyó Vidzy y otros embeds. El lector de Vidzy informó error al solicitar HLS; otro embed devolvió 404. Un redirect de Kokoflix abrió un reproductor, pero esto no demuestra un stream directo reproducible.
 
 El diagnóstico reproducible está en `scripts/multiidioma-probe.mjs`; el paso de CI es informativo, no confirma reproducción. Ninguno de estos tres se ha añadido como proveedor.
+
+### DeVideoSRC experimental
+
+Se añadió `devideosrc` para probar el flujo por IMDb: GET del shell y POST al resolver, sin PoW ni WebView. Solo devuelve fuentes que el servicio declare `hls` o `mp4`; se descartan los embeds HTML. Por tanto puede no devolver ningún resultado aunque el servicio tenga servidores. No se ha comprobado su reproducción real en Worker: el contrato de resolve se infiere por similitud con PlayLatinSRC y la API indica que necesita token. La sonda de CI informa si devuelve fuentes directas, no prueba que reproduzcan. `DEVIDEOSRC=off` lo desactiva; seleccionar en `/configure` y probar en el despliegue real.
+
+Un tercer intento de búsqueda de FrenchStream devolvió HTTP 200 con página de verificación, no resultados. No se resuelve el desafío.

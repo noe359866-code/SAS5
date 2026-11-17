@@ -105,6 +105,21 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
+      # Los informes también como artefacto: los logs y el resumen de Actions
+      # no siempre se pueden leer desde fuera del repo, el artefacto sí.
+      - name: Publicar informes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proveedores-informe
+          path: |
+            /tmp/movie.txt
+            /tmp/series.txt
+            /tmp/pow.txt
+            /tmp/e2e.txt
+          if-no-files-found: warn
+          retention-days: 14
+
       # End-to-end opcional: si se indica la URL del despliegue, se pide un
       # /stream real y se cuentan los resultados por proveedor.
       - name: End-to-end contra el despliegue

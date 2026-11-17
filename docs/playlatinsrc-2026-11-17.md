@@ -105,9 +105,11 @@ salió en verde:
 ✔ serie tt0108778 S1E1 · /custom/serial/tt0108778/1/1
     2 stream(s) · Latino · embed
     hosts: Dropload, Doodstream
-✔ buscador del addon · 4 hit(s) en 459 ms
+✔ buscador del addon · 4 hit(s) en 549 ms
     idiomas: Latino, Castellano · referer: true
 ```
+
+Ambos runs (`44160555886` y `44161234325`) salieron en verde con el paso estricto ya incluido.
 
 Y la sonda agregada `providers-check` añadió su línea:
 

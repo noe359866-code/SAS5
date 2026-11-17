@@ -27,3 +27,5 @@ if(embed) {
  }
  }catch(e){console.log('  error HLS: '+e.name)}
 }
+const mp4embed=/embeds:\{[\s\S]{0,1500}?server:"MP4Upload",url:"([^"]+)"/i.exec(episode)?.[1];
+if(mp4embed) try {const u=new URL(mp4embed);console.log('MP4Upload embed: host='+u.hostname);if(u.hostname==='www.mp4upload.com' && /^\/embed-[a-z0-9]+\.html$/i.test(u.pathname)) { const r=await fetch(u,{headers:{'User-Agent':ua,Referer:'https://www.mp4upload.com/'},signal:AbortSignal.timeout(12000)});const text=await r.text(); const direct=/src:\s*["'](https:[^"']+\.mp4[^"']*)["']/.exec(text)?.[1];console.log(`  embed: HTTP ${r.status}; challenge=${r.headers.get('cf-mitigated')==='challenge'}; MP4 hallado=${!!direct}`);if(direct){const d=new URL(direct);console.log('  MP4 host='+d.hostname);const rr=await fetch(d,{headers:{'User-Agent':ua,Referer:'https://www.mp4upload.com/',Range:'bytes=0-1023'},signal:AbortSignal.timeout(12000)});const reader=rr.body?.getReader();const x=reader?await reader.read():{};if(reader)await reader.cancel();console.log(`  MP4: HTTP ${rr.status}; tipo=${rr.headers.get('content-type')}; bytes=${x.value?.length||0}`);}}} catch(e){console.log('  MP4 error: '+e.name)}

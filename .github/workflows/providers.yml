@@ -33,6 +33,7 @@ on:
       - 'lib/spinflix.js'
       - 'lib/embed69.js'
       - 'lib/videoapi.js'
+      - 'scripts/sources-probe.mjs'
       - 'lib/hlsProxy.js'
       - 'scripts/providers-check.mjs'
       - 'scripts/embed69-pow.mjs'
@@ -145,6 +146,33 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 
+      # Webs candidatas: se mira el HTML crudo para ver si el reproductor es
+      # propio o son embeds de terceros. Es la decisión que separa «merece un
+      # proveedor» de «esto ya lo cubre Embed69». El resumen se publica como
+      # anotación porque los logs no se pueden leer desde fuera del repo.
+      - name: Fuentes candidatas (HTML crudo)
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          urls="https://flixlatam.com/pelicula/interstellar
+          https://flixlatam.com/serie/la-mesa-final-r5gv9C
+          https://doramasflix.in/episodios/doctor-x-mafia-in-white-1x12
+          https://doramasflix.co/capitulos/doctor-x-mafia-in-white-1x12"
+          {
+            echo '### Fuentes candidatas'
+            echo '```'
+            node scripts/sources-probe.mjs $urls || true
+            node scripts/sources-probe.mjs --gql || true
+            echo '```'
+          } | tee /tmp/fuentes.txt
+          cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"
+          # Anotación: una línea por fuente, sin los ejemplos de URL.
+          while IFS= read -r l; do
+            case "$l" in
+              *http*) echo "::notice title=Fuentes candidatas::$l" ;;
+            esac
+          done < /tmp/fuentes.txt
+
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.
       - name: Publicar informes
@@ -157,6 +185,7 @@ jobs:
             /tmp/series.txt
             /tmp/pow.txt
             /tmp/videoapi.txt
+            /tmp/fuentes.txt
             /tmp/e2e.txt
           if-no-files-found: warn
           retention-days: 14

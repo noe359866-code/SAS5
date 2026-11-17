@@ -20,6 +20,40 @@
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 const TIMEOUT_MS = Number(process.env.PROBE_TIMEOUT_MS) || 20_000;
 
+/**
+ * Pistas de reproductor: si el HTML trae estos hosts o patrones, hay algo
+ * jugable o un desvío detectable. Si no aparece ninguno, el player lo inyecta
+ * JavaScript y un addon HTTP puro no puede llegar a él.
+ */
+const PLAYER_HINTS = {
+  voe: /voe\.(?:sx|com|st|to|be)|voe-sx|voe\./i,
+  streamtape: /streamtape/i,
+  filemoon: /filemoon|filelions/i,
+  mixdrop: /mixdrop/i,
+  waaw: /waaw\./i,
+  upstream: /upstream\./i,
+  streamhub: /streamhub\./i,
+  embedwish: /embedwish/i,
+  veev: /veev\./i,
+  streamplay: /streamplay/i,
+  dooood: /dooood|dood\./i,
+  uqload: /uqload/i,
+  vidhide: /vidhide|luluvdo|minochinos/i,
+  m3u8: /\.m3u8/i,
+  goto: /goto\.php/i,
+  cryptojs: /CryptoJS|AES\.decrypt|Salted__/,
+  ajax: /admin-ajax\.php|wp-json\/[a-z0-9_-]+\/v1/i,
+};
+
+function playerHints(html) {
+  const found = [];
+  for (const [name, pattern] of Object.entries(PLAYER_HINTS)) {
+    const count = (html.match(new RegExp(pattern.source, 'gi')) || []).length;
+    if (count) found.push(`${name}×${count}`);
+  }
+  return found;
+}
+
 /** URL sin query ni credenciales: los embeds llevan token en la query. */
 function safe(url) {
   try {
@@ -95,6 +129,7 @@ async function probe(url) {
       if (html.includes(key)) result[key] = (html.match(new RegExp(key, 'g')) || []).length;
     }
     result.anubis = /within\.website\/x\/cmd\/anubis|Making sure you're not a bot/i.test(html);
+    result.hints = playerHints(html);
     result.ms = Date.now() - started;
   } catch (err) {
     result.error = `${(err && err.name) || 'Error'}: ${(err && err.message) || err}`;
@@ -195,6 +230,7 @@ function line(item) {
   for (const key of ['links_online', 'stream_urls', 'players', 'servidores', 'reproductores']) {
     if (item[key]) bits.push(`${key}×${item[key]}`);
   }
+  if (item.hints && item.hints.length) bits.push(`pistas ${item.hints.join(',')}`);
   return `${item.ok ? '✔' : '✘'} ${item.url} · ${bits.join(' · ')}`;
 }
 

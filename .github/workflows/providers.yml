@@ -154,18 +154,18 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
-          urls="https://flixlatam.com/pelicula/interstellar
-          https://flixlatam.com/serie/la-mesa-final-r5gv9C
-          https://doramasflix.in/episodios/doctor-x-mafia-in-white-1x12
-          https://doramasflix.co/capitulos/doctor-x-mafia-in-white-1x12"
+          urls="https://cinehdplus.org/pelicula-13800/interestelar/
+          https://cinehdplus.org/episodio-135739/otra-vida-1x10/
+          https://verpeliculasultra.com/accion/4997-f1-la-pelicula.html
+          https://verpeliculasultra.com/index.php?do=search&subaction=search&story=f1"
           {
             echo '### Fuentes candidatas'
             echo '```'
             node scripts/sources-probe.mjs $urls || true
             node scripts/sources-probe.mjs --gql || true
             echo '```'
-            echo '### Doramasflix · qué hay en `servidores`'
-            node scripts/sources-probe.mjs --dump https://doramasflix.in/episodios/doctor-x-mafia-in-white-1x12 > /tmp/dump.txt 2>&1 || true
+            echo '### CineHDPlus · qué hay en `servidores`'
+            node scripts/sources-probe.mjs --dump https://cinehdplus.org/episodio-135739/otra-vida-1x10/ > /tmp/dump.txt 2>&1 || true
             cat /tmp/dump.txt
           } | tee /tmp/fuentes.txt
           cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"
@@ -177,7 +177,7 @@ jobs:
           done < /tmp/fuentes.txt
           # Lo único que decide es qué hosts sirve el payload: se emite solo eso.
           hosts_line="$(grep -m1 'hosts en el payload' /tmp/dump.txt || true)"
-          [ -n "$hosts_line" ] && echo "::notice title=Doramasflix hosts::$hosts_line"
+          [ -n "$hosts_line" ] && echo "::notice title=CineHDPlus hosts::$hosts_line"
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.

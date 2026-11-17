@@ -44,8 +44,18 @@ test('spinflix película: search → detalle verificado → streamurl → HLS po
   assert.equal(hit.relevant, true);
   assert.match(hit.title, /1080p/);
   assert.match(hit.title, /Dual Latino/);
-  assert.ok(hit.url.startsWith('https://spinoff.link/pelis/proxy.php?url='));
-  assert.ok(decodeURIComponent(hit.url).includes(MASTER));
+  // Por defecto va por el proxy PROPIO del addon: pone el Referer en cada
+  // segmento y no depende de que el proxy de la web siga arriba. Sin dominio
+  // público configurado (tests), cae al CDN directo.
+  const config = require('../lib/config');
+  const originalBase = config.addonBaseUrl;
+  config.addonBaseUrl = 'https://addon.example';
+  const proxied = spinflix.proxiedHls(MASTER);
+  config.addonBaseUrl = originalBase;
+  assert.ok(proxied.startsWith('https://addon.example/hls?ref='), proxied);
+  assert.ok(decodeURIComponent(proxied).includes(MASTER));
+  // Y el stream que devuelve el buscador es reproducible con él.
+  assert.ok(hit.url === MASTER || decodeURIComponent(hit.url).includes(MASTER));
   assert.equal(calls.filter((u) => u.includes('/streamurl')).length, 1);
 });
 
@@ -131,4 +141,49 @@ test('spinflix: la etiqueta de audio se lee Lat / ES / Inglés según la ficha',
   assert.equal(spinflix.audioLabel('castellano - inglés'), 'ES + Inglés');
   assert.equal(spinflix.audioLabel('subtitulado'), 'Subtitulado');
   assert.equal(spinflix.audioLabel(''), '');
+});
+
+test('SpinFlix: busca primero con el título en español, que es el único que indexa', () => {
+  // Verificado contra la API real: «interstellar» → 0 resultados,
+  // «interestelar» → 1. Antes se buscaba solo con el título principal (inglés)
+  // y el proveedor no devolvía nada para casi todo.
+  const resolved = { title: 'Interstellar', altTitle: null, mediaType: 'movie', year: '2014' };
+  assert.deepEqual(
+    spinflix.searchQueries(resolved, null, ['Interestelar', 'Interestelar']),
+    ['Interestelar', 'Interstellar'],
+    'el título en español va primero y sin repetir'
+  );
+  // Sin TMDB (o en un título que ya viene en español) queda el de la petición.
+  assert.deepEqual(spinflix.searchQueries(resolved, 'Interstellar 2014', []), ['Interstellar 2014', 'Interstellar']);
+  // Y los títulos de contraste incluyen el español, o la ficha se descartaría.
+  const titles = spinflix.searchTitles(resolved, null, ['Interestelar']);
+  assert.ok(titles.includes('Interestelar') && titles.includes('Interstellar'));
+});
+
+test('proxiedHls: sin SPINFLIX_PROXY_URL usa el proxy propio; con él, el externo', () => {
+  const config = require('../lib/config');
+  const base = config.addonBaseUrl;
+  const proxy = config.spinflixProxyUrl;
+  try {
+    config.addonBaseUrl = 'https://addon.example';
+    config.spinflixProxyUrl = '';
+    // Proxy propio: el Referer viaja en la URL para cada segmento.
+    assert.equal(
+      spinflix.proxiedHls('https://s10.vimeos.net/a/master.m3u8?t=x'),
+      'https://addon.example/hls?ref=https%3A%2F%2Fvimeos.net%2F&u=https%3A%2F%2Fs10.vimeos.net%2Fa%2Fmaster.m3u8%3Ft%3Dx'
+    );
+    // Sin dominio público (desarrollo en local) se entrega el CDN directo.
+    config.addonBaseUrl = '';
+    assert.equal(spinflix.proxiedHls('https://s10.vimeos.net/a/master.m3u8'), 'https://s10.vimeos.net/a/master.m3u8');
+    // Proxy externo configurado a mano: se respeta tal cual.
+    config.addonBaseUrl = 'https://addon.example';
+    config.spinflixProxyUrl = 'https://spinoff.link/pelis/proxy.php';
+    assert.match(
+      spinflix.proxiedHls('https://s10.vimeos.net/a/master.m3u8'),
+      /^https:\/\/spinoff\.link\/pelis\/proxy\.php\?url=/
+    );
+  } finally {
+    config.addonBaseUrl = base;
+    config.spinflixProxyUrl = proxy;
+  }
 });

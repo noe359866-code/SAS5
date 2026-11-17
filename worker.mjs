@@ -38,7 +38,11 @@ import debridProviders from './lib/debridProviders.js';
 import debridConnect from './lib/debridConnect.js';
 import realDebridOAuth from './lib/realDebridOAuth.js';
 import rateLimit from './lib/rateLimit.js';
+// Proxy HLS propio: evita depender del proxy de la web de SpinFlix y pone el
+// Referer en CADA segmento, no solo en la primera playlist.
+import hlsProxy from './lib/hlsProxy.js';
 import logoData from './lib/logoData.js';
+import configRegistry from './lib/configRegistry.js';
 
 const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
 const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+?)(?:\/([^/]+))?\.json$/;
@@ -190,7 +194,9 @@ async function runAndCache(key, createResponse, ctx, edge) {
   if (ttl > 0) {
     const store = Promise.resolve()
       .then(() => serializeResponse(response))
-      .then((entry) => responseCache.set(key, entry, ttl, { staleSeconds: Math.min(stale, 3600) }))
+      // La ventana de gracia se toma del `stale-while-revalidate` publicado (hasta
+      // 24 h): mientras siga en memoria, la petición no ejecuta el handler.
+      .then((entry) => responseCache.set(key, entry, ttl, { staleSeconds: stale || 3600 }))
       .catch(() => {});
     if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(store);
     else await store;
@@ -457,6 +463,12 @@ async function handleRequest(request, env, ctx) {
     const origin = url.origin;
     const host = url.host;
 
+    // ── Proxy HLS (streams directos de SpinFlix) ───────────────
+    // /hls?u=<url del CDN>&ref=<referer>: 0 HTML, solo media y playlists.
+    if (path === '/hls') {
+      return hlsProxy.handleHlsProxy(request, url, env || {});
+    }
+
     if (path.startsWith('/internal/watch/')) {
       const watchCacheUrl = `${origin}/__edge${path}?${url.searchParams.toString()}&_r=${encodeURIComponent(config.watchRegion)}&_l=${encodeURIComponent(config.tmdbLanguage)}&_t=${config.tmdbConfigured ? 1 : 0}`;
       return edgeCached(request, ctx, async () => {
@@ -516,7 +528,15 @@ async function handleRequest(request, env, ctx) {
 
     // ── Estado agregado de la caché (sin claves ni datos por usuario) ──
     if (path === '/internal/cache.json') {
-      return jsonResponse({ ...cache.stats(), responseCache: responseCache.stats() }, 200, 0);
+      // `configs` es el registro de configuraciones vistas: qué pregenerar.
+      // Solo lleva el segmento base64url (que ya viaja en la URL del manifest)
+      // y la selección; nunca credenciales (las configs con debridId no entran).
+      const limit = Math.min(200, Math.max(1, Number(url.searchParams.get('configs')) || 40));
+      return jsonResponse(
+        { ...cache.stats(), responseCache: responseCache.stats(), configs: configRegistry.report({ limit }) },
+        200,
+        0
+      );
     }
 
     // ── Branding (logos de plataformas/estudios vía TMDB) ─────
@@ -590,6 +610,15 @@ async function handleRequest(request, env, ctx) {
           // Caché de respuestas del isolate: la única que funciona en
           // *.workers.dev, donde la Cache API de Cloudflare no hace nada.
           responseCache: responseCache.stats(),
+          // Ahorro de cuota: cuánto del plan de estáticos está en marcha.
+          // `configsTracked` son las configuraciones vistas desde este isolate;
+          // `npm run prerender -- --from-url` las usa para pregenerar.
+          quota: {
+            freeDailyInvocations: 100_000,
+            configsTracked: configRegistry.report({ limit: 1 }).totalSegments,
+            staticPlan: 'static-assets + _redirects + por-configuracion',
+            hint: 'npm run prerender -- --from-url=https://tu-dominio',
+          },
           watchRegion: config.watchRegion,
           watchRegionFallback: config.watchRegionFallback,
         },
@@ -629,6 +658,17 @@ async function handleRequest(request, env, ctx) {
       if (cfg) {
         const rest = prefixed[2].replace(/\/+$/, '') || '/';
         const logoUrl = `${origin}/assets/logo.png`;
+        // Registro de configuraciones vistas: alimenta el planificador de
+        // estáticos (`npm run prerender -- --from-url` lo lee de
+        // /internal/cache.json). Se anota en las rutas de Stremio (manifest,
+        // catálogo, ficha y stream) porque son las que se repiten en cada
+        // sesión; /configure es una visita humana y no aporta señal.
+        // Nunca registra configs con debridId: su segmento es por usuario.
+        if (rest !== '/configure') configRegistry.note(prefixed[1], cfg);
+
+        // Si alguna de estas rutas está pregenerada en public/, la petición ni
+        // siquiera llega aquí (los static assets van primero): llegar significa
+        // que el archivo falta y hay que resolverlo en caliente, como siempre.
         // Stremio abre /<tu-config>/configure al pulsar "Configurar":
         // debe abrir el configurador con TU región/selección ya cargada.
         if (rest === '/configure') {

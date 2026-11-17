@@ -619,8 +619,10 @@ test('iconos: un nombre desconocido falla en vez de dejar un hueco', () => {
 });
 
 test('pósters: las miniaturas piden a TMDB el tamaño pequeño', () => {
-  assert.equal(posterThumb('https://image.tmdb.org/t/p/w500/abc.jpg'), 'https://image.tmdb.org/t/p/w342/abc.jpg');
-  assert.equal(posterThumb('https://image.tmdb.org/t/p/w780/abc.jpg'), 'https://image.tmdb.org/t/p/w342/abc.jpg');
+  // w185: la tarjeta mide ~170 px CSS y en pantallas 2× necesita 340 px.
+  // w500 pesaba ~40 KB por título frente a ~10 KB.
+  assert.equal(posterThumb('https://image.tmdb.org/t/p/w500/abc.jpg'), 'https://image.tmdb.org/t/p/w185/abc.jpg');
+  assert.equal(posterThumb('https://image.tmdb.org/t/p/w780/abc.jpg'), 'https://image.tmdb.org/t/p/w185/abc.jpg');
   // Otros orígenes y tamaños sin número ("original") se dejan como llegan.
   assert.equal(posterThumb('https://example.org/t/p/w500/abc.jpg'), 'https://example.org/t/p/w500/abc.jpg');
   assert.equal(posterThumb('https://image.tmdb.org/t/p/original/abc.jpg'), 'https://image.tmdb.org/t/p/original/abc.jpg');
@@ -628,8 +630,8 @@ test('pósters: las miniaturas piden a TMDB el tamaño pequeño', () => {
   assert.equal(posterThumb(undefined), '');
   // Y las páginas las usan: ningún póster de rail a tamaño grande.
   const html = withEnv({}, () => home());
-  assert.match(html, /class="poster"><img src="https:\/\/image\.tmdb\.org\/t\/p\/w342\//);
-  assert.equal(/class="poster"><img src="https:\/\/image\.tmdb\.org\/t\/p\/w(500|780)\//.test(html), false);
+  assert.match(html, /class="poster"><img src="https:\/\/image\.tmdb\.org\/t\/p\/w185\//);
+  assert.equal(/class="poster"><img src="https:\/\/image\.tmdb\.org\/t\/p\/w(342|500|780)\//.test(html), false);
 });
 
 // ------------------------------------------------------------- Web i18n
@@ -888,4 +890,73 @@ test('idioma de interfaz: ambas páginas incluyen selector accesible y localizac
     assert.doesNotThrow(() => new vm.Script(localizationScript));
     assert.doesNotMatch(bootstrapScript + localizationScript, /\bfetch\s*\(|XMLHttpRequest|geolocation/i);
   }
+});
+
+test('/configure: dos selecciones iguales producen exactamente la misma URL', () => {
+  // La URL de instalación es la identidad del usuario: si dependiera del orden
+  // en que se marcaron las casillas, sus catálogos no se podrían pregenerar.
+  const install = (actions) => runConfigure({ actions }).url;
+  const a = install(`state.platforms = new Set(['disney','netflix']); state.studios = new Set(['pixar','marvel']);
+    state.hide = new Set(['3d','cam']); state.lang = 'es'; state.region = 'NI';`);
+  const b = install(`state.platforms = new Set(['netflix','disney']); state.studios = new Set(['marvel','pixar']);
+    state.hide = new Set(['cam','3d']); state.lang = 'es'; state.region = 'NI';`);
+  assert.equal(a, b);
+
+  // Y el servidor decodifica esa URL a la misma configuración.
+  const segment = a.split('/')[3];
+  const cfg = decode(segment);
+  assert.deepEqual(cfg.platforms, ['netflix', 'disney']);
+  assert.deepEqual(cfg.studios, ['marvel', 'pixar']);
+  assert.equal(cfg.lang, 'es');
+  assert.equal(cfg.region, 'NI');
+});
+
+test('/configure: el idioma omitido en la URL se rellena con el del despliegue', () => {
+  // Un despliegue en portugués: si el servidor rellenara "es" (la constante),
+  // los catálogos pregenerados saldrían en el idioma equivocado.
+  const pt = runConfigure({ env: { TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'BR' }, actions: `state.platforms = new Set(['netflix']);` });
+  const cfg = decode(pt.segment);
+  assert.equal(cfg.lang, 'pt-BR');
+  assert.equal(cfg.region, 'BR');
+
+  // En un despliegue en español (por defecto) sigue siendo "es".
+  const es = runConfigure({ actions: `state.platforms = new Set(['netflix']);` });
+  assert.equal(decode(es.segment).lang, 'es');
+
+  // Y si el usuario elige OTRO idioma, sí viaja en la URL.
+  const other = runConfigure({ env: { TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'BR' }, actions: `state.platforms = new Set(['netflix']); state.lang = 'en';` });
+  assert.equal(decode(other.segment).lang, 'en');
+});
+
+test('/configure: la página pregenerada de una región nace con esa región elegida', () => {
+  // Es el archivo al que apunta el «Configurar» de Stremio vía _redirects:
+  // región correcta y 0 invocaciones del Worker.
+  const html = withEnv({ TMDB_LANGUAGE: 'es', WATCH_REGION: 'NI' }, () => configure({ preset: { region: 'MX' } }));
+  const script = configureScript(html);
+  const cut = script.indexOf('\nfunction setChecks');
+  const sandbox = {
+    window: { location: { origin: ORIGIN } },
+    btoa: (text) => Buffer.from(text, 'binary').toString('base64'),
+    localStorage: { getItem: () => null, setItem: () => {} },
+  };
+  vm.runInNewContext(`${script.slice(0, cut)}\nrestore();globalThis.out = JSON.stringify({ region: state.region, lang: state.lang, url: personalUrl() });`, sandbox);
+  const out = JSON.parse(sandbox.out);
+  assert.equal(out.region, 'MX');
+  assert.equal(out.lang, 'es', 'el idioma sigue siendo el del despliegue');
+
+  // El borrador guardado del navegador sigue mandando sobre el preset.
+  const draft = { region: 'ES', platforms: ['netflix'], studios: [], base: ['tendencias'], streams: [] };
+  const withDraft = runConfigure({ draft, initialCfg: undefined, actions: '' });
+  assert.equal(withDraft.region, 'ES');
+});
+
+test('pósters: el catálogo del addon usa el tamaño mínimo (w92)', () => {
+  // Una fila de Stremio son 20 títulos: a w500 son ~800 KB por fila y a w92
+  // ~100 KB. El grande se carga al abrir la ficha.
+  const { posterList } = require('../lib/rails');
+  assert.equal(posterList('https://image.tmdb.org/t/p/w500/abc.jpg'), 'https://image.tmdb.org/t/p/w92/abc.jpg');
+  assert.equal(posterList('https://example.org/t/p/w500/abc.jpg'), 'https://example.org/t/p/w500/abc.jpg');
+  const tmdb = require('../lib/tmdb');
+  const meta = tmdb.mapTmdbItem({ id: 1, title: 'X', poster_path: '/p.jpg', vote_average: 7 }, 'movie');
+  assert.equal(meta.poster, 'https://image.tmdb.org/t/p/w185/p.jpg');
 });

@@ -13,3 +13,8 @@ public/configure/
 public/manifest.json
 public/internal/
 
+# Catálogos/fichas pregenerados de cada configuración popular
+# (public/<segmento-base64>/...). Los genera `npm run prerender --from-url` y
+# se suben a Cloudflare con `wrangler deploy`; no se versionan.
+public/*/manifest.json
+public/*/catalog/

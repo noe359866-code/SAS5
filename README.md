@@ -54,7 +54,7 @@ Metadatos enriquecidos en la ficha:
 │   ├── tvdb.js           # Cliente TheTVDB v4 (login JWT; fichas por IMDb id)
 │   ├── omdb.js           # Cliente OMDB (ratings)
 │   ├── watchmode.js      # Cliente Watchmode (plataformas)
-│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino, Español (ES/LAT)
+│   ├── streams.js        # Proveedores de contenido: Knaben, Torlock (Torznab), BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino, Español (ES/LAT), SpinFlix
 │   ├── streamFilters.js  # Filtros de streams: clasificador por nombre + preferencias del usuario
 │   ├── catalogs.js       # Definición de catálogos (+ filtrado por config)
 │   ├── userConfig.js     # Codec/validación de config de usuario (base64url)
@@ -313,9 +313,10 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 | `GET /catalog/:type/:id.json` | Catálogos (`movie`/`series`) |
 | `GET /<config>/catalog/:type/:id.json` | Catálogos con tu config |
 | `GET /meta/:type/:id.json` | Ficha enriquecida (`tt…`, `tmdb:movie:123`, `tvmaze:123`, `tvdb:series:123`) |
-| `GET /stream/:type/:id.json` | Streams torrent de Knaben + Torlock + BlackHoleBay + Nyaa + YTS + EZTV + The RarBg + Índice BR + Torrentio ES/Latino + Español (ES/LAT) (`tt…`, `tt…:T:E` en series) |
+| `GET /stream/:type/:id.json` | Streams torrent de Knaben + Torlock + BlackHoleBay + Nyaa + YTS + EZTV + The RarBg + Índice BR + Torrentio ES/Latino + Español (ES/LAT) + SpinFlix (`tt…`, `tt…:T:E` en series) |
 | `GET /<config>/stream/:type/:id.json` | Streams con proveedores/filtros y, si hay cuenta conectada, los enlaces directos que el adaptador confirme; respuesta `no-store` |
 | `GET /internal/streams-test.json?id=tt…` | Diagnóstico de streams: título resuelto, query, respuesta por proveedor y cuántos resultados caen en cada categoría de filtro (`categories`) |
+| `GET /hls?u=…&ref=…` | Proxy HLS de los streams directos de SpinFlix (lista blanca de hosts y extensiones de media) |
 | `GET /healthz` | Estado del addon y de las fuentes configuradas |
 | `GET /assets/logo.png` | Logo del addon |
 | `GET /` | Landing con instalador de 1 clic |
@@ -328,7 +329,7 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
 - **Idioma y región**: el idioma (18 opciones) se pasa a TMDB y cambia títulos, sinopsis y pósters; los nombres de los catálogos y la web siguen en español. La región (44 países) es el `watch_region` de los catálogos "por plataforma" y el país de «En cines» y «Próximos estrenos». Si una plataforma no tiene resultados en la región elegida se prueba con `WATCH_REGION_FALLBACK` (por defecto `MX,US`). Los valores de partida son `TMDB_LANGUAGE` y `WATCH_REGION`.
 - **Soporte**: el enlace sale de `SUPPORT_URL`. Si es de Discord se muestra con su marca; cualquier otra URL http(s) aparece como «Soporte». Por defecto se usa la invitación permanente actual; si cambia, actualiza `SUPPORT_URL`.
 - **Donaciones (Ko-fi → PayPal)**: la web muestra tu página de Ko-fi (`KOFI_USERNAME`) en la barra, en una tarjeta propia y en el pie; Ko-fi es quien cobra, con PayPal o tarjeta, y no cobra comisión por donaciones. No hace falta ninguna clave: **Ko-fi no tiene API pública de lectura** —su única superficie para desarrolladores es un webhook que notifica cada pago completado (`POST` con campo `data` en JSON y `verification_token`)—, así que este addon no guarda ni consulta donaciones. Si más adelante quieres un contador de agradecimiento o los últimos apoyos públicos, hace falta ese webhook (`KOFI_WEBHOOK_VERIFICATION_TOKEN`) y un sitio donde guardarlos; dímelo y lo montamos. `/healthz` informa del estado con `donations`.
-- **Proveedores de contenido (streams)**: Knaben, Torlock, BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino y Español (ES/LAT) no requieren clave. Se consultan en paralelo, se deduplican por infoHash y se cachean 1 h; el timeout es configurable (6 s por indexador por defecto) y una segunda búsqueda por título alternativo solo recibe 2,5 s. El título se resuelve desde IMDb con TMDB (en inglés, que es lo que indexan los torrents), con respaldo TVMaze (series) y **Cinemeta** (sin clave). Control con `STREAM_PROVIDERS`/`STREAM_MAX_RESULTS` y por usuario en `/configure`.
+- **Proveedores de contenido (streams)**: Knaben, Torlock, BlackHoleBay, Nyaa, YTS, EZTV, The RarBg, Índice BR, Torrentio ES/Latino, Español (ES/LAT) y SpinFlix no requieren clave. Se consultan en paralelo, se deduplican por infoHash y se cachean 1 h; el timeout es configurable (6 s por indexador por defecto) y una segunda búsqueda por título alternativo solo recibe 2,5 s. El título se resuelve desde IMDb con TMDB (en inglés, que es lo que indexan los torrents), con respaldo TVMaze (series) y **Cinemeta** (sin clave). Control con `STREAM_PROVIDERS`/`STREAM_MAX_RESULTS` y por usuario en `/configure`.
 - **Servicios debrid**: se conecta una sola cuenta por configuración. TorBox comprueba la caché antes de crear el torrent con `add_only_if_cached=true` y `seed=3` («don't seed», el parámetro documentado por TorBox es 1=auto, 2=sembrar, 3=no sembrar); un hit puede quedar listado en la cuenta. Los clientes mandan `User-Agent` propio: Cloudflare Workers salen sin él y el borde anti-bots de los proveedores responde 403 antes de mirar la clave. EasyDebrid solo llama a `link/generate` tras un lookup positivo. Premiumize solo llama a `transfer/directdl` tras `cache/check` positivo; esa comprobación es best-effort y el proveedor puede aplicar fair-use. Real-Debrid usa OAuth, renueva tokens en servidor y solo busca hashes entre torrents con estado `downloaded` de la biblioteca personal: no consulta la caché global, no añade ni selecciona torrents. Cada petición revisa como máximo 8 hashes y genera hasta 3 enlaces. Real-Debrid recorre la biblioteca personal en páginas de 500 entradas, con un tope defensivo de 20 páginas (10.000 torrents) y un presupuesto total de hasta 15 s; las respuestas incompletas por alcanzar el tope o el tiempo no se cachean como misses definitivos. Los magnets públicos siempre permanecen como respaldo. La URL/manifest personal contiene un ID opaco que da acceso a esa conexión: no compartas esa URL. En Cloudflare se requiere `DEBRID_ENCRYPTION_KEY`; con la KV `DEBRID_KV` las credenciales son duraderas y, sin ella, el Worker usa su Cache API (por datacenter y expulsable, conviene la KV); RD también necesita client ID/secret y callback OAuth. Node local guarda en memoria efímera; Vercel no tiene almacenamiento persistente configurado y no permite conectar cuentas en producción. Las pruebas mock no sustituyen una verificación en vivo con cuentas de proveedor.
 - **Nyaa, YTS y EZTV** son fuentes especializadas: solo se consultan cuando aplican.
   - **YTS** (solo películas) se busca por IMDb id, así que el resultado es exacto. API: [yts.gg/api](https://yts.gg/api).
@@ -338,12 +339,21 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
   - **EZTV** (solo series) se consulta por IMDb id. API: [eztv1.xyz/api](https://eztv1.xyz/api/). Solo sabe listar todos los torrents de una serie, del más reciente al más antiguo y de 100 en 100, así que el episodio se busca en esa lista: una petición si es reciente y hasta 4 (los 400 torrents más nuevos) si no. En series muy largas (Los Simpson pasa de 2.400 torrents) los episodios antiguos quedan fuera. Temporada, episodio y título se leen del nombre del lanzamiento, porque la API deja a menudo `season`/`episode` a 0 y a veces asigna a una serie torrents de otra de nombre parecido.
   - Si alguna de las APIs cambia de dominio: `NYAA_API_URL`, `YTS_API_URL`, `EZTV_API_URL` y `RARBG_API_URL`.
   - **Al actualizar**: si tu despliegue define `STREAM_PROVIDERS`, añade los proveedores nuevos (`nyaa,yts,eztv,rarbg,torrentindexer,torrentioes,espanol`). Las URL personales ya instaladas llevan su lista de proveedores: vuelve a `/configure`, marca los nuevos y reinstala.
-- **Torrentio ES/Latino** consulta el endpoint de addon público de Torrentio con `providers=mejortorrent,wolfmax4k,cinecalidad` y `language=spanish,latino`. Amplía resultados de **castellano** y **español latino**; manda el IMDb id y recibe magnets/hash, seeders, archivos y `fileIdx`. Se filtran respuestas sin marca de audio español/latino y los episodios se validan (SxxEyy, 1x02 y `Cap. 102`/packs). Es una fuente externa comunitaria que ya mantiene su propio índice; depende de su disponibilidad y límites. Se puede cambiar la base con `TORRENTIO_ES_URL`; desactívala en `/configure` o exclúyela de `STREAM_PROVIDERS` si no quieres depender de ella.
+- **Torrentio ES/Latino** consulta el endpoint de addon público de Torrentio con `providers=mejortorrent,wolfmax4k,cinecalidad` y `language=spanish,latino` (los tres siguen vivos y devolviendo resultados; se comprueba contra su `manifest.json`). Amplía resultados de **castellano** y **español latino**; manda el IMDb id y recibe magnets/hash, seeders, archivos y `fileIdx`. Se filtran respuestas sin marca de audio español/latino y los episodios se validan (SxxEyy, 1x02 y `Cap. 102`/packs). Es una fuente externa comunitaria que ya mantiene su propio índice; depende de su disponibilidad y límites. Se puede cambiar la base con `TORRENTIO_ES_URL`; desactívala en `/configure` o exclúyela de `STREAM_PROVIDERS` si no quieres depender de ella.
 - **Español (ES/LAT)** es la vía para el contenido en castellano y español latino que **no** publican las webs hispanas: los índices generales (Knaben, Torlock y BlackHoleBay) sí lo tienen, pero con el título en español («Duna: Parte Dos», «El Batman»), así que buscar solo en inglés no lo encuentra nunca. Funciona así:
   - Pide a TMDB el título en **español de España** (`language=es-ES`) y, si difiere, el de **México** (`es-MX`); si en español se titula igual que en inglés, no repite la consulta (ya la hacen los proveedores generales). Sin clave de TMDB el proveedor se omite sin contar como fallo.
   - Vuelve a consultar los tres índices con ese título (más el año en películas y `SxxEyy` en episodios) y se queda con lo hispano: releases cuyo nombre lleva el título en español o que declaran audio español (`Castellano`, `Español`, `Latino`, `[ESP]`, `[LAT]`…).
   - El título de México solo se prueba si el de España no dio nada, para no triplicar peticiones; si las tres fuentes fallan, el proveedor falla y se pausa como los demás.
+  - Si TMDB sirve la ficha en español pero **sin traducir el título** (pasa con bastantes series), se usa el título original: es como lo nombran los releases hispanos cuando no hay traducción. Con `tmdb:<id>` el id se guarda aunque TMDB no esté configurado.
   - No añade dependencias nuevas: son las mismas APIs públicas ya usadas, así que respeta sus límites y no requiere configuración. Desactívalo en `/configure` o exclúyelo de `STREAM_PROVIDERS` si no te interesa.
+- **SpinFlix** ([spinoff.link](https://spinoff.link/pelis/)) sirve **streams directos** (HLS, sin torrent ni debrid) en español latino, desde la API de su fuente LaMovie.
+  - Su buscador indexa **solo títulos en español**: `interstellar` devuelve 0 resultados e `interestelar` devuelve la ficha. Por eso se consulta primero con el título de TMDB en `es-ES`/`es-MX` y después con el de la petición; sin ese primer paso el proveedor apenas daba resultados.
+  - El `.m3u8` de vimeos.net lleva token de 12 h (no ligado a IP). El CDN sirve las playlists con **200 y sin `Referer`**, pero los segmentos `.ts` son el eslabón débil: si el CDN los cierra o el proxy de su web se cae, la reproducción se queda a medias sin aviso.
+  - Por eso el stream se sirve por el **proxy propio del addon**: `GET /hls?u=<url del CDN>&ref=<referer>`. Pone el `Referer` en **cada** petición (no solo en la primera playlist porque reescribe las URI de dentro) y no depende de terceros. El `/streamproxy` de su API devuelve 403 en los segmentos.
+  - `/hls` solo acepta HTTPS, hosts de una lista blanca (`vimeos.net`/`vimeos.com` + `HLS_PROXY_HOSTS`) y extensiones de media (`.m3u8`, `.ts`, `.m4s`, `.mp4`, `.vtt`, `.key`): no es un proxy abierto. `SPINFLIX_PROXY_URL` permite volver al proxy de su web o a otro.
+  - **Cuota:** cada segmento servido por `/hls` sí ejecuta el Worker (el vídeo no es un static asset). Para no gastar el plan free, deja `SPINFLIX_PROXY_URL` apuntando al proxy de la web y usa el propio solo como rescate.
+  - Un fallo puntual con uno de los títulos ya no aborta la búsqueda: se prueba el siguiente. Si **ninguna** consulta responde, el proveedor falla (y se pausa como los demás); si responden vacías, simplemente no tiene la obra.
+  - No requiere clave ni cuenta. Desactívalo en `/configure` o exclúyelo de `STREAM_PROVIDERS`.
 - **Índice BR** ([torrent-indexer](https://github.com/felipemarinho97/torrent-indexer), de felipemarinho97) agrega los sitios brasileños **Comando Torrents, BluDV, Torrent dos Filmes, Starck Filmes, Rede Torrent y Vaca Torrent** en una sola API JSON. Es la vía para el contenido en portugués: lanzamientos `Dublado`, `Dual Áudio` o `Nacional` que los índices generales no tienen, con el nombre del release en portugués. Se consulta de dos formas en paralelo:
   - **Por IMDb id** (películas; también series cuando el sitio enlaza el id). El índice guarda el enlace de IMDb dentro de cada ficha, así que la búsqueda es exacta aunque el título esté traducido («Vingadores: Ultimato»). Como la similitud de una consulta por id se puntúa 0, se pide con `filter_results=false` y el IMDb id declarado en cada resultado decide qué vale.
   - **Por el título en portugués de TMDB** (`language=pt-BR`, sin clave no hay este paso). En series se busca el título solo (los sitios publican el lote de la temporada) y la relevancia normal descarta las demás temporadas; en películas, título + año.
@@ -372,22 +382,50 @@ Cada usuario los elige en `/configure` y viajan en su URL personal (`hide`, `sor
 - **Si todo queda oculto** el addon responde una lista vacía: vuelve a marcar alguna categoría. Un estreno reciente puede existir solo en CAM.
 - **Diagnóstico**: `/internal/streams-test.json?id=tt…` incluye `categories` con el número de resultados de cada categoría para ese título.
 
-## 📈 Escalar en el plan gratuito (100K → 145K+ peticiones/día)
+## 📈 Escalar en el plan gratuito (100K → aguanta el doble sin pagar)
 
-El plan free de Workers da **100.000 peticiones/día por cuenta** y devuelve `error 1027` al agotarlas.
-Las peticiones a *static assets* son gratis e ilimitadas, y el addon ya se apoya en eso:
+El plan free de Workers da **100.000 invocaciones/día por cuenta**: no es un número que se pueda
+subir por código (al agotarlo Cloudflare devuelve `error 1027` y no ejecuta el Worker). Lo que sí se
+puede hacer es **bajar cuántas peticiones ejecutan el Worker**. Un addon con 178.000 peticiones/día
+cabe de sobra si la mayoría llegan como *static assets*, que son gratis e ilimitados:
 
-1. **Catálogos y fichas por defecto como estáticos** — `npm run prerender` escribe `public/catalog/<tipo>/<id>.json` y `public/meta/<tipo>/<tt…>.json`
-   y Cloudflare los sirve sin ejecutar el Worker (los catálogos suelen ser 60–80 % del tráfico).
-2. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de un
+1. **Catálogos y fichas por defecto como estáticos** — `npm run prerender` escribe
+   `public/catalog/<tipo>/<id>.json` **y sus páginas 2 y 3** (`page-2.json`, `page-3.json`, que es
+   como pagina Stremio) y `public/meta/<tipo>/<tt…>.json`.
+2. **Plan por configuración (`npm run prerender --from-url`)** — los usuarios instalan
+   `/<cfg>/manifest.json` y esos catálogos NO eran estáticos. El Worker anota qué configuraciones ve
+   (`/internal/cache.json` → `configs`), el script reparte el tope de **20.000 archivos** de
+   Cloudflare Free (`lib/staticPlan.js`) y escribe el manifest y los catálogos de las más usadas.
+   El segmento `<cfg>` es **canónico**, así que dos usuarios con la misma configuración comparten
+   archivo. Ejemplo real: *«el Worker ejecuta ~26.700 de 178.000 peticiones/día (27 % del plan
+   free) → aguanta ~666.000 peticiones/día»*.
+3. **`_redirects` en el borde** — `/watch` (sin barra, el enlace del menú y del botón «Ver ahora»)
+   ejecutaba el Worker **para devolver un 404**: 1 invocación por clic. Ahora es un 301 del borde y
+   cuesta 0. Igual `/configure/` y `/manifest.json/`. La barra final del manifest se cubre con
+   **una sola regla dinámica** (`/:path/manifest.json/`), así que no gasta cupo por usuario.
+4. **Configurador pregenerado por región** — el botón «Configurar» de Stremio (`/<cfg>/configure`)
+   renderizaba la página entera en el Worker en cada clic. `_redirects` lo manda a
+   `/configure/r/<REGION>` (archivo estático, ~500 KB, uno por región usada): **0 invocaciones**,
+   con la región y el idioma ya elegidos.
+5. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de un
    manifest personal (6–10× menos peticiones por sesión).
-3. **Logo y `robots.txt` estáticos** — fuera de la cuota; los crawlers no recorren rutas dinámicas.
-4. **Repartir cuota** — la cuota es por cuenta, no por Worker: espejos en otra cuenta o el mismo código
+6. **Logo y `robots.txt` estáticos** — fuera de la cuota; los crawlers no recorren rutas dinámicas.
+7. **Repartir cuota** — la cuota es por cuenta, no por Worker: espejos en otra cuenta o el mismo código
    en Vercel (`api/index.js`) suman cuotas independientes.
-5. **5 USD/mes** — 10 M peticiones/mes (≈333K/día) si no quieres trocear URLs.
+8. **5 USD/mes** — 10 M peticiones/mes (≈333K/día) si algún día no quieres trocear URLs.
 
-Guía completa con números, comandos de verificación y límites:
-[docs/escala-plan-free.md](docs/escala-plan-free.md).
+Todo esto se regenera y despliega solo cada 6 h (`.github/workflows/prerender.yml`). Guía completa
+con números, comandos de verificación y límites: [docs/escala-plan-free.md](docs/escala-plan-free.md).
+
+```bash
+# Qué configuraciones ha visto tu despliegue y qué conviene pregenerar
+curl -s https://tu-dominio/internal/cache.json | head -c 600
+PUBLIC_ORIGIN=https://tu-dominio npm run prerender -- --from-url
+npm run deploy            # ya incluye --from-url
+
+# Auditoría: cuántas de tus peticiones ejecutan el Worker
+npm run scale:audit -- --url https://tu-dominio --requests 178000
+```
 
 ## 📄 Licencia
 
@@ -552,3 +590,13 @@ son un espacio o un carácter de más al pegar), una línea de ayuda **solo del 
 dónde está su clave, y un estado con color por gravedad —neutro, buscando, correcto, aviso de plan
 sin suscribir y error— en lugar de un párrafo gris que decía lo mismo cuando funcionaba y cuando
 fallaba. El `maxlength` del campo coincide con el límite real de validación (256).
+
+### ¿Alguna fuente en español «no da»? Sonda rápida
+
+```bash
+npm run providers:check                              # Interstellar y compañía
+npm run providers:check -- --series=tt0903747        # una serie (Breaking Bad)
+npm run providers:check -- --query=interestelar      # sin clave de TMDB
+```
+
+Comprueba contra los servicios reales las tres fuentes hispanas (**Torrentio ES/Latino**, **Español (ES/LAT)** y **SpinFlix**) y dice si el problema es de la fuente (caída, dominio cambiado) o del addon (filtro, URL mal formada). Recuerda: ninguno de ellos busca por el título en inglés.

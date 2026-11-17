@@ -95,3 +95,26 @@ test('los consejos avisan de workers.dev, de catálogos sin cachear y de la web 
   });
   assert.deepEqual(clean, []);
 });
+
+test('projectPlan/capacityWithPlan: convierte el plan de estáticos en peticiones/día', () => {
+  const { projectPlan, capacityWithPlan } = require('../lib/scaleAudit.js');
+  // Un plan que sirve el 90 % del tráfico como archivo.
+  const plan = { files: [{ daily: 0.62 }, { daily: 0.15 }, { daily: 0.13 }] };
+  const projected = projectPlan({ plan, total: 178_000 });
+  assert.equal(projected.savedRequests, Math.round(178_000 * 0.9));
+  assert.equal(projected.workerRequests, 178_000 - projected.savedRequests);
+  assert.equal(projected.ok, true);
+  assert.equal(projected.budget, 100_000);
+
+  // Con 90 % servido desde static assets, caben ~10× más peticiones: eso es
+  // duplicar la capacidad sin pagar.
+  assert.equal(capacityWithPlan({ files: plan.files }), 1_000_000);
+  assert.ok(capacityWithPlan({ files: plan.files }) > 178_000 * 2);
+
+  // Sin plan, el techo es la cuota del plan free.
+  assert.equal(capacityWithPlan({ files: [] }), 100_000);
+  // El ahorro nunca puede superar el total ni dejar el Worker en negativo.
+  const all = projectPlan({ plan: { files: [{ daily: 1 }, { daily: 0.5 }] }, total: 1000 });
+  assert.equal(all.workerRequests, 0);
+  assert.equal(all.savedRequests, 1000);
+});

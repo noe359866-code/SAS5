@@ -47,7 +47,10 @@ jobs:
           TMDB_LANGUAGE: ${{ vars.TMDB_LANGUAGE || 'es' }}
         run: |
           npm run build:web
-          npm run prerender
+          # --from-url lee /internal/cache.json del despliegue actual y pregenera
+          # los catálogos de las configuraciones más usadas (0 invocaciones),
+          # además de regenerar public/_redirects.
+          npm run prerender -- --from-url
 
       - name: Deploy Worker & Static Assets to Cloudflare
         if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}

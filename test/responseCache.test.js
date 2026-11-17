@@ -104,3 +104,22 @@ test('las métricas distinguen aciertos, fallos y aciertos stale', () => {
   assert.equal(stats.entries, 1);
   assert.equal(stats.bytes, 5);
 });
+
+test('la ventana de gracia admite las 24 h que promete stale-while-revalidate', () => {
+  const cache = require('../lib/responseCache');
+  const config = require('../lib/config');
+  config.reload({ RESPONSE_CACHE_MB: '24' });
+  cache.reset();
+  try {
+    // Un catálogo publica `stale-while-revalidate=86400`: si la caché lo
+    // recortara a 6 h, a las 7 h volvería a ejecutar TMDB en vez de servir.
+    cache.set('k', '{"a":1}', 60, { staleSeconds: 86400 });
+    const stats = cache.stats();
+    assert.ok(stats.entries >= 1);
+    // Sigue disponible como "stale" (y por tanto evita ejecutar el handler).
+    assert.equal(cache.getStale('k'), '{"a":1}');
+  } finally {
+    cache.reset();
+    config.reload(null);
+  }
+});

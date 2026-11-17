@@ -3,9 +3,14 @@
  * Sonda REAL de VideoAPI, sin dobles ni datos de ejemplo.
  *
  *   node scripts/videoapi-check.mjs                    # Interstellar + Breaking Bad
- *   node scripts/videoapi-check.mjs --imdb tt0816692
- *   node scripts/videoapi-check.mjs --series tt0903747 --season 1 --episode 1
+ *   node scripts/videoapi-check.mjs --movie 157336 --series 1396
+ *   node scripts/videoapi-check.mjs --imdb tt0816692   # además, la traducción IMDb→TMDB
  *   node scripts/videoapi-check.mjs --json
+ *
+ * La sonda habla con VideoAPI **por TMDB id**, que es la única llave que
+ * entiende, así que NO necesita TMDB_API_KEY. Si la clave está configurada
+ * (o se pasa --imdb), se comprueba además el camino real de producción:
+ * IMDb → TMDB → VideoAPI, que es el que usa el addon en Stremio.
  *
  * Comprueba el contrato completo, que es lo que puede romperse solo:
  *
@@ -28,12 +33,14 @@ const videoapi = require('../lib/videoapi.js');
 const TIMEOUT_MS = Number(process.env.CHECK_TIMEOUT_MS) || 15_000;
 
 function parseArgs(argv) {
-  const options = { imdb: 'tt0816692', series: 'tt0903747', season: 1, episode: 1, json: false };
+  // Ids de TMDB conocidos: Interstellar y Breaking Bad.
+  const options = { movie: 157336, series: 1396, season: 1, episode: 1, imdb: '', json: false };
   for (const arg of argv) {
-    if (arg.startsWith('--imdb=')) options.imdb = arg.split('=')[1];
-    else if (arg.startsWith('--series=')) options.series = arg.split('=')[1];
+    if (arg.startsWith('--movie=')) options.movie = Number(arg.split('=')[1]);
+    else if (arg.startsWith('--series=')) options.series = Number(arg.split('=')[1]);
     else if (arg.startsWith('--season=')) options.season = Number(arg.split('=')[1]);
     else if (arg.startsWith('--episode=')) options.episode = Number(arg.split('=')[1]);
+    else if (arg.startsWith('--imdb=')) options.imdb = arg.split('=')[1];
     else if (arg === '--json') options.json = true;
     else if (arg === '--help' || arg === '-h') options.help = true;
   }
@@ -50,16 +57,19 @@ async function get(url, referer) {
   return { status: res.status, ok: res.ok, text: await res.text() };
 }
 
-/** Una obra (película o episodio) de punta a punta. */
-async function probe(mediaType, id, title) {
-  const out = { title, mediaType, ok: false };
-  const resolved = await streams.resolveTitle(mediaType, id);
-  if (!resolved) return { ...out, error: 'no se pudo resolver el título' };
-  out.resolvedTitle = resolved.title;
-  out.tmdbId = resolved.tmdbId || null;
-  if (!resolved.tmdbId) return { ...out, error: 'sin TMDB id: VideoAPI solo identifica por TMDB' };
-
+/**
+ * Una obra de punta a punta, a partir de los datos mínimos que necesita el
+ * proveedor (`tmdbId`, tipo y episodio). No pasa por `resolveTitle`: así la
+ * sonda mide VideoAPI y no la configuración de TMDB del entorno.
+ */
+async function probe(resolved, label) {
+  const out = { title: label, mediaType: resolved.mediaType, tmdbId: resolved.tmdbId, ok: false };
+  if (!Number.isInteger(out.tmdbId) || out.tmdbId <= 0) {
+    return { ...out, error: 'falta el TMDB id' };
+  }
   const exists = videoapi.existsUrl(resolved);
+  if (!exists) return { ...out, error: 'sin ruta de exists (¿serie sin temporada/episodio?)' };
+
   const first = await get(exists, `${base()}/api`);
   if (!first.ok) return { ...out, error: `exists respondió HTTP ${first.status}` };
   let payload;
@@ -68,7 +78,7 @@ async function probe(mediaType, id, title) {
   } catch (_) {
     return { ...out, error: 'exists no devolvió JSON' };
   }
-  out.exists = payload && payload.exists === true;
+  out.exists = Boolean(payload && payload.exists === true);
   if (!out.exists) return { ...out, ok: true, note: 'no está en el catálogo (respuesta válida)' };
 
   const path = videoapi.playerPath(payload);
@@ -85,33 +95,57 @@ async function probe(mediaType, id, title) {
   return { ...out, ok: true };
 }
 
+/**
+ * El camino de producción en Stremio: el addon recibe un IMDb y necesita el
+ * TMDB id. Solo se comprueba si hay TMDB configurado; si no, se avisa de la
+ * consecuencia real (sin TMDB, VideoAPI no tiene con qué preguntar).
+ */
+async function probeImdb(imdb, mediaType, season, episode) {
+  const resolved = await streams.resolveTitle(mediaType, `${imdb}:${season}:${episode}`);
+  if (!resolved) return { title: `IMDb ${imdb}`, ok: false, error: 'no se pudo resolver el título' };
+  if (!resolved.tmdbId) {
+    return {
+      title: `IMDb ${imdb} → ${resolved.title}`,
+      ok: false,
+      error: 'sin TMDB id: el entorno no tiene TMDB_API_KEY, y VideoAPI solo identifica por TMDB. ' +
+        'En producción hace falta la clave (o que Stremio mande tmdb:<id>).',
+    };
+  }
+  return probe(
+    { mediaType: resolved.mediaType, tmdbId: resolved.tmdbId, season, episode },
+    `IMDb ${imdb} → ${resolved.title} (TMDB ${resolved.tmdbId})`
+  );
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log('Sonda real de VideoAPI.\n\n' +
-      '  --imdb=tt0816692     película de prueba\n' +
-      '  --series=tt0903747   serie de prueba\n' +
+    console.log('Sonda real de VideoAPI (por TMDB, sin claves).\n\n' +
+      '  --movie=157336       película de TMDB (por defecto Interstellar)\n' +
+      '  --series=1396        serie de TMDB (por defecto Breaking Bad)\n' +
       '  --season=N --episode=N\n' +
+      '  --imdb=tt0816692     comprueba además la traducción IMDb→TMDB\n' +
       '  --json               salida legible por máquina');
     return;
   }
 
   const results = [
-    await probe('movie', options.imdb, `película ${options.imdb}`),
+    await probe({ mediaType: 'movie', tmdbId: options.movie }, `película TMDB ${options.movie}`),
     await probe(
-      'series',
-      `${options.series}:${options.season}:${options.episode}`,
-      `serie ${options.series} S${options.season}E${options.episode}`
+      { mediaType: 'series', tmdbId: options.series, season: options.season, episode: options.episode },
+      `serie TMDB ${options.series} S${options.season}E${options.episode}`
     ),
   ];
+  if (options.imdb) {
+    results.push(await probeImdb(options.imdb, 'movie', 1, 1));
+  }
 
   if (options.json) {
     console.log(JSON.stringify({ host: base(), results }, null, 2));
   } else {
     console.log(`VideoAPI · ${base()}\n`);
     for (const item of results) {
-      console.log(`${item.ok ? '✔' : '✘'} ${item.title}${item.resolvedTitle ? ` → ${item.resolvedTitle}` : ''}`);
-      if (item.tmdbId) console.log(`    TMDB ${item.tmdbId}`);
+      console.log(`${item.ok ? '✔' : '✘'} ${item.title}`);
       if (item.error) console.log(`    ${item.error}`);
       if (item.note) console.log(`    ${item.note}`);
       if (item.iframes) console.log(`    ${item.iframes} iframe(s) · host ${item.playerHost} · ${item.path}`);

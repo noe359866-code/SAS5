@@ -19,6 +19,10 @@ on:
         description: 'IMDb de la serie de prueba'
         required: false
         default: 'tt0903747'
+      movie:
+        description: 'TMDB de la película de prueba (vacío = Interstellar)'
+        required: false
+        default: ''
       provider_url:
         description: 'URL desplegada para probar /stream (opcional)'
         required: false
@@ -112,13 +116,18 @@ jobs:
       # legible cuando los logs no se pueden leer desde fuera.
       - name: VideoAPI · catálogo y reproductor
         env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          VIDEOAPI_MOVIE: ${{ inputs.movie }}
           VIDEOAPI_IMDB: ${{ inputs.imdb || 'tt0816692' }}
-          VIDEOAPI_SERIES: ${{ inputs.series || 'tt0903747' }}
         run: |
           set -o pipefail
           # El motivo se publica como anotación: es lo único del run que se
           # puede leer por la API cuando los logs devuelven EOF.
-          if node scripts/videoapi-check.mjs --imdb "$VIDEOAPI_IMDB" --series "$VIDEOAPI_SERIES" > /tmp/videoapi.txt 2>&1; then
+          # Sin TMDB_API_KEY la sonda va por TMDB id y sigue valiendo: mide
+          # VideoAPI, no la configuración del entorno.
+          args="--imdb $VIDEOAPI_IMDB"
+          if [ -n "$VIDEOAPI_MOVIE" ]; then args="--movie $VIDEOAPI_MOVIE $args"; fi
+          if node scripts/videoapi-check.mjs $args > /tmp/videoapi.txt 2>&1; then
             status=0
           else
             status=$?

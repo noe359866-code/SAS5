@@ -55,3 +55,9 @@ for(const [type,id,season,episode] of [['movie',603,null,null],['tv',1396,1,1]])
   if(u.protocol==='https:' && u.hostname==='macdn.hakunaymatata.com') {const r=await fetch(u,{headers:{Referer:base+'/',Range:'bytes=0-1023'},redirect:'error',signal:AbortSignal.timeout(12000)});const reader=r.body?.getReader();const x=reader?await reader.read():{};if(reader)await reader.cancel();console.log(`  medio: HTTP ${r.status}; tipo=${r.headers.get('content-type')}; ftyp=${String.fromCharCode(...(x.value||[]).slice(4,8))==='ftyp'}`);}
  }catch(e){console.log('Media '+type+': '+e.name+'; causa='+(e.cause?.code||''));}
 }
+try {
+ const {searchVumeto}=await import('../lib/vumeto.js');
+ for(const item of [{title:'The Matrix',mediaType:'movie',tmdbId:603},{title:'Breaking Bad',mediaType:'series',tmdbId:1396,season:1,episode:1}]) {
+  try {const result=await searchVumeto('',item,item.title,15000);console.log(`Adaptador ${item.mediaType}: resultados=${result.hits?.length||0}; fase=${result.query||result.skipped}`);}catch(e){console.log(`Adaptador ${item.mediaType}: ${e.name}; HTTP=${e.status||'n/a'}`);}
+ }
+} catch(e) {console.log('Adaptador: '+e.name)}

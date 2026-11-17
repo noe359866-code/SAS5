@@ -38,6 +38,8 @@ on:
       - 'lib/frenchstream.js'
       - 'lib/animeflv.js'
       - 'lib/animeav1.js'
+      - 'lib/vumeto.js'
+      - 'test/vumeto.test.js'
       - 'test/animeav1.test.js'
       - 'test/animeflv.test.js'
       - 'lib/videoapi.js'
@@ -297,7 +299,7 @@ jobs:
           cat /tmp/vumeto.txt
           summary="$(tr '\n' '|' < /tmp/vumeto.txt | cut -c1-8000)"
           echo "::notice title=Vumeto diagnóstico::$summary"
-          details="$(grep -E '^API |^Media |^  (disponibles|tipos|input declarado|medio)' /tmp/vumeto.txt | tr '\n' '|' | cut -c1-4000)"
+          details="$(grep -E '^API |^Media |^Adaptador |^  (disponibles|tipos|input declarado|medio)' /tmp/vumeto.txt | tr '\n' '|' | cut -c1-4000)"
           echo "::notice title=Vumeto API::$details"
 
       # Los informes también como artefacto: los logs y el resumen de Actions

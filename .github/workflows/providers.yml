@@ -46,6 +46,7 @@ on:
       - 'lib/hlsProxy.js'
       - 'scripts/providers-check.mjs'
       - 'scripts/multiidioma-probe.mjs'
+      - 'scripts/animeflv-probe.mjs'
       - 'scripts/fanpelis-check.mjs'
       - 'scripts/sources-probe.mjs'
       - 'scripts/embed69-pow.mjs'
@@ -257,6 +258,15 @@ jobs:
           summary="$(tr '\n' '|' < /tmp/multiidioma.txt | cut -c1-900)"
           echo "::notice title=Diagnóstico multiidioma::$summary"
 
+      - name: AnimeFLV · diagnóstico inicial
+        continue-on-error: true
+        run: |
+          node scripts/animeflv-probe.mjs > /tmp/animeflv.txt 2>&1
+          cat /tmp/animeflv.txt
+          cat /tmp/animeflv.txt >> "$GITHUB_STEP_SUMMARY"
+          summary="$(tr '\n' '|' < /tmp/animeflv.txt | cut -c1-5000)"
+          echo "::notice title=AnimeFLV diagnóstico::$summary"
+
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.
       - name: Publicar informes
@@ -265,6 +275,7 @@ jobs:
         with:
           name: proveedores-informe
           path: |
+            /tmp/animeflv.txt
             /tmp/multiidioma.txt
             /tmp/movie.txt
             /tmp/series.txt

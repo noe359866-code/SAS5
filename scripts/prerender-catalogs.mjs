@@ -212,7 +212,10 @@ export async function prerenderMetas(options = {}) {
   const outDir = path.resolve(ROOT, options.outDir || process.env.PRERENDER_OUT_DIR || 'public');
   const concurrency = Math.max(1, Math.min(8, Number(options.concurrency) || 4));
   const dryRun = Boolean(options.dryRun);
-  const maxMetas = Math.max(0, Number(options.maxMetas) || 1500);
+  // 6.000 fichas cubren ~150 catálogos de 40 títulos sin repetir, y siguen
+  // dejando sitio para los catálogos por configuración en el tope de 20.000
+  // archivos. El planificador recorta si no cabe (nunca se pasa).
+  const maxMetas = Math.max(0, Number(options.maxMetas) || 6000);
   const log = options.log || ((line) => console.log(line));
   const core = require(libPath('core.js'));
   const resolve = options.resolve || ((type, id) => core.handleMeta(type, id, null));
@@ -293,9 +296,16 @@ export async function prerenderPages(options = {}) {
   // Solo los catálogos que ya existen: si la página 1 no se pudo generar, las
   // siguientes tampoco aportan nada.
   const targets = [];
+  if (Array.isArray(options.ids) && options.ids.length) {
+    // Lista explícita (`tipo/id`): solo esos catálogos.
+    for (const entry of options.ids) {
+      const [type, id] = String(entry).split('/');
+      if (type && id) targets.push({ type, id });
+    }
+  }
   let typeDirs = [];
   try {
-    typeDirs = await readdir(catalogDir, { withFileTypes: true });
+    typeDirs = targets.length ? [] : await readdir(catalogDir, { withFileTypes: true });
   } catch (_) {
     return { written: [], failed: [], skipped: 0, ms: Date.now() - started };
   }
@@ -449,6 +459,76 @@ export async function prerenderConfigs(options = {}) {
 }
 
 /**
+ * Pregenera el configurador como archivo estático por REGIÓN.
+ *
+ * El botón «Configurar» de Stremio abre `/<cfg>/configure`, que hasta ahora
+ * renderizaba el Worker entero (headerg, muro de pósters, 121 catálogos…) en
+ * cada clic. `_redirects` lo manda a `/configure/r/<REGION>`, que es este
+ * archivo: 0 invocaciones.
+ *
+ * Lo que se pierde: la selección fina del usuario (plataformas y estudios
+ * marcados) no aparece premarcada; la región y el idioma sí. El borrador del
+ * navegador (`localStorage`) tiene prioridad, así que quien configure desde el
+ * mismo navegador sigue viendo su selección.
+ *
+ * @param {object} [options]
+ * @param {Array<{region: string}>} [options.regions] regiones a generar
+ * @param {string} [options.outDir]
+ * @param {(region: string) => string} [options.render] HTML de una región
+ * @param {boolean} [options.dryRun]
+ * @param {(line: string) => void} [options.log]
+ */
+export async function prerenderConfigPages(options = {}) {
+  const started = Date.now();
+  const outDir = path.resolve(ROOT, options.outDir || process.env.PRERENDER_OUT_DIR || 'public');
+  const dryRun = Boolean(options.dryRun);
+  const log = options.log || ((line) => console.log(line));
+  const regions = options.regions || require(libPath('userConfig.js')).REGION_OPTIONS.map((r) => r.code);
+  const render = options.render;
+  const renderOne = render || ((region) => {
+    const config = require(libPath('config.js'));
+    const { renderConfigure } = require(libPath('configurePage.js'));
+    const origin = String(process.env.PUBLIC_ORIGIN || process.env.ADDON_BASE_URL || config.addonBaseUrl || '').trim().replace(/\/+$/, '');
+    if (!origin) return null;
+    return renderConfigure({
+      origin,
+      host: new URL(origin).host,
+      trendingMovies: options.trendingMovies,
+      trendingSeries: options.trendingSeries,
+      preset: { region },
+    });
+  });
+
+  const written = [];
+  for (const region of regions) {
+    if (!/^[A-Z]{2}$/.test(String(region))) continue;
+    let html = null;
+    try {
+      html = renderOne(region);
+    } catch (err) {
+      log(`  ✗ /configure/r/${region}: ${(err && err.message) || err}`);
+      continue;
+    }
+    // Sin PUBLIC_ORIGIN no se puede hornear la URL del manifest: se deja al
+    // Worker (que lo renderiza en caliente) en vez de publicar enlaces rotos.
+    if (!html) continue;
+    const file = path.join(outDir, 'configure', 'r', `${region}.html`);
+    if (!dryRun) {
+      await mkdir(path.dirname(file), { recursive: true });
+      await writeFile(file, html, 'utf8');
+    }
+    written.push(`/configure/r/${region}`);
+  }
+
+  log(
+    `${dryRun ? '[dry-run] ' : ''}Configuradores por región: ${written.length} escritos · ` +
+    `${Date.now() - started} ms` +
+    (written.length ? '' : ' (define PUBLIC_ORIGIN para pregenerarlos)')
+  );
+  return { written, ms: Date.now() - started };
+}
+
+/**
  * Escribe `public/_redirects` con las rutas que el Worker resolvía gastando
  * una invocación (`/watch`, barras finales…). Se conserva lo que no gestiona
  * este script, para no pisar reglas manuales.
@@ -458,8 +538,11 @@ export async function writeRedirects(options = {}) {
   const { buildRedirects, renderRedirects } = require(libPath('edgeRoutes.js'));
   const file = path.join(outDir, '_redirects');
   const log = options.log || ((line) => console.log(line));
-  const segments = (options.configs || []).map((entry) => entry.segment).filter(Boolean);
-  const { rules, dropped } = buildRedirects({ segments });
+  const { REGION_OPTIONS } = require(libPath('userConfig.js'));
+  const { rules, dropped } = buildRedirects({
+    configs: options.configs || [],
+    regions: new Set(REGION_OPTIONS.map((region) => region.code)),
+  });
 
   let existing = '';
   try {
@@ -467,7 +550,11 @@ export async function writeRedirects(options = {}) {
   } catch (_) { /* primera vez */ }
   const next = renderRedirects(rules, existing);
   if (!options.dryRun) await writeFile(file, next, 'utf8');
-  log(`_redirects: ${rules.length} reglas en el borde (0 invocaciones)` + (dropped ? ` · ${dropped} descartadas por el tope de Cloudflare` : ''));
+  log(
+    `_redirects: ${rules.length} reglas en el borde (0 invocaciones)` +
+    ` · ${rules.filter((rule) => rule.from.includes('/configure')).length} llevan el «Configurar» de Stremio a un configurador pregenerado` +
+    (dropped ? ` · ${dropped} descartadas por el tope de Cloudflare` : '')
+  );
   return { rules: rules.length, dropped };
 }
 
@@ -481,10 +568,11 @@ function parseArgs(argv) {
     else if (arg.startsWith('--out=')) options.outDir = arg.slice('--out='.length);
     else if (arg === '--no-metas') options.metas = false;
     else if (arg === '--only-metas') options.onlyMetas = true;
-    else if (arg.startsWith('--max-metas=')) options.maxMetas = Number(arg.split('=')[1]) || 1500;
+    else if (arg.startsWith('--max-metas=')) options.maxMetas = Number(arg.split('=')[1]) || 6000;
     else if (arg.startsWith('--pages=')) options.pages = Math.max(1, Number(arg.split('=')[1]) || 3);
     else if (arg === '--no-pages') options.pages = 1;
     else if (arg === '--no-configs') options.configs = false;
+    else if (arg === '--no-config-pages') options.configPages = false;
     else if (arg.startsWith('--from-url=')) options.fromUrl = arg.slice('--from-url='.length);
     else if (arg === '--from-url') options.fromUrl = true;
     else if (arg === '--help' || arg === '-h') options.help = true;
@@ -580,6 +668,7 @@ if (invokedDirectly) {
       'node scripts/prerender-catalogs.mjs [--dry-run] [--only=<id>]… [--concurrency=N] [--out=dir]\n' +
       '                                   [--no-metas] [--only-metas] [--max-metas=N]\n' +
       '                                   [--pages=N] [--no-pages] [--no-configs]\n' +
+      '                                   [--no-config-pages]\n' +
       '                                   [--from-url=https://tu-dominio]'
     );
     process.exit(0);
@@ -646,11 +735,33 @@ if (invokedDirectly) {
       }
 
       // Páginas 2..N de esos catálogos (el «cargar más» de Stremio).
+      //
+      // Se regeneran las que faltan Y las que ya existían: aunque el catálogo
+      // de la página 1 no cambie (lo normal entre ejecuciones cada 6 h), sus
+      // páginas deben refrescarse igual que él. Sin esto, la página 2 de un
+      // catálogo «sin novedades» se quedaría congelada para siempre.
       if (pages.length > 1) {
+        const withPages = new Set();
+        try {
+          for (const dir of await readdir(path.join(outDir, 'catalog'), { withFileTypes: true })) {
+            if (!dir.isDirectory()) continue;
+            for (const id of await readdir(path.join(outDir, 'catalog', dir.name))) {
+              try {
+                const sub = await readdir(path.join(outDir, 'catalog', dir.name, id));
+                if (sub.some((name) => /^page-\d+\.json$/.test(name))) withPages.add(`${dir.name}/${id}`);
+              } catch (_) { /* no es un directorio: es un catálogo de página 1 */ }
+            }
+          }
+        } catch (_) { /* primera ejecución */ }
+        const needsPages = [...new Set([
+          ...writeDefaults.map((item) => `${item.type}/${item.id}`),
+          ...withPages,
+        ])];
         await prerenderPages({
           outDir,
           pages: pages.length,
           log: () => {},
+          ids: needsPages,
           resolve: async (type, id, skip) => {
             if (!plannedPage(type, id, skip / 20 + 1)) return { metas: [] };
             return coreCatalogPage(type, id, skip);
@@ -721,9 +832,32 @@ if (invokedDirectly) {
         );
       }
 
+      // Configurador pregenerado por región: es a donde apunta el «Configurar»
+      // de Stremio vía _redirects. Solo las regiones que aparecen en el
+      // informe (más la del despliegue): generar las 90 no vale para nada.
+      if (options.configPages !== false) {
+        const deployRegion = String(process.env.WATCH_REGION || require(libPath('config.js')).watchRegion || 'NI').toUpperCase();
+        const regions = new Set([deployRegion]);
+        for (const entry of configs) {
+          if (entry.cfg && /^[A-Z]{2}$/.test(entry.cfg.region || '')) regions.add(entry.cfg.region);
+        }
+        const { written: pages } = await prerenderConfigPages({
+          outDir,
+          regions: [...regions],
+          dryRun: options.dryRun,
+          trendingMovies: null,
+          trendingSeries: null,
+        });
+        if (pages.length) {
+          console.log(`[prerender] Configurador estático en ${pages.length} regiones (0 invocaciones por clic en «Configurar»).`);
+        }
+      }
+
       // Proyección honesta con el plan que de verdad se escribió.
       const { projectPlan, capacityWithPlan } = require(libPath('scaleAudit.js'));
       const projected = projectPlan({ plan, total: Number(process.env.PLAN_TOTAL_REQUESTS) || 500_000 });
+      const coverage = Math.round(Math.min(1, plan.daily) * 100);
+      console.log(`[prerender] Cobertura estática: ${coverage} % de las peticiones (el resto son streams, que siempre ejecutan el Worker).`);
       console.log(
         `[prerender] Con este plan el Worker ejecuta ~${projected.workerRequests.toLocaleString('es')} de ` +
         `${projected.total.toLocaleString('es')} peticiones/día (${Math.round(projected.usage * 100)} % del plan free) ` +

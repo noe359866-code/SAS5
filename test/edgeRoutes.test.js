@@ -23,20 +23,23 @@ test('/watch se resuelve en el borde, no en el Worker', () => {
   assert.ok(rules.some((rule) => rule.from === '/manifest.json/' && rule.to === '/manifest.json'));
 });
 
-test('cada segmento conocido recibe su redirección de barra final en el manifest', () => {
-  const { rules } = buildRedirects({ segments: ['AAAbbbccc', 'DDDeeeefff', 'AAAbbbccc'] });
-  // Ojo: `/manifest.json/` (ruta fija) también termina igual; se distinguen por
-  // el segmento delante.
-  const manifests = rules.filter((rule) => /^\/[^/]+\/manifest\.json\/$/.test(rule.from));
-  assert.deepEqual(manifests.map((rule) => rule.from).sort(), [
-    '/AAAbbbccc/manifest.json/',
-    '/DDDeeeefff/manifest.json/',
-  ]);
+test('ninguna configuración se queda sin regla para la barra final del manifest', () => {
+  // Ya no hace falta una regla por segmento: la dinámica las cubre todas.
+  const { rules } = buildRedirects({ configs: [] });
+  const dynamic = rules.find((rule) => rule.from === '/:path/manifest.json/');
+  assert.ok(dynamic, 'sin la regla dinámica haría falta una por usuario');
+  assert.equal(dynamic.to, '/:path/manifest.json');
+  assert.equal(dynamic.status, 301);
+  // Y ninguna regla estática llega a gastar el cupo por usuario.
+  assert.equal(rules.filter((rule) => rule.from.includes(':path')).length, 1);
 });
 
 test('nunca se pasa del tope de reglas de Cloudflare (2.000 + 100)', () => {
-  const segments = Array.from({ length: 3000 }, (_, i) => `seg${String(i).padStart(6, '0')}`);
-  const { rules, dropped } = buildRedirects({ segments });
+  const configs = Array.from({ length: 3000 }, (_, i) => ({
+    segment: `seg${String(i).padStart(6, '0')}`,
+    cfg: { region: 'MX' },
+  }));
+  const { rules, dropped } = buildRedirects({ configs });
   assert.equal(rules.length, MAX_REDIRECTS);
   assert.ok(dropped > 0);
   // Lo que sobrevive es lo más importante: las rutas fijas nunca se recortan.
@@ -66,4 +69,35 @@ test('el bloque generado queda comentado y delimitado para poder sustituirlo', (
   for (const line of outside.split('\n')) {
     assert.ok(!line.trim() || line.trim().startsWith('#'), `regla fuera del bloque: ${line}`);
   }
+});
+
+test('el «Configurar» de Stremio se manda al configurador pregenerado de su región', () => {
+  const { rules } = buildRedirects({
+    configs: [
+      { segment: 'AAAbbbccc', cfg: { region: 'MX' } },
+      { segment: 'DDDeeeefff', cfg: { region: 'NI' } },
+      { segment: 'EEEfffggg', cfg: { region: 'XX' } }, // región inválida: sin regla
+    ],
+    regions: new Set(['MX', 'NI', 'US', 'ES']),
+  });
+  const configure = rules.filter((rule) => rule.from.endsWith('/configure'));
+  assert.deepEqual(
+    configure.map((rule) => `${rule.from} ${rule.to} ${rule.status}`).sort(),
+    ['/AAAbbbccc/configure /configure/r/MX 302', '/DDDeeeefff/configure /configure/r/NI 302']
+  );
+  // 302 (no 301): si el mapa de regiones cambia, el navegador no lo memoriza.
+  assert.equal(configure[0].status, 302);
+});
+
+
+test('todas las reglas del borde se quedan dentro del cupo de Cloudflare', () => {
+  // 2.000 estáticas + 100 dinámicas. Se comprueba con un caso realista:
+  // 200 configuraciones conocidas.
+  const { rules, dropped } = buildRedirects({
+    configs: Array.from({ length: 200 }, (_, i) => ({ segment: `seg${String(i).padStart(8, '0')}`, cfg: { region: 'MX' } })),
+    regions: new Set(['MX']),
+  });
+  assert.equal(dropped, 0);
+  assert.ok(rules.length < 300, `solo ${rules.length} reglas con 200 configuraciones`);
+  assert.equal(rules.filter((rule) => rule.from.includes(':path')).length, 1, 'una sola regla dinámica');
 });

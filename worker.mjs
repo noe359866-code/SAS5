@@ -191,7 +191,9 @@ async function runAndCache(key, createResponse, ctx, edge) {
   if (ttl > 0) {
     const store = Promise.resolve()
       .then(() => serializeResponse(response))
-      .then((entry) => responseCache.set(key, entry, ttl, { staleSeconds: Math.min(stale, 3600) }))
+      // La ventana de gracia se toma del `stale-while-revalidate` publicado (hasta
+      // 24 h): mientras siga en memoria, la petición no ejecuta el handler.
+      .then((entry) => responseCache.set(key, entry, ttl, { staleSeconds: stale || 3600 }))
       .catch(() => {});
     if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(store);
     else await store;

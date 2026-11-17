@@ -12,4 +12,5 @@
 /watch/index.html /watch/ 301
 /configure/index.html /configure 301
 /index.html / 301
+/:path/manifest.json/ /:path/manifest.json 301
 # <<< plan:static <<<

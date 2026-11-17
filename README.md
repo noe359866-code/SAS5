@@ -391,13 +391,18 @@ cabe de sobra si la mayoría llegan como *static assets*, que son gratis e ilimi
    free) → aguanta ~666.000 peticiones/día»*.
 3. **`_redirects` en el borde** — `/watch` (sin barra, el enlace del menú y del botón «Ver ahora»)
    ejecutaba el Worker **para devolver un 404**: 1 invocación por clic. Ahora es un 301 del borde y
-   cuesta 0. Igual `/configure/` y `/manifest.json/`.
-4. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de un
+   cuesta 0. Igual `/configure/` y `/manifest.json/`. La barra final del manifest se cubre con
+   **una sola regla dinámica** (`/:path/manifest.json/`), así que no gasta cupo por usuario.
+4. **Configurador pregenerado por región** — el botón «Configurar» de Stremio (`/<cfg>/configure`)
+   renderizaba la página entera en el Worker en cada clic. `_redirects` lo manda a
+   `/configure/r/<REGION>` (archivo estático, ~500 KB, uno por región usada): **0 invocaciones**,
+   con la región y el idioma ya elegidos.
+5. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de un
    manifest personal (6–10× menos peticiones por sesión).
-5. **Logo y `robots.txt` estáticos** — fuera de la cuota; los crawlers no recorren rutas dinámicas.
-6. **Repartir cuota** — la cuota es por cuenta, no por Worker: espejos en otra cuenta o el mismo código
+6. **Logo y `robots.txt` estáticos** — fuera de la cuota; los crawlers no recorren rutas dinámicas.
+7. **Repartir cuota** — la cuota es por cuenta, no por Worker: espejos en otra cuenta o el mismo código
    en Vercel (`api/index.js`) suman cuotas independientes.
-7. **5 USD/mes** — 10 M peticiones/mes (≈333K/día) si algún día no quieres trocear URLs.
+8. **5 USD/mes** — 10 M peticiones/mes (≈333K/día) si algún día no quieres trocear URLs.
 
 Todo esto se regenera y despliega solo cada 6 h (`.github/workflows/prerender.yml`). Guía completa
 con números, comandos de verificación y límites: [docs/escala-plan-free.md](docs/escala-plan-free.md).

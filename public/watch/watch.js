@@ -272,6 +272,8 @@ function scrollToSources() { $('source-panel').scrollIntoView({ block: 'start', 
 $('choose').onclick = () => { if (state.selected?.type === 'series') selectEpisode(); loadStreams(); scrollToSources(); };
 async function loadExtras(m, run) {
   try {
+    // La ficha (meta) ya viaja con la tarjeta y con /internal/watch/meta, así
+    // que aquí no se repite: una invocación menos por cada título abierto.
     const data = await api('extras', { id: m.id, type: m.type }); if (run !== state.detailRun) return;
     $('genres').replaceChildren(...(data.genres || []).map(g => text('span', g, 'chip')));
     for (const [label, value] of [['Duración', data.runtime && `${data.runtime} min`], ['Idioma', data.language?.toUpperCase()], ['Estado', data.status], ['Temporadas', data.seasons], ['Episodios', data.episodeCount]]) {

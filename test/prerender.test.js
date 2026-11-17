@@ -284,3 +284,56 @@ test('un fallo de TMDB no borra los catálogos que ya estaban publicados', async
     assert.equal(fresh.metas[0].id, 'tt10');
   });
 });
+
+// ------------------------------------------- Configurador estático por región
+
+test('prerenderConfigPages escribe /configure/r/<REGION> con la región preseleccionada', async () => {
+  const { prerenderConfigPages } = await load();
+  await withTmpDir(async (outDir) => {
+    const rendered = [];
+    const result = await prerenderConfigPages({
+      outDir,
+      log: () => {},
+      regions: ['MX', 'NI', 'xx'], // "xx" no es una región válida
+      render: (region) => {
+        rendered.push(region);
+        return `<html data-region="${region}"></html>`;
+      },
+    });
+
+    assert.deepEqual(result.written, ['/configure/r/MX', '/configure/r/NI']);
+    assert.deepEqual(rendered, ['MX', 'NI']);
+    assert.match(await readFile(path.join(outDir, 'configure', 'r', 'MX.html'), 'utf8'), /data-region="MX"/);
+
+    // Sin HTML (p. ej. falta PUBLIC_ORIGIN) no se escribe un archivo roto.
+    const skipped = await prerenderConfigPages({
+      outDir,
+      log: () => {},
+      regions: ['US'],
+      render: () => null,
+    });
+    assert.deepEqual(skipped.written, []);
+    await assert.rejects(readFile(path.join(outDir, 'configure', 'r', 'US.html')));
+  });
+});
+
+test('prerenderPages acepta una lista de catálogos concreta (no recorre todo)', async () => {
+  const { prerenderPages } = await load();
+  await withTmpDir(async (outDir) => {
+    const { mkdir, writeFile } = require('node:fs/promises');
+    await mkdir(path.join(outDir, 'catalog', 'movie'), { recursive: true });
+    await writeFile(path.join(outDir, 'catalog', 'movie', 'cine_top.json'), '{"metas":[]}');
+    await writeFile(path.join(outDir, 'catalog', 'movie', 'cine_netflix.json'), '{"metas":[]}');
+
+    const result = await prerenderPages({
+      outDir,
+      pages: 2,
+      ids: ['movie/cine_top'],
+      log: () => {},
+      resolve: async (type, id, skip) => ({ metas: [{ id: `tt${id}${skip}` }] }),
+    });
+    assert.deepEqual(result.written, ['movie/cine_top/page-2']);
+    // El catálogo que no estaba en la lista no se toca.
+    await assert.rejects(readFile(path.join(outDir, 'catalog', 'movie', 'cine_netflix', 'page-2.json')));
+  });
+});

@@ -39,6 +39,7 @@ En un addon de Stremio + reproductor web (`/watch`), el tráfico típico se repa
 | Cloudflare KV `get` (`DEBRID_KV`) | **1.000 lecturas / día** (Free) | **~150 – 400 lecturas / día** incluso con miles de reproducciones debrid, gracias a la caché en RAM de 5 min + `cacheTtl: 300` en el PoP de KV |
 | Memoria por isolate | **128 MB** | **~25 – 40 MB** de cachés de datos + **hasta `RESPONSE_CACHE_MB` (24 MB por defecto)** para respuestas completas; el presupuesto se mide en **bytes**, no en entradas |
 | Archivos por versión (static assets) | **20.000** (Free) | **~130 de catálogos + hasta 1.500 fichas + ~40 de web + N configuraciones populares**: `lib/staticPlan.js` reparte el presupuesto y el prerender se detiene y avisa antes de pasar el tope (`scripts/prerender-catalogs.mjs`) |
+| Configurador por región (`/configure/r/XX`) | 1 archivo por región usada (~500 KB) | **3–10 archivos**: solo las regiones que aparecen en el informe más la del despliegue |
 | Reglas de `_redirects` | **2.000 estáticas + 100 dinámicas** | **6 fijas + 1 por configuración conocida** (~40–200): `/watch`, barras finales y `/manifest.json/`. Si se pasara, se recortan por prioridad y avisa |
 | Cache API (`caches.default`) | Funcional **solo en dominio propio** | En `*.workers.dev` es un **no-op**: por eso la caché de respuestas del isolate (`lib/responseCache.js`) va **antes** y es la que sostiene esos despliegues |
 
@@ -150,6 +151,16 @@ el Worker resolvía **gastando una invocación para devolver un 404**: `/watch` 
 (el enlace del menú y del botón «Ver ahora»), `/configure/`, `/manifest.json/`. `_redirects` se
 evalúa antes de los assets y del Worker: **0 invocaciones**. Se respeta el tope de Cloudflare
 (2.000 estáticas + 100 dinámicas) y se conservan las reglas manuales.
+
+Dos piezas más del mismo esfuerzo, que no gastan cupo de reglas:
+
+- **Una sola regla dinámica** (`/:path/manifest.json/ → /:path/manifest.json`) cubre *todas* las
+  configuraciones presentes y futuras. Antes hacía falta una por usuario.
+- **El botón «Configurar» de Stremio** (`/<cfg>/configure`) ya no renderiza el configurador entero
+  en el Worker en cada clic: `_redirects` lo manda a `/configure/r/<REGION>`, un **archivo
+  pregenerado por región** (`prerenderConfigPages`, ~500 KB, uno por región usada). El configurador
+  abre con la región y el idioma correctos; la selección fina sigue viniendo del borrador del
+  navegador (`localStorage`), que tiene prioridad. Coste: **0 invocaciones**.
 
 **Cómo se comprueba** (sin creerse nada):
 

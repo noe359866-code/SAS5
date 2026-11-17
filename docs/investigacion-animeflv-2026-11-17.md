@@ -17,3 +17,7 @@ Este dominio es un sitio WordPress distinto de animeflv.net. Se ha añadido como
 4. Añadir pruebas con fixtures y registrar solo la extracción directa comprobada, sin fallback a embeds. Mantener límites de subrequests y documentar que una playlist no garantiza contenido ni ausencia de publicidad.
 
 La sonda reproducible está en `scripts/animeflv-probe.mjs` y se ejecuta en `.github/workflows/providers.yml`; resultados observados en la ejecución de GitHub Actions 44187800831.
+
+## Implementación experimental
+
+El adaptador busca una ficha de slug exacto, solo procesa la primera temporada y requiere que el número y la ruta del episodio coincidan. Extrae exclusivamente la opción HLS del host observado y comprueba que responda con una playlist. En la ejecución 44188779134 el adaptador devolvió un resultado real para Sora wa Akai Kawa no Hotori S01E20; no se ha probado la reproducción de los segmentos ni el contenido del vídeo. La equivalencia entre la numeración de la ficha y la primera temporada sigue siendo una hipótesis conservadora, no una garantía universal.

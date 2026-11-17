@@ -116,13 +116,23 @@ jobs:
           VIDEOAPI_SERIES: ${{ inputs.series || 'tt0903747' }}
         run: |
           set -o pipefail
-          node scripts/videoapi-check.mjs --imdb "$VIDEOAPI_IMDB" --series "$VIDEOAPI_SERIES" | tee /tmp/videoapi.txt
+          # El motivo se publica como anotación: es lo único del run que se
+          # puede leer por la API cuando los logs devuelven EOF.
+          if node scripts/videoapi-check.mjs --imdb "$VIDEOAPI_IMDB" --series "$VIDEOAPI_SERIES" > /tmp/videoapi.txt 2>&1; then
+            status=0
+          else
+            status=$?
+          fi
+          cat /tmp/videoapi.txt
+          reason="$(grep -v '^$' /tmp/videoapi.txt | grep -vE '^VideoAPI ·' | tail -4 | tr '\n' '|')"
+          echo "::error title=VideoAPI (código $status)::$reason"
           {
             echo '### VideoAPI'
             echo '```'
             cat /tmp/videoapi.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.

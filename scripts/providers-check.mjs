@@ -21,6 +21,7 @@ const require = createRequire(import.meta.url);
 const config = require('../lib/config.js');
 const streams = require('../lib/streams.js');
 const spinflix = require('../lib/spinflix.js');
+const videoapi = require('../lib/videoapi.js');
 
 const TIMEOUT_MS = Number(process.env.CHECK_TIMEOUT_MS) || 12_000;
 
@@ -101,6 +102,31 @@ async function checkSpinFlix(options) {
   };
 }
 
+/**
+ * VideoAPI: no busca por texto, se le pregunta por el TMDB id. Dos pasos y el
+ * contrato queda verificado: `exists` responde y la página del reproductor
+ * trae un iframe del host final (lamovie.link / vimeos.net).
+ */
+async function checkVideoApi(resolved) {
+  const url = videoapi.existsUrl(resolved);
+  if (!url) return { skipped: 'sin TMDB id: no hay nada que preguntar' };
+  const response = await fetch(url, { headers: { Referer: 'https://videoapi.la/api' }, signal: AbortSignal.timeout(TIMEOUT_MS) });
+  if (!response.ok) throw new Error(`exists respondió HTTP ${response.status}`);
+  const payload = await response.json();
+  const path = videoapi.playerPath(payload);
+  if (!path) return { exists: false, path: null, movieless: true };
+  const pageUrl = `${String(config.videoapiUrl || 'https://videoapi.la').replace(/\/+$/, '')}${path}`;
+  const html = await (await fetch(pageUrl, { headers: { Referer: 'https://videoapi.la/' }, signal: AbortSignal.timeout(TIMEOUT_MS) })).text();
+  const frames = videoapi.playerFrames(html, pageUrl);
+  return {
+    exists: true,
+    path,
+    iframes: frames.length,
+    primero: frames[0] ? frames[0].url.slice(0, 70) : null,
+    aviso: frames.length ? null : 'la página no trajo iframe del reproductor',
+  };
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
@@ -124,6 +150,7 @@ async function main() {
   const results = [];
   results.push(await timed('torrentioes (manifest)', checkTorrentioSpanish));
   results.push(await timed('spinflix (buscador)', () => checkSpinFlix(options)));
+  results.push(await timed('videoapi (exists + reproductor)', () => checkVideoApi(resolved)));
   // Los tres buscadores que alimentan «Español (ES/ES)» y el propio agregado.
   // El agregado «Español (ES/LAT)»: busca con el título en español de TMDB en
   // Knaben, Torlock y BlackHoleBay y se queda solo lo que declara audio español.

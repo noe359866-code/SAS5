@@ -154,10 +154,10 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
-          urls="https://pelispedia.mov/pelicula/interstellar
-          https://flixlatam.com/pelicula/interstellar
-          https://pelispedia.mov/serie/la-mesa-final-r5gv9C
-          https://flixlatam.com/serie/la-mesa-final-r5gv9C"
+          urls="https://pelispedia.mov/vidurl/tt0816692/
+          https://pelispedia.mov/vidurl/tt0903747-1x1/
+          https://flixlatam.com/vidurl/tt0816692/
+          https://embed69.org/f/tt0816692/"
           {
             echo '### Fuentes candidatas'
             echo '```'
@@ -165,7 +165,7 @@ jobs:
             node scripts/sources-probe.mjs --gql || true
             echo '```'
             echo '### Encadenado: página → iframe del reproductor'
-            for u in "https://pelispedia.mov/pelicula/interstellar" "https://flixlatam.com/pelicula/interstellar"; do
+            for u in "https://pelispedia.mov/vidurl/tt0816692/" "https://flixlatam.com/vidurl/tt0816692/"; do
               node scripts/sources-probe.mjs --chain "$u" || true
             done
             echo

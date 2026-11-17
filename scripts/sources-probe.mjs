@@ -43,6 +43,12 @@ const PLAYER_HINTS = {
   m3u8: /\.m3u8/i,
   goto: /goto\.php/i,
   cryptojs: /CryptoJS|AES\.decrypt|Salted__/,
+  // Firma exacta del reproductor de Embed69: si aparece, la página es suya
+  // (o un espejo suyo) y sirve el mismo parser y el mismo PoW.
+  pow: /POW_CHALLENGE|POW_DIFFICULTY|POW_SALT/,
+  dataLink: /dataLink/,
+  sortedEmbeds: /sortedEmbeds/,
+  videoLanguage: /video_language/,
   ajax: /admin-ajax\.php|wp-json\/[a-z0-9_-]+\/v1/i,
 };
 

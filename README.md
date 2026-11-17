@@ -113,6 +113,7 @@ Edita `.env`:
 | `DEBRID_MAX_CHECKS` / `DEBRID_MAX_RESULTS` | Opcional | Máximo de hashes consultados (8) y enlaces directos generados (3) por petición |
 | `DEBRID_TIMEOUT_MS` | Opcional | Tiempo máximo de espera antes de devolver los magnets públicos (4500 ms) |
 | `DEBRID_VALIDATE_TIMEOUT_MS` | Opcional | Plazo al validar la clave debrid en `/configure` (9000 ms); sube a 12000–15000 si el proveedor responde lento |
+| `ANIMEAV1` | Opcional | `off` desactiva AnimeAV1 experimental |
 | `ANIMEFLV` | Opcional | `off` desactiva AnimeFLV experimental |
 | `FRENCHSTREAM` | Opcional | `off` desactiva FrenchStream experimental |
 | `DEVIDEOSRC` | Opcional | `off` desactiva DeVideoSRC experimental (solo URLs directas, puede no devolver resultados) |
@@ -560,3 +561,5 @@ El endpoint de streams descarta páginas embed (HTML) que los proveedores presen
 El filtro descarta también URLs con algunos indicadores inequívocos de anuncios y evita seleccionar esas URLs primero al extraer HLS. **No verifica que la playlist corresponda a la película ni elimina anuncios insertados dentro de ella**. Hace falta validar los casos reales y sus hosts; no hay garantía de reproducción ni de ausencia de anuncios.
 
 - **AnimeFLV.or.at (experimental)**: solo series de primera temporada, búsqueda por título exacto y episodio del sitio; únicamente HLS de Zilla con playlist y segmento de inicialización fMP4 accesible. Subtítulos en español no implican audio español: aparece con idioma de audio desconocido; las variantes expresamente marcadas LAT se etiquetan como latino. Hasta siete solicitudes, incluidas comprobaciones acotadas del segmento de inicialización. Sin validación completa de reproducción ni garantía de ausencia de anuncios; temporadas posteriores no se buscan para evitar confundir numeración absoluta. `ANIMEFLV=off` lo desactiva.
+
+- **AnimeAV1 (experimental)**: solo series de primera temporada, título exacto y episodio presente en el catálogo. Extrae únicamente MP4Upload subtitulado, comprueba que comienza como MP4 y etiqueta el audio desconocido. Hasta cinco solicitudes; no demuestra reproducción completa ni contenido correcto, y puede fallar por bloqueos o expiración. `ANIMEAV1=off` lo desactiva.

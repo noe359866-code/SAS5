@@ -37,6 +37,8 @@ on:
       - 'lib/devideosrc.js'
       - 'lib/frenchstream.js'
       - 'lib/animeflv.js'
+      - 'lib/animeav1.js'
+      - 'test/animeav1.test.js'
       - 'test/animeflv.test.js'
       - 'lib/videoapi.js'
       - 'lib/fanpelis.js'

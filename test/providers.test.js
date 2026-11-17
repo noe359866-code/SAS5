@@ -775,11 +775,11 @@ test('The RarBg: con HTTP 429 se pausa lo que pide Retry-After y una respuesta r
   }
 });
 
-test('healthz: informa de los diecinueve proveedores de streams', async () => {
+test('healthz: informa de los veinte proveedores de streams', async () => {
   const worker = (await import('../worker.mjs')).default;
   const all = await (await worker.fetch(new Request('https://addon.example/healthz'), {}, {})).json();
   assert.deepEqual(all.streamProviders, [
-    'knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc', 'devideosrc', 'frenchstream', 'animeflv',
+    'knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc', 'devideosrc', 'frenchstream', 'animeflv', 'animeav1',
   ]);
   for (const key of all.streamProviders) assert.equal(all.sources[key], true, key);
   const some = await (await worker.fetch(new Request('https://addon.example/healthz'), { STREAM_PROVIDERS: 'yts,knaben' }, {})).json();

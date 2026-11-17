@@ -29,3 +29,8 @@ if(embed) {
 }
 const mp4embed=/embeds:\{[\s\S]{0,1500}?server:"MP4Upload",url:"([^"]+)"/i.exec(episode)?.[1];
 if(mp4embed) try {const u=new URL(mp4embed);console.log('MP4Upload embed: host='+u.hostname);if(u.hostname==='www.mp4upload.com' && /^\/embed-[a-z0-9]+\.html$/i.test(u.pathname)) { const r=await fetch(u,{headers:{'User-Agent':ua,Referer:'https://www.mp4upload.com/'},signal:AbortSignal.timeout(12000)});const text=await r.text(); const direct=/src:\s*["'](https:[^"']+\.mp4[^"']*)["']/.exec(text)?.[1];console.log(`  embed: HTTP ${r.status}; challenge=${r.headers.get('cf-mitigated')==='challenge'}; MP4 hallado=${!!direct}`);if(direct){const d=new URL(direct);console.log('  MP4 host='+d.hostname);const rr=await fetch(d,{headers:{'User-Agent':ua,Referer:'https://www.mp4upload.com/',Range:'bytes=0-1023'},signal:AbortSignal.timeout(12000)});const reader=rr.body?.getReader();const x=reader?await reader.read():{};if(reader)await reader.cancel();console.log(`  MP4: HTTP ${rr.status}; tipo=${rr.headers.get('content-type')}; bytes=${x.value?.length||0}; marca=${String.fromCharCode(...(x.value||[]).slice(4,8))}`);}}} catch(e){console.log('  MP4 error: '+e.name)}
+try {
+ const {searchAnimeav1}=await import('../lib/animeav1.js');
+ const title='Sora wa Akai Kawa no Hotori';const result=await searchAnimeav1('',{title,mediaType:'series',season:1,episode:20},title,12000);
+ console.log('Adaptador real: resultados='+(result.hits||[]).length+'; fase='+(result.query||result.skipped));
+} catch(e) {console.log('Adaptador real: '+e.name+'; estado='+(e.status||'desconocido'));}

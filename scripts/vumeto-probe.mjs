@@ -25,6 +25,8 @@ for(const path of ['/embed/movie/603','/embed/tv/1396/1/1']) {
   const scripts=[...html.matchAll(/<script\b[^>]*src=["']([^"']+)["']/gi)].map(m=>new URL(m[1],base)).filter(u=>u.origin===base && !/hls\.min/.test(u.pathname)).slice(0,10);
   console.log('  scripts: '+scripts.map(u=>u.pathname).join(','));
   const blobs=[html];for(const u of scripts){try{const sr=await fetch(u,{signal:AbortSignal.timeout(10000)});blobs.push(await sr.text());}catch{}}
+  const page=html;
+  for(const line of page.split('\n')) if(/\b(?:get|fetch)\s*\(|\/api\/|providers|sourceEndpoint/i.test(line) && !/sourceGeneration|currentSource|autoplay|querySelector/.test(line)) console.log('  petición: '+line.trim().replace(/https?:[^\s"'`<>]+/g,'[URL]').replace(/[A-Za-z0-9_-]{32,}/g,'[dato]').slice(0,220));
   for(const js of blobs) {
    const urls=[...js.matchAll(/https?:\/\/[a-z0-9.-]+/gi)].map(x=>{try{return new URL(x[0]).hostname}catch{return ''}});console.log('  hosts: '+[...new Set(urls.filter(Boolean))].slice(0,30).join(','));
    for(const m of [...js.matchAll(/.{0,70}(?:fetch\(|\/api\/[^"'`\s<>]{1,80}|m3u8|sourceUrl|vidsrc|currentSource|server[s]?:).{0,100}/gi)].slice(0,12)) console.log('  estructura: '+m[0].replace(/https?:[^\s"'`<>]+/g,'[URL]').replace(/[A-Za-z0-9_-]{32,}/g,'[dato]').replace(/\s+/g,' ').slice(0,170));

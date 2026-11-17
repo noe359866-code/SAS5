@@ -22,3 +22,10 @@ for(const path of ['/seasons/1/1','/seasons/2/34','/movies/superheroe','/movies/
   }
  } catch(e){console.log('  error: '+e.name)}
 }
+for (const path of ['/01x001.mp4','/01x002.mp4']) {
+ try {
+  const r=await fetch('https://play.shinchaneros.tv'+path,{headers:{Range:'bytes=0-1023',Referer:base+'/'},signal:AbortSignal.timeout(12000)});
+  const bytes=new Uint8Array(await r.arrayBuffer());
+  console.log(`MP4 ${path}: HTTP ${r.status}, challenge=${r.headers.get('cf-mitigated')==='challenge'}, tipo=${r.headers.get('content-type')}, bytes=${bytes.length}, ftyp=${String.fromCharCode(...bytes.slice(4,8))==='ftyp'}`);
+ } catch(e){console.log(`MP4 ${path}: ${e.name}`)}
+}

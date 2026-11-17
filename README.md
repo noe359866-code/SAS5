@@ -113,6 +113,7 @@ Edita `.env`:
 | `DEBRID_MAX_CHECKS` / `DEBRID_MAX_RESULTS` | Opcional | Máximo de hashes consultados (8) y enlaces directos generados (3) por petición |
 | `DEBRID_TIMEOUT_MS` | Opcional | Tiempo máximo de espera antes de devolver los magnets públicos (4500 ms) |
 | `DEBRID_VALIDATE_TIMEOUT_MS` | Opcional | Plazo al validar la clave debrid en `/configure` (9000 ms); sube a 12000–15000 si el proveedor responde lento |
+| `ANIMEFLV` | Opcional | `off` desactiva AnimeFLV experimental |
 | `FRENCHSTREAM` | Opcional | `off` desactiva FrenchStream experimental |
 | `DEVIDEOSRC` | Opcional | `off` desactiva DeVideoSRC experimental (solo URLs directas, puede no devolver resultados) |
 | `VIXSRC` | Opcional | `off` desactiva el extractor VixSrc (activo por defecto; experimental) |
@@ -557,3 +558,5 @@ La lista de idiomas de cada proveedor es orientativa. El filtro de audio utiliza
 El endpoint de streams descarta páginas embed (HTML) que los proveedores presentan como vídeo y solo deja pasar URLs reconocibles de MP4/HLS/WebM, el proxy HLS propio y la playlist de VixSrc. Fanpelis no devuelve el iframe cuando no puede extraer la playlist. Esto puede reducir los resultados de VideoAPI, Embed69 y PlayLatinSRC: resolver sus hosts requiere extractores adicionales; no significa que el título no exista. Los proxies externos con formatos no reconocidos y URLs de vídeo sin extensión pueden quedar excluidos.
 
 El filtro descarta también URLs con algunos indicadores inequívocos de anuncios y evita seleccionar esas URLs primero al extraer HLS. **No verifica que la playlist corresponda a la película ni elimina anuncios insertados dentro de ella**. Hace falta validar los casos reales y sus hosts; no hay garantía de reproducción ni de ausencia de anuncios.
+
+- **AnimeFLV.or.at (experimental)**: solo series de primera temporada, búsqueda por título exacto y episodio del sitio; únicamente la opción HLS de Zilla validada como playlist. Subtítulos en español no implican audio español: aparece con idioma de audio desconocido. Hasta cuatro solicitudes. Sin validación completa de reproducción ni garantía de ausencia de anuncios; temporadas posteriores no se buscan para evitar confundir numeración absoluta. `ANIMEFLV=off` lo desactiva.

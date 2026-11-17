@@ -12,7 +12,7 @@ for (const path of ['/?s=one+piece','/anime/one-piece/','/2026/11/17/sora-wa-aka
       if (m >= 0) console.log('  muestra búsqueda: '+html.slice(Math.max(0,m-100),m+200).replace(/\s+/g,' '));
     }
     if (path === '/anime/one-piece/') {
-      const m = html.indexOf('one-piece-episodio-1180');
+      const m = html.indexOf('animeflv-episodes-data');
       if (m >= 0) console.log('  muestra episodio: '+html.slice(Math.max(0,m-100),m+120).replace(/\s+/g,' '));
     }
     if (path.startsWith('/2026/')) {
@@ -32,3 +32,9 @@ try {
  const duration = [...t.matchAll(/#EXTINF:([0-9.]+)/g)].reduce((s,m) => s + Number(m[1]),0);
  console.log(`HLS: HTTP ${r.status}; tipo=${r.headers.get('content-type')}; m3u=${t.startsWith('#EXTM3U')}; duración=${Math.round(duration)}s`);
 } catch(e) { console.log('HLS: '+e.name); }
+
+try {
+ const { searchAnimeflv } = await import('../lib/animeflv.js');
+ const r = await searchAnimeflv('', {title:'Sora wa Akai Kawa no Hotori', mediaType:'series', season:1, episode:20}, 'Sora wa Akai Kawa no Hotori', 12000);
+ console.log('Adaptador real: resultados='+ (r.hits || []).length + '; fase=' + (r.query || r.skipped));
+} catch(e) { console.log('Adaptador real: error='+e.message); }

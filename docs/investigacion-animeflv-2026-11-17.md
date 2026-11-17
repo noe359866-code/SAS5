@@ -1,6 +1,6 @@
 # Investigación: animeflv.or.at (17-11-2026)
 
-Este dominio es un sitio WordPress distinto de animeflv.net. No se ha registrado como proveedor: falta resolver la correspondencia fiable entre temporadas de los metadatos y la numeración del sitio y validar reproducción completa.
+Este dominio es un sitio WordPress distinto de animeflv.net. Se ha añadido como proveedor experimental limitado a primera temporada; sigue pendiente validar reproducción completa y la correspondencia de temporadas posteriores.
 
 ## Hallazgos
 

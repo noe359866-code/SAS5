@@ -150,44 +150,22 @@ jobs:
       # propio o son embeds de terceros. Es la decisión que separa «merece un
       # proveedor» de «esto ya lo cubre Embed69». El resumen se publica como
       # anotación porque los logs no se pueden leer desde fuera del repo.
-      - name: Fuentes candidatas (HTML crudo)
+      # PlayLatinSRC es el único candidato con API por IMDb, así que se sondea
+      # aparte y en serio: ¿el embed trae la URL del host en el HTML?
+      - name: PlayLatinSRC · embed y hosts
         continue-on-error: true
         run: |
           set -o pipefail
-          urls="https://playlatinsrc.co/custom/serial/tt0108778/1/1
-          https://playlatinsrc.co/custom/movie/tt0110357
-          https://playlatinsrc.co/serial/tt0108778
-          https://playlatinsrc.co/download/tt0110357"
-          {
-            echo '### Fuentes candidatas'
-            echo '```'
-            node scripts/sources-probe.mjs $urls || true
-            node scripts/sources-probe.mjs --gql || true
-            echo '```'
-            echo '### Encadenado: página → iframe del reproductor'
-            for u in "https://playlatinsrc.co/custom/serial/tt0108778/1/1" "https://playlatinsrc.co/custom/movie/tt0110357"; do
-              node scripts/sources-probe.mjs --chain "$u" || true
-            done
-            echo
-            echo '### PlayLatin: qué hay dentro del embed (cáscara de 3 KB)'
-            node scripts/sources-probe.mjs --dump https://playlatinsrc.co/custom/serial/tt0108778/1/1 2>&1 | tee /tmp/plsrc.txt
-          } | tee /tmp/fuentes.txt
-          cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"
-          # Lo primero: el embed de PlayLatin cabe entero y es lo que decide.
-          # Las anotaciones comparten un tope de 4096 caracteres por check-run.
-          echo "::notice title=PlayLatin embed::$(tr '\n' ' ' < /tmp/plsrc.txt | cut -c1-950)"
-          # Anotaciones selectivas: la sonda completa son ~60 líneas y cada
-          # anotación tiene su propio tope (4096 caracteres en total), así que
-          # se emiten por separado el estado de cada fuente y los juicios.
-          grep -E '^[✔✘]' /tmp/fuentes.txt | while IFS= read -r l; do
-            echo "::notice title=Fuente::$l"
-          done
-          # Lo único que decide es qué hosts sirve el payload: se emite solo eso.
-          grep -E '^\[2\]' /tmp/fuentes.txt | while IFS= read -r l; do
-            echo "::notice title=Encadenado::$l"
-          done
-          hosts_line="$(grep -m1 'hosts en el payload' /tmp/dump.txt || true)"
-          [ -n "$hosts_line" ] && echo "::notice title=PelisPedia hosts::$hosts_line"
+          if node scripts/playlatinsrc-check.mjs > /tmp/playlatin.txt 2>&1; then
+            status=0
+          else
+            status=$?
+          fi
+          cat /tmp/playlatin.txt
+          cat /tmp/playlatin.txt >> "$GITHUB_STEP_SUMMARY"
+          # Anotación corta y decisiva (las anotaciones tienen tope global).
+          summary="$(grep -E '^[✔✘]|^      ·|viable|No integrar' /tmp/playlatin.txt | tr '\n' '|' | cut -c1-900)"
+          echo "::notice title=PlayLatinSRC (código $status)::$summary"
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.
@@ -201,7 +179,7 @@ jobs:
             /tmp/series.txt
             /tmp/pow.txt
             /tmp/videoapi.txt
-            /tmp/fuentes.txt
+            /tmp/playlatin.txt
             /tmp/dump.txt
             /tmp/e2e.txt
           if-no-files-found: warn

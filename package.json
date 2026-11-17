@@ -19,7 +19,8 @@
     "providers:e2e": "node scripts/providers-e2e.mjs",
     "videoapi:check": "node scripts/videoapi-check.mjs",
     "sources:probe": "node scripts/sources-probe.mjs",
-    "vidurl:check": "node scripts/vidurl-format.mjs"
+    "vidurl:check": "node scripts/vidurl-format.mjs",
+    "playlatin:check": "node scripts/playlatinsrc-check.mjs"
   },
   "keywords": [
     "stremio",

@@ -170,21 +170,7 @@ jobs:
             done
             echo
             echo '### vidurl: formato de los enlaces'
-            node -e "
-              (async () => {
-                const url = 'https://pelispedia.mov/vidurl/tt0816692/';
-                const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0', Referer: 'https://pelispedia.mov/' }, signal: AbortSignal.timeout(20000) });
-                const h = await r.text();
-                const count = (re) => (h.match(re) || []).length;
-                const dotted = count(/a\.[A-Za-z0-9+/=_-]{20,}\.c/g);
-                const pow = count(/POW_CHALLENGE|POW_DIFFICULTY|POW_SALT/g);
-                const dl = h.indexOf('dataLink');
-                const snippet = dl < 0 ? '(sin dataLink)' : h.slice(dl, dl + 420).replace(/\s+/g, ' ');
-                console.log(JSON.stringify({ bytes: h.length, pow, dotted, tiene_dataLink: dl >= 0 }));
-                console.log('snip=' + snippet);
-              })().catch((e) => console.log('ERROR ' + e.message));
-            " > /tmp/vidurl.txt 2>&1 || true
-            cat /tmp/vidurl.txt
+            node scripts/vidurl-format.mjs
           } | tee /tmp/fuentes.txt
           cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"
           # Anotaciones selectivas: la sonda completa son ~60 líneas y cada

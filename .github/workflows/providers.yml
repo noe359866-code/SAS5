@@ -174,12 +174,15 @@ jobs:
             cat /tmp/dump.txt
           } | tee /tmp/fuentes.txt
           cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"
-          # Anotación: una línea por fuente, sin los ejemplos de URL.
-          while IFS= read -r l; do
-            case "$l" in
-              *http*) echo "::notice title=Fuentes candidatas::$l" ;;
-            esac
-          done < /tmp/fuentes.txt
+          # Anotaciones selectivas: la sonda completa son ~60 líneas y cada
+          # anotación tiene su propio tope (4096 caracteres en total), así que
+          # se emiten por separado el estado de cada fuente y los juicios.
+          grep -E '^[✔✘]' /tmp/fuentes.txt | while IFS= read -r l; do
+            echo "::notice title=Fuente::$l"
+          done
+          grep -E '^\[1\]|^    sin iframes' /tmp/fuentes.txt | while IFS= read -r l; do
+            echo "::notice title=Fuentes\::$l"
+          done
           # Lo único que decide es qué hosts sirve el payload: se emite solo eso.
           grep -E '^\[2\]' /tmp/fuentes.txt | while IFS= read -r l; do
             echo "::notice title=Encadenado::$l"

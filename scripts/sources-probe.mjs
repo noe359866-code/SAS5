@@ -293,7 +293,7 @@ async function chain(url) {
     out.push(`[2] ${res.ok ? '✔' : '✘'} ${safe(candidate)} · ${bits.join(' · ')}`);
     for (const sample of embeds.slice(0, 3)) out.push(`      · ${safe(sample)}`);
   }
-  const apiPaths = [...new Set((html.match(/["'](?:https?:\\/\\/[^"'\\s]+)?\\/(?:api|v1|v2)\\/[a-z0-9_\\/-]{2,60}/gi) || []))]
+  const apiPaths = [...new Set(html.match(/(?:https?:\/\/[^"\s]+)?\/(?:api|v1|v2)\/[a-z0-9_\/-]{2,60}/gi) || [])]
     .slice(0, 12);
   if (apiPaths.length) out.push(`\nrutas de API en el HTML: ${apiPaths.join(', ')}`);
   return out.join('\n');

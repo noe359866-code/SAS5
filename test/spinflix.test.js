@@ -159,3 +159,31 @@ test('SpinFlix: busca primero con el título en español, que es el único que i
   const titles = spinflix.searchTitles(resolved, null, ['Interestelar']);
   assert.ok(titles.includes('Interestelar') && titles.includes('Interstellar'));
 });
+
+test('proxiedHls: sin SPINFLIX_PROXY_URL usa el proxy propio; con él, el externo', () => {
+  const config = require('../lib/config');
+  const base = config.addonBaseUrl;
+  const proxy = config.spinflixProxyUrl;
+  try {
+    config.addonBaseUrl = 'https://addon.example';
+    config.spinflixProxyUrl = '';
+    // Proxy propio: el Referer viaja en la URL para cada segmento.
+    assert.equal(
+      spinflix.proxiedHls('https://s10.vimeos.net/a/master.m3u8?t=x'),
+      'https://addon.example/hls?ref=https%3A%2F%2Fvimeos.net%2F&u=https%3A%2F%2Fs10.vimeos.net%2Fa%2Fmaster.m3u8%3Ft%3Dx'
+    );
+    // Sin dominio público (desarrollo en local) se entrega el CDN directo.
+    config.addonBaseUrl = '';
+    assert.equal(spinflix.proxiedHls('https://s10.vimeos.net/a/master.m3u8'), 'https://s10.vimeos.net/a/master.m3u8');
+    // Proxy externo configurado a mano: se respeta tal cual.
+    config.addonBaseUrl = 'https://addon.example';
+    config.spinflixProxyUrl = 'https://spinoff.link/pelis/proxy.php';
+    assert.match(
+      spinflix.proxiedHls('https://s10.vimeos.net/a/master.m3u8'),
+      /^https:\/\/spinoff\.link\/pelis\/proxy\.php\?url=/
+    );
+  } finally {
+    config.addonBaseUrl = base;
+    config.spinflixProxyUrl = proxy;
+  }
+});

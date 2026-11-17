@@ -261,3 +261,27 @@ test('/configure: la tarjeta debrid no deja frases sin entrada de diccionario', 
   }
   assert.ok(seen.size > 20, 'la tarjeta debrid debería tener texto que auditar');
 });
+
+
+test('/configure: tipo e idioma filtran proveedores y sobreviven a la URL', () => {
+  const { JSDOM, VirtualConsole } = require('jsdom');
+  const html = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  const dom = new JSDOM(html, { url: 'https://addon.example/configure', runScripts: 'outside-only', virtualConsole: new VirtualConsole() });
+  try {
+    const w = dom.window, d = w.document;
+    w.eval(configureScript(html));
+    const toggle = (group, key, checked) => {
+      const input = d.querySelector(`input[data-group="${group}"][data-key="${key}"]`);
+      input.checked = checked; input.dispatchEvent(new w.Event('change', { bubbles: true }));
+    };
+    toggle('streamTypes', 'torrent', false);
+    assert.equal(d.querySelector('input[data-group="streams"][data-key="knaben"]').closest('label').hidden, true);
+    assert.equal(d.querySelector('input[data-group="streams"][data-key="vixsrc"]').closest('label').hidden, false);
+    toggle('streamLanguages', 'fr', false);
+    const href = d.querySelector('[data-install]').getAttribute('href');
+    const segment = new URL(href.replace('stremio://', 'https://')).pathname.split('/')[1];
+    const cfg = userConfig.decodeConfig(segment, PLATFORM_KEYS, STUDIO_KEYS, require('../lib/streams').PROVIDER_KEYS);
+    assert.deepEqual(cfg.streamTypes, ['direct']);
+    assert.ok(!cfg.streamLanguages.includes('fr'));
+  } finally { dom.window.close(); }
+});

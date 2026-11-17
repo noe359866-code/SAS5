@@ -545,3 +545,9 @@ npm run providers:check -- --query=interestelar      # sin clave de TMDB
 ```
 
 Comprueba contra los servicios reales las fuentes hispanas (**Torrentio ES/Latino**, **Español (ES/LAT)**, **SpinFlix**, **VideoAPI**, **Fanpelis** y **PlayLatinSRC**) y dice si el problema es de la fuente (caída, dominio cambiado) o del addon (filtro, URL mal formada). Recuerda: ninguna busca por el título en inglés, y las dos últimas van por id (TMDB e IMDb respectivamente).
+
+### Fuentes e idioma de audio
+
+En `/configure`, la sección de proveedores permite elegir **streaming directo**, **torrents** o ambos; después, uno o varios idiomas de audio y los proveedores visibles compatibles. Las selecciones se guardan en la URL personal. Las instalaciones antiguas sin estos campos mantienen todos los tipos e idiomas activos.
+
+La lista de idiomas de cada proveedor es orientativa. El filtro de audio utiliza únicamente etiquetas disponibles: un resultado sin audio identificado se clasifica como **Desconocido**; los subtítulos por sí solos no garantizan el idioma del audio. Elegir idiomas y quitar Desconocido puede ocultar fuentes válidas sin etiquetar. Debrid sigue aplicado a torrents seleccionados. Si no se selecciona tipo o idioma, no hay streams.

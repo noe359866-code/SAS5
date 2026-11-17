@@ -9,6 +9,7 @@ try {
   const s=await fetch(u,{signal:AbortSignal.timeout(15000)}), js=await s.text();console.log(`Bundle ${u.pathname}: HTTP ${s.status}; bytes=${js.length}`);
   const urls=[...js.matchAll(/https?:\/\/[a-z0-9.-]+/gi)].map(m=>{try{return new URL(m[0]).hostname}catch{return ''}});
   const domains=[...new Set(urls.filter(Boolean))].filter(x=>!/(?:google|facebook|twitter|w3|github|tmdb|react|schema)/i.test(x));console.log('  Dominios: '+domains.slice(0,40).join(','));
+  if (u.pathname !== '/app.js') continue;
   for(const key of ['iframe','m3u8','/api/','vidsrc','embed','streamUrl']) {
     const n=[...js.matchAll(new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'))].length;
     console.log(`  ${key}: ${n} coincidencias`);

@@ -295,7 +295,7 @@ jobs:
         run: |
           node scripts/vumeto-probe.mjs > /tmp/vumeto.txt 2>&1
           cat /tmp/vumeto.txt
-          summary="$(tr '\n' '|' < /tmp/vumeto.txt | cut -c1-5000)"
+          summary="$(tr '\n' '|' < /tmp/vumeto.txt | cut -c1-8000)"
           echo "::notice title=Vumeto diagnóstico::$summary"
 
       # Los informes también como artefacto: los logs y el resumen de Actions

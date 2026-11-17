@@ -34,3 +34,9 @@ try {
  const title='Sora wa Akai Kawa no Hotori';const result=await searchAnimeav1('',{title,mediaType:'series',season:1,episode:20},title,12000);
  console.log('Adaptador real: resultados='+(result.hits||[]).length+'; fase='+(result.query||result.skipped));
 } catch(e) {console.log('Adaptador real: '+e.name+'; estado='+(e.status||'desconocido'));}
+if(mp4embed) try {
+ const er=await fetch(mp4embed,{headers:{'User-Agent':ua,Referer:'https://www.mp4upload.com/'},signal:AbortSignal.timeout(12000)}); const body=await er.text(); const raw=/src:\s*["'](https:[^"']+\.mp4[^"']*)["']/.exec(body)?.[1];
+ if(raw) for(const [profile,h] of Object.entries({plain:{Range:'bytes=0-31'},referer:{Range:'bytes=0-31',Referer:'https://www.mp4upload.com/','User-Agent':ua},browser:{Range:'bytes=0-31',Referer:'https://www.mp4upload.com/','User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36'}})) {
+  try {const r=await fetch(raw,{headers:h,redirect:'error',signal:AbortSignal.timeout(12000)});const reader=r.body?.getReader(), x=reader?await reader.read():{};if(reader)await reader.cancel();console.log(`MP4 perfil ${profile}: HTTP ${r.status}; tipo=${r.headers.get('content-type')}; marca=${String.fromCharCode(...(x.value||[]).slice(4,8))}`);} catch(e){console.log(`MP4 perfil ${profile}: ${e.name}; causa=${e.cause?.code||e.cause?.name||'desconocida'}`);}
+ }
+} catch(e){console.log('MP4 perfiles: '+e.name)}

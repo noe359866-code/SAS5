@@ -170,9 +170,14 @@ jobs:
             done
             echo
             echo '### vidurl: formato de los enlaces'
-            node scripts/vidurl-format.mjs
+            node scripts/vidurl-format.mjs 2>&1 | tee /tmp/vidurl.txt
           } | tee /tmp/fuentes.txt
           cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"
+          # Lo primero y más corto: es lo que decide, y las anotaciones tienen
+          # un tope global de 4096 caracteres por check-run.
+          head -2 /tmp/vidurl.txt | tr '\n' ' ' | cut -c1-900 | while IFS= read -r l; do
+            echo "::notice title=vidurl formato::$l"
+          done
           # Anotaciones selectivas: la sonda completa son ~60 líneas y cada
           # anotación tiene su propio tope (4096 caracteres en total), así que
           # se emiten por separado el estado de cada fuente y los juicios.
@@ -182,9 +187,6 @@ jobs:
           # Lo único que decide es qué hosts sirve el payload: se emite solo eso.
           grep -E '^\[2\]' /tmp/fuentes.txt | while IFS= read -r l; do
             echo "::notice title=Encadenado::$l"
-          done
-          head -2 /tmp/vidurl.txt | tr '\n' ' ' | cut -c1-900 | while IFS= read -r l; do
-            echo "::notice title=vidurl formato::$l"
           done
           hosts_line="$(grep -m1 'hosts en el payload' /tmp/dump.txt || true)"
           [ -n "$hosts_line" ] && echo "::notice title=PelisPedia hosts::$hosts_line"

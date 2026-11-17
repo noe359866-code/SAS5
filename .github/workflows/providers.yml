@@ -154,10 +154,10 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
-          urls="https://cinehdplus.org/pelicula-13800/interestelar/
-          https://cinehdplus.org/episodio-135739/otra-vida-1x10/
-          https://verpeliculasultra.com/accion/4997-f1-la-pelicula.html
-          https://verpeliculasultra.com/index.php?do=search&subaction=search&story=f1"
+          urls="https://pelispedia.mov/pelicula/interstellar
+          https://flixlatam.com/pelicula/interstellar
+          https://pelispedia.mov/serie/la-mesa-final-r5gv9C
+          https://flixlatam.com/serie/la-mesa-final-r5gv9C"
           {
             echo '### Fuentes candidatas'
             echo '```'
@@ -165,12 +165,12 @@ jobs:
             node scripts/sources-probe.mjs --gql || true
             echo '```'
             echo '### Encadenado: página → iframe del reproductor'
-            for u in "https://cinehdplus.org/pelicula-13800/interestelar/" "https://cinehdplus.org/episodio-135739/otra-vida-1x10/" "https://verpeliculasultra.com/accion/4997-f1-la-pelicula.html"; do
+            for u in "https://pelispedia.mov/pelicula/interstellar" "https://flixlatam.com/pelicula/interstellar"; do
               node scripts/sources-probe.mjs --chain "$u" || true
             done
             echo
-            echo '### CineHDPlus · qué hay en `servidores`'
-            node scripts/sources-probe.mjs --dump https://cinehdplus.org/episodio-135739/otra-vida-1x10/ > /tmp/dump.txt 2>&1 || true
+            echo '### PelisPedia · qué hay en `servidores`'
+            node scripts/sources-probe.mjs --dump https://pelispedia.mov/pelicula/interstellar > /tmp/dump.txt 2>&1 || true
             cat /tmp/dump.txt
           } | tee /tmp/fuentes.txt
           cat /tmp/fuentes.txt >> "$GITHUB_STEP_SUMMARY"

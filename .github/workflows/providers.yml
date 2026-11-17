@@ -133,8 +133,10 @@ jobs:
             status=$?
           fi
           cat /tmp/videoapi.txt
-          reason="$(grep -v '^$' /tmp/videoapi.txt | grep -vE '^VideoAPI ·' | tail -4 | tr '\n' '|')"
-          echo "::error title=VideoAPI (código $status)::$reason"
+          if [ "$status" -ne 0 ]; then
+            reason="$(grep -v '^$' /tmp/videoapi.txt | grep -vE '^VideoAPI ·' | tail -4 | tr '\n' '|')"
+            echo "::error title=VideoAPI (código $status)::$reason"
+          fi
           {
             echo '### VideoAPI'
             echo '```'

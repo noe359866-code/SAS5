@@ -7,6 +7,7 @@
  *   node scripts/sources-probe.mjs https://flixlatam.com/pelicula/interstellar
  *   node scripts/sources-probe.mjs --gql           # ¿sigue viva la API de Doramasflix?
  *   node scripts/sources-probe.mjs --dump <url>    # qué hay dentro de `servidores`/`links_online`
+ *   node scripts/sources-probe.mjs --chain <url>   # sigue el iframe del reproductor un paso más
  *
  * Existe porque evaluar una web desde un sandbox sin salida a Internet acaba en
  * suposiciones: esto se ejecuta donde sí hay red (un runner de GitHub Actions,
@@ -213,6 +214,66 @@ async function dump(url) {
   return out.join('\n');
 }
 
+/**
+ * Encadena un paso más: pide la página, saca el iframe que parece el
+ * reproductor (no el tráiler) y lo pide también. Es la prueba que separa «la
+ * web tiene un endpoint de player» de «el player lo monta el navegador».
+ * Solo imprime host+path: los tokens van en la query.
+ */
+async function chain(url) {
+  const first = await probe(url);
+  const out = [`[1] ${line(first)}`];
+  const pageUrl = url;
+  const candidates = (first.samples || [])
+    .filter((sample) => !/youtube\.com|youtu\.be|google/i.test(sample))
+    .filter((sample) => !/[?#]/.test(sample) || true);
+  if (!candidates.length) {
+    out.push('    sin iframes que seguir: el reproductor no está en el HTML');
+    return out.join('\n');
+  }
+  for (const candidate of candidates.slice(0, 3)) {
+    let res;
+    let text = '';
+    try {
+      res = await fetch(candidate, {
+        headers: {
+          'User-Agent': UA,
+          Accept: 'text/html,application/json,*/*',
+          'Accept-Language': 'es-ES,es;q=0.9',
+          Referer: pageUrl,
+        },
+        redirect: 'follow',
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+      });
+      text = await res.text();
+    } catch (err) {
+      out.push(`[2] ✘ ${safe(candidate)} · ${(err && err.name) || 'Error'}`);
+      continue;
+    }
+    const embeds = embedsIn(text, res.url || candidate);
+    const hints = playerHints(text);
+    const hosts = [...new Set(embeds.map(hostOf))].slice(0, 6);
+    // ¿Es una lista de servidores en JSON? Se enseñan las claves, no los valores.
+    let keys = [];
+    try {
+      const parsed = JSON.parse(text);
+      keys = Object.keys(parsed).slice(0, 12);
+    } catch (_) { /* no es JSON */ }
+    const bits = [
+      `HTTP ${res.status}`,
+      `${text.length} B`,
+      `final ${safe(res.url || candidate)}`,
+      embeds.length ? `embeds ${embeds.length} · hosts ${hosts.join(',')}` : 'embeds 0',
+    ];
+    if (hints.length) bits.push(`pistas ${hints.join(',')}`);
+    if (keys.length) bits.push(`json {${keys.join(',')}}`);
+    if (/goto\.php|fotise|financialtrust|ggpick/i.test(text)) bits.push('OJO: publicidad/desvío');
+    out.push(`[2] ${res.ok ? '✔' : '✘'} ${safe(candidate)} · ${bits.join(' · ')}`);
+    for (const sample of embeds.slice(0, 3)) out.push(`      · ${safe(sample)}`);
+  }
+  return out.join('\n');
+}
+
 function line(item) {
   if (item.error) return `✘ ${item.url} · ${item.error} (${item.ms} ms)`;
   const bits = [
@@ -242,6 +303,16 @@ async function main() {
       ? `✔ Doramasflix GQL vivo · HTTP ${gql.status} · ${gql.ms} ms · ${gql.detail}`
       : `✘ Doramasflix GQL · HTTP ${gql.status || '-'} · ${gql.error || gql.detail || ''}${gql.note ? ` · ${gql.note}` : ''}`);
     process.exitCode = gql.ok ? 0 : 1;
+    return;
+  }
+  if (args[0] === '--chain') {
+    const target = args.find((arg) => /^https?:\/\//i.test(arg));
+    if (!target) {
+      console.error('Uso: node scripts/sources-probe.mjs --chain <url>');
+      process.exitCode = 2;
+      return;
+    }
+    console.log(await chain(target));
     return;
   }
   if (args[0] === '--dump') {

@@ -164,6 +164,11 @@ jobs:
             node scripts/sources-probe.mjs $urls || true
             node scripts/sources-probe.mjs --gql || true
             echo '```'
+            echo '### Encadenado: página → iframe del reproductor'
+            for u in "https://cinehdplus.org/pelicula-13800/interestelar/" "https://cinehdplus.org/episodio-135739/otra-vida-1x10/" "https://verpeliculasultra.com/accion/4997-f1-la-pelicula.html"; do
+              node scripts/sources-probe.mjs --chain "$u" || true
+            done
+            echo
             echo '### CineHDPlus · qué hay en `servidores`'
             node scripts/sources-probe.mjs --dump https://cinehdplus.org/episodio-135739/otra-vida-1x10/ > /tmp/dump.txt 2>&1 || true
             cat /tmp/dump.txt
@@ -176,6 +181,9 @@ jobs:
             esac
           done < /tmp/fuentes.txt
           # Lo único que decide es qué hosts sirve el payload: se emite solo eso.
+          grep -E '^\[2\]' /tmp/fuentes.txt | while IFS= read -r l; do
+            echo "::notice title=Encadenado::$l"
+          done
           hosts_line="$(grep -m1 'hosts en el payload' /tmp/dump.txt || true)"
           [ -n "$hosts_line" ] && echo "::notice title=CineHDPlus hosts::$hosts_line"
 

@@ -17,6 +17,7 @@ if (fr) {
   const names = [...text.matchAll(/class=["'][^"']*search-title[^"']*["'][^>]*>([^<]*)/gi)].slice(0, 5).map(x => x[1].trim());
   const ids = [...text.matchAll(/newsid(?:=|%3[dD])(\d+)/g)].map(x => x[1]);
   console.log(`  títulos: ${names.join(' | ') || '(sin coincidencias parseables)'}; ids newsid: ${ids.length}`);
+  console.log('  muestra: ' + text.replace(/\s+/g, ' ').slice(0, 650));
   const paths = [...text.matchAll(/onclick=["']([^"']*(?:[\s\S]*?))(?=\sclass=|>)/gi)].slice(0, 3).map(x => x[1].slice(0, 160));
   console.log(`  onclick: ${paths.join(' | ') || 'no encontrado'}`);
 }
@@ -32,3 +33,10 @@ for (const [label, url, headers] of [
     console.log(`  var servers: ${/var\s+servers\s*=/.test(out.content)}; iframe scripts: ${(out.content.match(/video_iframe/gi) || []).length}`);
   }
 }
+try {
+  const { createRequire } = await import('node:module');
+  const require = createRequire(import.meta.url);
+  const { searchDeVideoSrc } = require('../lib/devideosrc');
+  const r = await searchDeVideoSrc('', { mediaType:'movie', imdbId:'tt0133093', title:'The Matrix' }, 'The Matrix', 12000);
+  console.log(`DeVideoSRC Matrix: ${r.hits?.length || 0} URLs directas; ${r.skipped || 'consulta completada'}`);
+} catch (e) { console.log(`DeVideoSRC Matrix: ${e.message}`); }

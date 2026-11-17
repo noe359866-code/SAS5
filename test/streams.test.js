@@ -26,8 +26,8 @@ test('manifest: declara el recurso stream', () => {
   assert.match(manifest.version, /^\d+\.\d+\.\d+$/);
 });
 
-test('proveedores: los dieciséis proveedores quedan registrados', () => {
-  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc'];
+test('proveedores: los diecisiete proveedores quedan registrados', () => {
+  const all = ['knaben', 'torlock', 'blackholebay', 'nyaa', 'yts', 'eztv', 'rarbg', 'torrentindexer', 'torrentioes', 'espanol', 'spinflix', 'fanpelis', 'embed69', 'videoapi', 'playlatin', 'vixsrc', 'devideosrc'];
   assert.deepEqual(streams.PROVIDER_KEYS, all);
   assert.deepEqual(streams.activeProviders(null), all);
   assert.deepEqual(streams.activeProviders({ streams: ['torlock'] }), ['torlock']);

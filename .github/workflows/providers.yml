@@ -53,6 +53,7 @@ on:
       - 'scripts/animeflv-probe.mjs'
       - 'scripts/shinchaneros-probe.mjs'
       - 'scripts/animeav1-probe.mjs'
+      - 'scripts/vumeto-probe.mjs'
       - 'scripts/fanpelis-check.mjs'
       - 'scripts/sources-probe.mjs'
       - 'scripts/embed69-pow.mjs'
@@ -288,6 +289,14 @@ jobs:
           cat /tmp/animeav1.txt
           summary="$(tr '\n' '|' < /tmp/animeav1.txt | cut -c1-3000)"
           echo "::notice title=AnimeAV1 diagnóstico::$summary"
+
+      - name: Vumeto · diagnóstico inicial
+        continue-on-error: true
+        run: |
+          node scripts/vumeto-probe.mjs > /tmp/vumeto.txt 2>&1
+          cat /tmp/vumeto.txt
+          summary="$(tr '\n' '|' < /tmp/vumeto.txt | cut -c1-5000)"
+          echo "::notice title=Vumeto diagnóstico::$summary"
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.

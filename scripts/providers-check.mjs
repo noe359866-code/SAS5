@@ -143,12 +143,24 @@ async function checkFanpelis(resolved, timeoutMs) {
     if (typeof streams.spanishTitles === 'function') spanish = await streams.spanishTitles(resolved);
   } catch (_) { /* sin TMDB se prueba solo con el de la petición */ }
   const queryTitle = spanish[0] || resolved.title;
-  const result = await fanpelis.searchFanpelis(queryTitle, resolved, queryTitle, timeoutMs);
+  // Varios intentos, igual que en producción cuando TMDB no está configurado
+  // (que es el caso de este workflow): título de la petición, alternativo y
+  // el español. Se informa de cuál funcionó.
+  const tried = [...new Set([queryTitle, resolved.title, resolved.altTitle].filter(Boolean))];
+  let result = { hits: [] };
+  let used = tried[0];
+  for (const q of tried) {
+    result = await fanpelis.searchFanpelis(q, resolved, q, timeoutMs);
+    used = q;
+    if ((result && result.hits && result.hits.length)) break;
+  }
   const hits = (result && result.hits) || [];
   return {
     hits: hits.length,
     ms: Date.now() - started,
     query: result && result.query,
+    probado: tried,
+    acerto: used,
     skipped: result && result.skipped,
     samples: hits.slice(0, 2).map((hit) => ({
       title: String(hit.title || '').slice(0, 90),

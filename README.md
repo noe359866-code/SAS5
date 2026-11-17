@@ -248,6 +248,19 @@ El plan gratuito de Workers tiene **100.000 invocaciones/día por cuenta** (Erro
 6. **Cero fan-out innecesario en web.** Los 21 estudios llevan logo estático integrado (0 llamadas extra al abrir `/configure`), botón *«Esenciales (carga rápida)»* para manifiestos ligeros y coalescencia de peticiones en `/configure`. Consulta la arquitectura detallada y la Cache Rule exacta en [docs/escala-plan-free.md](docs/escala-plan-free.md).
 7. **Auditoría medible (`npm run scale:audit`).** El Worker marca sus respuestas con `X-Catalogos-Runtime: worker`: lo que llegue sin esa cabecera no consumió invocación. Con eso, `node scripts/scale-audit.mjs --url https://tu-dominio` mide qué parte de tu tráfico es gratis y proyecta cuántas invocaciones/día necesitarías (sale con código `2` si te pasas de las 100.000).
 
+### Corregido tras las pruebas en vivo del 17/11/2026
+
+Ver [docs/pruebas-en-vivo-2026-11-17.md](docs/pruebas-en-vivo-2026-11-17.md). Los cinco fallos que se veían en el
+cliente y su estado:
+
+| Fallo | Corrección |
+|---|---|
+| Streams de otras series dentro de una ficha («The Bad Guys Breaking In» en Breaking Bad) | `isRelevant()` exige que el título aparezca como frase contigua, además de temporada y episodio. |
+| Publicidad de «vercineo.net» en descripciones **y en títulos** de TMDB/TVMaze | Nuevo `lib/sanitize.js`, aplicado en catálogos, fichas, portada y TVMaze. |
+| `tvdb:` y `tmdb:<id>` sin tipo devolvían `[]` o una serie equivocada en silencio | Se señalan con un motivo (`stage: parseId` en `/internal/streams-test.json`) y `meta` desambigua `tmdb:<id>` con el tipo de la petición. |
+| Debrid: la credencial desaparecía a los 5 minutos sin avisar | El servidor devuelve `durable: false` y `/configure` lo advierte. Para que sea duradero sigue haciendo falta crear `DEBRID_KV`. |
+
+
 ```bash
 npm run scale:audit -- --url https://tu-dominio            # proyección a 500.000 peticiones/día
 npm run scale:audit -- --url https://tu-dominio --requests 800000

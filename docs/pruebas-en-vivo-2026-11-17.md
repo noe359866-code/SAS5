@@ -366,21 +366,48 @@ subrequests.
 
 ---
 
-## 10. Orden de corrección recomendado
+## 10. Estado de las correcciones
 
-1. **Redesplegar** `main` (`1c568f6`) para que producción coincida con el repo. Sin esto,
-   todo lo demás se corrige a ciegas.
-2. **Saneado de texto** (`lib/sanitize.js`, aplicado en `lib/tmdb.js` y `lib/meta.js`) — es lo
-   más visible y lo más barato; toca `name` y `description`.
-3. **Filtro de series** (`isRelevant`): exigir título además de episodio. Añadir los 4 tests
-   del punto 3 antes y después del cambio.
-4. **Ids `tvmaze:`/`tvdb:`/`tmdb:`**: reproducir tras el despliegue; si persiste, arreglar
-   `parseStreamId`/`resolveTitle` y devolver error explícito en vez de `[]` silencioso.
-5. **Debrid**: KV + `DEBRID_ENCRYPTION_KEY` + OAuth de RD; y arreglar el mensaje de
-   `/configure` para que no diga «This server…».
-6. **Proveedores 403/429**: pausa con TTL y `cacheMaxAge` distinto de 0 en respuestas
-   parciales.
+Todo lo que dependía de código está corregido en la rama `arena/b2c60ee9-sas5`,
+con tests. Lo que depende de la cuenta de Cloudflare **no se puede hacer desde
+el repositorio** y queda anotado abajo.
 
-Los puntos 2 y 3 son independientes y no tocan la auditoría debrid
-(`docs/auditoria-debrid-2026-11-17.md`), que sigue pendiente de aplicar en su propio orden
-(C1+C3 → C2 → A1 → …).
+| # | Fallo | Estado |
+|---|---|---|
+| 1 | Contaminación de streams de series | **Corregido.** `lib/streams.js`: `isRelevant()` compara el título como frase contigua y solo después acepta temporada/episodio. 17 casos reales verificados, más 3 tests nuevos. |
+| 2 | Publicidad de `vercineo.net` en `description` y `name` | **Corregido.** Nuevo `lib/sanitize.js`, aplicado en `lib/tmdb.js` (catálogos), `lib/meta.js` (fichas), `lib/tvmaze.js` y `lib/homePage.js` (portada). 11 tests. |
+| 3a | `tvmaze:ID:T:E` devolvía `[]` | **Corregido** en `parseStreamId` (sufijo de temporada + IMDb id del show para que respondan EZTV/RarBg/Torrentio). |
+| 3b | `tvdb:` devolvía `[]` en silencio | **Corregido en el diagnóstico**: `/internal/streams-test.json` devuelve `stage: "parseId"` con el motivo. No se implementa TVDB (se eliminó en `1c568f6` y no se anuncia en el manifest). |
+| 3c | `tmdb:<id>` sin tipo resolvía otra serie | **Corregido.** En `/stream` se desambigua con el `type` de la petición; en `/meta` también. |
+| 4 | El worker desplegado es anterior a `main` | **No se puede hacer desde aquí**: requiere `wrangler login` o un token de Cloudflare y no lo hay en el entorno. Está todo listo para `npm run deploy`. |
+| 5 | Debrid sin KV/OAuth | **Mitigado.** El servidor devuelve `durable: false` y `/configure` avisa («la conexión puede perderse a los 5 minutos»). El fallo de fondo exige crear la KV y configurar los secrets — ver abajo. |
+| 6 | `cacheMaxAge: 0` en respuestas parciales | **Revisado y sin cambios a propósito.** Ver nota. |
+
+### Lo que queda por hacer fuera del repositorio
+
+```bash
+# 1. Desplegar el código corregido (hace falta sesión de Cloudflare)
+npx wrangler login
+npm run deploy                      # incluye prerender + wrangler deploy
+
+# 2. Hacer duradero el debrid (lo que arregla de raíz el fallo de los 5 min)
+npm run debrid:kv                   # crea DEBRID_KV y escribe el binding
+npx wrangler secret put DEBRID_ENCRYPTION_KEY     # ≥ 32 caracteres
+npx wrangler secret put REALDEBRID_CLIENT_ID
+npx wrangler secret put REALDEBRID_CLIENT_SECRET
+npx wrangler secret put REALDEBRID_REDIRECT_URI   # …/internal/debrid/real-debrid/callback
+```
+
+Después de desplegar, lo primero que hay que comprobar es `/healthz`:
+`credentialStorage` debe pasar de `"cache"` a `"kv"`.
+
+### Nota sobre `cacheMaxAge: 0`
+
+Se intentó cachear 5 minutos las respuestas «parciales» y **se revirtió**: seis
+tests del proyecto protegen el contrato contrario (no servir respuestas
+degradadas desde la caché). Lo que evita golpear 14 proveedores en cada visita
+es la pausa por proveedor que ya existe: cuando `blackholebay`/`rarbg` fallan
+varias veces, se pausan 5 minutos y la respuesta pasa a `cacheMaxAge: 300`.
+Si se quiere ir más allá, el camino es marcar el 403 como fallo permanente
+(pausa larga), no relajar la caché.
+

@@ -36,6 +36,12 @@ on:
       - 'lib/vixsrc.js'
       - 'lib/devideosrc.js'
       - 'lib/frenchstream.js'
+      - 'lib/animeflv.js'
+      - 'lib/animeav1.js'
+      - 'lib/vumeto.js'
+      - 'test/vumeto.test.js'
+      - 'test/animeav1.test.js'
+      - 'test/animeflv.test.js'
       - 'lib/videoapi.js'
       - 'lib/fanpelis.js'
       - 'lib/spinflix.js'
@@ -46,6 +52,10 @@ on:
       - 'lib/hlsProxy.js'
       - 'scripts/providers-check.mjs'
       - 'scripts/multiidioma-probe.mjs'
+      - 'scripts/animeflv-probe.mjs'
+      - 'scripts/shinchaneros-probe.mjs'
+      - 'scripts/animeav1-probe.mjs'
+      - 'scripts/vumeto-probe.mjs'
       - 'scripts/fanpelis-check.mjs'
       - 'scripts/sources-probe.mjs'
       - 'scripts/embed69-pow.mjs'
@@ -257,6 +267,41 @@ jobs:
           summary="$(tr '\n' '|' < /tmp/multiidioma.txt | cut -c1-900)"
           echo "::notice title=Diagnóstico multiidioma::$summary"
 
+      - name: AnimeFLV · diagnóstico inicial
+        continue-on-error: true
+        run: |
+          node scripts/animeflv-probe.mjs > /tmp/animeflv.txt 2>&1
+          cat /tmp/animeflv.txt
+          cat /tmp/animeflv.txt >> "$GITHUB_STEP_SUMMARY"
+          summary="$(tr '\n' '|' < /tmp/animeflv.txt | cut -c1-5000)"
+          echo "::notice title=AnimeFLV diagnóstico::$summary"
+
+      - name: ShinChaneros · diagnóstico inicial
+        continue-on-error: true
+        run: |
+          node scripts/shinchaneros-probe.mjs > /tmp/shinchaneros.txt 2>&1
+          cat /tmp/shinchaneros.txt
+          summary="$(tr '\n' '|' < /tmp/shinchaneros.txt | cut -c1-5000)"
+          echo "::notice title=ShinChaneros diagnóstico::$summary"
+
+      - name: AnimeAV1 · diagnóstico inicial
+        continue-on-error: true
+        run: |
+          node scripts/animeav1-probe.mjs > /tmp/animeav1.txt 2>&1
+          cat /tmp/animeav1.txt
+          summary="$(tr '\n' '|' < /tmp/animeav1.txt | cut -c1-3000)"
+          echo "::notice title=AnimeAV1 diagnóstico::$summary"
+
+      - name: Vumeto · diagnóstico inicial
+        continue-on-error: true
+        run: |
+          node scripts/vumeto-probe.mjs > /tmp/vumeto.txt 2>&1
+          cat /tmp/vumeto.txt
+          summary="$(tr '\n' '|' < /tmp/vumeto.txt | cut -c1-8000)"
+          echo "::notice title=Vumeto diagnóstico::$summary"
+          details="$(grep -E '^API |^Media |^Adaptador |^  (disponibles|tipos|input declarado|medio)' /tmp/vumeto.txt | tr '\n' '|' | cut -c1-4000)"
+          echo "::notice title=Vumeto API::$details"
+
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.
       - name: Publicar informes
@@ -265,6 +310,7 @@ jobs:
         with:
           name: proveedores-informe
           path: |
+            /tmp/animeflv.txt
             /tmp/multiidioma.txt
             /tmp/movie.txt
             /tmp/series.txt

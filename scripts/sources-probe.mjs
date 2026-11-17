@@ -207,7 +207,7 @@ async function dump(url) {
   const redact = (text) => text
     .replace(/("(?:token|hash|sig|signature|key|pass|password|jwt)"\s*:\s*")[^"]{4,}/gi, '$1<redactado>')
     .replace(/\?[^"'\\\s]{16,}/g, '?<redactado>');
-  for (const key of ['dataLink', 'sortedEmbeds', 'servidores', 'links_online', 'stream_urls', 'players']) {
+  for (const key of ['dataLink', 'sortedEmbeds', 'dropload', 'unlimplay', 'sources', 'streams', 'servers', 'embed_url', 'servidores', 'links_online', 'stream_urls', 'players']) {
     let from = 0;
     let shown = 0;
     while (shown < 2) {
@@ -293,6 +293,9 @@ async function chain(url) {
     out.push(`[2] ${res.ok ? '✔' : '✘'} ${safe(candidate)} · ${bits.join(' · ')}`);
     for (const sample of embeds.slice(0, 3)) out.push(`      · ${safe(sample)}`);
   }
+  const apiPaths = [...new Set((html.match(/["'](?:https?:\\/\\/[^"'\\s]+)?\\/(?:api|v1|v2)\\/[a-z0-9_\\/-]{2,60}/gi) || []))]
+    .slice(0, 12);
+  if (apiPaths.length) out.push(`\nrutas de API en el HTML: ${apiPaths.join(', ')}`);
   return out.join('\n');
 }
 

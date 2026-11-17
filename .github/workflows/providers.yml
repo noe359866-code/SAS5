@@ -14,7 +14,7 @@ on:
       imdb:
         description: 'IMDb de la película de prueba'
         required: false
-        default: 'tt0816692'
+        default: 'tt0133093'
       series:
         description: 'IMDb de la serie de prueba'
         required: false
@@ -33,6 +33,9 @@ on:
       - 'lib/spinflix.js'
       - 'lib/embed69.js'
       - 'lib/videoapi.js'
+      - 'lib/fanpelis.js'
+      - 'lib/spinflix.js'
+      - 'test/fanpelis.test.js'
       - 'scripts/sources-probe.mjs'
       - 'lib/hlsProxy.js'
       - 'scripts/providers-check.mjs'
@@ -77,7 +80,7 @@ jobs:
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           CHECK_TIMEOUT_MS: '15000'
-          MOVIE_IMDB: ${{ inputs.imdb || 'tt0816692' }}
+          MOVIE_IMDB: ${{ inputs.imdb || 'tt0133093' }}
           SERIES_IMDB: ${{ inputs.series || 'tt0903747' }}
         run: |
           set -o pipefail
@@ -102,7 +105,7 @@ jobs:
       - name: Embed69 · PoW y enlaces
         continue-on-error: true
         env:
-          EMBED69_IMDB: ${{ inputs.imdb || 'tt0816692' }}
+          EMBED69_IMDB: ${{ inputs.imdb || 'tt0133093' }}
         run: |
           set -o pipefail
           node scripts/embed69-pow.mjs --imdb "$EMBED69_IMDB" | tee /tmp/pow.txt
@@ -121,7 +124,7 @@ jobs:
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           VIDEOAPI_MOVIE: ${{ inputs.movie }}
-          VIDEOAPI_IMDB: ${{ inputs.imdb || 'tt0816692' }}
+          VIDEOAPI_IMDB: ${{ inputs.imdb || 'tt0133093' }}
         run: |
           set -o pipefail
           # El motivo se publica como anotación: es lo único del run que se
@@ -255,5 +258,5 @@ jobs:
         if: ${{ inputs.provider_url != '' }}
         env:
           ADDON_URL: ${{ inputs.provider_url }}
-          MOVIE_IMDB: ${{ inputs.imdb || 'tt0816692' }}
+          MOVIE_IMDB: ${{ inputs.imdb || 'tt0133093' }}
         run: node scripts/providers-e2e.mjs --url "$ADDON_URL" --imdb "$MOVIE_IMDB" | tee /tmp/e2e.txt

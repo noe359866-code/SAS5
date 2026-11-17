@@ -22,6 +22,7 @@ const config = require('../lib/config.js');
 const streams = require('../lib/streams.js');
 const spinflix = require('../lib/spinflix.js');
 const videoapi = require('../lib/videoapi.js');
+const fanpelis = require('../lib/fanpelis.js');
 
 const TIMEOUT_MS = Number(process.env.CHECK_TIMEOUT_MS) || 12_000;
 
@@ -127,6 +128,29 @@ async function checkVideoApi(resolved) {
   };
 }
 
+/**
+ * Fanpelis: la prueba de extremo a extremo que de verdad importa, porque aquí
+ * SÍ se busca por título y se resuelve el .m3u8 del embed. Si devuelve hits,
+ * el stream que verá Stremio existe.
+ */
+async function checkFanpelis(resolved, timeoutMs) {
+  const started = Date.now();
+  const result = await fanpelis.searchFanpelis(resolved.title, resolved, resolved.title, timeoutMs);
+  const hits = (result && result.hits) || [];
+  return {
+    hits: hits.length,
+    ms: Date.now() - started,
+    query: result && result.query,
+    skipped: result && result.skipped,
+    samples: hits.slice(0, 2).map((hit) => ({
+      title: String(hit.title || '').slice(0, 90),
+      url: String(hit.url || '').slice(0, 70),
+      directo: hit.directUrl ? String(hit.directUrl).split('?')[0].slice(0, 70) : null,
+      subtitulos: Array.isArray(hit.subtitles) ? hit.subtitles.length : 0,
+    })),
+  };
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
@@ -151,6 +175,7 @@ async function main() {
   results.push(await timed('torrentioes (manifest)', checkTorrentioSpanish));
   results.push(await timed('spinflix (buscador)', () => checkSpinFlix(options)));
   results.push(await timed('videoapi (exists + reproductor)', () => checkVideoApi(resolved)));
+  results.push(await timed('fanpelis (búsqueda → .m3u8)', () => checkFanpelis(resolved, TIMEOUT_MS)));
   // Los tres buscadores que alimentan «Español (ES/ES)» y el propio agregado.
   // El agregado «Español (ES/LAT)»: busca con el título en español de TMDB en
   // Knaben, Torlock y BlackHoleBay y se queda solo lo que declara audio español.

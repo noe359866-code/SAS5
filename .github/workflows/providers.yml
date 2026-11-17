@@ -49,6 +49,7 @@ on:
       - 'scripts/providers-check.mjs'
       - 'scripts/multiidioma-probe.mjs'
       - 'scripts/animeflv-probe.mjs'
+      - 'scripts/shinchaneros-probe.mjs'
       - 'scripts/fanpelis-check.mjs'
       - 'scripts/sources-probe.mjs'
       - 'scripts/embed69-pow.mjs'
@@ -268,6 +269,14 @@ jobs:
           cat /tmp/animeflv.txt >> "$GITHUB_STEP_SUMMARY"
           summary="$(tr '\n' '|' < /tmp/animeflv.txt | cut -c1-5000)"
           echo "::notice title=AnimeFLV diagnóstico::$summary"
+
+      - name: ShinChaneros · diagnóstico inicial
+        continue-on-error: true
+        run: |
+          node scripts/shinchaneros-probe.mjs > /tmp/shinchaneros.txt 2>&1
+          cat /tmp/shinchaneros.txt
+          summary="$(tr '\n' '|' < /tmp/shinchaneros.txt | cut -c1-5000)"
+          echo "::notice title=ShinChaneros diagnóstico::$summary"
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.

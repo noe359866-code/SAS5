@@ -43,3 +43,15 @@ for(const path of ['/embed/movie/603','/embed/tv/1396/1/1']) {
 for(const path of ['/_player/health','/_player/map?type=movie&id=603','/_player/resolve?type=movie&id=603&provider=moviebox-0930']) {
  try {const r=await fetch('https://vumeto.xyz'+path,{headers:{Referer:'https://vumeto.xyz/embed/movie/603'},signal:AbortSignal.timeout(20000)});const text=await r.text();let data;try{data=JSON.parse(text)}catch{};console.log(`API ${path.replace(/id=603/,'id=[id]')}: HTTP ${r.status}; tipo=${r.headers.get('content-type')}; keys=${Object.keys(data||{}).join(',')}`);if(Array.isArray(data?.providers))console.log('  proveedores: '+JSON.stringify(data.providers.map(p=>({id:p.id,configured:p.configured}))));if(data?.sources)console.log('  fuentes: '+data.sources.length+'; tipos='+JSON.stringify(data.sources.map(x=>({keys:Object.keys(x),type:x.type,quality:x.quality,language:x.language, directType:typeof x.directUrl,urlType:typeof x.url,host:(()=>{try{return new URL(x.directUrl||x.url,base).hostname}catch{return ''}})(),pathPrefix:(()=>{try{return new URL(x.directUrl||x.url,base).pathname.split('/').slice(0,2).join('/')}catch{return ''}})()}))));if(data?.error)console.log('  error: '+String(data.error).slice(0,100));}catch(e){console.log('API: '+e.name)}
 }
+for(const [type,id,season,episode] of [['movie',603,null,null],['tv',1396,1,1]]) {
+ try {
+  const base='https://vumeto.xyz';const path=type==='movie'?`/embed/movie/${id}`:`/embed/tv/${id}/${season}/${episode}`;
+  const page=await(await fetch(base+path,{signal:AbortSignal.timeout(12000)})).text();const session=/<meta\s+name=["']vumeto-session["']\s+content=["']([^"']+)["']/.exec(page)?.[1];if(!session){console.log('Media '+type+': sin sesión');continue;}
+  const query=new URLSearchParams({type,id:String(id),provider:'moviebox-0930'});if(season){query.set('season',season);query.set('episode',episode);}
+  const rr=await fetch(base+'/_player/resolve?'+query,{headers:{'X-Vumeto-Session':session,Referer:base+path},signal:AbortSignal.timeout(35000)});const d=await rr.json();
+  console.log(`Media ${type}: HTTP ${rr.status}; fuentes=${d.sources?.length||0}; target=${JSON.stringify(d.target)}; idiomas=${[...new Set((d.sources||[]).map(x=>x.language))].join(',')}`);
+  const first=(d.sources||[]).find(x=>x.directUrl && x.type==='video/mp4');if(!first)continue;
+  const u=new URL(first.directUrl);console.log(`  medio host=${u.hostname}; tipo=${first.type}; extmp4=${u.pathname.endsWith('.mp4')}`);
+  if(u.protocol==='https:' && u.hostname==='macdn.hakunaymatata.com') {const r=await fetch(u,{headers:{Referer:base+'/',Range:'bytes=0-1023'},redirect:'error',signal:AbortSignal.timeout(12000)});const reader=r.body?.getReader();const x=reader?await reader.read():{};if(reader)await reader.cancel();console.log(`  medio: HTTP ${r.status}; tipo=${r.headers.get('content-type')}; ftyp=${String.fromCharCode(...(x.value||[]).slice(4,8))==='ftyp'}`);}
+ }catch(e){console.log('Media '+type+': '+e.name+'; causa='+(e.cause?.code||''));}
+}

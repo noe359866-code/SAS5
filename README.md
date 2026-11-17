@@ -551,3 +551,9 @@ Comprueba contra los servicios reales las fuentes hispanas (**Torrentio ES/Latin
 En `/configure`, la sección de proveedores permite elegir **streaming directo**, **torrents** o ambos; después, uno o varios idiomas de audio y los proveedores visibles compatibles. Las selecciones se guardan en la URL personal. Las instalaciones antiguas sin estos campos mantienen todos los tipos e idiomas activos.
 
 La lista de idiomas de cada proveedor es orientativa. El filtro de audio utiliza únicamente etiquetas disponibles: un resultado sin audio identificado se clasifica como **Desconocido**; los subtítulos por sí solos no garantizan el idioma del audio. Elegir idiomas y quitar Desconocido puede ocultar fuentes válidas sin etiquetar. Debrid sigue aplicado a torrents seleccionados. Si no se selecciona tipo o idioma, no hay streams.
+
+### Enlaces directos y publicidad
+
+El endpoint de streams descarta páginas embed (HTML) que los proveedores presentan como vídeo y solo deja pasar URLs reconocibles de MP4/HLS/WebM, el proxy HLS propio y la playlist de VixSrc. Fanpelis no devuelve el iframe cuando no puede extraer la playlist. Esto puede reducir los resultados de VideoAPI, Embed69 y PlayLatinSRC: resolver sus hosts requiere extractores adicionales; no significa que el título no exista. Los proxies externos con formatos no reconocidos y URLs de vídeo sin extensión pueden quedar excluidos.
+
+El filtro descarta también URLs con algunos indicadores inequívocos de anuncios y evita seleccionar esas URLs primero al extraer HLS. **No verifica que la playlist corresponda a la película ni elimina anuncios insertados dentro de ella**. Hace falta validar los casos reales y sus hosts; no hay garantía de reproducción ni de ausencia de anuncios.

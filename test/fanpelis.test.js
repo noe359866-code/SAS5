@@ -141,16 +141,14 @@ test('fanpelis: descargas (mega, magnet) y embeds desconocidos se ignoran', asyn
   assert.ok(!calls.some((u) => u.includes('mega.nz')));
 });
 
-test('fanpelis: embed que no expone el .m3u8 se sirve como iframe con su Referer', async () => {
+test('fanpelis: embed sin playlist no se presenta como vídeo', async () => {
   mockApi([
     ['/api/rest/search', json(SEARCH_MOVIE)],
     ['/api/rest/player', json(PLAYER)],
     ['vimeos.net/embed-', html('<html><body>sin playlist</body></html>')],
   ]);
   const out = await fanpelis.searchFanpelis('Matrix', MOVIE, 'Matrix', 1000);
-  assert.equal(out.hits.length, 1);
-  assert.equal(out.hits[0].url, EMBED);
-  assert.equal(out.hits[0].referer, 'https://fanpelis.to/');
+  assert.equal(out.hits.length, 0);
 });
 
 test('fanpelis: caída total lanza (para que el proveedor se pause); vacío no', async () => {

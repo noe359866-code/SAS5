@@ -113,6 +113,7 @@ Edita `.env`:
 | `DEBRID_MAX_CHECKS` / `DEBRID_MAX_RESULTS` | Opcional | Máximo de hashes consultados (8) y enlaces directos generados (3) por petición |
 | `DEBRID_TIMEOUT_MS` | Opcional | Tiempo máximo de espera antes de devolver los magnets públicos (4500 ms) |
 | `DEBRID_VALIDATE_TIMEOUT_MS` | Opcional | Plazo al validar la clave debrid en `/configure` (9000 ms); sube a 12000–15000 si el proveedor responde lento |
+| `VIXSRC` | Opcional | `off` desactiva el extractor VixSrc (activo por defecto; experimental) |
 | `PLAYLATIN_URL` | Opcional | Dominio de PlayLatinSRC (defecto `https://playlatinsrc.co`) |
 | `PORT` | Opcional | Puerto local (defecto `7000`) |
 
@@ -383,6 +384,8 @@ monograma y, con clave configurada, `branding.js` lo resuelve en vivo desde TMDB
   - Lo que la web lista como `downloads[]` (Mega, Mediafire, 1fichier, magnet) **se ignora a propósito**: no se reproduce desde un Worker.
   - `FANPELIS=off` lo desactiva sin tocar el resto; `FANPELIS_URL` cambia el dominio. En `/configure` se puede desmarcar como cualquier otro.
   - Sonda real: `npm run fanpelis:check -- --query matrix --deep` (búsqueda → reproductor → embed → `.m3u8`).
+- **VixSrc (IT/EN)**: extractor usado por StreamingCommunity, por ID TMDB, con dos GET habituales y hasta cuatro ante un 410. Devuelve HLS con Referer; la disponibilidad de audio depende del título. Sin WebView ni PoW. `npm run vixsrc:check` comprueba API, embed y master HLS; estado y límites en [evaluación multiidioma](docs/proveedores-multiidioma-2026-11-17.md). La reproducción final aún requiere validación en Stremio.
+
 - **PlayLatinSRC** ([playlatinsrc.co](https://playlatinsrc.co)) es una API de streaming en español que identifica por **ID de IMDb** y sirve las tres versiones (Latino, Castellano y Subtitulado) desde el mismo embed. Declara 21.615 películas, 290 series y 11.568 episodios.
   - Es la única fuente hispana del addon que funciona **solo con IMDb**: VideoAPI exige TMDB y Fanpelis busca por texto, así que cuando TMDB no responde o el título no está en su catálogo, este proveedor sigue teniendo con qué preguntar. No hay PoW ni clave.
   - Verificado en la CI: `tt0110357` → 4 streams (Latino y Castellano, 9 `sources` en el resolve) en ~900 ms y `tt0108778` S1E1 → 2 streams, con el buscador del addon devolviendo 4 hits.

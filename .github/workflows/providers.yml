@@ -33,11 +33,13 @@ on:
       - 'lib/spinflix.js'
       - 'lib/embed69.js'
       - 'lib/playlatin.js'
+      - 'lib/vixsrc.js'
       - 'lib/videoapi.js'
       - 'lib/fanpelis.js'
       - 'lib/spinflix.js'
       - 'test/fanpelis.test.js'
       - 'test/playlatin.test.js'
+      - 'test/vixsrc.test.js'
       - 'scripts/sources-probe.mjs'
       - 'lib/hlsProxy.js'
       - 'scripts/providers-check.mjs'
@@ -239,6 +241,9 @@ jobs:
           # Segundo aviso, solo para el embed de Gnula (los avisos son escasos).
           media_summary="$(grep -E '^[✔✘]|^    ' /tmp/gnula-media.txt | tr '\n' '|' | cut -c1-600)"
           echo "::notice title=Gnula embed::$media_summary"
+
+      - name: VixSrc · API, embed y playlist
+        run: node scripts/vixsrc-check.mjs
 
       # Los informes también como artefacto: los logs y el resumen de Actions
       # no siempre se pueden leer desde fuera del repo, el artefacto sí.

@@ -16,6 +16,7 @@ if(embed) {
  if(u.hostname==='player.zilla-networks.com') {
   const rr=await fetch(u,{headers:{'User-Agent':ua,Referer:base+'/'},signal:AbortSignal.timeout(12000)});const body=await rr.text();
   console.log(`  player Zilla: HTTP ${rr.status}; tipo=${rr.headers.get('content-type')}; bytes=${body.length}; m3u=${body.startsWith('#EXTM3U')}`);
+  console.log('  player HTML: '+body.replace(/https?:[^\"'\s<>]+/g,'[URL]').replace(/\s+/g,' ').slice(0,800));
   for(const x of [...body.matchAll(/.{0,100}(?:m3u8|source|playlist|hls|segment).{0,130}/gi)].slice(0,8)) console.log('  player texto: '+x[0].replace(/https?:[^"'\s<>]+/g,'[URL]').replace(/\s+/g,' ').slice(0,200));
  }
  if(u.hostname==='animeav1.uns.bio' && /^[A-Za-z0-9]{1,40}$/.test(u.hash.slice(1))) {

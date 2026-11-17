@@ -27,12 +27,18 @@ const fanpelis = require('../lib/fanpelis.js');
 const TIMEOUT_MS = Number(process.env.CHECK_TIMEOUT_MS) || 12_000;
 
 function parseArgs(argv) {
-  const options = { imdb: 'tt0816692', series: null, query: null, lang: 'es', json: false };
-  for (const arg of argv) {
-    if (arg.startsWith('--imdb=')) options.imdb = arg.split('=')[1];
-    else if (arg.startsWith('--series=')) options.series = arg.split('=')[1];
-    else if (arg.startsWith('--query=')) options.query = arg.split('=')[1];
-    else if (arg === '--json') options.json = true;
+  const options = { imdb: 'tt0133093', series: null, query: null, lang: 'es', json: false };
+  // Se aceptan `--imdb=x` y `--imdb x`: en el workflow la forma con espacio se
+  // lee mejor y antes se ignoraba en silencio (siempre probaba Interstellar).
+  const valued = { '--imdb': 'imdb', '--series': 'series', '--query': 'query', '--lang': 'lang' };
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    const eq = arg.indexOf('=');
+    if (eq > 0 && valued[arg.slice(0, eq)]) {
+      options[valued[arg.slice(0, eq)]] = arg.slice(eq + 1);
+    } else if (valued[arg] && i + 1 < argv.length) {
+      options[valued[arg]] = argv[++i];
+    } else if (arg === '--json') options.json = true;
     else if (arg === '--help' || arg === '-h') options.help = true;
   }
   return options;

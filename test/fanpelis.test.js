@@ -210,3 +210,24 @@ test('fanpelis: vimeos rota de dominio y el proxy acepta todos sus TLD', () => {
   assert.equal(hls.hostAllowed('vimeos.net.evil.example', allowed), false);
   assert.equal(hls.hostAllowed('cdn.example', allowed), false);
 });
+
+test('fanpelis: la API solo indexa el título traducido, así que se prueba sin artículo', async () => {
+  // Comprobado contra el servicio real: «The Matrix» → 0 fichas; «Matrix» → 3.
+  cache.deletePrefix('fanpelis:');
+  const queries = [];
+  global.fetch = async (url) => {
+    const u = String(url);
+    if (!u.includes('/api/rest/search')) return json({}, 404);
+    const q = decodeURIComponent((u.match(/query=([^&]*)/) || [])[1] || '');
+    queries.push(q);
+    // Solo responde al título sin artículo, como el servicio real.
+    if (q === 'Matrix') return json(SEARCH_MOVIE);
+    return json({ data: { posts: [] } });
+  };
+  const out = await fanpelis.searchFanpelis('The Matrix', MOVIE, 'The Matrix', 1000);
+  // El player y el embed no están simulados en este caso (responden 404): lo
+  // que se prueba es que la consulta sin artículo encuentra la ficha.
+  assert.deepEqual(out.hits || [], []);
+  assert.ok(queries.includes('The Matrix'));
+  assert.ok(queries.includes('Matrix'), `probó: ${queries.join(', ')}`);
+});

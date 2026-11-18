@@ -93,7 +93,11 @@ async function main() {
   // Limitar concurrencia y no repetir un rechazo.
   const rows = [];
   for (const control of controls) rows.push(await probe(control));
-  for (const { provider, title, state, players, media } of rows) console.log(`${provider} / ${title}: ${state}; ${players.join(', ') || 'sin URL de reproducción visible'}; ${media}`);
+  for (const { provider, title, state, players, media } of rows) {
+    const line = `${state}; ${players.join(', ') || 'sin URL de reproducción visible'}; ${media}`;
+    const label = `${provider} / ${title}`;
+    console.log(process.env.GITHUB_ACTIONS ? `::notice title=${label}::${line}` : `${label}: ${line}`);
+  }
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
     '### Candidatos de StreamFlix (Node)', '', '| Fuente | Control | Entrada | Opciones | Medio |', '|---|---|---|---|---|',
     ...rows.map(({ provider, title, state, players, media }) => `| ${provider} | ${title} | ${state} | ${players.join(', ') || '—'} | ${media} |`), '',

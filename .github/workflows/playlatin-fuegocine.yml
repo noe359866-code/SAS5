@@ -26,5 +26,7 @@ jobs:
       - run: npm ci
       - name: Regresiones de los dos adaptadores
         run: node --test test/playlatin.test.js test/fuegocine.test.js test/seriesStreams.test.js
-      - name: Inventario de los reproductores públicos
-        run: node scripts/provider-pair-live.js
+      - name: Contrato y reproductores de PlayLatinSRC
+        run: node scripts/provider-pair-live.js playlatin
+      - name: Catálogo y reproductores de FuegoCine
+        run: node scripts/provider-pair-live.js fuegocine

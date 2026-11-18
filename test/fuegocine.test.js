@@ -41,3 +41,26 @@ test('FuegoCine verifica la serie, la temporada y el episodio antes de leer el v
   assert.deepEqual(hits.map(({ url }) => url), ['https://cdn.example/episodio.mp4']);
   assert.equal(pages.size, 0);
 });
+
+test('FuegoCine encuentra en el sitemap una obra fuera de portada y no consulta enlaces externos', async (t) => {
+  const pages = new Map([
+    ['/', '<a href="/movies/details/otra/13">Otra</a>'],
+    ['/sitemap-movies.xml', '<?xml version="1.0"?><urlset><url><loc>https://otra.example/movies/details/el-pequeno/87</loc></url><url><loc>https://fuegocine.com/movies/details/el-peque%C3%B1o/32</loc></url><url><loc>https://fuegocine.com/shows/details/el-pequeno/9</loc></url></urlset>'],
+    ['/movies/details/el-peque%C3%B1o/32', '<title>El pequeño | Fuego Cine</title><a href="/movies/watch/el-peque%C3%B1o/32">Play</a>'],
+    ['/movies/watch/el-peque%C3%B1o/32', '<h2>El pequeño (2007)</h2><video data-language="Latino" src="https://cdn.example/movie.mp4"></video>'],
+  ]);
+  const cache = require('../lib/cache');
+  t.after(() => cache.deletePrefix('fuegocine:sitemap:'));
+  t.mock.method(global, 'fetch', async (url, init) => {
+    const path = new URL(url).pathname;
+    assert.equal(new URL(url).origin, 'https://fuegocine.com');
+    assert.equal(init.redirect, 'manual');
+    assert.ok(pages.has(path), path);
+    const html = pages.get(path);
+    pages.delete(path);
+    return new Response(html);
+  });
+  const hits = await SEARCHERS.fuegocine('', { title: 'El pequeño', year: '2007', mediaType: 'movie' });
+  assert.deepEqual(hits.map(({ url }) => url), ['https://cdn.example/movie.mp4']);
+  assert.equal(pages.size, 0);
+});

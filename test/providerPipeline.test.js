@@ -39,6 +39,40 @@ test('el diagnóstico de fuente cuenta medios aceptados independientemente de lo
   assert.equal(report.spinflix.relevant, 0);
 });
 
+test('la sonda separa manifiestos verificados, bloqueos y URLs no comprobadas sin revelar firmas', async (t) => {
+  config.reload({ STREAM_PROVIDERS: 'fanpelis,playlatin' });
+  t.after(() => config.reload());
+  t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
+  t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [
+    media('https://cdn.example/no.m3u8?signature=secret', { verification: 'cdn-http-403' }),
+    media('https://cdn.example/unknown.mp4', { verification: 'https://example.invalid/sensitive' }),
+  ]);
+  t.mock.method(streams.SEARCHERS, 'playlatin', async () => [media('https://cdn.example/ok.m3u8', { verification: 'manifest-ok' })]);
+  const report = await streams.diagnose('movie', 'tt9998812', null);
+  assert.equal(report.totalStreams, 3);
+  assert.equal(report.verifiedManifests, 1);
+  assert.deepEqual(report.mediaChecks, { 'cdn-http-403': 1, unchecked: 1, 'manifest-ok': 1 });
+  assert.equal(report.providers.fanpelis.accepted, 2);
+  assert.deepEqual(report.providers.fanpelis.mediaChecks, { 'cdn-http-403': 1, unchecked: 1 });
+  assert.doesNotMatch(JSON.stringify(report), /signature|secret|sensitive|cdn\.example/);
+});
+
+test('el límite de resultados no oculta el HLS verificado detrás de enlaces no comprobados', async (t) => {
+  config.reload({ STREAM_PROVIDERS: 'fanpelis,playlatin', STREAM_MAX_RESULTS: '2' });
+  t.after(() => config.reload());
+  t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
+  t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [
+    media('https://cdn.example/no.m3u8', { verification: 'cdn-http-403' }),
+    media('https://cdn.example/unknown.mp4'),
+  ]);
+  t.mock.method(streams.SEARCHERS, 'playlatin', async () => [media('https://cdn.example/ok.m3u8', { verification: 'manifest-ok' })]);
+  const result = await streams.searchStreams('movie', 'tt9998813', null);
+  assert.deepEqual(result.map((stream) => stream.url), ['https://cdn.example/ok.m3u8', 'https://cdn.example/unknown.mp4']);
+  const unverified = streams.toDirectStream(media('https://cdn.example/no.m3u8', { verification: 'cdn-http-403' }));
+  assert.match(unverified.name, /sin verificar/);
+  assert.equal(unverified.behaviorHints.notWebReady, true);
+});
+
 test('Vimeos no presenta HTML ni enlaces caídos como HLS y no inventa calidad cuando el CDN niega la sonda', async () => {
   const master = 'https://s10.vimeos.net/example/master.m3u8';
   assert.equal(await inspectVimeos(master, { text: async () => '<html>no video</html>' }), null);

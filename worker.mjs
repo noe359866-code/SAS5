@@ -197,9 +197,10 @@ async function runAndCache(key, createResponse, ctx, edge) {
   return response;
 }
 
-function workerRuntime(env, ctx) {
+function workerRuntime(env, ctx, playbackOrigin) {
   return {
     env,
+    playbackOrigin,
     waitUntil: ctx && typeof ctx.waitUntil === 'function' ? (promise) => ctx.waitUntil(promise) : undefined,
   };
 }
@@ -223,7 +224,7 @@ function canonicalStreamCacheUrl(requestUrl, type, id, cfg) {
   const u = new URL(requestUrl);
   const active = streams.activeProviders(cfg).slice().sort().join(',');
   const badges = Array.isArray(cfg && cfg.badges) ? cfg.badges.slice().sort().join(',') : 'all';
-  return `${u.origin}/__edge/stream/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
+  return `${u.origin}/__edge/stream-v2/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
 }
 
 function safeDecode(value) {
@@ -262,7 +263,7 @@ async function serveStream(type, id, cfg, request, env, ctx) {
   const decodedId = safeDecode(id);
   if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
   const create = async () => {
-    const result = await core.handleStream(type, decodedId, cfg, workerRuntime(env, ctx));
+    const result = await core.handleStream(type, decodedId, cfg, workerRuntime(env, ctx, new URL(request.url).origin));
     return jsonResponse(result, 200, 0, core.streamCacheControl(result.cacheMaxAge));
   };
   const cacheUrl = canonicalStreamCacheUrl(request.url, type, decodedId, cfg);
@@ -397,7 +398,7 @@ async function handleRequest(request, env, ctx) {
       const diag = await cache.coalesce(diagKey, async () => {
         const cached = cache.get(diagKey);
         if (cached) return cached;
-        const fresh = await streams.diagnose(type, testId, null);
+        const fresh = await streams.diagnose(type, testId, null, { playbackOrigin: origin });
         cache.set(diagKey, fresh, 30);
         return fresh;
       });

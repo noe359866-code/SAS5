@@ -295,3 +295,71 @@ test('/hls: el proxy sirve playlists y segmentos, y rechaza lo que no es media',
     global.fetch = originalFetch;
   }
 });
+
+test('Worker: el enlace de Fanpelis en /stream sirve HLS, vídeo y audio por SpinFlix', async (t) => {
+  const { encodeConfig } = require('../lib/userConfig');
+  const base = 'https://worker.example';
+  const master = 'https://s9.vimeos.net/hls2/fixture/master.m3u8?t=test';
+  const variant = new URL('video.m3u8?t=test', master).href;
+  const audio = new URL('es.m3u8?t=test', master).href;
+  const embed = 'https://vimeos.net/embed-transport-test.html';
+  const played = [];
+  t.mock.method(require('../lib/tvmaze'), 'showLookupByImdb', async () => null);
+  t.mock.method(require('../lib/cinemeta'), 'lookup', async () => ({ name: 'Serie del fixture', releaseInfo: '2009' }));
+  t.mock.method(global, 'fetch', async (value, init) => {
+    const url = new URL(value);
+    assert.equal(init.redirect, 'manual');
+    if (url.hostname === 'fanpelis.to') {
+      if (url.pathname.endsWith('/search')) return Response.json({ data: { posts: [{ _id: 100, title: 'Serie del fixture', type: 'tvshows' }] } });
+      if (url.pathname.endsWith('/episodes')) return Response.json({ data: [
+        { _id: 101, season_number: 1, episode_number: 1 }, { _id: 102, season_number: 1, episode_number: 2 },
+      ] });
+      assert.equal(url.pathname, '/api/rest/player');
+      assert.equal(url.searchParams.get('post_id'), '102');
+      return Response.json({ data: { embeds: [{ lang: 'Latino', url: embed }] } });
+    }
+    if (url.href === embed) return new Response(`<script>file = '${master}'</script>`);
+    assert.equal(url.origin + url.pathname, 'https://spinoff.link/pelis/proxy.php');
+    const media = url.searchParams.get('url');
+    assert.equal(url.searchParams.get('ref'), 'https://s9.vimeos.net/');
+    played.push(media);
+    if (media === master) {
+      const alreadyProxied = `https://spinoff.link/pelis/proxy.php?url=${encodeURIComponent(audio)}&type=key`;
+      return new Response(`#EXTM3U\n#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="es",LANGUAGE="es",URI="${alreadyProxied}"\n#EXT-X-STREAM-INF:RESOLUTION=1280x720,AUDIO="es"\n${variant}\n`);
+    }
+    if (media === variant || media === audio) return new Response(`#EXTM3U\n#EXTINF:1,\n${media === audio ? 'es' : 'video'}.ts?t=test\n`);
+    assert.ok(media.endsWith('.ts?t=test'));
+    assert.equal(init.headers.Range, 'bytes=0-563');
+    const packets = new Uint8Array(564);
+    for (let i = 0; i < packets.length; i += 188) packets[i] = 0x47;
+    return new Response(packets, { status: 206, headers: { 'Content-Type': 'video/mp2t', 'Content-Range': 'bytes 0-563/16000' } });
+  });
+  const send = (raw, init) => worker.fetch(new Request(new URL(raw, base), init), env, {});
+  const path = '/stream/series/tt9006134%3A1%3A2.json';
+  const selection = encodeConfig({ streams: ['fanpelis'] });
+  const body = await (await send(`/${selection}${path}`)).json();
+  assert.equal(body.streams.length, 1);
+  const [stream] = body.streams;
+  assert.match(stream.title, /S01E02.*Latino.*Fanpelis/);
+  assert.equal(stream.behaviorHints.notWebReady, true);
+  assert.equal(stream.behaviorHints.proxyHeaders, undefined);
+  assert.equal(new URL(stream.url).origin, base);
+  assert.equal(new URL(stream.url).searchParams.get('via'), 'spinflix');
+  const playlist = await (await send(stream.url)).text();
+  assert.ok(!playlist.includes('proxy.php'), 'no anidar el proxy de SpinFlix del manifiesto');
+  const videoPath = playlist.split('\n').find((value) => value.startsWith('/hls?'));
+  const audioPath = playlist.match(/URI="([^"]+)"/)[1];
+  for (const mediaPath of [videoPath, audioPath]) {
+    const variant = await (await send(mediaPath)).text();
+    const first = variant.split('\n').find((value) => value.startsWith('/hls?'));
+    const segment = await send(first, { headers: { Range: 'bytes=0-563' } });
+    assert.equal(segment.status, 206);
+    assert.equal(segment.headers.get('Content-Range'), 'bytes 0-563/16000');
+    assert.equal(segment.headers.get('Access-Control-Allow-Origin'), '*');
+    assert.equal(new Uint8Array(await segment.arrayBuffer())[0], 0x47);
+  }
+  assert.equal(played.length, 6);
+  const disabled = await (await send(`/${encodeConfig({ streams: [] })}${path}`)).json();
+  assert.deepEqual(disabled.streams, []);
+  assert.equal(played.length, 6);
+});

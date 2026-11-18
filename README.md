@@ -19,7 +19,9 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 
 Quita `STREAM_PROVIDERS` de tu despliegue, o fija `STREAM_PROVIDERS=all`, para usar las ocho. Una lista como `fanpelis,spinflix` limita las fuentes; `off` apaga todas. `FANPELIS=off` y `PLAYLATIN=off` siguen admitidos. Para una web pregenerada con `npm run build:web`, usa las mismas variables que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
 
-Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. No se resuelven challenges ni se ejecuta JavaScript de terceros. Los HLS de Vimeos se comprueban con un plazo breve; si el CDN no permite comprobarlos desde el servidor, no se anuncia una resolución no verificada. Los enlaces con vencimiento conocido se retiran con margen y la caché HTTP de streams no sirve respuestas caducadas.
+Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. No se resuelven challenges ni se ejecuta JavaScript de terceros. Los enlaces con vencimiento conocido se retiran con margen y la caché HTTP de streams no sirve respuestas caducadas.
+
+En Cloudflare, Fanpelis y SpinFlix usan la ruta de reproducción existente de SpinFlix para sus HLS de Vimeos cuando esa ruta devuelve un manifiesto válido. El Worker conserva esa ruta hasta los segmentos de vídeo y audio; no cambia la fuente seleccionada. Si no puede validarla, conserva el comportamiento del CDN directo. Cada petición a `/hls` cuenta como una invocación del Worker y su disponibilidad depende del proveedor.
 
 ## Configuración local
 
@@ -55,7 +57,8 @@ npm run deploy
 
 - Comprueba `/stream/movie/tt0816692.json` (Interestelar) para distinguir una respuesta vacía de un problema de reproducción. Si usas una URL personal, prueba la ruta con el mismo prefijo de configuración. Una selección vacía o con fuentes ya deshabilitadas no se sustituye automáticamente; abre `/configure` y vuelve a instalar con al menos una fuente activa.
 - Para una serie, el ID de un episodio tiene el formato `id:temporada:episodio`, por ejemplo `/stream/series/tt0903747:1:1.json`. El ID de la serie sin episodio no es un ID reproducible.
-- `/internal/streams-test.json?type=movie&id=tt0816692` muestra el diagnóstico de las fuentes de la configuración por defecto. Los catálogos contienen fichas aunque las fuentes no tengan enlaces directos válidos para todos los títulos. Una respuesta con enlaces tampoco garantiza que el reproductor pueda abrirlos.
+- `/internal/streams-test.json?type=movie&id=tt0133093` muestra el diagnóstico de las fuentes de la configuración por defecto. `totalStreams` cuenta candidatos, no reproducciones: `verifiedManifests` y `mediaChecks` distinguen los manifiestos comprobados de los rechazos HTTP del CDN y los medios sin comprobar.
+- Para distinguir un fallo del API de un 403 de reproducción, consulta la [sonda del Worker publicado](docs/worker-streams.md). El catálogo y el manifest pueden seguir funcionando aunque el CDN no entregue el vídeo.
 
 ## Desarrollo y pruebas
 

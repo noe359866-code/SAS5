@@ -46,7 +46,7 @@ const PLAYER = {
     embeds: [{ lang: 'Latino', quality: 'Full HD', url: EMBED }],
     downloads: [
       { url: 'https://mega.nz/file/abc', server: 'Mega', lang: 'Latino/Inglés', quality: 'Dual 1080p' },
-      { url: 'magnet:?xt=urn:btih:abc', server: 'Torrent', lang: 'Latino/Inglés', quality: 'Dual 1080p' },
+      { url: 'https://mega.nz/file/sample', server: 'Download', lang: 'Latino/Inglés', quality: 'Dual 1080p' },
     ],
   },
 };
@@ -128,13 +128,13 @@ test('fanpelis: el episodio que no existe devuelve cero hits sin romper', async 
   assert.deepEqual(out.hits, []);
 });
 
-test('fanpelis: descargas (mega, magnet) y embeds desconocidos se ignoran', async () => {
+test('fanpelis: enlaces de descarga y embeds desconocidos se ignoran', async () => {
   const calls = mockApi([
     ['/api/rest/search', json(SEARCH_MOVIE)],
     ['/api/rest/player', json({ data: { embeds: [
       { lang: 'Latino', quality: 'HD', url: 'https://ads.example/tracker.js' },
       { lang: 'Latino', quality: 'HD', url: 'https://mega.nz/file/abc' },
-    ], downloads: [{ url: 'magnet:?xt=urn:btih:abc' }] } })],
+    ], downloads: [{ url: 'https://mega.nz/file/sample' }] } })],
   ]);
   const out = await fanpelis.searchFanpelis('Matrix', MOVIE, 'Matrix', 1000);
   assert.deepEqual(out.hits, []);
@@ -192,6 +192,9 @@ test('fanpelis: utilidades de selección e idioma', () => {
   assert.equal(fanpelis.audioLabelOf('Latino'), 'Latino');
   assert.equal(fanpelis.audioLabelOf('Castellano'), 'Castellano');
   assert.equal(fanpelis.audioLabelOf('Subtitulado'), 'Subtitulado');
+  assert.equal(fanpelis.audioLabelOf('Latino/Inglés'), 'Latino + Inglés');
+  assert.equal(fanpelis.audioLabelOf('English'), 'Inglés');
+  assert.equal(fanpelis.audioLabelOf(''), '', 'no se inventa audio Latino si falta la etiqueta');
   assert.equal(fanpelis.pickEpisode(EPISODES.data, 1, 2)._id, 26787);
   assert.equal(fanpelis.pickEpisode(EPISODES.data, 9, 1), null);
 });

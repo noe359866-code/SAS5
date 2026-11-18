@@ -25,10 +25,6 @@ const userConfig = require('../lib/userConfig');
 const { PLATFORM_KEYS, STUDIO_KEYS, PLATFORMS, STUDIOS } = require('../lib/catalogs');
 const { PROVIDER_KEYS: STREAM_KEYS, activeProviders, diagnose: diagnoseStreams } = require('../lib/streams');
 const cache = require('../lib/cache');
-const debridCredentials = require('../lib/debridCredentials');
-const debridProviders = require('../lib/debridProviders');
-const debridConnect = require('../lib/debridConnect');
-const realDebridOAuth = require('../lib/realDebridOAuth');
 const rateLimit = require('../lib/rateLimit');
 
 const app = express();
@@ -108,18 +104,9 @@ app.get('/healthz', (req, res) => {
       tmdb: config.tmdbConfigured,
       tvmaze: true,
       omdb: config.omdbConfigured,
-      // knaben, torlock, blackholebay, nyaa, yts, eztv, rarbg, torrentindexer, torrentioes: true si está activo
       ...Object.fromEntries(STREAM_KEYS.map((key) => [key, activeProviders(null).includes(key)])),
     },
     streamProviders: activeProviders(null),
-    debrid: { providers: debridProviders.PROVIDERS.map((provider) => provider.key) },
-    realDebrid: {
-      supported: true,
-      mode: 'oauth-personal-library',
-      oauthConfigured: realDebridOAuth.isConfigured(),
-      credentialStorageReady: debridCredentials.isConfigured(),
-      credentialStorage: debridCredentials.storageKind(),
-    },
     // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
     donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
     cache: cache.stats(),
@@ -131,9 +118,8 @@ app.get('/healthz', (req, res) => {
 // 4b. Página de configuración + branding (logos vía TMDB)
 app.get('/configure', async (req, res) => {
   const { baseUrl, host } = requestBase(req);
-  const hasOAuthParams = Boolean(req.query.debrid_credential || req.query.debrid_error);
   const trending = await loadTrending();
-  res.setHeader('Cache-Control', hasOAuthParams ? 'no-store' : buildCacheControl(1800, 86400));
+  res.setHeader('Cache-Control', buildCacheControl(1800, 86400));
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.send(renderConfigure({ origin: baseUrl, host, trendingMovies: trending.movies, trendingSeries: trending.series }));
 });
@@ -174,86 +160,6 @@ app.get('/internal/cache.json', (req, res) => {
   res.json(cache.stats());
 });
 
-function redirectConfigure(req, res, query = {}) {
-  const destination = new URL('/configure', requestBase(req).baseUrl);
-  for (const [key, value] of Object.entries(query)) destination.searchParams.set(key, String(value));
-  res.status(302).setHeader('Location', destination.toString());
-  res.end();
-}
-
-app.get('/internal/debrid/real-debrid/authorize', (req, res) => {
-  res.setHeader('Cache-Control', 'no-store');
-  res.setHeader('Referrer-Policy', 'no-referrer');
-  const { baseUrl, proto } = requestBase(req);
-  if (!debridCredentials.isConfigured()) {
-    return redirectConfigure(req, res, { debrid_error: 'storage_not_configured' });
-  }
-  try {
-    const authorization = realDebridOAuth.makeAuthorization({ origin: baseUrl });
-    res.setHeader('Set-Cookie', realDebridOAuth.stateCookie(authorization.state, proto === 'https'));
-    res.redirect(302, authorization.authorizationUrl);
-  } catch (err) {
-    redirectConfigure(req, res, {
-      debrid_error: err && err.code === 'realdebrid_oauth_not_configured' ? 'oauth_not_configured' : 'oauth_failed',
-    });
-  }
-});
-
-app.get('/internal/debrid/real-debrid/callback', async (req, res) => {
-  res.setHeader('Cache-Control', 'no-store');
-  res.setHeader('Referrer-Policy', 'no-referrer');
-  const { proto } = requestBase(req);
-  const secure = proto === 'https';
-  res.setHeader('Set-Cookie', realDebridOAuth.clearStateCookie(secure));
-  const state = typeof req.query.state === 'string' ? req.query.state : '';
-  if (!realDebridOAuth.verifyState(state, req.headers.cookie)) {
-    return redirectConfigure(req, res, { debrid_error: 'oauth_failed' });
-  }
-  if (typeof req.query.error === 'string') {
-    return redirectConfigure(req, res, { debrid_error: 'oauth_denied' });
-  }
-  try {
-    const result = await realDebridOAuth.completeAuthorization(req.query.code);
-    return redirectConfigure(req, res, { debrid_credential: result.credentialId });
-  } catch (_) {
-    console.error('[Debrid] No se pudo completar OAuth de Real-Debrid.');
-    return redirectConfigure(req, res, { debrid_error: 'oauth_failed' });
-  }
-});
-
-app.post('/internal/debrid/connect', async (req, res) => {
-  res.setHeader('Cache-Control', 'no-store');
-  if (!sameOrigin(req)) {
-    return res.status(403).json({
-      error: 'origin_not_allowed',
-      message: 'La petición no se ve venir de este dominio. Abre /configure de este servidor en el navegador y vuelve a intentarlo.',
-    });
-  }
-  if (!rateLimit.allow(`debrid-connect:${req.ip || 'unknown'}`, { limit: 8, windowMs: 60_000 })) {
-    return res.status(429).json({ error: 'rate_limited', message: 'Espera un minuto antes de volver a conectar.' });
-  }
-  // Misma validación, mismo cifrado y mismos mensajes que el Worker de Cloudflare.
-  const { status, payload } = await debridConnect.connect(req.body || {}, {
-    storageMessage: 'El servidor debe configurar almacenamiento privado y DEBRID_ENCRYPTION_KEY.',
-  });
-  return res.status(status).json(payload);
-});
-
-app.delete('/internal/debrid/connect', async (req, res) => {
-  res.setHeader('Cache-Control', 'no-store');
-  if (!sameOrigin(req)) return res.status(403).json({ error: 'origin_not_allowed' });
-  try {
-    await debridCredentials.disconnect(req.body && req.body.credentialId);
-    res.json({ ok: true });
-  } catch (err) {
-    if (err && (err.code === 'debrid_storage_not_configured' || err.code === 'debrid_encryption_not_configured')) {
-      return res.status(503).json({ error: 'debrid_not_configured' });
-    }
-    console.error('[Debrid] No se pudo desconectar la cuenta.');
-    return res.status(503).json({ error: 'debrid_unavailable' });
-  }
-});
-
 // 4c. Manifest personal con config de usuario (/<base64url>/manifest.json)
 function decodeUserConfig(req, res) {
   const cfg = userConfig.decodeConfig(req.params.cfg, PLATFORM_KEYS, STUDIO_KEYS, STREAM_KEYS);
@@ -280,7 +186,7 @@ app.get('/:cfg/manifest.json', (req, res) => {
   const cfg = decodeUserConfig(req, res);
   if (!cfg) return;
   const { baseUrl } = requestBase(req);
-  res.setHeader('Cache-Control', cfg.debridId ? 'no-store' : buildCacheControl(300, 3600));
+  res.setHeader('Cache-Control', buildCacheControl(300, 3600));
   res.json(core.buildManifest(`${baseUrl}/assets/logo.png`, cfg));
 });
 
@@ -310,7 +216,7 @@ app.get('/:cfg/stream/:type/:id.json', async (req, res) => {
   let id;
   try { id = decodeURIComponent(req.params.id); } catch (_) { return res.status(400).json({ error: 'invalid_id' }); }
   const result = await core.handleStream(req.params.type, id, cfg);
-  res.setHeader('Cache-Control', cfg.debridId ? 'no-store' : buildCacheControl(result.cacheMaxAge));
+  res.setHeader('Cache-Control', buildCacheControl(result.cacheMaxAge));
   res.json(result);
 });
 

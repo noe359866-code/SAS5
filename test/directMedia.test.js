@@ -10,8 +10,6 @@ test('filtra iframes y rutas publicitarias, conserva MP4 y HLS', () => {
   assert.equal(isDirectMedia('https://example.org/ads/video.mp4','fanpelis'), false);
   assert.equal(isDirectMedia('https://cdn.example/movie/Ad-Astra/master.m3u8?x=ads','fanpelis'), true);
   assert.equal(isDirectMedia('https://cdn.example/movie.mp4','playlatin'), true);
-  assert.equal(isDirectMedia('https://vixsrc.to/playlist/123?token=x','vixsrc'), true);
-  assert.equal(isDirectMedia('https://vixsrc.to/playlist/123?token=x','other'), false);
   const oldBase = config.addonBaseUrl; config.addonBaseUrl = 'https://addon.example';
   assert.equal(isDirectMedia('https://addon.example/hls?u=' + encodeURIComponent('https://cdn.example/master.m3u8'),'fanpelis'),true);
   assert.equal(isDirectMedia('https://evil.example/hls?u=' + encodeURIComponent('https://cdn.example/master.m3u8'),'fanpelis'),false);
@@ -21,18 +19,19 @@ test('filtra iframes y rutas publicitarias, conserva MP4 y HLS', () => {
   config.addonBaseUrl = oldBase;
 });
 test('el pipeline no presenta embeds como vídeos y lo informa al diagnóstico', async () => {
-  const old = streams.SEARCHERS.videoapi;
+  const old = streams.SEARCHERS.fanpelis;
   try {
-    streams.SEARCHERS.videoapi = async () => ({hits: [
-      {provider:'videoapi', title:'Movie', url:'https://vimeos.net/embed-123.html', relevant:true, seeders:0},
-      {provider:'videoapi', title:'Movie', url:'https://vimeos.net/embed-456.html', infoHash:'a'.repeat(40), relevant:true, seeders:0},
-      {provider:'videoapi', title:'Movie', url:'https://cdn.example/movie.mp4', relevant:true, seeders:0},
+    streams.SEARCHERS.fanpelis = async () => ({hits: [
+      {provider:'fanpelis', title:'Movie', url:'https://vimeos.net/embed-123.html', relevant:true},
+      {provider:'fanpelis', title:'Movie', url:'https://vimeos.net/embed-456.html', relevant:true},
+      {provider:'fanpelis', title:'Movie', audioLabel:'Latino', url:'https://cdn.example/movie.mp4', relevant:true},
     ]});
     const report = {};
-    const hits = await streams.runProviders(['videoapi'],'Movie',{title:'Movie',mediaType:'movie'},'Movie',report,1000,{ignorePause:true});
+    const hits = await streams.runProviders(['fanpelis'],'Movie',{title:'Movie',mediaType:'movie'},'Movie',report,1000,{ignorePause:true});
     assert.deepEqual(hits.map(h=>h.url), ['https://cdn.example/movie.mp4']);
-    assert.equal(report.videoapi.rejectedNonMedia,2);
-  } finally { streams.SEARCHERS.videoapi = old; }
+    assert.equal(report.fanpelis.raw, 3);
+    assert.equal(report.fanpelis.relevant, 1);
+  } finally { streams.SEARCHERS.fanpelis = old; }
 });
 test('si el embed mezcla un anuncio identificable y un master, no se escoge el anuncio', () => {
   const { extractFromEmbedHtml } = require('../lib/spinflix');

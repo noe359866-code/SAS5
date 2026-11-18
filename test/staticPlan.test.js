@@ -25,9 +25,9 @@ const { PROVIDER_KEYS } = require('../lib/streams');
 
 const cfgFor = (segment) => userConfig.decodeConfig(segment, PLATFORM_KEYS, STUDIO_KEYS, PROVIDER_KEYS);
 
-test('configKey ignora lo que no cambia un catálogo (streams, filtros, orden)', () => {
+test('configKey ignora la selección de fuentes directas', () => {
   const base = { lang: 'es', region: 'NI', platforms: ['netflix'], studios: ['marvel'], base: ['tendencias'] };
-  const withStreams = { ...base, streams: ['knaben'], hide: ['cam'], sort: 'size', maxSize: 10 };
+  const withStreams = { ...base, streams: ['retired-indexer'], hide: ['cam'], sort: 'size', maxSize: 10 };
   assert.equal(configKey(base), configKey(withStreams));
   // Lo que sí cambia el contenido sí cuenta.
   assert.notEqual(configKey(base), configKey({ ...base, region: 'MX' }));
@@ -42,18 +42,11 @@ test('configKey ignora lo que no cambia un catálogo (streams, filtros, orden)',
   );
 });
 
-test('nunca se planifica una config con debrid (segmento por usuario, streams privados)', () => {
-  assert.equal(isPlannableConfig({ debridId: 'a'.repeat(32) }), false);
-  assert.equal(isPlannableConfig({ debridId: null }), true);
-  assert.equal(isPlannableConfig(null), false);
-
-  const segment = userConfig.encodeConfig({ lang: 'es', region: 'NI', debridId: 'a'.repeat(32) });
-  const plan = buildPlan({
-    configs: [{ segment, cfg: cfgFor(segment), popularity: 100 }],
-    defs: [],
-    budget: 100,
-  });
-  assert.deepEqual(plan.files, []);
+test('configs válidas con fuentes directas sí se incluyen en el plan', () => {
+  const cfg = { lang: 'es-MX', region: 'NI', streams: ['fanpelis'] };
+  assert.equal(isPlannableConfig(cfg), true);
+  const segment = userConfig.encodeConfig({ lang: 'es', region: 'NI', streams: ['fanpelis'] });
+  assert.equal(isPlannableConfig(userConfig.decodeConfig(segment, [], [], ['fanpelis'])), true);
 });
 
 test('pageSuffix: la página 1 es el archivo del catálogo', () => {

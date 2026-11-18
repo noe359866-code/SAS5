@@ -400,8 +400,7 @@ export async function prerenderConfigs(options = {}) {
     const cfg = entry.cfg || userConfig.decodeConfig(
       entry.segment, catalogsLib.PLATFORM_KEYS, catalogsLib.STUDIO_KEYS, require(libPath('streams.js')).PROVIDER_KEYS
     );
-    // Con debrid el segmento es por usuario y sus streams son privados.
-    if (!cfg || cfg.debridId) continue;
+    if (!cfg) continue;
 
     // Si el planificador decidió qué archivos exactos tocan (`files`), se
     // respeta al pie de la letra: el presupuesto de 20.000 no es negociable.

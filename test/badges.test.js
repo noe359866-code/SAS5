@@ -87,13 +87,11 @@ test('config: los badges viajan en la URL solo si se recortan', () => {
 test('streams: la línea de badges entra en el título del stream', () => {
   const hit = {
     title: REMUX,
+    url: 'https://cdn.example/movie.m3u8',
+    audioLabel: 'Latino',
     titles: ['Dune: Part Two'],
     quality: '2160p',
     tags: ['remux', '4k', 'dv', 'hevc'],
-    seeders: 42,
-    peers: 7,
-    size: 53 * 1024 ** 3,
-    infoHash: 'a'.repeat(40),
     sources: [],
   };
   const conBadges = toStream(hit, { badges: null });

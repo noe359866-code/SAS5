@@ -239,17 +239,17 @@ test('prerenderConfigs escribe el manifest y solo los catálogos que pidió el p
   });
 });
 
-test('prerenderConfigs ignora configs con debrid (segmento por usuario)', async () => {
+test('prerenderConfigs incluye configuraciones válidas de usuario', async () => {
   const { prerenderConfigs } = await load();
   await withTmpDir(async (outDir) => {
     const result = await prerenderConfigs({
       outDir,
       log: () => {},
-      configs: [{ segment: 'abc123def456', cfg: { lang: 'es', region: 'NI', debridId: 'c'.repeat(32) } }],
+      configs: [{ segment: 'abc123def456', cfg: { lang: 'es', region: 'NI', streams: ['fanpelis'] } }],
       resolve: async () => ({ metas: [{ id: 'tt1' }] }),
     });
-    assert.deepEqual(result.written, []);
-    assert.deepEqual(result.manifests, []);
+    assert.ok(result.written.length > 0);
+    assert.deepEqual(result.manifests, ['/abc123def456/manifest.json']);
   });
 });
 

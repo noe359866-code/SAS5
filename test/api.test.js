@@ -11,7 +11,7 @@ let origin;
 let originalFetch;
 let originalEnv = {};
 const envNames = [
-  'NODE_ENV', 'VERCEL',
+  'NODE_ENV', 'VERCEL', 'STREAMFLIX_NODE_PROVIDERS',
 ];
 
 before(async () => {
@@ -19,6 +19,7 @@ before(async () => {
   for (const name of envNames) originalEnv[name] = process.env[name];
   process.env.NODE_ENV = 'test';
   delete process.env.VERCEL;
+  process.env.STREAMFLIX_NODE_PROVIDERS = 'pelisflixhd,seriesflix'; // opción retirada
   app = require('../api/index');
   server = app.listen(0, '127.0.0.1');
   await new Promise((resolve, reject) => {
@@ -71,6 +72,13 @@ test('API Express: healthz solo anuncia las fuentes vigentes', async (t) => {
   const body = response.json();
   assert.deepEqual(body.streamProviders, ['spinflix']);
   assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: false, spinflix: true, gnulahd: false });
+});
+
+test('API Express: la antigua opción de StreamFlix ya no instala fichas como streams', async (t) => {
+  const fetchMock = t.mock.method(global, 'fetch', async () => { throw new Error('no debe consultar la red'); });
+  assert.equal((await request('/streamflix/manifest.json')).status, 404);
+  assert.equal((await request('/streamflix/stream/movie/tt0133093.json')).status, 404);
+  assert.equal(fetchMock.mock.callCount(), 0);
 });
 
 test('API Express entrega extras de paginación para catálogos personales', async () => {

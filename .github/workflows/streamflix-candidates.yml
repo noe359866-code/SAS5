@@ -5,9 +5,7 @@ on:
     branches: ['arena/**']
     paths:
       - '.github/workflows/streamflix-candidates.yml'
-      - 'scripts/streamflix-*.js'
-      - 'node/streamflix*.js'
-      - 'api/index.js'
+      - 'scripts/streamflix-candidates.js'
       - 'test/streamflix.test.js'
 permissions:
   contents: read
@@ -24,4 +22,3 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: node --test test/streamflix.test.js
       - run: node scripts/streamflix-candidates.js
-      - run: node scripts/streamflix-live.js

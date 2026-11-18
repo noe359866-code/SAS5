@@ -14,6 +14,14 @@ La API también devolvió los dos candidatos de Matrix y Breaking Bad con sus ID
 
 El `403` se observó desde el Worker. No se comprobó la descarga de segmentos, el audio ni la reproducción desde una instalación doméstica. Los HLS devueltos llevaban `notWebReady` y `proxyHeaders`, conforme a la [especificación del SDK de Stremio](https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/stream.md). Que aparezca un enlace no garantiza que el cliente web pueda abrirlo sin un servidor de reproducción; usar el cliente de escritorio tampoco garantiza acceso al CDN.
 
+## Reparación de la ruta de reproducción
+
+Para Fanpelis y SpinFlix, el Worker intenta la ruta de reproducción que ya ofrece SpinFlix, sin cambiar de fuente ni reemplazar el vídeo. El proxy de SpinFlix devuelve manifiestos con una mezcla de URL proxificadas y directas. `/hls` las normaliza y usa el mismo transporte para la variante, el audio, las claves y los segmentos. Si el manifiesto no es válido o contiene un destino fuera del CDN permitido, no se publica como validado.
+
+- En la [comparación del transporte](https://github.com/noe359866-code/SAS5/actions/runs/44297383808), el proxy de SpinFlix entregó bytes MPEG-TS del primer segmento de **Mufasa: El rey león** (`tt13186482`) y de los primeros segmentos de vídeo y audio español de **Breaking Bad T1E2** (`tt0903747:1:2`). La comparación se ejecutó desde GitHub, no desde Cloudflare.
+- En la [prueba de la rama](https://github.com/noe359866-code/SAS5/actions/runs/44298419206), `workerd` siguió la URL que devuelve `/stream` y entregó HTTP 200 con esos bytes para los dos controles. La película trae audio integrado; el episodio publica una pista española separada, que también se pidió. Se comprobó el acceso a los primeros segmentos, no que Stremio reprodujera los títulos completos.
+- Tras desplegar, el job `published-playback` repite esa misma comprobación contra `ramdonlatam.noe359866.workers.dev`. Con Node 22, también se puede ejecutar `node scripts/worker-streams-live.js --playback`. A diferencia de la sonda de listados, falla si cualquiera de los dos controles no entrega medio por la ruta del Worker.
+
 ## Cómo volver a probarlo
 
 - `/stream/movie/tt0133093.json` y `/stream/series/tt0903747:1:1.json` comprueban el listado. Prueba la misma ruta con el prefijo de configuración de tu instalación si tiene uno; la configuración por defecto y la selección guardada pueden usar fuentes distintas.

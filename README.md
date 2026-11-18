@@ -19,7 +19,9 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 
 Quita `STREAM_PROVIDERS` de tu despliegue, o fija `STREAM_PROVIDERS=all`, para usar las ocho. Una lista como `fanpelis,spinflix` limita las fuentes; `off` apaga todas. `FANPELIS=off` y `PLAYLATIN=off` siguen admitidos. Para una web pregenerada con `npm run build:web`, usa las mismas variables que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
 
-Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. No se resuelven challenges ni se ejecuta JavaScript de terceros. Los HLS de Vimeos se comprueban con un plazo breve; si el CDN no permite comprobarlos desde el servidor, no se anuncia una resolución no verificada. Los enlaces con vencimiento conocido se retiran con margen y la caché HTTP de streams no sirve respuestas caducadas.
+Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. No se resuelven challenges ni se ejecuta JavaScript de terceros. Los enlaces con vencimiento conocido se retiran con margen y la caché HTTP de streams no sirve respuestas caducadas.
+
+En Cloudflare, Fanpelis y SpinFlix usan la ruta de reproducción existente de SpinFlix para sus HLS de Vimeos cuando esa ruta devuelve un manifiesto válido. El Worker conserva esa ruta hasta los segmentos de vídeo y audio; no cambia la fuente seleccionada. Si no puede validarla, conserva el comportamiento del CDN directo. Cada petición a `/hls` cuenta como una invocación del Worker y su disponibilidad depende del proveedor.
 
 ## Configuración local
 

@@ -2,7 +2,7 @@ name: Streams del Worker publicado
 on:
   workflow_dispatch:
   push:
-    branches: ['arena/**']
+    branches: ['arena/**', 'main']
     paths:
       - '.github/workflows/worker-streams-live.yml'
       - 'scripts/worker-streams-live.js'
@@ -45,3 +45,21 @@ jobs:
           done
           if ! test -s "$RUNNER_TEMP/playback-ready.json"; then cat "$RUNNER_TEMP/playback-worker.log"; exit 1; fi
           node scripts/worker-streams-live.js --playback http://127.0.0.1:8799
+  published-playback:
+    # Workers Builds despliega main por separado; no confundir el workerd
+    # del runner con el acceso a los segmentos desde Cloudflare.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: HLS y primeros segmentos desde el Worker publicado
+        run: |
+          for attempt in {1..8}; do
+            if node scripts/worker-streams-live.js --playback; then exit 0; fi
+            if (( attempt < 8 )); then sleep 20; fi
+          done
+          exit 1

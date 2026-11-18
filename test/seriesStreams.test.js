@@ -11,8 +11,11 @@ const request = async (path, env = {}) => {
 
 test('una ficha TMDB personal permite pedir el stream de su episodio a una fuente por IMDb', async (t) => {
   const requests = [];
-  const providerPath = '/custom/serial/tt9010010/1/1';
-  t.mock.method(global, 'fetch', async (input, opts) => {
+  const provider = 'https://spinflix.example';
+  const providerPath = '/serie/serie-de-prueba/1/1';
+  const embed = 'https://vimeos.net/embed-pilot.html';
+  const master = 'https://s9.vimeos.net/hls2/fixture/pilot.m3u8';
+  t.mock.method(global, 'fetch', async (input) => {
     const url = new URL(input);
     requests.push(url);
     if (url.hostname === 'api.themoviedb.org' && url.pathname === '/3/tv/901001') {
@@ -30,19 +33,24 @@ test('una ficha TMDB personal permite pedir el stream de su episodio a una fuent
         { season: 0, episode: 2, name: 'Especial' },
       ] } });
     }
-    if (url.hostname === 'playlatinsrc.co' && url.pathname === providerPath) {
-      return new Response('<div class="player-shell" data-id="tt9010010" data-type="series" data-season="1" data-episode="1" data-resolve-token="mock"></div>');
+    if (url.origin === provider) {
+      if (url.pathname === '/search') return json({ results: [
+        { slug: 'serie-de-prueba', type: 'tvshows', title: 'Serie de prueba', year: '2024' },
+      ] });
+      if (url.pathname === '/serie/serie-de-prueba') return json({ imdb_id: 'tt9010010' });
+      if (url.pathname === providerPath) return json({
+        season: 1, episode: 1, embeds: { video: [{ language: 'Latino', link: embed }] },
+      });
+      if (url.pathname === '/streamurl' && url.searchParams.get('url') === embed) return json({ videos: { hls: [master] } });
     }
-    if (url.hostname === 'playlatinsrc.co' && url.pathname === '/api/resolve' && opts.method === 'POST') {
-      const body = JSON.parse(opts.body);
-      if (body.id === 'tt9010010' && body.season === '1' && body.episode === '1') {
-        return json({ ok: true, sources: [{ version: 'latino', url: 'https://media.example/pilot.mp4' }] });
-      }
+    if (url.href === master) {
+      return new Response('#EXTM3U\n#EXTINF:1,\npilot.ts\n');
     }
     throw new Error(`Petición inesperada: ${url.hostname}${url.pathname}`);
   });
-  const env = { TMDB_API_KEY: 'mock', STREAM_PROVIDERS: 'playlatin' };
-  const prefix = '/' + Buffer.from(JSON.stringify({ region: 'MX', streams: ['playlatin'] })).toString('base64url');
+  const env = { TMDB_API_KEY: 'mock', SPINFLIX_URL: provider };
+  // La instalación es anterior al retiro y tenía SpinFlix y PlayLatinSRC.
+  const prefix = '/' + Buffer.from(JSON.stringify({ region: 'MX', streams: ['playlatin', 'spinflix'] })).toString('base64url');
   const metaResponse = await request(`${prefix}/meta/series/tmdb:tv:901001.json`, env);
   assert.equal(metaResponse.status, 200);
   const { meta } = await metaResponse.json();
@@ -55,8 +63,14 @@ test('una ficha TMDB personal permite pedir el stream de su episodio a una fuent
   const streamResponse = await request(`${prefix}/stream/series/${episodeId}.json`, env);
   assert.equal(streamResponse.status, 200);
   const { streams } = await streamResponse.json();
-  assert.deepEqual(streams.map((stream) => stream.url), ['https://media.example/pilot.mp4']);
-  assert.ok(requests.some((url) => url.pathname === providerPath));
+  assert.deepEqual(streams.map((stream) => stream.url), [master]);
+  assert.match(streams[0].title, /S01E01.*Latino.*SpinFlix/);
+  assert.deepEqual(requests.filter((url) => url.origin === provider).map((url) => url.pathname), [
+    '/search', '/serie/serie-de-prueba', providerPath, '/streamurl',
+  ]);
+  assert.deepEqual([...new Set(requests.map((url) => url.hostname))].sort(), [
+    'api.themoviedb.org', 's9.vimeos.net', 'spinflix.example', 'v3-cinemeta.strem.io',
+  ]);
 });
 
 test('sin IMDb usa los episodios de TMDB y no cachea una ficha sin episodios por un fallo transitorio', async (t) => {

@@ -1,4 +1,6 @@
-# FlixLatam y Cuevana 3: verificación de los adaptadores
+# FlixLatam y Cuevana 3: verificación histórica
+
+Estos adaptadores y sus sondas ya no forman parte del addon. Consulta el [README](../README.md#fuentes-de-reproducción) para las fuentes vigentes.
 
 Se consultó cada fuente por separado, sin usar los resultados de otra. La identificación de la ficha o del episodio es distinta de encontrar un medio directo, comprobar su respuesta HTTP y reproducirlo en Stremio.
 
@@ -24,13 +26,4 @@ El HTML inicial sirve una aplicación dinámica sin los enlaces de búsqueda. El
 
 [Prueba en GitHub Actions](https://github.com/noe359866-code/SAS5/actions/runs/44235806384): **0 streams aceptados en los seis controles**. No se verificó la reproducción ni el audio en Stremio. El runner no es el Worker de producción y este workflow no despliega.
 
-## Repetir la prueba
-
-Ejecutar **FlixLatam y Cuevana 3 en vivo** (`.github/workflows/flixlatam-cuevana.yml`) o usar Node 22 con las dependencias instaladas:
-
-```sh
-node scripts/flixlatam-cuevana-live.js flixlatam
-node scripts/flixlatam-cuevana-live.js cuevana3
-```
-
-Las regresiones locales usan respuestas simuladas. La sonda en vivo es informativa: un check verde significa que pudo emitir un informe, no que haya vídeo disponible. Si hay HLS de un CDN conocido, también solicita un rango de un segmento. No ejecuta desafíos ni registra URLs firmadas.
+Las regresiones locales usaban respuestas simuladas. La sonda en vivo era informativa: un check verde significaba que pudo emitir un informe, no que hubiera vídeo disponible. Si había HLS de un CDN conocido, también solicitaba un rango de un segmento. No ejecutaba desafíos ni registraba URLs firmadas.

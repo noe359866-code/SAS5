@@ -62,7 +62,7 @@ test('GnulaHD: busca solo la ficha, el capítulo publicado y su medio etiquetado
   ]);
   assert.deepEqual(await searchGnulaHD('', { ...show, season: null }), { skipped: 'episode-required' });
   const hits = await searchGnulaHD('', show);
-  assert.equal(hits[0].referer, `${BASE}/mi-serie-2x03/`);
+  assert.equal(hits[0].url, BASE + media);
 });
 
 test('GnulaHD: no crea una URL de episodio que no aparece en la serie', async (t) => {

@@ -14,7 +14,7 @@ test('audio: solo marca Latino explícito y reconoce el inglés para rechazarlo'
   assert.deepEqual(choice.hitLanguages({ url: 'https://x', audioLabel: 'Español latino' }), ['lat']);
   assert.deepEqual(choice.hitLanguages({ url: 'https://example.org/a', provider: 'unregistered-provider' }), ['unknown']);
   assert.deepEqual(choice.hitLanguages({ url: 'https://example.org/a', provider: 'fanpelis' }), ['unknown']);
-  assert.deepEqual(choice.hitLanguages({ url: 'https://example.org/a', provider: 'playlatin' }), ['unknown']);
+  assert.deepEqual(choice.hitLanguages({ url: 'https://example.org/a', provider: 'spinflix' }), ['unknown']);
 });
 
 test('filtro obligatorio: admite castellano y bloquea Inglés, dual y desconocido incluso sin config', () => {
@@ -22,7 +22,7 @@ test('filtro obligatorio: admite castellano y bloquea Inglés, dual y desconocid
   const dual = { title: 'Movie 1080p Latino English', titles: ['Movie'] };
   const english = { title: 'Movie 1080p English', titles: ['Movie'] };
   const unknown = { title: 'Movie 1080p', titles: ['Movie'] };
-  const directLatino = { provider: 'playlatin', url: 'https://cdn.example/movie.m3u8', audioLabel: 'Latino' };
+  const directLatino = { provider: 'spinflix', url: 'https://cdn.example/movie.m3u8', audioLabel: 'Latino' };
   const unverifiableDirect = { provider: 'unregistered-provider', url: 'https://cdn.example/movie.m3u8' };
   assert.equal(choice.hitMatches(latino, null), true);
   assert.equal(choice.hitMatches(dual, null), false);
@@ -37,56 +37,60 @@ test('filtro obligatorio: admite castellano y bloquea Inglés, dual y desconocid
   assert.equal(choice.hitMatches(latino, { streamTypes: ['direct'] }), true);
 });
 
-test('configuración: fuentes directas activas y esquema sin selectores de tipo/idioma', () => {
+test('configuración: solo las tres fuentes directas y sin selectores de tipo/idioma', () => {
   const cfg = user.normalizeConfig({ lang: 'en', streams: ['fanpelis', 'retired-indexer'], streamLanguages: ['en'] }, [], [], streams.PROVIDER_KEYS);
   assert.equal(cfg.lang, 'es-MX');
   assert.deepEqual(cfg.streams, ['fanpelis']);
   assert.equal('streamTypes' in cfg, false);
   assert.equal('streamLanguages' in cfg, false);
-  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'fuegocine', 'animeonlineninja', 'cuevana3', 'gnulahd']);
-  assert.equal(choice.providerType('fanpelis'), 'direct');
-  assert.equal(choice.providerType('gnulahd'), 'direct');
+  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'spinflix', 'gnulahd']);
+  assert.deepEqual(Object.keys(streams.SEARCHERS).sort(), [...streams.PROVIDER_KEYS].sort());
+  assert.deepEqual(Object.keys(choice.PROVIDER_LANGUAGES), streams.PROVIDER_KEYS);
+  for (const key of streams.PROVIDER_KEYS) assert.equal(choice.providerType(key), 'direct');
   assert.equal(choice.providerType('retired-indexer'), null);
-  assert.equal(user.normalizeConfig({ streams: [] }, [], [], streams.PROVIDER_KEYS).streams.length, 0);
-  assert.equal(user.normalizeConfig({ streams: ['retired-indexer'] }, [], [], streams.PROVIDER_KEYS).streams, null);
-  const originalProviders = config.streamProviders;
-  try {
-    config.streamProviders = ['retired-indexer', 'legacy-source'];
-    assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS);
-  } finally { config.streamProviders = originalProviders; }
 });
 
-test('sin STREAM_PROVIDERS se consultan las ocho fuentes, incluida GnulaHD experimental; se respetan los overrides', (t) => {
+test('GnulaHD experimental sigue activa por defecto; se respetan las listas explícitas y off', (t) => {
   t.after(() => config.reload());
   config.reload({});
-  assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS);
-  assert.ok(streams.activeProviders(null).includes('gnulahd'));
+  assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'spinflix', 'gnulahd']);
   assert.deepEqual(streams.activeProviders({ streams: [] }), []);
-  assert.deepEqual(streams.activeProviders({ streams: ['cuevana3'] }), ['cuevana3']);
   assert.deepEqual(streams.activeProviders({ streams: ['gnulahd'] }), ['gnulahd']);
-  config.reload({ STREAM_PROVIDERS: 'all', PLAYLATIN: 'off' });
-  assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS.filter((key) => key !== 'playlatin'));
+  config.reload({ STREAM_PROVIDERS: 'all', FANPELIS: 'off' });
+  assert.deepEqual(streams.activeProviders(null), ['spinflix', 'gnulahd']);
+  assert.deepEqual(streams.activeProviders({ streams: ['fanpelis'] }), []);
   config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix' });
   assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'spinflix']);
   config.reload({ STREAM_PROVIDERS: 'off' });
   assert.deepEqual(streams.activeProviders(null), []);
+  assert.deepEqual(streams.activeProviders({ streams: ['gnulahd'] }), []);
 });
 
-test('las configuraciones antiguas nunca reactivan CineCalidad ni TioPlus/PelisPlus', (t) => {
+test('los enlaces antiguos conservan su selección válida y nunca reactivan una fuente retirada', (t) => {
   t.after(() => config.reload());
-  const retired = ['cinecalidad', 'tioplus', 'pelisplus'];
-  for (const key of retired) {
-    assert.equal(choice.providerType(key), null);
-    assert.equal(Object.hasOwn(streams.SEARCHERS, key), false);
-  }
-  config.reload({ STREAM_PROVIDERS: [...retired, 'cuevana3', 'flixlatam'].join(',') });
-  assert.deepEqual(streams.activeProviders(null), ['flixlatam', 'cuevana3']);
-  const decode = (keys) => user.decodeConfig(Buffer.from(JSON.stringify({ streams: keys })).toString('base64url'), [], [], streams.PROVIDER_KEYS);
-  const cfg = decode(['cuevana3', ...retired]);
-  assert.deepEqual(cfg.streams, ['cuevana3']);
-  assert.deepEqual(streams.activeProviders(cfg), ['cuevana3']);
-  config.reload({ STREAM_PROVIDERS: retired.join(',') });
+  const retired = ['flixlatam', 'playlatin', 'fuegocine', 'animeonlineninja', 'cuevana3', 'cinecalidad', 'tioplus', 'pelisplus'];
+  for (const key of retired) assert.equal(choice.providerType(key), null);
+  const readSegment = (segment) => user.decodeConfig(segment, [], [], streams.PROVIDER_KEYS);
+  // Simula una URL instalada antes del retiro, sin pasar por el encoder actual.
+  const decode = (keys) => readSegment(Buffer.from(JSON.stringify({ region: 'MX', streams: keys })).toString('base64url'));
+  const cfg = decode([...retired, 'spinflix', 'fanpelis', 'spinflix']);
+  assert.equal(cfg.region, 'MX');
+  assert.deepEqual(cfg.streams, ['spinflix', 'fanpelis']);
+  assert.deepEqual(readSegment(user.encodeConfig(cfg)).streams, ['fanpelis', 'spinflix']);
+
+  config.reload({});
+  assert.deepEqual(streams.activeProviders(cfg), ['fanpelis', 'spinflix']);
+  config.reload({ STREAM_PROVIDERS: [...retired, 'spinflix'].join(',') });
+  assert.deepEqual(streams.activeProviders(null), ['spinflix']);
+  assert.deepEqual(streams.activeProviders(decode(['fanpelis', ...retired])), []);
+
+  // Una lista antigua de solo retiradas tiene el mismo fallback que antes.
   assert.equal(decode(retired).streams, null);
-  assert.deepEqual(streams.activeProviders(decode(retired)), streams.PROVIDER_KEYS);
+  assert.deepEqual(streams.activeProviders(decode(retired)), ['spinflix']);
+  config.reload({ STREAM_PROVIDERS: retired.join(',') });
+  assert.deepEqual(streams.activeProviders(decode(retired)), ['fanpelis', 'spinflix', 'gnulahd']);
+  assert.deepEqual(decode([]).streams, []);
   assert.deepEqual(streams.activeProviders(decode([])), []);
+  config.reload({ STREAM_PROVIDERS: 'off' });
+  assert.deepEqual(streams.activeProviders(decode(retired)), []);
 });

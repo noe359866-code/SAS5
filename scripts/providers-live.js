@@ -10,19 +10,15 @@ const { allowedVideoUrl, REFERER } = require('../lib/vimeos');
 const fixtures = {
   peliculas: [
     { title: 'Matrix', altTitle: 'The Matrix', year: '1999', mediaType: 'movie', imdbId: 'tt0133093', tmdbId: 603,
-      keys: ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'cuevana3'], control: true },
+      keys: ['fanpelis', 'spinflix'], control: true },
   ],
   series: [
     { title: 'Breaking Bad', year: '2008', mediaType: 'series', season: 1, episode: 1, imdbId: 'tt0903747', tmdbId: 1396,
-      keys: ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'cuevana3'], control: true },
-    { title: 'Naruto', year: '2002', mediaType: 'series', season: 1, episode: 1, imdbId: 'tt0409591', keys: ['animeonlineninja'] },
+      keys: ['fanpelis', 'spinflix'], control: true },
   ],
   extra: [
-    { title: 'Toy Story 5', year: '2026', mediaType: 'movie', keys: ['fuegocine'] },
-    { title: 'VisionQuest', year: '2026', mediaType: 'series', season: 1, episode: 1, keys: ['fuegocine'] },
     { title: 'Mufasa: El rey león', altTitle: 'Mufasa: The Lion King', year: '2024', mediaType: 'movie',
       imdbId: 'tt13186482', keys: ['fanpelis'] },
-    { title: 'El rey león', altTitle: 'The Lion King', year: '1994', mediaType: 'movie', imdbId: 'tt0110357', keys: ['playlatin'] },
   ],
 };
 
@@ -43,7 +39,7 @@ function summarize(entry) {
 // Solo sondear playlists y un segmento en el CDN conocido; no descargar
 // vídeos, consultar iframes arbitrarios, publicar firmas ni verificar audio.
 async function probeMedia(hit) {
-  const raw = hit?.directUrl || hit?.url;
+  const raw = hit?.url;
   if (!allowedVideoUrl(raw) || !/\.m3u8$/i.test(new URL(raw).pathname)) return 'no sondeado';
   const pickUrl = (uri, parent, suffix) => {
     if (!uri) return null;
@@ -112,4 +108,4 @@ if (require.main === module) main(process.argv[2]).catch(() => {
   process.exitCode = 1;
 });
 
-module.exports = { annotate, probeMedia };
+module.exports = { annotate };

@@ -77,34 +77,26 @@ function mockApi(handlers) {
   return calls;
 }
 
-test('fanpelis película: búsqueda → player → embed → master .m3u8 por el proxy propio', async () => {
+test('fanpelis película: búsqueda → player → embed → URL original del manifiesto', async () => {
   const calls = mockApi([
     ['/api/rest/search', json(SEARCH_MOVIE)],
     ['/api/rest/player?post_id=18507', json(PLAYER)],
     ['vimeos.net/embed-', html(packedEmbed(MASTER))],
   ]);
-  const originalBase = config.addonBaseUrl;
-  config.addonBaseUrl = 'https://addon.example';
-  try {
-    const out = await fanpelis.searchFanpelis('Matrix', MOVIE, 'Matrix', 1000);
-    assert.equal(out.hits.length, 1);
-    const hit = out.hits[0];
-    assert.equal(hit.provider, 'fanpelis');
-    assert.equal(hit.relevant, true);
-    assert.match(hit.title, /Matrix 1999/);
-    assert.match(hit.title, /720p/);
-    assert.equal(hit.resolution, '720p', 'manda el manifiesto, no la calidad de la ficha');
-    assert.match(hit.title, /Latino/);
-    assert.equal(hit.audioLabel, 'Latino');
-    assert.equal(hit.directUrl, MASTER);
-    assert.ok(hit.url.startsWith('https://addon.example/hls?ref='), hit.url);
-    assert.ok(decodeURIComponent(hit.url).includes(MASTER));
-    // Se eligió la ficha de 1999, no la de 2003 ni la de 2021.
-    assert.ok(calls.some((u) => u.includes('post_id=18507')));
-    assert.ok(!calls.some((u) => u.includes('post_id=18508')));
-  } finally {
-    config.addonBaseUrl = originalBase;
-  }
+  const out = await fanpelis.searchFanpelis('Matrix', MOVIE, 'Matrix', 1000);
+  assert.equal(out.hits.length, 1);
+  const hit = out.hits[0];
+  assert.equal(hit.provider, 'fanpelis');
+  assert.equal(hit.relevant, true);
+  assert.match(hit.title, /Matrix 1999/);
+  assert.match(hit.title, /720p/);
+  assert.equal(hit.resolution, '720p', 'manda el manifiesto, no la calidad de la ficha');
+  assert.match(hit.title, /Latino/);
+  assert.equal(hit.audioLabel, 'Latino');
+  assert.equal(hit.url, MASTER);
+  // Se eligió la ficha de 1999, no la de 2003 ni la de 2021.
+  assert.ok(calls.some((u) => u.includes('post_id=18507')));
+  assert.ok(!calls.some((u) => u.includes('post_id=18508')));
 });
 
 test('fanpelis: reintenta por el título antes de los dos puntos sin aceptar otra película', async () => {
@@ -193,13 +185,6 @@ test('fanpelis: FANPELIS=off lo desactiva sin tocar el resto', async () => {
   }
 });
 
-test('fanpelis: el maestro de PlayLatin y Fanpelis va en el proxy HLS propio', () => {
-  // vimeos.net ya está en la lista blanca del proxy (lo usa SpinFlix): el
-  // stream de Fanpelis no necesita configuración extra.
-  const proxied = require('../lib/spinflix').proxiedHls(MASTER);
-  assert.ok(proxied === MASTER || proxied.includes('/hls?'));
-});
-
 test('fanpelis: aparece en /healthz y en los chips de /configure', () => {
   assert.ok(streams.PROVIDERS.some((provider) => provider.key === 'fanpelis'));
   const configure = require('../lib/configurePage');
@@ -223,17 +208,14 @@ test('fanpelis: utilidades de selección e idioma', () => {
   assert.equal(fanpelis.pickEpisode(EPISODES.data, 9, 1), null);
 });
 
-test('fanpelis: vimeos rota de dominio y el proxy acepta todos sus TLD', () => {
-  // El mismo embed devolvió `s9.vimeos.net` en una pasada y `p3.vimeos.zip`
-  // en la siguiente: si el proxy solo permite .net, ese stream no reproduce.
-  const hls = require('../lib/hlsProxy');
-  const allowed = hls.allowedHosts({});
+test('fanpelis: conserva la lista de hosts conocidos de Vimeos sin admitir dominios ajenos', () => {
+  const { allowedVideoUrl } = require('../lib/vimeos');
   for (const host of ['s9.vimeos.net', 'p3.vimeos.zip', 'vimeos.com', 's1.vimeos.xyz']) {
-    assert.equal(hls.hostAllowed(host, allowed), true, host);
+    assert.ok(allowedVideoUrl(`https://${host}/master.m3u8`), host);
   }
-  // Y sigue sin ser un proxy abierto: un dominio ajeno no pasa.
-  assert.equal(hls.hostAllowed('vimeos.net.evil.example', allowed), false);
-  assert.equal(hls.hostAllowed('cdn.example', allowed), false);
+  for (const host of ['vimeos.net.evil.example', 'cdn.example', 'spinoff.link']) {
+    assert.equal(allowedVideoUrl(`https://${host}/master.m3u8`), false, host);
+  }
 });
 
 test('fanpelis: la API solo indexa el título traducido, así que se prueba sin artículo', async () => {
@@ -255,4 +237,50 @@ test('fanpelis: la API solo indexa el título traducido, así que se prueba sin 
   assert.deepEqual(out.hits || [], []);
   assert.ok(queries.includes('The Matrix'));
   assert.ok(queries.includes('Matrix'), `probó: ${queries.join(', ')}`);
+});
+
+test('fanpelis: una copia exacta del episodio con HLS comprobado desplaza al primer visor rechazado', async () => {
+  const obsolete = 'https://vimeos.net/embed-fixture-obsoleto.html';
+  const denied = 'https://s9.vimeos.net/hls2/fixture/denied.m3u8';
+  const calls = mockApi([
+    ['/api/rest/search', json(SEARCH_TV)],
+    ['/api/rest/episodes', json(EPISODES)],
+    ['/api/rest/player?post_id=26785', json({ data: { embeds: [{ lang: 'Latino', url: obsolete }] } })],
+    ['/api/rest/player?post_id=26786', json(PLAYER)],
+    [obsolete, html(packedEmbed(denied))],
+    [denied, json({}, 403)],
+    [EMBED, html(packedEmbed(MASTER))],
+  ]);
+  const { hits } = await fanpelis.searchFanpelis(SERIES.title, SERIES, SERIES.title, 1000);
+  assert.deepEqual(hits.map(({ url, verification }) => [url, verification]), [[MASTER, 'manifest-ok']]);
+  assert.match(hits[0].title, /S01E01/);
+  assert.deepEqual(calls.filter((url) => url.includes('/api/rest/player')).map((url) => new URL(url).searchParams.get('post_id')), ['26785', '26786']);
+});
+
+test('fanpelis: idiomas descartados, hosts ajenos y enlaces repetidos no consumen el cupo de visores', async () => {
+  const obsolete = 'https://vimeos.net/embed-fixture-ausente.html';
+  const calls = mockApi([
+    ['/api/rest/search', json(SEARCH_MOVIE)],
+    ['/api/rest/player', json({ data: { embeds: [
+      { lang: 'Inglés', url: 'https://vimeos.net/embed-english.html' },
+      { lang: 'Subtitulado', url: 'https://vimeos.net/embed-sub.html' },
+      { lang: 'Latino', url: 'https://vimeos.net.evil.example/embed' },
+      ...Array.from({ length: 5 }, () => ({ lang: 'Latino', url: obsolete })),
+      { lang: 'Castellano', url: EMBED },
+    ] } })],
+    [EMBED, html(packedEmbed(MASTER))],
+  ]);
+  const { hits } = await fanpelis.searchFanpelis(MOVIE.title, MOVIE, MOVIE.title, 1000);
+  assert.deepEqual(hits.map((hit) => hit.audioLabel), ['Castellano']);
+  assert.deepEqual(calls.filter((url) => url.includes('/embed')), [obsolete, EMBED]);
+});
+
+test('fanpelis: el HTTP 429 del reproductor detiene la búsqueda antes de pedir otra copia', async () => {
+  const calls = mockApi([
+    ['/api/rest/search', json(SEARCH_TV)],
+    ['/api/rest/episodes', json(EPISODES)],
+    ['/api/rest/player?post_id=26785', json({}, 429)],
+  ]);
+  await assert.rejects(() => fanpelis.searchFanpelis(SERIES.title, SERIES, SERIES.title, 1000), { status: 429 });
+  assert.equal(calls.filter((url) => url.includes('/api/rest/player')).length, 1);
 });

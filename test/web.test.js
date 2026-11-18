@@ -663,23 +663,28 @@ test('/configure: dos selecciones iguales producen exactamente la misma URL', ()
 
 test('/configure: solo ofrece fuentes que el despliegue realmente consulta', () => {
   const defaults = withEnv({}, () => configure());
-  const { PROVIDER_KEYS } = require('../lib/streams');
+  const offered = (html) => [...html.matchAll(/data-group="streams" data-key="([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(offered(defaults), ['fanpelis', 'spinflix', 'gnulahd']);
   for (const key of PROVIDER_KEYS) assert.ok(defaults.includes(`checked data-group="streams" data-key="${key}"`), key);
   assert.match(defaults, /data-key="gnulahd" \/><span>GnulaHD \(experimental\)<\/span>/);
-  assert.doesNotMatch(defaults, /data-group="streams" data-key="(?:cinecalidad|tioplus|pelisplus)"/i);
   assert.equal(runConfigure().url, `${ORIGIN}/manifest.json`);
 
   const env = { STREAM_PROVIDERS: 'fanpelis,spinflix,playlatin' };
-  withEnv(env, () => {
-    assert.match(configure(), /data-group="streams" data-key="fanpelis"/);
-    config.reload({ ...env, FANPELIS: 'off', PLAYLATIN: 'off' });
-    const html = configure();
-    assert.match(html, /data-group="streams" data-key="spinflix"/);
-    assert.doesNotMatch(html, /data-group="streams" data-key="(?:fanpelis|playlatin|flixlatam|gnulahd)"/);
-  });
+  assert.deepEqual(offered(withEnv(env, () => configure())), ['fanpelis', 'spinflix']);
+  assert.deepEqual(offered(withEnv({ ...env, FANPELIS: 'off' }, () => configure())), ['spinflix']);
+  assert.deepEqual(offered(withEnv({ STREAM_PROVIDERS: 'off' }, () => configure())), []);
 
   const olderConfig = runConfigure({ env: { STREAM_PROVIDERS: 'fanpelis' }, initialCfg: { region: 'MX', streams: ['spinflix'] } });
   assert.deepEqual(decode(olderConfig.segment).streams, [], 'no activa otras fuentes sin permiso');
+});
+
+test('/configure: un borrador anterior al retiro no amplía la selección guardada', () => {
+  const knownStreams = ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'fuegocine', 'animeonlineninja', 'cuevana3', 'gnulahd'];
+  const oldDraft = runConfigure({ draft: { knownStreams, streams: ['flixlatam', 'spinflix'] } });
+  assert.deepEqual(oldDraft.saved.knownStreams, PROVIDER_KEYS);
+  assert.deepEqual(decode(oldDraft.segment).streams, ['spinflix']);
+  const disabledDraft = runConfigure({ draft: { knownStreams, streams: [] } });
+  assert.deepEqual(decode(disabledDraft.segment).streams, []);
 });
 
 test('/configure: el idioma de catálogos se mantiene fijo en español latino', () => {

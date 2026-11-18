@@ -31,9 +31,6 @@ import catalogs from './lib/catalogs.js';
 import streams from './lib/streams.js';
 import cache from './lib/cache.js';
 import rateLimit from './lib/rateLimit.js';
-// Proxy HLS propio: evita depender del proxy de la web de SpinFlix y pone el
-// Referer en CADA segmento, no solo en la primera playlist.
-import hlsProxy from './lib/hlsProxy.js';
 import logoData from './lib/logoData.js';
 import configRegistry from './lib/configRegistry.js';
 
@@ -197,10 +194,8 @@ async function runAndCache(key, createResponse, ctx, edge) {
   return response;
 }
 
-function workerRuntime(env, ctx, playbackOrigin) {
+function workerRuntime(ctx) {
   return {
-    env,
-    playbackOrigin,
     waitUntil: ctx && typeof ctx.waitUntil === 'function' ? (promise) => ctx.waitUntil(promise) : undefined,
   };
 }
@@ -224,7 +219,8 @@ function canonicalStreamCacheUrl(requestUrl, type, id, cfg) {
   const u = new URL(requestUrl);
   const active = streams.activeProviders(cfg).slice().sort().join(',');
   const badges = Array.isArray(cfg && cfg.badges) ? cfg.badges.slice().sort().join(',') : 'all';
-  return `${u.origin}/__edge/stream-v2/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
+  // No reutilizar JSON del transporte retirado, incluso para una config ya instalada.
+  return `${u.origin}/__edge/stream-v4/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
 }
 
 function safeDecode(value) {
@@ -259,11 +255,11 @@ async function serveMeta(type, id, cfg, request, ctx) {
   }, cacheUrl);
 }
 
-async function serveStream(type, id, cfg, request, env, ctx) {
+async function serveStream(type, id, cfg, request, ctx) {
   const decodedId = safeDecode(id);
   if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
   const create = async () => {
-    const result = await core.handleStream(type, decodedId, cfg, workerRuntime(env, ctx, new URL(request.url).origin));
+    const result = await core.handleStream(type, decodedId, cfg, workerRuntime(ctx));
     return jsonResponse(result, 200, 0, core.streamCacheControl(result.cacheMaxAge));
   };
   const cacheUrl = canonicalStreamCacheUrl(request.url, type, decodedId, cfg);
@@ -312,12 +308,6 @@ async function handleRequest(request, env, ctx) {
 
     const origin = url.origin;
     const host = url.host;
-
-    // ── Proxy HLS (streams directos de SpinFlix) ───────────────
-    // /hls?u=<url del CDN>&ref=<referer>: 0 HTML, solo media y playlists.
-    if (path === '/hls') {
-      return hlsProxy.handleHlsProxy(request, url, env || {});
-    }
 
     // ── Portada estilo streaming (tendencias en vivo si hay TMDB) ─
     if (path === '/' || path === '/api') {
@@ -398,7 +388,7 @@ async function handleRequest(request, env, ctx) {
       const diag = await cache.coalesce(diagKey, async () => {
         const cached = cache.get(diagKey);
         if (cached) return cached;
-        const fresh = await streams.diagnose(type, testId, null, { playbackOrigin: origin });
+        const fresh = await streams.diagnose(type, testId, null);
         cache.set(diagKey, fresh, 30);
         return fresh;
       });
@@ -471,7 +461,7 @@ async function handleRequest(request, env, ctx) {
     match = path.match(META_RE);
     if (match) return serveMeta(match[1], match[2], null, request, ctx);
     match = path.match(STREAM_RE);
-    if (match) return serveStream(match[1], match[2], null, request, env, ctx);
+    if (match) return serveStream(match[1], match[2], null, request, ctx);
 
     // ── Rutas con prefijo de config de usuario: /<cfg>/... ────
     const prefixed = path.match(CONFIG_PREFIX_RE);
@@ -505,7 +495,7 @@ async function handleRequest(request, env, ctx) {
         m2 = rest.match(META_RE);
         if (m2) return serveMeta(m2[1], m2[2], cfg, request, ctx);
         m2 = rest.match(STREAM_RE);
-        if (m2) return serveStream(m2[1], m2[2], cfg, request, env, ctx);
+        if (m2) return serveStream(m2[1], m2[2], cfg, request, ctx);
       }
       // Prefijo con pinta de config pero inválida → 404 limpio
       return jsonResponse({ error: 'invalid_config', message: 'Config inválida. Vuelve a /configure' }, 404, 0);

@@ -10,9 +10,9 @@
  *   GET /api/rest/episodes?post_id={serie}                  → _id por temporada
  *   GET /api/rest/player?post_id={obra|episodio}&_any=1      → embeds[] + downloads[]
  *
- * El campo `embeds[]` trae `url` (el iframe del reproductor), `lang` y
- * `quality` ya resueltos: si ese `url` es un host que Stremio puede reproducir
- * con `proxyHeaders`, el proveedor cuesta **tres GET y nada de CPU**.
+ * El campo `embeds[]` trae `url` (el visor), `lang` y `quality`. El addon
+ * solo publica una URL de medio extraída del visor; esta sonda no prueba
+ * que el cliente pueda reproducirla directamente.
  *
  * Lo que este script responde, que es lo único que decide:
  *
@@ -196,9 +196,8 @@ async function main() {
 
   // 4. ¿El embed se puede convertir en HLS sin navegador? (--deep)
   if (options.deep && playable.length) {
-    // El embed es lo que decide: si de aquí sale un .m3u8, el proveedor es un
-    // stream directo (proxy HLS propio, como SpinFlix); si no, es un iframe y
-    // se sirve con proxyHeaders.
+    // Un .m3u8 extraído es un candidato directo, no una prueba de playback.
+    // El addon no publica el iframe si no encuentra un medio compatible.
     report.steps.embeds = [];
     for (const sample of playable.slice(0, 2)) {
       try {

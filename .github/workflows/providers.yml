@@ -36,12 +36,9 @@ jobs:
       - run: npm ci
       - name: Películas
         run: node scripts/providers-live.js peliculas
-      - name: Series y anime
+      - name: Series
         if: success() || failure()
         run: node scripts/providers-live.js series
       - name: Controles específicos
         if: success() || failure()
         run: node scripts/providers-live.js extra
-      - name: Estructura pública de los reproductores
-        if: success() || failure()
-        run: node scripts/provider-pages-live.js

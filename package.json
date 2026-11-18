@@ -12,7 +12,6 @@
     "prerender": "node scripts/prerender-catalogs.mjs",
     "build:web": "node scripts/build-web.mjs",
     "scale:audit": "node scripts/scale-audit.mjs",
-    "playlatin:check": "node scripts/playlatin-check.mjs",
     "fanpelis:check": "node scripts/fanpelis-check.mjs"
   },
   "keywords": [

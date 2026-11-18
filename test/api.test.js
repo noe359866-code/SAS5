@@ -62,8 +62,16 @@ function request(path, { method = 'GET', body, headers = {} } = {}) {
   });
 }
 
-
-
+test('API Express: healthz solo anuncia las fuentes vigentes', async (t) => {
+  const config = require('../lib/config');
+  t.after(() => config.reload());
+  config.reload({ STREAM_PROVIDERS: 'playlatin,spinflix' });
+  const response = await request('/healthz');
+  assert.equal(response.status, 200);
+  const body = response.json();
+  assert.deepEqual(body.streamProviders, ['spinflix']);
+  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: false, spinflix: true, gnulahd: false });
+});
 
 test('API Express entrega extras de paginación para catálogos personales', async () => {
   const core = require('../lib/core');

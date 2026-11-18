@@ -10,22 +10,24 @@ const media = (url, extras = {}) => ({ title: 'Control', url, audioLabel: 'Latin
 
 test('un challenge no deja sin resultados al resto y evita volver a consultar la fuente durante la pausa', async (t) => {
   let blockedCalls = 0;
-  t.mock.method(streams.SEARCHERS, 'animeonlineninja', async () => {
+  config.reload({ STREAM_PROVIDER_COOLDOWN_SECONDS: '300' });
+  t.after(() => config.reload());
+  t.mock.method(streams.SEARCHERS, 'gnulahd', async () => {
     blockedCalls++;
     throw Object.assign(new Error('detalle no público'), { challenge: true, status: 403 });
   });
   t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [media('https://cdn.example/movie.mp4')]);
   const resolved = { title: 'Control', mediaType: 'movie' };
-  const order = ['animeonlineninja', 'fanpelis'];
+  const order = ['gnulahd', 'fanpelis'];
   const report = {};
   const hits = await streams.runProviders(order, 'Control', resolved, 'Control', report);
   assert.equal(hits.length, 1);
-  assert.equal(report.animeonlineninja.reason, 'challenge');
-  assert.equal(report.animeonlineninja.status, 403);
+  assert.equal(report.gnulahd.reason, 'challenge');
+  assert.equal(report.gnulahd.status, 403);
   assert.doesNotMatch(JSON.stringify(report), /detalle no público/);
   await streams.runProviders(order, 'Control', resolved, 'Control', report);
   assert.equal(blockedCalls, 1);
-  assert.equal(report.animeonlineninja.paused, true);
+  assert.equal(report.gnulahd.paused, true);
 });
 
 test('el diagnóstico de fuente cuenta medios aceptados independientemente de los duplicados de otra fuente', async (t) => {
@@ -40,14 +42,14 @@ test('el diagnóstico de fuente cuenta medios aceptados independientemente de lo
 });
 
 test('la sonda separa manifiestos verificados, bloqueos y URLs no comprobadas sin revelar firmas', async (t) => {
-  config.reload({ STREAM_PROVIDERS: 'fanpelis,playlatin' });
+  config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix' });
   t.after(() => config.reload());
   t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
   t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [
     media('https://cdn.example/no.m3u8?signature=secret', { verification: 'cdn-http-403' }),
     media('https://cdn.example/unknown.mp4', { verification: 'https://example.invalid/sensitive' }),
   ]);
-  t.mock.method(streams.SEARCHERS, 'playlatin', async () => [media('https://cdn.example/ok.m3u8', { verification: 'manifest-ok' })]);
+  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media('https://cdn.example/ok.m3u8', { verification: 'manifest-ok' })]);
   const report = await streams.diagnose('movie', 'tt9998812', null);
   assert.equal(report.totalStreams, 3);
   assert.equal(report.verifiedManifests, 1);
@@ -58,14 +60,14 @@ test('la sonda separa manifiestos verificados, bloqueos y URLs no comprobadas si
 });
 
 test('el límite de resultados no oculta el HLS verificado detrás de enlaces no comprobados', async (t) => {
-  config.reload({ STREAM_PROVIDERS: 'fanpelis,playlatin', STREAM_MAX_RESULTS: '2' });
+  config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix', STREAM_MAX_RESULTS: '2' });
   t.after(() => config.reload());
   t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
   t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [
     media('https://cdn.example/no.m3u8', { verification: 'cdn-http-403' }),
     media('https://cdn.example/unknown.mp4'),
   ]);
-  t.mock.method(streams.SEARCHERS, 'playlatin', async () => [media('https://cdn.example/ok.m3u8', { verification: 'manifest-ok' })]);
+  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media('https://cdn.example/ok.m3u8', { verification: 'manifest-ok' })]);
   const result = await streams.searchStreams('movie', 'tt9998813', null);
   assert.deepEqual(result.map((stream) => stream.url), ['https://cdn.example/ok.m3u8', 'https://cdn.example/unknown.mp4']);
   const unverified = streams.toDirectStream(media('https://cdn.example/no.m3u8', { verification: 'cdn-http-403' }));
@@ -100,4 +102,51 @@ test('Worker: el JSON de streams no sale de caché después del límite de la fi
   now += 11_000;
   assert.match((await (await request()).json()).streams[0].url, /signed-2\.m3u8$/);
   assert.equal(calls, 2);
+});
+
+test('duplicados: un HLS verificado no se pierde si la primera fuente devolvió la misma URL sin verificar', async (t) => {
+  const master = 'https://s10.vimeos.net/hls2/fixture/shared.m3u8';
+  t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [media(master, { verification: 'cdn-http-403' })]);
+  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media(master, { verification: 'manifest-ok' })]);
+  const report = {};
+  const hits = await streams.runProviders(['fanpelis', 'spinflix'], '', { title: 'Control' }, 'Control', report);
+  assert.equal(hits.length, 1);
+  assert.equal(hits[0].provider, 'spinflix');
+  assert.equal(report.fanpelis.accepted, 1);
+  assert.equal(report.fanpelis.relevant, 0);
+  assert.equal(report.spinflix.relevant, 1);
+  const stream = streams.toDirectStream(hits[0], null);
+  assert.equal(stream.url, master);
+  assert.doesNotMatch(stream.name, /sin verificar/);
+});
+
+test('Worker: los resultados exclusivamente sin verificar se vuelven a sondear en 30 segundos', async (t) => {
+  const worker = (await import('../worker.mjs')).default;
+  let now = Date.now();
+  let calls = 0;
+  t.mock.method(Date, 'now', () => now);
+  t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
+  t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [media('https://cdn.example/recheck.m3u8', {
+    verification: ++calls > 1 ? 'manifest-ok' : 'cdn-http-403',
+  })]);
+  const env = { STREAM_PROVIDERS: 'fanpelis', STREAM_STALE_SECONDS: '600' };
+  t.after(() => config.reload());
+  const request = () => worker.fetch(new Request('https://audit.example/stream/movie/tt9998814.json'), env, {});
+  const first = await request();
+  assert.equal(first.headers.get('cache-control'), 'public, max-age=30, s-maxage=30, must-revalidate');
+  assert.match((await first.json()).streams[0].name, /sin verificar/);
+  now += 31_000;
+  const next = await request();
+  assert.doesNotMatch((await next.json()).streams[0].name, /sin verificar/);
+  assert.equal(calls, 2);
+});
+
+test('el presupuesto de una fuente cuenta en común JSON y texto sin hacer peticiones extra', async (t) => {
+  const { providerHttp, stopProvider } = require('../lib/providerHttp');
+  const fetchMock = t.mock.method(global, 'fetch', async () => Response.json({ ok: true }));
+  const http = providerHttp(1000, 2);
+  await http.json('https://provider.example/index');
+  await http.text('https://provider.example/playlist');
+  await assert.rejects(() => http.json('https://provider.example/extra'), (err) => err.requestLimit && stopProvider(err));
+  assert.equal(fetchMock.mock.callCount(), 2);
 });

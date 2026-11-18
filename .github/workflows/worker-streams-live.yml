@@ -1,4 +1,4 @@
-name: Streams del Worker publicado
+name: Streams del Worker y CDN directo
 on:
   workflow_dispatch:
   push:
@@ -7,23 +7,35 @@ on:
       - '.github/workflows/worker-streams-live.yml'
       - 'scripts/worker-streams-live.js'
       - 'test/workerStreamsLive.test.js'
-      - 'lib/hlsProxy.js'
-      - 'lib/vimeos*.js'
+      - 'lib/config.js'
+      - 'lib/directMedia.js'
+      - 'lib/fanpelis.js'
+      - 'lib/spinflix.js'
+      - 'lib/providerHttp.js'
+      - 'lib/providerTitles.js'
+      - 'lib/hlsManifest.js'
+      - 'lib/streams.js'
+      - 'lib/vimeos.js'
       - 'worker.mjs'
 permissions:
   contents: read
 jobs:
   probe:
+    # Las pruebas de rama no gastan invocaciones del Worker publicado.
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 4
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
       - run: node --test test/workerStreamsLive.test.js
-      - name: Manifest, stream y comprobación HLS desde producción
+      - name: API publicada y manifiestos del CDN (sin seguir proxies de versiones anteriores)
         run: node scripts/worker-streams-live.js
+      - name: Primeros segmentos del CDN desde los enlaces de producción
+        if: github.event_name == 'workflow_dispatch'
+        run: node scripts/worker-streams-live.js --playback
   playback:
     runs-on: ubuntu-latest
     timeout-minutes: 4
@@ -34,7 +46,7 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - name: Película y episodio por la ruta completa del Worker (workerd local)
+      - name: API de workerd local y primeros segmentos directos del CDN
         run: |
           npx wrangler dev --local --ip 127.0.0.1 --port 8799 --var STREAM_PROVIDERS:fanpelis,spinflix > "$RUNNER_TEMP/playback-worker.log" 2>&1 &
           pid=$!
@@ -44,26 +56,4 @@ jobs:
             sleep 1
           done
           if ! test -s "$RUNNER_TEMP/playback-ready.json"; then cat "$RUNNER_TEMP/playback-worker.log"; exit 1; fi
-          for attempt in {1..3}; do
-            if node scripts/worker-streams-live.js --playback http://127.0.0.1:8799; then exit 0; fi
-            if (( attempt < 3 )); then sleep 8; fi
-          done
-          exit 1
-  published-playback:
-    # Workers Builds despliega main por separado; no confundir el workerd
-    # del runner con el acceso a los segmentos desde Cloudflare.
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    timeout-minutes: 6
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version: '22'
-      - name: HLS y primeros segmentos desde el Worker publicado
-        run: |
-          for attempt in {1..8}; do
-            if node scripts/worker-streams-live.js --playback; then exit 0; fi
-            if (( attempt < 8 )); then sleep 20; fi
-          done
-          exit 1
+          node scripts/worker-streams-live.js --playback http://127.0.0.1:8799 --expect-direct

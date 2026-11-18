@@ -27,7 +27,7 @@ jobs:
     permissions:
       contents: read
     env:
-      STREAM_PROVIDERS: fanpelis,playlatin,flixlatam,cuevana3,cinecalidad,tioplus
+      STREAM_PROVIDERS: fanpelis,playlatin,flixlatam,spinflix,cuevana3,cinecalidad,tioplus
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

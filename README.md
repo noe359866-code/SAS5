@@ -73,3 +73,11 @@ Reconocen enlaces directos HTTPS con audio latino o castellano explícito en la
 página. No aceptan iframes HTML como vídeo ni siguen redirecciones. Si solo hay
 reproductores externos sin una fuente directa etiquetada, no devuelven resultados.
 La sonda de Actions informa los resultados por proveedor; no verifica reproducción.
+
+### SpinFlix (Spinoff)
+
+Para habilitar `https://spinoff.link/pelis/#/`, añade `spinflix` a
+`STREAM_PROVIDERS` y selecciónalo en `/configure` si usas una lista personalizada.
+El addon consulta la API JSON mediante `SPINFLIX_URL`, no la ruta `#/` del
+navegador. Solo acepta audio español identificado y usa el proxy HLS del addon
+para los enlaces compatibles de Vimeos. No está activo por defecto.

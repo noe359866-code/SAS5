@@ -9,7 +9,7 @@ const fixtures = [
 (async () => {
   let failed = false;
   for (const resolved of fixtures) {
-    const keys = ['fanpelis', 'playlatin', 'flixlatam', 'cuevana3', 'cinecalidad', 'tioplus'];
+    const keys = ['fanpelis', 'playlatin', 'flixlatam', 'spinflix', 'cuevana3', 'cinecalidad', 'tioplus'];
     const report = {};
     const hits = await runProviders(keys, resolved.title, resolved, resolved.title, report, 9000);
     for (const key of keys) {

@@ -19,3 +19,20 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+  live:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/arena/') || github.event_name == 'workflow_dispatch'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    permissions:
+      contents: read
+    env:
+      STREAM_PROVIDERS: fanpelis,playlatin,flixlatam
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: node scripts/providers-live.js

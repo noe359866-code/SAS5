@@ -17,7 +17,7 @@ test('audio: solo marca Latino explícito y reconoce el inglés para rechazarlo'
   assert.deepEqual(choice.hitLanguages({ url: 'https://example.org/a', provider: 'playlatin' }), ['unknown']);
 });
 
-test('filtro obligatorio: bloquea Inglés, dual, Castellano y desconocido incluso sin config', () => {
+test('filtro obligatorio: admite castellano y bloquea Inglés, dual y desconocido incluso sin config', () => {
   const latino = { title: 'Movie 1080p Latino', titles: ['Movie'] };
   const dual = { title: 'Movie 1080p Latino English', titles: ['Movie'] };
   const english = { title: 'Movie 1080p English', titles: ['Movie'] };
@@ -27,6 +27,8 @@ test('filtro obligatorio: bloquea Inglés, dual, Castellano y desconocido inclus
   assert.equal(choice.hitMatches(latino, null), true);
   assert.equal(choice.hitMatches(dual, null), false);
   assert.equal(choice.hitMatches(english, null), false);
+  assert.equal(choice.hitMatches({ audioLabel: 'Castellano' }, null), true);
+  assert.equal(choice.hitMatches({ audioLabel: 'Subtitulado en español' }, null), false);
   assert.equal(choice.hitMatches(unknown, null), false);
   assert.equal(choice.hitMatches({ ...directLatino, audioLabel: 'Latino + Inglés' }, null), false);
   assert.equal(choice.hitMatches(directLatino, null), true);
@@ -41,7 +43,7 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   assert.deepEqual(cfg.streams, ['fanpelis']);
   assert.equal('streamTypes' in cfg, false);
   assert.equal('streamLanguages' in cfg, false);
-  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'playlatin']);
+  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin']);
   assert.equal(choice.providerType('fanpelis'), 'direct');
   assert.equal(choice.providerType('retired-indexer'), null);
   assert.equal(user.normalizeConfig({ streams: [] }, [], [], streams.PROVIDER_KEYS).streams.length, 0);
@@ -49,6 +51,6 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   const originalProviders = config.streamProviders;
   try {
     config.streamProviders = ['retired-indexer', 'legacy-source'];
-    assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS);
+    assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'playlatin']);
   } finally { config.streamProviders = originalProviders; }
 });

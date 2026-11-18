@@ -66,6 +66,18 @@ test('FlixLatam no confunde un ancla #s1-e2 con una página de episodio', async 
     assert.ok(pages.length > 0, 'no debe volver a buscar la ficha general');
     return new Response(pages.shift());
   });
-  assert.deepEqual(await searchFlixLatam('', { title: 'El título', year: 2001, mediaType: 'series', season: 1, episode: 2 }), []);
+  assert.deepEqual(await searchFlixLatam('', { title: 'El título', year: 2001, mediaType: 'series', season: 1, episode: 2 }), { hits: [], reason: 'no-episode-player' });
   assert.equal(pages.length, 0);
+});
+
+test('FlixLatam admite enlaces de episodio y paneles locales solo cuando concuerdan temporada y episodio', async (t) => {
+  const { findEpisode } = require('../lib/flixlatam');
+  const page = 'https://flixlatam.com/serie/titulo';
+  const rows = '<div id="seasons"><ul class="episodios"><li><span class="numerando">1 - 1</span><a class="episode-link" href="/episodio/titulo-1x1">Uno</a></li><li><span class="numerando">1 - 2</span><a class="episode-link" href="#s1-e2">Dos</a></li></ul></div>';
+  const html = rows + `<section id="s1-e2">${player('Latino', '/episodio-dos.mp4')}</section>${player('Latino', '/general.mp4')}`;
+  assert.deepEqual(findEpisode(html, page, 1, 1), { page: 'https://flixlatam.com/episodio/titulo-1x1' });
+  assert.equal(findEpisode(html, page, 2, 1), null);
+  t.mock.method(global, 'fetch', async (url) => new Response(url.includes('/search?') ? card('/serie/titulo', 2001) : html));
+  const hits = await searchFlixLatam('', { title: 'El título', year: 2001, mediaType: 'series', season: 1, episode: 2 });
+  assert.deepEqual(hits.map(({ url }) => url), ['https://flixlatam.com/episodio-dos.mp4']);
 });

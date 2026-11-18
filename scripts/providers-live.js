@@ -19,6 +19,7 @@ const fixtures = {
   ],
   extra: [
     { title: 'Toy Story 5', year: '2026', mediaType: 'movie', keys: ['fuegocine'] },
+    { title: 'VisionQuest', year: '2026', mediaType: 'series', season: 1, episode: 1, keys: ['fuegocine'] },
     { title: 'Mufasa: El rey león', altTitle: 'Mufasa: The Lion King', year: '2024', mediaType: 'movie',
       imdbId: 'tt13186482', keys: ['fanpelis'] },
     { title: 'El rey león', altTitle: 'The Lion King', year: '1994', mediaType: 'movie', imdbId: 'tt0110357', keys: ['playlatin'] },
@@ -78,7 +79,11 @@ async function main(group) {
     const keys = fixture.keys.filter((key) => enabled.includes(key));
     const report = {};
     const hits = await runProviders(keys, fixture.title, fixture, fixture.title, report, 6000);
-    const checks = await Promise.all(fixture.keys.map((key) => probeMedia(hits.find((hit) => hit.provider === key))));
+    const checks = await Promise.all(fixture.keys.map(async (key) => {
+      const hit = hits.find((item) => item.provider === key);
+      const check = await probeMedia(hit);
+      return hit?.verification ? `${hit.verification}; ${check}` : check;
+    }));
     for (const [index, key] of fixture.keys.entries()) {
       const entry = report[key];
       const state = entry ? summarize(entry) : 'desactivado';

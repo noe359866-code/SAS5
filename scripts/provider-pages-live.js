@@ -47,9 +47,18 @@ function shape(html, url) {
     .filter((key) => new RegExp(`\\b${key}\\b`, 'i').test(inline)).join(',') || '—';
   const row = $('#seasons .episodios li').first();
   const options = $('[data-option],.ODDIV li[onclick],.pframe,[data-embed]').toArray().slice(0, 10).map(describe).join(' ') || '—';
-  const headline = $('a[href*="/ver-pelicula/matrix/"],a[href*="/online/naruto-100724/"]').first();
-  const headings = headline.find('h2,h3,.title,.year,time,span').toArray().slice(0, 8).map(marker).join(',') || '—';
-  return `scripts=${signals}; rutas=${routes}; video=${nodes('video,video source', 6)}; iframes=${nodes('iframe', 6)}; opciones=${options}; episodio=${row.length ? [describe(row[0]), ...row.find('a,button').toArray().slice(0, 5).map(describe)].join(' ') : '—'}; enlaces=${headings}`;
+  const target = $('a[href*="/ver-pelicula/matrix/"],a[href*="/online/naruto-100724/"]');
+  const headings = (el) => $(el).find('h2,h3,.title,time,span').toArray().slice(0, 6).map(marker).join(',') || '—';
+  const cards = target.toArray().slice(0, 3).map((el) => `${marker(el.parent)}:${headings(el)}`).join(' ') || '—';
+  const firstEpisode = row.find('a.episode-link[href]').first().attr('href');
+  let episodePath = '—';
+  try {
+    const link = new URL(firstEpisode, url);
+    if (link.origin === origin && !link.search && !link.hash && /^\/[\w/-]+$/.test(link.pathname)) episodePath = link.pathname.replace(/\/\d+(?=\/|$)/g, '/:n');
+  } catch { /* sin enlace de episodio */ }
+  const audioGroup = $('[data-option]').first().parents().toArray().slice(0, 3).map((el) => marker(el)).join(',') || '—';
+  return `scripts=${signals}; rutas=${routes}; video=${nodes('video,video source', 6)}; iframes=${nodes('iframe', 6)}; opciones=${options}; grupo=${audioGroup}; episodio=${row.length ? [describe(row[0]), ...row.find('a,button').toArray().slice(0, 5).map(describe)].join(' ') : '—'} ${episodePath}; tarjetas=${cards}`;
+
 }
 
 async function probe([label, url]) {

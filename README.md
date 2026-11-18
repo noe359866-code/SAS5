@@ -4,9 +4,23 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 
 ## Fuentes de reproducción
 
-Por defecto se consultan en paralelo Fanpelis, FlixLatam y PlayLatinSRC. Solo se publican enlaces reproducibles con evidencia de audio latino o castellano; se descartan audio inglés, dual con inglés, subtítulos sin doblaje, enlaces de descarga y resultados sin idioma identificable. La resolución de títulos y metadatos usa TMDB, TVMaze y Cinemeta cuando corresponde.
+**Las nueve fuentes registradas se consultan por defecto**. `/configure` permite desmarcarlas una por una; las instalaciones que ya guardaron una selección explícita la conservan. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha o un iframe no son un stream.
 
-Configura `STREAM_PROVIDERS` para habilitar fuentes en el despliegue y `STREAM_MAX_RESULTS` para fijar el máximo de resultados. En `/configure` se puede elegir entre las fuentes habilitadas. Si pregeneras la web con `npm run build:web`, usa los mismos valores de `STREAM_PROVIDERS`, `FANPELIS` y `PLAYLATIN` que en el Worker.
+| Clave | Web consultada | Identificación y reproductores compatibles |
+|---|---|---|
+| `fanpelis` | `fanpelis.to` | API de títulos y episodios; HLS de Vimeos. |
+| `flixlatam` | `flixlatam.com` | Búsqueda por tipo/año, enlace o panel del episodio exacto; medios directos, Vimeos y Uqload compatibles. |
+| `playlatin` | `playlatinsrc.co` | IMDb y numeración del episodio; solo medios directos del resolver de su reproductor. |
+| `spinflix` | `lamoviebot.tvymas.workers.dev` | API de SpinFlix/LaMovie, detalle por ID o título y año, HLS de Vimeos. |
+| `fuegocine` | `fuegocine.com` | Portada y listado; ficha y visor de película o ruta de temporada y episodio de serie. |
+| `animeonlineninja` | `ww4.animeonline.ninja` | Fichas de anime y enlace con numeración explícita. |
+| `cuevana3` | `cuevanas3.pro` | Buscador y fichas con rutas canónicas. |
+| `cinecalidad` | `www.cinecalidad.am` | Tarjetas con título/año y opciones Vimeos agrupadas por audio. |
+| `tioplus` | `tioplus.app` | Búsqueda y ficha HTML; depende de la disponibilidad de la web. |
+
+Quita `STREAM_PROVIDERS` de tu despliegue, o fija `STREAM_PROVIDERS=all`, para usar las nueve. Una lista como `fanpelis,spinflix` limita las fuentes; `off` apaga todas. `FANPELIS=off` y `PLAYLATIN=off` siguen admitidos. Para una web pregenerada con `npm run build:web`, usa las mismas variables que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
+
+Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. No se resuelven challenges ni se ejecuta JavaScript de terceros. Los HLS de Vimeos se comprueban con un plazo breve; si el CDN no permite comprobarlos desde el servidor, no se anuncia una resolución no verificada. Los enlaces con vencimiento conocido se retiran con margen y la caché HTTP de streams no sirve respuestas caducadas.
 
 ## Configuración local
 
@@ -52,52 +66,13 @@ npm run build:web
 npm run prerender
 ```
 
-Las pruebas usan respuestas simuladas y no garantizan que un proveedor externo esté disponible en vivo. RamdonLatam no aloja ni distribuye archivos; presenta metadatos y enlaces directos proporcionados por fuentes externas.
+`npm test` usa respuestas simuladas. Para probar el código contra las webs reales, ejecuta **Tests** (`.github/workflows/providers.yml`) con *Run workflow* en GitHub Actions. También corre al hacer push a una rama `arena/` que modifique los adaptadores o sondas. No requiere claves de TMDB ni despliega el Worker.
 
-### FlixLatam
-
-FlixLatam se incluye por defecto. Si tu despliegue fija `STREAM_PROVIDERS`,
-añade `flixlatam` a esa lista. En instalaciones con selección personalizada,
-marca FlixLatam en `/configure`.
-
-Busca películas y episodios por título, año y numeración. Lee fuentes directas
-etiquetadas como latino o castellano y resuelve embeds públicos de Uqload cuando
-el proveedor indica su audio. No devuelve embeds como si fueran vídeos. Los
-reproductores protegidos, archivos caducados y pistas sin etiqueta no se publican.
-La compatibilidad depende del reproductor disponible para cada título.
-
-### Cuevana 3, CineCalidad y TioPlus
-
-Adaptadores opcionales: añade `cuevana3,cinecalidad,tioplus` a tu lista existente
-`STREAM_PROVIDERS`, por ejemplo:
-
-```env
-STREAM_PROVIDERS=fanpelis,playlatin,flixlatam,cuevana3,cinecalidad,tioplus
+```sh
+node scripts/providers-live.js                    # los nueve proveedores
+node scripts/providers-live.js peliculas          # Matrix
+node scripts/providers-live.js series             # Breaking Bad y Naruto
+node scripts/providers-live.js extra              # Mufasa, El rey león y FuegoCine
 ```
 
-Reconocen enlaces directos HTTPS con audio latino o castellano explícito en la
-página. No aceptan iframes HTML como vídeo ni siguen redirecciones. Si solo hay
-reproductores externos sin una fuente directa etiquetada, no devuelven resultados.
-La sonda de Actions informa los resultados por proveedor; no verifica reproducción.
-
-### SpinFlix (Spinoff)
-
-Para habilitar `https://spinoff.link/pelis/#/`, añade `spinflix` a
-`STREAM_PROVIDERS` y selecciónalo en `/configure` si usas una lista personalizada.
-El addon consulta la API JSON mediante `SPINFLIX_URL`, no la ruta `#/` del
-navegador. Solo acepta audio español identificado y usa el proxy HLS del addon
-para los enlaces compatibles de Vimeos. No está activo por defecto.
-
-### AnimeOnlineNinja
-
-Añade `animeonlineninja` a `STREAM_PROVIDERS` para habilitarlo. Usa el buscador
-público, las fichas `/online/` y `/pelicula/` y la numeración de temporada y
-episodio. Publica solo vídeo directo con doblaje español identificado; no
-presenta reproductores HTML o pistas solo subtituladas como streams.
-
-### FuegoCine
-
-Añade `fuegocine` a `STREAM_PROVIDERS` para probar esta fuente opcional. El
-adaptador busca películas en la portada y abre el enlace `/movies/watch/`
-vinculado por la ficha. Solo devuelve vídeo directo HTTPS con doblaje explícito
-en el reproductor. No admite series, servidores externos ni cuentas.
+El informe separa enlaces extraídos y aceptados por fuente, códigos HTTP y, en los CDN conocidos, el manifiesto HLS y el acceso HTTP a un segmento. No guarda URLs firmadas ni comprueba el audio o la reproducción en Stremio. El runner de GitHub puede recibir otra respuesta que un Worker desplegado o un reproductor doméstico. RamdonLatam no aloja archivos de video; solo presenta metadatos y enlaces externos.

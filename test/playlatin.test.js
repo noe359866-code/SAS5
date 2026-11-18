@@ -41,8 +41,8 @@ const RESOLVE = {
   id: 'tt0110357',
   imdb_id: 'tt0110357',
   sources: [
-    { id: 'dropload-latino', name: 'dropload.to', url: 'https://dropload.to/e/abc123', version: 'latino', kind: 'embed', embed: true },
-    { id: 'dood-cast', name: 'doodstream.com', url: 'https://dood.example/e/xyz', version: 'castellano', kind: 'embed', embed: true },
+    { id: 'dropload-latino', name: 'dropload.to', url: 'https://cdn.example/master.m3u8', version: 'latino', kind: 'hls' },
+    { id: 'dood-cast', name: 'doodstream.com', url: 'https://cdn.example/movie.mp4', version: 'castellano', kind: 'mp4' },
     { id: 'mix-sub', name: 'mixdrop.co', url: 'https://mixdrop.example/e/sub1', version: 'subtitulado', kind: 'embed', embed: true },
   ],
 };
@@ -103,11 +103,12 @@ test('playlatin: acepta comillas simples y atributos en otro orden', () => {
 });
 
 test('playlatin: normaliza las fuentes, descarta lo no reproducible y limita el número', () => {
-  const sources = playlatin.normalizeSources(RESOLVE);
+  const embeds = Array.from({ length: 4 }, (_, i) => ({ url: `https://player.example/e/${i}`, version: 'latino' }));
+  const sources = playlatin.normalizeSources({ sources: [...embeds, ...RESOLVE.sources] });
   assert.equal(sources.length, 2);
   assert.deepEqual(sources.map((s) => s.label), ['Latino', 'Castellano']);
   assert.equal(sources[0].server, 'Dropload');
-  assert.equal(sources[0].kind, 'embed');
+  assert.equal(sources[0].kind, 'hls');
 
   // http:// y basura fuera; los .m3u8 cuentan como hls.
   const mixed = playlatin.normalizeSources({
@@ -119,11 +120,11 @@ test('playlatin: normaliza las fuentes, descarta lo no reproducible y limita el 
       { url: 'https://otro.example/e/2', name: 'otro.example', version: 'castellano' },
     ],
   });
-  assert.deepEqual(mixed.map((s) => s.url), ['https://cdn.example/master.m3u8', 'https://otro.example/e/2']);
+  assert.deepEqual(mixed.map((s) => s.url), ['https://cdn.example/master.m3u8']);
   assert.equal(mixed[0].kind, 'hls');
 
   // No hay fallback a versiones de idioma desconocido.
-  const many = playlatin.normalizeSources({ sources: Array.from({ length: 12 }, (_, i) => ({ url: `https://h${i}.example/e/1`, version: 'latino' })) });
+  const many = playlatin.normalizeSources({ sources: Array.from({ length: 12 }, (_, i) => ({ url: `https://h${i}.example/e/1.mp4`, version: 'latino' })) });
   assert.equal(many.length, 4);
 });
 
@@ -214,7 +215,7 @@ test('playlatin: los streams salen con proxyHeaders y noWebReady', async () => {
   ]);
   const result = await streams.SEARCHERS.playlatin('x', resolvedMovie, resolvedMovie.title, 8000);
   const stream = streams.toStream(result.hits[0], null);
-  assert.equal(stream.url, 'https://dropload.to/e/abc123');
+  assert.equal(stream.url, 'https://cdn.example/master.m3u8');
   assert.equal(stream.behaviorHints.notWebReady, true);
   assert.equal(stream.behaviorHints.proxyHeaders.request.Referer, 'https://playlatinsrc.co/');
   assert.match(stream.title, /🎧 Latino/);

@@ -5,6 +5,7 @@ const candidates = [
   ['FuegoCine · película', 'https://fuegocine.com/', /^\/movies\/details\/[^/]+\/\d+\/?$/],
   ['FuegoCine · serie', 'https://fuegocine.com/', /^\/shows\/details\/[^/]+\/\d+\/?$/],
   ['AnimeOnlineNinja', 'https://ver2.animeonline.ninja/', /\/(?:episodio|anime|ver)\//],
+  ['AnimeJara', 'https://animejara.com/', /(?:\/(?:ver|episodios?|capitulos?)\/|[-/](?:episodio|capitulo)-\d+|\/[a-z0-9-]+\/\d+\/?$)/i],
   ['AnimeBum', 'https://animebum.org/', /\/(?:episodio|anime|ver)\//],
   ['Cuevana 3', 'https://cuevana.gs/', /\/(?:pelicula|peliculas|serie|series)\//],
   ['PoseidonHD2', 'https://www.poseidonhd2.co/', /\/(?:movies|pelicula|series|serie)\//],

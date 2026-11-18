@@ -88,3 +88,10 @@ Añade `animeonlineninja` a `STREAM_PROVIDERS` para habilitarlo. Usa el buscador
 público, las fichas `/online/` y `/pelicula/` y la numeración de temporada y
 episodio. Publica solo vídeo directo con doblaje español identificado; no
 presenta reproductores HTML o pistas solo subtituladas como streams.
+
+### FuegoCine
+
+Añade `fuegocine` a `STREAM_PROVIDERS` para probar esta fuente opcional. El
+adaptador busca películas en la portada y abre el enlace `/movies/watch/`
+vinculado por la ficha. Solo devuelve vídeo directo HTTPS con doblaje explícito
+en el reproductor. No admite series, servidores externos ni cuentas.

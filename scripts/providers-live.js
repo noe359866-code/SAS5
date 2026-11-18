@@ -2,6 +2,7 @@
 const { runProviders } = require('../lib/streams');
 
 const fixtures = [
+  { title: 'Toy Story 5', year: '2026', mediaType: 'movie', keys: ['fuegocine'] },
   { title: 'Naruto', year: '2002', mediaType: 'series', season: 1, episode: 1, imdbId: 'tt0409591', keys: ['animeonlineninja'] },
   { title: 'Matrix', year: '1999', mediaType: 'movie', imdbId: 'tt0133093' },
   { title: 'Breaking Bad', year: '2008', mediaType: 'series', season: 1, episode: 1, imdbId: 'tt0903747' },

@@ -8,6 +8,7 @@ on:
       - 'scripts/streamflix-*.js'
       - 'node/streamflix*.js'
       - 'api/index.js'
+      - 'test/streamflix.test.js'
 permissions:
   contents: read
 jobs:
@@ -21,5 +22,6 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - run: node --test test/streamflix.test.js
       - run: node scripts/streamflix-candidates.js
       - run: node scripts/streamflix-live.js

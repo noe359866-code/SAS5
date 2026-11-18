@@ -222,4 +222,4 @@ if (require.main === module) {
     process.exitCode = 1;
   });
 }
-module.exports = { audit, auditPlayback, checkPlayback, checkSegment };
+module.exports = { audit, auditPlayback };

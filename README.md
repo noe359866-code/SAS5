@@ -22,6 +22,14 @@ Habilitada no significa **disponible**: una fuente puede responder con error, no
 
 **Sin proxy de reproducción:** `/stream` devuelve la URL original del CDN. El addon puede comprobar el manifiesto al buscar un enlace, pero no retransmite playlists, variantes, claves, audio ni segmentos. Al retirar `/hls`, la reproducción ya no genera invocaciones sucesivas del Worker para esos recursos. `/stream` sigue siendo una consulta dinámica. Si el CDN rechaza el acceso directo o no ofrece CORS para Stremio Web, el enlace puede no reproducirse; no se recurre a un proxy alternativo. Las variables antiguas `SPINFLIX_PROXY_URL` y `HLS_PROXY_HOSTS` ya no tienen efecto; `SPINFLIX_URL` sigue indicando la API de búsqueda.
 
+## Fuentes web opcionales (solo Node)
+
+**PelisflixHD** (películas) y **SeriesFlix** (episodios) se instalan como un addon complementario. Stremio muestra **Abrir en el navegador** para las fichas que coinciden por título y año y anuncian audio latino o castellano. No son streams reproducibles dentro de Stremio.
+
+En el servidor Node, configura `STREAMFLIX_NODE_PROVIDERS=pelisflixhd,seriesflix`, reinicia e instala `https://<tu-host-node>/streamflix/manifest.json` en Stremio. Puedes indicar solo una de las claves; `off` o no definir la variable deja el complemento apagado. Esto no modifica la instalación principal ni su `STREAM_PROVIDERS`.
+
+**No configures esta opción en Cloudflare.** El Worker no contiene el complemento ni consulta estas webs. No hay proxy en Node ni en el Worker. Consulta los [controles y resultados de StreamFlix](docs/streamflix-node.md).
+
 ## Configuración local
 
 Requiere Node.js 18 o posterior.

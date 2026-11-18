@@ -41,12 +41,14 @@ function selectCard(cards, titles, year) {
   const unique = new Map();
   for (const card of cards) {
     if (!card.url || (card.year && card.year !== year)) continue;
-    const score = titleScore(completeNames(card.title), titles);
-    if (score) unique.set(card.url.pathname.replace(/\/$/, ''), { ...card, score });
+    const titleMatch = titleScore(completeNames(card.title), titles);
+    if (!titleMatch) continue;
+    const key = card.url.pathname.replace(/\/$/, '');
+    const score = (card.year ? 3 : 0) + titleMatch;
+    if (score > (unique.get(key)?.score || 0)) unique.set(key, { ...card, score });
   }
-  const ranked = [...unique.values()].sort((a, b) => Number(Boolean(b.year)) - Number(Boolean(a.year)) || b.score - a.score);
-  const [first, second] = ranked;
-  if (!first || (second && Boolean(first.year) === Boolean(second.year) && first.score === second.score)) return null;
+  const [first, second] = [...unique.values()].sort((a, b) => b.score - a.score);
+  if (!first || first.score === second?.score) return null;
   return first;
 }
 

@@ -8,7 +8,6 @@ const { providerHttp } = require('../lib/providerHttp');
 const { allowedVideoUrl, extractFromEmbedHtml, unpackPacked } = require('../lib/vimeos');
 const { parseManifest } = require('../lib/hlsManifest');
 const { isDirectMedia } = require('../lib/directMedia');
-const { checkPlayback, checkSegment } = require('./worker-streams-live');
 
 const controls = [
   ['CineCalidad', 'Matrix', 'https://www.cinecalidad.am/ver-pelicula/matrix/', '#playeroptionsul li[data-option]:not(.dooplay_player_option_trailer)', 'data-option'],
@@ -67,30 +66,67 @@ function optionAudio(label) {
   return '';
 }
 
-async function sampleOtherMedia(raw, player, http) {
-  // Solo medios en los orígenes conocidos. Anotar los demás, no abrirlos.
+async function sampleBytes(url) {
+  const res = await fetch(url, {
+    redirect: 'manual', signal: AbortSignal.timeout(2500), headers: { Origin: WEB, Range: 'bytes=0-383' },
+  });
+  const status = `HTTP ${res.status}`;
+  if (!res.ok || !res.body) {
+    await res.body?.cancel().catch(() => {});
+    return status;
+  }
+  const reader = res.body.getReader();
+  const head = Buffer.alloc(384);
+  let length = 0;
+  try {
+    while (length < head.length) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = value.subarray(0, head.length - length);
+      head.set(chunk, length);
+      length += chunk.length;
+    }
+  } finally { await reader.cancel().catch(() => {}); }
+  const ts = length > 376 && [0, 188, 376].every((index) => head[index] === 0x47);
+  const mp4 = length > 8 && /^(?:ftyp|styp|moof)$/.test(head.toString('ascii', 4, 8));
+  const cors = res.headers.get('access-control-allow-origin');
+  return `${status} (${ts ? 'MPEG-TS' : mp4 ? 'MP4' : 'sin cabecera de medio'}; CORS=${cors === '*' || cors === WEB ? 'sí' : 'no'})`;
+}
+
+async function sampleMedia(raw, player, http) {
   const url = urlOf(raw, player);
   if (!url || !isDirectMedia(url.href) || !/\.(?:m3u8|mp4)$/i.test(url.pathname)) return 'sin HLS/MP4 público en el visor';
-  if (allowedVideoUrl(url.href) && /\.m3u8$/i.test(url.pathname)) return (await checkPlayback(fetch, url.href, new URL('https://addon.invalid').origin)).state;
-  if (url.origin !== player.origin || !playerHosts.has(url.hostname)) return `medio en ${url.hostname}, sin sondear (origen no validado)`;
-  if (/\.mp4$/i.test(url.pathname)) return (await checkSegment(fetch, url.href)).state;
-  const text = await http.text(url.href, { maxBytes: 512 * 1024, timeoutMs: 2500, headers: { Origin: WEB } });
-  return parseManifest(text) ? 'HLS válido; falta comprobar segmentos' : 'manifiesto inválido';
+  const allowed = (u) => u && (allowedVideoUrl(u.href) || (u.origin === player.origin && playerHosts.has(u.hostname)));
+  if (!allowed(url)) return `medio en ${url.hostname}, sin sondear (origen no validado)`;
+  if (/\.mp4$/i.test(url.pathname)) return `MP4 ${await sampleBytes(url)}`;
+  const playlist = async (u) => parseManifest(await http.text(u.href, {
+    maxBytes: 512 * 1024, timeoutMs: 2500, headers: { Origin: WEB },
+  }));
+  let master;
+  try { master = await playlist(url); } catch (err) { return `manifiesto CDN ${resultOf(err)}`; }
+  if (!master) return 'manifiesto inválido';
+  const variant = master.variants.length ? urlOf(master.variants[0].uri, url) : url;
+  if (!allowed(variant) || !/\.m3u8$/i.test(variant.pathname)) return 'HLS válido, variante no sondeable';
+  let media;
+  try { media = variant === url ? master : await playlist(variant); } catch (err) { return `variante CDN ${resultOf(err)}`; }
+  const segment = urlOf(media?.segment, variant);
+  if (!allowed(segment) || !/\.(?:ts|m4s|mp4)$/i.test(segment.pathname)) return 'HLS válido, segmento no sondeable';
+  return `HLS válido, primer segmento ${await sampleBytes(segment)}`;
 }
 
 async function sampleOption(url, http) {
   try {
-    if (isDirectMedia(url.href)) return await sampleOtherMedia(url.href, url, http);
+    if (isDirectMedia(url.href)) return await sampleMedia(url.href, url, http);
     const html = await http.text(url.href, { maxBytes: 1024 * 1024, timeoutMs: 3000 });
     if (isChallenge(html)) return 'challenge del visor';
     if (allowedVideoUrl(url.href)) {
       const master = extractFromEmbedHtml(html).hls.find((raw) => allowedVideoUrl(raw));
-      return master ? await sampleOtherMedia(master, url, http) : 'visor Vimeos sin HLS público';
+      return master ? await sampleMedia(master, url, http) : 'visor Vimeos sin HLS público';
     }
     const $ = load(html);
     const source = $('video[src], video source[src]').first().attr('src')
       || /\bsources?\s*:\s*\[\s*\{\s*["']?file["']?\s*:\s*["']([^"']+)["']/i.exec(unpackPacked(html) || html)?.[1];
-    return source ? await sampleOtherMedia(source, url, http)
+    return source ? await sampleMedia(source, url, http)
       : 'sin HLS/MP4 público en el visor';
   } catch (error) { return resultOf(error); }
 }

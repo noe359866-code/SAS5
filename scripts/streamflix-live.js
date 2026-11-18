@@ -31,10 +31,15 @@ async function main() {
     };
     const manifest = await json('/streamflix/manifest.json');
     assert.deepEqual(manifest.resources, ['stream']);
+    assert.deepEqual(manifest.types, ['movie', 'series']);
+    const original = await json('/manifest.json');
+    assert.equal(original.id, 'org.comunidad.catalogos.plus');
+    assert.notEqual(manifest.id, original.id);
     for (const [title, type, id, expected] of controls) {
       try {
         const { streams } = await json(`/streamflix/stream/${type}/${encodeURIComponent(id)}.json`);
-        const match = streams.some((stream) => stream.externalUrl === expected && !stream.url && !stream.behaviorHints?.proxyHeaders);
+        const match = streams.some((stream) => stream.externalUrl === expected && !stream.url && !stream.behaviorHints?.proxyHeaders
+          && /Abrir en el navegador/.test(stream.description) && /Latino|Castellano/.test(stream.description));
         log(title, match ? 'ficha exacta como enlace de navegador, no reproducción' : `sin ficha exacta (${streams.length} resultados)`);
         if (!match) process.exitCode = 1;
       } catch {

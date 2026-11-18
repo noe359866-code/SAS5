@@ -48,6 +48,16 @@ test('healthz: reporta runtime cloudflare-workers', async () => {
   assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, gnulahd: true });
 });
 
+test('las fuentes web de StreamFlix no existen en el Worker aunque se configure la variable de Node', async (t) => {
+  const fetchMock = t.mock.method(global, 'fetch', async () => { throw new Error('no debe consultar la red'); });
+  const workerEnv = { ...env, STREAMFLIX_NODE_PROVIDERS: 'pelisflixhd,seriesflix' };
+  for (const path of ['/streamflix/manifest.json', '/streamflix/stream/movie/tt0133093.json']) {
+    const response = await worker.fetch(new Request(`https://worker-isolation.test${path}`), workerEnv, {});
+    assert.equal(response.status, 404);
+  }
+  assert.equal(fetchMock.mock.callCount(), 0);
+});
+
 test('catalog: sin TMDB key devuelve metas=[] con 200', async () => {
   const res = await get('/catalog/movie/cine_top.json');
   assert.equal(res.status, 200);

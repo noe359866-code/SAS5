@@ -8,9 +8,10 @@ on:
       - 'scripts/provider-pair-live.js'
       - 'lib/playlatin.js'
       - 'lib/fuegocine.js'
-      - 'lib/publicEmbedMedia.js'
+      - 'lib/playlatinDropload.js'
       - 'test/playlatin.test.js'
       - 'test/fuegocine.test.js'
+      - 'test/seriesStreams.test.js'
 permissions:
   contents: read
 jobs:

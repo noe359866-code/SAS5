@@ -244,3 +244,80 @@ test('playlatin: una identidad distinta en la respuesta y los iframes no son str
     assert.equal(out.reason, reason);
   }
 });
+
+const DROPEMBED = 'https://dr0pstream.com/e/fixture';
+const DROPMASTER = 'https://r1.dropcdn.io/video/master.m3u8?token=fixture';
+const dropHTML = (master) => `<script>jwplayer('video').setup({sources:[{file:'${master}'}]});</script>`;
+const dropSource = { url: DROPEMBED, kind: 'embed', embed: true };
+const masterHLS = '#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=1000000,RESOLUTION=1280x720\n720.m3u8\n';
+
+test('playlatin: respeta el resolver HTTPS anunciado y no envía tokens a otro destino', async () => {
+  for (const endpoint of ['https://tercero.example/api/resolve', '/api/list', '/api/resolve?other=1']) {
+    const calls = mockFetch([[/\/custom\/movie\//, () => new Response(SHELL.replace('data-mode=', `data-resolve-endpoint="${endpoint}" data-mode=`))]]);
+    assert.equal((await playlatin.searchPlayLatin('', resolvedMovie)).reason, 'unsupported-resolver');
+    assert.equal(calls.length, 1);
+  }
+  const calls = mockFetch([
+    [/\/custom\/movie\//, () => new Response(SHELL.replace('data-mode=', 'data-resolve-endpoint="/api/player/resolve" data-mode='))],
+    [/^https:\/\/playlatinsrc\.co\/api\/player\/resolve$/, (_, init) => {
+      assert.equal(init.redirect, 'manual');
+      return json(RESOLVE);
+    }],
+  ]);
+  assert.equal((await playlatin.searchPlayLatin('', resolvedMovie)).hits.length, 2);
+  assert.equal(calls.length, 2);
+});
+
+test('playlatin: lee HLS de Dropload para el episodio antiguo sin etiquetar películas sin versión', async () => {
+  const calls = mockFetch([
+    [/\/custom\/serial\//, () => new Response(SHELL_SERIES)],
+    [/\/api\/resolve$/, () => json({ type: 'series', season: 1, episode: 2, id: resolvedEpisode.imdbId,
+      sources: [dropSource, { url: 'https://doodstream.com/e/fixture', kind: 'embed' }] })],
+    [/^https:\/\/dr0pstream\.com\/e\/fixture$/, (_, init) => {
+      assert.match(init.headers.Referer, /\/custom\/serial\/tt0108778\/1\/2$/);
+      assert.equal(init.redirect, 'manual');
+      assert.equal(init.method, undefined);
+      return new Response(dropHTML(DROPMASTER));
+    }],
+    [/^https:\/\/r1\.dropcdn\.io\/video\/master\.m3u8/, (_, init) => {
+      assert.equal(init.headers.Referer, 'https://dr0pstream.com/');
+      assert.equal(init.redirect, 'manual');
+      return new Response(masterHLS);
+    }],
+  ]);
+  const report = {};
+  const [hit] = await streams.runProviders(['playlatin'], '', resolvedEpisode, resolvedEpisode.title, report);
+  assert.equal(report.playlatin.accepted, 1);
+  assert.equal(hit.url, DROPMASTER);
+  assert.equal(hit.audioLabel, 'Latino');
+  assert.equal(hit.resolution, '720p');
+  assert.equal(hit.verification, 'manifest-ok');
+  assert.ok(hit.expiresAt <= Date.now() + 120_000);
+  assert.equal(streams.toStream(hit, null).behaviorHints.proxyHeaders.request.Referer, 'https://dr0pstream.com/');
+  assert.equal(calls.length, 4);
+
+  const movieCalls = mockFetch([[/\/custom\/movie\//, () => new Response(SHELL)], [/\/api\/resolve$/, () => json({ ...RESOLVE, sources: [dropSource] })]]);
+  assert.equal((await playlatin.searchPlayLatin('', resolvedMovie)).reason, 'embeds-only');
+  assert.equal(movieCalls.length, 2);
+});
+
+test('playlatin: un challenge, HTML o un CDN ajeno no se convierte en stream', async () => {
+  const good = { ...dropSource, version: 'castellano' };
+  for (const [embed, body, reason, callCount] of [
+    [new Response(dropHTML('https://r1.dropcdn.io.example/master.m3u8')), null, 'embed-no-public-media', 3],
+    [new Response('', { status: 403, headers: { 'cf-mitigated': 'challenge' } }), null, 'embed-challenge', 3],
+    [new Response(dropHTML(DROPMASTER)), new Response('<html>no hay vídeo</html>'), 'cdn-invalid-manifest', 4],
+    [new Response(dropHTML(DROPMASTER)), new Response('denied', { status: 403 }), 'cdn-http-403', 4],
+  ]) {
+    const calls = mockFetch([
+      [/\/custom\/movie\//, () => new Response(SHELL)],
+      [/\/api\/resolve$/, () => json({ ...RESOLVE, sources: [good, { ...dropSource, version: 'inglés' }] })],
+      [/^https:\/\/dr0pstream\.com\/e\/fixture$/, () => embed],
+      [/^https:\/\/r1\.dropcdn\.io\//, () => body],
+    ]);
+    const result = await playlatin.searchPlayLatin('', resolvedMovie);
+    assert.deepEqual(result.hits, []);
+    assert.equal(result.reason, reason);
+    assert.equal(calls.length, callCount);
+  }
+});

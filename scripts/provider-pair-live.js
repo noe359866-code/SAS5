@@ -8,6 +8,9 @@ const { providerHttp } = require('../lib/providerHttp');
 const { lookupPlayLatin, normalizeSources } = require('../lib/playlatin');
 const { findFuegoPlayer } = require('../lib/fuegocine');
 const { unpackPacked } = require('../lib/vimeos');
+const { runProviders } = require('../lib/streams');
+const { droploadCdn } = require('../lib/playlatinDropload');
+const { parseManifest } = require('../lib/hlsManifest');
 const { annotate } = require('./providers-live');
 
 const playCases = [
@@ -18,6 +21,7 @@ const playCases = [
 ];
 const fuegoCases = [
   { title: 'Toy Story 5', year: '2026', mediaType: 'movie' },
+  { title: 'Te Van a Matar', year: '2026', mediaType: 'movie' },
   { title: 'Ratatouille', year: '2007', mediaType: 'movie' },
   { title: 'VisionQuest', year: '2026', mediaType: 'series', season: 1, episode: 1 },
 ];
@@ -56,7 +60,7 @@ function urlKind(raw, page) {
         source = safeUrl(Buffer.from(value, 'base64').toString('utf8'));
         kind = 'base64';
       }
-      return `${key}:${source?.pathname.match(/\.(?:mp4|m3u8|vtt|srt)$/i) ? `${kind}-${source.hostname}${source.pathname.slice(source.pathname.lastIndexOf('.'))}` : source ? `${kind}-${source.hostname}` : 'sin-medio'}`;
+      return `${key}:${source?.pathname.match(/\.(?:mp4|m3u8|vtt|srt)$/i) ? `${kind}-${source.hostname}${source.pathname.slice(source.pathname.lastIndexOf('.'))}` : source ? `${kind}-${source.hostname}` : value.trim() ? 'sin-medio' : 'vacío'}`;
     }).join(',');
   }
   return `${url.hostname}/${path}${shape ? ` (${shape})` : ''}`;
@@ -74,7 +78,8 @@ function playerShape($, page) {
   const markers = ['jwplayer', 'videojs', 'Playerjs', 'Clappr', 'sources', 'm3u8', 'mp4', 'm3u8Url', 'data-src']
     .filter((key) => new RegExp(`\\b${key}\\b`, 'i').test(markup));
   const bits = (list) => [...new Set(list)].slice(0, 8).join(', ') || '—';
-  return `video=${bits(videos)}; iframes=${bits(frames)}; literales=${bits(signals)}; señales=${bits(markers)}`;
+  const jw = /\bjwplayer\s*\(/i.test(markup) && /[\w'"]sources["']?\s*:\s*\[/.test(markup);
+  return `video=${bits(videos)}; iframes=${bits(frames)}; literales=${bits(signals)}; señales=${bits(markers)}${jw ? '; JW sources[]' : ''}`;
 }
 
 const checked = new Set();
@@ -90,45 +95,66 @@ async function inspectOnce(raw, page, label) {
   }
 }
 
-const versionNames = new Set(['latino', 'castellano', 'subtitulado']);
-const kindNames = new Set(['embed', 'iframe', 'mp4', 'hls', 'webm']);
-async function probeLatin() {
-  for (const fixture of playCases) {
-    const label = `PlayLatinSRC / ${fixture.title}`;
-    try {
-      const { payload, page, reason } = await lookupPlayLatin(fixture, providerHttp(8000));
-      if (!payload) { annotate(label, reason); continue; }
-      const list = Array.isArray(payload.sources) ? payload.sources : [];
-      const types = list.slice(0, 16).map((source) => `${urlKind(source?.url, page)}:${kindNames.has(source?.kind) ? source.kind : 'sin-tipo'}:${versionNames.has(source?.version) ? source.version : 'sin-idioma'}`);
-      const keys = (obj) => Object.keys(obj || {}).filter((key) => /^[a-z_]{1,25}$/i.test(key)).join(',');
-      annotate(label, `directos=${normalizeSources(payload).length}; fuentes=${list.length}; ${[...new Set(types)].join(', ') || '—'}; proxy anunciado=${list.filter((s) => typeof s?.proxy_url === 'string' && s.proxy_url).length}; campos=${keys(payload)}/${keys(list[0])}`);
-      await Promise.all(list.slice(0, 16).filter((entry) => versionNames.has(entry?.version) && entry.version !== 'subtitulado').map((entry) => inspectOnce(entry.url, page, 'PlayLatinSRC')));
-    } catch (error) { annotate(label, reportError(error)); }
-  }
+async function probeDrop(hit) {
+  const master = droploadCdn(hit.url);
+  if (!master || !/\.m3u8$/i.test(new URL(master).pathname)) return 'medio sin sonda CDN';
+  const http = providerHttp(6000);
+  const headers = { Referer: hit.referer };
+  const read = async (url) => parseManifest(await http.text(url, { headers, maxBytes: 256 * 1024, timeoutMs: 2500 }));
+  const mediaUrl = (uri, parent, extension) => {
+    const url = uri && droploadCdn(uri, parent);
+    return url && extension.test(new URL(url).pathname) ? url : null;
+  };
+  try {
+    const playlist = await read(master);
+    const first = mediaUrl(playlist?.variants[0]?.uri, master, /\.m3u8$/i);
+    const list = first ? await read(first) : playlist;
+    const segment = mediaUrl(list?.segment, first || master, /\.(?:ts|mp4|m4s)$/i);
+    if (!segment) return 'manifiesto sin segmento sondeable';
+    const response = await fetch(segment, { redirect: 'manual', headers: { ...headers, Range: 'bytes=0-0' }, signal: AbortSignal.timeout(2500) });
+    await response.body?.cancel().catch(() => {});
+    return `segmento HTTP ${response.status} (Range de 1 byte; no reproducción)`;
+  } catch (error) { return `sonda CDN: ${reportError(error)}`; }
 }
 
-async function inspectLatinSeries() {
-  const page = 'https://playlatinsrc.co/serial/tt0903747';
-  try {
-    const $ = load(await fetchText(page, { redirect: 'manual', timeoutMs: 5000, maxBytes: 1024 * 1024 }));
-    const labels = $('span,div,button,strong').toArray().filter((node) => /^latino$|^castellano$|^subtitulado$/i.test($(node).text().trim()))
-      .slice(0, 12).map((node) => `${node.name}${$(node).parent().attr('class') ? ` bajo ${$(node).parent().attr('class')}` : ''}: ${(node.attribs.class || '').slice(0, 70)}`);
-    const tags = $('[data-version],[data-lang],[data-language],[data-imdb],[data-imdb-id]').toArray().slice(0, 12)
-      .map((el) => `${el.name}: ${Object.keys(el.attribs).filter((k) => /^data-/.test(k)).join(',')}`);
-    annotate('PlayLatinSRC / ficha estándar de serie', `etiquetas=${[...new Set(labels)].join('; ')}; atributos=${[...new Set(tags)].join('; ')}`);
-  } catch (error) { annotate('PlayLatinSRC / ficha estándar de serie', reportError(error)); }
+async function checkAdapter(key, fixture) {
+  const report = {};
+  const hits = await runProviders([key], fixture.title, fixture, fixture.title, report, undefined, { ignorePause: true });
+  const entry = report[key];
+  const formats = [...new Set(hits.map((hit) => `${hit.quality || 'directo'}/${hit.audioLabel}${hit.verification ? `/${hit.verification}` : ''}`))];
+  const playback = key === 'playlatin' && hits.length ? `; ${await probeDrop(hits[0])}` : '';
+  const state = entry.reason || entry.skipped || (hits.length ? 'medio aceptado' : 'sin medio');
+  return { note: `${state}; aceptados=${entry.accepted ?? 0}; ${formats.join(', ') || '—'}${playback}`, entry };
+}
+
+async function probeLatin() {
+  for (const fixture of playCases) {
+    const label = `PlayLatinSRC / ${fixture.title}${fixture.season ? ` T${fixture.season}E${fixture.episode}` : ''}`;
+    try {
+      const { note, entry } = await checkAdapter('playlatin', fixture);
+      annotate(label, note);
+      if (entry.reason !== 'embed-no-public-media') continue;
+      const { payload, page } = await lookupPlayLatin(fixture, providerHttp(6000));
+      if (!payload) continue;
+      const list = Array.isArray(payload.sources) ? payload.sources : [];
+      const native = normalizeSources(payload).length;
+      annotate(`${label} / resolver`, `directos=${native}; embeds=${list.filter((s) => s?.embed === true).length}`);
+      await Promise.all(list.slice(0, 12).map((source) => inspectOnce(source?.url, page, 'PlayLatinSRC')));
+    } catch (error) { annotate(label, reportError(error)); }
+  }
 }
 
 async function probeFuego() {
   for (const fixture of fuegoCases) {
     const label = `FuegoCine / ${fixture.title}`;
     try {
+      const { note } = await checkAdapter('fuegocine', fixture);
       const { player: $, watch, reason, skipped, catalog } = await findFuegoPlayer(fixture, fixture.title, providerHttp(8000));
-      if (!$) { annotate(label, reason || skipped); continue; }
+      if (!$) { annotate(label, `${note}; localizador: ${reason || skipped}`); continue; }
       const frames = $('iframe[src],iframe[data-src]').toArray();
       const containers = frames.map((node) => $(node).parents().toArray().slice(0, 3).map((parent) => $(parent).attr('class'))
         .filter((classes) => classes && /^[\w -]{1,100}$/.test(classes)).join(' > ')).filter(Boolean);
-      annotate(label, `catálogo=${catalog}; ${playerShape($, watch)}; contenedores=${[...new Set(containers)].join(' | ') || '—'}`);
+      annotate(label, `${note}; catálogo=${catalog}; ${playerShape($, watch)}; contenedores=${[...new Set(containers)].join(' | ') || '—'}`);
       await Promise.all(frames.slice(0, 8).map((node) => inspectOnce($(node).attr('data-src') || $(node).attr('src'), watch, 'FuegoCine')));
     } catch (error) { annotate(label, reportError(error)); }
   }
@@ -137,8 +163,8 @@ async function probeFuego() {
 // Separar pasos: Actions trunca las anotaciones de un paso largo.
 const group = process.argv[2];
 const jobs = {
-  playlatin: () => Promise.all([probeLatin(), inspectLatinSeries()]),
+  playlatin: probeLatin,
   fuegocine: probeFuego,
 };
-(group && jobs[group] ? jobs[group]() : Promise.all([probeLatin(), inspectLatinSeries(), probeFuego()]))
+(group && jobs[group] ? jobs[group]() : Promise.all([probeLatin(), probeFuego()]))
   .catch(() => { process.exitCode = 1; });

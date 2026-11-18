@@ -18,15 +18,17 @@ test('SpinFlix verifica la ficha y devuelve solo HLS con doblaje válido', async
       { link: 'https://vimeos.net.evil.example/embed', language: 'Latino' },
       { link: embed, language: 'Castellano' },
     ] } });
+    if (raw === master) return new Response('#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=900000,RESOLUTION=1728x720\nv720.m3u8');
     assert.equal(url.pathname, '/streamurl');
     assert.equal(url.searchParams.get('url'), embed);
     return Response.json({ qualities: [{ url: master }] });
   });
   const resolved = { title: movie.title, year: '2025', mediaType: 'movie', imdbId: movie.imdb_id };
   const hits = await runProviders(['spinflix'], movie.title, resolved, movie.title, {});
-  assert.deepEqual(calls, ['/search', '/pelicula/prueba-spinflix', '/streamurl']);
+  assert.deepEqual(calls, ['/search', '/pelicula/prueba-spinflix', '/streamurl', '/fixture/master.m3u8']);
   assert.equal(hits.length, 1);
   assert.equal(hits[0].provider, 'spinflix');
   assert.equal(hits[0].audioLabel, 'Castellano');
   assert.equal(hits[0].directUrl, master);
+  assert.equal(hits[0].resolution, '720p');
 });

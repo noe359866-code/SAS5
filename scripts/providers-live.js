@@ -3,6 +3,9 @@
 // Sonda de los adaptadores usados en producción, sin mocks ni claves de TMDB.
 const { appendFileSync } = require('node:fs');
 const { activeProviders, runProviders } = require('../lib/streams');
+const { parseManifest } = require('../lib/hlsManifest');
+const { fetchText } = require('../lib/http');
+const { allowedVideoUrl, REFERER } = require('../lib/vimeos');
 
 const fixtures = {
   peliculas: [
@@ -33,7 +36,35 @@ function summarize(entry) {
   if (entry?.paused) return 'en pausa';
   if (entry?.skipped) return `omitido: ${entry.skipped}`;
   if (!entry?.ok) return entry?.reason || 'error de consulta';
-  return entry.reason || (entry.relevant ? 'medio aceptado' : 'sin medio compatible');
+  return entry.reason || (entry.accepted ? 'medio aceptado' : 'sin medio compatible');
+}
+
+// Solo sondear playlists y un segmento en el CDN conocido; no descargar
+// vídeos, consultar iframes arbitrarios, publicar firmas ni verificar audio.
+async function probeMedia(hit) {
+  const raw = hit?.directUrl || hit?.url;
+  if (!allowedVideoUrl(raw) || !/\.m3u8$/i.test(new URL(raw).pathname)) return 'no sondeado';
+  const pickUrl = (uri, parent, suffix) => {
+    if (!uri) return null;
+    const url = new URL(uri, parent);
+    return allowedVideoUrl(url.href) && suffix.test(url.pathname) ? url.href : null;
+  };
+  const headers = { Referer: REFERER };
+  const read = async (url) => parseManifest(await fetchText(url, { redirect: 'manual', headers, timeoutMs: 3000, maxBytes: 512 * 1024 }));
+  try {
+    const manifest = await read(raw);
+    if (!manifest) return 'HLS inválido';
+    const sub = pickUrl(manifest.variants[0]?.uri, raw, /\.m3u8$/i);
+    const list = sub ? await read(sub) : manifest;
+    const segment = pickUrl(list?.segment, sub || raw, /\.(?:ts|m4s|mp4)$/i);
+    if (!segment) return 'HLS válido, sin segmento sondeable';
+    const response = await fetch(segment, { redirect: 'manual', headers: { ...headers, Range: 'bytes=0-0' }, signal: AbortSignal.timeout(3000) });
+    await response.body?.cancel().catch(() => {});
+    const type = response.headers.get('content-type') || '';
+    return response.ok && !/html|json/i.test(type) ? `HLS y segmento HTTP ${response.status}` : `HLS válido, segmento no verificado (HTTP ${response.status})`;
+  } catch (err) {
+    return `falló la comprobación HLS${err.status ? ` (HTTP ${err.status})` : ''}`;
+  }
 }
 
 async function main(group) {
@@ -47,23 +78,25 @@ async function main(group) {
     const keys = fixture.keys.filter((key) => enabled.includes(key));
     const report = {};
     const hits = await runProviders(keys, fixture.title, fixture, fixture.title, report, 6000);
-    for (const key of fixture.keys) {
+    const checks = await Promise.all(fixture.keys.map((key) => probeMedia(hits.find((hit) => hit.provider === key))));
+    for (const [index, key] of fixture.keys.entries()) {
       const entry = report[key];
       const state = entry ? summarize(entry) : 'desactivado';
       const status = entry?.status || /\bHTTP (\d{3})\b/.exec(entry?.error || '')?.[1] || '—';
       const kinds = [...new Set(hits.filter((hit) => hit.provider === key).map((hit) => hit.resolution || hit.quality || 'directo'))].join(', ') || '—';
       const raw = entry?.raw ?? 0;
-      const relevant = entry?.relevant ?? 0;
-      const note = `${state}; HTTP ${status}; aceptados ${relevant}/${raw}; formato/calidad ${kinds}`;
+      const accepted = entry?.accepted ?? entry?.relevant ?? 0;
+      const check = checks[index];
+      const note = `${state}; HTTP ${status}; aceptados ${accepted}/${raw}; formato/calidad ${kinds}; ${check}`;
       annotate(`${label} / ${key}`, note);
-      rows.push(`| ${label} | ${key} | ${state} | ${status} | ${relevant}/${raw} | ${kinds} |`);
+      rows.push(`| ${label} | ${key} | ${state} | ${status} | ${accepted}/${raw} | ${kinds} | ${check} |`);
     }
     if (fixture.control && !hits.length) failed = true;
   }
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
     `### Scrapers: ${group || 'todos'}`, '',
-    '| Control | Proveedor | Estado | HTTP | Aceptados/extraídos | Formato/calidad |',
-    '|---|---|---|---|---|---|', ...rows, '',
+    '| Control | Proveedor | Estado | HTTP | Aceptados/extraídos | Formato/calidad | Sonda CDN |',
+    '|---|---|---|---|---|---|---|', ...rows, '',
     'Que el adaptador acepte una URL no prueba reproducción en Stremio. Sonda desde el runner, no desde producción.', '',
   ].join('\n'));
   if (failed) process.exitCode = 1;

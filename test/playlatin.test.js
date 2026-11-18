@@ -154,7 +154,7 @@ test('playlatin: episodio → ruta con temporada y episodio', async () => {
   config.reload({ PLAYLATIN: 'on' });
   const calls = mockFetch([
     [/\/custom\/serial\/tt0108778\/1\/2$/, () => new Response(SHELL_SERIES, { status: 200 })],
-    [/\/api\/resolve$/, () => json(RESOLVE)],
+    [/\/api\/resolve$/, () => json({ ...RESOLVE, imdb_id: 'tt0108778', id: 'tt0108778', type: 'series', season: 1, episode: 2 })],
   ]);
   const result = await streams.SEARCHERS.playlatin('Friends S01E02', resolvedEpisode, resolvedEpisode.title, 8000);
   assert.equal(result.hits.length, 2);
@@ -169,6 +169,7 @@ test('playlatin: página sin token o título fuera de catálogo → sin streams,
   mockFetch([[/\/custom\/movie\/tt0110357$/, () => new Response('<div class="player-shell" data-id="tt0110357"></div>', { status: 200 })]]);
   const result = await streams.SEARCHERS.playlatin('x', resolvedMovie, resolvedMovie.title, 8000);
   assert.deepEqual(result.hits, []);
+  assert.equal(result.reason, 'missing-token');
 });
 
 test('playlatin: resolve que responde ok:false no lanza', async () => {
@@ -179,6 +180,7 @@ test('playlatin: resolve que responde ok:false no lanza', async () => {
   ]);
   const result = await streams.SEARCHERS.playlatin('x', resolvedMovie, resolvedMovie.title, 8000);
   assert.deepEqual(result.hits, []);
+  assert.equal(result.reason, 'resolve-rejected');
 });
 
 test('playlatin: sin IMDb no se consulta, y la 2ª pasada de título no repite', async () => {
@@ -219,4 +221,26 @@ test('playlatin: los streams salen con proxyHeaders y noWebReady', async () => {
   assert.equal(stream.behaviorHints.notWebReady, true);
   assert.equal(stream.behaviorHints.proxyHeaders.request.Referer, 'https://playlatinsrc.co/');
   assert.match(stream.title, /🎧 Latino/);
+});
+
+test('playlatin: atributos ajenos no cambian el ID del reproductor; no acepta otro episodio', async () => {
+  const html = `<p data-id="tt999" data-resolve-token="ajeno"></p>${SHELL_SERIES}`;
+  assert.equal(playlatin.parseShell(html).id, resolvedEpisode.imdbId);
+  assert.equal(playlatin.parseShell(`<p data-id="tt999" data-resolve-token="ajeno"></p>`).ok, false);
+  const calls = mockFetch([[/\/custom\/serial\//, () => new Response(html)]]);
+  const result = await playlatin.searchPlayLatin('', { ...resolvedEpisode, episode: 3 });
+  assert.equal(result.reason, 'identity-mismatch');
+  assert.equal(calls.length, 1, 'no envía un POST para los datos de otro episodio');
+});
+
+test('playlatin: una identidad distinta en la respuesta y los iframes no son streams', async () => {
+  for (const [payload, reason] of [
+    [{ ...RESOLVE, imdb_id: 'tt999' }, 'identity-mismatch'],
+    [{ ...RESOLVE, sources: [{ version: 'latino', kind: 'embed', url: 'https://embed.example/player.mp4' }] }, 'embeds-only'],
+  ]) {
+    mockFetch([[/\/custom\/movie\//, () => new Response(SHELL)], [/\/api\/resolve$/, () => json(payload)]]);
+    const out = await playlatin.searchPlayLatin('', resolvedMovie);
+    assert.deepEqual(out.hits, []);
+    assert.equal(out.reason, reason);
+  }
 });

@@ -189,7 +189,7 @@ async function runAndCache(key, createResponse, ctx, edge) {
       .then(() => serializeResponse(response))
       // La ventana de gracia se toma del `stale-while-revalidate` publicado (hasta
       // 24 h): mientras siga en memoria, la petición no ejecuta el handler.
-      .then((entry) => responseCache.set(key, entry, ttl, { staleSeconds: stale || 3600 }))
+      .then((entry) => responseCache.set(key, entry, ttl, { staleSeconds: stale }))
       .catch(() => {});
     if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(store);
     else await store;
@@ -263,7 +263,7 @@ async function serveStream(type, id, cfg, request, env, ctx) {
   if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
   const create = async () => {
     const result = await core.handleStream(type, decodedId, cfg, workerRuntime(env, ctx));
-    return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
+    return jsonResponse(result, 200, 0, core.streamCacheControl(result.cacheMaxAge));
   };
   const cacheUrl = canonicalStreamCacheUrl(request.url, type, decodedId, cfg);
   return edgeCached(request, ctx, create, cacheUrl);

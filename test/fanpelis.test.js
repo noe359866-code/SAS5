@@ -18,6 +18,7 @@ const SERIES = { title: 'Breaking Bad', altTitle: null, year: '2008', mediaType:
 
 const MASTER = 'https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8';
 const EMBED = 'https://vimeos.net/embed-ccjygcfxujhd.html';
+const HLS = '#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=700000,RESOLUTION=1280x720\n720.m3u8';
 
 /** Respuestas de la API, tal como las devolvió el servicio real (recortadas). */
 const SEARCH_MOVIE = {
@@ -70,6 +71,7 @@ function mockApi(handlers) {
       if (!u.includes(needle)) continue;
       return typeof reply === 'function' ? reply(u, options) : reply;
     }
+    if (u === MASTER) return new Response(HLS);
     return json({}, 404);
   };
   return calls;
@@ -90,7 +92,8 @@ test('fanpelis película: búsqueda → player → embed → master .m3u8 por el
     assert.equal(hit.provider, 'fanpelis');
     assert.equal(hit.relevant, true);
     assert.match(hit.title, /Matrix 1999/);
-    assert.match(hit.title, /1080p/);
+    assert.match(hit.title, /720p/);
+    assert.equal(hit.resolution, '720p', 'manda el manifiesto, no la calidad de la ficha');
     assert.match(hit.title, /Latino/);
     assert.equal(hit.audioLabel, 'Latino');
     assert.equal(hit.directUrl, MASTER);

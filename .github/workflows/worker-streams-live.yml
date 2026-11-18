@@ -1,0 +1,23 @@
+name: Streams del Worker publicado
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/worker-streams-live.yml'
+      - 'scripts/worker-streams-live.js'
+      - 'test/workerStreamsLive.test.js'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: node --test test/workerStreamsLive.test.js
+      - name: Manifest, stream y comprobación HLS desde producción
+        run: node scripts/worker-streams-live.js

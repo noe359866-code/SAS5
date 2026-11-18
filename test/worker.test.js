@@ -175,7 +175,7 @@ test('manifest personal: filtra catálogos según config', async () => {
   const res = await get('/' + cfg + '/manifest.json');
   assert.equal(res.status, 200);
   const manifest = await res.json();
-  assert.equal(manifest.name, 'Catálogos+ · MX');
+  assert.equal(manifest.name, 'RamdonLatam · MX');
   const ids = manifest.catalogs.map((c) => c.id).sort();
   assert.deepEqual(ids, [
     'cine_estudio_marvel', 'cine_netflix', 'cine_tendencias',
@@ -229,7 +229,7 @@ test('manifest personal con config larga (~600 chars) responde 200 (no 404)', as
   const res = await get('/' + cfg + '/manifest.json');
   assert.equal(res.status, 200);
   const manifest = await res.json();
-  assert.equal(manifest.name, 'Catálogos+ · MX');
+  assert.equal(manifest.name, 'RamdonLatam · MX');
   assert.equal(manifest.resources.includes('stream'), true);
   assert.ok(manifest.catalogs.length > 40);
 

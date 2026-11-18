@@ -87,7 +87,7 @@ test('landing y /configure comparten el sistema de diseño y no dejan plantillas
   for (const [label, html] of [['landing', home], ['configure', conf]]) {
     assert.equal(/\$\{/.test(html), false, `${label}: quedan placeholders sin resolver`);
     assert.match(html, /--brand:\s*#f5f5f7/, `${label}: sin tokens del tema`);
-    assert.match(html, /--brand-2:\s*#2997ff/, `${label}: sin azul de sistema`);
+    assert.match(html, /--brand-2:\s*#2997ff/, `${label}: sin acento azul`);
     assert.match(html, /--grad:\s*linear-gradient/, `${label}: sin degradado de la acción principal`);
     assert.match(html, /class="nav"/, `${label}: sin barra de navegación`);
     assert.match(html, /class="page-glow"/, `${label}: sin fondo decorativo`);

@@ -80,7 +80,7 @@ globalThis.out = JSON.stringify({
 
 // ---------------------------------------------------------- Refresh visual
 
-test('la portada y el configurador comparten la piel Apple TV y el diseño responsive', () => {
+test('la portada y el configurador comparten la identidad de RamdonLatam y el diseño responsive', () => {
   const homeHtml = withEnv({}, () => home());
   const configureHtml = withEnv({}, () => configure());
   assert.match(homeHtml, /<h1>Stremio, <em>a tu manera\.<\/em><\/h1>/);
@@ -98,7 +98,7 @@ test('la portada y el configurador comparten la piel Apple TV y el diseño respo
     // Botones y controles de píldora; la acción principal es blanca sobre negro.
     assert.match(html, /border-radius: 980px/, label);
     assert.match(html, /\.btn-primary \{ color: #000;/, label);
-    assert.match(html, /Piel Apple TV/, label);
+    assert.match(html, /Ramdon<i>Latam<\/i>/, label);
     // El acento violeta→cian de la capa anterior no vuelve en ninguna regla.
     assert.equal(html.includes('rgba(124,92,255'), false, `${label}: queda violeta de marca`);
     // En la configuración predeterminada solo está el enlace externo de soporte.
@@ -107,18 +107,7 @@ test('la portada y el configurador comparten la piel Apple TV y el diseño respo
     // Los estantes llevan su marco (.rail-view), donde el script cuelga las flechas.
     assert.match(html, /<div class="rail-view"><div class="rail-scroll" data-autoscroll="1">/, label);
   }
-  // Hero cinematográfico: el muro va de fondo, fuera de la rejilla de texto,
-  // con seis columnas y cada una con su lista dos veces (bucle sin salto).
-  const backdrop = homeHtml.match(/<div class="hero-backdrop" aria-hidden="true">([\s\S]*?)<div class="wrap">/);
-  assert.ok(backdrop, 'falta .hero-backdrop');
-  const columns = backdrop[1].split('<div class="wall-col">').slice(1);
-  assert.equal(columns.length, 6);
-  for (const column of columns) {
-    const posters = [...column.matchAll(/<img src="([^"]+)"/g)].map((m) => m[1]);
-    assert.equal(posters.length, 10);
-    assert.deepEqual(posters.slice(0, 5), posters.slice(5));
-  }
-  assert.equal(/class="hero-visual"[^>]*>\s*<div class="hero-wall"/.test(homeHtml), false);
+  assert.match(homeHtml, /class="hero-backdrop" aria-hidden="true">\s*<img src="\/assets\/pacific-dusk.jpg" alt="" fetchpriority="high"/);
 });
 
 
@@ -130,7 +119,7 @@ test('soporte: el Discord sale en la barra, en la tarjeta y en el pie de las dos
       // Enlace de la barra, botón de icono (móvil), tarjeta y pie.
       assert.equal(count(html, `href="${DISCORD}" target="_blank" rel="noopener noreferrer"`), 4, label);
       assert.match(html, /Unirme al Discord/, label);
-      assert.match(html, /Discord de Catálogos\+/, label);
+      assert.match(html, /Discord de RamdonLatam/, label);
       assert.match(html, /aria-label="Soporte en Discord"/, label);
     }
   });
@@ -244,7 +233,7 @@ test('donaciones: las frases nuevas se traducen a los seis idiomas de la web', (
     'Donar',
     'Donar en Ko-fi',
     'Donar con Ko-fi',
-    '¿Te sirve Catálogos+? Invítame un café',
+    '¿Te sirve RamdonLatam? Invítame un café',
   ];
   for (const source of sources) {
     assert.ok(WEB_PHRASES.some((row) => row[0] === source), `falta la frase «${source}»`);

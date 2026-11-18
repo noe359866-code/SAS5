@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Addon de Stremio «Catálogos+» (vía stremio-addon-sdk).
+ * Addon de Stremio «RamdonLatam» (vía stremio-addon-sdk).
  * Punto de entrada para el servidor Node local y Vercel.
  * El núcleo (manifest + handlers) vive en lib/core.js y es compartido
  * con el Cloudflare Worker (worker.mjs).

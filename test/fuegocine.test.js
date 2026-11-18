@@ -13,7 +13,7 @@ test('FuegoCine abre el reproductor de la misma película y exige doblaje por fu
   t.mock.method(global, 'fetch', async (raw, init) => {
     assert.equal(new URL(raw).origin, 'https://fuegocine.com');
     assert.equal(new URL(raw).pathname, paths.shift());
-    assert.equal(init.redirect, 'error');
+    assert.equal(init.redirect, 'manual');
     return new Response(pages.shift());
   });
   const hits = await SEARCHERS.fuegocine('', { title: 'Demo', year: '2026', mediaType: 'movie' });

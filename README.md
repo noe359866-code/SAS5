@@ -1,4 +1,4 @@
-# Catálogos+
+# RamdonLatam
 
 Addon gratuito para Stremio con catálogos de películas y series, metadatos en español latino y fuentes de reproducción directa con audio latino o castellano.
 
@@ -46,7 +46,7 @@ npm run build:web
 npm run prerender
 ```
 
-Las pruebas usan respuestas simuladas y no garantizan que un proveedor externo esté disponible en vivo. Catálogos+ no aloja ni distribuye archivos; presenta metadatos y enlaces directos proporcionados por fuentes externas.
+Las pruebas usan respuestas simuladas y no garantizan que un proveedor externo esté disponible en vivo. RamdonLatam no aloja ni distribuye archivos; presenta metadatos y enlaces directos proporcionados por fuentes externas.
 
 ### FlixLatam
 

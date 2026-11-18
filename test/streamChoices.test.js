@@ -78,8 +78,12 @@ test('las configuraciones antiguas nunca reactivan CineCalidad ni TioPlus/PelisP
   }
   config.reload({ STREAM_PROVIDERS: [...retired, 'cuevana3', 'flixlatam'].join(',') });
   assert.deepEqual(streams.activeProviders(null), ['flixlatam', 'cuevana3']);
-  const segment = Buffer.from(JSON.stringify({ streams: ['cuevana3', ...retired] })).toString('base64url');
-  const cfg = user.decodeConfig(segment, [], [], streams.PROVIDER_KEYS);
+  const decode = (keys) => user.decodeConfig(Buffer.from(JSON.stringify({ streams: keys })).toString('base64url'), [], [], streams.PROVIDER_KEYS);
+  const cfg = decode(['cuevana3', ...retired]);
   assert.deepEqual(cfg.streams, ['cuevana3']);
   assert.deepEqual(streams.activeProviders(cfg), ['cuevana3']);
+  config.reload({ STREAM_PROVIDERS: retired.join(',') });
+  assert.equal(decode(retired).streams, null);
+  assert.deepEqual(streams.activeProviders(decode(retired)), streams.PROVIDER_KEYS);
+  assert.deepEqual(streams.activeProviders(decode([])), []);
 });

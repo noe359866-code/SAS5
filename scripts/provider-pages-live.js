@@ -46,7 +46,7 @@ function shape(html, url) {
     .filter((key) => new RegExp(`\\b${key}\\b`, 'i').test(inline)).join(',') || '—';
   const row = $('#seasons .episodios li').first();
   const options = $('[data-option],.ODDIV li[onclick],.pframe,[data-embed]').toArray().slice(0, 10).map(describe).join(' ') || '—';
-  const target = $('a[href*="/ver-pelicula/matrix/"],a[href*="/online/naruto-100724/"],a[href*="/peliculas/matrix-1999"]');
+  const target = $('a[href*="/online/naruto-100724/"],a[href*="/peliculas/matrix-1999"]');
   const headings = (el) => $(el).find('h2,h3,.title,time,span').toArray().slice(0, 6).map(marker).join(',') || '—';
   const cards = target.toArray().slice(0, 3).map((el) => {
     const ancestors = $(el).parents().toArray().slice(0, 4).map(marker).join('>');

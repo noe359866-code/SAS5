@@ -1,163 +1,75 @@
 'use strict';
 
-// Verifica los adaptadores reales e inventaría la estructura pública de
-// fichas conocidas. No registra enlaces firmados ni ejecuta código remoto.
+// Controles aislados: nunca se usa otra fuente para completar un resultado.
+// No se escribe HTML/JSON del proveedor, firmas ni URLs de vídeo en los logs.
+const { appendFileSync } = require('node:fs');
 const { load } = require('cheerio');
 const { runProviders } = require('../lib/streams');
 const { fetchText } = require('../lib/http');
 const { annotate, probeMedia } = require('./providers-live');
-const { allowedVideoUrl, inspectVimeos, unpackPacked, extractFromEmbedHtml } = require('../lib/vimeos');
-const { providerHttp } = require('../lib/providerHttp');
 
+const breakingBad = { title: 'Breaking Bad', year: '2008', imdbId: 'tt0903747', tmdbId: 1396, mediaType: 'series', season: 1, episode: 2 };
+const matrix = { title: 'Matrix', altTitle: 'The Matrix', year: '1999', imdbId: 'tt0133093', tmdbId: 603, mediaType: 'movie' };
 const controls = {
   flixlatam: [
-    { title: 'Matrix', year: '1999', mediaType: 'movie', page: 'https://flixlatam.com/pelicula/matrix' },
+    { ...matrix, page: 'https://flixlatam.com/pelicula/matrix' },
     { title: 'En Ruta de Escape', year: '2026', mediaType: 'movie', page: 'https://flixlatam.com/pelicula/en-ruta-de-escape-N6sitT' },
-    { title: 'Breaking Bad', year: '2008', mediaType: 'series', season: 1, episode: 2, page: 'https://flixlatam.com/serie/breaking-bad' },
+    { ...breakingBad, page: 'https://flixlatam.com/serie/breaking-bad' },
   ],
-  cuevana3: [
-    { title: 'Matrix', year: '1999', mediaType: 'movie', postId: 3899, page: 'https://cuevanas3.pro/peliculas/matrix-1999/' },
-    { title: 'El Efecto Mariposa', year: '2004', mediaType: 'movie', postId: 7712, page: 'https://cuevanas3.pro/peliculas/el-efecto-mariposa-2004/' },
-    { title: 'Breaking Bad', year: '2008', mediaType: 'series', season: 1, episode: 2, postId: 77, page: 'https://cuevanas3.pro/episodio/breaking-bad-temporada-1-episodio-2/' },
-  ],
+  cuevana3: [matrix, { title: 'El Efecto Mariposa', year: '2004', mediaType: 'movie' }, breakingBad],
 };
 
-const embedHosts = new Set(['embed69.org', 'uqload.vc', 'uqload.cx', 'uqload.is']);
-const inspected = new Set();
-const frames = 'iframe[src],iframe[data-src]';
-const mediaExt = /\.(?:m3u8|mp4|m4v|webm)$/i;
 const problem = (err) => err.challenge ? 'challenge' : err.status ? `HTTP ${err.status}` : err.timeout ? 'timeout' : 'error de red o formato';
-const list = (items, max = 9) => [...new Set(items)].slice(0, max).join(', ') || '—';
 
-function urlOf(raw, page) {
-  if (!raw || !/^(?:https:\/\/|\/)/i.test(raw)) return null;
+async function inspectFlix(fixture) {
+  const page = new URL(fixture.page);
+  const get = (url, options = {}) => fetchText(url, { redirect: 'manual', timeoutMs: 5000, maxBytes: 512 * 1024, ...options });
   try {
-    const url = new URL(raw, page);
-    return url.protocol === 'https:' && !url.username && !url.password && !url.port ? url : null;
-  } catch { return null; }
-}
-
-function urlShape(raw, page) {
-  const parsed = urlOf(raw, page);
-  if (parsed) return `${parsed.hostname}${mediaExt.exec(parsed.pathname)?.[0] || ''}`;
-  if (raw && raw.length < 2048 && /^[a-z0-9+/]+={0,2}$/i.test(raw)) {
-    const decoded = urlOf(Buffer.from(raw, 'base64').toString('utf8'), page);
-    if (decoded) return `base64:${decoded.hostname}${mediaExt.exec(decoded.pathname)?.[0] || ''}`;
-  }
-  return !raw ? 'vacío' : String(raw).startsWith('#') ? 'ancla' : 'sin URL directa';
-}
-
-function cuevanaShape($, page) {
-  const inline = $('script:not([src])').toArray().map((el) => $(el).html() || '').join('\n').replace(/\\\//g, '/');
-  const endpoints = ['fastApi', 'apiUrl'].map((key) => {
-    const raw = new RegExp(`["']?${key}["']?\\s*:\\s*["']([^"']+)["']`).exec(inline)?.[1];
-    const url = urlOf(raw, page);
-    if (!url) return null;
-    const path = /^\/(?:[a-z_-]{1,24}\/){0,5}(?:v\d{1,2}\/?)?$/i.test(url.pathname + (url.pathname.endsWith('/') ? '' : '/')) ? url.pathname : '';
-    return `${key}=${url.hostname}${path}`;
-  });
-  const links = $('a[href]').toArray().filter((el) => /\/(?:peliculas?|series?|episodio)\//i.test($(el).attr('href'))).length;
-  return `enlaces de catálogo=${links}; ${list(endpoints.filter(Boolean))}`;
-}
-
-function playerShape($, page, episode) {
-  const inline = $('script:not([src])').toArray().map((el) => $(el).html() || '').join('\n').replace(/\\\//g, '/');
-  const signals = [...inline.matchAll(/\b([a-z_][a-z0-9_]{0,36})["']?\s*(?:=|:)\s*(?=[\[{'"`])/gi)]
-    .map((m) => m[1]).filter((name) => /episode|season|player|embed|server|dataLink|source|video|ajax/i.test(name));
-  const literals = [...inline.matchAll(/['"]((?:https:\/\/|\/)[^'"<>\s\\]{2,2048})['"]/g)].map((m) => urlOf(m[1], page))
-    .filter((url) => url && mediaExt.test(url.pathname)).map((url) => urlShape(url.href, page));
-  const scripts = $('script[src]').toArray().map((el) => $(el).attr('src')).map((raw) => {
-    try {
-      const url = new URL(raw, page);
-      return url.origin === new URL(page).origin && /^\/[a-z0-9_./-]{1,160}\.js$/i.test(url.pathname) ? url.pathname : null;
-    } catch { return null; }
-  }).filter(Boolean);
-  const attrs = (sel, cap) => $(sel).toArray().slice(0, cap).map((el) => {
-    const names = Object.keys(el.attribs).filter((name) => /^(?:data-(?:play|video|embed|url|src|source|server|lang|episode|season|id)[a-z0-9-]*|src|onclick)$/i.test(name));
-    if (!names.length) return null;
-    const readable = names.map((name) => /^(?:data-)?(?:src|url|embed|video|file)$/.test(name) ? `${name}:${urlShape($(el).attr(name), page)}` : name);
-    const classes = ($(el).attr('class') || '').split(/\s+/).filter((cls) => /^(?:[a-z_-]*)(?:player|server|embed|frame|episode|tab)(?:[a-z_-]*)$/i.test(cls));
-    return `${el.name}${classes.length ? `.${classes.slice(0, 3).join('.')}` : ''}[${readable.join(',')}]`;
-  }).filter(Boolean);
-  const vids = $('video[src],video[data-src],video source[src],video source[data-src]').toArray().map((el) => urlShape($(el).attr('data-src') || $(el).attr('src'), page));
-  const playerAttrs = attrs(`${frames},[data-url],[data-video],[data-server],[data-embed],[data-player],[data-source],.pframe [onclick],[class*="server"] [onclick]`, 28);
-  const hash = episode && `#s${episode.season}-e${episode.episode}`;
-  const link = hash && $(`a[href$="${hash}"]`);
-  const row = link && link.first().closest('li');
-  const names = (el) => (el?.toArray() || []).flatMap((node) => Object.keys(node.attribs)).filter((name) => /^data-[a-z0-9-]+$|^onclick$/.test(name));
-  const ep = link && `; anclas exactas=${link.length}; atributos de fila=${list([...names(link), ...names(row), ...names(row.find('button,a,iframe'))])}; panel=${$(hash).length}`;
-  return `vídeo=${list(vids)}; literales=${list(literals)}; atributos=${list(playerAttrs)}; JS=${list(signals)}; scripts propios=${list(scripts, 6)}${ep || ''}`;
-}
-
-async function inspectEmbed(raw, page) {
-  const frame = urlOf(raw, page);
-  if (!frame || !embedHosts.has(frame.hostname) || inspected.has(frame.hostname)) return null;
-  inspected.add(frame.hostname);
-  try {
-    const html = await fetchText(frame.href, { redirect: 'manual', headers: { Referer: new URL(page).origin + '/' }, timeoutMs: 3500, maxBytes: 384 * 1024 });
-    if (/Anubis|making sure you.re not a bot|just a moment/i.test(html)) return `${frame.hostname}: challenge`;
-    if (/file (?:is no longer available|was removed|not found|expired)|expired or has been deleted/i.test(html)) return `${frame.hostname}: archivo no disponible`;
-    return `${frame.hostname}: ${playerShape(load(html), frame.href)}`;
-  } catch (err) { return `${frame.hostname}: ${problem(err)}`; }
-}
-
-async function cuevanaPlayer(fixture, origin) {
-  const http = providerHttp(6500);
-  const get = (url, maxBytes) => http.text(url, { maxBytes, headers: { Referer: fixture.page } });
-  try {
-    const api = `${origin}/wp-api/v1/player?postId=${fixture.postId}&demo=0`;
-    const payload = JSON.parse(await get(api, 512 * 1024)).data;
-    const frame = urlOf(payload?.embeds?.find((item) => item?.lang === 'Latino')?.url, fixture.page);
-    if (!frame || ![origin, 'https://cuevana3.gs'].includes(frame.origin) || frame.pathname !== '/player.php'
-      || frame.searchParams.get('server') !== 'vimeos' || !/^[a-z0-9_-]{16,512}$/i.test(frame.searchParams.get('t') || '')) return 'API: sin visor Vimeos Latino conocido';
-    // Destino canónico observado al abrir este visor público, no un redirect libre.
-    const canonical = new URL(frame.pathname + frame.search, origin).href;
-    const html = await get(canonical, 768 * 1024);
-    const text = unpackPacked(html) || html;
-    const { hls } = extractFromEmbedHtml(text);
-    const keys = [...text.matchAll(/\b([a-z_][a-z0-9_]{0,36})["']?\s*[:=]\s*(?:["'][^\r\n"']{0,2048}\.m3u8|\[\s*\{)/gi)]
-      .map((m) => m[1]);
-    const hlsHosts = list(hls.map((url) => urlShape(url, canonical)));
-    const recognized = load(html)('iframe[src]').toArray().map((node) => urlOf(node.attribs.src, canonical)).filter((url) => url?.origin === 'https://vimeos.net');
-    const frameShape = list(recognized.map((url) => `${url.pathname.match(/^\/[a-z]{1,16}(?:[/-]|\.php)/i)?.[0] || 'otro prefijo'}${url.pathname.endsWith('.html') ? '.html' : ''}`));
-    const check = hls.find((url) => allowedVideoUrl(url));
-    const media = check ? await inspectVimeos(check, http) : null;
-    return `API: visor Latino/Vimeos; HTML recibido, packed=${text !== html}; campos=${list(keys)}; HLS=${hlsHosts}; CDN=${media?.verification || (check ? 'manifiesto no aceptado' : 'no sondeado')}; iframe Vimeos=${frameShape}`;
-  } catch (err) { return `visor API: ${problem(err)}`; }
-}
-
-async function probe(key, fixture) {
-  const report = {};
-  const hits = await runProviders([key], fixture.title, fixture, fixture.title, report, undefined, { ignorePause: true });
-  const entry = report[key];
-  const checked = await Promise.all(hits.slice(0, 2).map(async (hit) => `${hit.audioLabel} (${hit.verification || 'URL directa'}, ${await probeMedia(hit)})`));
-  const state = `${entry.reason || entry.skipped || 'candidatos'}; aceptados=${entry.accepted || 0}; HTTP ${entry.status || '—'}${checked.length ? `; ${list(checked)}` : ''}`;
-  if (hits.length || ['challenge', 'access-denied'].includes(entry.reason)) return state;
-  try {
-    const html = await fetchText(fixture.page, { redirect: 'manual', timeoutMs: 7000, maxBytes: 2 * 1024 * 1024 });
-    const $ = load(html);
-    const embeds = await Promise.all($(frames).toArray().slice(0, 6).map((el) => inspectEmbed($(el).attr('data-src') || $(el).attr('src'), fixture.page)));
-    const shape = key === 'cuevana3' ? `${cuevanaShape($, fixture.page)}\n${await cuevanaPlayer(fixture, new URL(fixture.page).origin)}\n` : '';
-    let fragment = '';
-    if (key === 'flixlatam' && fixture.season && fixture.episode) {
-      const endpoint = new URL(`/api/episodio${new URL(fixture.page).pathname}/${fixture.season}/${fixture.episode}`, fixture.page);
-      try {
-        const data = JSON.parse(await fetchText(endpoint.href, { redirect: 'manual', headers: { Accept: 'application/json' }, timeoutMs: 5000, maxBytes: 512 * 1024 }));
-        if (data?.success === true && data.temporada === fixture.season && data.episodio === fixture.episode && typeof data.html === 'string') {
-          fragment = `\nFragmento exacto HTTP 200; ${playerShape(load(data.html), fixture.page)}`;
-        } else fragment = '\nFragmento no corresponde al episodio';
-      } catch (err) { fragment = `\nFragmento: ${problem(err)}`; }
+    let html;
+    let state = 'ficha';
+    if (fixture.mediaType === 'series') {
+      const [, type, slug] = page.pathname.split('/');
+      const endpoint = `${page.origin}/api/episodio/${type}/${slug}/${fixture.season}/${fixture.episode}`;
+      const data = JSON.parse(await get(endpoint, { headers: { Accept: 'application/json', Referer: page.href } }));
+      if (data?.success !== true || data.type !== type || data.slug !== slug || data.temporada !== fixture.season
+        || data.episodio !== fixture.episode || typeof data.html !== 'string' || !data.html.trim()) return 'Fragmento no identificado';
+      html = data.html;
+      state = 'fragmento del episodio exacto';
+    } else {
+      html = await get(page.href, { maxBytes: 2 * 1024 * 1024 });
     }
-    return `${state}\n${shape}${playerShape($, fixture.page, fixture.season && fixture)}${fragment}${embeds.some(Boolean) ? `\n${embeds.filter(Boolean).join('\n')}` : ''}`;
-  } catch (err) { return `${state}; visor: ${problem(err)}`; }
+    const $ = load(html);
+    const frames = $('iframe[src],iframe[data-src],iframe[srcdoc]').toArray().map((el) => {
+      try {
+        const url = new URL(el.attribs['data-src'] || el.attribs.src);
+        return url.protocol === 'https:' ? url.hostname : 'sin URL HTTPS';
+      } catch { return 'sin URL HTTPS'; }
+    });
+    const videos = $('video[src],video[data-src],video source[src],video source[data-src]').length;
+    return `${state}; iframes=${frames.length} (${[...new Set(frames)].slice(0, 6).join(', ') || 'ninguno'}); etiquetas de vídeo=${videos}`;
+  } catch (err) { return `${fixture.mediaType === 'series' ? 'fragmento' : 'ficha'}: ${problem(err)}`; }
 }
 
 async function main(key) {
   if (!Object.hasOwn(controls, key)) throw new Error('Usa flixlatam o cuevana3');
+  const rows = [];
   for (const fixture of controls[key]) {
-    const title = `${key} / ${fixture.title}${fixture.season ? ` T${fixture.season}E${fixture.episode}` : ''}`;
-    annotate(title, await probe(key, fixture));
+    const title = `${fixture.title}${fixture.season ? ` T${fixture.season}E${fixture.episode}` : ''}`;
+    const report = {};
+    const hits = await runProviders([key], fixture.title, fixture, fixture.title, report, undefined, { ignorePause: true });
+    const entry = report[key];
+    const cdnStatus = /^cdn-http-(\d{3})$/.exec(entry.reason || '')?.[1];
+    const state = cdnStatus ? `manifiesto HLS: CDN HTTP ${cdnStatus}` : `${entry.reason || entry.skipped || 'medio aceptado'}${entry.status ? ` (HTTP ${entry.status})` : ''}`;
+    const checks = await Promise.all(hits.slice(0, 2).map(async (hit) => `${hit.audioLabel} (${hit.verification || 'URL directa'}; ${await probeMedia(hit)})`));
+    if (key === 'flixlatam' && !hits.length && !['challenge', 'access-denied', 'rate-limited'].includes(entry.reason)) checks.push(await inspectFlix(fixture));
+    const note = checks.join('; ') || '—';
+    annotate(`${key} / ${title}`, `${state}; aceptados=${entry.accepted || 0}; ${note}`);
+    rows.push(`| ${title} | ${state} | ${entry.accepted || 0} | ${note.replace(/\|/g, '\\|')} |`);
   }
+  if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+    `### ${key}`, '', '| Control | Resultado | Aceptados | Observaciones |', '|---|---|---:|---|', ...rows, '',
+    'Sonda informativa desde Actions. La respuesta HTTP y las etiquetas no verifican reproducción ni audio en Stremio.', '',
+  ].join('\n'));
 }
 
-main(process.argv[2]).catch((error) => { console.error(error instanceof TypeError ? 'Falló la sonda de proveedores' : 'No se completó la sonda enfocada'); process.exitCode = 1; });
+main(process.argv[2]).catch(() => { console.error('No se completó la sonda enfocada'); process.exitCode = 1; });

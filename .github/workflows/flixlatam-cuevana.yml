@@ -8,10 +8,13 @@ on:
       - 'lib/flixlatam*.js'
       - 'lib/cuevana3*.js'
       - 'lib/spanishProviders.js'
+      - 'lib/streamChoices.js'
       - 'scripts/flixlatam-cuevana-live.js'
+      - 'scripts/providers-live.js'
       - 'test/flixlatam*.test.js'
       - 'test/cuevana3*.test.js'
       - 'test/spanishProviders.test.js'
+      - 'test/streamChoices.test.js'
 permissions:
   contents: read
 jobs:

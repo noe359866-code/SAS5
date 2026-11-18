@@ -7,7 +7,7 @@ const candidates = [
   ['AnimeOnlineNinja', 'https://ver2.animeonline.ninja/', /\/(?:episodio|anime|ver)\//],
   ['AnimeJara', 'https://animejara.com/', /(?:\/(?:ver|episodios?|capitulos?)\/|[-/](?:episodio|capitulo)-\d+|\/[a-z0-9-]+\/\d+\/?$)/i],
   ['AnimeBum', 'https://animebum.org/', /\/(?:episodio|anime|ver)\//],
-  ['Cuevana 3', 'https://cuevana.gs/', /\/(?:pelicula|peliculas|serie|series)\//],
+  ['Cuevana 3', 'https://cuevanas3.pro/', /\/(?:pelicula|peliculas|serie|series)\//],
   ['PoseidonHD2', 'https://www.poseidonhd2.co/', /\/(?:movies|pelicula|series|serie)\//],
   ['JKAnime', 'https://jkanime.net/', /\/[a-z0-9-]+\/\d+\/?$/i],
   ['TioAnime', 'https://tioanime.com/directorio?q=Naruto&p=1', /\/anime\//],

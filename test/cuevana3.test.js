@@ -17,7 +17,8 @@ const media = 'https://p3.vimeos.zip/fixture/master.m3u8';
 const api = (data) => Response.json({ error: false, data });
 const options = (...embeds) => api({ embeds, downloads: [{ lang: 'Castellano', url: 'https://downloads.example/movie.mp4' }] });
 const player = () => options({ url: frame, lang: 'Latino', quality: 'Full HD' });
-const playerHtml = `<iframe src="${nested}"></iframe><iframe src="https://vimeos.net.other.example/embed-fake.html"></iframe>`;
+const playerHtml = `<iframe src="${nested}"></iframe><iframe src="https://vimeos.net.other.example/embed-fake.html"></iframe>
+  <div class="trailer"><iframe src="https://vimeos.net/embed-trailer.html"></iframe></div>`;
 const sourceHtml = `<script>jwplayer('player').setup({file:'${media}'})</script>`;
 const manifest = '#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=800000,RESOLUTION=1280x720\nlevel.m3u8\n';
 const search = (resolved, type) => `${base}/wp-api/v1/search?${new URLSearchParams({ q: resolved.title, page: 1, postType: type, postsPerPage: 18 })}`;

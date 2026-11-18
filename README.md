@@ -4,7 +4,7 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 
 ## Fuentes de reproducción
 
-**Las nueve fuentes registradas se consultan por defecto**. `/configure` permite desmarcarlas una por una; las instalaciones que ya guardaron una selección explícita la conservan. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha o un iframe no son un stream.
+**Las siete fuentes registradas se consultan por defecto**. `/configure` permite desmarcarlas una por una; las instalaciones que ya guardaron una selección explícita la conservan. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha o un iframe no son un stream.
 
 | Clave | Web consultada | Identificación y reproductores compatibles |
 |---|---|---|
@@ -15,10 +15,8 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 | `fuegocine` | `fuegocine.com` | Sitemap, portada y listado; ficha y visor de película o ruta del episodio exacto. No devuelve iframes sin medio compatible. |
 | `animeonlineninja` | `ww4.animeonline.ninja` | Fichas de anime y enlace con numeración explícita. |
 | `cuevana3` | `cuevanas3.pro` | Buscador y fichas con rutas canónicas. |
-| `cinecalidad` | `www.cinecalidad.am` | Tarjetas con título/año y opciones Vimeos agrupadas por audio. |
-| `tioplus` | `tioplus.app` | Búsqueda y ficha HTML; depende de la disponibilidad de la web. |
 
-Quita `STREAM_PROVIDERS` de tu despliegue, o fija `STREAM_PROVIDERS=all`, para usar las nueve. Una lista como `fanpelis,spinflix` limita las fuentes; `off` apaga todas. `FANPELIS=off` y `PLAYLATIN=off` siguen admitidos. Para una web pregenerada con `npm run build:web`, usa las mismas variables que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
+Quita `STREAM_PROVIDERS` de tu despliegue, o fija `STREAM_PROVIDERS=all`, para usar las siete. Una lista como `fanpelis,spinflix` limita las fuentes; `off` apaga todas. `FANPELIS=off` y `PLAYLATIN=off` siguen admitidos. Para una web pregenerada con `npm run build:web`, usa las mismas variables que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
 
 Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. No se resuelven challenges ni se ejecuta JavaScript de terceros. Los HLS de Vimeos se comprueban con un plazo breve; si el CDN no permite comprobarlos desde el servidor, no se anuncia una resolución no verificada. Los enlaces con vencimiento conocido se retiran con margen y la caché HTTP de streams no sirve respuestas caducadas.
 
@@ -69,7 +67,7 @@ npm run prerender
 `npm test` usa respuestas simuladas. Para probar el código contra las webs reales, ejecuta **Tests** (`.github/workflows/providers.yml`) con *Run workflow* en GitHub Actions. También corre al hacer push a una rama `arena/` que modifique los adaptadores o sondas. No requiere claves de TMDB ni despliega el Worker.
 
 ```sh
-node scripts/providers-live.js                    # los nueve proveedores
+node scripts/providers-live.js                    # los siete proveedores
 node scripts/providers-live.js peliculas          # Matrix
 node scripts/providers-live.js series             # Breaking Bad y Naruto
 node scripts/providers-live.js extra              # Mufasa, El rey león y FuegoCine

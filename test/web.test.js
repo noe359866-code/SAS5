@@ -665,6 +665,7 @@ test('/configure: solo ofrece fuentes que el despliegue realmente consulta', () 
   const defaults = withEnv({}, () => configure());
   const { PROVIDER_KEYS } = require('../lib/streams');
   for (const key of PROVIDER_KEYS) assert.ok(defaults.includes(`checked data-group="streams" data-key="${key}"`), key);
+  assert.doesNotMatch(defaults, /data-group="streams" data-key="(?:cinecalidad|tioplus|pelisplus)"/i);
   assert.equal(runConfigure().url, `${ORIGIN}/manifest.json`);
 
   const env = { STREAM_PROVIDERS: 'fanpelis,spinflix,playlatin' };

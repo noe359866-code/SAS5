@@ -6,9 +6,7 @@ const { pickEpisode } = require('../lib/spanishProviders');
 
 for (const [key, origin, search, path] of [
   ['cuevana3', 'https://cuevanas3.pro', '/search/el%20t%C3%ADtulo/', '/peliculas/titulo-2025/'],
-  ['cinecalidad', 'https://www.cinecalidad.am', '/page/1?s=El%20t%C3%ADtulo', '/ver-pelicula/titulo-2025'],
   ['animeonlineninja', 'https://ww4.animeonline.ninja', '/search/?s=El%20t%C3%ADtulo', '/pelicula/titulo-2025'],
-  ['tioplus', 'https://tioplus.app', '/search/El%20t%C3%ADtulo', '/pelicula/titulo-2025'],
 ]) {
   test(`${key}: título exacto, mismo origen y solo vídeo con doblaje identificado`, async (t) => {
     const pages = [
@@ -41,25 +39,4 @@ test('AnimeOnlineNinja: distingue temporadas mediante la numeración que acompa�
   const html = '<li><div class="numerando">1 - 2</div><a href="/episodio/naruto-cap-2/">Episodio</a></li>';
   assert.equal(pickEpisode(html, page, 1, 2), 'https://ww4.animeonline.ninja/episodio/naruto-cap-2/');
   assert.equal(pickEpisode(html, page, 2, 2), null);
-});
-
-test('CineCalidad reconoce tarjeta con año en span y resuelve solo la opción Vimeos del grupo de audio', async (t) => {
-  const origin = 'https://www.cinecalidad.am';
-  const embed = 'https://vimeos.net/embed-fixture';
-  const master = 'https://s10.vimeos.net/releases/cine/master.m3u8';
-  const pages = new Map([
-    [`${origin}/page/1?s=Matrix`, '<article class="item movies"><div class="poster custom"><h3 class="hover_caption_caption"><a href="/ver-pelicula/matrix/">Matrix<br><br>1999<br><br>Sinopsis</a></h3><a href="/ver-pelicula/matrix/"></a></div></article><article><img alt="Matrix"><a href="/ver-pelicula/otra/">Matrix <span>2003</span></a></article>'],
-    [`${origin}/ver-pelicula/matrix/`, `<section><div>Audio latino</div><ul><li class="dooplay_player_option" data-option="${embed}">Vimeos</li><li class="dooplay_player_option dooplay_player_option_trailer" data-option="https://vimeos.net/embed-trailer">Trailer</li></ul></section>`],
-    [embed, `<script>player({ file: '${master}' });</script>`],
-    [master, '#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=700000,RESOLUTION=1280x720\nv720.m3u8'],
-  ]);
-  t.mock.method(global, 'fetch', async (url) => {
-    assert.ok(pages.has(url), url);
-    const html = pages.get(url);
-    pages.delete(url);
-    return new Response(html);
-  });
-  const hits = await SEARCHERS.cinecalidad('', { mediaType: 'movie', title: 'Matrix', year: '1999' });
-  assert.deepEqual(hits.map(({ url, audioLabel, resolution }) => [url, audioLabel, resolution]), [[master, 'Audio latino', '720p']]);
-  assert.equal(pages.size, 0);
 });

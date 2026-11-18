@@ -43,7 +43,7 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   assert.deepEqual(cfg.streams, ['fanpelis']);
   assert.equal('streamTypes' in cfg, false);
   assert.equal('streamLanguages' in cfg, false);
-  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'fuegocine', 'animeonlineninja', 'cuevana3', 'cinecalidad', 'tioplus']);
+  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'fuegocine', 'animeonlineninja', 'cuevana3']);
   assert.equal(choice.providerType('fanpelis'), 'direct');
   assert.equal(choice.providerType('retired-indexer'), null);
   assert.equal(user.normalizeConfig({ streams: [] }, [], [], streams.PROVIDER_KEYS).streams.length, 0);
@@ -55,7 +55,7 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   } finally { config.streamProviders = originalProviders; }
 });
 
-test('sin STREAM_PROVIDERS se consultan las nueve fuentes; los overrides se respetan', (t) => {
+test('sin STREAM_PROVIDERS se consultan las siete fuentes; los overrides se respetan', (t) => {
   t.after(() => config.reload());
   config.reload({});
   assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS);
@@ -67,4 +67,19 @@ test('sin STREAM_PROVIDERS se consultan las nueve fuentes; los overrides se resp
   assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'spinflix']);
   config.reload({ STREAM_PROVIDERS: 'off' });
   assert.deepEqual(streams.activeProviders(null), []);
+});
+
+test('las configuraciones antiguas nunca reactivan CineCalidad ni TioPlus/PelisPlus', (t) => {
+  t.after(() => config.reload());
+  const retired = ['cinecalidad', 'tioplus', 'pelisplus'];
+  for (const key of retired) {
+    assert.equal(choice.providerType(key), null);
+    assert.equal(Object.hasOwn(streams.SEARCHERS, key), false);
+  }
+  config.reload({ STREAM_PROVIDERS: [...retired, 'cuevana3', 'flixlatam'].join(',') });
+  assert.deepEqual(streams.activeProviders(null), ['flixlatam', 'cuevana3']);
+  const segment = Buffer.from(JSON.stringify({ streams: ['cuevana3', ...retired] })).toString('base64url');
+  const cfg = user.decodeConfig(segment, [], [], streams.PROVIDER_KEYS);
+  assert.deepEqual(cfg.streams, ['cuevana3']);
+  assert.deepEqual(streams.activeProviders(cfg), ['cuevana3']);
 });

@@ -10,7 +10,7 @@ const { allowedVideoUrl, REFERER } = require('../lib/vimeos');
 const fixtures = {
   peliculas: [
     { title: 'Matrix', altTitle: 'The Matrix', year: '1999', mediaType: 'movie', imdbId: 'tt0133093', tmdbId: 603,
-      keys: ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'cuevana3', 'cinecalidad', 'tioplus'], control: true },
+      keys: ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'cuevana3'], control: true },
   ],
   series: [
     { title: 'Breaking Bad', year: '2008', mediaType: 'series', season: 1, episode: 1, imdbId: 'tt0903747', tmdbId: 1396,

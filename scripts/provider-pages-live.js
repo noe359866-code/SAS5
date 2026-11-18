@@ -11,8 +11,6 @@ const controls = [
   ['FlixLatam serie', 'https://flixlatam.com/serie/breaking-bad'],
   ['Cuevana búsqueda', 'https://cuevanas3.pro/search/matrix/'],
   ['Cuevana ficha', 'https://cuevanas3.pro/peliculas/matrix-1999/'],
-  ['CineCalidad búsqueda', 'https://www.cinecalidad.am/page/1?s=Matrix'],
-  ['CineCalidad ficha', 'https://www.cinecalidad.am/ver-pelicula/matrix/'],
   ['FuegoCine Visor', 'https://fuegocine.com/movies/watch/toy-story-5/157'],
   ['FuegoCine Episodio', 'https://fuegocine.com/shows/visionquest/01x01-sin-ataduras/49'],
   ['AnimeOnlineNinja búsqueda', 'https://ww4.animeonline.ninja/search/?s=Naruto'],

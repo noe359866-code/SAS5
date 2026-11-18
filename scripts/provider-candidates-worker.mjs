@@ -9,8 +9,6 @@ const candidates = [
   ['AnimeBum', 'https://animebum.org/', /\/(?:episodio|anime|ver)\//],
   ['Cuevana 3', 'https://cuevana.gs/', /\/(?:pelicula|peliculas|serie|series)\//],
   ['PoseidonHD2', 'https://www.poseidonhd2.co/', /\/(?:movies|pelicula|series|serie)\//],
-  ['CineCalidad', 'https://www.cinecalidad.am/page/1?s=Matrix', /\/ver-(?:pelicula|serie)\//],
-  ['PelisPlus / TioPlus', 'https://tioplus.app/search/Matrix', /\/(?:pelicula|serie|anime)\//],
   ['JKAnime', 'https://jkanime.net/', /\/[a-z0-9-]+\/\d+\/?$/i],
   ['TioAnime', 'https://tioanime.com/directorio?q=Naruto&p=1', /\/anime\//],
   ['Latanime', 'https://latanime.org/buscar?q=Naruto', /\/anime\//],

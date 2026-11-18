@@ -1,0 +1,27 @@
+name: FuegoCine en vivo
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/fuegocine.yml'
+      - 'lib/fuegocine*.js'
+      - 'scripts/fuegocine-live.js'
+      - 'test/fuegocine*.test.js'
+permissions:
+  contents: read
+jobs:
+  fuegocine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Regresiones de FuegoCine
+        run: node --test test/fuegocine*.test.js
+      - name: Sonda informativa de visores públicos
+        run: node scripts/fuegocine-live.js

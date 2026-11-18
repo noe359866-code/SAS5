@@ -5,7 +5,7 @@
 const { load } = require('cheerio');
 const { runProviders } = require('../lib/streams');
 const { fetchText } = require('../lib/http');
-const { annotate } = require('./providers-live');
+const { annotate, probeMedia } = require('./providers-live');
 const { allowedVideoUrl, inspectVimeos, unpackPacked, extractFromEmbedHtml } = require('../lib/vimeos');
 const { providerHttp } = require('../lib/providerHttp');
 
@@ -118,9 +118,11 @@ async function cuevanaPlayer(fixture, origin) {
     const keys = [...text.matchAll(/\b([a-z_][a-z0-9_]{0,36})["']?\s*[:=]\s*(?:["'][^\r\n"']{0,2048}\.m3u8|\[\s*\{)/gi)]
       .map((m) => m[1]);
     const hlsHosts = list(hls.map((url) => urlShape(url, canonical)));
+    const recognized = load(html)('iframe[src]').toArray().map((node) => urlOf(node.attribs.src, canonical)).filter((url) => url?.origin === 'https://vimeos.net');
+    const frameShape = list(recognized.map((url) => `${url.pathname.match(/^\/[a-z]{1,16}(?:[/-]|\.php)/i)?.[0] || 'otro prefijo'}${url.pathname.endsWith('.html') ? '.html' : ''}`));
     const check = hls.find((url) => allowedVideoUrl(url));
     const media = check ? await inspectVimeos(check, http) : null;
-    return `API: visor Latino/Vimeos; HTML recibido, packed=${text !== html}; campos=${list(keys)}; HLS=${hlsHosts}; CDN=${media?.verification || (check ? 'manifiesto no aceptado' : 'no sondeado')}; ${playerShape(load(html), canonical)}`;
+    return `API: visor Latino/Vimeos; HTML recibido, packed=${text !== html}; campos=${list(keys)}; HLS=${hlsHosts}; CDN=${media?.verification || (check ? 'manifiesto no aceptado' : 'no sondeado')}; iframe Vimeos=${frameShape}`;
   } catch (err) { return `visor API: ${problem(err)}`; }
 }
 
@@ -128,8 +130,9 @@ async function probe(key, fixture) {
   const report = {};
   const hits = await runProviders([key], fixture.title, fixture, fixture.title, report, undefined, { ignorePause: true });
   const entry = report[key];
-  const state = `${entry.reason || entry.skipped || 'candidatos'}; aceptados=${entry.accepted || 0}; HTTP ${entry.status || '—'}${hits.length ? `; ${list(hits.map((hit) => hit.verification || hit.quality || 'medio directo'))}` : ''}`;
-  if (entry.reason === 'challenge' || entry.reason === 'access-denied') return state;
+  const checked = await Promise.all(hits.slice(0, 2).map(async (hit) => `${hit.audioLabel} (${hit.verification || 'URL directa'}, ${await probeMedia(hit)})`));
+  const state = `${entry.reason || entry.skipped || 'candidatos'}; aceptados=${entry.accepted || 0}; HTTP ${entry.status || '—'}${checked.length ? `; ${list(checked)}` : ''}`;
+  if (hits.length || ['challenge', 'access-denied'].includes(entry.reason)) return state;
   try {
     const html = await fetchText(fixture.page, { redirect: 'manual', timeoutMs: 7000, maxBytes: 2 * 1024 * 1024 });
     const $ = load(html);

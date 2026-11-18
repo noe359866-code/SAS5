@@ -112,4 +112,4 @@ if (require.main === module) main(process.argv[2]).catch(() => {
   process.exitCode = 1;
 });
 
-module.exports = { annotate };
+module.exports = { annotate, probeMedia };

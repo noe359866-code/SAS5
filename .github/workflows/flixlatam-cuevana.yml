@@ -26,7 +26,7 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - name: Regresiones locales y registro activo
-        run: node --test test/flixlatam.test.js test/spanishProviders.test.js test/streamChoices.test.js
+        run: node --test test/flixlatam.test.js test/cuevana3.test.js test/spanishProviders.test.js test/streamChoices.test.js
       - name: FlixLatam (sonda informativa)
         run: node scripts/flixlatam-cuevana-live.js flixlatam
       - name: Cuevana 3 (sonda informativa)

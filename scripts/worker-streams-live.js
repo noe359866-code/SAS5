@@ -172,8 +172,25 @@ async function auditPlayback(base, fetcher = fetch) {
       .filter((s) => /Fanpelis|SpinFlix/.test(s.title) && /\b(?:latino|lat|castellano)\b/i.test(s.title))
       .map((s) => workerMedia(s.url, origin, origin, /\.m3u8$/i)).filter(Boolean).slice(0, 2);
     const results = await Promise.all(candidates.map((url) => checkPlayback(fetcher, url, origin)));
-    return { title, status: response.status, ok: results.some((row) => row.ok),
-      results: results.length ? results.map((row) => row.state) : ['sin HLS de reproducción por el Worker'] };
+    const state = results.length ? results.map((row) => row.state) : [`sin HLS de reproducción por el Worker (${streams?.length ?? 0} resultados)`];
+    if (!results.length && response.ok) {
+      // Sin firmas, enlaces de instalación ni trazas del proveedor en la salida.
+      try {
+        const diagnostic = await read(fetcher, `${origin}/internal/streams-test.json?type=${type}&id=${encodeURIComponent(id)}`, 'application/json');
+        if (diagnostic.ok) {
+          const { stage, providers } = JSON.parse(diagnostic.body);
+          if (stage === 'resolveTitle') state.push('no resolvió el título');
+          for (const key of ['fanpelis', 'spinflix']) {
+            const row = providers?.[key];
+            if (row) {
+              const reason = /^(?:[a-z-]+[\d-]*)$/i.test(row.reason || '') ? row.reason : null;
+              state.push(`${key}: ${reason || `${Number(row.accepted) || 0} candidatos/${Number(row.mediaChecks?.['manifest-ok']) || 0} HLS válidos`}`);
+            }
+          }
+        }
+      } catch { /* Un error del diagnóstico no invalida el resultado de /stream. */ }
+    }
+    return { title, status: response.status, ok: results.some((row) => row.ok), results: state };
   }));
 }
 

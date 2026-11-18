@@ -44,7 +44,11 @@ jobs:
             sleep 1
           done
           if ! test -s "$RUNNER_TEMP/playback-ready.json"; then cat "$RUNNER_TEMP/playback-worker.log"; exit 1; fi
-          node scripts/worker-streams-live.js --playback http://127.0.0.1:8799
+          for attempt in {1..3}; do
+            if node scripts/worker-streams-live.js --playback http://127.0.0.1:8799; then exit 0; fi
+            if (( attempt < 3 )); then sleep 8; fi
+          done
+          exit 1
   published-playback:
     # Workers Builds despliega main por separado; no confundir el workerd
     # del runner con el acceso a los segmentos desde Cloudflare.

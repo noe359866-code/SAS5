@@ -4,17 +4,19 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 
 ## Fuentes de reproducción
 
-**Fanpelis, SpinFlix y GnulaHD (experimental) están habilitadas por defecto**. `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha, un iframe o una descarga no son un stream.
+**Fanpelis, SpinFlix, GnulaHD, VideoApp y PelisPlus están habilitadas por defecto** (las tres últimas son experimentales). `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha, un iframe o una descarga no son un stream.
 
 | Clave | Web consultada | Identificación y medios compatibles |
 |---|---|---|
 | `fanpelis` | `fanpelis.to` | API de títulos y episodios; si no se verifica el HLS de la primera publicación de un episodio, puede probar otra con la misma temporada y número. |
 | `spinflix` | `lamoviebot.tvymas.workers.dev` | Busca variantes del título y confirma la ficha por ID o por título completo y año compatible. Si falta el episodio en una ficha candidata, comprueba la siguiente sin cambiar de capítulo. |
 | `gnulahd` | `ww3.gnulahd.nu` | Experimental: verifica la ficha o el episodio exacto y solo admite HLS directo publicado en el HTML con etiqueta de audio explícita. [Estado y cómo probarlo](docs/gnulahd.md). |
+| `videoapp` | `videoapp.zip` | Experimental: obtiene el iframe Vimeos por ID TMDB y busca HLS. Solo publica el resultado si el iframe identifica audio latino o castellano; la muestra de Interestelar no lo indica, por lo que se informa `audio-unverified` y no se anuncia como reproducible. |
+| `pelisplus` | `pelisplushd.la` | Experimental, solo películas: busca la ficha y confirma título y año; intenta extraer HLS o MP4 de visores Streamwish/Filelions, VidHide y Dropload conocidos con audio identificado. Los enlaces se entregan **sin verificar**, y no se garantiza que funcionen en el cliente. [Detalles](docs/pelisplus.md). |
 
 Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro por defecto. Una lista como `fanpelis,spinflix` limita las fuentes; `STREAM_PROVIDERS=off` apaga todas y `FANPELIS=off` desactiva solo Fanpelis. Para pregenerar la web con `npm run build:web`, usa la misma configuración de fuentes que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
 
-**Instalaciones existentes:** las claves se guardan por nombre. Se descartan las fuentes retiradas sin añadir otras a una selección que aún contenga claves vigentes. Si una lista antigua solo contiene fuentes retiradas, se aplica el valor por defecto, como antes: las fuentes que permite el despliegue para un enlace personal y el registro actual para `STREAM_PROVIDERS`. Una selección personal vacía (`streams: []`) y `STREAM_PROVIDERS=off` siguen apagando todas las fuentes.
+**Instalaciones existentes:** las claves se guardan por nombre. Se descartan las fuentes retiradas sin añadir otras a una selección que aún contenga claves vigentes. La clave `pelisplus` vuelve a estar registrada; una configuración antigua que la incluya puede reactivarla. Si una lista antigua solo contiene fuentes retiradas, se aplica el valor por defecto, como antes: las fuentes que permite el despliegue para un enlace personal y el registro actual para `STREAM_PROVIDERS`. Una selección personal vacía (`streams: []`) y `STREAM_PROVIDERS=off` siguen apagando todas las fuentes.
 
 Se retiraron FlixLatam, PlayLatinSRC, FuegoCine, AnimeOnlineNinja y Cuevana 3 porque no dieron una ruta de reproducción fiable en los controles. Se conservan los informes históricos de [FlixLatam y Cuevana 3](docs/flixlatam-cuevana.md), [FuegoCine](docs/fuegocine.md) y [PlayLatinSRC](docs/playlatinsrc-2026-11-17.md). Las variables `PLAYLATIN` y `PLAYLATIN_URL` ya no tienen efecto.
 

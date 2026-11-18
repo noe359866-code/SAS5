@@ -44,8 +44,8 @@ test('healthz: reporta runtime cloudflare-workers', async () => {
   const body = await res.json();
   assert.equal(body.ok, true);
   assert.equal(body.runtime, 'cloudflare-workers');
-  assert.deepEqual(body.streamProviders, ['fanpelis', 'spinflix', 'gnulahd']);
-  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, gnulahd: true });
+  assert.deepEqual(body.streamProviders, ['fanpelis', 'spinflix', 'gnulahd', 'videoapp', 'pelisplus']);
+  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, gnulahd: true, videoapp: true, pelisplus: true });
 });
 
 test('catalog: sin TMDB key devuelve metas=[] con 200', async () => {

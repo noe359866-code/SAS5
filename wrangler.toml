@@ -32,6 +32,18 @@ DEBRID_VALIDATE_TIMEOUT_MS = "9000"
 # se paga con PayPal o tarjeta). Página del proyecto; "off" oculta todo.
 KOFI_USERNAME = "hydratorrents"
 
+# ── Duplicar la cuota diaria (100.000 → 200.000 invocaciones/día) ─────────
+# MIRROR_ORIGINS: la URL del OTRO despliegue del mismo addon (otra cuenta de
+# Cloudflare o Vercel). /configure reparte a cada usuario entre los dos y cada
+# cuenta mantiene su propia cuota de 100.000/día. Sin esta variable, todo
+# apunta a este despliegue como siempre. Guía: docs/espejos-cuota.md
+# MIRROR_ORIGINS = "https://catalogos-plus-2.tu-subdominio.workers.dev"
+#
+# Atajos de borde: los catálogos y fichas de quien no cambió idioma ni región
+# se sirven con un 301 de _redirects desde /catalog y /meta (0 invocaciones).
+# Se generan solos en cada prerender; "off" los desactiva.
+# STATIC_SHORTCUTS = "on"
+
 # Node.js compat por si alguna dependencia lo requiere
 compatibility_flags = ["nodejs_compat"]
 

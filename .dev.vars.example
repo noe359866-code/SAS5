@@ -23,3 +23,7 @@ WATCH_REGION=NI
 # SUPPORT_URL=https://discord.gg/J6byqsRUfu
 # Donaciones vía Ko-fi (se paga con PayPal o tarjeta). "off" las oculta.
 KOFI_USERNAME=hydratorrents
+# Duplicar la cuota diaria: URL del segundo despliegue del addon (otra cuenta).
+# MIRROR_ORIGINS=https://catalogos-plus-2.tu-subdominio.workers.dev
+# Atajos de borde (catálogos/fichas → /catalog y /meta con 0 invocaciones).
+# STATIC_SHORTCUTS=on

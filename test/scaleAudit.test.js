@@ -118,3 +118,21 @@ test('projectPlan/capacityWithPlan: convierte el plan de estáticos en peticione
   assert.equal(all.workerRequests, 0);
   assert.equal(all.savedRequests, 1000);
 });
+
+test('projectPlan suma los atajos de borde y capacityWithMirrors duplica el techo', () => {
+  const { projectPlan, capacityWithPlan, capacityWithMirrors } = require('../lib/scaleAudit.js');
+  const plan = { files: [{ daily: 0.62 }, { daily: 0.15 }], shortcuts: [{ daily: 0.08 }] };
+  const projected = projectPlan({ plan, total: 200_000 });
+  assert.equal(projected.savedRequests, Math.round(200_000 * 0.85));
+  assert.equal(projected.workerRequests, 30_000);
+  // Los atajos no escriben archivos: la cobertura es la misma que si existieran.
+  assert.equal(
+    capacityWithPlan({ files: plan.files, shortcuts: plan.shortcuts }),
+    capacityWithPlan({ files: [...plan.files, ...plan.shortcuts] })
+  );
+  // La cuota es POR CUENTA: dos despliegues con el mismo plan duplican el techo.
+  assert.equal(capacityWithMirrors({ count: 2, files: plan.files }) * 1, capacityWithPlan({ files: plan.files }) * 2);
+  assert.equal(capacityWithMirrors({ count: 1, files: plan.files }), capacityWithPlan({ files: plan.files }));
+  // Sin espejos no se inventa capacidad.
+  assert.equal(capacityWithMirrors({ count: 0, files: plan.files }), capacityWithPlan({ files: plan.files }));
+});

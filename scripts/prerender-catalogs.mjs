@@ -539,9 +539,11 @@ export async function writeRedirects(options = {}) {
   const file = path.join(outDir, '_redirects');
   const log = options.log || ((line) => console.log(line));
   const { REGION_OPTIONS } = require(libPath('userConfig.js'));
-  const { rules, dropped } = buildRedirects({
+  const { rules, dropped, shortcuts } = buildRedirects({
     configs: options.configs || [],
     regions: new Set(REGION_OPTIONS.map((region) => region.code)),
+    defaults: deploymentDefaults(),
+    shortcuts: shortcutsEnabled(),
   });
 
   let existing = '';
@@ -553,9 +555,10 @@ export async function writeRedirects(options = {}) {
   log(
     `_redirects: ${rules.length} reglas en el borde (0 invocaciones)` +
     ` · ${rules.filter((rule) => rule.from.includes('/configure')).length} llevan el «Configurar» de Stremio a un configurador pregenerado` +
+    (shortcuts ? ` · ${shortcuts} configuraciones atajan catálogos y fichas a los archivos por defecto` : '') +
     (dropped ? ` · ${dropped} descartadas por el tope de Cloudflare` : '')
   );
-  return { rules: rules.length, dropped };
+  return { rules: rules.length, dropped, shortcuts };
 }
 
 function parseArgs(argv) {
@@ -628,9 +631,12 @@ export async function fetchConfigReport(baseUrl, timeoutMs = 15000) {
  */
 export function planStaticFiles({
   configs, budget, catalogsLib, titles = [], pages = [1, 2, 3], defs = [], defaultCatalogPages = 1,
+  defaults = null, shortcuts = true,
 }) {
   const { buildPlan } = require(libPath('staticPlan.js'));
   const lib = catalogsLib || require(libPath('catalogs.js'));
+  // Sin `defaults` no hay atajos: el planificador escribe todo como antes.
+  const deployDefaults = defaults || deploymentDefaults();
   return buildPlan({
     configs,
     titles,
@@ -639,7 +645,19 @@ export function planStaticFiles({
     popularPages: pages,
     catalogPages: defaultCatalogPages,
     defsFor: (cfg) => lib.buildDefs(cfg),
+    defaults: shortcuts ? deployDefaults : null,
+    shortcuts,
   });
+}
+
+/**
+ * Idioma y región del despliegue: la referencia con la que se decide si una
+ * configuración puede atajarse en el borde (`lib/edgeShortcuts.js`).
+ * @returns {{lang: string, region: string}}
+ */
+function deploymentDefaults() {
+  const config = require(libPath('config.js'));
+  return { lang: config.tmdbLanguage || 'es', region: config.watchRegion || 'NI' };
 }
 
 /** Suma los recuentos por tipo de dos planes. */
@@ -649,6 +667,11 @@ function mergeKinds(...maps) {
     for (const [kind, count] of Object.entries(map || {})) out[kind] = (out[kind] || 0) + count;
   }
   return out;
+}
+
+/** ¿Están activos los atajos de borde? (STATIC_SHORTCUTS=off los desactiva). */
+function shortcutsEnabled() {
+  return require(libPath('config.js')).staticShortcuts !== false;
 }
 
 /** Resuelve la página `skip` de un catálogo por defecto (mismo camino que el Worker). */
@@ -662,6 +685,12 @@ const invokedDirectly = process.argv[1] &&
 const ASSET_FILE_LIMIT = 20000; // tope de archivos por versión en Workers Free
 
 if (invokedDirectly) {
+  // Mismas [vars] que el Worker: sin esto, los atajos y el reparto de cuota se
+  // calcularían con el entorno de la máquina en vez de con el del despliegue.
+  require(libPath('tomlVars.js')).applyWranglerVars([
+    'MIRROR_ORIGINS', 'STATIC_SHORTCUTS', 'WATCH_REGION', 'WATCH_REGION_FALLBACK',
+    'TMDB_LANGUAGE', 'PUBLIC_ORIGIN',
+  ]);
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
     console.log(
@@ -784,6 +813,7 @@ if (invokedDirectly) {
       const budgetLeft = Math.max(0, ASSET_FILE_LIMIT - BASE_RESERVE - written);
       const planB = planStaticFiles({
         configs, budget: budgetLeft, titles, catalogsLib, pages: [1],
+        defaults: deploymentDefaults(), shortcuts: shortcutsEnabled(),
       });
       const wantedMetas = new Set(planB.files.map((file) => file.path));
       if (options.metas && titles.length) {
@@ -797,11 +827,22 @@ if (invokedDirectly) {
       // fase A no lleva configuraciones ni fichas).
       const plan = {
         files: [...planA.files, ...planB.files],
+        shortcuts: [...(planA.shortcuts || []), ...(planB.shortcuts || [])],
         byKind: mergeKinds(planA.byKind, planB.byKind),
         skipped: planA.skipped + planB.skipped,
         budget,
         daily: planA.daily + planB.daily,
       };
+      // Configuraciones cuyos catálogos/fichas los sirve el borde con una
+      // redirección a los archivos por defecto: no escriben ni un JSON de
+      // catálogo y aun así cuestan 0 invocaciones.
+      const shortcutSegments = new Set(plan.shortcuts.map((file) => file.segment));
+      if (shortcutSegments.size) {
+        console.log(
+          `[prerender] Atajos de borde: ${shortcutSegments.size} configuraciones sin gastar archivos ` +
+          '(sus catálogos y fichas son los de /catalog y /meta, servidos por _redirects con 0 invocaciones).'
+        );
+      }
 
       // Catálogos + manifest de las configuraciones populares.
       const configured = plan.files.filter((file) => file.segment);
@@ -854,17 +895,25 @@ if (invokedDirectly) {
       }
 
       // Proyección honesta con el plan que de verdad se escribió.
-      const { projectPlan, capacityWithPlan } = require(libPath('scaleAudit.js'));
-      const projected = projectPlan({ plan, total: Number(process.env.PLAN_TOTAL_REQUESTS) || 500_000 });
+      const { projectPlan, capacityWithPlan, capacityWithMirrors } = require(libPath('scaleAudit.js'));
+      const requested = Number(process.env.PLAN_TOTAL_REQUESTS) || 500_000;
+      const projected = projectPlan({ plan, total: requested });
       const coverage = Math.round(Math.min(1, plan.daily) * 100);
+      const mirrorCount = require(libPath('config.js')).mirrorOrigins.length + 1;
       console.log(`[prerender] Cobertura estática: ${coverage} % de las peticiones (el resto son streams, que siempre ejecutan el Worker).`);
       console.log(
         `[prerender] Con este plan el Worker ejecuta ~${projected.workerRequests.toLocaleString('es')} de ` +
         `${projected.total.toLocaleString('es')} peticiones/día (${Math.round(projected.usage * 100)} % del plan free) ` +
-        `→ aguanta ~${capacityWithPlan({ files: plan.files }).toLocaleString('es')} peticiones/día.`
+        `→ aguanta ~${capacityWithPlan({ files: plan.files, shortcuts: plan.shortcuts }).toLocaleString('es')} peticiones/día.`
       );
+      if (mirrorCount > 1) {
+        console.log(
+          `[prerender] Espejos activos: ${mirrorCount} despliegues × 100.000 invocaciones/día ` +
+          `→ techo combinado ~${capacityWithMirrors({ count: mirrorCount, files: plan.files, shortcuts: plan.shortcuts }).toLocaleString('es')} peticiones/día.`
+        );
+      }
 
-      if (options.configs !== false) await writeRedirects({ outDir, configs });
+      if (options.configs !== false) await writeRedirects({ outDir, configs, dryRun: options.dryRun });
     }
 
     // Guardarraíl: Cloudflare Free admite 20.000 archivos por versión. Si nos

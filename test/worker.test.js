@@ -569,3 +569,24 @@ test('/hls: el proxy sirve playlists y segmentos, y rechaza lo que no es media',
     global.fetch = originalFetch;
   }
 });
+
+test('espejos: /internal/mirrors.json y /healthz suman la cuota de cada despliegue', async () => {
+  const mirrorEnv = { WATCH_REGION: 'NI', MIRROR_ORIGINS: 'https://espejo2.workers.dev' };
+  const call = (path) => worker.fetch(new Request(`http://worker.local${path}`), mirrorEnv, {});
+
+  const res = await call('/internal/mirrors.json');
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.deepEqual(body.mirrors, ['https://espejo2.workers.dev']);
+  assert.equal(body.shards, 2);
+  assert.equal(body.dailyCapacity, 200_000);
+
+  const health = await (await call('/healthz')).json();
+  assert.equal(health.mirrors.dailyCapacity, 200_000);
+  assert.equal(health.language, 'es');
+  assert.equal(health.quota.edgeShortcuts, true);
+
+  // /configure reparte la URL instalada entre el propio despliegue y el espejo.
+  const html = await (await call('/configure')).text();
+  assert.match(html, /const MIRRORS = \["http:\/\/worker\.local","https:\/\/espejo2\.workers\.dev"\];/);
+});

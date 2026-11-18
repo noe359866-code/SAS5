@@ -183,6 +183,56 @@ streams, 10 %, nunca son estáticos) y sale del tipo:
 Es una **proyección**, no una medición: los números reales los da
 `npm run scale:audit -- --url https://tu-dominio --requests 178000`.
 
+### Capa 8 · Atajos de borde (`lib/edgeShortcuts.js`)
+
+Toda petición que llega al Worker gasta cuota, aunque la respuesta sea idéntica para miles de
+usuarios. Los catálogos dependen solo de `lang`, `region` y del `id`; las fichas, de `lang` y
+`region`. Por eso, para quien no cambió idioma ni región, `/<cfg>/catalog/...` y `/<cfg>/meta/...`
+son **byte a byte** los archivos que el prerender ya escribe en `/catalog/...` y `/meta/...`.
+
+El prerender añade entonces dos reglas por configuración a `public/_redirects`:
+
+```txt
+/<cfg>/catalog/*   /catalog/:splat   301
+/<cfg>/meta/*      /meta/:splat      301
+```
+
+- `_redirects` se evalúa **antes** de los assets y del Worker → **0 invocaciones** en las dos
+  peticiones (la redirección y el archivo).
+- Si el archivo no existiera (p. ej. una ficha de un título fuera de los pregenerados), la petición
+  cae al Worker, que con la configuración por defecto devuelve **el mismo** contenido: nunca hay 404.
+- Cubre ~62 % (catálogos) + 15 % (fichas) del tráfico y funciona con los usuarios **ya instalados**.
+- Nunca toca `/<cfg>/stream/...`, `/<cfg>/manifest.json`, `/<cfg>/configure` ni configuraciones con
+  `debridId`.
+- Cupo: 2 reglas dinámicas por configuración, máximo 100 → ~49 configuraciones. Esas configuraciones
+  **dejan de gastar archivos** en el planificador (`lib/staticPlan.js` los marca como `shortcuts`), y
+  el presupuesto liberado se reparte entre fichas y configuraciones que sí cambian idioma o región.
+- Se desactiva con `STATIC_SHORTCUTS=off`.
+
+### Capa 9 · Espejos de cuota (`lib/mirrors.js`)
+
+El techo de 100.000/día es **por cuenta**. Con `MIRROR_ORIGINS`, el addon reparte a los usuarios
+entre varios despliegues del mismo código:
+
+```toml
+[vars]
+MIRROR_ORIGINS = "https://catalogos-plus-2.tu-subdominio.workers.dev"
+```
+
+- `/configure` y la portada eligen espejo con un hash FNV-1a estable del segmento de configuración
+  (o de un id guardado en `localStorage` para la instalación por defecto): el usuario cae siempre en
+  el mismo servidor, así su manifest y sus catálogos no se mezclan.
+- 2 despliegues = **200.000 invocaciones/día**; 3 = 300.000. Sin dominio propio ni Cache Rules.
+- `/internal/mirrors.json` y `/healthz` → `mirrors` informan del reparto y del techo real;
+  `npm run scale:audit` imprime el techo combinado.
+- Los usuarios ya instalados **no** se mueven solos: Stremio conserva la URL. Para repartir el
+  tráfico existente hay que reinstalar o compartir el enlace del espejo nuevo. Los atajos de la capa 8
+  sí les alivian sin tocar nada.
+- Cada espejo tiene sus **propios secrets, su KV y sus static assets**: hay que desplegar el repo
+  completo (con `npm run deploy`) en cada cuenta.
+
+Guía paso a paso: [espejos-cuota.md](espejos-cuota.md).
+
 ---
 
 ## 3. Regla de Caché en Cloudflare CDN (clave para superar 230K–500K req/día en Plan Free)
@@ -278,6 +328,8 @@ como comprobación automática después de cada despliegue.
 | **A. Dominio propio + Cache Rule** | CDN y static assets → **0** | Worker (no se cachean: son por título, y con Debrid además `no-store`) | **~50.000** | ✅ **Sí** (50 % del presupuesto libre) |
 | **B. `*.workers.dev` con prerender** | Gratis **solo sin configuración**; con `/<cfg>/` ejecutan el Worker | Worker | **~50.000 – 500.000** según cuántos usuarios instalen el manifest personal | ⚠️ Depende: si más del ~20 % del tráfico lleva `/<cfg>/`, te pasas |
 | **B-bis. `*.workers.dev` + plan por configuración** | Catálogos/fichas/manifest por defecto **y** los de las N configuraciones más usadas → static assets | Worker solo en streams y long-tail | **~30.000 – 60.000** para 178.000–500.000 peticiones/día | ✅ **Sí** — es la vía recomendada sin dominio propio |
+| **B-ter. `*.workers.dev` + atajos de borde** | Catálogos y fichas de toda configuración con el idioma/región por defecto → 301 a los archivos por defecto | Worker solo en streams y en configs con otro idioma/región | **~15.000 – 45.000** para 173.000–500.000 peticiones/día | ✅ **Sí**, sin dominio propio ni reinstalar |
+| **B-quater. Lo anterior + 2 espejos** | Igual, repartido entre dos cuentas | Igual | **cada espejo a la mitad** | ✅ **Sí**, techo combinado **200.000** |
 | **C. `*.workers.dev` sin prerender** | Todo ejecuta el Worker | Worker | **~500.000** | ❌ No (5× por encima) |
 
 Por qué cambia tanto: sin Cache Rule, cada petición con configuración propia (`/<cfg>/…`, que es lo

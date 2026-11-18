@@ -101,3 +101,68 @@ test('todas las reglas del borde se quedan dentro del cupo de Cloudflare', () =>
   assert.ok(rules.length < 300, `solo ${rules.length} reglas con 200 configuraciones`);
   assert.equal(rules.filter((rule) => rule.from.includes(':path')).length, 1, 'una sola regla dinámica');
 });
+
+test('atajos de borde: una config con el idioma y la región por defecto usa los archivos compartidos', () => {
+  const { rules, shortcuts } = buildRedirects({
+    configs: [
+      { segment: 'AAA111', cfg: { lang: 'es', region: 'NI' } },
+      { segment: 'BBB222', cfg: { region: 'NI' } },                 // idioma implícito = por defecto
+      { segment: 'CCC333', cfg: { lang: 'es', region: 'MX' } },     // otra región: sin atajo
+      { segment: 'DDD444', cfg: { lang: 'en', region: 'NI' } },     // otro idioma: sin atajo
+      { segment: 'EEE555', cfg: { lang: 'es', region: 'NI', debridId: 'a'.repeat(32) } },
+    ],
+    defaults: { lang: 'es', region: 'NI' },
+  });
+  assert.equal(shortcuts, 2);
+  const made = rules.map((rule) => `${rule.from} ${rule.to} ${rule.status}`);
+  assert.ok(made.includes('/AAA111/catalog/* /catalog/:splat 301'));
+  assert.ok(made.includes('/AAA111/meta/* /meta/:splat 301'));
+  assert.ok(made.includes('/BBB222/catalog/* /catalog/:splat 301'));
+  // Nada de tocar streams, manifest ni configurador de esas configs.
+  for (const rule of rules) {
+    if (!rule.from.includes('/catalog/') && !rule.from.includes('/meta/')) continue;
+    assert.ok(!rule.from.includes('/stream/'), 'los streams nunca se atajan');
+    assert.ok(!rule.from.includes('/manifest'), 'el manifest es de cada usuario');
+  }
+  // Las que cambian idioma o región no llevan atajo; el debrid tampoco.
+  for (const segment of ['CCC333', 'DDD444', 'EEE555']) {
+    assert.equal(rules.some((rule) => rule.from.startsWith(`/${segment}/catalog/`)), false, segment);
+  }
+});
+
+test('los atajos no se generan sin defaults ni cuando se desactivan', () => {
+  const configs = [{ segment: 'AAA111', cfg: { lang: 'es', region: 'NI' } }];
+  assert.equal(buildRedirects({ configs }).shortcuts, 0);
+  assert.equal(buildRedirects({ configs, defaults: { lang: 'es', region: 'NI' }, shortcuts: false }).shortcuts, 0);
+  // Sin región o idioma de referencia no hay atajos (no se adivina).
+  assert.equal(buildRedirects({ configs, defaults: { lang: 'es' } }).shortcuts, 0);
+});
+
+test('los atajos respetan el cupo de 100 reglas dinámicas de Cloudflare', () => {
+  const configs = Array.from({ length: 200 }, (_, i) => ({
+    segment: `seg${String(i).padStart(6, '0')}`,
+    cfg: { lang: 'es', region: 'NI' },
+  }));
+  const { rules } = buildRedirects({ configs, defaults: { lang: 'es', region: 'NI' } });
+  // 1 regla dinámica fija (manifest con barra) + 2 por configuración ≤ 100.
+  const dynamic = rules.filter((rule) => rule.from.includes('*') || rule.from.includes(':path'));
+  assert.ok(dynamic.length <= 100, `demasiadas dinámicas: ${dynamic.length}`);
+  // Se atienden las primeras configuraciones y se avisa del resto en el log.
+  assert.ok(rules.some((rule) => rule.from === '/seg000000/catalog/*'));
+});
+
+test('un segmento raro nunca entra en una regla de _redirects', () => {
+  const { rules, shortcuts } = buildRedirects({
+    configs: [
+      { segment: 'ok_seg-1', cfg: { lang: 'es', region: 'NI' } },
+      { segment: '../etc/passwd', cfg: { lang: 'es', region: 'NI' } },
+      { segment: 'con espacio', cfg: { lang: 'es', region: 'NI' } },
+    ],
+    defaults: { lang: 'es', region: 'NI' },
+  });
+  assert.equal(shortcuts, 1);
+  // Solo los atajos llevan el segmento: ninguno con espacios, puntos o `..`.
+  for (const rule of rules.filter((item) => item.from.includes('*'))) {
+    assert.ok(!/[ .]/.test(rule.from) && !rule.from.includes('..'), `regla insegura: ${rule.from}`);
+  }
+});

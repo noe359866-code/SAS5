@@ -30,6 +30,7 @@ const debridProviders = require('../lib/debridProviders');
 const debridConnect = require('../lib/debridConnect');
 const realDebridOAuth = require('../lib/realDebridOAuth');
 const rateLimit = require('../lib/rateLimit');
+const mirrors = require('../lib/mirrors');
 
 const app = express();
 
@@ -123,6 +124,9 @@ app.get('/healthz', (req, res) => {
     // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
     donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
     cache: cache.stats(),
+    // Espejos de cuota: cuántos despliegues suman y cuál es el techo real.
+    mirrors: mirrors.report({ self: requestBase(req).baseUrl, mirrors: config.mirrorOrigins }),
+    language: config.tmdbLanguage,
     watchRegion: config.watchRegion,
     watchRegionFallback: config.watchRegionFallback,
   });
@@ -135,7 +139,13 @@ app.get('/configure', async (req, res) => {
   const trending = await loadTrending();
   res.setHeader('Cache-Control', hasOAuthParams ? 'no-store' : buildCacheControl(1800, 86400));
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.send(renderConfigure({ origin: baseUrl, host, trendingMovies: trending.movies, trendingSeries: trending.series }));
+  res.send(renderConfigure({
+    origin: baseUrl,
+    host,
+    trendingMovies: trending.movies,
+    trendingSeries: trending.series,
+    mirrors: config.mirrorOrigins,
+  }));
 });
 
 app.get('/internal/branding.json', async (req, res) => {
@@ -172,6 +182,13 @@ app.get('/internal/streams-test.json', async (req, res) => {
 app.get('/internal/cache.json', (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   res.json(cache.stats());
+});
+
+// Espejos de cuota: cuántos despliegues suman cuota y cuál es el techo real.
+app.get('/internal/mirrors.json', (req, res) => {
+  const { baseUrl } = requestBase(req);
+  res.setHeader('Cache-Control', 'public, max-age=300');
+  res.json(mirrors.report({ self: baseUrl, mirrors: config.mirrorOrigins }));
 });
 
 function redirectConfigure(req, res, query = {}) {
@@ -273,7 +290,14 @@ app.get('/:cfg/configure', async (req, res) => {
   const trending = await loadTrending();
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.send(renderConfigure({ origin: baseUrl, host, trendingMovies: trending.movies, trendingSeries: trending.series, initialCfg: cfg }));
+  res.send(renderConfigure({
+    origin: baseUrl,
+    host,
+    trendingMovies: trending.movies,
+    trendingSeries: trending.series,
+    initialCfg: cfg,
+    mirrors: config.mirrorOrigins,
+  }));
 });
 
 app.get('/:cfg/manifest.json', (req, res) => {
@@ -350,6 +374,7 @@ app.get(['/', '/api'], async (req, res, next) => {
     trendingSeries: trending.series,
     trendingAnime: trending.anime,
     apiStatus: { tmdb: config.tmdbConfigured },
+    mirrors: config.mirrorOrigins,
   });
   res.setHeader('Cache-Control', buildCacheControl(1800, 86400));
   res.setHeader('Content-Type', 'text/html; charset=utf-8');

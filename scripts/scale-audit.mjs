@@ -109,6 +109,13 @@ export async function audit({ url, requests = 500_000, timeoutMs = 15_000, fetch
   // 1) Comprobar que el marcador del Worker funciona (la auditoría depende de él).
   const health = await doProbe('/healthz');
   const markerWorks = Boolean(health.headers.get('x-catalogos-runtime'));
+  const healthBody = typeof health.json === 'function' ? health.json() : null;
+  // Idioma y región del despliegue: son la referencia de los atajos de borde.
+  const defaults = healthBody
+    ? { lang: healthBody.language || 'es', region: healthBody.watchRegion || 'NI' }
+    : null;
+  // Espejos: cada despliegue adicional suma 100.000 invocaciones/día.
+  const mirrors = healthBody && healthBody.mirrors ? healthBody.mirrors : null;
 
   // 2) Un config personal de ejemplo, como el que instala Stremio.
   let configSegment = null;
@@ -167,7 +174,7 @@ export async function audit({ url, requests = 500_000, timeoutMs = 15_000, fetch
   // 4) Plan de estáticos REAL: qué configuraciones ha visto el despliegue y
   //    cuántas caben en el presupuesto de 20.000 archivos. Con esto la
   //    proyección deja de suponer y usa lo que hay publicado de verdad.
-  const plan = await loadPlan({ doProbe, requests });
+  const plan = await loadPlan({ doProbe, requests, defaults });
 
   return {
     url: origin.origin,
@@ -178,6 +185,7 @@ export async function audit({ url, requests = 500_000, timeoutMs = 15_000, fetch
     servedBy,
     estimate: estimation,
     plan,
+    mirrors,
     advice: advise({ servedBy, host: origin.host, estimate: estimation }),
   };
 }
@@ -194,7 +202,7 @@ export async function audit({ url, requests = 500_000, timeoutMs = 15_000, fetch
  * @param {(path: string) => Promise<object>} args.doProbe sonda HTTP
  * @param {number} args.requests peticiones/día a proyectar
  */
-async function loadPlan({ doProbe, requests }) {
+async function loadPlan({ doProbe, requests, defaults = null }) {
   const { buildPlan, ASSET_FILE_LIMIT, BASE_RESERVE } = require('../lib/staticPlan.js');
   const { projectPlan, capacityWithPlan } = require('../lib/scaleAudit.js');
   const catalogs = require('../lib/catalogs.js');
@@ -214,14 +222,16 @@ async function loadPlan({ doProbe, requests }) {
     defs: catalogs.buildDefs(null),
     defsFor: (cfg) => catalogs.buildDefs(cfg),
     budget: ASSET_FILE_LIMIT - BASE_RESERVE,
+    defaults,
   });
   return {
     configsSeen: report.totalSegments || 0,
     configsPlanned: new Set(plan.files.filter((file) => file.segment).map((file) => file.segment)).size,
+    shortcutConfigs: plan.shortcutSegments.length,
     byKind: plan.byKind,
     files: plan.files.length,
     projection: projectPlan({ plan, total: requests }),
-    capacity: capacityWithPlan({ files: plan.files }),
+    capacity: capacityWithPlan({ files: plan.files, shortcuts: plan.shortcuts }),
   };
 }
 
@@ -259,12 +269,21 @@ function printReport(report) {
       `\n  ${p.byKind['catalog-default'] || 0} catálogos por defecto, ${p.byKind.meta || 0} fichas, ` +
       `${(p.byKind['catalog-configured'] || 0) + (p.byKind['catalog-configured-page'] || 0)} catálogos por configuración, ` +
       `${p.byKind.manifest || 0} manifest` +
+      (p.shortcutConfigs ? `, ${p.shortcutConfigs} configuraciones atajadas en el borde (0 archivos)` : '') +
       `\n  Con ese plan el Worker ejecutaría ~${p.projection.workerRequests.toLocaleString('es')} ` +
       `de ${p.projection.total.toLocaleString('es')} peticiones/día ` +
       `(${Math.round(p.projection.usage * 100)} % del plan free) → techo ~${p.capacity.toLocaleString('es')}/día`
     );
   } else {
     console.log('\nPlan de estáticos: no se pudo leer /internal/cache.json (¿despliegue sin esta versión?).');
+  }
+  if (report.mirrors) {
+    const m = report.mirrors;
+    console.log(
+      `\nEspejos de cuota: ${m.shards} despliegue(s) × ${Number(m.perShardDaily || FREE_DAILY_INVOCATIONS).toLocaleString('es')} ` +
+      `invocaciones/día → techo combinado ~${Number(m.dailyCapacity || FREE_DAILY_INVOCATIONS).toLocaleString('es')}/día` +
+      (m.mirrors && m.mirrors.length ? ` (${m.mirrors.join(', ')})` : '')
+    );
   }
   if (report.advice.length) {
     console.log('\nQué hacer:');

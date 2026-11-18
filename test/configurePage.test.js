@@ -285,3 +285,29 @@ test('/configure: tipo e idioma filtran proveedores y sobreviven a la URL', () =
     assert.ok(!cfg.streamLanguages.includes('fr'));
   } finally { dom.window.close(); }
 });
+
+test('/configure reparte la instalación entre los espejos de cuota', () => {
+  const mirrors = require('../lib/mirrors');
+  // Sin MIRROR_ORIGINS solo está el propio origen: comportamiento de siempre.
+  const single = renderConfigure({ origin: 'https://addon.example', host: 'addon.example' });
+  const singleList = JSON.parse(single.match(/const MIRRORS = (\[[^;]*\]);/)[1]);
+  assert.deepEqual(singleList, ['https://addon.example']);
+
+  // Con espejos, la lista los incluye (el propio primero) y el script sabe
+  // elegir uno de forma determinista.
+  const html = renderConfigure({
+    origin: 'https://addon.example',
+    host: 'addon.example',
+    mirrors: ['https://espejo2.workers.dev', 'https://espejo3.vercel.app'],
+  });
+  const list = JSON.parse(html.match(/const MIRRORS = (\[[^;]*\]);/)[1]);
+  assert.deepEqual(list, [
+    'https://addon.example',
+    'https://espejo2.workers.dev',
+    'https://espejo3.vercel.app',
+  ]);
+  // El hash del navegador es el mismo que el del servidor.
+  assert.match(html, /function mirrorOrigin\(seed\)/);
+  assert.match(html, /2166136261/);
+  assert.ok(list.includes(mirrors.assign('ABC123segmento', list)));
+});

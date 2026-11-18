@@ -154,3 +154,49 @@ test('sin presupuesto no se escribe nada (y no se rompe)', () => {
   assert.deepEqual(plan.files, []);
   assert.equal(plan.skipped, 1);
 });
+
+test('atajos de borde: una config con el idioma y la región por defecto no gasta archivos', () => {
+  const segment = userConfig.encodeConfig({ region: 'NI', platforms: PLATFORM_KEYS.slice(0, 4) });
+  const cfg = cfgFor(segment);
+  assert.equal(cfg.lang, 'es');
+
+  const withShortcuts = buildPlan({
+    configs: [{ segment, cfg, popularity: 10 }],
+    defs: catalogs.buildDefs(null),
+    defsFor: (value) => catalogs.buildDefs(value),
+    budget: 5000,
+    defaults: { lang: 'es', region: 'NI' },
+  });
+  // Cero JSON de catálogo por configuración: los sirve `_redirects` desde
+  // /catalog/... con 0 invocaciones. El manifest sí se escribe (sin él, el
+  // addon no se abre).
+  assert.equal(withShortcuts.files.filter((file) => file.segment && file.kind.startsWith('catalog')).length, 0);
+  assert.ok(withShortcuts.files.some((file) => file.path === `/${segment}/manifest.json`));
+  assert.deepEqual(withShortcuts.shortcutSegments, [segment]);
+  assert.ok(withShortcuts.shortcuts.length > 0);
+  // El ahorro se sigue contando: la cobertura no baja al quitar los archivos.
+  const withoutShortcuts = buildPlan({
+    configs: [{ segment, cfg, popularity: 10 }],
+    defs: catalogs.buildDefs(null),
+    defsFor: (value) => catalogs.buildDefs(value),
+    budget: 5000,
+  });
+  assert.equal(withoutShortcuts.shortcuts.length, 0);
+  assert.ok(withShortcuts.daily >= withoutShortcuts.daily - 1e-9, 'el atajo no puede empeorar la cobertura');
+  // Y se libera presupuesto: menos archivos escritos para el mismo tráfico.
+  assert.ok(withShortcuts.files.length < withoutShortcuts.files.length);
+});
+
+test('atajos de borde: una config con otra región o idioma se sigue pregenerando', () => {
+  const segment = userConfig.encodeConfig({ region: 'MX' });
+  const cfg = cfgFor(segment);
+  const plan = buildPlan({
+    configs: [{ segment, cfg, popularity: 10 }],
+    defs: catalogs.buildDefs(null),
+    defsFor: (value) => catalogs.buildDefs(value),
+    budget: 5000,
+    defaults: { lang: 'es', region: 'NI' },
+  });
+  assert.equal(plan.shortcuts.length, 0);
+  assert.ok(plan.files.some((file) => file.path === `/${segment}/catalog/movie/cine_tendencias.json`));
+});

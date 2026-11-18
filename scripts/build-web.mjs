@@ -33,6 +33,14 @@ const require = createRequire(import.meta.url);
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const libPath = (name) => path.join(ROOT, 'lib', name);
 
+// Las [vars] de wrangler.toml son la configuración real del despliegue: si
+// MIRROR_ORIGINS o WATCH_REGION están ahí y no en el entorno, se aplican ahora
+// para que la web pregenerada reparta igual que el Worker.
+require(libPath('tomlVars.js')).applyWranglerVars([
+  'MIRROR_ORIGINS', 'STATIC_SHORTCUTS', 'WATCH_REGION', 'WATCH_REGION_FALLBACK',
+  'TMDB_LANGUAGE', 'PUBLIC_ORIGIN',
+]);
+
 const origin = String(process.env.PUBLIC_ORIGIN || process.env.ADDON_BASE_URL || '').trim().replace(/\/+$/, '');
 if (!origin) {
   console.log('[build-web] Sin PUBLIC_ORIGIN ni ADDON_BASE_URL: no se pregenera la web (el Worker la servirá en caliente).');
@@ -88,12 +96,14 @@ const home = renderHome({
   trendingSeries: trending.series,
   trendingAnime: trending.anime,
   apiStatus: { tmdb: config.tmdbConfigured },
+  mirrors: config.mirrorOrigins,
 });
 const configure = renderConfigure({
   origin,
   host,
   trendingMovies: trending.movies,
   trendingSeries: trending.series,
+  mirrors: config.mirrorOrigins,
 });
 const manifestJson = JSON.stringify(core.buildManifest(`${origin}/assets/logo.png`));
 const brandingJson = JSON.stringify(await branding(config.tmdbLanguage));

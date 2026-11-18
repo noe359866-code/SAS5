@@ -35,6 +35,9 @@ Metadatos enriquecidos en la ficha:
 ├── lib/
 │   ├── config.js         # Config compartida Node/Workers (reload por request)
 │   ├── core.js           # Núcleo agnóstico: manifest + handlers
+│   ├── edgeShortcuts.js  # Atajos de borde: /<cfg>/catalog|meta → archivos por defecto
+│   ├── mirrors.js        # Espejos de cuota: reparto entre despliegues (MIRROR_ORIGINS)
+│   ├── tomlVars.js       # [vars] de wrangler.toml para los scripts de build/prerender
 │   ├── cache.js          # Caché LRU, TTL, stale-while-revalidate y coalescencia
 │   ├── debridCredentials.js # Credenciales multi-proveedor cifradas y referencias opacas
 │   ├── debridProviders.js # Registro y validación de adaptadores debrid
@@ -239,7 +242,7 @@ Obtendrás una URL tipo `https://catalogos-plus.tu-subdominio.workers.dev`:
 
 #### Capacidad del plan free: +230K–500K peticiones/día
 
-El plan gratuito de Workers tiene **100.000 invocaciones/día por cuenta** (Error 1027), **10 ms de CPU**, **50 subpeticiones/invocación**, **1.000 lecturas KV/día** y **20.000 archivos estáticos** por versión. `Catálogos+` está diseñado para **+500.000 peticiones/día** combinando siete defensas automáticas:
+El plan gratuito de Workers tiene **100.000 invocaciones/día por cuenta** (Error 1027), **10 ms de CPU**, **50 subpeticiones/invocación**, **1.000 lecturas KV/día** y **20.000 archivos estáticos** por versión. `Catálogos+` está diseñado para **+500.000 peticiones/día** combinando nueve defensas automáticas:
 
 > **Aviso importante para `*.workers.dev`:** la Cache API de Cloudflare **no funciona** en esos
 > subdominios («any Cache API operations … in *.workers.dev deployments will have no impact») y allí
@@ -253,7 +256,9 @@ El plan gratuito de Workers tiene **100.000 invocaciones/día por cuenta** (Erro
 4. **Caché en memoria de KV Debrid (`lib/debridCredentials.js`).** Las credenciales descifradas se cachean 5 min en RAM del isolate (con invalidación instantánea al actualizar/desconectar) y `cacheTtl: 300` en KV, reduciendo >95 % las lecturas contra el límite gratuito de 1.000 lecturas KV/día.
 5. **Presupuesto estricto de subpeticiones y Single-Flight (`cache.coalesce`).** Coalescencia de peticiones concurrentes en TMDB, OMDB, catálogos, fichas y streams; tope de 24 `/external_ids` por invocación (muy por debajo del límite de 50 subrequests de Cloudflare) y `MAX_ENTRIES = 8000` en la LRU.
 6. **Cero fan-out innecesario en web.** Los 21 estudios llevan logo estático integrado (0 llamadas extra al abrir `/configure`), botón *«Esenciales (carga rápida)»* para manifiestos ligeros y coalescencia de peticiones en `/configure`. Consulta la arquitectura detallada y la Cache Rule exacta en [docs/escala-plan-free.md](docs/escala-plan-free.md).
-7. **Auditoría medible (`npm run scale:audit`).** El Worker marca sus respuestas con `X-Catalogos-Runtime: worker`: lo que llegue sin esa cabecera no consumió invocación. Con eso, `node scripts/scale-audit.mjs --url https://tu-dominio` mide qué parte de tu tráfico es gratis y proyecta cuántas invocaciones/día necesitarías (sale con código `2` si te pasas de las 100.000).
+7. **Atajos de borde (`lib/edgeShortcuts.js`).** Los catálogos y fichas de quien no cambió idioma ni región son los mismos archivos `/catalog/…` y `/meta/…`; `_redirects` los manda allí con un 301 del borde: **0 invocaciones** para el ~77 % del tráfico, también para los usuarios ya instalados. Ver [docs/espejos-cuota.md](docs/espejos-cuota.md).
+8. **Espejos de cuota (`lib/mirrors.js`).** Con `MIRROR_ORIGINS`, `/configure` reparte a cada usuario entre dos o más despliegues del addon (cada uno con sus 100.000 invocaciones/día). 2 despliegues = **200.000/día**. Ver [docs/espejos-cuota.md](docs/espejos-cuota.md).
+9. **Auditoría medible (`npm run scale:audit`).** El Worker marca sus respuestas con `X-Catalogos-Runtime: worker`: lo que llegue sin esa cabecera no consumió invocación. Con eso, `node scripts/scale-audit.mjs --url https://tu-dominio` mide qué parte de tu tráfico es gratis y proyecta cuántas invocaciones/día necesitarías (sale con código `2` si te pasas de las 100.000).
 
 ### Corregido tras las pruebas en vivo del 17/11/2026
 
@@ -431,39 +436,75 @@ Cada usuario los elige en `/configure` y viajan en su URL personal (`hide`, `sor
 - **Si todo queda oculto** el addon responde una lista vacía: vuelve a marcar alguna categoría. Un estreno reciente puede existir solo en CAM.
 - **Diagnóstico**: `/internal/streams-test.json?id=tt…` incluye `categories` con el número de resultados de cada categoría para ese título.
 
-## 📈 Escalar en el plan gratuito (100K → aguanta el doble sin pagar)
+## 🔁 Duplicar la cuota: de 100.000 a 200.000 peticiones/día (sin pagar)
 
-El plan free de Workers da **100.000 invocaciones/día por cuenta**: no es un número que se pueda
-subir por código (al agotarlo Cloudflare devuelve `error 1027` y no ejecuta el Worker). Lo que sí se
-puede hacer es **bajar cuántas peticiones ejecutan el Worker**. Un addon con 178.000 peticiones/día
-cabe de sobra si la mayoría llegan como *static assets*, que son gratis e ilimitados:
+El plan free de Workers da **100.000 invocaciones/día por cuenta** y eso **no se puede subir por
+código**: al llegar, Cloudflare devuelve `error 1027` y el Worker ni se ejecuta. Un despliegue con
+`173.803 / 100.000` en el panel necesita dos cosas a la vez: **gastar menos invocaciones** y
+**repartir la cuota entre dos despliegues**. Las dos están ya en el addon:
+
+1. **Atajos de borde (`lib/edgeShortcuts.js`)** — si el usuario no cambió idioma ni región, sus
+   `/<cfg>/catalog/...` y `/<cfg>/meta/...` son exactamente los archivos `/catalog/...` y
+   `/meta/...`. `_redirects` los manda allí con un **301 del borde: 0 invocaciones** (y la segunda
+   petición vuelve a costar 0). Cubre el **~62 % (catálogos) + 15 % (fichas)** del tráfico, aplica a
+   **usuarios ya instalados** y no toca streams, manifest ni configurador. Tope: 2 reglas por
+   configuración (~49 configuraciones); las demás siguen como siempre. Se apaga con
+   `STATIC_SHORTCUTS=off`.
+2. **Espejos de cuota (`lib/mirrors.js`)** — `MIRROR_ORIGINS` declara otros despliegues del mismo
+   addon (otra cuenta de Cloudflare o Vercel). `/configure` y la portada asignan a cada usuario **un
+   solo** espejo con un hash estable de su configuración, así que su manifest, sus catálogos y sus
+   fichas no se mezclan. **2 despliegues = 200.000 invocaciones/día**; 3 = 300.000. Diagnóstico en
+   `/internal/mirrors.json` y `/healthz`.
+
+```toml
+# wrangler.toml (en AMBOS despliegues, cada uno con la URL del otro)
+[vars]
+MIRROR_ORIGINS = "https://catalogos-plus-2.tu-subdominio.workers.dev"
+# STATIC_SHORTCUTS = "off"   # solo si quisieras desactivar los atajos de borde
+```
+
+```bash
+# Cuenta B: mismo repo, misma TMDB_API_KEY y sus propios secrets
+CLOUDFLARE_API_TOKEN=<token B> CLOUDFLARE_ACCOUNT_ID=<cuenta B> \
+PUBLIC_ORIGIN=https://catalogos-plus-2.tu-subdominio.workers.dev npm run deploy
+
+# Cuenta A: regenerar estáticos y _redirects con los atajos
+PUBLIC_ORIGIN=https://tu-dominio npm run deploy
+
+# Comprobar: 301 sin marca del Worker, dos espejos y techo combinado
+curl -sI https://tu-dominio/<cfg>/catalog/movie/cine_tendencias.json | grep -iE '^(HTTP|location|x-catalogos-runtime)'
+curl -s https://tu-dominio/internal/mirrors.json
+npm run scale:audit -- --url https://tu-dominio --requests 173803
+```
+
+> **Usuarios ya instalados:** los atajos les alivian solos. Para el reparto entre espejos hay que
+> **reinstalar** (Stremio guarda la URL instalada) o compartir el enlace del espejo nuevo. Guía
+> completa, con verificación y límites: **[docs/espejos-cuota.md](docs/espejos-cuota.md)**.
+
+Y las palancas que ya existían, por orden de impacto:
 
 1. **Catálogos y fichas por defecto como estáticos** — `npm run prerender` escribe
-   `public/catalog/<tipo>/<id>.json` **y sus páginas 2 y 3** (`page-2.json`, `page-3.json`, que es
-   como pagina Stremio) y `public/meta/<tipo>/<tt…>.json`.
-2. **Plan por configuración (`npm run prerender --from-url`)** — los usuarios instalan
-   `/<cfg>/manifest.json` y esos catálogos NO eran estáticos. El Worker anota qué configuraciones ve
-   (`/internal/cache.json` → `configs`), el script reparte el tope de **20.000 archivos** de
-   Cloudflare Free (`lib/staticPlan.js`) y escribe el manifest y los catálogos de las más usadas.
-   El segmento `<cfg>` es **canónico**, así que dos usuarios con la misma configuración comparten
-   archivo. Ejemplo real: *«el Worker ejecuta ~26.700 de 178.000 peticiones/día (27 % del plan
-   free) → aguanta ~666.000 peticiones/día»*.
-3. **`_redirects` en el borde** — `/configure/` y `/manifest.json/` ejecutaban el Worker
-   **para devolver un 404**: 1 invocación por clic. Ahora son un 301 del borde y cuestan 0. La barra final del manifest se cubre con
-   **una sola regla dinámica** (`/:path/manifest.json/`), así que no gasta cupo por usuario.
-4. **Configurador pregenerado por región** — el botón «Configurar» de Stremio (`/<cfg>/configure`)
-   renderizaba la página entera en el Worker en cada clic. `_redirects` lo manda a
-   `/configure/r/<REGION>` (archivo estático, ~500 KB, uno por región usada): **0 invocaciones**,
-   con la región y el idioma ya elegidos.
-5. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de un
-   manifest personal (6–10× menos peticiones por sesión).
+   `public/catalog/<tipo>/<id>.json` **y sus páginas 2 y 3** y `public/meta/<tipo>/<tt…>.json`.
+2. **Plan por configuración (`npm run prerender --from-url`)** — el Worker anota qué configuraciones
+   ve (`/internal/cache.json` → `configs`), el script reparte el tope de **20.000 archivos** de
+   Cloudflare Free (`lib/staticPlan.js`) y escribe el manifest (y los catálogos que no ataje el
+   borde) de las más usadas. El segmento `<cfg>` es **canónico**: dos usuarios con la misma
+   configuración comparten archivo.
+3. **`_redirects` en el borde** — `/configure/` y `/manifest.json/` ejecutaban el Worker **para
+   devolver un 404**: 1 invocación por clic. Ahora son un 301 del borde y cuestan 0.
+4. **Configurador pregenerado por región** — `/<cfg>/configure` renderizaba la página entera en el
+   Worker en cada clic; `_redirects` lo manda a `/configure/r/<REGION>` (archivo estático): **0
+   invocaciones**.
+5. **Manifests pequeños** — instala desde `/configure`: 121 catálogos por defecto frente a 12–20 de
+   un manifest personal (6–10× menos peticiones por sesión).
 6. **Logo y `robots.txt` estáticos** — fuera de la cuota; los crawlers no recorren rutas dinámicas.
-7. **Repartir cuota** — la cuota es por cuenta, no por Worker: espejos en otra cuenta o el mismo código
-   en Vercel (`api/index.js`) suman cuotas independientes.
+7. **Dominio propio + Cache Rule** (gratis) — el CDN sirve `/catalog/`, `/meta/` y `/manifest.json`
+   sin ejecutar el Worker incluso con `/<cfg>/`; es la única palanca que cubre también a quien no se
+   reinstala.
 8. **5 USD/mes** — 10 M peticiones/mes (≈333K/día) si algún día no quieres trocear URLs.
 
-Todo esto se regenera y despliega solo cada 6 h (`.github/workflows/prerender.yml`). Guía completa
-con números, comandos de verificación y límites: [docs/escala-plan-free.md](docs/escala-plan-free.md).
+Todo esto se regenera y despliega solo cada 6 h (`.github/workflows/prerender.yml`). Detalle técnico
+y tabla de límites: [docs/escala-plan-free.md](docs/escala-plan-free.md).
 
 ```bash
 # Qué configuraciones ha visto tu despliegue y qué conviene pregenerar
@@ -471,8 +512,8 @@ curl -s https://tu-dominio/internal/cache.json | head -c 600
 PUBLIC_ORIGIN=https://tu-dominio npm run prerender -- --from-url
 npm run deploy            # ya incluye --from-url
 
-# Auditoría: cuántas de tus peticiones ejecutan el Worker
-npm run scale:audit -- --url https://tu-dominio --requests 178000
+# Auditoría: cuántas de tus peticiones ejecutan el Worker y cuánto suma cada espejo
+npm run scale:audit -- --url https://tu-dominio --requests 173803
 ```
 
 ## 📄 Licencia

@@ -42,6 +42,8 @@ import rateLimit from './lib/rateLimit.js';
 import hlsProxy from './lib/hlsProxy.js';
 import logoData from './lib/logoData.js';
 import configRegistry from './lib/configRegistry.js';
+// Espejos de cuota: reparto de usuarios entre varios despliegues del addon.
+import mirrors from './lib/mirrors.js';
 
 const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
 const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+?)(?:\/([^/]+))?\.json$/;
@@ -488,9 +490,10 @@ async function handleRequest(request, env, ctx) {
           trendingSeries: trending.series,
           trendingAnime: trending.anime,
           apiStatus: { tmdb: config.tmdbConfigured },
+          mirrors: config.mirrorOrigins,
         });
         return htmlResponse(html, 1800);
-      }, `${origin}/__edge/home.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}`);
+      }, `${origin}/__edge/home.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}&mirrors=${mirrors.hash32(config.mirrorOrigins.join(','))}`);
     }
 
     // ── Página de configuración ───────────────────────────────
@@ -499,7 +502,13 @@ async function handleRequest(request, env, ctx) {
       const createConfigure = async () => {
         const trending = await loadTrending();
         return htmlResponse(
-          renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series }),
+          renderConfigure({
+            origin,
+            host,
+            trendingMovies: trending.movies,
+            trendingSeries: trending.series,
+            mirrors: config.mirrorOrigins,
+          }),
           hasOAuthParams ? 0 : 1800
         );
       };
@@ -509,7 +518,7 @@ async function handleRequest(request, env, ctx) {
             request,
             ctx,
             createConfigure,
-            `${origin}/__edge/configure.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}&kofi=${encodeURIComponent(config.kofiUrl || '')}&sup=${encodeURIComponent(config.supportUrl || '')}`
+            `${origin}/__edge/configure.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}&kofi=${encodeURIComponent(config.kofiUrl || '')}&sup=${encodeURIComponent(config.supportUrl || '')}&mirrors=${mirrors.hash32(config.mirrorOrigins.join(','))}`
           );
     }
 
@@ -523,6 +532,15 @@ async function handleRequest(request, env, ctx) {
         { ...cache.stats(), responseCache: responseCache.stats(), configs: configRegistry.report({ limit }) },
         200,
         0
+      );
+    }
+
+    // ── Espejos de cuota (diagnóstico, sin datos de usuario) ──
+    if (path === '/internal/mirrors.json') {
+      return jsonResponse(
+        mirrors.report({ self: origin, mirrors: config.mirrorOrigins }),
+        200,
+        300
       );
     }
 
@@ -602,8 +620,12 @@ async function handleRequest(request, env, ctx) {
             freeDailyInvocations: 100_000,
             configsTracked: configRegistry.report({ limit: 1 }).totalSegments,
             staticPlan: 'static-assets + _redirects + por-configuracion',
+            edgeShortcuts: config.staticShortcuts,
             hint: 'npm run prerender -- --from-url=https://tu-dominio',
           },
+          // Espejos: cuántos despliegues suman cuota y cuál es el techo real.
+          mirrors: mirrors.report({ self: origin, mirrors: config.mirrorOrigins }),
+          language: config.tmdbLanguage,
           watchRegion: config.watchRegion,
           watchRegionFallback: config.watchRegionFallback,
         },
@@ -658,7 +680,14 @@ async function handleRequest(request, env, ctx) {
         // debe abrir el configurador con TU región/selección ya cargada.
         if (rest === '/configure') {
           const trending = await loadTrending();
-          return htmlResponse(renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series, initialCfg: cfg }));
+          return htmlResponse(renderConfigure({
+            origin,
+            host,
+            trendingMovies: trending.movies,
+            trendingSeries: trending.series,
+            initialCfg: cfg,
+            mirrors: config.mirrorOrigins,
+          }));
         }
         if (rest === '/manifest.json') {
           const createManifest = () => jsonResponse(core.buildManifest(logoUrl, cfg), 200, cfg.debridId ? 0 : 300);

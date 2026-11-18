@@ -26,7 +26,7 @@ test('GnulaHD: continúa solo por el enlace exacto y confirma el capítulo en la
   ['/mi-serie-1x02/', '<h1>Ver Mi serie 1×02 Online — Dos</h1><a href="/ver/mi-serie/">Todos</a><iframe src="https://embed.example/view"></iframe>']]);
   const result = await probe(show);
   assert.match(result, /^episodio exacto identificado;/);
-  assert.match(result, /etiquetas de vídeo=0; URL en vídeo=—; iframes=1 \(embed\.example\)/);
+  assert.match(result, /etiquetas de vídeo=0; fuentes HTML de vídeo=0; URL en vídeo=—; iframes=1 \(embed\.example\)/);
 });
 
 test('GnulaHD: una ficha sin enlace válido no provoca una petición de episodio inferida', async (t) => {
@@ -38,31 +38,37 @@ test('GnulaHD: una descarga, un tráiler y un iframe con extensión MP4 no se co
   mockFetch(t, [['/ver/control/', page('Control', 2001, `<video class="trailer" src="https://cdn.example/trailer.mp4"></video>
     <div class="downloads"><video src="https://cdn.example/download.mp4"></video></div>
     <a href="https://cdn.example/download.mp4" download>Descargar</a>
-    <iframe src="https://player.example/pretend.mp4"></iframe><video src="https://cdn.example/live.m3u8" data-lang="Latino"></video>`)]]);
+    <iframe src="https://player.example/pretend.mp4"></iframe><video src="https://cdn.example/live.m3u8" data-lang="Latino"></video><video></video>`)]]);
   const result = await probe({ title: 'Control', year: 2001, slug: 'control' });
-  assert.match(result, /etiquetas de vídeo=1; URL en vídeo=cdn\.example\.m3u8 \(Latino\); iframes=1/);
+  assert.match(result, /etiquetas de vídeo=2; fuentes HTML de vídeo=1; URL en vídeo=cdn\.example\.m3u8 \(Latino\); iframes=1/);
   assert.doesNotMatch(result, /https:|pretend\.mp4|download\.mp4|trailer\.mp4/);
 });
 
-test('GnulaHD: rastrea el destino y el método declarados, sin ejecutar el script ni mostrar valores', async (t) => {
+test('GnulaHD: distingue las llamadas del script con vídeo del resto sin ejecutar ni volcar valores', async (t) => {
   mockFetch(t, [['/ver/control/', page('Control', 2001, `
     <script>window.gnula = {ajax: '${origin}/wp-admin/admin-ajax.php?signature=secret-marker', nonce: 'secret-marker'};</script>
+    <script>fetch('/wp-json/gnula/comment', { method: 'POST' });</script>
     <script>
       throw new Error('No se debe ejecutar este código');
-      async function loadPlayer() {
+      document.addEventListener('click', async () => {
         const body = new URLSearchParams();
         body.set('action', 'secret-action');
         body.set('post_id', 'private-id');
         body.set('lang', 'secret-language');
         body.set('nonce', window.gnula.nonce);
-        const response = await fetch(window.gnula.ajax, { method: 'POST', body });
-        return document.createElement('iframe');
-      }
+        await fetch(window.gnula.ajax, { method: 'POST', body });
+        const player = document.createElement('video');
+        const hls = new Hls();
+        hls.loadSource('secret-source');
+        player.play();
+      });
     </script>`)]]);
   const result = await probe({ title: 'Control', year: 2001, slug: 'control' });
-  assert.match(result, /destinos declarados=AJAX WordPress; llamadas estáticas=POST AJAX WordPress/);
-  for (const label of ['acción', 'id de contenido', 'idioma', 'verificador', 'crea=iframe']) assert.ok(result.includes(label), label);
-  assert.doesNotMatch(result, /secret|private-id|admin-ajax\.php|https:/);
+  assert.match(result, /destinos declarados=AJAX WordPress, REST WordPress/);
+  assert.match(result, /scripts con señales de reproductor=1; crea=video;/);
+  assert.match(result, /señales en esos scripts=(?=[^;]*clic)(?=[^;]*Hls)(?=[^;]*loadSource\(\))(?=[^;]*play\(\))/);
+  assert.match(result, /llamadas en esos scripts=POST destino dinámico \((?=[^)]*acción)(?=[^)]*id de contenido)(?=[^)]*idioma)(?=[^)]*verificador)[^)]*\); llamadas en otros scripts=POST REST WordPress/);
+  assert.doesNotMatch(result, /secret|private-id|admin-ajax\.php|wp-json|https:/);
 });
 
 test('GnulaHD: JSON-LD y metadatos sociales se cuentan por separado de un vídeo reproducible', async (t) => {
@@ -70,7 +76,18 @@ test('GnulaHD: JSON-LD y metadatos sociales se cuentan por separado de un vídeo
     <meta property="og:video" content="https://trailer.example/asset.mp4">
     <script type="application/ld+json">{"@graph":[{"@type":"Movie"},{"@type":"VideoObject", "embedUrl":"https://trailer.example/secret"}]}</script>`)]]);
   const result = await probe({ title: 'Control', year: 2001, slug: 'control' });
-  assert.match(result, /etiquetas de vídeo=0; URL en vídeo=—/);
+  assert.match(result, /etiquetas de vídeo=0; fuentes HTML de vídeo=0; URL en vídeo=—/);
   assert.match(result, /\(VideoObject=1, contentUrl=0, embedUrl=1\); meta de vídeo=1/);
   assert.doesNotMatch(result, /https:|secret/);
+});
+
+test('GnulaHD: los avisos y controles del HTML no cuentan textos de descargas ni scripts', async (t) => {
+  mockFetch(t, [['/ver/control/', page('Control', 2001, `
+    <div class="downloads"><button>Latino</button>Cargando servidores…</div>
+    <script>const player = 'Cargando servidores…';</script>
+    <button>Haz clic para reproducir</button>
+    <div role="menuitemradio">✓ Subtitulado</div>`)]]);
+  const result = await probe({ title: 'Control', year: 2001, slug: 'control' });
+  assert.match(result, /controles de audio HTML=Subtitulado; avisos HTML=Haz clic para reproducir;/);
+  assert.match(result, /etiquetas de vídeo=0; fuentes HTML de vídeo=0; URL en vídeo=—;/);
 });

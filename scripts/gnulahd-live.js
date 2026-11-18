@@ -54,8 +54,9 @@ function matchingEpisode($, page, show, fixture) {
 
 function inspectPlayer($, page) {
   const rows = (selector) => $(selector).toArray().filter((node) => !$(node).closest(excluded).length);
-  const video = rows('video[src],video[data-src],video source[src],video source[data-src]');
-  const media = video.map((node) => {
+  const video = rows('video');
+  const sources = rows('video[src],video[data-src],video source[src],video source[data-src]');
+  const media = sources.map((node) => {
     const el = $(node);
     const url = httpsUrl(el.attr('data-src') || el.attr('src'), page);
     const group = el.closest('[data-lang],[data-language]');
@@ -64,7 +65,11 @@ function inspectPlayer($, page) {
   }).filter(Boolean);
   const frames = rows('iframe');
   const hosts = frames.map((node) => httpsUrl($(node).attr('data-src') || $(node).attr('src'), page)?.hostname || 'sin URL HTTPS');
-  const labels = $('button,option,[role="option"]').toArray().map((node) => $(node).text().trim()).filter((text) => localizedAudio.test(text));
+  const labels = rows('button,option,[role="option"],[role="menuitemradio"]').map((node) => $(node).text().replace(/^\s*✓\s*/, '').trim()).filter((text) => localizedAudio.test(text));
+  const body = $('body').clone();
+  body.find(`script,style,noscript,template,${excluded}`).remove();
+  const text = body.text().replace(/\s+/g, ' ');
+  const shell = ['Haz clic para reproducir', 'Cargando servidores'].filter((phrase) => text.includes(phrase));
   const attrs = rows('[data-src],[data-video],[data-url],[data-embed],[data-lang],[data-language],[data-player],[data-post],[data-server],[data-servers]')
     .flatMap((node) => Object.keys(node.attribs)).filter((name) => /^data-[a-z-]{1,35}$/.test(name));
   const scripts = $('script:not([src])').toArray().map((node) => $(node).html() || '').join('\n').replace(/\\\//g, '/');
@@ -72,7 +77,9 @@ function inspectPlayer($, page) {
     .filter((field) => new RegExp(`\\b${field}\\b`, 'i').test(scripts));
   const literals = [...scripts.matchAll(/["'](https:\/\/[^'"<>\s\\]{1,2048})["']/gi)].map((match) => httpsUrl(match[1], page))
     .filter((url) => url && ext.test(url.pathname)).map((url) => url.hostname + ext.exec(url.pathname)[0]);
-  return `etiquetas de vídeo=${video.length}; URL en vídeo=${unique(media)}; iframes=${frames.length} (${unique(hosts)}); menú=${unique(labels)}; atributos=${unique(attrs)}; JS=${unique(fields)}; literales sin verificar=${unique(literals)}; ${inspectInline($, page)}`;
+  return `etiquetas de vídeo=${video.length}; fuentes HTML de vídeo=${sources.length}; URL en vídeo=${unique(media)}; `
+    + `iframes=${frames.length} (${unique(hosts)}); controles de audio HTML=${unique(labels)}; avisos HTML=${unique(shell)}; `
+    + `atributos=${unique(attrs)}; JS=${unique(fields)}; literales sin verificar=${unique(literals)}; ${inspectInline($, page)}`;
 }
 
 async function probe(fixture, http = providerHttp(7000)) {

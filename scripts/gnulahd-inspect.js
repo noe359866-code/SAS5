@@ -47,12 +47,12 @@ function astNodes(script, sourceType) {
   let root;
   try { root = parse(script, { ecmaVersion: 'latest', sourceType }); } catch { return null; }
   const list = [];
-  const stack = [{ node: root, parent: null, scope: root }];
+  const stack = [{ node: root, scope: root }];
   while (stack.length && list.length < maxNodes) {
-    const { node, parent, scope } = stack.pop();
+    const { node, scope } = stack.pop();
     const owner = functions.has(node.type) ? node : scope;
-    list.push({ node, parent, scope: owner });
-    children(node, (child) => stack.push({ node: child, parent: node, scope: owner }));
+    list.push({ node, scope: owner });
+    children(node, (child) => stack.push({ node: child, scope: owner }));
   }
   return stack.length ? null : list;
 }
@@ -75,64 +75,60 @@ function inputKind(key) {
   return '';
 }
 
-function observedRequests(groups, page) {
+function callShape(node, formKinds, page) {
+  const ref = reference(node.callee);
+  if (!['fetch', 'window.fetch', '$.ajax', 'jQuery.ajax', '$.post', 'jQuery.post'].includes(ref)) return '';
+  const [first, second] = node.arguments;
+  const ajaxObject = ref.endsWith('.ajax') && first?.type === 'ObjectExpression';
+  const options = ajaxObject ? first : second;
+  // Un literal declarado en otra parte no demuestra que sea el destino de esta llamada.
+  const dest = route(literal(ajaxObject ? setting(options, 'url') : first), page) || 'destino dinámico';
+  const isFetch = ref.endsWith('fetch');
+  const method = ref.endsWith('.post') ? 'POST' : literal(setting(options, 'method') || (!isFetch && setting(options, 'type'))).toUpperCase() || (options ? '?' : 'GET');
+  const body = isFetch ? setting(options, 'body') : ref.endsWith('.post') ? second : setting(options, 'data');
+  const encoded = body?.type === 'NewExpression' && ['URLSearchParams', 'FormData'].includes(reference(body.callee));
+  const keys = properties(encoded ? body.arguments[0] : body).map((p) => inputKind(word(p.key)));
+  const fields = [...keys, ...(formKinds?.get(reference(body)) || [])].filter(Boolean);
+  return `${/^(?:GET|POST)$/.test(method) ? method : 'otro método o dinámico'} ${dest}${fields.length ? ` (${summary(fields)})` : ''}`;
+}
+
+function inspectScript(list, page) {
   const paths = new Set();
-  const bindings = new Map();
-  function remember(ref, value, depth = 0) {
-    if (!ref || depth > 3) return;
-    const kind = route(literal(value), page);
-    if (kind && kind !== 'otro origen') {
-      if (kind !== 'mismo origen') paths.add(kind);
-      const previous = bindings.get(ref);
-      // Un nombre reutilizado no permite atribuir el destino de una llamada.
-      bindings.set(ref, previous && previous !== kind ? 'destino variable' : kind);
-    }
-    for (const prop of properties(value)) {
-      const key = word(prop.key);
-      if (/^[a-z_$][\w$]{0,31}$/i.test(key)) remember(`${ref}.${key}`, prop.value, depth + 1);
-    }
-  }
+  const created = new Set();
+  const signals = new Set();
   const formKinds = new Map();
-  const frames = new Set();
-  for (const list of groups) for (const { node, scope } of list) {
-    if (node.type === 'VariableDeclarator') remember(reference(node.id), node.init);
-    if (node.type === 'AssignmentExpression' && node.operator === '=') remember(reference(node.left), node.right);
+  const requests = [];
+  for (const { node, scope } of list) {
     if (node.type === 'Literal') {
       const kind = route(literal(node), page);
       if (['AJAX WordPress', 'REST WordPress', 'visor del sitio'].includes(kind)) paths.add(kind);
     }
+    if (node.type === 'AssignmentExpression' && reference(node.left).endsWith('.onclick')) signals.add('clic');
+    const ref = reference(node.callee);
+    if (node.type === 'NewExpression' && ['Hls', 'window.Hls'].includes(ref)) signals.add('Hls');
     if (node.type !== 'CallExpression') continue;
-    const key = reference(node.callee).split('.').pop();
-    if (key === 'createElement' && /^(?:video|iframe|source)$/i.test(literal(node.arguments[0]))) frames.add(literal(node.arguments[0]).toLowerCase());
+    const key = ref.split('.').pop();
+    const arg = literal(node.arguments[0]);
+    if (['document.createElement', 'window.document.createElement'].includes(ref) && /^(?:video|iframe|source)$/i.test(arg)) created.add(arg.toLowerCase());
+    if (key === 'addEventListener' && arg === 'click') signals.add('clic');
+    if (key === 'play') signals.add('play()');
+    if (key === 'loadSource') signals.add('loadSource()');
     if (key !== 'append' && key !== 'set') continue;
-    const kind = inputKind(literal(node.arguments[0]));
-    if (kind) {
+    const kind = inputKind(arg);
+    const target = reference(node.callee.object);
+    if (kind && target) {
       if (!formKinds.has(scope)) formKinds.set(scope, new Map());
-      const target = reference(node.callee.object);
       const fields = formKinds.get(scope);
-      if (target && !fields.has(target)) fields.set(target, new Set());
-      fields.get(target)?.add(kind);
+      if (!fields.has(target)) fields.set(target, new Set());
+      fields.get(target).add(kind);
     }
   }
-  const requests = [];
-  for (const list of groups) for (const { node, scope } of list) {
+  for (const { node, scope } of list) {
     if (node.type !== 'CallExpression') continue;
-    const ref = reference(node.callee);
-    if (!['fetch', 'window.fetch', '$.ajax', 'jQuery.ajax', '$.post', 'jQuery.post'].includes(ref)) continue;
-    const [first, second] = node.arguments;
-    const options = ref.endsWith('.ajax') && first?.type === 'ObjectExpression' ? first : second;
-    const target = options === first ? setting(options, 'url') : first;
-    const dest = route(literal(target), page) || bindings.get(reference(target)) || 'destino dinámico';
-    if (dest === 'otro origen') continue;
-    const isFetch = ref.endsWith('fetch');
-    const method = ref.endsWith('.post') ? 'POST' : literal(setting(options, 'method') || setting(options, 'type')).toUpperCase() || (options ? '?' : 'GET');
-    const body = isFetch ? setting(options, 'body') : ref.endsWith('.post') ? second : setting(options, 'data');
-    const encoded = body?.type === 'NewExpression' && ['URLSearchParams', 'FormData'].includes(reference(body.callee));
-    const keys = properties(encoded ? body.arguments[0] : body).map((p) => inputKind(word(p.key)));
-    const fields = [...keys, ...(formKinds.get(scope)?.get(reference(body)) || [])].filter(Boolean);
-    requests.push(`${/^(?:GET|POST)$/.test(method) ? method : 'método no literal'} ${dest}${fields.length ? ` (${summary(fields)})` : ''}`);
+    const call = callShape(node, formKinds.get(scope), page);
+    if (call) requests.push(call);
   }
-  return { paths: summary(paths), requests: summary(requests), created: summary(frames) };
+  return { paths: [...paths], created: [...created], signals: [...signals], requests };
 }
 
 function structuredData($) {
@@ -167,8 +163,14 @@ function inspectInline($, page) {
   const candidates = $('script:not([src])').toArray().map((node) => ({ type: $(node).attr('type'), text: $(node).html() || '' }))
     .filter(({ type, text }) => (!type || ['module', 'text/javascript', 'application/javascript'].includes(type)) && relevant.test(text));
   const groups = candidates.slice(0, maxScripts).map(({ type, text }) => text.length <= maxScript ? astNodes(text, type === 'module' ? 'module' : 'script') : null).filter(Boolean);
-  const evidence = observedRequests(groups, page);
-  return `JS analizado=${groups.length}/${candidates.length}; destinos declarados=${evidence.paths}; llamadas estáticas=${evidence.requests}; crea=${evidence.created}; ${structuredData($)}`;
+  const scripts = groups.map((list) => inspectScript(list, page));
+  const players = scripts.filter(({ created, signals }) => created.length || signals.includes('Hls'));
+  const others = scripts.filter((script) => !players.includes(script));
+  const combine = (rows, key) => summary(rows.flatMap((row) => row[key]));
+  return `JS analizado=${groups.length}/${candidates.length}; destinos declarados=${combine(scripts, 'paths')}; `
+    + `scripts con señales de reproductor=${players.length}; crea=${combine(players, 'created')}; `
+    + `señales en esos scripts=${combine(players, 'signals')}; llamadas en esos scripts=${combine(players, 'requests')}; `
+    + `llamadas en otros scripts=${combine(others, 'requests')}; ${structuredData($)}`;
 }
 
 module.exports = { inspectInline };

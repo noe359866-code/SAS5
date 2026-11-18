@@ -226,14 +226,14 @@ test('prerenderConfigs escribe el manifest y solo los catálogos que pidió el p
         ],
       }],
       resolve: async (type, id) => ({ metas: [{ id: 'tt1', type, name: 'Uno' }], cacheMaxAge: 21600 }),
-      manifest: (c) => ({ id: 'org.comunidad.catalogos.plus', name: `Catálogos+ · ${c.region}` }),
+      manifest: (c) => ({ id: 'org.comunidad.catalogos.plus', name: `RamdonLatam · ${c.region}` }),
     });
 
     assert.deepEqual(result.manifests, [`/${segment}/manifest.json`]);
     assert.deepEqual(result.written, [`${segment}/catalog/movie/cine_tendencias.json`]);
 
     const manifest = JSON.parse(await readFile(path.join(outDir, segment, 'manifest.json'), 'utf8'));
-    assert.equal(manifest.name, 'Catálogos+ · NI');
+    assert.equal(manifest.name, 'RamdonLatam · NI');
     // Un catálogo que no estaba en el plan no se escribe.
     await assert.rejects(readFile(path.join(outDir, segment, 'catalog', 'movie', 'cine_netflix.json')));
   });

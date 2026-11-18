@@ -11,7 +11,7 @@ test('SpinFlix verifica la ficha y devuelve solo HLS con doblaje válido', async
   t.mock.method(global, 'fetch', async (raw, init) => {
     const url = new URL(raw);
     calls.push(url.pathname);
-    assert.equal(init.redirect, 'error');
+    assert.equal(init.redirect, 'manual');
     if (url.pathname === '/search') return Response.json({ results: [movie] });
     if (url.pathname === '/pelicula/prueba-spinflix') return Response.json({ ...movie, embeds: { video: [
       { link: 'https://vimeos.net/embed-english', language: 'Inglés' },

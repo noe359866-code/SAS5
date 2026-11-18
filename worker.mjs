@@ -1,5 +1,5 @@
 /**
- * Catálogos+ — Addon de Stremio para Cloudflare Workers
+ * RamdonLatam — Addon de Stremio para Cloudflare Workers
  *
  * Rutas:
  *   GET /                               Landing

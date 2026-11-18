@@ -19,7 +19,7 @@ for (const [key, origin, search, path] of [
     t.mock.method(global, 'fetch', async (url, init) => {
       const [expected, html] = pages.shift();
       assert.equal(url, expected);
-      assert.equal(init.redirect, 'error');
+      assert.equal(init.redirect, 'manual');
       return new Response(html);
     });
     const hits = await SEARCHERS[key]('', { title: 'El título', mediaType: 'movie', year: '2025' });

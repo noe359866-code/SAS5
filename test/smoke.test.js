@@ -130,7 +130,7 @@ test('manifest personal: filtra catálogos según config (Express)', async () =>
   assert.equal(res.status, 200);
   const manifest = await res.json();
   assert.equal(manifest.catalogs.length, 4);
-  assert.equal(manifest.name, 'Catálogos+ · MX');
+  assert.equal(manifest.name, 'RamdonLatam · MX');
 });
 
 test('config inválida: 404 (Express)', async () => {

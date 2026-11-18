@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────
-#  Catálogos+ · Cloudflare Worker — configuración de despliegue
+#  RamdonLatam · Cloudflare Worker — configuración de despliegue
 #  Las claves de API NO van aquí. Se añaden como secrets:
 #    npx wrangler secret put TMDB_API_KEY
 #    npx wrangler secret put OMDB_API_KEY
@@ -11,7 +11,7 @@ compatibility_date = "2026-11-01"
 
 # Variables NO secretas (puedes editarlas con seguridad)
 [vars]
-ADDON_NAME = "Catálogos+"
+ADDON_NAME = "RamdonLatam"
 WATCH_REGION = "NI"
 TMDB_MIN_VOTE_COUNT = "500"
 CACHE_TTL_SECONDS = "21600"
@@ -20,7 +20,7 @@ STREAM_FALLBACK_TIMEOUT_MS = "2500"
 STREAM_PROVIDER_COOLDOWN_SECONDS = "300"
 STREAM_STALE_SECONDS = "21600"
 # Enlace de soporte de la web. Por defecto, invitación permanente actual al
-# Discord de Catálogos+. Actualízalo aquí si el enlace cambia.
+# Discord de RamdonLatam. Actualízalo aquí si el enlace cambia.
 # SUPPORT_URL = "https://discord.gg/J6byqsRUfu"
 # Donaciones: botón de Ko-fi en la barra, tarjeta propia y pie (dentro de Ko-fi
 # se paga con PayPal o tarjeta). Página del proyecto; "off" oculta todo.

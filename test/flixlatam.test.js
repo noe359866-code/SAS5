@@ -39,7 +39,7 @@ test('FlixLatam es opt-in y busca el episodio exacto con peticiones limitadas al
     player('Español Latino', 'https://cdn.example/episode.mp4')];
   const requests = [];
   t.mock.method(global, 'fetch', async (url, init) => {
-    assert.equal(init.redirect, 'error');
+    assert.equal(init.redirect, 'manual');
     requests.push(url);
     return new Response(pages.shift());
   });
@@ -57,7 +57,7 @@ test('FlixLatam resuelve un embed público Uqload sin ejecutar JavaScript', asyn
   const calls = [];
   t.mock.method(global, 'fetch', async (url, init) => {
     calls.push(url);
-    assert.equal(init.redirect, 'error');
+    assert.equal(init.redirect, 'manual');
     if (url.includes('/search?')) return new Response(card('/pelicula/titulo', 2001));
     if (url.endsWith('/pelicula/titulo')) return new Response('<div class="pframe"><iframe title="Castellano" src="https://uqload.vc/embed-abc.html"></iframe><iframe title="Latino" src="https://uqload.vc.evil.example/embed-abc.html"></iframe><iframe title="Uqload" src="https://uqload.vc/embed-unlabeled.html"></iframe></div>');
     assert.equal(url, 'https://uqload.vc/embed-abc.html');

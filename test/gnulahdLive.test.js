@@ -43,3 +43,34 @@ test('GnulaHD: una descarga, un tráiler y un iframe con extensión MP4 no se co
   assert.match(result, /etiquetas de vídeo=1; URL en vídeo=cdn\.example\.m3u8 \(Latino\); iframes=1/);
   assert.doesNotMatch(result, /https:|pretend\.mp4|download\.mp4|trailer\.mp4/);
 });
+
+test('GnulaHD: rastrea el destino y el método declarados, sin ejecutar el script ni mostrar valores', async (t) => {
+  mockFetch(t, [['/ver/control/', page('Control', 2001, `
+    <script>window.gnula = {ajax: '${origin}/wp-admin/admin-ajax.php?signature=secret-marker', nonce: 'secret-marker'};</script>
+    <script>
+      throw new Error('No se debe ejecutar este código');
+      async function loadPlayer() {
+        const body = new URLSearchParams();
+        body.set('action', 'secret-action');
+        body.set('post_id', 'private-id');
+        body.set('lang', 'secret-language');
+        body.set('nonce', window.gnula.nonce);
+        const response = await fetch(window.gnula.ajax, { method: 'POST', body });
+        return document.createElement('iframe');
+      }
+    </script>`)]]);
+  const result = await probe({ title: 'Control', year: 2001, slug: 'control' });
+  assert.match(result, /destinos declarados=AJAX WordPress; llamadas estáticas=POST AJAX WordPress/);
+  for (const label of ['acción', 'id de contenido', 'idioma', 'verificador', 'crea=iframe']) assert.ok(result.includes(label), label);
+  assert.doesNotMatch(result, /secret|private-id|admin-ajax\.php|https:/);
+});
+
+test('GnulaHD: JSON-LD y metadatos sociales se cuentan por separado de un vídeo reproducible', async (t) => {
+  mockFetch(t, [['/ver/control/', page('Control', 2001, `
+    <meta property="og:video" content="https://trailer.example/asset.mp4">
+    <script type="application/ld+json">{"@graph":[{"@type":"Movie"},{"@type":"VideoObject", "embedUrl":"https://trailer.example/secret"}]}</script>`)]]);
+  const result = await probe({ title: 'Control', year: 2001, slug: 'control' });
+  assert.match(result, /etiquetas de vídeo=0; URL en vídeo=—/);
+  assert.match(result, /\(VideoObject=1, contentUrl=0, embedUrl=1\); meta de vídeo=1/);
+  assert.doesNotMatch(result, /https:|secret/);
+});

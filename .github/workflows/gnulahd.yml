@@ -5,7 +5,7 @@ on:
     branches: ['arena/**']
     paths:
       - '.github/workflows/gnulahd.yml'
-      - 'scripts/gnulahd-live.js'
+      - 'scripts/gnulahd-*.js'
       - 'test/gnulahdLive.test.js'
 permissions:
   contents: read

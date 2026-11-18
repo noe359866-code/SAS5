@@ -39,6 +39,7 @@
     "stremio-addon-sdk": "^1.6.10"
   },
   "devDependencies": {
+    "acorn": "8.15.0",
     "jsdom": "^26.1.0",
     "nodemon": "^3.1.9",
     "wrangler": "^4.159.0"

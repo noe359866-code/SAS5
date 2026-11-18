@@ -5,6 +5,7 @@
 const { appendFileSync } = require('node:fs');
 const { load } = require('cheerio');
 const { providerHttp } = require('../lib/providerHttp');
+const { inspectInline } = require('./gnulahd-inspect');
 const { annotate } = require('./providers-live');
 
 const BASE = 'https://ww3.gnulahd.nu';
@@ -12,7 +13,8 @@ const controls = [
   { title: 'Matrix', year: 1999, slug: 'matrix' },
   { title: 'El Origen', year: 2010, slug: 'el-origen' },
   { title: 'La Odisea', year: 2026, slug: 'la-odisea-2026' },
-  { title: 'Breaking Bad', year: 2008, slug: 'breaking-bad', season: 1, episode: 2 },
+  { title: 'Marrow', year: 2026, slug: 'marrow' },
+  { title: 'Breaking Bad', year: 2008, slug: 'breaking-bad', season: 2, episode: 3 },
   { title: 'VisionQuest', year: 2026, slug: 'visionquest', season: 1, episode: 2 },
 ];
 const norm = (value) => value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
@@ -70,7 +72,7 @@ function inspectPlayer($, page) {
     .filter((field) => new RegExp(`\\b${field}\\b`, 'i').test(scripts));
   const literals = [...scripts.matchAll(/["'](https:\/\/[^'"<>\s\\]{1,2048})["']/gi)].map((match) => httpsUrl(match[1], page))
     .filter((url) => url && ext.test(url.pathname)).map((url) => url.hostname + ext.exec(url.pathname)[0]);
-  return `etiquetas de vídeo=${video.length}; URL en vídeo=${unique(media)}; iframes=${frames.length} (${unique(hosts)}); menú=${unique(labels)}; atributos=${unique(attrs)}; JS=${unique(fields)}; literales sin verificar=${unique(literals)}`;
+  return `etiquetas de vídeo=${video.length}; URL en vídeo=${unique(media)}; iframes=${frames.length} (${unique(hosts)}); menú=${unique(labels)}; atributos=${unique(attrs)}; JS=${unique(fields)}; literales sin verificar=${unique(literals)}; ${inspectInline($, page)}`;
 }
 
 async function probe(fixture, http = providerHttp(7000)) {

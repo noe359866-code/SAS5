@@ -11,8 +11,8 @@ const { allowedVideoUrl } = require('../lib/vimeos');
 const { parseManifest } = require('../lib/hlsManifest');
 
 const movies = [
-  ['Te Van a Matar', '2026'], ['Ciudad de Dios', '2002'], ['El Hombre de la Tierra', '2007'],
-  ['La Odisea', '2026'], ['Toy Story 5', '2026'], ['Ratatouille', '2007'],
+  ['Ciudad de Dios', '2002'], ['Te Van a Matar', '2026'], ['Plan de Escape', '2013'],
+  ['Ghost in the Shell: La Vigilante del Futuro', '2017'], ['Toy Story 5', '2026'], ['Ratatouille', '2007'],
 ].map(([title, year]) => ({ title, year, mediaType: 'movie' }));
 const series = [
   { title: 'VisionQuest', year: '2026', season: 1, episode: 1 },
@@ -81,6 +81,11 @@ async function inspectUnlimMedia($, page) {
       const variable = [...before.matchAll(/(?:\b(?:const|let|var)\s+|\bwindow\.)([a-zA-Z_$][\w$]{0,35})\s*=\s*(?=[\[{"'])/g)].pop()?.[1] || '—';
       const key = /["']?([A-Za-z_$][\w$]{0,35})["']?\s*:\s*$/.exec(before.slice(-80))?.[1] || '—';
       const start = before.lastIndexOf('{');
+      const parent = /["']?([A-Za-z_$][\w$]{0,29})["']?\s*:\s*$/.exec(before.slice(Math.max(0, start - 90), start))?.[1] || '—';
+      const scriptType = $(node).attr('type');
+      const type = /^(?:text|application)\/[a-z+.-]{1,32}$/.test(scriptType || '') ? scriptType : 'script';
+      const id = $(node).attr('id');
+      const marker = /^[a-z][a-z_-]{0,29}$/i.test(id || '') ? id : '—';
       const end = script.indexOf('}', match.index + match[0].length);
       let fields = '—';
       let language = '—';
@@ -92,7 +97,7 @@ async function inspectUnlimMedia($, page) {
           if (/^(?:latino|castellano|subtitulado|es|es-419|spa|lat|la|mx|cast)$/.test(declared)) language = declared;
         } catch { /* no es un objeto JSON literal */ }
       }
-      if (!urls.has(url.href)) urls.set(url.href, { url, info: `${shape(url)} en ${variable}.${key}; campos=${fields}; idioma=${language}; query=${url.search ? 'sí' : 'no'}` });
+      if (!urls.has(url.href)) urls.set(url.href, { url, info: `${shape(url)} en ${type}#${marker} ${variable}/${parent}.${key}; campos=${fields}; idioma=${language}; query=${url.search ? 'sí' : 'no'}` });
       if (urls.size >= 4) break;
     }
     if (urls.size >= 4) break;
@@ -129,7 +134,7 @@ async function inspect(raw, page) {
   if (!url || !allowed.has(url.hostname)) return null;
   const hostname = url.hostname;
   const count = tried.get(hostname) || 0;
-  if (count >= (hostname === 'unlimplay.com' ? 5 : 2)) return null;
+  if (count >= (hostname === 'unlimplay.com' ? 6 : 2)) return null;
   tried.set(hostname, count + 1);
   const init = { redirect: 'manual', signal: AbortSignal.timeout(hostname === 'unlimplay.com' ? 7500 : 3500), headers: { Referer: `${new URL(page).origin}/` } };
   let route = '';

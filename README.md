@@ -55,7 +55,8 @@ npm run deploy
 
 - Comprueba `/stream/movie/tt0816692.json` (Interestelar) para distinguir una respuesta vacía de un problema de reproducción. Si usas una URL personal, prueba la ruta con el mismo prefijo de configuración. Una selección vacía o con fuentes ya deshabilitadas no se sustituye automáticamente; abre `/configure` y vuelve a instalar con al menos una fuente activa.
 - Para una serie, el ID de un episodio tiene el formato `id:temporada:episodio`, por ejemplo `/stream/series/tt0903747:1:1.json`. El ID de la serie sin episodio no es un ID reproducible.
-- `/internal/streams-test.json?type=movie&id=tt0816692` muestra el diagnóstico de las fuentes de la configuración por defecto. Los catálogos contienen fichas aunque las fuentes no tengan enlaces directos válidos para todos los títulos. Una respuesta con enlaces tampoco garantiza que el reproductor pueda abrirlos.
+- `/internal/streams-test.json?type=movie&id=tt0133093` muestra el diagnóstico de las fuentes de la configuración por defecto. `totalStreams` cuenta candidatos, no reproducciones: `verifiedManifests` y `mediaChecks` distinguen los manifiestos comprobados de los rechazos HTTP del CDN y los medios sin comprobar.
+- Para distinguir un fallo del API de un 403 de reproducción, consulta la [sonda del Worker publicado](docs/worker-streams.md). El catálogo y el manifest pueden seguir funcionando aunque el CDN no entregue el vídeo.
 
 ## Desarrollo y pruebas
 

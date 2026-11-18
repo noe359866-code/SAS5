@@ -33,7 +33,7 @@ test('GnulaHD: el registro de streams admite el HLS público validado con Castel
   mockFetch(t, [['/ver/el-origen/', page(movie, video)], [media, master], ['/media/hd.m3u8', manifest]]);
   const report = {};
   const hits = await runProviders(['gnulahd'], movie.title, movie, movie.title, report);
-  assert.deepEqual(report.gnulahd, { ok: true, raw: 1, accepted: 1, relevant: 1 });
+  assert.deepEqual(report.gnulahd, { ok: true, raw: 1, accepted: 1, relevant: 1, mediaChecks: { 'manifest-ok': 1 } });
   assert.equal(hits[0].verification, 'manifest-ok');
   const stream = toDirectStream(hits[0], null);
   assert.equal(stream.url, BASE + media);

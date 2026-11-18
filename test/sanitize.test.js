@@ -78,3 +78,24 @@ test('hasSpam: detecta publicidad y no da falsos positivos', () => {
   assert.equal(hasSpam('Matrix 2.0 la secuela.'), false);
   assert.equal(hasSpam(''), false);
 });
+
+test('sinopsis con tope: recorta por palabra, no por unidad UTF-16', () => {
+  const { cleanOverviewLimited, textLength, cutText, OVERVIEW_MAX } = require('../lib/sanitize');
+  // Un texto largo no puede colarse entero: la respuesta de /meta se infla y
+  // Stremio solo muestra las primeras líneas.
+  const long = 'Una frase completa con su punto. '.repeat(60);
+  const limited = cleanOverviewLimited(long);
+  assert.ok(textLength(limited) <= OVERVIEW_MAX + 1, `quedó en ${textLength(limited)} caracteres`);
+  assert.match(limited, /…$/);
+  assert.doesNotMatch(limited, /\s…$/, 'no deja un espacio antes de los puntos suspensivos');
+  assert.match(limited, /\.$|…$/, 'corta en un final de palabra');
+
+  // Un emoji ocupa dos unidades UTF-16: cortar a lo bruto dejaría un carácter
+  // inválido en el JSON. `cutText` cuenta caracteres visibles.
+  assert.equal(textLength('🎬🎬🎬'), 3);
+  assert.equal(cutText('🎬🎬🎬', 2), '🎬🎬');
+  assert.equal(textLength(cutText('🎬🎬🎬', 2)), 2);
+  assert.equal(cleanOverviewLimited('Corta 🎬', 50), 'Corta 🎬');
+  assert.equal(cleanOverviewLimited(null), null);
+  assert.equal(cleanOverviewLimited(''), '');
+});

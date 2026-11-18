@@ -24,6 +24,24 @@ Habilitada no significa **disponible**: una fuente puede responder con error, no
 
 **Sin proxy de reproducción:** `/stream` devuelve la URL original del CDN. El addon puede comprobar el manifiesto al buscar un enlace, pero no retransmite playlists, variantes, claves, audio ni segmentos. Al retirar `/hls`, la reproducción ya no genera invocaciones sucesivas del Worker para esos recursos. `/stream` sigue siendo una consulta dinámica. Si el CDN rechaza el acceso directo o no ofrece CORS para Stremio Web, el enlace puede no reproducirse; no se recurre a un proxy alternativo. Las variables antiguas `SPINFLIX_PROXY_URL` y `HLS_PROXY_HOSTS` ya no tienen efecto; `SPINFLIX_URL` sigue indicando la API de búsqueda.
 
+## Fichas y catálogos
+
+Las fichas de `/meta` se construyen con TMDB (y OMDB si hay clave) y muestran lo que TMDB ya devuelve, sin peticiones extra por título:
+
+- **Ficha técnica** en la descripción: idioma original, país de producción y duración (`2 h 16 min`), más presupuesto y recaudación en películas.
+- **Autoría correcta**: en películas, dirección; en series, creadores (`created_by`). Antes una serie salía sin autoría porque TMDB no marca `job: Director` en sus créditos agregados.
+- **Título original** cuando la ficha lo traduce, y **próximo episodio** en las series en emisión.
+- **Fecha completa de estreno** en `released`, para que Stremio pueda ordenar por fecha.
+- La sinopsis se recorta a 700 caracteres (por palabra y sin romper emojis) y pasa por el [saneado de publicidad](lib/sanitize.js).
+
+En los catálogos:
+
+- Las filas de **plataforma** acumulan la región del usuario y las de reserva (`WATCH_REGION`, `WATCH_REGION_FALLBACK`) para llenar la página: la cobertura JustWatch de países como Nicaragua es casi nula y una fila con dos títulos parece rota.
+- Una página **vacía** se recuerda 5 minutos; antes cada visita repetía las consultas a TMDB sin cambiar el resultado.
+- La **paginación** (`skip`) sigue contando posiciones de TMDB a partir de la segunda página.
+
+`npm test` cubre estas piezas con respuestas simuladas; `lib/metaText.js` (idioma, país, duración, dinero) no toca red.
+
 ## Configuración local
 
 Requiere Node.js 18 o posterior.

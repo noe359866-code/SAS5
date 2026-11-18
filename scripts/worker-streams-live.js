@@ -5,7 +5,7 @@
 const { appendFileSync } = require('node:fs');
 const { allowedHosts, hostAllowed } = require('../lib/hlsProxy');
 const { parseManifest } = require('../lib/hlsManifest');
-const { spinFlixMedia } = require('../lib/vimeosPlayback');
+const { spinFlixMedia, TRANSPORT_CHECK_RE } = require('../lib/vimeosPlayback');
 
 const BASE = 'https://ramdonlatam.noe359866.workers.dev';
 const WEB = 'https://web.stremio.com';
@@ -192,7 +192,11 @@ async function auditPlayback(base, fetcher = fetch) {
             const row = providers?.[key];
             if (row) {
               const reason = /^(?:[a-z-]+[\d-]*)$/i.test(row.reason || '') ? row.reason : null;
-              state.push(`${key}: ${reason || `${Number(row.accepted) || 0} candidatos/${Number(row.mediaChecks?.['manifest-ok']) || 0} HLS válidos`}`);
+              const checks = Object.entries({ ...row.mediaChecks, ...row.transportChecks })
+                .filter(([label]) => /^(?:manifest-ok|unchecked|cdn-unverified|cdn-http-[1-5]\d{2})$/.test(label) || TRANSPORT_CHECK_RE.test(label))
+                .map(([label, count]) => `${label}=${Number(count) || 0}`);
+              const counts = `${Number(row.accepted) || 0} candidatos/${Number(row.mediaChecks?.['manifest-ok']) || 0} HLS válidos`;
+              state.push(`${key}: ${reason || counts}${checks.length ? ` (${checks.join(', ')})` : ''}`);
             }
           }
         }

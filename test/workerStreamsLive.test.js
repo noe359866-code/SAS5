@@ -84,3 +84,17 @@ test('prueba de reproducción: exige bytes de los segmentos y del audio español
   assert.match(rows[1].results[1], /^SpinFlix: .*audio es .*sin cabecera de medio/);
   assert.doesNotMatch(JSON.stringify(rows), /vimeos\.net|t=test/);
 });
+
+test('prueba de reproducción: muestra las causas del transporte y CDN sin copiar firmas', async () => {
+  const { auditPlayback } = require('../scripts/worker-streams-live');
+  const rows = await auditPlayback(base, async (value) => {
+    const url = new URL(value);
+    if (url.pathname.startsWith('/stream/')) return json({ streams: [{ title: 'Fanpelis · Latino', url: denied }] });
+    assert.equal(url.pathname, '/internal/streams-test.json');
+    return json({ providers: { fanpelis: {
+      accepted: 1, mediaChecks: { 'cdn-http-403': 1 }, transportChecks: { 'proxy-http-502': 1, [denied]: 1 },
+    } } });
+  });
+  assert.ok(rows.every((row) => !row.ok && row.results.some((state) => state.includes('cdn-http-403=1, proxy-http-502=1'))));
+  assert.doesNotMatch(JSON.stringify(rows), /vimeos\.zip|secret/);
+});

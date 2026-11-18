@@ -165,3 +165,12 @@ test('SpinFlix: un rechazo del resolver detiene la búsqueda en vez de consultar
   await assert.rejects(() => searchSpinFlix('', resolved, resolved.title), { status: 403 });
   assert.deepEqual(calls, ['/search', '/pelicula/control-de-acceso', '/streamurl']);
 });
+
+test('SpinFlix: un error 500 de una ficha no se informa como sin coincidencias', async (t) => {
+  const item = { title: 'Prueba de fallo', slug: 'prueba-de-fallo', type: 'movies', year: 2025 };
+  t.mock.method(global, 'fetch', async (raw) => {
+    if (new URL(raw).pathname === '/search') return Response.json({ results: [item] });
+    return new Response('error', { status: 500 });
+  });
+  await assert.rejects(searchSpinFlix('', { title: item.title, year: '2025', mediaType: 'movie' }, item.title, 1000), { status: 500 });
+});

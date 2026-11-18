@@ -284,3 +284,32 @@ test('fanpelis: el HTTP 429 del reproductor detiene la búsqueda antes de pedir 
   await assert.rejects(() => fanpelis.searchFanpelis(SERIES.title, SERIES, SERIES.title, 1000), { status: 429 });
   assert.equal(calls.filter((url) => url.includes('/api/rest/player')).length, 1);
 });
+
+test('fanpelis: busca otra ficha antes de conformarse con un manifiesto rechazado', async () => {
+  const first = 'https://vimeos.net/embed-first.html';
+  const denied = 'https://s9.vimeos.net/hls2/fixture/denied.m3u8';
+  const posts = [
+    { _id: 101, title: 'Matrix', release_date: '1999-01-01', type: 'movies' },
+    { _id: 102, title: 'Matrix', release_date: '1999-01-01', type: 'movies' },
+  ];
+  const calls = mockApi([
+    ['/api/rest/search', () => json({ data: { posts } })],
+    ['/api/rest/player?post_id=101', () => json({ data: { embeds: [{ lang: 'Latino', url: first }] } })],
+    ['/api/rest/player?post_id=102', () => json(PLAYER)],
+    [first, () => html(packedEmbed(denied))],
+    [denied, () => json({}, 403)],
+    [EMBED, () => html(packedEmbed(MASTER))],
+  ]);
+  const result = await fanpelis.searchFanpelis('Matrix', MOVIE, MOVIE.title, 1000);
+  assert.equal(result.hits[0].url, MASTER);
+  assert.equal(result.hits[0].verification, 'manifest-ok');
+  assert.equal(calls.filter((url) => url.includes('/api/rest/player')).length, 2);
+});
+
+test('fanpelis: un error 500 del player no se confunde con ausencia de medios', async () => {
+  mockApi([
+    ['/api/rest/search', () => json(SEARCH_MOVIE)],
+    ['/api/rest/player', () => json({}, 500)],
+  ]);
+  await assert.rejects(fanpelis.searchFanpelis('Matrix', MOVIE, MOVIE.title, 1000), { status: 500 });
+});

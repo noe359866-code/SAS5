@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'lib/**'
+      - 'scripts/provider*-live.js'
       - 'test/**'
       - 'package.json'
       - '.github/workflows/providers.yml'
@@ -15,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: npm
       - run: npm ci
       - run: npm test
@@ -26,13 +27,21 @@ jobs:
     timeout-minutes: 4
     permissions:
       contents: read
-    env:
-      STREAM_PROVIDERS: fanpelis,playlatin,flixlatam,spinflix,cuevana3,cinecalidad,tioplus
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: npm
       - run: npm ci
-      - run: node scripts/providers-live.js
+      - name: Películas
+        run: node scripts/providers-live.js peliculas
+      - name: Series y anime
+        if: success() || failure()
+        run: node scripts/providers-live.js series
+      - name: Controles específicos
+        if: success() || failure()
+        run: node scripts/providers-live.js extra
+      - name: Estructura pública de los reproductores
+        if: success() || failure()
+        run: node scripts/provider-pages-live.js

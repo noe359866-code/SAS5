@@ -5,10 +5,7 @@ const { SEARCHERS } = require('../lib/streams');
 const { pickEpisode } = require('../lib/spanishProviders');
 
 for (const [key, origin, search, path] of [
-  ['cuevana3', 'https://cuevanas3.pro', '/?s=El%20t%C3%ADtulo', '/peliculas/titulo-2025'],
-  ['cinecalidad', 'https://www.cinecalidad.am', '/page/1?s=El%20t%C3%ADtulo', '/ver-pelicula/titulo-2025'],
   ['animeonlineninja', 'https://ww4.animeonline.ninja', '/search/?s=El%20t%C3%ADtulo', '/pelicula/titulo-2025'],
-  ['tioplus', 'https://tioplus.app', '/search/El%20t%C3%ADtulo', '/pelicula/titulo-2025'],
 ]) {
   test(`${key}: título exacto, mismo origen y solo vídeo con doblaje identificado`, async (t) => {
     const pages = [
@@ -29,9 +26,9 @@ for (const [key, origin, search, path] of [
 }
 
 test('selecciona temporada y episodio explícitos, no solo un número de episodio', () => {
-  const page = 'https://cuevanas3.pro/series/demo';
+  const page = 'https://ww4.animeonline.ninja/online/demo';
   const html = '<a href="/episodio/demo-temporada-1-episodio-2">1x2</a><a href="/episodio/demo-temporada-2-episodio-2">2x2</a>';
-  assert.equal(pickEpisode(html, page, 2, 2), 'https://cuevanas3.pro/episodio/demo-temporada-2-episodio-2');
+  assert.equal(pickEpisode(html, page, 2, 2), 'https://ww4.animeonline.ninja/episodio/demo-temporada-2-episodio-2');
   assert.equal(pickEpisode(html, page, 3, 2), null);
 });
 

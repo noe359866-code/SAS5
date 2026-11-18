@@ -43,15 +43,50 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   assert.deepEqual(cfg.streams, ['fanpelis']);
   assert.equal('streamTypes' in cfg, false);
   assert.equal('streamLanguages' in cfg, false);
-  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'fuegocine', 'animeonlineninja', 'cuevana3', 'cinecalidad', 'tioplus']);
+  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'fuegocine', 'animeonlineninja', 'cuevana3', 'gnulahd']);
   assert.equal(choice.providerType('fanpelis'), 'direct');
+  assert.equal(choice.providerType('gnulahd'), 'direct');
   assert.equal(choice.providerType('retired-indexer'), null);
   assert.equal(user.normalizeConfig({ streams: [] }, [], [], streams.PROVIDER_KEYS).streams.length, 0);
   assert.equal(user.normalizeConfig({ streams: ['retired-indexer'] }, [], [], streams.PROVIDER_KEYS).streams, null);
   const originalProviders = config.streamProviders;
   try {
     config.streamProviders = ['retired-indexer', 'legacy-source'];
-    const expected = streams.PROVIDER_KEYS.slice(0, 3).filter((key) => key !== "flixlatam" || config.flixlatamEnabled);
-    assert.deepEqual(streams.activeProviders(null), expected);
+    assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS);
   } finally { config.streamProviders = originalProviders; }
+});
+
+test('sin STREAM_PROVIDERS se consultan las ocho fuentes, incluida GnulaHD experimental; se respetan los overrides', (t) => {
+  t.after(() => config.reload());
+  config.reload({});
+  assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS);
+  assert.ok(streams.activeProviders(null).includes('gnulahd'));
+  assert.deepEqual(streams.activeProviders({ streams: [] }), []);
+  assert.deepEqual(streams.activeProviders({ streams: ['cuevana3'] }), ['cuevana3']);
+  assert.deepEqual(streams.activeProviders({ streams: ['gnulahd'] }), ['gnulahd']);
+  config.reload({ STREAM_PROVIDERS: 'all', PLAYLATIN: 'off' });
+  assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS.filter((key) => key !== 'playlatin'));
+  config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix' });
+  assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'spinflix']);
+  config.reload({ STREAM_PROVIDERS: 'off' });
+  assert.deepEqual(streams.activeProviders(null), []);
+});
+
+test('las configuraciones antiguas nunca reactivan CineCalidad ni TioPlus/PelisPlus', (t) => {
+  t.after(() => config.reload());
+  const retired = ['cinecalidad', 'tioplus', 'pelisplus'];
+  for (const key of retired) {
+    assert.equal(choice.providerType(key), null);
+    assert.equal(Object.hasOwn(streams.SEARCHERS, key), false);
+  }
+  config.reload({ STREAM_PROVIDERS: [...retired, 'cuevana3', 'flixlatam'].join(',') });
+  assert.deepEqual(streams.activeProviders(null), ['flixlatam', 'cuevana3']);
+  const decode = (keys) => user.decodeConfig(Buffer.from(JSON.stringify({ streams: keys })).toString('base64url'), [], [], streams.PROVIDER_KEYS);
+  const cfg = decode(['cuevana3', ...retired]);
+  assert.deepEqual(cfg.streams, ['cuevana3']);
+  assert.deepEqual(streams.activeProviders(cfg), ['cuevana3']);
+  config.reload({ STREAM_PROVIDERS: retired.join(',') });
+  assert.equal(decode(retired).streams, null);
+  assert.deepEqual(streams.activeProviders(decode(retired)), streams.PROVIDER_KEYS);
+  assert.deepEqual(streams.activeProviders(decode([])), []);
 });

@@ -114,7 +114,13 @@ test('las fichas de los títulos de los catálogos se pregeneran deduplicadas y 
     const result = await prerenderMetas({
       outDir,
       log: () => {},
-      resolve: async (type, id) => ({ meta: { id, type, name: `Ficha ${id}` }, cacheMaxAge: 3600 }),
+      resolve: async (type, id) => ({
+        meta: {
+          id, type, name: `Ficha ${id}`,
+          ...(type === 'series' ? { videos: [{ id: `${id}:1:1`, title: 'Piloto', season: 1, episode: 1 }] } : {}),
+        },
+        cacheMaxAge: 3600,
+      }),
     });
     assert.equal(result.written.length, 4);
     assert.deepEqual(result.empty, []);
@@ -157,6 +163,16 @@ test('las fichas respetan el tope y no escriben nada si el resolvedor falla', as
     });
     assert.deepEqual(empty.empty, ['movie/tt2001']);
     assert.deepEqual(empty.written, []);
+
+    const withoutEpisodes = await prerenderMetas({
+      outDir,
+      log: () => {},
+      ids: [{ type: 'series', id: 'tt2002' }],
+      resolve: async (type, id) => ({ meta: { id, type, name: 'Serie sin episodios', videos: [] } }),
+    });
+    assert.deepEqual(withoutEpisodes.empty, ['series/tt2002']);
+    assert.deepEqual(withoutEpisodes.written, []);
+    await assert.rejects(readFile(path.join(outDir, 'meta', 'series', 'tt2002.json')), { code: 'ENOENT' });
   });
 });
 

@@ -661,6 +661,27 @@ test('/configure: dos selecciones iguales producen exactamente la misma URL', ()
   assert.equal(cfg.region, 'NI');
 });
 
+test('/configure: solo ofrece fuentes que el despliegue realmente consulta', () => {
+  const defaults = withEnv({}, () => configure());
+  const { PROVIDER_KEYS } = require('../lib/streams');
+  for (const key of PROVIDER_KEYS) assert.ok(defaults.includes(`checked data-group="streams" data-key="${key}"`), key);
+  assert.match(defaults, /data-key="gnulahd" \/><span>GnulaHD \(experimental\)<\/span>/);
+  assert.doesNotMatch(defaults, /data-group="streams" data-key="(?:cinecalidad|tioplus|pelisplus)"/i);
+  assert.equal(runConfigure().url, `${ORIGIN}/manifest.json`);
+
+  const env = { STREAM_PROVIDERS: 'fanpelis,spinflix,playlatin' };
+  withEnv(env, () => {
+    assert.match(configure(), /data-group="streams" data-key="fanpelis"/);
+    config.reload({ ...env, FANPELIS: 'off', PLAYLATIN: 'off' });
+    const html = configure();
+    assert.match(html, /data-group="streams" data-key="spinflix"/);
+    assert.doesNotMatch(html, /data-group="streams" data-key="(?:fanpelis|playlatin|flixlatam|gnulahd)"/);
+  });
+
+  const olderConfig = runConfigure({ env: { STREAM_PROVIDERS: 'fanpelis' }, initialCfg: { region: 'MX', streams: ['spinflix'] } });
+  assert.deepEqual(decode(olderConfig.segment).streams, [], 'no activa otras fuentes sin permiso');
+});
+
 test('/configure: el idioma de catálogos se mantiene fijo en español latino', () => {
   const pt = runConfigure({ env: { TMDB_LANGUAGE: 'en', WATCH_REGION: 'BR' }, actions: `state.platforms = new Set(['netflix']);` });
   const cfg = decode(pt.segment);

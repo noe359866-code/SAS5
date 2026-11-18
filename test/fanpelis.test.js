@@ -18,6 +18,7 @@ const SERIES = { title: 'Breaking Bad', altTitle: null, year: '2008', mediaType:
 
 const MASTER = 'https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8';
 const EMBED = 'https://vimeos.net/embed-ccjygcfxujhd.html';
+const HLS = '#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=700000,RESOLUTION=1280x720\n720.m3u8';
 
 /** Respuestas de la API, tal como las devolvió el servicio real (recortadas). */
 const SEARCH_MOVIE = {
@@ -70,6 +71,7 @@ function mockApi(handlers) {
       if (!u.includes(needle)) continue;
       return typeof reply === 'function' ? reply(u, options) : reply;
     }
+    if (u === MASTER) return new Response(HLS);
     return json({}, 404);
   };
   return calls;
@@ -90,7 +92,8 @@ test('fanpelis película: búsqueda → player → embed → master .m3u8 por el
     assert.equal(hit.provider, 'fanpelis');
     assert.equal(hit.relevant, true);
     assert.match(hit.title, /Matrix 1999/);
-    assert.match(hit.title, /1080p/);
+    assert.match(hit.title, /720p/);
+    assert.equal(hit.resolution, '720p', 'manda el manifiesto, no la calidad de la ficha');
     assert.match(hit.title, /Latino/);
     assert.equal(hit.audioLabel, 'Latino');
     assert.equal(hit.directUrl, MASTER);
@@ -102,6 +105,26 @@ test('fanpelis película: búsqueda → player → embed → master .m3u8 por el
   } finally {
     config.addonBaseUrl = originalBase;
   }
+});
+
+test('fanpelis: reintenta por el título antes de los dos puntos sin aceptar otra película', async () => {
+  const resolved = { title: 'Mufasa: El rey león', altTitle: 'Mufasa: The Lion King', year: '2024', mediaType: 'movie' };
+  const sameYear = { _id: 101, title: 'Otra película (2024)', release_date: '2024-01-01', type: 'movies' };
+  const differentYear = { _id: 102, title: 'Mufasa: El rey león (2019)', release_date: '2019-01-01', type: 'movies' };
+  const actual = { _id: 103, title: 'Mufasa: El rey león (2024)', release_date: '2024-12-18', type: 'movies' };
+  const calls = mockApi([
+    ['/api/rest/search', (url) => {
+      const query = new URL(url).searchParams.get('query');
+      return json({ data: { posts: query === 'Mufasa' ? [sameYear, differentYear, actual] : [sameYear] } });
+    }],
+    ['/api/rest/player', () => json(PLAYER)],
+    ['vimeos.net/embed-', html(packedEmbed(MASTER))],
+  ]);
+  const out = await fanpelis.searchFanpelis(resolved.title, resolved, resolved.title, 1000);
+  assert.equal(out.hits.length, 1);
+  assert.equal(out.query, 'fanpelis="Mufasa"');
+  assert.equal(new URL(calls[0]).searchParams.get('query'), 'Mufasa');
+  assert.deepEqual(calls.filter((url) => url.includes('/api/rest/player')).map((url) => new URL(url).searchParams.get('post_id')), ['103']);
 });
 
 test('fanpelis serie: /episodes elige el episodio y su player es el del episodio', async () => {
@@ -186,9 +209,10 @@ test('fanpelis: aparece en /healthz y en los chips de /configure', () => {
 });
 
 test('fanpelis: utilidades de selección e idioma', () => {
-  // Un título que empieza igual puntúa, pero menos que la coincidencia exacta.
+  // Una coincidencia por prefijo no identifica una película.
   const picked = fanpelis.pickCandidates(SEARCH_MOVIE.data.posts, MOVIE);
-  assert.equal(picked[0]._id, 18507);
+  assert.deepEqual(picked.map((item) => item._id), [18507]);
+  assert.deepEqual(fanpelis.pickCandidates([{ ...picked[0], release_date: '2009-05-16' }], MOVIE), []);
   assert.equal(fanpelis.audioLabelOf('Latino'), 'Latino');
   assert.equal(fanpelis.audioLabelOf('Castellano'), 'Castellano');
   assert.equal(fanpelis.audioLabelOf('Subtitulado'), 'Subtitulado');

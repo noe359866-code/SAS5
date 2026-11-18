@@ -243,8 +243,9 @@ export async function prerenderMetas(options = {}) {
         continue;
       }
       const data = meta && meta.meta;
-      // Sin ficha no se escribe nada: el Worker la sigue resolviendo en vivo.
-      if (!data || !data.id) {
+      // Una serie sin episodios no es reproducible desde Stremio. Deja que
+      // el Worker reintente en vivo en lugar de publicar esa ficha estática.
+      if (!data || !data.id || (target.type === 'series' && !data.videos?.length)) {
         empty.push(`${target.type}/${target.id}`);
         continue;
       }

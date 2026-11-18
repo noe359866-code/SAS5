@@ -216,7 +216,7 @@ app.get('/:cfg/stream/:type/:id.json', async (req, res) => {
   let id;
   try { id = decodeURIComponent(req.params.id); } catch (_) { return res.status(400).json({ error: 'invalid_id' }); }
   const result = await core.handleStream(req.params.type, id, cfg);
-  res.setHeader('Cache-Control', buildCacheControl(result.cacheMaxAge));
+  res.setHeader('Cache-Control', core.streamCacheControl(result.cacheMaxAge));
   res.json(result);
 });
 

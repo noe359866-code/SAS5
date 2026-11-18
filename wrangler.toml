@@ -8,6 +8,7 @@
 name = "catalogos-plus"
 main = "worker.mjs"
 compatibility_date = "2026-11-01"
+compatibility_flags = ["nodejs_compat"]
 
 # Variables NO secretas (puedes editarlas con seguridad)
 [vars]
@@ -18,16 +19,13 @@ CACHE_TTL_SECONDS = "21600"
 STREAM_PROVIDER_TIMEOUT_MS = "6000"
 STREAM_FALLBACK_TIMEOUT_MS = "2500"
 STREAM_PROVIDER_COOLDOWN_SECONDS = "300"
-STREAM_STALE_SECONDS = "21600"
+STREAM_STALE_SECONDS = "0"
 # Enlace de soporte de la web. Por defecto, invitación permanente actual al
 # Discord de RamdonLatam. Actualízalo aquí si el enlace cambia.
 # SUPPORT_URL = "https://discord.gg/J6byqsRUfu"
 # Donaciones: botón de Ko-fi en la barra, tarjeta propia y pie (dentro de Ko-fi
 # se paga con PayPal o tarjeta). Página del proyecto; "off" oculta todo.
 KOFI_USERNAME = "off"
-
-# Node.js compat por si alguna dependencia lo requiere
-compatibility_flags = ["nodejs_compat"]
 
 # ─────────────────────────────────────────────────────────────
 #  Static assets: peticiones GRATIS e ILIMITADAS

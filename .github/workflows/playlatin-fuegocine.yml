@@ -1,0 +1,33 @@
+name: PlayLatinSRC y FuegoCine en vivo
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/playlatin-fuegocine.yml'
+      - 'scripts/provider-pair-live.js'
+      - 'lib/playlatin.js'
+      - 'lib/fuegocine.js'
+      - 'lib/playlatinDropload.js'
+      - 'test/playlatin.test.js'
+      - 'test/fuegocine.test.js'
+      - 'test/seriesStreams.test.js'
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Regresiones de los dos adaptadores
+        run: node --test test/playlatin.test.js test/fuegocine.test.js test/seriesStreams.test.js
+      - name: Contrato y reproductores de PlayLatinSRC
+        run: node scripts/provider-pair-live.js playlatin
+      - name: Catálogo y reproductores de FuegoCine
+        run: node scripts/provider-pair-live.js fuegocine

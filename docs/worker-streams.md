@@ -25,6 +25,17 @@ node scripts/worker-streams-live.js --playback http://127.0.0.1:8799 --expect-di
 
 El último comando requiere `wrangler dev` en el puerto 8799. `--expect-direct` falla si los controles aún devuelven URLs del addon o hints de proxy; `--require-media` exige al menos una muestra de medio válida por título. Sin este último flag, un 403 del CDN no se interpreta como fallo de `/stream`. El workflow **Streams del Worker y CDN directo** usa `workerd` local en ramas `arena/`; consulta producción solo en `main` o al ejecutarlo manualmente y no despliega cambios.
 
+## Primera comprobación de la rama sin proxy
+
+La [sonda en `workerd` local de GitHub Actions](https://github.com/noe359866-code/SAS5/actions/runs/44309509520/job/134819669426) probó `3a60617`. Ambos controles devolvieron HTTP 200, CORS y dos enlaces directos en `/stream`. Los resultados del CDN fueron:
+
+| Control | Fanpelis | SpinFlix |
+|---|---|---|
+| *Mufasa: El rey león* | Manifiesto HTTP 403. | Manifiesto y primera variante HTTP 200; primer segmento HTTP 206 MPEG-TS, con CORS. No se comprobó audio por separado. |
+| *Breaking Bad* T1E2 | Manifiesto HTTP 403. | Manifiesto HTTP 403. |
+
+En la [sonda independiente de adaptadores](https://github.com/noe359866-code/SAS5/actions/runs/44309509522/job/134819869156), los cinco candidatos recibieron 403 al pedir el HLS directo. Son pruebas desde el runner: no verifican el despliegue de la rama ni la reproducción en Stremio.
+
 ## Resultados históricos (no prueban la ruta directa actual)
 
 **18 de noviembre de 2026 · `ramdonlatam.noe359866.workers.dev`**

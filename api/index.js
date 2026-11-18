@@ -26,6 +26,7 @@ const { PLATFORM_KEYS, STUDIO_KEYS, PLATFORMS, STUDIOS } = require('../lib/catal
 const { PROVIDER_KEYS: STREAM_KEYS, activeProviders, diagnose: diagnoseStreams } = require('../lib/streams');
 const cache = require('../lib/cache');
 const rateLimit = require('../lib/rateLimit');
+const { mountStreamflix } = require('../node/streamflix');
 
 const app = express();
 
@@ -49,6 +50,9 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// Addon extra optativo del servidor Node; el Worker usa otro entrypoint.
+mountStreamflix(app);
 
 function requestBase(req) {
   const host = req.headers['x-forwarded-host'] || req.headers.host || `localhost:${config.port}`;

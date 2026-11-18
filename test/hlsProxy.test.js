@@ -99,3 +99,29 @@ test('proxy HLS: no sigue redirecciones ni presenta HTML como una playlist', asy
   mockFetch(() => new Response('<html>error del CDN</html>', { status: 200 }));
   assert.equal((await hls.handleHlsProxy(req(), url, {})).status, 502);
 });
+
+test('modo SpinFlix: rechaza hosts extra, rutas no HLS y firmas vencidas antes de consultar', async () => {
+  const calls = mockFetch(() => { throw new Error('no debe hacer peticiones'); });
+  const local = (source) => new URL(`https://addon.example/hls?via=spinflix&u=${encodeURIComponent(source)}`);
+  for (const media of ['https://extra.example/hls2/master.m3u8', 'https://vimeos.net/api/private.m3u8']) {
+    assert.equal((await hls.handleHlsProxy(req(), local(media), { HLS_PROXY_HOSTS: 'extra.example' })).status, 403);
+  }
+  assert.equal((await hls.handleHlsProxy(req(), local(`${MASTER}&s=1500000000`), {})).status, 410);
+  assert.equal(calls.length, 0);
+});
+
+test('modo SpinFlix: no sigue URI fuera del CDN ni devuelve páginas de error como segmentos', async () => {
+  const calls = mockFetch((value, options) => {
+    const url = new URL(value);
+    assert.equal(url.origin, 'https://spinoff.link');
+    assert.equal(options.redirect, 'manual');
+    assert.notEqual(options.headers.Referer, 'https://evil.example/');
+    const media = url.searchParams.get('url');
+    if (media === MASTER) return new Response('#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=1\nhttps://evil.example/hls/media.m3u8\n');
+    return new Response('<html>error</html>', { headers: { 'Content-Type': 'text/html' } });
+  });
+  const local = (source) => new URL(`https://addon.example/hls?via=spinflix&ref=https%3A%2F%2Fevil.example%2F&u=${encodeURIComponent(source)}`);
+  assert.equal((await hls.handleHlsProxy(req(), local(MASTER), {})).status, 502);
+  assert.equal((await hls.handleHlsProxy(req(), local('https://s10.vimeos.net/hls2/a/segment.ts'), {})).status, 502);
+  assert.equal(calls.length, 2);
+});

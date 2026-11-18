@@ -7,6 +7,9 @@ on:
       - '.github/workflows/worker-streams-live.yml'
       - 'scripts/worker-streams-live.js'
       - 'test/workerStreamsLive.test.js'
+      - 'lib/hlsProxy.js'
+      - 'lib/vimeos*.js'
+      - 'worker.mjs'
 permissions:
   contents: read
 jobs:
@@ -21,5 +24,24 @@ jobs:
       - run: node --test test/workerStreamsLive.test.js
       - name: Manifest, stream y comprobación HLS desde producción
         run: node scripts/worker-streams-live.js
-      - name: Primer segmento de la ruta existente de SpinFlix
-        run: node scripts/worker-streams-live.js --spinflix
+  playback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Película y episodio por la ruta completa del Worker (workerd local)
+        run: |
+          npx wrangler dev --local --ip 127.0.0.1 --port 8799 --var STREAM_PROVIDERS:fanpelis,spinflix > "$RUNNER_TEMP/playback-worker.log" 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --silent --fail --max-time 2 http://127.0.0.1:8799/healthz -o "$RUNNER_TEMP/playback-ready.json"; then break; fi
+            sleep 1
+          done
+          if ! test -s "$RUNNER_TEMP/playback-ready.json"; then cat "$RUNNER_TEMP/playback-worker.log"; exit 1; fi
+          node scripts/worker-streams-live.js --playback http://127.0.0.1:8799

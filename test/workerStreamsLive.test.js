@@ -48,3 +48,31 @@ test('sonda del Worker: separa el API, los candidatos y el estado CDN sin public
   ]);
   assert.doesNotMatch(JSON.stringify(report), /secret|vimeos\.|other\.example/);
 });
+test('prueba de reproducción: exige bytes de los segmentos y del audio español separado', async () => {
+  const { auditPlayback } = require('../scripts/worker-streams-live');
+  const urls = (name) => `/hls?via=spinflix&u=${encodeURIComponent(`https://s10.vimeos.net/hls2/${name}?t=test`)}`;
+  const fetched = [];
+  const rows = await auditPlayback(base, async (value, init) => {
+    const url = new URL(value);
+    assert.equal(url.origin, base);
+    assert.equal(init.redirect, 'manual');
+    assert.equal(init.headers.Origin, web);
+    if (url.pathname.startsWith('/stream/')) return json({ streams: [
+      { title: 'Fanpelis · Latino', url: `${base}${urls(url.pathname.includes('/series/') ? 'series.m3u8' : 'movie.m3u8')}` },
+    ] });
+    const media = new URL(url.searchParams.get('u')).pathname.split('/').pop();
+    fetched.push(media);
+    const cors = { 'Access-Control-Allow-Origin': '*' };
+    if (media === 'series.m3u8') return new Response(`#EXTM3U\n#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="es",LANGUAGE="es",URI="${urls('es.m3u8')}"\n#EXT-X-STREAM-INF:BANDWIDTH=1\n${urls('movie.m3u8')}\n`, { headers: cors });
+    if (media.endsWith('.m3u8')) return new Response(`#EXTM3U\n#EXTINF:1,\n${urls(media.replace('.m3u8', '.ts'))}\n`, { headers: cors });
+    assert.equal(init.headers.Range, 'bytes=0-4095');
+    // Cuerpo correcto para vídeo, pero no para el audio que el player necesita.
+    const packets = new Uint8Array(384);
+    if (media !== 'es.ts') for (let i = 0; i < packets.length; i += 188) packets[i] = 0x47;
+    return new Response(packets, { headers: cors });
+  });
+  assert.ok(fetched.includes('movie.ts') && fetched.includes('es.ts'));
+  assert.deepEqual(rows.map((row) => row.ok), [true, false]);
+  assert.match(rows[1].results[0], /audio es .*sin cabecera de medio/);
+  assert.doesNotMatch(JSON.stringify(rows), /vimeos\.net|t=test/);
+});

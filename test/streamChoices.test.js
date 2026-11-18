@@ -51,7 +51,20 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   const originalProviders = config.streamProviders;
   try {
     config.streamProviders = ['retired-indexer', 'legacy-source'];
-    const expected = streams.PROVIDER_KEYS.slice(0, 3).filter((key) => key !== "flixlatam" || config.flixlatamEnabled);
-    assert.deepEqual(streams.activeProviders(null), expected);
+    assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS);
   } finally { config.streamProviders = originalProviders; }
+});
+
+test('sin STREAM_PROVIDERS se consultan las nueve fuentes; los overrides se respetan', (t) => {
+  t.after(() => config.reload());
+  config.reload({});
+  assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS);
+  assert.deepEqual(streams.activeProviders({ streams: [] }), []);
+  assert.deepEqual(streams.activeProviders({ streams: ['cuevana3'] }), ['cuevana3']);
+  config.reload({ STREAM_PROVIDERS: 'all', PLAYLATIN: 'off' });
+  assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS.filter((key) => key !== 'playlatin'));
+  config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix' });
+  assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'spinflix']);
+  config.reload({ STREAM_PROVIDERS: 'off' });
+  assert.deepEqual(streams.activeProviders(null), []);
 });

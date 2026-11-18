@@ -1,0 +1,102 @@
+'use strict';
+
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+
+const json = (data) => Response.json(data);
+const request = async (path, env = {}) => {
+  const { default: worker } = await import('../worker.mjs');
+  return worker.fetch(new Request(`https://episodes.example${path}`), env, {});
+};
+
+test('una ficha TMDB personal permite pedir el stream de su episodio a una fuente por IMDb', async (t) => {
+  const requests = [];
+  const providerPath = '/custom/serial/tt9010010/1/1';
+  t.mock.method(global, 'fetch', async (input, opts) => {
+    const url = new URL(input);
+    requests.push(url);
+    if (url.hostname === 'api.themoviedb.org' && url.pathname === '/3/tv/901001') {
+      const append = url.searchParams.get('append_to_response')?.split(',') || [];
+      return json({
+        name: 'Serie de prueba', first_air_date: '2024-01-02',
+        ...(append.includes('external_ids') ? { external_ids: { imdb_id: 'tt9010010' } } : {}),
+      });
+    }
+    if (url.hostname === 'v3-cinemeta.strem.io' && url.pathname === '/meta/series/tt9010010.json') {
+      return json({ meta: { videos: [
+        { season: 2, episode: 3, name: 'Regreso' },
+        { season: 1, number: 1, name: 'Piloto', firstAired: '2024-01-02T00:00:00.000Z' },
+        { season: 1, number: 1, name: 'Duplicado' },
+        { season: 0, episode: 2, name: 'Especial' },
+      ] } });
+    }
+    if (url.hostname === 'playlatinsrc.co' && url.pathname === providerPath) {
+      return new Response('<div class="player-shell" data-id="tt9010010" data-type="series" data-season="1" data-episode="1" data-resolve-token="mock"></div>');
+    }
+    if (url.hostname === 'playlatinsrc.co' && url.pathname === '/api/resolve' && opts.method === 'POST') {
+      const body = JSON.parse(opts.body);
+      if (body.id === 'tt9010010' && body.season === '1' && body.episode === '1') {
+        return json({ ok: true, sources: [{ version: 'latino', url: 'https://media.example/pilot.mp4' }] });
+      }
+    }
+    throw new Error(`Petición inesperada: ${url.hostname}${url.pathname}`);
+  });
+  const env = { TMDB_API_KEY: 'mock', STREAM_PROVIDERS: 'playlatin' };
+  const prefix = '/' + Buffer.from(JSON.stringify({ region: 'MX', streams: ['playlatin'] })).toString('base64url');
+  const metaResponse = await request(`${prefix}/meta/series/tmdb:tv:901001.json`, env);
+  assert.equal(metaResponse.status, 200);
+  const { meta } = await metaResponse.json();
+  assert.equal(meta.id, 'tmdb:tv:901001');
+  assert.deepEqual(meta.videos.map((video) => video.id), ['tmdb:tv:901001:1:1', 'tmdb:tv:901001:2:3']);
+  assert.equal(meta.videos[0].title, 'Piloto');
+  assert.equal(meta.videos[0].released, '2024-01-02T00:00:00.000Z');
+
+  const episodeId = encodeURIComponent(meta.videos[0].id);
+  const streamResponse = await request(`${prefix}/stream/series/${episodeId}.json`, env);
+  assert.equal(streamResponse.status, 200);
+  const { streams } = await streamResponse.json();
+  assert.deepEqual(streams.map((stream) => stream.url), ['https://media.example/pilot.mp4']);
+  assert.ok(requests.some((url) => url.pathname === providerPath));
+});
+
+test('sin IMDb usa los episodios de TMDB y no cachea una ficha sin episodios por un fallo transitorio', async (t) => {
+  let seasonCalls = 0;
+  t.mock.method(global, 'fetch', async (input) => {
+    const url = new URL(input);
+    if (url.pathname === '/3/tv/901002') {
+      return json({ name: 'Miniserie', seasons: [
+        { season_number: 0, episode_count: 1 }, { season_number: 2, episode_count: 2 },
+      ] });
+    }
+    if (url.pathname === '/3/tv/901002/season/2' && ++seasonCalls > 1) {
+      return json({ episodes: [{ season_number: 2, episode_number: 5, name: 'Quinto', air_date: '2025-01-01' }] });
+    }
+    return new Response(null, { status: 503 });
+  });
+  const path = '/meta/series/tmdb:901002.json';
+  const env = { TMDB_API_KEY: 'mock' };
+  const failed = await request(path, env);
+  assert.equal(failed.headers.get('cache-control'), 'no-store');
+  assert.deepEqual((await failed.json()).meta.videos, []);
+  const recovered = await request(path, env);
+  assert.deepEqual((await recovered.json()).meta.videos, [{
+    id: 'tmdb:901002:2:5', season: 2, episode: 5, title: 'Quinto', released: '2025-01-01T00:00:00.000Z',
+  }]);
+  assert.equal(seasonCalls, 2);
+});
+
+test('una ficha TVMaze incluye episodios numerados con su ID de catálogo', async (t) => {
+  t.mock.method(global, 'fetch', async (input) => {
+    const url = new URL(input);
+    if (url.hostname === 'api.tvmaze.com' && url.pathname === '/shows/901003') {
+      return json({ id: 901003, name: 'Serie de TVMaze' });
+    }
+    if (url.hostname === 'api.tvmaze.com' && url.pathname === '/shows/901003/episodes') {
+      return json([{ season: 1, number: null }, { season: 2, number: 4, name: 'Cuarto', summary: '<p>Sinopsis</p>' }]);
+    }
+    throw new Error(`Petición inesperada: ${url.hostname}${url.pathname}`);
+  });
+  const response = await request('/meta/series/tvmaze:901003.json');
+  const { meta } = await response.json();
+  assert.deepEqual(meta.videos, [{ id: 'tvmaze:901003:2:4', season: 2, episode: 4, title: 'Cuarto', overview: 'Sinopsis' }]);
+});

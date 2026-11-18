@@ -4,9 +4,9 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 
 ## Fuentes de reproducción
 
-Se consultan en paralelo las fuentes directas activadas: Fanpelis y PlayLatinSRC. Solo se publican enlaces reproducibles con evidencia de audio latino o castellano; se descartan audio inglés, dual con inglés, subtítulos sin doblaje, enlaces de descarga y resultados sin idioma identificable. La resolución de títulos y metadatos usa TMDB, TVMaze y Cinemeta cuando corresponde.
+Por defecto se consultan en paralelo Fanpelis, FlixLatam y PlayLatinSRC. Solo se publican enlaces reproducibles con evidencia de audio latino o castellano; se descartan audio inglés, dual con inglés, subtítulos sin doblaje, enlaces de descarga y resultados sin idioma identificable. La resolución de títulos y metadatos usa TMDB, TVMaze y Cinemeta cuando corresponde.
 
-El conjunto recomendado de fuentes queda en Fanpelis y PlayLatinSRC, ambas sin pruebas de trabajo pesadas. Configura `STREAM_PROVIDERS` para limitar las fuentes y `STREAM_MAX_RESULTS` para fijar el máximo de resultados. También se pueden seleccionar fuentes desde `/configure`.
+Configura `STREAM_PROVIDERS` para habilitar fuentes en el despliegue y `STREAM_MAX_RESULTS` para fijar el máximo de resultados. En `/configure` se puede elegir entre las fuentes habilitadas. Si pregeneras la web con `npm run build:web`, usa los mismos valores de `STREAM_PROVIDERS`, `FANPELIS` y `PLAYLATIN` que en el Worker.
 
 ## Configuración local
 
@@ -37,6 +37,12 @@ npm run deploy
 - `/stream/:type/:id.json`: resultados de reproducción directa en español latino.
 - `/configure`: selección de región, plataformas, estudios y fuentes directas.
 - `/healthz`: estado de servicio y proveedores.
+
+### Si Stremio no muestra streams
+
+- Comprueba `/stream/movie/tt0816692.json` (Interestelar) para distinguir una respuesta vacía de un problema de reproducción. Si usas una URL personal, prueba la ruta con el mismo prefijo de configuración. Una selección vacía o con fuentes ya deshabilitadas no se sustituye automáticamente; abre `/configure` y vuelve a instalar con al menos una fuente activa.
+- Para una serie, el ID de un episodio tiene el formato `id:temporada:episodio`, por ejemplo `/stream/series/tt0903747:1:1.json`. El ID de la serie sin episodio no es un ID reproducible.
+- `/internal/streams-test.json?type=movie&id=tt0816692` muestra el diagnóstico de las fuentes de la configuración por defecto. Los catálogos contienen fichas aunque las fuentes no tengan enlaces directos válidos para todos los títulos. Una respuesta con enlaces tampoco garantiza que el reproductor pueda abrirlos.
 
 ## Desarrollo y pruebas
 

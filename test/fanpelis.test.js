@@ -104,6 +104,25 @@ test('fanpelis película: búsqueda → player → embed → master .m3u8 por el
   }
 });
 
+test('fanpelis: reintenta por el título antes de los dos puntos sin aceptar otra película', async () => {
+  const resolved = { title: 'Mufasa: El rey león', altTitle: 'Mufasa: The Lion King', year: '2024', mediaType: 'movie' };
+  const sameYear = { _id: 101, title: 'Otra película (2024)', release_date: '2024-01-01', type: 'movies' };
+  const differentYear = { _id: 102, title: 'Mufasa: El rey león (2019)', release_date: '2019-01-01', type: 'movies' };
+  const actual = { _id: 103, title: 'Mufasa: El rey león (2024)', release_date: '2024-12-18', type: 'movies' };
+  const calls = mockApi([
+    ['/api/rest/search', (url) => {
+      const query = new URL(url).searchParams.get('query');
+      return json({ data: { posts: query === 'Mufasa' ? [sameYear, differentYear, actual] : [sameYear] } });
+    }],
+    ['/api/rest/player', () => json(PLAYER)],
+    ['vimeos.net/embed-', html(packedEmbed(MASTER))],
+  ]);
+  const out = await fanpelis.searchFanpelis(resolved.title, resolved, resolved.title, 1000);
+  assert.equal(out.hits.length, 1);
+  assert.equal(out.query, 'fanpelis="Mufasa"');
+  assert.deepEqual(calls.filter((url) => url.includes('/api/rest/player')).map((url) => new URL(url).searchParams.get('post_id')), ['103']);
+});
+
 test('fanpelis serie: /episodes elige el episodio y su player es el del episodio', async () => {
   const calls = mockApi([
     ['/api/rest/search', json(SEARCH_TV)],

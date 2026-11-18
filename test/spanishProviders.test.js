@@ -5,7 +5,7 @@ const { SEARCHERS } = require('../lib/streams');
 const { pickEpisode } = require('../lib/spanishProviders');
 
 for (const [key, origin, search, path] of [
-  ['cuevana3', 'https://cuevanas3.pro', '/?s=El%20t%C3%ADtulo', '/peliculas/titulo-2025'],
+  ['cuevana3', 'https://cuevanas3.pro', '/search/el%20t%C3%ADtulo/', '/peliculas/titulo-2025'],
   ['cinecalidad', 'https://www.cinecalidad.am', '/page/1?s=El%20t%C3%ADtulo', '/ver-pelicula/titulo-2025'],
   ['animeonlineninja', 'https://ww4.animeonline.ninja', '/search/?s=El%20t%C3%ADtulo', '/pelicula/titulo-2025'],
   ['tioplus', 'https://tioplus.app', '/search/El%20t%C3%ADtulo', '/pelicula/titulo-2025'],

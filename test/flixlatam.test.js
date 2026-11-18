@@ -1,8 +1,6 @@
 'use strict';
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const config = require('../lib/config');
-const { activeProviders } = require('../lib/streams');
 const { findShow, directSources, searchFlixLatam } = require('../lib/flixlatam');
 
 const card = (url, year) => `<article><h3><a href="${url}">El título</a></h3><span class="year">${year}</span></article>`;
@@ -23,16 +21,8 @@ test('FlixLatam descarta audio no permitido, reproductores HTML, publicidad y to
   assert.deepEqual(directSources(html, 'https://flixlatam.com/peliculas/test', 'Título').map((hit) => hit.url), ['https://cdn.example/manifest.m3u8', 'https://flixlatam.com/dub.mp4']);
 });
 
-test('FlixLatam es opt-in y busca el episodio exacto con peticiones limitadas al origen', async (t) => {
-  const previous = { enabled: config.flixlatamEnabled, providers: config.streamProviders };
-  t.after(() => { config.flixlatamEnabled = previous.enabled; config.streamProviders = previous.providers; });
+test('FlixLatam busca el episodio exacto con peticiones limitadas al origen', async (t) => {
   const resolved = { title: 'El título', mediaType: 'series', year: '2001', season: 2, episode: 3 };
-  config.flixlatamEnabled = false;
-  assert.equal(activeProviders().includes('flixlatam'), false);
-  assert.deepEqual(await searchFlixLatam('', resolved), { skipped: 'disabled' });
-  config.flixlatamEnabled = true;
-  config.streamProviders = ['flixlatam'];
-  assert.deepEqual(activeProviders(), ['flixlatam']);
   const pages = [card('/serie/titulo', 2001), `<div id="seasons"><div class="se-c"><div class="se-q"><span class="se-t">2</span></div>
     <ul class="episodios"><li><span class="numerando">2 - 3</span><span class="episodiotitle"><a href="/episodio/2x3">Capítulo</a></span></li></ul></div></div>`,
     '<div class="pframe"><iframe src="https://other.example/embed"></iframe><iframe src="/embed/2x3"></iframe></div>',
@@ -51,9 +41,6 @@ test('FlixLatam es opt-in y busca el episodio exacto con peticiones limitadas al
 });
 
 test('FlixLatam resuelve un embed público Uqload sin ejecutar JavaScript', async (t) => {
-  const previous = config.flixlatamEnabled;
-  config.flixlatamEnabled = true;
-  t.after(() => { config.flixlatamEnabled = previous; });
   const calls = [];
   t.mock.method(global, 'fetch', async (url, init) => {
     calls.push(url);
@@ -69,4 +56,16 @@ test('FlixLatam resuelve un embed público Uqload sin ejecutar JavaScript', asyn
   assert.deepEqual(hits.map(({ url, referer, audioLabel }) => ({ url, referer, audioLabel })), [{
     url: 'https://cdn.example/video.mp4', referer: 'https://uqload.vc/', audioLabel: 'Castellano',
   }]);
+});
+
+test('FlixLatam no confunde un ancla #s1-e2 con una página de episodio', async (t) => {
+  const pages = [card('/serie/titulo', 2001), `<div id="seasons"><div class="se-c"><div class="se-q"><span class="se-t">1</span></div>
+    <ul class="episodios"><li><span class="numerando">1 - 2</span><span class="episodiotitle"><a href="#s1-e2">Capítulo</a></span></li></ul></div></div>
+    ${player('Latino', '/reproductor-general.mp4')}`];
+  t.mock.method(global, 'fetch', async () => {
+    assert.ok(pages.length > 0, 'no debe volver a buscar la ficha general');
+    return new Response(pages.shift());
+  });
+  assert.deepEqual(await searchFlixLatam('', { title: 'El título', year: 2001, mediaType: 'series', season: 1, episode: 2 }), []);
+  assert.equal(pages.length, 0);
 });

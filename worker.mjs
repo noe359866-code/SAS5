@@ -224,7 +224,7 @@ function canonicalStreamCacheUrl(requestUrl, type, id, cfg) {
   const u = new URL(requestUrl);
   const active = streams.activeProviders(cfg).slice().sort().join(',');
   const badges = Array.isArray(cfg && cfg.badges) ? cfg.badges.slice().sort().join(',') : 'all';
-  return `${u.origin}/__edge/stream-v2/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
+  return `${u.origin}/__edge/stream-v3/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
 }
 
 function safeDecode(value) {

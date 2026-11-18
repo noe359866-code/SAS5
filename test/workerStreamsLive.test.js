@@ -57,9 +57,15 @@ test('prueba de reproducción: exige bytes de los segmentos y del audio español
     assert.equal(url.origin, base);
     assert.equal(init.redirect, 'manual');
     assert.equal(init.headers.Origin, web);
-    if (url.pathname.startsWith('/stream/')) return json({ streams: [
-      { title: 'Fanpelis · Latino', url: `${base}${urls(url.pathname.includes('/series/') ? 'series.m3u8' : 'movie.m3u8')}` },
-    ] });
+    if (url.pathname.startsWith('/stream/')) {
+      const movie = url.pathname.includes('/movie/');
+      const primary = `${base}${urls(movie ? 'movie.m3u8' : 'series.m3u8')}`;
+      return json({ streams: [
+        { title: 'Fanpelis · Latino', url: primary },
+        { title: 'Fanpelis · Latino', url: `${base}${urls('same-source-extra.m3u8')}` },
+        { title: 'SpinFlix · Castellano', url: primary },
+      ] });
+    }
     const media = new URL(url.searchParams.get('u')).pathname.split('/').pop();
     fetched.push(media);
     const cors = { 'Access-Control-Allow-Origin': '*' };
@@ -72,7 +78,9 @@ test('prueba de reproducción: exige bytes de los segmentos y del audio español
     return new Response(packets, { headers: cors });
   });
   assert.ok(fetched.includes('movie.ts') && fetched.includes('es.ts'));
+  assert.ok(!fetched.includes('same-source-extra.m3u8'));
   assert.deepEqual(rows.map((row) => row.ok), [true, false]);
-  assert.match(rows[1].results[0], /audio es .*sin cabecera de medio/);
+  assert.match(rows[1].results[0], /^Fanpelis: .*audio es .*sin cabecera de medio/);
+  assert.match(rows[1].results[1], /^SpinFlix: .*audio es .*sin cabecera de medio/);
   assert.doesNotMatch(JSON.stringify(rows), /vimeos\.net|t=test/);
 });

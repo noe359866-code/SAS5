@@ -7,7 +7,12 @@ on:
       - '.github/workflows/worker-streams-live.yml'
       - 'scripts/worker-streams-live.js'
       - 'test/workerStreamsLive.test.js'
+      - 'lib/fanpelis.js'
+      - 'lib/spinflix.js'
+      - 'lib/providerHttp.js'
+      - 'lib/providerTitles.js'
       - 'lib/hlsProxy.js'
+      - 'lib/streams.js'
       - 'lib/vimeos*.js'
       - 'worker.mjs'
 permissions:

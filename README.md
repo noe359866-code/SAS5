@@ -4,22 +4,21 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 
 ## Fuentes de reproducción
 
-**Las ocho fuentes registradas se consultan por defecto**, incluida GnulaHD en modo experimental. `/configure` permite desmarcarlas una por una; las instalaciones que ya guardaron una selección explícita la conservan. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha o un iframe no son un stream.
+**Fanpelis, SpinFlix y GnulaHD (experimental) están habilitadas por defecto**. `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha, un iframe o una descarga no son un stream.
 
-| Clave | Web consultada | Identificación y reproductores compatibles |
+| Clave | Web consultada | Identificación y medios compatibles |
 |---|---|---|
-| `fanpelis` | `fanpelis.to` | API de títulos y episodios; HLS de Vimeos. |
-| `flixlatam` | `flixlatam.com` | Búsqueda por tipo/año y enlace, panel o fragmento público del episodio exacto; medios directos, Vimeos y Uqload compatibles. |
-| `playlatin` | `playlatinsrc.co` | IMDb y episodio exacto; medios directos del resolver o HLS público de Dropload con manifiesto válido. |
-| `spinflix` | `lamoviebot.tvymas.workers.dev` | API de SpinFlix/LaMovie, detalle por ID o título y año, HLS de Vimeos. |
-| `fuegocine` | `fuegocine.com` | Sitemap, portada y listado; ficha y visor de película o ruta del episodio exacto. No devuelve iframes sin medio compatible. |
-| `animeonlineninja` | `ww4.animeonline.ninja` | Fichas de anime y enlace con numeración explícita. |
-| `cuevana3` | `cuevanas3.pro` | API pública de títulos y episodios; solo devuelve HLS de Vimeos si el manifiesto es válido. |
+| `fanpelis` | `fanpelis.to` | API de títulos y episodios; si no se verifica el HLS de la primera publicación de un episodio, puede probar otra con la misma temporada y número. |
+| `spinflix` | `lamoviebot.tvymas.workers.dev` | Busca variantes del título y confirma la ficha por ID o por título completo y año compatible. Si falta el episodio en una ficha candidata, comprueba la siguiente sin cambiar de capítulo. |
 | `gnulahd` | `ww3.gnulahd.nu` | Experimental: verifica la ficha o el episodio exacto y solo admite HLS directo publicado en el HTML con etiqueta de audio explícita. [Estado y cómo probarlo](docs/gnulahd.md). |
 
-Quita `STREAM_PROVIDERS` de tu despliegue, o fija `STREAM_PROVIDERS=all`, para usar las ocho. Una lista como `fanpelis,spinflix` limita las fuentes; `off` apaga todas. `FANPELIS=off` y `PLAYLATIN=off` siguen admitidos. Para una web pregenerada con `npm run build:web`, usa las mismas variables que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
+Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro por defecto. Una lista como `fanpelis,spinflix` limita las fuentes; `STREAM_PROVIDERS=off` apaga todas y `FANPELIS=off` desactiva solo Fanpelis. Para pregenerar la web con `npm run build:web`, usa la misma configuración de fuentes que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
 
-Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. No se resuelven challenges ni se ejecuta JavaScript de terceros. Los enlaces con vencimiento conocido se retiran con margen y la caché HTTP de streams no sirve respuestas caducadas.
+**Instalaciones existentes:** las claves se guardan por nombre. Se descartan las fuentes retiradas sin añadir otras a una selección que aún contenga claves vigentes. Si una lista antigua solo contiene fuentes retiradas, se aplica el valor por defecto, como antes: las fuentes que permite el despliegue para un enlace personal y el registro actual para `STREAM_PROVIDERS`. Una selección personal vacía (`streams: []`) y `STREAM_PROVIDERS=off` siguen apagando todas las fuentes.
+
+Se retiraron FlixLatam, PlayLatinSRC, FuegoCine, AnimeOnlineNinja y Cuevana 3 porque no dieron una ruta de reproducción fiable en los controles. Se conservan los informes históricos de [FlixLatam y Cuevana 3](docs/flixlatam-cuevana.md), [FuegoCine](docs/fuegocine.md) y [PlayLatinSRC](docs/playlatinsrc-2026-11-17.md). Las variables `PLAYLATIN` y `PLAYLATIN_URL` ya no tienen efecto.
+
+Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. Fanpelis y SpinFlix filtran los visores por idioma y origen antes de probarlos y mantienen un límite de tiempo y peticiones por búsqueda. Si la API o un visor rechaza el acceso, no se intenta resolver el desafío ni se ejecuta JavaScript externo. Los enlaces con vencimiento conocido se retiran con margen. Cuando dos resultados tienen la misma URL, prevalece el mejor comprobado; si solo hay enlaces sin verificar, se guardan por poco tiempo para volver a comprobarlos pronto.
 
 En Cloudflare, Fanpelis y SpinFlix usan la ruta de reproducción existente de SpinFlix para sus HLS de Vimeos cuando esa ruta devuelve un manifiesto válido. El Worker conserva esa ruta hasta los segmentos de vídeo y audio; no cambia la fuente seleccionada. Si no puede validarla, conserva el comportamiento del CDN directo. Cada petición a `/hls` cuenta como una invocación del Worker y su disponibilidad depende del proveedor.
 
@@ -49,13 +48,13 @@ npm run deploy
 - `/manifest.json` y `/<config>/manifest.json`: manifests de Stremio.
 - `/catalog/:type/:id.json`: catálogos.
 - `/meta/:type/:id.json`: metadatos.
-- `/stream/:type/:id.json`: resultados de reproducción directa en español latino.
+- `/stream/:type/:id.json`: resultados de reproducción directa con audio latino o castellano.
 - `/configure`: selección de región, plataformas, estudios y fuentes directas.
-- `/healthz`: estado de servicio y proveedores.
+- `/healthz`: estado del servicio y fuentes habilitadas; no comprueba que haya vídeo.
 
 ### Si Stremio no muestra streams
 
-- Comprueba `/stream/movie/tt0816692.json` (Interestelar) para distinguir una respuesta vacía de un problema de reproducción. Si usas una URL personal, prueba la ruta con el mismo prefijo de configuración. Una selección vacía o con fuentes ya deshabilitadas no se sustituye automáticamente; abre `/configure` y vuelve a instalar con al menos una fuente activa.
+- Comprueba `/stream/movie/tt0816692.json` (Interestelar) para distinguir una respuesta vacía de un problema de reproducción. Si usas una URL personal, prueba la ruta con el mismo prefijo de configuración. Si desmarcaste todas las fuentes o las que elegiste siguen registradas pero el despliegue no las permite, abre `/configure` y actualiza la instalación con al menos una fuente habilitada.
 - Para una serie, el ID de un episodio tiene el formato `id:temporada:episodio`, por ejemplo `/stream/series/tt0903747:1:1.json`. El ID de la serie sin episodio no es un ID reproducible.
 - `/internal/streams-test.json?type=movie&id=tt0133093` muestra el diagnóstico de las fuentes de la configuración por defecto. `totalStreams` cuenta candidatos, no reproducciones: `verifiedManifests` y `mediaChecks` distinguen los manifiestos comprobados de los rechazos HTTP del CDN y los medios sin comprobar.
 - Para distinguir un fallo del API de un 403 de reproducción, consulta la [sonda del Worker publicado](docs/worker-streams.md). El catálogo y el manifest pueden seguir funcionando aunque el CDN no entregue el vídeo.
@@ -74,14 +73,9 @@ npm run prerender
 node scripts/providers-live.js                    # controles generales
 node scripts/gnulahd-live.js adapter               # solo GnulaHD experimental
 node scripts/providers-live.js peliculas          # Matrix
-node scripts/providers-live.js series             # Breaking Bad y Naruto
-node scripts/providers-live.js extra              # Mufasa, El rey león y FuegoCine
+node scripts/providers-live.js series             # Breaking Bad T1E1
+node scripts/providers-live.js extra              # Mufasa: El rey león en Fanpelis
+node scripts/worker-streams-live.js --playback     # HLS y primeros segmentos del Worker publicado
 ```
 
-El informe general separa los enlaces extraídos de los aceptados y, en los CDN conocidos, comprueba el manifiesto HLS y el acceso HTTP a un segmento.
-
-Para probar **FlixLatam y Cuevana 3 por separado**, usa el workflow `flixlatam-cuevana.yml`. Los resultados y los límites conocidos están en [la nota de verificación](docs/flixlatam-cuevana.md).
-
-Para comprobar **solo PlayLatinSRC y FuegoCine**, usa el workflow `playlatin-fuegocine.yml` o ejecuta `node scripts/provider-pair-live.js`. Este workflow ejecuta regresiones y una sonda informativa por proveedor; un check verde no significa que las webs tengan contenido reproducible en todos los controles. En PlayLatinSRC se prueba el HLS y una solicitud Range a un segmento del CDN conocido. En FuegoCine se distingue una ficha localizada mediante el sitemap de un visor con medio directo.
-
-Los informes no guardan URLs firmadas ni comprueban el audio o la reproducción en Stremio. El runner de GitHub puede recibir otra respuesta que un Worker desplegado o un reproductor doméstico. RamdonLatam no aloja archivos de video; solo presenta metadatos y enlaces externos.
+La sonda general de Fanpelis y SpinFlix separa los enlaces extraídos de los aceptados y, en los CDN conocidos, comprueba el manifiesto HLS y el acceso HTTP a un segmento desde el runner. La [sonda de reproducción](docs/worker-streams.md#reparación-de-la-ruta-de-reproducción) sigue la URL que el Worker devuelve a Stremio. Los informes no guardan URLs firmadas ni comprueban reproducción completa en el cliente. RamdonLatam no aloja archivos de video; solo presenta metadatos y enlaces externos.

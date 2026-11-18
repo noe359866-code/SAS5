@@ -5,11 +5,11 @@ const { isDirectMedia } = require('../lib/directMedia');
 const streams = require('../lib/streams');
 const config = require('../lib/config');
 test('filtra iframes y rutas publicitarias, conserva MP4 y HLS', () => {
-  assert.equal(isDirectMedia('https://dood.example/e/123','playlatin'), false);
+  assert.equal(isDirectMedia('https://dood.example/e/123','spinflix'), false);
   assert.equal(isDirectMedia('https://example.org/ad/video.m3u8','fanpelis'), false);
   assert.equal(isDirectMedia('https://example.org/ads/video.mp4','fanpelis'), false);
   assert.equal(isDirectMedia('https://cdn.example/movie/Ad-Astra/master.m3u8?x=ads','fanpelis'), true);
-  assert.equal(isDirectMedia('https://cdn.example/movie.mp4','playlatin'), true);
+  assert.equal(isDirectMedia('https://cdn.example/movie.mp4','spinflix'), true);
   const oldBase = config.addonBaseUrl; config.addonBaseUrl = 'https://addon.example';
   assert.equal(isDirectMedia('https://addon.example/hls?u=' + encodeURIComponent('https://cdn.example/master.m3u8'),'fanpelis'),true);
   assert.equal(isDirectMedia('https://evil.example/hls?u=' + encodeURIComponent('https://cdn.example/master.m3u8'),'fanpelis'),false);

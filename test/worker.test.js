@@ -44,8 +44,8 @@ test('healthz: reporta runtime cloudflare-workers', async () => {
   const body = await res.json();
   assert.equal(body.ok, true);
   assert.equal(body.runtime, 'cloudflare-workers');
-  assert.equal(body.sources.tvmaze, true);
-  assert.equal(body.sources.tmdb, false);
+  assert.deepEqual(body.streamProviders, ['fanpelis', 'spinflix', 'gnulahd']);
+  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, gnulahd: true });
 });
 
 test('catalog: sin TMDB key devuelve metas=[] con 200', async () => {
@@ -196,12 +196,13 @@ test('catalog deshabilitado por config: lista vacía aunque el catálogo exista'
 
 test('configure con config: /<cfg>/configure abre con la región del usuario cargada', async () => {
   const cfg = Buffer.from(
-    JSON.stringify({ lang: 'es', region: 'MX', platforms: ['netflix'], studios: [], base: ['tendencias'], streams: ['retired-indexer'] })
+    JSON.stringify({ lang: 'es', region: 'MX', platforms: ['netflix'], studios: [], base: ['tendencias'], streams: ['flixlatam', 'playlatin'] })
   ).toString('base64url');
   const res = await get('/' + cfg + '/configure', { headers: { Accept: 'text/html' } });
   assert.equal(res.status, 200);
   const html = await res.text();
   assert.match(html, /"region":"MX"/); // INITIAL precargado en la página
+  assert.match(html, /"streams":null/); // selección de solo retiradas → fuentes por defecto
   assert.match(html, /Región de plataformas/);
 });
 

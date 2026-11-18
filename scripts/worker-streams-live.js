@@ -168,11 +168,19 @@ async function auditPlayback(base, fetcher = fetch) {
   return Promise.all(playbackControls.map(async ([title, type, id]) => {
     const response = await read(fetcher, `${origin}/stream/${type}/${encodeURIComponent(id)}.json`, 'application/json');
     const streams = response.ok && response.cors ? JSON.parse(response.body).streams : null;
-    const candidates = (Array.isArray(streams) ? streams : [])
-      .filter((s) => /Fanpelis|SpinFlix/.test(s.title) && /\b(?:latino|lat|castellano)\b/i.test(s.title))
-      .map((s) => workerMedia(s.url, origin, origin, /\.m3u8$/i)).filter(Boolean).slice(0, 2);
-    const results = await Promise.all(candidates.map((url) => checkPlayback(fetcher, url, origin)));
-    const state = results.length ? results.map((row) => row.state) : [`sin HLS de reproducción por el Worker (${streams?.length ?? 0} resultados)`];
+    const candidates = (Array.isArray(streams) ? streams : []).flatMap((stream) => {
+      const label = typeof stream?.title === 'string' ? stream.title : '';
+      const provider = /\b(Fanpelis|SpinFlix)\b/.exec(label)?.[1];
+      if (!provider || !/\b(?:latino|lat|castellano)\b/i.test(label)) return [];
+      const url = workerMedia(stream.url, origin, origin, /\.m3u8$/i);
+      return url ? [{ provider, url }] : [];
+    });
+    // Mantener dos sondeos por título; si están las dos fuentes, probar una de cada una.
+    const selected = candidates.slice(0, 2);
+    const other = candidates.find(({ provider }) => provider !== selected[0]?.provider);
+    if (other) selected[1] = other;
+    const results = await Promise.all(selected.map(async ({ provider, url }) => ({ provider, ...await checkPlayback(fetcher, url, origin) })));
+    const state = results.length ? results.map((row) => `${row.provider}: ${row.state}`) : [`sin HLS de reproducción por el Worker (${streams?.length ?? 0} resultados)`];
     if (!results.length && response.ok) {
       // Sin firmas, enlaces de instalación ni trazas del proveedor en la salida.
       try {

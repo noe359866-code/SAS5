@@ -2,7 +2,9 @@
 
 **18 de noviembre de 2026 · `ramdonlatam.noe359866.workers.dev`**
 
-El `manifest.json` anunció `catalog`, `meta` y `stream`. `/healthz` informó `cloudflare-workers` y las ocho fuentes activas en la configuración por defecto. Eso no prueba que el CDN entregue vídeo. La [sonda de producción](https://github.com/noe359866-code/SAS5/actions/runs/44239650322), realizada sobre `a11f06f`, comprobó las rutas que consulta Stremio y pidió los manifiestos candidatos a través del `/hls` del propio Worker:
+## Medición anterior a la reparación y al retiro de fuentes
+
+En la versión `a11f06f`, el `manifest.json` anunció `catalog`, `meta` y `stream`. `/healthz` informó `cloudflare-workers` y las ocho fuentes activas en aquel momento. Eso no prueba que el CDN entregue vídeo. La [sonda de producción](https://github.com/noe359866-code/SAS5/actions/runs/44239650322) comprobó las rutas que consulta Stremio y pidió los manifiestos candidatos a través del `/hls` del propio Worker:
 
 | Control | Respuesta `/stream` | Candidatos | Manifiestos vía Worker |
 |---|---|---:|---|
@@ -20,7 +22,8 @@ Para Fanpelis y SpinFlix, el Worker intenta la ruta de reproducción que ya ofre
 
 - En la [comparación del transporte](https://github.com/noe359866-code/SAS5/actions/runs/44297383808), el proxy de SpinFlix entregó bytes MPEG-TS del primer segmento de **Mufasa: El rey león** (`tt13186482`) y de los primeros segmentos de vídeo y audio español de **Breaking Bad T1E2** (`tt0903747:1:2`). La comparación se ejecutó desde GitHub, no desde Cloudflare.
 - En la [prueba de la rama](https://github.com/noe359866-code/SAS5/actions/runs/44298419206), `workerd` siguió la URL que devuelve `/stream` y entregó HTTP 200 con esos bytes para los dos controles. La película trae audio integrado; el episodio publica una pista española separada, que también se pidió. Se comprobó el acceso a los primeros segmentos, no que Stremio reprodujera los títulos completos.
-- Tras desplegar, el job `published-playback` repite esa misma comprobación contra `ramdonlatam.noe359866.workers.dev`. Con Node 22, también se puede ejecutar `node scripts/worker-streams-live.js --playback`. A diferencia de la sonda de listados, falla si cualquiera de los dos controles no entrega medio por la ruta del Worker.
+- El [job `published-playback` de la reparación ya desplegada](https://github.com/noe359866-code/SAS5/actions/runs/44299014931/job/134783491000) obtuvo los primeros segmentos de vídeo de ambos controles y de la pista `es` separada de *Breaking Bad*, siguiendo las URLs entregadas por el Worker publicado. No comprobó la reproducción completa en Stremio ni la cobertura de anime.
+- Tras cada publicación que activa ese workflow, `published-playback` repite la comprobación. Con Node 22, también se puede ejecutar `node scripts/worker-streams-live.js --playback`. A diferencia de la sonda de listados, falla si cualquiera de los dos controles no entrega medio por la ruta del Worker.
 
 ## Cómo volver a probarlo
 

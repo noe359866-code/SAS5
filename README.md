@@ -81,3 +81,10 @@ Para habilitar `https://spinoff.link/pelis/#/`, añade `spinflix` a
 El addon consulta la API JSON mediante `SPINFLIX_URL`, no la ruta `#/` del
 navegador. Solo acepta audio español identificado y usa el proxy HLS del addon
 para los enlaces compatibles de Vimeos. No está activo por defecto.
+
+### AnimeOnlineNinja
+
+Añade `animeonlineninja` a `STREAM_PROVIDERS` para habilitarlo. Usa el buscador
+público, las fichas `/online/` y `/pelicula/` y la numeración de temporada y
+episodio. Publica solo vídeo directo con doblaje español identificado; no
+presenta reproductores HTML o pistas solo subtituladas como streams.

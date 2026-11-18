@@ -43,7 +43,7 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   assert.deepEqual(cfg.streams, ['fanpelis']);
   assert.equal('streamTypes' in cfg, false);
   assert.equal('streamLanguages' in cfg, false);
-  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'cuevana3', 'cinecalidad', 'tioplus']);
+  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'animeonlineninja', 'cuevana3', 'cinecalidad', 'tioplus']);
   assert.equal(choice.providerType('fanpelis'), 'direct');
   assert.equal(choice.providerType('retired-indexer'), null);
   assert.equal(user.normalizeConfig({ streams: [] }, [], [], streams.PROVIDER_KEYS).streams.length, 0);

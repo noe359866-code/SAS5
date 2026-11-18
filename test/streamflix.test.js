@@ -4,16 +4,16 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { probe } = require('../scripts/streamflix-candidates');
 
-const MOVIE = ['PelisflixHD', 'Película de prueba', 'https://pelisflixhd.love/pelicula/prueba/'];
-const ENTRY = MOVIE[2];
-const EMBED = 'https://nupload.my/e/prueba';
+const MOVIE = ['Película de prueba', 'https://www.cinecalidad.am/ver-pelicula/prueba/'];
+const ENTRY = MOVIE[1];
+const EMBED = 'https://vimeos.net/e/prueba';
 const CDN = 'https://media.vimeos.net';
 const TS = Buffer.alloc(384);
 for (const i of [0, 188, 376]) TS[i] = 0x47;
 const MP4 = Buffer.from('\u0000\u0000\u0000\u0018ftypisom\u0000\u0000\u0002\u0000isom', 'ascii');
 
 function options(...entries) {
-  return `<ul id="player">${entries.map(([label, url]) => `<li data-server="${Buffer.from(url).toString('base64')}"><span>${label}</span><button>Reproducir</button></li>`).join('')}</ul>`;
+  return `<ul id="playeroptionsul">${entries.map(([label, url]) => `<li data-option="${url}"><span>${label}</span></li>`).join('')}</ul>`;
 }
 
 function mockFetch(pages) {
@@ -29,9 +29,9 @@ function mockFetch(pages) {
   return { fetcher, seen };
 }
 
-test('sonda StreamFlix: data-server y un iframe permitido pueden llevar a MP4 directo, comprobado por bytes', async () => {
-  const nested = 'https://www.mp4upload.com/embed-sample.html';
-  const mp4 = 'https://cdn.mp4upload.com/video/demo.mp4?firma=solo-fixture';
+test('sonda CineCalidad: data-option y un iframe permitido pueden llevar a MP4 directo, comprobado por bytes', async () => {
+  const nested = 'https://voe.sx/e/embed-sample';
+  const mp4 = 'https://media.vimeos.net/video/demo.mp4?firma=solo-fixture';
   const { fetcher, seen } = mockFetch({
     [ENTRY]: options(['Opción 1 · Latino', EMBED]),
     [EMBED]: `<iframe data-src="${nested}"></iframe>`,
@@ -46,7 +46,7 @@ test('sonda StreamFlix: data-server y un iframe permitido pueden llevar a MP4 di
     { url: nested, headers: undefined }, { url: mp4, headers: { Range: 'bytes=0-383' } }]);
 });
 
-test('sonda StreamFlix: ni HTML con extensión .mp4 ni un archivo sin etiqueta de audio pasan', async () => {
+test('sonda CineCalidad: ni HTML con extensión .mp4 ni un archivo sin etiqueta de audio pasan', async () => {
   const mp4 = `${CDN}/video.mp4`;
   for (const [name, bytes, expected] of [
     ['Castellano', '<html>Sin vídeo</html>', /sin cabecera de medio/], ['Servidor', MP4, /falta acreditar audio/],
@@ -59,7 +59,7 @@ test('sonda StreamFlix: ni HTML con extensión .mp4 ni un archivo sin etiqueta d
   }
 });
 
-test('sonda StreamFlix: HLS con audio separado requiere acceso a vídeo y a la pista española', async () => {
+test('sonda CineCalidad: HLS con audio separado requiere acceso a vídeo y a la pista española', async () => {
   const master = `${CDN}/master.m3u8`;
   const variant = `${CDN}/variant.m3u8`;
   const audio = `${CDN}/audio.m3u8`;
@@ -81,7 +81,7 @@ test('sonda StreamFlix: HLS con audio separado requiere acceso a vídeo y a la p
   }
 });
 
-test('sonda StreamFlix: no abre publicidad, descargas, redirecciones ni orígenes desconocidos', async () => {
+test('sonda CineCalidad: no abre publicidad, descargas, redirecciones ni orígenes desconocidos', async () => {
   const allowed = `${CDN}/ok.m3u8`;
   const redirected = 'https://otro.example/redireccion.ts';
   const { fetcher, seen } = mockFetch({
@@ -96,8 +96,8 @@ test('sonda StreamFlix: no abre publicidad, descargas, redirecciones ni orígene
   assert.deepEqual(seen.map(({ url }) => url), [ENTRY, EMBED, allowed]);
 });
 
-test('sonda StreamFlix: solo permite una redirección pública entre visores conocidos', async () => {
-  const next = 'https://www.mp4upload.com/embed-sample.html';
+test('sonda CineCalidad: solo permite una redirección pública entre visores conocidos', async () => {
+  const next = 'https://voe.sx/e/embed-sample';
   const other = 'https://no-permitido.example/player';
   const { fetcher, seen } = mockFetch({
     [ENTRY]: options(['Latino', EMBED]),
@@ -110,19 +110,19 @@ test('sonda StreamFlix: solo permite una redirección pública entre visores con
   assert.deepEqual(seen.map(({ url }) => url), [ENTRY, EMBED, next]);
 });
 
-test('sonda StreamFlix: detecta un MP4 literal configurado en la propia ficha', async () => {
-  const page = 'https://www.lacartoons.com/serie/capitulo/98?t=1';
-  const mp4 = 'https://www.lacartoons.com/videos/demo.mp4';
+test('sonda CineCalidad: detecta un MP4 literal configurado en la propia ficha', async () => {
+  const page = 'https://www.cinecalidad.am/ver-pelicula/prueba-inline/';
+  const mp4 = 'https://www.cinecalidad.am/videos/demo.mp4';
   const { fetcher, seen } = mockFetch({
     [page]: `<script>videojs('d').src('${mp4}');</script>`,
     [mp4]: MP4,
   });
-  const report = await probe(['LaCartoons', 'Control', page, 'latino'], fetcher);
+  const report = await probe(['Control', page, 'latino'], fetcher);
   assert.equal(report.accepted, true);
   assert.deepEqual(seen.map(({ url }) => url), [page, mp4]);
 });
 
-test('sonda StreamFlix: un challenge no es una página de catálogo ni inicia otros fetch', async () => {
+test('sonda CineCalidad: un challenge no es una página de catálogo ni inicia otros fetch', async () => {
   const { fetcher, seen } = mockFetch({
     [ENTRY]: () => new Response(options(['Latino', EMBED]), { status: 403, headers: { 'cf-mitigated': 'challenge' } }),
   });
@@ -130,4 +130,27 @@ test('sonda StreamFlix: un challenge no es una página de catálogo ni inicia ot
   assert.equal(report.accepted, false);
   assert.equal(report.state, 'challenge (HTTP 403)');
   assert.deepEqual(seen.map(({ url }) => url), [ENTRY]);
+});
+
+test('sonda CineCalidad: no consulta fichas de otros sitios ni rutas de descarga', async () => {
+  const { fetcher, seen } = mockFetch({});
+  for (const page of ['https://example.invalid/ver-pelicula/prueba/', `${ENTRY}?download=1`]) {
+    const report = await probe(['Control', page], fetcher);
+    assert.equal(report.accepted, false);
+    assert.equal(report.state, 'ficha fuera de CineCalidad');
+  }
+  assert.deepEqual(seen, []);
+});
+
+test('sonda CineCalidad: un HLS extraído no es apto si el CDN rechaza el manifiesto', async () => {
+  const hls = `${CDN}/master.m3u8`;
+  const { fetcher, seen } = mockFetch({
+    [ENTRY]: options(['Latino', EMBED]),
+    [EMBED]: `<script>player.setup({file: "${hls}"});</script>`,
+    [hls]: () => new Response('Forbidden', { status: 403 }),
+  });
+  const report = await probe(MOVIE, fetcher);
+  assert.equal(report.accepted, false);
+  assert.match(report.attempts.join(), /manifiesto CDN HTTP 403/);
+  assert.deepEqual(seen.map(({ url }) => url), [ENTRY, EMBED, hls]);
 });

@@ -1,4 +1,4 @@
-name: Candidatos de StreamFlix (Node)
+name: CineCalidad (Node)
 on:
   workflow_dispatch:
   push:

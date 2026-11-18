@@ -10,29 +10,12 @@ const { parseManifest } = require('../lib/hlsManifest');
 const { isDirectMedia } = require('../lib/directMedia');
 const { normalizeText } = require('../lib/providerTitles');
 
-const providers = {
-  CineCalidad: ['#playeroptionsul li[data-option]:not(.dooplay_player_option_trailer)', 'data-option'],
-  PelisflixHD: ['#player li[data-server]', 'data-server'],
-  SeriesFlix: ['.optns-bx .drpdn .Button.sgty[data-url]', 'data-url'],
-  Latanime: ['a.play-video[data-player]', 'data-player'],
-  LaCartoons: ['iframe[src], iframe[data-src]', 'src'],
-};
+const ORIGIN = 'https://www.cinecalidad.am';
+const OPTIONS = '#playeroptionsul li[data-option]:not(.dooplay_player_option_trailer)';
 const controls = [
-  ['CineCalidad', 'El Origen (2010)', 'https://www.cinecalidad.am/ver-pelicula/el-origen/', 'latino'],
-  ['CineCalidad', 'Bandidas (2006)', 'https://www.cinecalidad.am/ver-pelicula/bandidas/', 'latino'],
-  ['PelisflixHD', 'Interestelar (2014)', 'https://pelisflixhd.love/pelicula/interstellar/'],
-  ['PelisflixHD', 'Jurassic World (2015)', 'https://pelisflixhd.love/pelicula/jurassic-world-parque-jurasico-iv-zrps/'],
-  ['SeriesFlix', 'Breaking Bad T2E1', 'https://seriesflixhd.boats/episodio/breaking-bad-zpya-2x1/'],
-  ['SeriesFlix', 'Better Call Saul T1E1', 'https://seriesflixhd.boats/episodio/better-call-saul-zjab-1x1/'],
-  ['Latanime', 'Death Note capítulo 1 (Latino)', 'https://latanime.org/ver/death-note-latino-episodio-1', 'latino'],
-  ['Latanime', 'Death Note capítulo 1 (Castellano)', 'https://latanime.org/ver/death-note-castellano-episodio-1', 'castellano'],
-  ['LaCartoons', 'Avatar: La leyenda de Aang T1E1', 'https://www.lacartoons.com/serie/capitulo/7830?t=1', 'latino'],
-  ['TioPlus', 'El Origen (búsqueda)', 'https://tioplus.app/search/inception'],
-  ['CineHax (MovieMaster)', 'El Origen (visor)', 'https://api.moviemaster.lat/e/movie/27205'],
+  ['El Origen (2010)', `${ORIGIN}/ver-pelicula/el-origen/`, 'latino'],
+  ['Bandidas (2006)', `${ORIGIN}/ver-pelicula/bandidas/`, 'latino'],
 ];
-const PLAYER_HOSTS = new Set(['nupload.my', 'voe.sx', 'waaw.to', 'www.mp4upload.com', 'mp4upload.com', 'uqload.com', 'uqload.to',
-  'luluvdo.com', 'lulustream.com', 'listeamed.net', 'filemoon.sx', 'swhoi.com', 'ok.ru', 'www.ok.ru']);
-const MEDIA_DOMAINS = ['mp4upload.com', 'uqload.com', 'uqload.to'];
 const MEDIA = /\.(?:m3u8|mp4)$/i;
 const HLS = /\.m3u8$/i;
 const SEGMENT = /\.(?:ts|m4s|mp4|aac)$/i;
@@ -46,27 +29,11 @@ function httpsUrl(value, base) {
   } catch { return null; }
 }
 
-const knownPlayer = (url) => url && (allowedVideoUrl(url.href) || PLAYER_HOSTS.has(url.hostname));
+const knownPlayer = (url) => url && (allowedVideoUrl(url.href) || url.hostname === 'voe.sx');
 const mediaUrl = (value, base) => {
   const url = httpsUrl(value, base);
   return url && MEDIA.test(url.pathname) && isDirectMedia(url.href) ? url : null;
 };
-
-function optionUrl(raw, page, attr) {
-  if (!raw || raw.length > 8192) return null;
-  let value = raw.trim();
-  if (['data-server', 'data-url', 'data-player'].includes(attr) && !/^(?:https?:)?\/\//i.test(value)) {
-    if (!/^[A-Za-z0-9+/_-]+={0,2}$/.test(value)) return null;
-    value = Buffer.from(value, 'base64').toString('utf8').trim();
-    if (!/^(?:https?:)?\/\//i.test(value)) return null;
-  }
-  const url = httpsUrl(value, page);
-  // Parámetro público que contiene otro visor; no navegar a destinos no validados.
-  if (url && (url.hostname === 'nupload.my' || url.origin === page.origin) && url.searchParams.has('url')) {
-    return httpsUrl(url.searchParams.get('url'), url) || url;
-  }
-  return url;
-}
 
 function audioOf(label) {
   const text = normalizeText(label).replace(/reproducir|idioma/g, ' ');
@@ -151,8 +118,7 @@ const rejected = (state) => ({ ok: false, state });
 const stateOf = (err) => err?.state || 'sin respuesta comprobable';
 
 async function sampleMedia(url, player, http) {
-  const allowed = (u) => u && (u.origin === player.origin || allowedVideoUrl(u.href)
-    || MEDIA_DOMAINS.some((host) => u.hostname === host || u.hostname.endsWith(`.${host}`)));
+  const allowed = (u) => u && (u.origin === player.origin || allowedVideoUrl(u.href));
   if (!allowed(url)) return rejected(`medio en ${url.hostname} (origen no validado)`);
   const sample = async (u, tsOrFragment = false) => {
     const { bytes, status } = await http.sample(u);
@@ -261,24 +227,24 @@ function sortOptions(options) {
   return [...first.values(), ...rest];
 }
 
-async function probe([provider, title, pageUrl, audio], fetcher = fetch) {
-  const page = new URL(pageUrl);
+async function probe([title, pageUrl, audio], fetcher = fetch) {
+  const report = { title, state: 'ficha disponible', options: [], attempts: [], accepted: false };
+  const page = httpsUrl(pageUrl);
+  if (page?.origin !== ORIGIN || !/^\/ver-pelicula\/[a-z0-9-]+\/?$/.test(page.pathname) || page.search) {
+    return { ...report, state: 'ficha fuera de CineCalidad' };
+  }
   const http = requestBudget(fetcher);
-  const report = { provider, title, state: 'ficha disponible', options: [], attempts: [], accepted: false };
   try {
     const html = await http.text(page, 2 * 1024 * 1024);
     if (challengePage(html)) { report.state = 'challenge'; return report; }
     const $ = load(html);
-    const config = providers[provider];
-    if (!config) report.state = /window\.PM_UI\s*=/.test(html) ? 'visor con estado público' : 'entrada disponible';
-    const opts = config ? $(config[0]).toArray().slice(0, 16).flatMap((el) => {
+    const opts = $(OPTIONS).toArray().slice(0, 16).flatMap((el) => {
       const item = $(el);
-      const attr = config[1];
-      const url = (attr === 'src' && httpsUrl(item.attr('data-src'), page)) || optionUrl(item.attr(attr), page, attr);
-      const label = item.closest('.drpdn').find('button.bstd').text() || item.text();
+      const url = httpsUrl(item.attr('data-option'), page);
+      const label = item.text();
       return !url || /tr[aá]iler|subtit|\bvose\b/i.test(label) ? [] : [{ url, audio: audio || audioOf(label) }];
-    }) : [];
-    const options = [...opts, ...mediaSources($, page, config && 'ficha').map((url) => ({ url, audio }))];
+    });
+    const options = [...opts, ...mediaSources($, page, 'ficha').map((url) => ({ url, audio }))];
     report.options = [...new Set(options.map(({ url }) => `${url.hostname}${mediaUrl(url.href) ? ' (medio)' : ' (visor)'}`))];
     const inspectable = options.filter(({ url }) => knownPlayer(url) || mediaUrl(url.href));
     for (const option of sortOptions(inspectable).slice(0, 6)) {
@@ -297,15 +263,13 @@ async function main() {
   for (const control of controls) rows.push(await probe(control));
   const summary = `${rows.filter(({ accepted }) => accepted).length}/${rows.length} controles con una muestra directa y audio identificado`;
   const log = (label, line) => console.log(process.env.GITHUB_ACTIONS ? `::notice title=${label}::${line}` : `${label}: ${line}`);
-  log('Segunda prueba StreamFlix', summary);
-  for (const provider of new Set(rows.map((row) => row.provider))) {
-    const details = rows.filter((row) => row.provider === provider).map(({ title, state, options, attempts, accepted }) =>
-      `${title}: ${state}; ${options.join(', ') || 'sin opción visible'}; ${attempts.join('; ') || 'sin intento de medio'}; muestra=${accepted ? 'sí' : 'no'}`);
-    log(provider, details.join(' | ')); // Una anotación por fuente evita el truncado de Actions.
+  log('CineCalidad (Node)', summary);
+  for (const { title, state, options, attempts, accepted } of rows) {
+    log(title, `${state}; ${options.join(', ') || 'sin opción visible'}; ${attempts.join('; ') || 'sin intento de medio'}; muestra=${accepted ? 'sí' : 'no'}`);
   }
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
-    '### Segunda prueba de enlaces directos (Node)', '', summary, '', '| Fuente | Control | Entrada | Opciones | Comprobación |', '|---|---|---|---|---|',
-    ...rows.map(({ provider, title, state, options, attempts }) => `| ${provider} | ${title} | ${state} | ${options.join(', ') || '—'} | ${attempts.join('; ') || '—'} |`), '',
+    '### CineCalidad: enlaces directos (Node)', '', summary, '', '| Control | Entrada | Opciones | Comprobación |', '|---|---|---|---|',
+    ...rows.map(({ title, state, options, attempts }) => `| ${title} | ${state} | ${options.join(', ') || '—'} | ${attempts.join('; ') || '—'} |`), '',
     'No se consulta el Worker ni se guardan firmas. Se comprueban primeros bytes, no reproducción completa ni CORS del cliente.', '',
   ].join('\n'));
   if (process.argv.includes('--require-direct') && !rows.some(({ accepted }) => accepted)) process.exitCode = 1;

@@ -15,10 +15,8 @@
  *
  * Secrets/vars del Worker (ver wrangler.toml y README):
  *   TMDB_API_KEY | TMDB_ACCESS_TOKEN, OMDB_API_KEY
- *   Vars no secretas: WATCH_REGION, ADDON_NAME, TMDB_LANGUAGE, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS,
+ *   Vars no secretas: WATCH_REGION, ADDON_NAME, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS,
  *                     SUPPORT_URL (soporte), KOFI_USERNAME (botón de donaciones) y
- *                     DEBRID_VALIDATE_TIMEOUT_MS (plazo al validar claves debrid en /configure)
- * Rutas debrid: ver lib/debridConnect.js (validación + mensajes) y lib/debridShared.js (red).
  */
 
 import config from './lib/config.js';
@@ -32,10 +30,6 @@ import userConfig from './lib/userConfig.js';
 import catalogs from './lib/catalogs.js';
 import streams from './lib/streams.js';
 import cache from './lib/cache.js';
-import debridCredentials from './lib/debridCredentials.js';
-import debridProviders from './lib/debridProviders.js';
-import debridConnect from './lib/debridConnect.js';
-import realDebridOAuth from './lib/realDebridOAuth.js';
 import rateLimit from './lib/rateLimit.js';
 // Proxy HLS propio: evita depender del proxy de la web de SpinFlix y pone el
 // Referer en CADA segmento, no solo en la primera playlist.
@@ -92,7 +86,7 @@ function htmlResponse(html, cacheSeconds = 0) {
 /**
  * Cache compartida de Cloudflare para las respuestas públicas repetidas.
  * Permite pasar una URL canónica (`cacheUrl`) para que usuarios con distinto
- * prefijo `/<cfg>/` (p. ej. distinto debridId o distintos filtros de streams)
+ * prefijo `/<cfg>/` (distintas preferencias de catálogo y presentación)
  * compartan la misma entrada de catálogo/meta/stream-público en el PoP local.
  */
 /**
@@ -115,7 +109,7 @@ function cacheTtl(policy) {
  *  2. Cache API del borde (solo opera en dominio propio).
  *  3. Ejecutar el handler (fan-out real: TMDB, indexadores…).
  *
- * Las respuestas `no-store`/`private` (Debrid, degradadas) nunca se guardan.
+ * Las respuestas `no-store`/`private` nunca se guardan.
  */
 async function edgeCached(request, ctx, createResponse, cacheUrl) {
   const edge = globalThis.caches && globalThis.caches.default;
@@ -210,57 +204,6 @@ function workerRuntime(env, ctx) {
   };
 }
 
-function sameOrigin(request) {
-  const origin = request.headers.get('origin');
-  if (origin) {
-    try {
-      return new URL(origin).origin === new URL(request.url).origin;
-    } catch (_) {
-      return false;
-    }
-  }
-  // Algunos navegadores integrados (el webview de Stremio, QtWebEngine,
-  // algunas WebViews de Android) no mandan `Origin` en un POST same-origin.
-  // Sin comprobar el mismo sitio, /configure devolvía 403 y el usuario solo veía
-  // «No se pudo conectar TorBox». `Sec-Fetch-Site` es la señal moderna y fiable;
-  // el `Referer` queda como respaldo.
-  const secFetchSite = String(request.headers.get('sec-fetch-site') || '').toLowerCase();
-  if (secFetchSite === 'same-origin' || secFetchSite === 'none') return true;
-  const referer = request.headers.get('referer');
-  if (referer) {
-    try {
-      return new URL(referer).origin === new URL(request.url).origin;
-    } catch (_) {
-      return false;
-    }
-  }
-  return false;
-}
-
-async function readJsonBody(request) {
-  const length = Number(request.headers.get('content-length')) || 0;
-  if (length > 4096) {
-    const error = new Error('body_too_large');
-    error.code = 'body_too_large';
-    throw error;
-  }
-  const text = await request.text();
-  if (new TextEncoder().encode(text).length > 4096) {
-    const error = new Error('body_too_large');
-    error.code = 'body_too_large';
-    throw error;
-  }
-  try {
-    const body = JSON.parse(text);
-    if (!body || typeof body !== 'object' || Array.isArray(body)) throw new Error('invalid_body');
-    return body;
-  } catch (_) {
-    const error = new Error('invalid_body');
-    error.code = 'invalid_body';
-    throw error;
-  }
-}
-
 function canonicalCatalogCacheUrl(requestUrl, type, id, cfg, extra) {
   const u = new URL(requestUrl);
   const lang = (cfg && cfg.lang) || config.tmdbLanguage || 'es';
@@ -279,11 +222,8 @@ function canonicalMetaCacheUrl(requestUrl, type, id, cfg) {
 function canonicalStreamCacheUrl(requestUrl, type, id, cfg) {
   const u = new URL(requestUrl);
   const active = streams.activeProviders(cfg).slice().sort().join(',');
-  const hide = Array.isArray(cfg && cfg.hide) ? cfg.hide.slice().sort().join(',') : '';
   const badges = Array.isArray(cfg && cfg.badges) ? cfg.badges.slice().sort().join(',') : 'all';
-  const sort = (cfg && cfg.sort) || 'peers';
-  const maxSize = Number(cfg && cfg.maxSize) || 0;
-  return `${u.origin}/__edge/stream/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&h=${encodeURIComponent(hide)}&b=${encodeURIComponent(badges)}&s=${encodeURIComponent(sort)}&m=${maxSize}`;
+  return `${u.origin}/__edge/stream/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
 }
 
 function safeDecode(value) {
@@ -325,8 +265,6 @@ async function serveStream(type, id, cfg, request, env, ctx) {
     const result = await core.handleStream(type, decodedId, cfg, workerRuntime(env, ctx));
     return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
   };
-  // Nunca guardar enlaces directos de una cuenta debrid en una caché compartida.
-  if (cfg && cfg.debridId) return create();
   const cacheUrl = canonicalStreamCacheUrl(request.url, type, decodedId, cfg);
   return edgeCached(request, ctx, create, cacheUrl);
 }
@@ -367,94 +305,6 @@ async function handleRequest(request, env, ctx) {
       return new Response(null, { status: 204, headers: corsHeaders() });
     }
 
-    const redirectConfigure = (query = {}, extraHeaders = {}) => {
-      const destination = new URL('/configure', request.url);
-      for (const [key, value] of Object.entries(query)) destination.searchParams.set(key, String(value));
-      return new Response(null, {
-        status: 302,
-        headers: corsHeaders({ 'Location': destination.toString(), 'Cache-Control': 'no-store', ...extraHeaders }),
-      });
-    };
-
-    if (path === realDebridOAuth.CALLBACK_PATH.replace(/\/$/, '') && request.method === 'GET') {
-      const secure = url.protocol === 'https:';
-      const clearedCookie = realDebridOAuth.clearStateCookie(secure);
-      const state = url.searchParams.get('state') || '';
-      const headers = { 'Referrer-Policy': 'no-referrer', 'Set-Cookie': clearedCookie };
-      if (!realDebridOAuth.verifyState(state, request.headers.get('cookie'))) {
-        return redirectConfigure({ debrid_error: 'oauth_failed' }, headers);
-      }
-      if (url.searchParams.has('error')) {
-        return redirectConfigure({ debrid_error: 'oauth_denied' }, headers);
-      }
-      try {
-        const result = await realDebridOAuth.completeAuthorization(url.searchParams.get('code'), env || {});
-        return redirectConfigure({ debrid_credential: result.credentialId }, headers);
-      } catch (_) {
-        console.error('[Debrid] No se pudo completar OAuth de Real-Debrid.');
-        return redirectConfigure({ debrid_error: 'oauth_failed' }, headers);
-      }
-    }
-
-    if (path === '/internal/debrid/real-debrid/authorize' && request.method === 'GET') {
-      if (!debridCredentials.isConfigured(env || {})) {
-        return redirectConfigure({ debrid_error: 'storage_not_configured' }, { 'Referrer-Policy': 'no-referrer' });
-      }
-      try {
-        const authorization = realDebridOAuth.makeAuthorization({ origin: url.origin, env: env || {} });
-        return new Response(null, {
-          status: 302,
-          headers: corsHeaders({
-            Location: authorization.authorizationUrl,
-            'Cache-Control': 'no-store',
-            'Referrer-Policy': 'no-referrer',
-            'Set-Cookie': realDebridOAuth.stateCookie(authorization.state, url.protocol === 'https:'),
-          }),
-        });
-      } catch (err) {
-        const error = err && err.code === 'realdebrid_oauth_not_configured' ? 'oauth_not_configured' : 'oauth_failed';
-        return redirectConfigure({ debrid_error: error }, { 'Referrer-Policy': 'no-referrer' });
-      }
-    }
-
-    if (path === '/internal/debrid/real-debrid/authorize' || path === realDebridOAuth.CALLBACK_PATH) {
-      return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
-    }
-
-    if ((path === '/internal/debrid/connect') && (request.method === 'POST' || request.method === 'DELETE')) {
-      if (!sameOrigin(request)) {
-        return jsonResponse({
-          error: 'origin_not_allowed',
-          message: 'La petición no se ve venir de este dominio. Abre /configure de este Worker en el navegador (pega la URL, no la abras desde otra página) y vuelve a intentarlo.',
-        }, 403, 0);
-      }
-      const clientIp = request.headers.get('cf-connecting-ip') ||
-        (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
-      if (request.method === 'POST' && !rateLimit.allow(`debrid-connect:${clientIp}`, { limit: 8, windowMs: 60_000 })) {
-        return jsonResponse({ error: 'rate_limited', message: 'Espera un minuto antes de volver a conectar.' }, 429, 0);
-      }
-      try {
-        const body = await readJsonBody(request);
-        if (request.method === 'DELETE') {
-          await debridCredentials.disconnect(body.credentialId, env || {});
-          return jsonResponse({ ok: true }, 200, 0);
-        }
-        // Validación, almacenamiento cifrado y mensajes de error viven en
-        // lib/debridConnect.js, compartidos con el servidor Express/Vercel.
-        const result = await debridConnect.connect(body, { env: env || {} });
-        return jsonResponse(result.payload, result.status, 0);
-      } catch (err) {
-        if (err && err.code === 'invalid_body') {
-          return jsonResponse({ error: 'invalid_body', message: 'Envía un objeto JSON válido de hasta 4 KB.' }, 400, 0);
-        }
-        if (err && err.code === 'body_too_large') {
-          return jsonResponse({ error: 'body_too_large', message: 'El cuerpo supera el límite de 4 KB.' }, 413, 0);
-        }
-        console.error('[Debrid] No se pudo procesar la conexión.');
-        return jsonResponse({ error: 'debrid_unavailable', message: 'No se pudo validar el proveedor. Inténtalo más tarde.' }, 502, 0);
-      }
-    }
-    if (path === '/internal/debrid/connect') return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
     }
@@ -495,29 +345,26 @@ async function handleRequest(request, env, ctx) {
 
     // ── Página de configuración ───────────────────────────────
     if (path === '/configure') {
-      const hasOAuthParams = url.searchParams.has('debrid_credential') || url.searchParams.has('debrid_error');
       const createConfigure = async () => {
         const trending = await loadTrending();
         return htmlResponse(
           renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series }),
-          hasOAuthParams ? 0 : 1800
+          1800
         );
       };
-      return hasOAuthParams
-        ? createConfigure()
-        : edgeCached(
-            request,
-            ctx,
-            createConfigure,
-            `${origin}/__edge/configure.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}&kofi=${encodeURIComponent(config.kofiUrl || '')}&sup=${encodeURIComponent(config.supportUrl || '')}`
-          );
+      return edgeCached(
+        request,
+        ctx,
+        createConfigure,
+        `${origin}/__edge/configure.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}&kofi=${encodeURIComponent(config.kofiUrl || '')}&sup=${encodeURIComponent(config.supportUrl || '')}`
+      );
     }
 
     // ── Estado agregado de la caché (sin claves ni datos por usuario) ──
     if (path === '/internal/cache.json') {
       // `configs` es el registro de configuraciones vistas: qué pregenerar.
       // Solo lleva el segmento base64url (que ya viaja en la URL del manifest)
-      // y la selección; nunca credenciales (las configs con debridId no entran).
+      // y la selección de cada configuración; no incluye credenciales.
       const limit = Math.min(200, Math.max(1, Number(url.searchParams.get('configs')) || 40));
       return jsonResponse(
         { ...cache.stats(), responseCache: responseCache.stats(), configs: configRegistry.report({ limit }) },
@@ -573,22 +420,11 @@ async function handleRequest(request, env, ctx) {
             tmdb: config.tmdbConfigured,
             tvmaze: true,
             omdb: config.omdbConfigured,
-            // knaben, torlock, blackholebay, nyaa, yts, eztv, rarbg, torrentindexer, torrentioes: true si está activo
             ...Object.fromEntries(
               streams.PROVIDER_KEYS.map((key) => [key, streams.activeProviders(null).includes(key)])
             ),
           },
           streamProviders: streams.activeProviders(null),
-          debrid: { providers: debridProviders.PROVIDERS.map((provider) => provider.key) },
-          realDebrid: {
-            supported: true,
-            mode: 'oauth-personal-library',
-            oauthConfigured: realDebridOAuth.isConfigured(env || {}),
-            credentialStorageReady: debridCredentials.isConfigured(env || {}),
-            // 'kv' es duradero; 'cache' (Cache API) funciona sin configurar
-            // pero es por datacenter, así que conviene crear la KV.
-            credentialStorage: debridCredentials.storageKind(env || {}),
-          },
           // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
           donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
           cache: cache.stats(),
@@ -648,7 +484,6 @@ async function handleRequest(request, env, ctx) {
         // /internal/cache.json). Se anota en las rutas de Stremio (manifest,
         // catálogo, ficha y stream) porque son las que se repiten en cada
         // sesión; /configure es una visita humana y no aporta señal.
-        // Nunca registra configs con debridId: su segmento es por usuario.
         if (rest !== '/configure') configRegistry.note(prefixed[1], cfg);
 
         // Si alguna de estas rutas está pregenerada en public/, la petición ni
@@ -661,8 +496,8 @@ async function handleRequest(request, env, ctx) {
           return htmlResponse(renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series, initialCfg: cfg }));
         }
         if (rest === '/manifest.json') {
-          const createManifest = () => jsonResponse(core.buildManifest(logoUrl, cfg), 200, cfg.debridId ? 0 : 300);
-          return cfg.debridId ? createManifest() : edgeCached(request, ctx, createManifest);
+          const createManifest = () => jsonResponse(core.buildManifest(logoUrl, cfg), 200, 300);
+          return edgeCached(request, ctx, createManifest);
         }
         let m2 = rest.match(CATALOG_RE);
         if (m2) return serveCatalog(m2[1], m2[2], cfg, request, ctx, m2[3]);

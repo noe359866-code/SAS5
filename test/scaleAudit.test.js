@@ -51,16 +51,16 @@ test('la proyección solo cuenta invocaciones lo que ejecuta el Worker', () => {
   // no consumen cuota, así que 500K caben en las 100.000 del plan free.
   const best = estimate({
     total,
-    servedBy: { catalog: 'static', meta: 'static', web: 'static', stream: 'worker', streamDebrid: 'worker' },
+    servedBy: { catalog: 'static', meta: 'static', web: 'static', stream: 'worker',  },
   });
-  assert.equal(best.invocations, Math.round(total * (DEFAULT_MIX.stream + DEFAULT_MIX.streamDebrid)));
+  assert.equal(best.invocations, Math.round(total * (DEFAULT_MIX.stream)));
   assert.equal(best.ok, true);
   assert.equal(best.headroom, 100_000 - best.invocations);
 
   // Sin pregenerar ni Cache Rule, todo pasa por el Worker: no cabe.
   const worst = estimate({
     total,
-    servedBy: { catalog: 'worker', meta: 'worker', web: 'worker', stream: 'worker', streamDebrid: 'worker' },
+    servedBy: { catalog: 'worker', meta: 'worker', web: 'worker', stream: 'worker',  },
   });
   assert.equal(worst.invocations, total);
   assert.equal(worst.ok, false);
@@ -69,7 +69,7 @@ test('la proyección solo cuenta invocaciones lo que ejecuta el Worker', () => {
   // La caché en memoria del isolate ahorra trabajo, pero NO invocaciones.
   const memory = estimate({
     total,
-    servedBy: { catalog: 'worker-memory', meta: 'worker-memory', web: 'worker', stream: 'worker', streamDebrid: 'worker' },
+    servedBy: { catalog: 'worker-memory', meta: 'worker-memory', web: 'worker', stream: 'worker',  },
   });
   assert.equal(memory.ok, false, 'la memoria del isolate no reduce invocaciones');
   assert.equal(memory.rows.find((row) => row.group === 'catalog').invocations, Math.round(total * DEFAULT_MIX.catalog));
@@ -78,7 +78,7 @@ test('la proyección solo cuenta invocaciones lo que ejecuta el Worker', () => {
 test('los consejos avisan de workers.dev, de catálogos sin cachear y de la web sin pregenerar', () => {
   const tips = advise({
     host: 'catalogos-plus.mi-subdominio.workers.dev',
-    servedBy: { catalog: 'worker', meta: 'worker', web: 'worker', stream: 'worker', streamDebrid: 'worker' },
+    servedBy: { catalog: 'worker', meta: 'worker', web: 'worker', stream: 'worker',  },
     estimate: { invocations: 500_000, ok: false },
   });
   const joined = tips.join(' ');
@@ -90,7 +90,7 @@ test('los consejos avisan de workers.dev, de catálogos sin cachear y de la web 
   // Un despliegue bien montado no recibe ningún consejo.
   const clean = advise({
     host: 'catalogos.example.com',
-    servedBy: { catalog: 'static', meta: 'static', web: 'static', stream: 'worker', streamDebrid: 'worker' },
+    servedBy: { catalog: 'static', meta: 'static', web: 'static', stream: 'worker',  },
     estimate: { invocations: 50_000, ok: true },
   });
   assert.deepEqual(clean, []);

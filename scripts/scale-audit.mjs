@@ -156,11 +156,7 @@ export async function audit({ url, requests = 500_000, timeoutMs = 15_000, fetch
     if (!rows.length) continue;
     servedBy[group] = rows.some((row) => row.servedBy.startsWith('worker')) ? 'worker' : rows[0].servedBy;
   }
-  if (!servedBy.streamDebrid) {
-    // Los streams con Debrid nunca se cachean (enlaces directos de la cuenta):
-    // siempre ejecutan el Worker. Es el suelo de invocaciones.
-    servedBy.streamDebrid = 'worker';
-  }
+
 
   const estimation = estimate({ servedBy, total: requests });
 

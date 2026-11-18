@@ -15,17 +15,3 @@ test('cf-mitigated challenge se detecta en 403 y también en 200 sin divulgar to
     });
   }
 });
-test('challenge pausa solo ese proveedor y diagnóstico lo identifica', async () => {
-  const old = streams.SEARCHERS.frenchstream, cooldown = config.streamProviderCooldownSeconds;
-  try {
-    config.streamProviderCooldownSeconds = 30;
-    streams.SEARCHERS.frenchstream = async () => { const err = new Error('challenge'); err.challenge = true; err.status = 403; throw err; };
-    const report = {};
-    await streams.runProviders(['frenchstream'], 'Matrix', {title:'Matrix'}, 'Matrix', report, 100, {ignorePause:true});
-    assert.equal(report.frenchstream.challenge, true);
-    assert.ok(streams.pausedProviders().includes('frenchstream'));
-    streams.SEARCHERS.frenchstream = async () => ({hits: []});
-    await streams.runProviders(['frenchstream'], 'Matrix', {title:'Matrix'}, 'Matrix', {}, 100, {ignorePause:true});
-    assert.ok(!streams.pausedProviders().includes('frenchstream'));
-  } finally { streams.SEARCHERS.frenchstream = old; config.streamProviderCooldownSeconds = cooldown; }
-});

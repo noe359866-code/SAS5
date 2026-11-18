@@ -33,8 +33,8 @@ const TIMEOUT_MS = Number(process.env.CHECK_TIMEOUT_MS) || 20_000;
 
 /** Hosts de reproductor que el addon ya sabe tratar (iframe o HLS). */
 const PLAYER_HOSTS = /^(?:https:\/\/)?(?:vimeos\.net|lamovie\.link|filemoon|vidhide|streamwish|streamtape|doodstream|dood\.|mixdrop|uqload|voe\.|dropload|unlimplay|netu|waaw)/i;
-/** Lo que NO es un reproductor: descargas, trailers y magnet. */
-const NOT_PLAYER = /^(?:magnet:|https:\/\/(?:mega\.nz|megaup|mediafire|1fichier|pixeldrain|uptobox|youtube|youtu\.be))/i;
+/** Dominios conocidos de descargas y trailers, no reproductores. */
+const NOT_PLAYER = /^https:\/\/(?:mega\.nz|megaup|mediafire|1fichier|pixeldrain|uptobox|youtube|youtu\.be)/i;
 
 function parseArgs(argv) {
   // Se aceptan las dos formas: `--query=matrix` y `--query matrix` (en el

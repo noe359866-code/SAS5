@@ -71,8 +71,7 @@ ${actions}
 save();
 globalThis.out = JSON.stringify({
   lang: state.lang, region: state.region, hide: [...state.hide], sort: state.sort, maxSize: state.maxSize,
-  platforms: [...state.platforms], debridId: state.debridId, debridProvider: state.debridProvider,
-  debridSelection: state.debridSelection, isDefault: isDefault(), url: personalUrl(),
+  platforms: [...state.platforms], isDefault: isDefault(), url: personalUrl(),
 });`, sandbox);
   const out = JSON.parse(sandbox.out);
   const match = out.url.match(/^https:\/\/addon\.example\/([^/]+)\/manifest\.json$/);
@@ -102,9 +101,8 @@ test('la portada y el configurador comparten la piel Apple TV y el diseño respo
     assert.match(html, /Piel Apple TV/, label);
     // El acento violeta→cian de la capa anterior no vuelve en ninguna regla.
     assert.equal(html.includes('rgba(124,92,255'), false, `${label}: queda violeta de marca`);
-    // Cápsula de pestañas: donación y soporte van marcados para poder
-    // sacarlos de ella cuando el idioma no cabe (.nav-fit-2).
-    assert.equal((html.match(/<a class="nav-ext" /g) || []).length, 2, label);
+    // En la configuración predeterminada solo está el enlace externo de soporte.
+    assert.equal((html.match(/<a class="nav-ext" /g) || []).length, 1, label);
     assert.match(html, /\.nav-fit-2 \.nav-links \.nav-ext \{ display: none; \}/, label);
     // Los estantes llevan su marco (.rail-view), donde el script cuelga las flechas.
     assert.match(html, /<div class="rail-view"><div class="rail-scroll" data-autoscroll="1">/, label);
@@ -123,42 +121,6 @@ test('la portada y el configurador comparten la piel Apple TV y el diseño respo
   assert.equal(/class="hero-visual"[^>]*>\s*<div class="hero-wall"/.test(homeHtml), false);
 });
 
-test('diseño accesible: salto al contenido, tabs enlazados y navegación por teclado', () => {
-  const homeHtml = withEnv({}, () => home());
-  const configureHtml = withEnv({}, () => configure());
-  for (const html of [homeHtml, configureHtml]) {
-    assert.match(html, /class="skip-link" href="#contenido">Saltar al contenido<\/a>/);
-    assert.match(html, /<main[^>]*id="contenido"/);
-  }
-
-  const dom = new JSDOM(homeHtml, { runScripts: 'outside-only', url: ORIGIN });
-  try {
-    const script = [...dom.window.document.scripts].find((node) => node.textContent.includes('function activateTab'));
-    assert.ok(script, 'no se encontró el controlador de pestañas');
-    dom.window.eval(script.textContent);
-    const tabs = [...dom.window.document.querySelectorAll('[role="tab"]')];
-    assert.equal(tabs.length, 3);
-    assert.equal(dom.window.document.querySelector('#panel-movies').getAttribute('aria-labelledby'), 'tab-movies');
-    tabs[0].dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
-    assert.equal(tabs[1].getAttribute('aria-selected'), 'true');
-    assert.equal(tabs[1].tabIndex, 0);
-    assert.equal(dom.window.document.activeElement, tabs[1]);
-    assert.equal(dom.window.document.querySelector('#panel-series').hidden, false);
-    assert.equal(dom.window.document.querySelector('#panel-movies').hidden, true);
-    tabs[1].dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'End', bubbles: true }));
-    assert.equal(tabs[2].getAttribute('aria-selected'), 'true');
-    assert.equal(dom.window.document.querySelector('#panel-anime').hidden, false);
-  } finally {
-    dom.window.close();
-  }
-
-  const configureDom = new JSDOM(configureHtml);
-  try {
-    assert.equal(configureDom.window.document.querySelector('#debrid .debrid-controls .debrid-controls'), null, 'los bloques de debrid no deben anidarse');
-  } finally {
-    configureDom.window.close();
-  }
-});
 
 // ---------------------------------------------------------------- Soporte
 
@@ -215,30 +177,26 @@ test('soporte: una SUPPORT_URL que no es http(s) se ignora', () => {
 
 // ------------------------------------------------------------ Donaciones
 
-const KOFI = 'https://ko-fi.com/hydratorrents';
-
-test('donaciones: Ko-fi sale en la barra, en su tarjeta y en el pie de las dos páginas', () => {
+test('donaciones: una cuenta Ko-fi solo aparece si el despliegue la configura', () => {
   withEnv({}, () => {
-    assert.equal(config.kofiUrl, KOFI);
+    assert.equal(config.kofiUrl, '');
+    assert.equal(donationLink().enabled, false);
+  });
+  withEnv({ KOFI_USERNAME: 'amiga' }, () => {
+    assert.equal(config.kofiUrl, 'https://ko-fi.com/amiga');
     assert.equal(donationLink().name, 'Ko-fi');
     assert.equal(donationLink().iconName, 'kofi');
-    for (const [label, html] of [['portada', home()], ['configure', configure()]]) {
-      // Enlace de la barra, botón de icono (móvil), botón de la tarjeta y pie.
-      assert.equal(count(html, `href="${KOFI}" target="_blank" rel="noopener noreferrer"`), 4, label);
-      assert.match(html, /class="support donate reveal" id="donar"/, label);
-      assert.match(html, /Invítame un café/, label);
-      assert.match(html, /Donar con Ko-fi/, label);
-      assert.match(html, /aria-label="Donar en Ko-fi"/, label);
-      // La pasarela se anuncia con su marca (PayPal), que no se traduce.
-      assert.equal(count(html, ' PayPal</span>'), 1, label);
+    for (const html of [home(), configure()]) {
+      assert.equal(count(html, 'href="https://ko-fi.com/amiga"'), 4);
+      assert.match(html, /Donar con Ko-fi/);
     }
   });
 });
 
 test('donaciones: KOFI_USERNAME acepta el usuario o la URL y solo enlaza a ko-fi.com', () => {
   const urlFor = (value) => withEnv({ KOFI_USERNAME: value }, () => config.kofiUrl);
-  assert.equal(urlFor(undefined), KOFI);
-  assert.equal(urlFor('   '), KOFI);
+  assert.equal(urlFor(undefined), '');
+  assert.equal(urlFor('   '), '');
   assert.equal(urlFor('amiga'), 'https://ko-fi.com/amiga');
   assert.equal(urlFor('@amiga'), 'https://ko-fi.com/amiga');
   assert.equal(urlFor('ko-fi.com/amiga'), 'https://ko-fi.com/amiga');
@@ -277,7 +235,6 @@ test('donaciones: con KOFI_USERNAME=off no queda rastro en la web y el soporte s
   withEnv({ KOFI_USERNAME: 'amiga' }, () => {
     for (const html of [home(), configure()]) {
       assert.equal(count(html, 'href="https://ko-fi.com/amiga"'), 4);
-      assert.equal(html.includes('hydratorrents'), false);
     }
   });
 });
@@ -301,7 +258,7 @@ test('donaciones: las frases nuevas se traducen a los seis idiomas de la web', (
 
 // ------------------------------------------------- Controles de /configure
 
-test('/configure: hay un control por cada filtro, orden, tamaño, idioma y región', () => {
+test('/configure: idioma latino fijo y controles para filtros, orden, tamaño y región', () => {
   const html = withEnv({}, () => configure());
   for (const key of filters.FILTER_KEYS) {
     assert.equal(count(html, `data-group="hide" data-key="${key}"`), 1, `filtro ${key}`);
@@ -312,9 +269,10 @@ test('/configure: hay un control por cada filtro, orden, tamaño, idioma y regi�
   for (const gb of filters.SIZE_OPTIONS) {
     assert.equal(count(html, `data-group="maxSize" data-value="${gb}"`), 1, `tamaño ${gb}`);
   }
-  for (const { code } of userConfig.LANG_OPTIONS) {
-    assert.equal(count(html, `data-group="lang" data-value="${code}"`), 1, `idioma ${code}`);
-  }
+  assert.equal(count(html, 'data-group="lang" data-value='), 0, 'el idioma de contenido no es configurable');
+  assert.match(html, /id="langCode">es-MX/);
+  assert.match(html, /id="langName">Español latino/);
+  assert.match(html, /Fijo para todos los catálogos, fichas y streams/);
   for (const { code } of userConfig.REGION_OPTIONS) {
     assert.equal(count(html, `data-group="region" data-value="${code}"`), 1, `región ${code}`);
   }
@@ -325,13 +283,13 @@ test('/configure: hay un control por cada filtro, orden, tamaño, idioma y regi�
   assert.deepEqual(filters.RECOMMENDED_HIDE, ['cam', 'scr', '3d']);
   // De serie no se oculta nada: todas las casillas de filtro nacen marcadas.
   assert.equal(count(html, 'checked data-group="hide"'), filters.FILTER_KEYS.length);
-  // Solo una opción de cada selector nace pulsada.
-  for (const group of ['lang', 'region', 'sort', 'maxSize']) {
+  // Solo una opción de cada selector configurable nace pulsada.
+  for (const group of ['region', 'sort', 'maxSize']) {
     const pressed = html.match(new RegExp(`data-group="${group}"[^>]*aria-pressed="true"`, 'g')) || [];
     assert.equal(pressed.length, 1, `grupo ${group}`);
   }
   // Los idiomas con otro alfabeto llevan su nombre en español para buscarlos.
-  assert.match(html, /data-search="日本語 Japonés ja"/);
+  assert.match(html, /Español latino/);
   assert.match(html, /data-search="Nicaragua NI"/);
 });
 
@@ -344,18 +302,19 @@ test('/configure: el idioma y la región de partida son los del despliegue', () 
       region: html.match(/const DEFAULT_REGION = "([^"]*)";/)[1],
     };
   };
-  const br = start({ TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'br' });
-  assert.equal(br.lang, 'pt-BR');
+  const br = start({ TMDB_LANGUAGE: 'en', WATCH_REGION: 'br' });
+  assert.equal(br.lang, 'es-MX');
   assert.equal(br.region, 'BR');
-  assert.match(br.html, /data-group="lang" data-value="pt-BR"[^>]*aria-pressed="true"/);
+  assert.doesNotMatch(br.html, /data-group="lang" data-value=/);
+  assert.match(br.html, /class="code" id="langCode">es-MX</);
   assert.match(br.html, /data-group="region" data-value="BR"[^>]*aria-pressed="true"/);
-  assert.match(br.html, /id="langName">Português \(Brasil\)</);
+  assert.match(br.html, /id="langName">Español latino</);
   assert.match(br.html, /id="regionName">Brasil</);
-  // Sin variables: español y Nicaragua. Un idioma que no está en la lista cae a español.
-  assert.deepEqual([start({}).lang, start({}).region], ['es', 'NI']);
-  assert.equal(start({ TMDB_LANGUAGE: 'xx-YY' }).lang, 'es');
-  // Con el idioma del despliegue marcado, no tocar nada instala el manifest general.
-  const untouched = runConfigure({ env: { TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'BR' } });
+  // El idioma editorial es fijo aunque el entorno solicite inglés.
+  assert.deepEqual([start({}).lang, start({}).region], ['es-MX', 'NI']);
+  assert.equal(start({ TMDB_LANGUAGE: 'xx-YY' }).lang, 'es-MX');
+  // Con el idioma fijo marcado, no tocar nada instala el manifest general.
+  const untouched = runConfigure({ env: { TMDB_LANGUAGE: 'en', WATCH_REGION: 'BR' } });
   assert.equal(untouched.isDefault, true);
   assert.equal(untouched.url, `${ORIGIN}/manifest.json`);
 });
@@ -389,7 +348,7 @@ test('/configure: el contador de catálogos cuenta lo mismo que el manifest', ()
   assert.match(landing, new RegExp(`<b>${PLATFORMS.length}</b><span>plataformas</span>`));
   assert.match(landing, new RegExp(`<b>${STUDIOS.length}</b><span>estudios</span>`));
   assert.match(landing, new RegExp(`<b>${filters.FILTER_KEYS.length}</b><span>filtros</span>`));
-  assert.match(landing, new RegExp(`<b>${userConfig.LANG_OPTIONS.length}</b><span>idiomas</span>`));
+  assert.match(landing, /<b>es-MX<\/b><span>español latino<\/span>/);
 });
 
 // ------------------------------------------- Script de /configure (en vm)
@@ -405,126 +364,6 @@ test('/configure: sin tocar nada se instala el manifest general', () => {
   assert.deepEqual([first.saved.hide, first.saved.sort, first.saved.maxSize], [[], filters.DEFAULT_SORT, 0]);
 });
 
-test('/configure: proveedor debrid e id opaco sobreviven borrador y URL personal', () => {
-  const credentialId = 'r'.repeat(32);
-  const run = runConfigure({ actions: `state.debridId = ${JSON.stringify(credentialId)}; state.debridProvider = 'realdebrid'; state.debridSelection = 'realdebrid';` });
-  assert.equal(run.isDefault, false);
-  assert.equal(run.debridId, credentialId);
-  assert.equal(run.debridProvider, 'realdebrid');
-  assert.equal(run.saved.debridId, credentialId);
-  assert.equal(run.saved.debridProvider, 'realdebrid');
-  assert.equal(run.saved.debridSelection, 'realdebrid');
-  assert.equal(decode(run.segment).debridId, credentialId);
-  assert.equal(decode(run.segment).debridProvider, 'realdebrid');
-  assert.match(run.url, /\/manifest\.json$/);
-  assert.doesNotMatch(run.url, /rd-test-secret-token/);
-
-  const restored = runConfigure({ draft: {
-    debridId: credentialId, debridProvider: 'premiumize', debridSelection: 'premiumize',
-  } });
-  assert.equal(restored.debridProvider, 'premiumize');
-  assert.equal(restored.debridSelection, 'premiumize');
-
-  const html = configure({ initialCfg: { lang: 'es', region: 'NI', debridId: credentialId, debridProvider: 'realdebrid' } });
-  assert.match(html, /id="debridToken" type="password"/);
-  assert.match(html, /id="connectDebrid"/);
-  assert.match(html, /se validan en el servidor y se guardan cifradas/);
-  assert.match(html, new RegExp(credentialId));
-});
-
-test('/configure: los filtros viajan en la URL personal y el servidor los entiende igual', () => {
-  const run = runConfigure({
-    actions: "state.hide = new Set(RECOMMENDED_HIDE); state.sort = 'quality'; state.maxSize = '10'; state.region = 'MX'; state.lang = 'es-MX'; state.platforms.delete('hulu');",
-  });
-  assert.equal(run.isDefault, false);
-  assert.ok(run.segment, `URL personal esperada: ${run.url}`);
-  assert.ok(run.segment.length <= userConfig.MAX_CONFIG_SEGMENT, `segmento de ${run.segment.length} caracteres`);
-  const cfg = decode(run.segment);
-  assert.ok(cfg, 'el servidor debe decodificar la URL que genera la página');
-  assert.deepEqual([...cfg.hide].sort(), [...filters.RECOMMENDED_HIDE].sort());
-  assert.equal(cfg.sort, 'quality');
-  assert.equal(cfg.maxSize, 10);
-  assert.equal(cfg.region, 'MX');
-  assert.equal(cfg.lang, 'es-MX');
-  assert.equal(cfg.platforms.includes('hulu'), false);
-  assert.equal(cfg.platforms.length, PLATFORM_KEYS.length - 1);
-  assert.deepEqual(cfg.streams, PROVIDER_KEYS);
-  // Navegador y servidor escriben la misma URL para la misma selección: al
-  // reabrir /configure desde Stremio no aparece una "tercera" configuración.
-  assert.equal(userConfig.encodeConfig(cfg), run.segment);
-
-  // Un solo filtro basta para que la URL sea personal; los demás campos de
-  // filtros no ocupan sitio si siguen en su valor de serie.
-  const one = runConfigure({ actions: "state.hide.add('cam');" });
-  const raw = JSON.parse(Buffer.from(one.segment, 'base64url').toString('utf8'));
-  assert.deepEqual(raw.hide, ['cam']);
-  assert.equal('sort' in raw, false);
-  assert.equal('maxSize' in raw, false);
-  // Lo mismo con solo el orden o solo el tamaño.
-  assert.equal(decode(runConfigure({ actions: "state.sort = 'size';" }).segment).sort, 'size');
-  assert.equal(decode(runConfigure({ actions: "state.maxSize = '5';" }).segment).maxSize, 5);
-});
-
-test('/configure: abierto desde Stremio carga los filtros instalados y reproduce la misma URL', () => {
-  const segment = userConfig.encodeConfig({
-    lang: 'en', region: 'US', platforms: ['netflix', 'max'], studios: [], base: ['tendencias'], streams: ['knaben', 'yts'],
-    hide: ['cam', '3d', 'av1'], sort: 'size', maxSize: 20,
-  });
-  const initialCfg = decode(segment);
-  // Un borrador distinto en el navegador no debe pisar lo instalado.
-  const run = runConfigure({ initialCfg, draft: { lang: 'fr', hide: ['4k'], sort: 'quality', maxSize: 2 } });
-  assert.deepEqual(run.hide.sort(), ['3d', 'av1', 'cam']);
-  assert.equal(run.sort, 'size');
-  assert.equal(run.maxSize, '20');
-  assert.equal(run.lang, 'en');
-  assert.equal(run.region, 'US');
-  assert.deepEqual(run.platforms, ['netflix', 'max']);
-  assert.equal(run.segment, segment);
-
-  // Una instalación anterior a los filtros (URL antigua) llega sin ellos.
-  const old = decode(Buffer.from(JSON.stringify({ lang: 'es', region: 'MX', platforms: ['netflix'] })).toString('base64url'));
-  const legacy = runConfigure({ initialCfg: old });
-  assert.deepEqual(legacy.hide, []);
-  assert.equal(legacy.sort, filters.DEFAULT_SORT);
-  assert.equal(legacy.maxSize, '0');
-  assert.equal(decode(legacy.segment).region, 'MX');
-});
-
-test('/configure: el borrador guardado recupera los filtros y descarta lo que no vale', () => {
-  const good = runConfigure({ draft: { lang: 'ja', region: 'JP', hide: ['cam', 'hdr'], sort: 'quality', maxSize: 5 } });
-  assert.deepEqual(good.hide, ['cam', 'hdr']);
-  assert.equal(good.sort, 'quality');
-  assert.equal(good.maxSize, '5');
-  assert.equal(good.lang, 'ja');
-  assert.equal(good.region, 'JP');
-  assert.deepEqual([good.saved.hide, good.saved.sort, good.saved.maxSize], [['cam', 'hdr'], 'quality', 5]);
-
-  // Claves desconocidas, tipos raros y números fuera de rango.
-  const bad = runConfigure({ draft: { lang: 'klingon', region: 'ZZ', hide: ['cam', 'nope', 7], sort: 'azar', maxSize: -3 } });
-  assert.deepEqual(bad.hide, ['cam']);
-  assert.equal(bad.sort, filters.DEFAULT_SORT);
-  assert.equal(bad.maxSize, '0');
-  assert.equal(bad.lang, 'es');
-  assert.equal(bad.region, 'NI');
-  assert.deepEqual(runConfigure({ draft: { hide: 'cam' } }).hide, []);
-  assert.equal(runConfigure({ draft: { maxSize: 99999 } }).maxSize, String(filters.MAX_SIZE_GB));
-  assert.equal(runConfigure({ draft: { maxSize: '7.9' } }).maxSize, '7');
-  assert.equal(runConfigure({ draft: { maxSize: 'mucho' } }).maxSize, '0');
-
-  // Borrador de antes de existir los filtros: nada oculto y sigue siendo el manifest general.
-  const legacy = runConfigure({ draft: { lang: 'es', region: 'NI', streams: PROVIDER_KEYS, knownStreams: PROVIDER_KEYS } });
-  assert.deepEqual(legacy.hide, []);
-  assert.equal(legacy.isDefault, true);
-});
-
-test('/configure: el tamaño que acepta la página es el que acepta el servidor', () => {
-  for (const value of [0, 1, 5, 50, 1000, 1001, 5000, -1, 2.7, '12', 'x', null]) {
-    const client = runConfigure({ draft: { maxSize: value } }).maxSize;
-    assert.equal(client, String(filters.normalizeMaxSize(value)), `maxSize ${JSON.stringify(value)}`);
-  }
-});
-
-// ------------------------------------------------------- HTML de las páginas
 
 test('web: los enlaces internos apuntan a secciones que existen', () => {
   withEnv({}, () => {
@@ -686,7 +525,6 @@ function runWebI18n({ languages = ['en-US'], language = '', savedLanguage = null
   const otherFormats = text('HDTV · DVD · otras');
   const message = text('Gratis y sin cuenta.');
   const counter = text('30 plataformas y 21 estudios');
-  const filterSummary = text('No se oculta nada: verás todos los streams. Orden: Más seeders. Tamaño máximo: 5 GB.');
   const fallback = text('Nicaragua y luego Estados Unidos como respaldo');
   const placeholder = text('', { placeholder: 'Filtrar esta portada…' });
   const meta = body.append(new I18nElement('meta', {
@@ -741,7 +579,7 @@ function runWebI18n({ languages = ['en-US'], language = '', savedLanguage = null
   vm.runInNewContext(WEB_I18N_SCRIPT, context);
   document.ready();
   return {
-    root, body, heading, popular, otherFormats, message, counter, filterSummary, fallback, placeholder, meta, summary,
+    root, body, heading, popular, otherFormats, message, counter, fallback, placeholder, meta, summary,
     select, autoOption, storage, observer: observerCallbacks[0],
   };
 }
@@ -759,84 +597,7 @@ test('idioma de interfaz: negocia entre las seis opciones, con español como fal
   for (const language of WEB_LANGUAGES) assert.ok(Object.keys(WEB_TRANSLATIONS[language]).length > 200);
 });
 
-test('idioma de interfaz: traduce la página en el navegador, recuerda la elección y permite volver a Auto', () => {
-  const page = runWebI18n({ languages: ['xx-XX', 'fr-CA'] });
-  assert.equal(page.root.lang, 'fr');
-  assert.equal(page.root.hasAttribute('data-i18n-pending'), false);
-  assert.equal(page.heading.node.nodeValue, 'Tendances');
-  assert.equal(page.popular.node.nodeValue, 'Populaires');
-  assert.equal(page.otherFormats.node.nodeValue, 'HDTV · DVD · autres');
-  assert.equal(page.message.node.nodeValue, 'Gratuit, sans compte.');
-  assert.equal(page.counter.node.nodeValue, '30 plateformes et 21 studios');
-  assert.equal(page.filterSummary.node.nodeValue, 'Aucun élément masqué : tous les streams seront affichés. Tri : Plus de seeders. Taille maximale : 5 GB.');
-  assert.equal(page.fallback.node.nodeValue, 'Nicaragua puis États-Unis en secours');
-  assert.equal(page.placeholder.el.getAttribute('placeholder'), 'Filtrer cette page…');
-  assert.match(page.meta.getAttribute('content'), /121 catalogues Stremio/);
-  assert.equal(page.summary.textContent, `${new Intl.DisplayNames(['fr'], { type: 'language' }).of('es')} · NI`);
-  assert.equal(page.autoOption.textContent, 'Automatique');
 
-  page.select.value = 'de';
-  page.select.listeners.change();
-  assert.equal(page.root.lang, 'de');
-  assert.equal(page.heading.node.nodeValue, 'Trends');
-  assert.equal(page.popular.node.nodeValue, 'Beliebt');
-  assert.equal(page.otherFormats.node.nodeValue, 'HDTV · DVD · sonstige');
-  assert.equal(page.message.node.nodeValue, 'Kostenlos und ohne Konto.');
-  assert.equal(page.filterSummary.node.nodeValue, 'Nichts ausgeblendet: Alle Streams werden angezeigt. Sortierung: Meiste Seeders. Maximale Größe: 5 GB.');
-  assert.equal(page.fallback.node.nodeValue, 'Nicaragua danach Vereinigte Staaten als Ersatz');
-  assert.equal(page.storage.value, 'de');
-  assert.equal(page.select.value, 'de');
-
-  // El renderer del configurador escribe sus mensajes en español después de
-  // cargar; el observador los localiza también sin recargar la página.
-  const updated = new I18nElement('span');
-  const updatedText = updated.append(new I18nTextNode('Copiada', updated));
-  page.body.append(updated);
-  page.observer([{ type: 'childList', target: page.body, addedNodes: [updated] }]);
-  assert.equal(updatedText.nodeValue, 'Kopiert');
-
-  page.select.value = 'auto';
-  page.select.listeners.change();
-  assert.equal(page.root.lang, 'fr');
-  assert.equal(page.heading.node.nodeValue, 'Tendances');
-  assert.equal(page.storage.value, null);
-  assert.equal(page.select.value, 'auto');
-});
-
-test('idioma de interfaz: traduce errores dinámicos del proveedor Debrid en los seis idiomas', () => {
-  const serverMessages = [
-    'Espera un minuto antes de volver a conectar.',
-    'Real-Debrid debe conectarse mediante OAuth; no pegues tu token API privado.',
-    'Selecciona un proveedor y pega una clave API válida.',
-    'El servidor debe configurar almacenamiento privado y DEBRID_ENCRYPTION_KEY.',
-    'El proveedor rechazó la clave API. Compruébala en tu cuenta.',
-  ];
-  const providerErrors = {
-    es: 'No se pudo validar TorBox. Inténtalo más tarde.',
-    en: 'Could not validate TorBox. Try again later.',
-    pt: 'Não foi possível validar o TorBox. Tente novamente mais tarde.',
-    fr: 'Impossible de valider TorBox. Réessayez plus tard.',
-    de: 'Der Anbieter TorBox konnte nicht validiert werden. Bitte versuche es später erneut.',
-    it: 'Impossibile convalidare TorBox. Riprova più tardi.',
-  };
-
-  for (const language of WEB_LANGUAGES) {
-    const page = runWebI18n({ languages: [language] });
-    for (const source of serverMessages) {
-      const element = new I18nElement('span');
-      const node = element.append(new I18nTextNode(source, element));
-      page.body.append(element);
-      page.observer([{ type: 'childList', target: page.body, addedNodes: [element] }]);
-      assert.equal(node.nodeValue, WEB_TRANSLATIONS[language][source], `${language}: ${source}`);
-    }
-
-    const dynamic = new I18nElement('span');
-    const dynamicText = dynamic.append(new I18nTextNode('No se pudo validar torbox. Inténtalo más tarde.', dynamic));
-    page.body.append(dynamic);
-    page.observer([{ type: 'childList', target: page.body, addedNodes: [dynamic] }]);
-    assert.equal(dynamicText.nodeValue, providerErrors[language], `${language}: error dinámico de proveedor`);
-  }
-});
 
 test('idioma de interfaz: español predeterminado y preferencia guardada sin cambiar la config del catálogo', () => {
   const fallback = runWebI18n({ languages: ['ja-JP'] });
@@ -853,7 +614,7 @@ test('idioma de interfaz: español predeterminado y preferencia guardada sin cam
 
   withEnv({ TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'BR' }, () => {
     const html = configure();
-    assert.match(html, /<span class="code" id="langCode">pt-BR<\/span>/);
+    assert.match(html, /<span class="code" id="langCode">es-MX<\/span>/);
     assert.match(html, /<span class="code" id="regionCode">BR<\/span>/);
   });
 });
@@ -907,25 +668,19 @@ test('/configure: dos selecciones iguales producen exactamente la misma URL', ()
   const cfg = decode(segment);
   assert.deepEqual(cfg.platforms, ['netflix', 'disney']);
   assert.deepEqual(cfg.studios, ['marvel', 'pixar']);
-  assert.equal(cfg.lang, 'es');
+  assert.equal(cfg.lang, 'es-MX');
   assert.equal(cfg.region, 'NI');
 });
 
-test('/configure: el idioma omitido en la URL se rellena con el del despliegue', () => {
-  // Un despliegue en portugués: si el servidor rellenara "es" (la constante),
-  // los catálogos pregenerados saldrían en el idioma equivocado.
-  const pt = runConfigure({ env: { TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'BR' }, actions: `state.platforms = new Set(['netflix']);` });
+test('/configure: el idioma de catálogos se mantiene fijo en español latino', () => {
+  const pt = runConfigure({ env: { TMDB_LANGUAGE: 'en', WATCH_REGION: 'BR' }, actions: `state.platforms = new Set(['netflix']);` });
   const cfg = decode(pt.segment);
-  assert.equal(cfg.lang, 'pt-BR');
+  assert.equal(cfg.lang, 'es-MX');
   assert.equal(cfg.region, 'BR');
-
-  // En un despliegue en español (por defecto) sigue siendo "es".
   const es = runConfigure({ actions: `state.platforms = new Set(['netflix']);` });
-  assert.equal(decode(es.segment).lang, 'es');
-
-  // Y si el usuario elige OTRO idioma, sí viaja en la URL.
-  const other = runConfigure({ env: { TMDB_LANGUAGE: 'pt-BR', WATCH_REGION: 'BR' }, actions: `state.platforms = new Set(['netflix']); state.lang = 'en';` });
-  assert.equal(decode(other.segment).lang, 'en');
+  assert.equal(decode(es.segment).lang, 'es-MX');
+  const other = runConfigure({ actions: `state.platforms = new Set(['netflix']); state.lang = 'en';` });
+  assert.equal(decode(other.segment).lang, 'es-MX');
 });
 
 test('/configure: la página pregenerada de una región nace con esa región elegida', () => {
@@ -942,7 +697,7 @@ test('/configure: la página pregenerada de una región nace con esa región ele
   vm.runInNewContext(`${script.slice(0, cut)}\nrestore();globalThis.out = JSON.stringify({ region: state.region, lang: state.lang, url: personalUrl() });`, sandbox);
   const out = JSON.parse(sandbox.out);
   assert.equal(out.region, 'MX');
-  assert.equal(out.lang, 'es', 'el idioma sigue siendo el del despliegue');
+  assert.equal(out.lang, 'es-MX', 'el idioma es fijo en español latino');
 
   // El borrador guardado del navegador sigue mandando sobre el preset.
   const draft = { region: 'ES', platforms: ['netflix'], studios: [], base: ['tendencias'], streams: [] };

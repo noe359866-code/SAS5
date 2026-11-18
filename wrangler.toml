@@ -19,18 +19,12 @@ STREAM_PROVIDER_TIMEOUT_MS = "6000"
 STREAM_FALLBACK_TIMEOUT_MS = "2500"
 STREAM_PROVIDER_COOLDOWN_SECONDS = "300"
 STREAM_STALE_SECONDS = "21600"
-DEBRID_MAX_CHECKS = "8"
-DEBRID_MAX_RESULTS = "3"
-DEBRID_TIMEOUT_MS = "4500"
-# Plazo aparte para validar la clave al conectar desde /configure. Es una acción
-# interactiva (un clic) y admitir más lento evita el falso «no se pudo validar».
-DEBRID_VALIDATE_TIMEOUT_MS = "9000"
 # Enlace de soporte de la web. Por defecto, invitación permanente actual al
 # Discord de Catálogos+. Actualízalo aquí si el enlace cambia.
 # SUPPORT_URL = "https://discord.gg/J6byqsRUfu"
 # Donaciones: botón de Ko-fi en la barra, tarjeta propia y pie (dentro de Ko-fi
 # se paga con PayPal o tarjeta). Página del proyecto; "off" oculta todo.
-KOFI_USERNAME = "hydratorrents"
+KOFI_USERNAME = "off"
 
 # Node.js compat por si alguna dependencia lo requiere
 compatibility_flags = ["nodejs_compat"]
@@ -46,17 +40,3 @@ compatibility_flags = ["nodejs_compat"]
 [assets]
 directory = "./public"
 run_worker_first = false
-
-# Credenciales debrid: el único secreto imprescindible es la clave de cifrado.
-#   npx wrangler secret put DEBRID_ENCRYPTION_KEY
-# Sin KV, las credenciales se guardan en la Cache API de Cloudflare (funciona
-# sin configurar nada, pero es por datacenter y Cloudflare puede expulsarlas).
-# Para el almacén duradero, ejecuta una vez (crea la KV y rellena este bloque):
-#   npm run debrid:kv          # = npx wrangler kv namespace create DEBRID_KV
-# `npm run deploy` ya lo intenta solo; sin sesión de Cloudflare avisa y sigue.
-# Para OAuth Real-Debrid, configura además como secrets:
-#   REALDEBRID_CLIENT_ID, REALDEBRID_CLIENT_SECRET y REALDEBRID_REDIRECT_URI
-# (callback exacto: https://<tu-dominio>/internal/debrid/real-debrid/callback).
-# [[kv_namespaces]]
-# binding = "DEBRID_KV"
-# id = "<ID de la KV creada>"

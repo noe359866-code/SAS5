@@ -39,12 +39,12 @@ test('cuenta visitas y normaliza la popularidad a la más vista', () => {
   assert.equal(report.totalHits, 4);
 });
 
-test('las configs con debrid no se registran (segmento por usuario, streams privados)', () => {
-  const segment = userConfig.encodeConfig({ lang: 'es', region: 'NI', debridId: 'b'.repeat(32) });
+test('las configs válidas se registran para prerender de catálogos', () => {
+  const segment = userConfig.encodeConfig({ lang: 'es', region: 'NI', streams: ['fanpelis'] });
   registry.note(segment, cfgFor(segment));
   const report = registry.report();
-  assert.deepEqual(report.configs, []);
-  assert.equal(report.totalHits, 0);
+  assert.equal(report.configs.length, 1);
+  assert.equal(report.totalHits, 1);
 });
 
 test('el informe no filtra nada que no sea idioma, región y selección', () => {

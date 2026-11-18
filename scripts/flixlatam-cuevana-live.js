@@ -6,6 +6,8 @@ const { load } = require('cheerio');
 const { runProviders } = require('../lib/streams');
 const { fetchText } = require('../lib/http');
 const { annotate } = require('./providers-live');
+const { allowedVideoUrl, inspectVimeos, unpackPacked, extractFromEmbedHtml } = require('../lib/vimeos');
+const { providerHttp } = require('../lib/providerHttp');
 
 const controls = {
   flixlatam: [
@@ -14,9 +16,9 @@ const controls = {
     { title: 'Breaking Bad', year: '2008', mediaType: 'series', season: 1, episode: 2, page: 'https://flixlatam.com/serie/breaking-bad' },
   ],
   cuevana3: [
-    { title: 'Matrix', year: '1999', mediaType: 'movie', page: 'https://cuevanas3.pro/peliculas/matrix-1999/' },
-    { title: 'El Efecto Mariposa', year: '2004', mediaType: 'movie', page: 'https://cuevanas3.pro/peliculas/el-efecto-mariposa-2004/' },
-    { title: 'Breaking Bad', year: '2008', mediaType: 'series', season: 1, episode: 2, page: 'https://cuevanas3.pro/episodio/breaking-bad-temporada-1-episodio-2/' },
+    { title: 'Matrix', year: '1999', mediaType: 'movie', postId: 3899, page: 'https://cuevanas3.pro/peliculas/matrix-1999/' },
+    { title: 'El Efecto Mariposa', year: '2004', mediaType: 'movie', postId: 7712, page: 'https://cuevanas3.pro/peliculas/el-efecto-mariposa-2004/' },
+    { title: 'Breaking Bad', year: '2008', mediaType: 'series', season: 1, episode: 2, postId: 77, page: 'https://cuevanas3.pro/episodio/breaking-bad-temporada-1-episodio-2/' },
   ],
 };
 
@@ -99,6 +101,29 @@ async function inspectEmbed(raw, page) {
   } catch (err) { return `${frame.hostname}: ${problem(err)}`; }
 }
 
+async function cuevanaPlayer(fixture, origin) {
+  const http = providerHttp(6500);
+  const get = (url, maxBytes) => http.text(url, { maxBytes, headers: { Referer: fixture.page } });
+  try {
+    const api = `${origin}/wp-api/v1/player?postId=${fixture.postId}&demo=0`;
+    const payload = JSON.parse(await get(api, 512 * 1024)).data;
+    const frame = urlOf(payload?.embeds?.find((item) => item?.lang === 'Latino')?.url, fixture.page);
+    if (!frame || ![origin, 'https://cuevana3.gs'].includes(frame.origin) || frame.pathname !== '/player.php'
+      || frame.searchParams.get('server') !== 'vimeos' || !/^[a-z0-9_-]{16,512}$/i.test(frame.searchParams.get('t') || '')) return 'API: sin visor Vimeos Latino conocido';
+    // Destino canónico observado al abrir este visor público, no un redirect libre.
+    const canonical = new URL(frame.pathname + frame.search, origin).href;
+    const html = await get(canonical, 768 * 1024);
+    const text = unpackPacked(html) || html;
+    const { hls } = extractFromEmbedHtml(text);
+    const keys = [...text.matchAll(/\b([a-z_][a-z0-9_]{0,36})["']?\s*[:=]\s*(?:["'][^\r\n"']{0,2048}\.m3u8|\[\s*\{)/gi)]
+      .map((m) => m[1]);
+    const hlsHosts = list(hls.map((url) => urlShape(url, canonical)));
+    const check = hls.find((url) => allowedVideoUrl(url));
+    const media = check ? await inspectVimeos(check, http) : null;
+    return `API: visor Latino/Vimeos; HTML recibido, packed=${text !== html}; campos=${list(keys)}; HLS=${hlsHosts}; CDN=${media?.verification || (check ? 'manifiesto no aceptado' : 'no sondeado')}; ${playerShape(load(html), canonical)}`;
+  } catch (err) { return `visor API: ${problem(err)}`; }
+}
+
 async function probe(key, fixture) {
   const report = {};
   const hits = await runProviders([key], fixture.title, fixture, fixture.title, report, undefined, { ignorePause: true });
@@ -109,8 +134,18 @@ async function probe(key, fixture) {
     const html = await fetchText(fixture.page, { redirect: 'manual', timeoutMs: 7000, maxBytes: 2 * 1024 * 1024 });
     const $ = load(html);
     const embeds = await Promise.all($(frames).toArray().slice(0, 6).map((el) => inspectEmbed($(el).attr('data-src') || $(el).attr('src'), fixture.page)));
-    const shape = key === 'cuevana3' ? `${cuevanaShape($, fixture.page)}; ${cuevanaShape(load(await fetchText('https://cuevanas3.pro/search/' + encodeURIComponent(fixture.title.toLowerCase()) + '/', { redirect: 'manual', timeoutMs: 4000, maxBytes: 2 * 1024 * 1024 })), fixture.page)} en búsqueda\n` : '';
-    return `${state}\n${shape}${playerShape($, fixture.page, fixture.season && fixture)}${embeds.some(Boolean) ? `\n${embeds.filter(Boolean).join('\n')}` : ''}`;
+    const shape = key === 'cuevana3' ? `${cuevanaShape($, fixture.page)}\n${await cuevanaPlayer(fixture, new URL(fixture.page).origin)}\n` : '';
+    let fragment = '';
+    if (key === 'flixlatam' && fixture.season && fixture.episode) {
+      const endpoint = new URL(`/api/episodio${new URL(fixture.page).pathname}/${fixture.season}/${fixture.episode}`, fixture.page);
+      try {
+        const data = JSON.parse(await fetchText(endpoint.href, { redirect: 'manual', headers: { Accept: 'application/json' }, timeoutMs: 5000, maxBytes: 512 * 1024 }));
+        if (data?.success === true && data.temporada === fixture.season && data.episodio === fixture.episode && typeof data.html === 'string') {
+          fragment = `\nFragmento exacto HTTP 200; ${playerShape(load(data.html), fixture.page)}`;
+        } else fragment = '\nFragmento no corresponde al episodio';
+      } catch (err) { fragment = `\nFragmento: ${problem(err)}`; }
+    }
+    return `${state}\n${shape}${playerShape($, fixture.page, fixture.season && fixture)}${fragment}${embeds.some(Boolean) ? `\n${embeds.filter(Boolean).join('\n')}` : ''}`;
   } catch (err) { return `${state}; visor: ${problem(err)}`; }
 }
 

@@ -81,3 +81,53 @@ test('FlixLatam admite enlaces de episodio y paneles locales solo cuando concuer
   const hits = await searchFlixLatam('', { title: 'El título', year: 2001, mediaType: 'series', season: 1, episode: 2 });
   assert.deepEqual(hits.map(({ url }) => url), ['https://flixlatam.com/episodio-dos.mp4']);
 });
+
+const show = { title: 'El título', year: 2001, mediaType: 'series', season: 1, episode: 2 };
+const showPage = 'https://flixlatam.com/serie/titulo';
+const routerPage = `<div id="item-context" data-type="serie" data-slug="titulo"></div><div id="episode-container" hidden></div>
+  <div id="seasons"><ul class="episodios">
+  <li><span class="numerando">1 - 1</span><a class="episode-link" href="#s1-e1">Uno</a></li>
+  <li><span class="numerando">1 - 2</span><a class="episode-link" href="${showPage}#s1-e2">Dos</a></li></ul></div>
+  ${player('Latino', '/general.mp4')}`;
+
+for (const [identity, expected] of [
+  [{}, ['https://flixlatam.com/capitulo-2.mp4']],
+  [{ episodio: 1 }, { hits: [], reason: 'episode-mismatch' }],
+  [{ temporada: 2 }, { hits: [], reason: 'episode-mismatch' }],
+  [{ slug: 'otra-serie' }, { hits: [], reason: 'episode-mismatch' }],
+]) {
+  test(`FlixLatam valida la identidad del fragmento del router (${JSON.stringify(identity)})`, async (t) => {
+    const urls = [];
+    t.mock.method(global, 'fetch', async (url, init) => {
+      urls.push(url);
+      assert.equal(init.redirect, 'manual');
+      if (url.includes('/search?')) return new Response(card('/serie/titulo', 2001));
+      if (url === showPage) return new Response(routerPage);
+      assert.equal(url, 'https://flixlatam.com/api/episodio/serie/titulo/1/2');
+      assert.equal(init.headers.Accept, 'application/json');
+      assert.equal(init.headers.Referer, showPage);
+      return Response.json({ success: true, html: player('Latino', '/capitulo-2.mp4'), type: 'serie',
+        slug: 'titulo', temporada: 1, episodio: 2, ...identity });
+    });
+    const result = await searchFlixLatam('', show);
+    assert.deepEqual(Array.isArray(result) ? result.map((hit) => hit.url) : result, expected);
+    assert.equal(urls.length, 3);
+  });
+}
+
+test('FlixLatam no solicita el fragmento si la fila o el contexto del router no concuerdan', async (t) => {
+  const { findEpisode } = require('../lib/flixlatam');
+  assert.equal(findEpisode(routerPage.replace('data-slug="titulo"', 'data-slug="otra-serie"'), showPage, 1, 2), null);
+  assert.equal(findEpisode(routerPage.replace(`${showPage}#s1-e2`, 'https://other.example/serie/titulo#s1-e2'), showPage, 1, 2), null);
+  assert.equal(findEpisode(routerPage, showPage, 2, 2), null);
+});
+
+test('FlixLatam descarta iframes con extensión de vídeo, tráilers y el reproductor caducado de Uqload', () => {
+  const html = `<div class="pframe"><iframe title="Latino" src="https://other.example/fake.mp4"></iframe>
+    <div class="trailer"><video data-lang="Latino" src="/teaser.mp4"></video></div>
+    <video data-lang="Latino" data-src="/media.mp4"></video></div>`;
+  assert.deepEqual(directSources(html, showPage, 'Título').map((hit) => hit.url), ['https://flixlatam.com/media.mp4']);
+  const { uqloadMedia } = require('../lib/flixlatam');
+  assert.equal(uqloadMedia(`<div>File is no longer available as it expired or has been deleted.</div>
+    <script>setup({file:'https://cdn.example/stale.mp4'})</script>`, 'https://uqload.vc/embed-abc.html'), null);
+});

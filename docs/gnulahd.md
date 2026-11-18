@@ -2,7 +2,7 @@
 
 **Estado al 18 de noviembre de 2026: fuente experimental habilitada por defecto.** Aparece marcada como **GnulaHD (experimental)** en `/configure`. Una instalación con selección explícita de fuentes la conserva: si no incluye GnulaHD, hay que marcarla y actualizar la instalación. `STREAM_PROVIDERS` sigue permitiendo limitar o apagar fuentes.
 
-El adaptador intenta fichas públicas por título y año y verifica su tipo. En series solo visita el capítulo que enlaza la ficha y comprueba la numeración y el regreso a la serie. No usa búsquedas ni APIs bloqueadas, visores o descargas. Solo ofrece un HLS enlazado en un `<video>` o `<source>` con etiqueta de audio **Latino** o **Castellano** y manifiesto válido. En esta prueba se limita al mismo origen, sin credenciales, firmas ni redirecciones seguidas. Una fuente activa **no** garantiza un resultado: la auditoría no verificó reproducción externa en ninguno de los controles.
+El adaptador intenta fichas públicas por título y año y verifica su tipo. En series solo visita el capítulo que enlaza la ficha y comprueba la numeración y el regreso a la serie. No usa búsquedas ni APIs bloqueadas, visores o descargas. Solo ofrece un HLS enlazado en un `<video>` o `<source>` con etiqueta de audio **Latino** o **Castellano** y manifiesto válido. En esta prueba se limita al mismo origen, sin credenciales, firmas ni redirecciones seguidas. Una fuente activa **no** garantiza un resultado: [la sonda en vivo del adaptador](https://github.com/noe359866-code/SAS5/actions/runs/44238574143) localizó las seis fichas o episodios exactos, pero devolvió `no-public-media` en todos (0 streams aceptados). No se verificó reproducción externa.
 
 ## Identidad e idioma observados en la auditoría
 

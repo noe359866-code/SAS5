@@ -48,7 +48,7 @@ test('CineCalidad reconoce tarjeta con año en span y resuelve solo la opción V
   const embed = 'https://vimeos.net/embed-fixture';
   const master = 'https://s10.vimeos.net/releases/cine/master.m3u8';
   const pages = new Map([
-    [`${origin}/page/1?s=Matrix`, '<article><img alt="Matrix"><a href="/ver-pelicula/matrix/">Matrix <span>1999</span> Sinopsis</a></article><article><img alt="Matrix"><a href="/ver-pelicula/otra/">Matrix <span>2003</span></a></article>'],
+    [`${origin}/page/1?s=Matrix`, '<article class="item movies"><div class="poster custom"><h3 class="hover_caption_caption"><a href="/ver-pelicula/matrix/">Matrix<br><br>1999<br><br>Sinopsis</a></h3><a href="/ver-pelicula/matrix/"></a></div></article><article><img alt="Matrix"><a href="/ver-pelicula/otra/">Matrix <span>2003</span></a></article>'],
     [`${origin}/ver-pelicula/matrix/`, `<section><div>Audio latino</div><ul><li class="dooplay_player_option" data-option="${embed}">Vimeos</li><li class="dooplay_player_option dooplay_player_option_trailer" data-option="https://vimeos.net/embed-trailer">Trailer</li></ul></section>`],
     [embed, `<script>player({ file: '${master}' });</script>`],
     [master, '#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=700000,RESOLUTION=1280x720\nv720.m3u8'],

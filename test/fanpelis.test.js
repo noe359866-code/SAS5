@@ -123,6 +123,7 @@ test('fanpelis: reintenta por el título antes de los dos puntos sin aceptar otr
   const out = await fanpelis.searchFanpelis(resolved.title, resolved, resolved.title, 1000);
   assert.equal(out.hits.length, 1);
   assert.equal(out.query, 'fanpelis="Mufasa"');
+  assert.equal(new URL(calls[0]).searchParams.get('query'), 'Mufasa');
   assert.deepEqual(calls.filter((url) => url.includes('/api/rest/player')).map((url) => new URL(url).searchParams.get('post_id')), ['103']);
 });
 

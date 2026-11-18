@@ -104,8 +104,8 @@ test('playlatin: acepta comillas simples y atributos en otro orden', () => {
 
 test('playlatin: normaliza las fuentes, descarta lo no reproducible y limita el número', () => {
   const sources = playlatin.normalizeSources(RESOLVE);
-  assert.equal(sources.length, 1);
-  assert.deepEqual(sources.map((s) => s.label), ['Latino']);
+  assert.equal(sources.length, 2);
+  assert.deepEqual(sources.map((s) => s.label), ['Latino', 'Castellano']);
   assert.equal(sources[0].server, 'Dropload');
   assert.equal(sources[0].kind, 'embed');
 
@@ -119,7 +119,7 @@ test('playlatin: normaliza las fuentes, descarta lo no reproducible y limita el 
       { url: 'https://otro.example/e/2', name: 'otro.example', version: 'castellano' },
     ],
   });
-  assert.deepEqual(mixed.map((s) => s.url), ['https://cdn.example/master.m3u8']);
+  assert.deepEqual(mixed.map((s) => s.url), ['https://cdn.example/master.m3u8', 'https://otro.example/e/2']);
   assert.equal(mixed[0].kind, 'hls');
 
   // No hay fallback a versiones de idioma desconocido.
@@ -134,10 +134,9 @@ test('playlatin: película → página, resolve con el token y streams relevante
     [/\/api\/resolve$/, () => json(RESOLVE)],
   ]);
   const result = await streams.SEARCHERS.playlatin('El rey león 1994', resolvedMovie, resolvedMovie.title, 8000);
-  assert.equal(result.hits.length, 1);
+  assert.equal(result.hits.length, 2);
   assert.ok(result.hits.every((hit) => hit.provider === 'playlatin' && hit.url && hit.relevant));
-  assert.deepEqual(result.hits.map((hit) => hit.audioLabel), ['Latino']);
-  // Solo se publica la versión doblada al español latino.
+  assert.deepEqual(result.hits.map((hit) => hit.audioLabel), ['Latino', 'Castellano']);
   assert.match(result.hits[0].title, /El rey león .*Dropload/);
 
   // El token viaja al resolve en el cuerpo, no en la URL.
@@ -157,7 +156,7 @@ test('playlatin: episodio → ruta con temporada y episodio', async () => {
     [/\/api\/resolve$/, () => json(RESOLVE)],
   ]);
   const result = await streams.SEARCHERS.playlatin('Friends S01E02', resolvedEpisode, resolvedEpisode.title, 8000);
-  assert.equal(result.hits.length, 1);
+  assert.equal(result.hits.length, 2);
   assert.match(calls[0].href, /\/custom\/serial\/tt0108778\/1\/2$/);
   const body = JSON.parse(calls.find((c) => c.method === 'POST').body);
   assert.equal(body.season, '1');

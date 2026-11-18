@@ -1,0 +1,44 @@
+name: Candidatos en Workers
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/provider-candidates.yml'
+      - 'scripts/provider-candidates*'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Compilar el Worker real sin desplegar
+        run: npx wrangler deploy --dry-run --outdir "$RUNNER_TEMP/worker-bundle"
+      - name: Consultar candidatos en workerd local
+        run: |
+          npx wrangler dev --config scripts/provider-candidates.toml --port 8799 > "$RUNNER_TEMP/candidate-worker.log" 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --silent --fail --max-time 35 http://127.0.0.1:8799/ -o candidates.json; then break; fi
+            sleep 1
+          done
+          if ! test -s candidates.json; then cat "$RUNNER_TEMP/candidate-worker.log"; exit 1; fi
+          jq -e 'type == "array" and length == 11' candidates.json > /dev/null
+          jq -r '.[] | [.name, (.entry.status // "—"), .entry.state, (.detail.state // "—"), (.detail.frames // "—"), (.detail.playerScript // false), (.detail.directElements // "—"), (.detail.taggedSpanish // "—")] | @tsv' candidates.json | while IFS=$'\t' read -r name http entry detail frames player direct spanish; do
+            echo "::notice title=$name::HTTP $http; entrada $entry; ficha $detail; iframes $frames; señales JS $player; vídeo directo $direct; audio español etiquetado $spanish"
+            echo "| $name | $http | $entry | $detail | $frames | $player | $direct | $spanish |" >> "$RUNNER_TEMP/candidate-rows"
+          done
+          {
+            echo '| Proveedor | HTTP | Entrada | Ficha | Iframes | Señales JS | Vídeo directo | Audio español etiquetado |'
+            echo '|---|---|---|---|---|---|---|---|'
+            cat "$RUNNER_TEMP/candidate-rows"
+            echo 'Sonda de acceso y estructura; no verifica audio, reproducción ni la salida de red del Worker desplegado.'
+          } >> "$GITHUB_STEP_SUMMARY"

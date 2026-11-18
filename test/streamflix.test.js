@@ -96,6 +96,32 @@ test('sonda StreamFlix: no abre publicidad, descargas, redirecciones ni orígene
   assert.deepEqual(seen.map(({ url }) => url), [ENTRY, EMBED, allowed]);
 });
 
+test('sonda StreamFlix: solo permite una redirección pública entre visores conocidos', async () => {
+  const next = 'https://www.mp4upload.com/embed-sample.html';
+  const other = 'https://no-permitido.example/player';
+  const { fetcher, seen } = mockFetch({
+    [ENTRY]: options(['Latino', EMBED]),
+    [EMBED]: () => new Response(null, { status: 301, headers: { Location: next } }),
+    [next]: () => new Response(null, { status: 302, headers: { Location: other } }),
+  });
+  const report = await probe(MOVIE, fetcher);
+  assert.equal(report.accepted, false);
+  assert.match(report.attempts.join(), /HTTP 302/);
+  assert.deepEqual(seen.map(({ url }) => url), [ENTRY, EMBED, next]);
+});
+
+test('sonda StreamFlix: detecta un MP4 literal configurado en la propia ficha', async () => {
+  const page = 'https://www.lacartoons.com/serie/capitulo/98?t=1';
+  const mp4 = 'https://www.lacartoons.com/videos/demo.mp4';
+  const { fetcher, seen } = mockFetch({
+    [page]: `<script>videojs('d').src('${mp4}');</script>`,
+    [mp4]: MP4,
+  });
+  const report = await probe(['LaCartoons', 'Control', page, 'latino'], fetcher);
+  assert.equal(report.accepted, true);
+  assert.deepEqual(seen.map(({ url }) => url), [page, mp4]);
+});
+
 test('sonda StreamFlix: un challenge no es una página de catálogo ni inicia otros fetch', async () => {
   const { fetcher, seen } = mockFetch({
     [ENTRY]: () => new Response(options(['Latino', EMBED]), { status: 403, headers: { 'cf-mitigated': 'challenge' } }),

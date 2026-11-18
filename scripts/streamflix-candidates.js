@@ -1,8 +1,8 @@
 'use strict';
 
-// Solo diagnóstico en Node. Las URLs salen de controles fijos y de datos
-// publicados en sus visores. No se ejecutan scripts ni se abren descargas,
-// challenges, redirecciones o servicios ajenos a la lista de orígenes.
+// Solo diagnóstico en Node. Se leen controles fijos y datos públicos de
+// visores permitidos. No se ejecutan scripts ni se abren descargas, challenges
+// o redirecciones de medios; un visor puede navegar una vez a otro permitido.
 const { appendFileSync } = require('node:fs');
 const { load } = require('cheerio');
 const { allowedVideoUrl, extractFromEmbedHtml, unpackPacked } = require('../lib/vimeos');
@@ -78,27 +78,28 @@ function audioOf(label) {
 
 const challengePage = (html) => /<title>\s*(?:just a moment|attention required)|cf-browser-verification/i.test(html);
 
-function mediaSources($, base, player = false) {
+function mediaSources($, base, context) {
   const media = $('video[src], video[data-src], video source[src], video source[data-src]').toArray()
-    .map((el) => $(el).attr('src') || $(el).attr('data-src'));
-  // Solo literales en la configuración del player. Un anuncio, un iframe y
-  // una página con extensión .mp4 no cuentan como medio comprobado.
-  if (player) {
+    .flatMap((el) => [$(el).attr('data-src'), $(el).attr('src')]);
+  // Solo literales. En una ficha (no el embed), exigir que el script configure
+  // un reproductor para no confundir enlaces del catálogo o recomendaciones.
+  if (context) {
     $('script:not([src])').each((_i, el) => {
       const text = $(el).html() || '';
       if (text.length > 256 * 1024) return;
       const config = unpackPacked(text) || text;
-      const sources = config.matchAll(/\b(?:file|src|hls\d*|mp4|contentUrl)["']?\s*:\s*["']([^"'\r\n]{1,8192})["']/gi);
+      if (context === 'ficha' && !/\b(?:jwplayer|videojs)\s*\(|\.(?:setup|src)\s*\(/i.test(config)) return;
+      const sources = config.matchAll(/(?:\b(?:file|src|hls\d*|mp4|contentUrl)["']?\s*:|\.src\s*\()\s*["']([^"'\r\n]{1,8192})["']/gi);
       for (const match of sources) media.push(match[1].replace(/\\\//g, '/').replace(/\\u0026/gi, '&'));
     });
-    if (allowedVideoUrl(base.href)) media.push(...extractFromEmbedHtml($.html()).hls);
+    if (context === 'visor' && allowedVideoUrl(base.href)) media.push(...extractFromEmbedHtml($.html()).hls);
   }
   return [...new Map(media.map((raw) => mediaUrl(raw, base)).filter(Boolean).map((url) => [url.href, url])).values()].slice(0, 6);
 }
 
 function requestBudget(fetcher, deadline = Date.now() + 12_000) {
   let count = 0;
-  const stop = (state) => { throw Object.assign(new Error(state), { state }); };
+  const stop = (state, location) => { throw Object.assign(new Error(state), { state, location }); };
   const read = async (url, bytes, range = false) => {
     const remaining = deadline - Date.now();
     if (count >= LIMIT) stop('límite de peticiones');
@@ -116,7 +117,8 @@ function requestBudget(fetcher, deadline = Date.now() + 12_000) {
     }
     if (!response.ok || !response.body) {
       await response.body?.cancel().catch(() => {});
-      stop(`HTTP ${status}`);
+      const location = [301, 302, 303, 307, 308].includes(status) ? httpsUrl(response.headers.get('location'), url) : null;
+      stop(`HTTP ${status}${location ? ` → ${location.hostname}` : ''}`, location);
     }
     if (!range && Number(response.headers.get('content-length')) > bytes) {
       await response.body.cancel().catch(() => {});
@@ -203,19 +205,30 @@ async function sampleMedia(url, player, http) {
 }
 
 function iframeUrls($, base) {
-  return $('iframe[src], iframe[data-src]').toArray().map((el) => httpsUrl($(el).attr('data-src') || $(el).attr('src'), base)).filter(Boolean);
+  return $('iframe[src], iframe[data-src]').toArray()
+    .map((el) => httpsUrl($(el).attr('data-src'), base) || httpsUrl($(el).attr('src'), base)).filter(Boolean);
 }
 
 async function inspectOption(option, page, http) {
   let url = option.url;
+  let redirected = false;
   try {
     for (let depth = 0; depth < 2; depth++) {
       if (mediaUrl(url.href)) return sampleMedia(url, depth === 0 ? page : option.url, http);
       if (!knownPlayer(url)) return rejected(`visor en ${url.hostname} (sin sondear)`);
-      const html = await http.text(url, 1024 * 1024);
+      let html;
+      try { html = await http.text(url, 1024 * 1024); } catch (err) {
+        const next = err.location;
+        // Solo una navegación pública de visor entre orígenes conocidos.
+        // No se sigue Location de medios, ni se modifica ninguna cabecera.
+        if (redirected || !knownPlayer(next) || next.href === url.href || mediaUrl(next.href)) throw err;
+        redirected = true;
+        url = next;
+        html = await http.text(url, 1024 * 1024);
+      }
       if (challengePage(html)) return rejected('challenge del visor');
       const $ = load(html);
-      const sources = mediaSources($, url, true);
+      const sources = mediaSources($, url, 'visor');
       if (sources.length) {
         const results = [];
         for (const source of sources.slice(0, 2)) {
@@ -234,14 +247,18 @@ async function inspectOption(option, page, http) {
 }
 
 function sortOptions(options) {
-  const list = [...options].sort((a, b) => Number(Boolean(b.audio)) - Number(Boolean(a.audio)));
-  const unique = [...new Map(list.reverse().map((item) => [item.url.href, item])).values()].reverse();
-  const hosts = new Set();
-  return [...unique.filter((item) => {
-    if (hosts.has(item.url.hostname)) return false;
-    hosts.add(item.url.hostname);
-    return true;
-  }), ...unique].filter((item, index, all) => all.indexOf(item) === index);
+  const sorted = [...options].sort((a, b) => Number(Boolean(b.audio)) - Number(Boolean(a.audio)));
+  const urls = new Set();
+  const first = new Map();
+  const rest = [];
+  for (const option of sorted) {
+    if (urls.has(option.url.href)) continue;
+    urls.add(option.url.href);
+    const host = option.url.hostname;
+    if (first.has(host)) rest.push(option);
+    else first.set(host, option);
+  }
+  return [...first.values(), ...rest];
 }
 
 async function probe([provider, title, pageUrl, audio], fetcher = fetch) {
@@ -257,11 +274,11 @@ async function probe([provider, title, pageUrl, audio], fetcher = fetch) {
     const opts = config ? $(config[0]).toArray().slice(0, 16).flatMap((el) => {
       const item = $(el);
       const attr = config[1];
-      const url = optionUrl(item.attr(attr) || (attr === 'src' ? item.attr('data-src') : ''), page, attr);
+      const url = (attr === 'src' && httpsUrl(item.attr('data-src'), page)) || optionUrl(item.attr(attr), page, attr);
       const label = item.closest('.drpdn').find('button.bstd').text() || item.text();
       return !url || /tr[aá]iler|subtit|\bvose\b/i.test(label) ? [] : [{ url, audio: audio || audioOf(label) }];
     }) : [];
-    const options = [...opts, ...mediaSources($, page).map((url) => ({ url, audio }))];
+    const options = [...opts, ...mediaSources($, page, config && 'ficha').map((url) => ({ url, audio }))];
     report.options = [...new Set(options.map(({ url }) => `${url.hostname}${mediaUrl(url.href) ? ' (medio)' : ' (visor)'}`))];
     const inspectable = options.filter(({ url }) => knownPlayer(url) || mediaUrl(url.href));
     for (const option of sortOptions(inspectable).slice(0, 6)) {
@@ -281,8 +298,10 @@ async function main() {
   const summary = `${rows.filter(({ accepted }) => accepted).length}/${rows.length} controles con una muestra directa y audio identificado`;
   const log = (label, line) => console.log(process.env.GITHUB_ACTIONS ? `::notice title=${label}::${line}` : `${label}: ${line}`);
   log('Segunda prueba StreamFlix', summary);
-  for (const { provider, title, state, options, attempts, accepted } of rows) {
-    log(`${provider} / ${title.replace(/:/g, '%3A')}`, `${state}; ${options.join(', ') || 'sin opción visible'}; ${attempts.join('; ') || 'sin intento de medio'}; muestra=${accepted ? 'sí' : 'no'}`);
+  for (const provider of new Set(rows.map((row) => row.provider))) {
+    const details = rows.filter((row) => row.provider === provider).map(({ title, state, options, attempts, accepted }) =>
+      `${title}: ${state}; ${options.join(', ') || 'sin opción visible'}; ${attempts.join('; ') || 'sin intento de medio'}; muestra=${accepted ? 'sí' : 'no'}`);
+    log(provider, details.join(' | ')); // Una anotación por fuente evita el truncado de Actions.
   }
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
     '### Segunda prueba de enlaces directos (Node)', '', summary, '', '| Fuente | Control | Entrada | Opciones | Comprobación |', '|---|---|---|---|---|',

@@ -78,7 +78,7 @@ function playerShape($, page) {
   const markers = ['jwplayer', 'videojs', 'Playerjs', 'Clappr', 'sources', 'm3u8', 'mp4', 'm3u8Url', 'data-src']
     .filter((key) => new RegExp(`\\b${key}\\b`, 'i').test(markup));
   const bits = (list) => [...new Set(list)].slice(0, 8).join(', ') || '—';
-  const jw = /\bjwplayer\s*\(/i.test(markup) && /[\w'"]sources["']?\s*:\s*\[/.test(markup);
+  const jw = /\bjwplayer\s*\(/i.test(markup) && /\bsources["']?\s*:\s*\[/.test(markup);
   return `video=${bits(videos)}; iframes=${bits(frames)}; literales=${bits(signals)}; señales=${bits(markers)}${jw ? '; JW sources[]' : ''}`;
 }
 
@@ -122,7 +122,8 @@ async function checkAdapter(key, fixture) {
   const hits = await runProviders([key], fixture.title, fixture, fixture.title, report, undefined, { ignorePause: true });
   const entry = report[key];
   const formats = [...new Set(hits.map((hit) => `${hit.quality || 'directo'}/${hit.audioLabel}${hit.verification ? `/${hit.verification}` : ''}`))];
-  const playback = key === 'playlatin' && hits.length ? `; ${await probeDrop(hits[0])}` : '';
+  const samples = key === 'playlatin' ? await Promise.all(hits.slice(0, 2).map(async (hit) => `${hit.audioLabel}: ${await probeDrop(hit)}`)) : [];
+  const playback = samples.length ? `; ${samples.join('; ')}` : '';
   const state = entry.reason || entry.skipped || (hits.length ? 'medio aceptado' : 'sin medio');
   return { note: `${state}; aceptados=${entry.accepted ?? 0}; ${formats.join(', ') || '—'}${playback}`, entry };
 }
@@ -147,8 +148,9 @@ async function probeLatin() {
 async function probeFuego() {
   for (const fixture of fuegoCases) {
     const label = `FuegoCine / ${fixture.title}`;
+    let note;
     try {
-      const { note } = await checkAdapter('fuegocine', fixture);
+      ({ note } = await checkAdapter('fuegocine', fixture));
       const { player: $, watch, reason, skipped, catalog } = await findFuegoPlayer(fixture, fixture.title, providerHttp(8000));
       if (!$) { annotate(label, `${note}; localizador: ${reason || skipped}`); continue; }
       const frames = $('iframe[src],iframe[data-src]').toArray();
@@ -156,7 +158,7 @@ async function probeFuego() {
         .filter((classes) => classes && /^[\w -]{1,100}$/.test(classes)).join(' > ')).filter(Boolean);
       annotate(label, `${note}; catálogo=${catalog}; ${playerShape($, watch)}; contenedores=${[...new Set(containers)].join(' | ') || '—'}`);
       await Promise.all(frames.slice(0, 8).map((node) => inspectOnce($(node).attr('data-src') || $(node).attr('src'), watch, 'FuegoCine')));
-    } catch (error) { annotate(label, reportError(error)); }
+    } catch (error) { annotate(label, note ? `${note}; localizador: ${reportError(error)}` : reportError(error)); }
   }
 }
 

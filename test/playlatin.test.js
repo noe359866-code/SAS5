@@ -321,3 +321,22 @@ test('playlatin: un challenge, HTML o un CDN ajeno no se convierte en stream', a
     assert.equal(calls.length, callCount);
   }
 });
+
+test('playlatin: admite los CDN r y ds publicados y conserva la versión de cada fichero', async () => {
+  const dsMaster = 'https://ds2.dropcdn.io/video/master.m3u8?token=otro';
+  const other = 'https://dr0pstream.com/e/otra';
+  const calls = mockFetch([
+    [/\/custom\/movie\//, () => new Response(SHELL)],
+    [/\/api\/resolve$/, () => json({ ...RESOLVE, sources: [
+      { ...dropSource, version: 'latino' },
+      { ...dropSource, version: 'castellano', url: other },
+      { ...dropSource, version: 'subtitulado', url: 'https://dr0pstream.com/e/sub' },
+    ] })],
+    [/^https:\/\/dr0pstream\.com\/e\/fixture$/, () => new Response(dropHTML(DROPMASTER))],
+    [/^https:\/\/dr0pstream\.com\/e\/otra$/, () => new Response(dropHTML(dsMaster))],
+    [/^https:\/\/(?:r1|ds2)\.dropcdn\.io\//, () => new Response(masterHLS)],
+  ]);
+  const result = await playlatin.searchPlayLatin('', resolvedMovie);
+  assert.deepEqual(result.hits.map(({ url, audioLabel }) => [url, audioLabel]), [[DROPMASTER, 'Latino'], [dsMaster, 'Castellano']]);
+  assert.equal(calls.length, 6);
+});

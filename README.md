@@ -10,9 +10,9 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 |---|---|---|
 | `fanpelis` | `fanpelis.to` | API de títulos y episodios; HLS de Vimeos. |
 | `flixlatam` | `flixlatam.com` | Búsqueda por tipo/año, enlace o panel del episodio exacto; medios directos, Vimeos y Uqload compatibles. |
-| `playlatin` | `playlatinsrc.co` | IMDb y numeración del episodio; solo medios directos del resolver de su reproductor. |
+| `playlatin` | `playlatinsrc.co` | IMDb y episodio exacto; medios directos del resolver o HLS público de Dropload con manifiesto válido. |
 | `spinflix` | `lamoviebot.tvymas.workers.dev` | API de SpinFlix/LaMovie, detalle por ID o título y año, HLS de Vimeos. |
-| `fuegocine` | `fuegocine.com` | Portada y listado; ficha y visor de película o ruta de temporada y episodio de serie. |
+| `fuegocine` | `fuegocine.com` | Sitemap, portada y listado; ficha y visor de película o ruta del episodio exacto. No devuelve iframes sin medio compatible. |
 | `animeonlineninja` | `ww4.animeonline.ninja` | Fichas de anime y enlace con numeración explícita. |
 | `cuevana3` | `cuevanas3.pro` | Buscador y fichas con rutas canónicas. |
 | `cinecalidad` | `www.cinecalidad.am` | Tarjetas con título/año y opciones Vimeos agrupadas por audio. |
@@ -75,4 +75,8 @@ node scripts/providers-live.js series             # Breaking Bad y Naruto
 node scripts/providers-live.js extra              # Mufasa, El rey león y FuegoCine
 ```
 
-El informe separa enlaces extraídos y aceptados por fuente, códigos HTTP y, en los CDN conocidos, el manifiesto HLS y el acceso HTTP a un segmento. No guarda URLs firmadas ni comprueba el audio o la reproducción en Stremio. El runner de GitHub puede recibir otra respuesta que un Worker desplegado o un reproductor doméstico. RamdonLatam no aloja archivos de video; solo presenta metadatos y enlaces externos.
+El informe general separa los enlaces extraídos de los aceptados y, en los CDN conocidos, comprueba el manifiesto HLS y el acceso HTTP a un segmento.
+
+Para comprobar **solo PlayLatinSRC y FuegoCine**, usa el workflow `playlatin-fuegocine.yml` o ejecuta `node scripts/provider-pair-live.js`. Este workflow ejecuta regresiones y una sonda informativa por proveedor; un check verde no significa que las webs tengan contenido reproducible en todos los controles. En PlayLatinSRC se prueba el HLS y una solicitud Range a un segmento del CDN conocido. En FuegoCine se distingue una ficha localizada mediante el sitemap de un visor con medio directo.
+
+Los informes no guardan URLs firmadas ni comprueban el audio o la reproducción en Stremio. El runner de GitHub puede recibir otra respuesta que un Worker desplegado o un reproductor doméstico. RamdonLatam no aloja archivos de video; solo presenta metadatos y enlaces externos.

@@ -83,3 +83,25 @@ test('FuegoCine no publica un iframe con nombre de archivo ni medios fuera del v
   });
   assert.deepEqual(await SEARCHERS.fuegocine('', { title: 'Demo', year: '2026', mediaType: 'movie' }), { hits: [], reason: 'embeds-only' });
 });
+
+test('FuegoCine aprovecha el vínculo exacto al episodio de la ficha sin descargar la lista de temporada', async (t) => {
+  const pages = new Map([
+    ['/sitemap-show.xml', '<urlset><url><loc>https://fuegocine.com/shows/details/prueba/7</loc></url></urlset>'],
+    ['/shows/details/prueba/7', `<h1>Prueba</h1><a href="/shows/prueba/01x01-primero/12">Prueba</a>
+      <a href="/shows/prueba/seasons/temporada-1/4">Temporada 1</a>`],
+    ['/shows/prueba/01x01-primero/12', '<video data-language="Latino" src="https://cdn.example/primer-episodio.mp4"></video>'],
+  ]);
+  const cache = require('../lib/cache');
+  t.after(() => cache.deletePrefix('fuegocine:sitemap:'));
+  t.mock.method(global, 'fetch', async (raw) => {
+    const url = new URL(raw);
+    assert.equal(url.origin, 'https://fuegocine.com');
+    assert.ok(pages.has(url.pathname), url.pathname);
+    const html = pages.get(url.pathname);
+    pages.delete(url.pathname);
+    return new Response(html);
+  });
+  const hits = await SEARCHERS.fuegocine('', { title: 'Prueba', year: '2026', mediaType: 'series', season: 1, episode: 1 });
+  assert.deepEqual(hits.map((hit) => hit.url), ['https://cdn.example/primer-episodio.mp4']);
+  assert.equal(pages.size, 0);
+});

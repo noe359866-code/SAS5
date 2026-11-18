@@ -7,6 +7,8 @@ const { runProviders } = require('../lib/streams');
 const { findFuegoPlayer } = require('../lib/fuegocine');
 const { providerHttp } = require('../lib/providerHttp');
 const { annotate } = require('./providers-live');
+const { allowedVideoUrl } = require('../lib/vimeos');
+const { parseManifest } = require('../lib/hlsManifest');
 
 const movies = [
   ['Toy Story 5', '2026'], ['Ratatouille', '2007'], ['Te Van a Matar', '2026'],
@@ -65,6 +67,45 @@ function playerShape($, page) {
   return `vídeo=${hosts(video)}; iframes=${hosts(frames)}; literales=${hosts(literals)}; señales=${hosts(signals)}; JSON=${$('script[type="application/json"]').length}; srcdoc=${$('iframe[srcdoc]').length}`;
 }
 
+// Distingue una fuente del título de constantes genéricas sobre formatos.
+// Solo anuncia nombres de campos, dialectos conocidos y validez del HLS.
+async function inspectUnlimMedia($, page) {
+  const urls = new Map();
+  for (const node of $('script:not([src])').toArray()) {
+    const script = $(node).text().replace(/\\\//g, '/');
+    const literals = script.matchAll(/["'](https:\/\/[^'"<>\s\\]{1,2048})["']/gi);
+    for (const match of literals) {
+      const url = secureUrl(match[1]);
+      if (!url || !/\.m3u8$/i.test(url.pathname) || !(url.hostname === 'vimeos.unlimplay.com' || allowedVideoUrl(url.href))) continue;
+      const before = script.slice(0, match.index);
+      const variable = [...before.matchAll(/(?:\b(?:const|let|var)\s+|\bwindow\.)([a-zA-Z_$][\w$]{0,35})\s*=\s*(?=[\[{"'])/g)].pop()?.[1] || '—';
+      const key = /["']?([A-Za-z_$][\w$]{0,35})["']?\s*:\s*$/.exec(before.slice(-80))?.[1] || '—';
+      const start = before.lastIndexOf('{');
+      const end = script.indexOf('}', match.index + match[0].length);
+      let fields = '—';
+      let language = '—';
+      if (start >= 0 && end >= start && end - start < 4096) {
+        try {
+          const obj = JSON.parse(script.slice(start, end + 1));
+          fields = Object.keys(obj).filter((field) => /^[a-z_]{1,24}$/i.test(field)).join(',');
+          const declared = String(obj.lang || obj.language || obj.audio || '').toLowerCase();
+          if (/^(?:latino|castellano|subtitulado|es|es-419|spa|lat|la|mx|cast)$/.test(declared)) language = declared;
+        } catch { /* no es un objeto JSON literal */ }
+      }
+      if (!urls.has(url.href)) urls.set(url.href, { url, info: `${shape(url)} en ${variable}.${key}; campos=${fields}; idioma=${language}; query=${url.search ? 'sí' : 'no'}` });
+      if (urls.size >= 4) break;
+    }
+    if (urls.size >= 4) break;
+  }
+  const http = providerHttp(4000);
+  return Promise.all([...urls.values()].slice(0, 2).map(async ({ url, info }) => {
+    try {
+      const manifest = parseManifest(await http.text(url.href, { headers: { Referer: `${new URL(page).origin}/` }, timeoutMs: 2500, maxBytes: 256 * 1024 }));
+      return `${info}; ${manifest ? 'manifiesto válido' : 'sin manifiesto válido'}`;
+    } catch (error) { return `${info}; ${problem(error)}`; }
+  }));
+}
+
 async function boundedText(response) {
   const reader = response.body?.getReader();
   if (!reader) return '';
@@ -106,7 +147,14 @@ async function inspect(raw, page) {
       await response.body?.cancel().catch(() => {});
       return `${hostname}: ${route}${response.headers.get('cf-mitigated') === 'challenge' ? 'challenge' : `HTTP ${response.status}`}`;
     }
-    return `${hostname}: ${route}${playerShape(load(await boundedText(response)), url.href)}`;
+    const type = response.headers.get('content-type') || '';
+    if (/^(?:video|audio)\//i.test(type)) {
+      await response.body?.cancel().catch(() => {});
+      return `${hostname}: ${route}tipo multimedia (sin descargar)`;
+    }
+    const $ = load(await boundedText(response));
+    const media = hostname === 'unlimplay.com' ? await inspectUnlimMedia($, url.href) : [];
+    return `${hostname}: ${route}${playerShape($, url.href)}${media.length ? `; ${media.join(' | ')}` : ''}`;
   } catch (e) { return `${hostname}: ${route}${problem(e)}`; }
 }
 

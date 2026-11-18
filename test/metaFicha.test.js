@@ -74,7 +74,10 @@ test('la ficha de una serie usa la creación (no la dirección) y publica la fec
   assert.deepEqual(meta.productionCompanies, ['Estudio Uno', 'Estudio Dos']);
   assert.match(meta.description, /🌐 Idioma original: Inglés/);
   assert.match(meta.description, /📍 España, Estados Unidos/);
-  assert.match(meta.description, /⏱ 52 min/);
+  // La duración va en el campo `runtime` (Stremio ya la pinta al lado del
+  // año): repetirla en la descripción sería ruido.
+  assert.equal(meta.runtime, '52 min');
+  assert.doesNotMatch(meta.description, /52 min/);
   assert.match(meta.description, /Título original: Test Show/);
   assert.match(meta.description, /📅 Próximo episodio: T3E4 · 2026-12-01 · «El regreso»/);
 });

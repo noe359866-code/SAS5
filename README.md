@@ -28,7 +28,7 @@ Habilitada no significa **disponible**: una fuente puede responder con error, no
 
 Las fichas de `/meta` se construyen con TMDB (y OMDB si hay clave) y muestran lo que TMDB ya devuelve, sin peticiones extra por título:
 
-- **Ficha técnica** en la descripción: idioma original, país de producción y duración (`2 h 16 min`), más presupuesto y recaudación en películas.
+- **Ficha técnica** en la descripción: idioma original y país de producción, más presupuesto y recaudación en películas. La duración va en el campo `runtime`, que Stremio ya pinta junto al año.
 - **Autoría correcta**: en películas, dirección; en series, creadores (`created_by`). Antes una serie salía sin autoría porque TMDB no marca `job: Director` en sus créditos agregados.
 - **Título original** cuando la ficha lo traduce, y **próximo episodio** en las series en emisión.
 - **Fecha completa de estreno** en `released`, para que Stremio pueda ordenar por fecha.

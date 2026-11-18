@@ -21,3 +21,5 @@ jobs:
       - run: node --test test/workerStreamsLive.test.js
       - name: Manifest, stream y comprobación HLS desde producción
         run: node scripts/worker-streams-live.js
+      - name: Primer segmento de la ruta existente de SpinFlix
+        run: node scripts/worker-streams-live.js --spinflix

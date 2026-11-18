@@ -87,5 +87,99 @@ async function main() {
   if (!declaresStream || !manifestCors || rows.some((row) => row.count === null || !row.cors)) process.exitCode = 1;
 }
 
-if (require.main === module) main().catch(() => { console.error('No se pudo completar la sonda del Worker publicado'); process.exitCode = 1; });
+// Verificación de la ruta de reproducción del proveedor que ya usaba el
+// addon: comparar el mismo segmento desde el CDN y desde el proxy de SpinFlix.
+const SPINFLIX_PROXY = 'https://spinoff.link/pelis/proxy.php';
+const playbackControls = [
+  ['Mufasa: El rey león', 'movie', 'tt13186482'],
+  ['Breaking Bad T1E2', 'series', 'tt0903747:1:2'],
+];
+
+function cdnUrl(raw, parent, ext) {
+  if (!raw || raw.length > 4096) return null;
+  try {
+    let url = new URL(raw, parent);
+    if (`${url.origin}${url.pathname}` === SPINFLIX_PROXY && url.searchParams.has('url')) url = new URL(url.searchParams.get('url'));
+    return url.protocol === 'https:' && !url.username && !url.password && !url.port && !url.hash
+      && hostAllowed(url.hostname, allowedHosts()) && ext.test(url.pathname) ? url : null;
+  } catch { return null; }
+}
+
+function spinflixProxy(url) {
+  const proxy = new URL(SPINFLIX_PROXY);
+  proxy.searchParams.set('url', url.href);
+  proxy.searchParams.set('ref', `${url.origin}/`);
+  return proxy.href;
+}
+
+async function segmentStatus(url, referer) {
+  try {
+    const res = await fetch(url, {
+      redirect: 'manual', signal: AbortSignal.timeout(4500),
+      headers: { Origin: WEB, Referer: referer, Range: 'bytes=0-4095' },
+    });
+    if (!res.ok || !res.body) {
+      await res.body?.cancel().catch(() => {});
+      return `HTTP ${res.status}`;
+    }
+    const reader = res.body.getReader();
+    const head = Buffer.alloc(384);
+    let count = 0;
+    try {
+      while (count < head.length) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        const chunk = value.subarray(0, head.length - count);
+        head.set(chunk, count);
+        count += chunk.length;
+      }
+    } finally { await reader.cancel().catch(() => {}); }
+    const ts = count > 376 && [0, 188, 376].every((offset) => head[offset] === 0x47);
+    const mp4 = count > 8 && /^(?:ftyp|styp|moof)$/.test(head.toString('ascii', 4, 8));
+    return `HTTP ${res.status} ${ts ? 'MPEG-TS' : mp4 ? 'MP4' : 'sin cabecera de vídeo/sonido'} (CORS ${res.headers.get('access-control-allow-origin') === '*' ? 'sí' : 'no *'})`;
+  } catch { return 'sin respuesta comprobable'; }
+}
+
+async function compareSpinFlix() {
+  const manifestExt = /\.m3u8$/i;
+  const playlist = (url) => read(fetch, spinflixProxy(url), 'application/vnd.apple.mpegurl');
+  const firstSegment = async (variant) => {
+    if (!variant) return 'playlist ausente';
+    const response = await playlist(variant);
+    if (!response.ok) return `playlist HTTP ${response.status}`;
+    const segment = cdnUrl(parseManifest(response.body)?.segment, variant, /\.(?:ts|mp4|m4s)$/i);
+    if (!segment) return 'playlist sin segmento';
+    const [direct, proxy] = await Promise.all([
+      segmentStatus(segment.href, 'https://vimeos.net/'), segmentStatus(spinflixProxy(segment), 'https://spinoff.link/pelis/'),
+    ]);
+    return `directo=${direct}; SpinFlix=${proxy}`;
+  };
+  for (const [title, type, id] of playbackControls) {
+    const result = await read(fetch, `${BASE}/stream/${type}/${encodeURIComponent(id)}.json`, 'application/json');
+    const candidates = (result.ok ? JSON.parse(result.body).streams : []).filter((stream) => /Fanpelis|SpinFlix/.test(stream.title)).slice(0, 2);
+    const notes = await Promise.all(candidates.map(async (stream) => {
+      const source = stream.title.includes('SpinFlix') ? 'SpinFlix' : 'Fanpelis';
+      const url = cdnUrl(stream.url, BASE, manifestExt);
+      if (!url) return `${source}: sin HLS de Vimeos`;
+      try {
+        const response = await playlist(url);
+        if (!response.ok) return `${source}: master HTTP ${response.status}`;
+        const master = parseManifest(response.body);
+        if (!master) return `${source}: master inválido`;
+        const variant = cdnUrl(master.variants[0]?.uri, url, manifestExt) || (master.segment && url);
+        const audioUri = response.body.split(/\r?\n/).find((line) => line.startsWith('#EXT-X-MEDIA:TYPE=AUDIO,')
+          && /,LANGUAGE="es(?:-[a-z]+)?"/i.test(line))?.match(/,URI="([^"]+)"/)?.[1];
+        const audio = cdnUrl(audioUri, url, manifestExt);
+        const [video, spanish] = await Promise.all([firstSegment(variant), audio ? firstSegment(audio) : null]);
+        return `${source}: master HTTP ${response.status}, vídeo ${video}${spanish ? `, audio es ${spanish}` : ''}`;
+      } catch { return `${source}: sin respuesta comprobable`; }
+    }));
+    for (const note of notes.length ? notes : ['sin candidatos']) console.log(`::notice title=Ruta SpinFlix / ${title.replace(':', '%3A')}::${note}`);
+  }
+}
+
+if (require.main === module) (process.argv.includes('--spinflix') ? compareSpinFlix() : main()).catch(() => {
+  console.error('No se pudo completar la comprobación de reproducción');
+  process.exitCode = 1;
+});
 module.exports = { audit };

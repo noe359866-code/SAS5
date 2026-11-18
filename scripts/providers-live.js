@@ -19,6 +19,8 @@ const fixtures = {
   extra: [
     { title: 'Mufasa: El rey león', altTitle: 'Mufasa: The Lion King', year: '2024', mediaType: 'movie',
       imdbId: 'tt13186482', keys: ['fanpelis', 'spinflix'] },
+    { title: 'Godzilla Minus Zero', altTitle: 'Godzilla -0.0', year: '2026', mediaType: 'movie',
+      keys: ['fanpelis', 'spinflix', 'gnulahd'] },
   ],
 };
 

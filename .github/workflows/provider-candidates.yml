@@ -31,7 +31,7 @@ jobs:
             sleep 1
           done
           if ! test -s candidates.json; then cat "$RUNNER_TEMP/candidate-worker.log"; exit 1; fi
-          jq -e 'type == "array" and length == 7' candidates.json > /dev/null
+          jq -e 'type == "array" and length == 9' candidates.json > /dev/null
           jq -r '.[] | [.name, (.entry.status // "—"), .entry.state, (.detail.state // "—"), (.detail.frames // "—"), (.detail.playerScript // false)] | @tsv' candidates.json | while IFS=$'\t' read -r name http entry detail frames player; do
             echo "::notice title=$name::HTTP $http; entrada $entry; ficha $detail; iframes $frames; señales JS $player"
             echo "| $name | $http | $entry | $detail | $frames | $player |" >> "$RUNNER_TEMP/candidate-rows"

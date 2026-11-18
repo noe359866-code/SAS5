@@ -2,6 +2,8 @@
 import { load } from 'cheerio';
 
 const candidates = [
+  ['AnimeOnlineNinja', 'https://ver2.animeonline.ninja/', /\/(?:episodio|anime|ver)\//],
+  ['AnimeBum', 'https://animebum.org/', /\/(?:episodio|anime|ver)\//],
   ['Cuevana 3', 'https://cuevana.gs/', /\/(?:pelicula|peliculas|serie|series)\//],
   ['PoseidonHD2', 'https://www.poseidonhd2.co/', /\/(?:movies|pelicula|series|serie)\//],
   ['CineCalidad', 'https://www.cinecalidad.am/page/1?s=Matrix', /\/ver-(?:pelicula|serie)\//],

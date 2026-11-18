@@ -25,6 +25,12 @@ Para Fanpelis y SpinFlix, el Worker intenta la ruta de reproducción que ya ofre
 - El [job `published-playback` de la reparación ya desplegada](https://github.com/noe359866-code/SAS5/actions/runs/44299014931/job/134783491000) obtuvo los primeros segmentos de vídeo de ambos controles y de la pista `es` separada de *Breaking Bad*, siguiendo las URLs entregadas por el Worker publicado. No comprobó la reproducción completa en Stremio ni la cobertura de anime.
 - Tras cada publicación que activa ese workflow, `published-playback` repite la comprobación. Con Node 22, también se puede ejecutar `node scripts/worker-streams-live.js --playback`. A diferencia de la sonda de listados, falla si cualquiera de los dos controles no entrega medio por la ruta del Worker.
 
+## Pruebas en vivo de las mejoras a Fanpelis y SpinFlix
+
+La [primera sonda de la rama](https://github.com/noe359866-code/SAS5/actions/runs/44306005061/job/134807633342) encontró candidatos para ambos controles, pero no pudo seguir un HLS por el Worker. La [sonda posterior en `workerd`](https://github.com/noe359866-code/SAS5/actions/runs/44306561539/job/134809530865), con los scrapers mejorados, siguió la URL de `/stream`: **Fanpelis y SpinFlix entregaron el primer segmento de vídeo de *Mufasa* y *Breaking Bad* T1E2**, y ambos entregaron un segmento de la pista `es` separada del episodio. En la misma revisión, [la sonda directa al CDN](https://github.com/noe359866-code/SAS5/actions/runs/44306561449/job/134809731209) recibió 403. Son resultados del runner, no un nuevo despliegue ni una prueba de reproducción completa en Stremio.
+
+Cuando una ruta no se valida, el diagnóstico distingue `mediaChecks` (resultado del HLS directo) de `transportChecks` (por ejemplo, `proxy-timeout` o `proxy-http-502`). Solo publica estados y recuentos, no las URLs ni sus firmas.
+
 ## Cómo volver a probarlo
 
 - `/stream/movie/tt0133093.json` y `/stream/series/tt0903747:1:1.json` comprueban el listado. Prueba la misma ruta con el prefijo de configuración de tu instalación si tiene uno; la configuración por defecto y la selección guardada pueden usar fuentes distintas.

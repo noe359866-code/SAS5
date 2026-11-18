@@ -2,6 +2,8 @@
 import { load } from 'cheerio';
 
 const candidates = [
+  ['FuegoCine · película', 'https://fuegocine.com/', /^\/movies\/details\/[^/]+\/\d+\/?$/],
+  ['FuegoCine · serie', 'https://fuegocine.com/', /^\/shows\/details\/[^/]+\/\d+\/?$/],
   ['AnimeOnlineNinja', 'https://ver2.animeonline.ninja/', /\/(?:episodio|anime|ver)\//],
   ['AnimeBum', 'https://animebum.org/', /\/(?:episodio|anime|ver)\//],
   ['Cuevana 3', 'https://cuevana.gs/', /\/(?:pelicula|peliculas|serie|series)\//],
@@ -49,7 +51,12 @@ async function probe([name, url, path]) {
     if (!page) return { name, entry, detail: result };
     const frames = page('iframe[src]').toArray().filter((el) => /player|embed|video|\.mp4|\.m3u8/i.test(page(el).attr('src'))).length;
     const markup = page('script:not([src])').toArray().map((el) => page(el).html() || '').join('\n');
-    return { name, entry, detail: { ...result, frames, playerScript: /\b(?:dataLink|videos|sources|servers)\s*[:=]/i.test(markup) } };
+    const directElements = page('video[src],video source[src]').toArray().filter((el) => /\.(?:m3u8|mp4)(?:$|[?#])/i.test(page(el).attr('src')));
+    const taggedSpanish = directElements.filter((el) => {
+      const label = page(el).closest('[data-language],[data-lang]');
+      return /^(?:latino|castellano|español(?: latino| de españa)?)$/i.test((label.attr('data-language') || label.attr('data-lang') || '').trim());
+    }).length;
+    return { name, entry, detail: { ...result, frames, directElements: directElements.length, taggedSpanish, playerScript: /\b(?:dataLink|videos|sources|servers)\s*[:=]/i.test(markup) } };
   } catch (error) {
     return { name, entry: { state: error?.name === 'TimeoutError' || error?.name === 'AbortError' ? 'timeout' : 'fetch-error' } };
   }

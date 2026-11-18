@@ -11,8 +11,8 @@ const { allowedVideoUrl } = require('../lib/vimeos');
 const { parseManifest } = require('../lib/hlsManifest');
 
 const movies = [
-  ['Toy Story 5', '2026'], ['Ratatouille', '2007'], ['Te Van a Matar', '2026'],
-  ['Ciudad de Dios', '2002'], ['El Hombre de la Tierra', '2007'], ['La Odisea', '2026'],
+  ['Te Van a Matar', '2026'], ['Ciudad de Dios', '2002'], ['El Hombre de la Tierra', '2007'],
+  ['La Odisea', '2026'], ['Toy Story 5', '2026'], ['Ratatouille', '2007'],
 ].map(([title, year]) => ({ title, year, mediaType: 'movie' }));
 const series = [
   { title: 'VisionQuest', year: '2026', season: 1, episode: 1 },
@@ -99,6 +99,7 @@ async function inspectUnlimMedia($, page) {
   }
   const http = providerHttp(4000);
   return Promise.all([...urls.values()].slice(0, 2).map(async ({ url, info }) => {
+    if (url.hostname === 'vimeos.unlimplay.com') return `${info}; proxy auxiliar no sondeado`;
     try {
       const manifest = parseManifest(await http.text(url.href, { headers: { Referer: `${new URL(page).origin}/` }, timeoutMs: 2500, maxBytes: 256 * 1024 }));
       return `${info}; ${manifest ? 'manifiesto válido' : 'sin manifiesto válido'}`;
@@ -128,9 +129,9 @@ async function inspect(raw, page) {
   if (!url || !allowed.has(url.hostname)) return null;
   const hostname = url.hostname;
   const count = tried.get(hostname) || 0;
-  if (count >= (hostname === 'unlimplay.com' ? 3 : 2)) return null;
+  if (count >= (hostname === 'unlimplay.com' ? 5 : 2)) return null;
   tried.set(hostname, count + 1);
-  const init = { redirect: 'manual', signal: AbortSignal.timeout(4500), headers: { Referer: `${new URL(page).origin}/` } };
+  const init = { redirect: 'manual', signal: AbortSignal.timeout(hostname === 'unlimplay.com' ? 7500 : 3500), headers: { Referer: `${new URL(page).origin}/` } };
   let route = '';
   try {
     let response = await fetch(url.href, init);

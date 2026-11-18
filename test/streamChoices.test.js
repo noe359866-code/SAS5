@@ -51,6 +51,7 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   const originalProviders = config.streamProviders;
   try {
     config.streamProviders = ['retired-indexer', 'legacy-source'];
-    assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'playlatin']);
+    const expected = streams.PROVIDER_KEYS.filter((key) => key !== "flixlatam" || config.flixlatamEnabled);
+    assert.deepEqual(streams.activeProviders(null), expected);
   } finally { config.streamProviders = originalProviders; }
 });

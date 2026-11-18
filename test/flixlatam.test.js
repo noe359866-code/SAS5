@@ -49,3 +49,24 @@ test('FlixLatam es opt-in y busca el episodio exacto con peticiones limitadas al
     'https://flixlatam.com/episodio/2x3', 'https://flixlatam.com/embed/2x3']);
   assert.equal(hits[0].url, 'https://cdn.example/episode.mp4');
 });
+
+test('FlixLatam resuelve un embed público Uqload sin ejecutar JavaScript', async (t) => {
+  const previous = config.flixlatamEnabled;
+  config.flixlatamEnabled = true;
+  t.after(() => { config.flixlatamEnabled = previous; });
+  const calls = [];
+  t.mock.method(global, 'fetch', async (url, init) => {
+    calls.push(url);
+    assert.equal(init.redirect, 'error');
+    if (url.includes('/search?')) return new Response(card('/pelicula/titulo', 2001));
+    if (url.endsWith('/pelicula/titulo')) return new Response('<div class="pframe"><iframe title="Castellano" src="https://uqload.vc/embed-abc.html"></iframe><iframe title="Latino" src="https://uqload.vc.evil.example/embed-abc.html"></iframe><iframe title="Uqload" src="https://uqload.vc/embed-unlabeled.html"></iframe></div>');
+    assert.equal(url, 'https://uqload.vc/embed-abc.html');
+    assert.equal(init.headers.Referer, 'https://flixlatam.com/pelicula/titulo');
+    return new Response(`<script>setup({file:'https://cdn.example/video.mp4'})</script>`);
+  });
+  const hits = await searchFlixLatam('', { title: 'El título', mediaType: 'movie', year: '2001' });
+  assert.equal(calls.length, 3);
+  assert.deepEqual(hits.map(({ url, referer, audioLabel }) => ({ url, referer, audioLabel })), [{
+    url: 'https://cdn.example/video.mp4', referer: 'https://uqload.vc/', audioLabel: 'Castellano',
+  }]);
+});

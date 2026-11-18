@@ -48,15 +48,14 @@ npm run prerender
 
 Las pruebas usan respuestas simuladas y no garantizan que un proveedor externo esté disponible en vivo. Catálogos+ no aloja ni distribuye archivos; presenta metadatos y enlaces directos proporcionados por fuentes externas.
 
-### FlixLatam (fuente experimental)
+### FlixLatam
 
-Actívala en el servidor con `STREAM_PROVIDERS=fanpelis,playlatin,flixlatam` y
-selecciónala en `/configure` si usas una lista personalizada. Sin ese cambio
-siguen activas las fuentes anteriores. El adaptador toma como referencia la
-estructura pública de [FlixLatam en StreamFlix Reborn](https://git.gay/streamflix-reborn2/streamflix/src/commit/c9ca432b227f061da6df8104dc55f342100ebd6b/app/src/main/java/com/streamflixreborn/streamflix/providers/FlixLatamProvider.kt).
+FlixLatam se incluye por defecto. Si tu despliegue fija `STREAM_PROVIDERS`,
+añade `flixlatam` a esa lista. En instalaciones con selección personalizada,
+marca FlixLatam en `/configure`.
 
-Busca películas y episodios por título, año (si está disponible) y numeración.
-Solo devuelve enlaces directos HTTPS con audio latino o castellano explícito. No sigue
-reproductores externos ni procesa tokens, cifrado o desafíos. Si la página no
-publica una fuente compatible, no devuelve resultados. Se verificó la búsqueda
-pública, pero no la reproducción real; las pruebas del adaptador usan HTML simulado.
+Busca películas y episodios por título, año y numeración. Lee fuentes directas
+etiquetadas como latino o castellano y resuelve embeds públicos de Uqload cuando
+el proveedor indica su audio. No devuelve embeds como si fueran vídeos. Los
+reproductores protegidos, archivos caducados y pistas sin etiqueta no se publican.
+La compatibilidad depende del reproductor disponible para cada título.

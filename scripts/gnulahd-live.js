@@ -14,6 +14,7 @@ const controls = [
   { title: 'El Origen', year: 2010, slug: 'el-origen' },
   { title: 'La Odisea', year: 2026, slug: 'la-odisea-2026' },
   { title: 'Marrow', year: 2026, slug: 'marrow' },
+  { title: 'Godzilla Minus Zero', altTitle: 'Godzilla -0.0', year: 2026, slug: 'godzilla-minus-zero' },
   { title: 'Breaking Bad', year: 2008, slug: 'breaking-bad', season: 2, episode: 3 },
   { title: 'VisionQuest', year: 2026, slug: 'visionquest', season: 1, episode: 2 },
 ];

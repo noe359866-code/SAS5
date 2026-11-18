@@ -1,12 +1,14 @@
 'use strict';
 
-// Sonda de páginas públicas de los proveedores de StreamFlix. No forma parte
-// del Worker, no ejecuta las páginas y no abre hosts desconocidos.
+// Sonda Node de páginas públicas. No ejecuta JavaScript de terceros, no se
+// autentica, no sigue redirecciones ni guarda URLs firmadas o contenido.
 const { appendFileSync } = require('node:fs');
 const { load } = require('cheerio');
 const { providerHttp } = require('../lib/providerHttp');
-const { allowedVideoUrl, extractFromEmbedHtml } = require('../lib/vimeos');
+const { allowedVideoUrl, extractFromEmbedHtml, unpackPacked } = require('../lib/vimeos');
 const { parseManifest } = require('../lib/hlsManifest');
+const { isDirectMedia } = require('../lib/directMedia');
+const { checkPlayback, checkSegment } = require('./worker-streams-live');
 
 const controls = [
   ['CineCalidad', 'Matrix', 'https://www.cinecalidad.am/ver-pelicula/matrix/', '#playeroptionsul li[data-option]:not(.dooplay_player_option_trailer)', 'data-option'],
@@ -14,10 +16,14 @@ const controls = [
   ['PelisflixHD', 'Matrix', 'https://pelisflixhd.love/pelicula/the-matrix-zgdg/', '#player li[data-server]', 'data-server'],
   ['PelisflixHD', 'Mufasa', 'https://pelisflixhd.love/pelicula/mufasa-el-rey-leon/', '#player li[data-server]', 'data-server'],
   ['SeriesFlix', 'Breaking Bad T1E2', 'https://seriesflixhd.boats/episodio/breaking-bad-zpya-1x2/', '.optns-bx .drpdn .Button.sgty[data-url]', 'data-url'],
-  ['Latanime', 'Naruto T1E1', 'https://latanime.org/ver/naruto-latino-episodio-1', 'li#play-video > a.play-video', 'data-player'],
+  ['Latanime', 'Naruto capítulo 1 (Latino)', 'https://latanime.org/ver/naruto-latino-episodio-1', 'li#play-video > a.play-video', 'data-player', 'latino'],
+  ['Latanime', 'Naruto capítulo 1 (Castellano)', 'https://latanime.org/ver/naruto-castellano-episodio-1', 'li#play-video > a.play-video', 'data-player', 'castellano'],
+  ['LaCartoons', 'Ben 10 T1E1', 'https://www.lacartoons.com/serie/capitulo/16654?t=1', 'iframe[src]', 'src', 'latino'],
   ['TioPlus', 'Matrix (búsqueda)', 'https://tioplus.app/search/matrix'],
   ['CineHax (MovieMaster)', 'Matrix (visor)', 'https://api.moviemaster.lat/e/movie/603'],
 ];
+const playerHosts = new Set(['nupload.my', 'www.mp4upload.com', 'luluvdo.com']);
+const WEB = 'https://web.stremio.com';
 
 function urlOf(value, parent) {
   if (!value || value.length > 8192) return null;
@@ -29,15 +35,15 @@ function urlOf(value, parent) {
 
 function optionUrl(raw, page, attr) {
   if (!raw || raw.length > 8192) return null;
-  let value = raw;
-  if (attr !== 'data-option') {
-    if (!/^[A-Za-z0-9+/_=-]+$/.test(raw)) return null;
-    value = Buffer.from(raw, 'base64').toString('utf8').trim();
+  let value = raw.trim();
+  if (attr.startsWith('data-') && attr !== 'data-option') {
+    if (!/^[A-Za-z0-9+/_=-]+$/.test(value)) return null;
+    value = Buffer.from(value, 'base64').toString('utf8').trim();
     if (!/^https?:\/\//i.test(value)) return null;
   }
   const url = urlOf(value, page);
-  if (attr === 'data-url' && url?.origin === new URL(page).origin && url.searchParams.has('url')) {
-    return urlOf(url.searchParams.get('url'));
+  if (url && (url.origin === new URL(page).origin || url.hostname === 'nupload.my') && url.searchParams.has('url')) {
+    return urlOf(url.searchParams.get('url')) || url;
   }
   return url;
 }
@@ -50,47 +56,74 @@ function resultOf(error) {
   return 'sin respuesta comprobable';
 }
 
-async function inspectHls(master, http) {
-  try {
-    const playlist = parseManifest(await http.text(master, { maxBytes: 512 * 1024, timeoutMs: 3000 }));
-    if (!playlist) return 'HLS inválido';
-    const variant = playlist.variants[0] ? urlOf(playlist.variants[0].uri, master) : null;
-    if (playlist.variants.length && (!variant || !allowedVideoUrl(variant.href) || !/\.m3u8$/i.test(variant.pathname))) return 'variante fuera del alcance';
-    const media = variant ? parseManifest(await http.text(variant.href, { maxBytes: 512 * 1024, timeoutMs: 3000 })) : playlist;
-    const segment = urlOf(media?.segment, variant?.href || master);
-    if (!segment || !allowedVideoUrl(segment.href) || !/\.(?:ts|m4s|mp4)$/i.test(segment.pathname)) return 'HLS válido, sin segmento sondeable';
-    const response = await fetch(segment, { headers: { Range: 'bytes=0-0' }, signal: AbortSignal.timeout(3000), redirect: 'manual' });
-    await response.body?.cancel().catch(() => {});
-    return `HLS válido, segmento HTTP ${response.status}`;
-  } catch (error) { return `HLS: ${resultOf(error)}`; }
+function isChallenge(html) {
+  return /<title>\s*just a moment|cf-browser-verification|<title>\s*attention required/i.test(html);
 }
 
-async function probe([provider, title, page, selector, attr]) {
-  const http = providerHttp(8000, 4);
+function optionAudio(label) {
+  if (/subtit|\bvose\b|\btr[aá]iler\b/i.test(label)) return '';
+  if (/\blatino\b|audio\s*latino/i.test(label) || /\dLATINO/i.test(label)) return 'latino';
+  if (/castellano/i.test(label)) return 'castellano';
+  return '';
+}
+
+async function sampleOtherMedia(raw, player, http) {
+  // Solo medios en los orígenes conocidos. Anotar los demás, no abrirlos.
+  const url = urlOf(raw, player);
+  if (!url || !isDirectMedia(url.href) || !/\.(?:m3u8|mp4)$/i.test(url.pathname)) return 'sin HLS/MP4 público en el visor';
+  if (allowedVideoUrl(url.href) && /\.m3u8$/i.test(url.pathname)) return (await checkPlayback(fetch, url.href, new URL('https://addon.invalid').origin)).state;
+  if (url.origin !== player.origin || !playerHosts.has(url.hostname)) return `medio en ${url.hostname}, sin sondear (origen no validado)`;
+  if (/\.mp4$/i.test(url.pathname)) return (await checkSegment(fetch, url.href)).state;
+  const text = await http.text(url.href, { maxBytes: 512 * 1024, timeoutMs: 2500, headers: { Origin: WEB } });
+  return parseManifest(text) ? 'HLS válido; falta comprobar segmentos' : 'manifiesto inválido';
+}
+
+async function sampleOption(url, http) {
   try {
-    const html = await http.text(page, { headers: { Accept: 'text/html' }, maxBytes: 2 * 1024 * 1024, timeoutMs: 4500 });
-    if (/<title>\s*just a moment|cf-browser-verification|<title>\s*attention required/i.test(html)) {
-      return { provider, title, state: 'challenge', players: [], media: 'no sondeado' };
+    if (isDirectMedia(url.href)) return await sampleOtherMedia(url.href, url, http);
+    const html = await http.text(url.href, { maxBytes: 1024 * 1024, timeoutMs: 3000 });
+    if (isChallenge(html)) return 'challenge del visor';
+    if (allowedVideoUrl(url.href)) {
+      const master = extractFromEmbedHtml(html).hls.find((raw) => allowedVideoUrl(raw));
+      return master ? await sampleOtherMedia(master, url, http) : 'visor Vimeos sin HLS público';
     }
     const $ = load(html);
-    const options = selector ? $(selector).toArray().slice(0, 12).map((el) => optionUrl($(el).attr(attr), page, attr)).filter(Boolean) : [];
-    const players = [...new Set(options.map((url) => `${url.hostname} (${/\.(?:m3u8|mp4)$/i.test(url.pathname) ? 'directo' : 'visor'})`))];
-    let media = 'no sondeado';
-    const vimeos = options.find((url) => allowedVideoUrl(url.href));
-    if (vimeos) {
-      try {
-        const master = /\.m3u8$/i.test(vimeos.pathname) ? vimeos.href
-          : extractFromEmbedHtml(await http.text(vimeos.href, { maxBytes: 1024 * 1024, timeoutMs: 3000, headers: { Referer: page } })).hls.find((url) => allowedVideoUrl(url));
-        media = master ? await inspectHls(master, http) : 'visor Vimeos sin HLS';
-      } catch (error) { media = `visor: ${resultOf(error)}`; }
+    const source = $('video[src], video source[src]').first().attr('src')
+      || /\bsources?\s*:\s*\[\s*\{\s*["']?file["']?\s*:\s*["']([^"']+)["']/i.exec(unpackPacked(html) || html)?.[1];
+    return source ? await sampleOtherMedia(source, url, http)
+      : 'sin HLS/MP4 público en el visor';
+  } catch (error) { return resultOf(error); }
+}
+
+async function probe([provider, title, page, selector, attr, audioInPage]) {
+  const http = providerHttp(11_000, 5);
+  try {
+    const html = await http.text(page, { headers: { Accept: 'text/html' }, maxBytes: 2 * 1024 * 1024, timeoutMs: 4500 });
+    if (isChallenge(html)) return { provider, title, state: 'challenge', players: [], media: 'no sondeado' };
+    const $ = load(html);
+    const groupAudio = audioInPage || (provider === 'CineCalidad' && /ver\s+online\s+audio\s+latino/i.test($('body').text().replace(/\s+/g, ' ')) ? 'latino' : '');
+    const options = selector ? $(selector).toArray().slice(0, 12).flatMap((el) => {
+      const item = $(el);
+      const url = optionUrl(item.attr(attr), page, attr);
+      const label = item.closest('.drpdn').find('button.bstd').text() || item.text();
+      if (!url || /tr[aá]iler/i.test(label)) return [];
+      return [{ url, audio: groupAudio || optionAudio(label) }];
+    }) : [];
+    const players = [...new Set(options.map(({ url }) => `${url.hostname} (${/\.(?:m3u8|mp4)$/i.test(url.pathname) ? 'directo' : 'visor'})`))];
+    const hosts = [...new Set(options.map(({ url }) => url.hostname))];
+    const allowed = options.filter(({ url }) => allowedVideoUrl(url.href) || playerHosts.has(url.hostname));
+    const media = [];
+    for (const host of hosts.filter((name) => allowed.some(({ url }) => url.hostname === name)).slice(0, 2)) {
+      const sameHost = allowed.filter(({ url }) => url.hostname === host);
+      const { url, audio } = sameHost.find((option) => option.audio) || sameHost[0];
+      media.push(`${host} (${audio || 'audio sin confirmar'}): ${await sampleOption(url, http)}`);
     }
     const state = selector ? 'ficha disponible' : /window\.PM_UI\s*=/.test(html) ? 'visor con estado público' : 'entrada disponible';
-    return { provider, title, state, players, media };
+    return { provider, title, state, players, media: media.join('; ') || 'no sondeado' };
   } catch (error) { return { provider, title, state: resultOf(error), players: [], media: 'no sondeado' }; }
 }
 
 async function main() {
-  // Limitar concurrencia y no repetir un rechazo.
   const rows = [];
   for (const control of controls) rows.push(await probe(control));
   for (const { provider, title, state, players, media } of rows) {
@@ -101,7 +134,7 @@ async function main() {
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
     '### Candidatos de StreamFlix (Node)', '', '| Fuente | Control | Entrada | Opciones | Medio |', '|---|---|---|---|---|',
     ...rows.map(({ provider, title, state, players, media }) => `| ${provider} | ${title} | ${state} | ${players.join(', ') || '—'} | ${media} |`), '',
-    'No se consulta ni se despliega el Worker de producción. No se guardan URLs firmadas.', '',
+    'Sin peticiones al Worker de producción. No se guardan firmas ni se comprueba reproducción completa.', '',
   ].join('\n'));
 }
 

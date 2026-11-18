@@ -45,6 +45,19 @@ function urlShape(raw, page) {
   return !raw ? 'vacío' : String(raw).startsWith('#') ? 'ancla' : 'sin URL directa';
 }
 
+function cuevanaShape($, page) {
+  const inline = $('script:not([src])').toArray().map((el) => $(el).html() || '').join('\n').replace(/\\\//g, '/');
+  const endpoints = ['fastApi', 'apiUrl'].map((key) => {
+    const raw = new RegExp(`["']?${key}["']?\\s*:\\s*["']([^"']+)["']`).exec(inline)?.[1];
+    const url = urlOf(raw, page);
+    if (!url) return null;
+    const path = /^\/(?:[a-z_-]{1,24}\/){0,5}(?:v\d{1,2}\/?)?$/i.test(url.pathname + (url.pathname.endsWith('/') ? '' : '/')) ? url.pathname : '';
+    return `${key}=${url.hostname}${path}`;
+  });
+  const links = $('a[href]').toArray().filter((el) => /\/(?:peliculas?|series?|episodio)\//i.test($(el).attr('href'))).length;
+  return `enlaces de catálogo=${links}; ${list(endpoints.filter(Boolean))}`;
+}
+
 function playerShape($, page, episode) {
   const inline = $('script:not([src])').toArray().map((el) => $(el).html() || '').join('\n').replace(/\\\//g, '/');
   const signals = [...inline.matchAll(/\b([a-z_][a-z0-9_]{0,36})["']?\s*(?:=|:)\s*(?=[\[{'"`])/gi)]
@@ -54,8 +67,7 @@ function playerShape($, page, episode) {
   const scripts = $('script[src]').toArray().map((el) => $(el).attr('src')).map((raw) => {
     try {
       const url = new URL(raw, page);
-      return url.origin === new URL(page).origin && /(?:player|episode|script|main|flix|cuevana)/i.test(url.pathname)
-        && /^\/[a-z0-9_./-]{1,160}\.js$/i.test(url.pathname) ? url.pathname : null;
+      return url.origin === new URL(page).origin && /^\/[a-z0-9_./-]{1,160}\.js$/i.test(url.pathname) ? url.pathname : null;
     } catch { return null; }
   }).filter(Boolean);
   const attrs = (sel, cap) => $(sel).toArray().slice(0, cap).map((el) => {
@@ -67,7 +79,11 @@ function playerShape($, page, episode) {
   }).filter(Boolean);
   const vids = $('video[src],video[data-src],video source[src],video source[data-src]').toArray().map((el) => urlShape($(el).attr('data-src') || $(el).attr('src'), page));
   const playerAttrs = attrs(`${frames},[data-url],[data-video],[data-server],[data-embed],[data-player],[data-source],.pframe [onclick],[class*="server"] [onclick]`, 28);
-  const ep = episode && `; fila=${list(attrs(`#seasons a[href$="#s${episode.season}-e${episode.episode}"],#seasons a[href$="#s${episode.season}-e${episode.episode}"] [data-src],#seasons li:has(a[href$="#s${episode.season}-e${episode.episode}"])`, 12))}`;
+  const hash = episode && `#s${episode.season}-e${episode.episode}`;
+  const link = hash && $(`a[href$="${hash}"]`);
+  const row = link && link.first().closest('li');
+  const names = (el) => (el?.toArray() || []).flatMap((node) => Object.keys(node.attribs)).filter((name) => /^data-[a-z0-9-]+$|^onclick$/.test(name));
+  const ep = link && `; anclas exactas=${link.length}; atributos de fila=${list([...names(link), ...names(row), ...names(row.find('button,a,iframe'))])}; panel=${$(hash).length}`;
   return `vídeo=${list(vids)}; literales=${list(literals)}; atributos=${list(playerAttrs)}; JS=${list(signals)}; scripts propios=${list(scripts, 6)}${ep || ''}`;
 }
 
@@ -93,7 +109,8 @@ async function probe(key, fixture) {
     const html = await fetchText(fixture.page, { redirect: 'manual', timeoutMs: 7000, maxBytes: 2 * 1024 * 1024 });
     const $ = load(html);
     const embeds = await Promise.all($(frames).toArray().slice(0, 6).map((el) => inspectEmbed($(el).attr('data-src') || $(el).attr('src'), fixture.page)));
-    return `${state}\n${playerShape($, fixture.page, fixture.season && fixture)}${embeds.some(Boolean) ? `\n${embeds.filter(Boolean).join('\n')}` : ''}`;
+    const shape = key === 'cuevana3' ? `${cuevanaShape($, fixture.page)}; ${cuevanaShape(load(await fetchText('https://cuevanas3.pro/search/' + encodeURIComponent(fixture.title.toLowerCase()) + '/', { redirect: 'manual', timeoutMs: 4000, maxBytes: 2 * 1024 * 1024 })), fixture.page)} en búsqueda\n` : '';
+    return `${state}\n${shape}${playerShape($, fixture.page, fixture.season && fixture)}${embeds.some(Boolean) ? `\n${embeds.filter(Boolean).join('\n')}` : ''}`;
   } catch (err) { return `${state}; visor: ${problem(err)}`; }
 }
 

@@ -165,3 +165,38 @@ test('SpinFlix: un rechazo del resolver detiene la búsqueda en vez de consultar
   await assert.rejects(() => searchSpinFlix('', resolved, resolved.title), { status: 403 });
   assert.deepEqual(calls, ['/search', '/pelicula/control-de-acceso', '/streamurl']);
 });
+
+test('SpinFlix: una ficha caída no se diagnostica como título ausente', async (t) => {
+  const movie = { title: 'Ficha caída', slug: 'ficha-caida', type: 'movies', year: 2025 };
+  t.mock.method(global, 'fetch', async (raw) => {
+    const url = new URL(raw);
+    if (url.pathname === '/search') return Response.json({ results: [movie] });
+    assert.equal(url.pathname, '/pelicula/ficha-caida');
+    return new Response(null, { status: 503 });
+  });
+  const report = {};
+  const resolved = { title: movie.title, year: '2025', mediaType: 'movie' };
+  const hits = await runProviders(['spinflix'], '', resolved, resolved.title, report);
+  assert.deepEqual(hits, []);
+  assert.equal(report.spinflix.ok, false);
+  assert.equal(report.spinflix.reason, 'upstream-error');
+  assert.equal(report.spinflix.status, 503);
+});
+
+test('SpinFlix: una numeración incoherente no activa el reproductor de otro episodio', async (t) => {
+  const show = { title: 'Serie de control distinta', slug: 'serie-distinta', type: 'tvshows' };
+  const calls = [];
+  t.mock.method(global, 'fetch', async (raw) => {
+    const { pathname } = new URL(raw);
+    calls.push(pathname);
+    if (pathname === '/search') return Response.json({ items: [show] });
+    if (pathname === '/serie/serie-distinta') return Response.json(show);
+    assert.equal(pathname, '/serie/serie-distinta/2/3');
+    return Response.json({ season_number: 2, episode_number: 3, episode: 4, embeds: { video: [
+      { language: 'Latino', stream_url: 'https://s9.vimeos.net/fixture/otro-episodio.m3u8' },
+    ] } });
+  });
+  const { hits } = await searchSpinFlix('', { title: show.title, mediaType: 'series', season: 2, episode: 3 });
+  assert.deepEqual(hits, []);
+  assert.deepEqual(calls, ['/search', '/serie/serie-distinta', '/serie/serie-distinta/2/3']);
+});

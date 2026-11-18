@@ -18,7 +18,7 @@ const fixtures = {
   ],
   extra: [
     { title: 'Mufasa: El rey león', altTitle: 'Mufasa: The Lion King', year: '2024', mediaType: 'movie',
-      imdbId: 'tt13186482', keys: ['fanpelis'] },
+      imdbId: 'tt13186482', keys: ['fanpelis', 'spinflix'] },
   ],
 };
 
@@ -32,7 +32,7 @@ function annotate(title, message) {
 function summarize(entry) {
   if (entry?.paused) return 'en pausa';
   if (entry?.skipped) return `omitido: ${entry.skipped}`;
-  if (!entry?.ok) return entry?.reason || 'error de consulta';
+  if (!entry?.ok) return [entry?.reason || 'error de consulta', entry?.stage].filter(Boolean).join(' / ');
   return entry.reason || (entry.accepted ? 'medio aceptado' : 'sin medio compatible');
 }
 
@@ -72,27 +72,28 @@ async function main(group) {
   let failed = false;
   for (const fixture of selected) {
     const label = fixture.mediaType === 'series' ? `${fixture.title} T${fixture.season}E${fixture.episode}` : fixture.title;
-    const keys = fixture.keys.filter((key) => enabled.includes(key));
-    const report = {};
-    const hits = await runProviders(keys, fixture.title, fixture, fixture.title, report, 6000);
+    // La deduplicación del addon no debe atribuir una URL compartida a una sola
+    // fuente en la auditoría. Cada adaptador conserva su presupuesto habitual.
     const checks = await Promise.all(fixture.keys.map(async (key) => {
-      const hit = hits.find((item) => item.provider === key);
-      const check = await probeMedia(hit);
-      return hit?.verification ? `${hit.verification}; ${check}` : check;
+      if (!enabled.includes(key)) return { hits: [], check: 'no sondeado' };
+      const report = {};
+      const hits = await runProviders([key], fixture.title, fixture, fixture.title, report, 6000);
+      const hit = hits.find((item) => item.verification === 'manifest-ok') || hits[0];
+      const check = hit?.verification === 'manifest-ok' ? await probeMedia(hit) : 'no sondeado de nuevo';
+      return { entry: report[key], hits, check: [hit?.verification, check].filter(Boolean).join('; ') };
     }));
     for (const [index, key] of fixture.keys.entries()) {
-      const entry = report[key];
+      const { entry, hits, check } = checks[index];
       const state = entry ? summarize(entry) : 'desactivado';
-      const status = entry?.status || /\bHTTP (\d{3})\b/.exec(entry?.error || '')?.[1] || '—';
-      const kinds = [...new Set(hits.filter((hit) => hit.provider === key).map((hit) => hit.resolution || hit.quality || 'directo'))].join(', ') || '—';
+      const status = entry?.status || '—';
+      const kinds = [...new Set(hits.map((hit) => hit.resolution || hit.quality || 'directo'))].join(', ') || '—';
       const raw = entry?.raw ?? 0;
-      const accepted = entry?.accepted ?? entry?.relevant ?? 0;
-      const check = checks[index];
+      const accepted = entry?.accepted ?? 0;
       const note = `${state}; HTTP ${status}; aceptados ${accepted}/${raw}; formato/calidad ${kinds}; ${check}`;
       annotate(`${label} / ${key}`, note);
       rows.push(`| ${label} | ${key} | ${state} | ${status} | ${accepted}/${raw} | ${kinds} | ${check} |`);
     }
-    if (fixture.control && !hits.length) failed = true;
+    if (fixture.control && !checks.some(({ hits }) => hits.length)) failed = true;
   }
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
     `### Scrapers: ${group || 'todos'}`, '',

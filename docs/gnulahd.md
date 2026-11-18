@@ -4,6 +4,8 @@
 
 El adaptador intenta fichas públicas por título y año y verifica su tipo. En series solo visita el capítulo que enlaza la ficha y comprueba la numeración y el regreso a la serie. No usa búsquedas ni APIs bloqueadas, visores o descargas. Solo ofrece un HLS enlazado en un `<video>` o `<source>` con etiqueta de audio **Latino** o **Castellano** y manifiesto válido. En esta prueba se limita al mismo origen, sin credenciales, firmas ni redirecciones seguidas. Una fuente activa **no** garantiza un resultado: [la sonda en vivo del adaptador](https://github.com/noe359866-code/SAS5/actions/runs/44238574143) localizó las seis fichas o episodios exactos, pero devolvió `no-public-media` en todos (0 streams aceptados). No se verificó reproducción externa.
 
+Si una ficha coincide pero no ofrece un medio compatible, el adaptador puede probar las demás variantes del título y el año con un máximo total de 10 peticiones y 2,5 segundos. Si comprueba la primera variante de un manifiesto maestro, la resolución mostrada corresponde a esa variante, no al máximo anunciado por el maestro. No se descargan segmentos.
+
 ## Identidad e idioma observados en la auditoría
 
 | Control | Identidad corroborada | Opciones del menú observado en la web |

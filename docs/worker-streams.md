@@ -25,6 +25,12 @@ node scripts/worker-streams-live.js --playback http://127.0.0.1:8799 --expect-di
 
 El último comando requiere `wrangler dev` en el puerto 8799. `--expect-direct` falla si los controles aún devuelven URLs del addon o hints de proxy; `--require-media` exige al menos una muestra de medio válida por título. Sin este último flag, un 403 del CDN no se interpreta como fallo de `/stream`. El workflow **Streams del Worker y CDN directo** usa `workerd` local en ramas `arena/`; consulta producción solo en `main` o al ejecutarlo manualmente y no despliega cambios.
 
+## Auditoría por proveedor
+
+`node scripts/providers-live.js` prueba Fanpelis y SpinFlix por separado, incluso si entregan la misma URL. Registra el estado del adaptador y del CDN sin revelar firmas; si el adaptador ya marcó el manifiesto como no verificado, la sonda no repite esa petición. `node scripts/gnulahd-live.js adapter` comprueba GnulaHD por separado. Ninguna de estas sondas despliega cambios.
+
+El diagnóstico puede devolver `unexpected-response` con la `stage` de una API cuando el JSON no cumple el formato esperado, y `response-too-large` cuando supera el límite de lectura. En Fanpelis no se guardan como resultados vacíos los errores de la API que llegan con HTTP 200. Para Vimeos, `manifest-ok` significa que la estructura y las referencias primarias del manifiesto (variantes o segmentos) pasan los filtros; no significa que se hayan descargado o reproducido.
+
 ## Primera comprobación de la rama sin proxy
 
 La [sonda en `workerd` local de GitHub Actions](https://github.com/noe359866-code/SAS5/actions/runs/44309509520/job/134819669426) probó `3a60617`. Ambos controles devolvieron HTTP 200, CORS y dos enlaces directos en `/stream`. Los resultados del CDN fueron:

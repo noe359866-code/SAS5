@@ -141,6 +141,28 @@ test('Worker: los resultados exclusivamente sin verificar se vuelven a sondear e
   assert.equal(calls, 2);
 });
 
+test('Worker: un manifiesto válido no prolonga la caché de otro enlace sin verificar', async (t) => {
+  const worker = (await import('../worker.mjs')).default;
+  let now = Date.now();
+  let calls = 0;
+  t.mock.method(Date, 'now', () => now);
+  t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
+  t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [
+    media('https://cdn.example/valid.m3u8', { verification: 'manifest-ok' }),
+    media('https://cdn.example/retry.m3u8', { verification: ++calls > 1 ? 'manifest-ok' : 'cdn-http-403' }),
+  ]);
+  const env = { STREAM_PROVIDERS: 'fanpelis', STREAM_STALE_SECONDS: '600' };
+  t.after(() => config.reload());
+  const request = () => worker.fetch(new Request('https://audit.example/stream/movie/tt9998815.json'), env, {});
+  const first = await request();
+  assert.equal(first.headers.get('cache-control'), 'public, max-age=30, s-maxage=30, must-revalidate');
+  assert.match((await first.json()).streams[1].name, /sin verificar/);
+  now += 31_000;
+  const next = await request();
+  assert.doesNotMatch((await next.json()).streams[1].name, /sin verificar/);
+  assert.equal(calls, 2);
+});
+
 test('el presupuesto de una fuente cuenta en común JSON y texto sin hacer peticiones extra', async (t) => {
   const { providerHttp, stopProvider } = require('../lib/providerHttp');
   const fetchMock = t.mock.method(global, 'fetch', async () => Response.json({ ok: true }));

@@ -69,7 +69,7 @@ function mockApi(handlers) {
     calls.push(u);
     for (const [needle, reply] of handlers) {
       if (!u.includes(needle)) continue;
-      return typeof reply === 'function' ? reply(u, options) : reply;
+      return typeof reply === 'function' ? reply(u, options) : reply.clone();
     }
     if (u === MASTER) return new Response(HLS);
     return json({}, 404);
@@ -225,7 +225,7 @@ test('fanpelis: la API solo indexa el título traducido, así que se prueba sin 
   global.fetch = async (url) => {
     const u = String(url);
     if (!u.includes('/api/rest/search')) return json({}, 404);
-    const q = decodeURIComponent((u.match(/query=([^&]*)/) || [])[1] || '');
+    const q = new URL(u).searchParams.get('query');
     queries.push(q);
     // Solo responde al título sin artículo, como el servicio real.
     if (q === 'Matrix') return json(SEARCH_MOVIE);
@@ -283,4 +283,62 @@ test('fanpelis: el HTTP 429 del reproductor detiene la búsqueda antes de pedir 
   ]);
   await assert.rejects(() => fanpelis.searchFanpelis(SERIES.title, SERIES, SERIES.title, 1000), { status: 429 });
   assert.equal(calls.filter((url) => url.includes('/api/rest/player')).length, 1);
+});
+
+test('fanpelis: no se detiene en la primera ficha si solo devuelve HLS sin verificar', async () => {
+  const denied = 'https://s9.vimeos.net/hls2/fixture/first.m3u8';
+  const obsolete = 'https://vimeos.net/embed-fixture-primero.html';
+  const item = SEARCH_MOVIE.data.posts[1];
+  mockApi([
+    ['/api/rest/search', json({ data: { posts: [item, { ...item, _id: 18509 }] } })],
+    ['/api/rest/player?post_id=18507', json({ data: { embeds: [{ lang: 'Latino', url: obsolete }] } })],
+    ['/api/rest/player?post_id=18509', json(PLAYER)],
+    [obsolete, html(packedEmbed(denied))],
+    [denied, json({}, 403)],
+    [EMBED, html(packedEmbed(MASTER))],
+  ]);
+  const { hits } = await fanpelis.searchFanpelis(MOVIE.title, MOVIE, MOVIE.title, 1000);
+  assert.deepEqual(hits.map(({ url, verification }) => [url, verification]), [[MASTER, 'manifest-ok']]);
+});
+
+test('fanpelis: distingue un reproductor caído de una búsqueda sin resultados', async () => {
+  mockApi([
+    ['/api/rest/search', json(SEARCH_MOVIE)],
+    ['/api/rest/player?post_id=18507', json({}, 503)],
+  ]);
+  await assert.rejects(() => fanpelis.searchFanpelis('', MOVIE, MOVIE.title, 1000), { status: 503 });
+});
+
+test('fanpelis: conserva el candidato sin verificar si se agota el tiempo al buscar uno mejor', async (t) => {
+  const deadline = 1000;
+  const start = Date.now();
+  let now = start;
+  t.mock.method(Date, 'now', () => now);
+  const denied = 'https://s9.vimeos.net/hls2/fixture/fallback.m3u8';
+  mockApi([
+    ['/api/rest/search', json(SEARCH_MOVIE)],
+    ['/api/rest/player?post_id=18507', json(PLAYER)],
+    [EMBED, html(packedEmbed(denied))],
+    [denied, () => { now = start + deadline; return json({}, 403); }],
+  ]);
+  const { hits } = await fanpelis.searchFanpelis('', MOVIE, MOVIE.title, deadline);
+  assert.deepEqual(hits.map(({ url, verification }) => [url, verification]), [[denied, 'cdn-http-403']]);
+});
+
+test('fanpelis: un error de API con HTTP 200 se diagnostica y no contamina la caché', async () => {
+  const movie = { ...MOVIE, altTitle: null };
+  let healthy = false;
+  let searches = 0;
+  mockApi([['/api/rest/search', () => {
+    searches++;
+    return healthy ? json({ data: { data: { posts: [] } } }) : json({ error: true, data: { posts: [] } });
+  }]]);
+  const report = {};
+  await streams.runProviders(['fanpelis'], '', movie, movie.title, report);
+  assert.equal(report.fanpelis.reason, 'unexpected-response');
+  assert.equal(report.fanpelis.stage, 'search');
+  healthy = true;
+  assert.equal((await fanpelis.searchFanpelis('', movie)).reason, 'no-match');
+  assert.equal((await fanpelis.searchFanpelis('', movie)).reason, 'no-match');
+  assert.equal(searches, 2, 'la forma válida alternativa sí se guarda');
 });

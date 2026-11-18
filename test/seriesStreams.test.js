@@ -43,7 +43,7 @@ test('una ficha TMDB personal permite pedir el stream de su episodio a una fuent
       });
       if (url.pathname === '/streamurl' && url.searchParams.get('url') === embed) return json({ videos: { hls: [master] } });
     }
-    if (url.origin + url.pathname === 'https://spinoff.link/pelis/proxy.php' && url.searchParams.get('url') === master) {
+    if (url.href === master) {
       return new Response('#EXTM3U\n#EXTINF:1,\npilot.ts\n');
     }
     throw new Error(`Petición inesperada: ${url.hostname}${url.pathname}`);
@@ -63,15 +63,13 @@ test('una ficha TMDB personal permite pedir el stream de su episodio a una fuent
   const streamResponse = await request(`${prefix}/stream/series/${episodeId}.json`, env);
   assert.equal(streamResponse.status, 200);
   const { streams } = await streamResponse.json();
-  assert.deepEqual(streams.map((stream) => stream.url), [
-    `https://episodes.example/hls?via=spinflix&u=${encodeURIComponent(master)}`,
-  ]);
+  assert.deepEqual(streams.map((stream) => stream.url), [master]);
   assert.match(streams[0].title, /S01E01.*Latino.*SpinFlix/);
   assert.deepEqual(requests.filter((url) => url.origin === provider).map((url) => url.pathname), [
     '/search', '/serie/serie-de-prueba', providerPath, '/streamurl',
   ]);
   assert.deepEqual([...new Set(requests.map((url) => url.hostname))].sort(), [
-    'api.themoviedb.org', 'spinflix.example', 'spinoff.link', 'v3-cinemeta.strem.io',
+    'api.themoviedb.org', 's9.vimeos.net', 'spinflix.example', 'v3-cinemeta.strem.io',
   ]);
 });
 

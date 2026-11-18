@@ -3,20 +3,15 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { isDirectMedia } = require('../lib/directMedia');
 const streams = require('../lib/streams');
-const config = require('../lib/config');
-test('filtra iframes y rutas publicitarias, conserva MP4 y HLS', () => {
-  assert.equal(isDirectMedia('https://dood.example/e/123','spinflix'), false);
-  assert.equal(isDirectMedia('https://example.org/ad/video.m3u8','fanpelis'), false);
-  assert.equal(isDirectMedia('https://example.org/ads/video.mp4','fanpelis'), false);
-  assert.equal(isDirectMedia('https://cdn.example/movie/Ad-Astra/master.m3u8?x=ads','fanpelis'), true);
-  assert.equal(isDirectMedia('https://cdn.example/movie.mp4','spinflix'), true);
-  const oldBase = config.addonBaseUrl; config.addonBaseUrl = 'https://addon.example';
-  assert.equal(isDirectMedia('https://addon.example/hls?u=' + encodeURIComponent('https://cdn.example/master.m3u8'),'fanpelis'),true);
-  assert.equal(isDirectMedia('https://evil.example/hls?u=' + encodeURIComponent('https://cdn.example/master.m3u8'),'fanpelis'),false);
-  assert.equal(isDirectMedia('https://ads.example.org/playlist.m3u8','fanpelis'),false);
-  assert.equal(isDirectMedia('https://addon.example/hls?u=' + encodeURIComponent('https://cdn.example/embed/1'),'fanpelis'),false);
-  assert.equal(isDirectMedia('javascript:alert(1)','x'),false);
-  config.addonBaseUrl = oldBase;
+test('filtra iframes, anuncios y la antigua ruta del relay; conserva MP4 y HLS', () => {
+  assert.equal(isDirectMedia('https://dood.example/e/123'), false);
+  assert.equal(isDirectMedia('https://example.org/ad/video.m3u8'), false);
+  assert.equal(isDirectMedia('https://example.org/ads/video.mp4'), false);
+  assert.equal(isDirectMedia('https://cdn.example/movie/Ad-Astra/master.m3u8?x=ads'), true);
+  assert.equal(isDirectMedia('https://cdn.example/movie.mp4'), true);
+  assert.equal(isDirectMedia('https://addon.example/hls?u=' + encodeURIComponent('https://cdn.example/master.m3u8')), false);
+  assert.equal(isDirectMedia('https://ads.example.org/playlist.m3u8'), false);
+  assert.equal(isDirectMedia('javascript:alert(1)'), false);
 });
 test('el pipeline no presenta embeds como vídeos y lo informa al diagnóstico', async () => {
   const old = streams.SEARCHERS.fanpelis;

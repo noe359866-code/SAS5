@@ -39,7 +39,7 @@ function summarize(entry) {
 // Solo sondear playlists y un segmento en el CDN conocido; no descargar
 // vídeos, consultar iframes arbitrarios, publicar firmas ni verificar audio.
 async function probeMedia(hit) {
-  const raw = hit?.directUrl || hit?.url;
+  const raw = hit?.url;
   if (!allowedVideoUrl(raw) || !/\.m3u8$/i.test(new URL(raw).pathname)) return 'no sondeado';
   const pickUrl = (uri, parent, suffix) => {
     if (!uri) return null;

@@ -20,7 +20,7 @@ Se retiraron FlixLatam, PlayLatinSRC, FuegoCine, AnimeOnlineNinja y Cuevana 3 po
 
 Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. Fanpelis y SpinFlix filtran los visores por idioma y origen antes de probarlos y mantienen un límite de tiempo y peticiones por búsqueda. Si la API o un visor rechaza el acceso, no se intenta resolver el desafío ni se ejecuta JavaScript externo. Los enlaces con vencimiento conocido se retiran con margen. Cuando dos resultados tienen la misma URL, prevalece el mejor comprobado; si solo hay enlaces sin verificar, se guardan por poco tiempo para volver a comprobarlos pronto.
 
-En Cloudflare, Fanpelis y SpinFlix usan la ruta de reproducción existente de SpinFlix para sus HLS de Vimeos cuando esa ruta devuelve un manifiesto válido. El Worker conserva esa ruta hasta los segmentos de vídeo y audio; no cambia la fuente seleccionada. Si no puede validarla, conserva el comportamiento del CDN directo. Cada petición a `/hls` cuenta como una invocación del Worker y su disponibilidad depende del proveedor.
+**Sin proxy de reproducción:** `/stream` devuelve la URL original del CDN. El addon puede comprobar el manifiesto al buscar un enlace, pero no retransmite playlists, variantes, claves, audio ni segmentos. Al retirar `/hls`, la reproducción ya no genera invocaciones sucesivas del Worker para esos recursos. `/stream` sigue siendo una consulta dinámica. Si el CDN rechaza el acceso directo o no ofrece CORS para Stremio Web, el enlace puede no reproducirse; no se recurre a un proxy alternativo. Las variables antiguas `SPINFLIX_PROXY_URL` y `HLS_PROXY_HOSTS` ya no tienen efecto; `SPINFLIX_URL` sigue indicando la API de búsqueda.
 
 ## Configuración local
 
@@ -75,7 +75,7 @@ node scripts/gnulahd-live.js adapter               # solo GnulaHD experimental
 node scripts/providers-live.js peliculas          # Matrix
 node scripts/providers-live.js series             # Breaking Bad T1E1
 node scripts/providers-live.js extra              # Mufasa: El rey león en Fanpelis
-node scripts/worker-streams-live.js --playback     # HLS y primeros segmentos del Worker publicado
+node scripts/worker-streams-live.js --playback     # API publicada, HLS y primeros segmentos desde el CDN
 ```
 
-La sonda general de Fanpelis y SpinFlix separa los enlaces extraídos de los aceptados y, en los CDN conocidos, comprueba el manifiesto HLS y el acceso HTTP a un segmento desde el runner. La [sonda de reproducción](docs/worker-streams.md#reparación-de-la-ruta-de-reproducción) sigue la URL que el Worker devuelve a Stremio. Los informes no guardan URLs firmadas ni comprueban reproducción completa en el cliente. RamdonLatam no aloja archivos de video; solo presenta metadatos y enlaces externos.
+La sonda general de Fanpelis y SpinFlix separa los enlaces extraídos de los aceptados y, en los CDN conocidos, comprueba el manifiesto HLS y el acceso HTTP a un segmento desde el runner. La [sonda de enlaces directos](docs/worker-streams.md#cómo-probarlo) toma la URL que el Worker devuelve a Stremio y consulta solo el CDN para el medio, con una lectura acotada de los primeros segmentos. Los informes no guardan URLs firmadas ni comprueban reproducción completa en el cliente. RamdonLatam solo presenta metadatos y enlaces externos.

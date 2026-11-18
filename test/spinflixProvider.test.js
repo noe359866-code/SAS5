@@ -33,7 +33,7 @@ test('SpinFlix verifica la ficha y devuelve solo HLS con doblaje válido', async
   assert.equal(hits.length, 1);
   assert.equal(hits[0].provider, 'spinflix');
   assert.equal(hits[0].audioLabel, 'Castellano');
-  assert.equal(hits[0].directUrl, master);
+  assert.equal(hits[0].url, master);
   assert.equal(hits[0].resolution, '720p');
 });
 
@@ -59,7 +59,7 @@ test('SpinFlix: consulta sin artículo pero valida el título entero y el año d
   const { hits } = await searchSpinFlix('', resolved, resolved.title);
   assert.deepEqual(queries, ['El Círculo', 'Círculo']);
   assert.deepEqual(details, ['/pelicula/circulo-1999']);
-  assert.deepEqual(hits.map(({ directUrl, verification }) => [directUrl, verification]), [[master, 'manifest-ok']]);
+  assert.deepEqual(hits.map(({ url, verification }) => [url, verification]), [[master, 'manifest-ok']]);
 });
 
 test('SpinFlix: verifica IMDb y continúa con otra ficha exacta si el episodio no existe', async (t) => {
@@ -90,7 +90,7 @@ test('SpinFlix: verifica IMDb y continúa con otra ficha exacta si el episodio n
   assert.deepEqual(details, ['/serie/id-confundido', '/serie/sin-episodio', '/serie/con-episodio']);
   assert.deepEqual(episodes, ['/serie/sin-episodio/2/3', '/serie/con-episodio/2/3']);
   assert.match(hits[0].title, /S02E03.*Castellano/);
-  assert.equal(hits[0].directUrl, master);
+  assert.equal(hits[0].url, master);
 });
 
 test('SpinFlix: filtra antes del límite y busca un HLS distinto si el del resolver no se verifica', async (t) => {
@@ -120,7 +120,7 @@ test('SpinFlix: filtra antes del límite y busca un HLS distinto si el del resol
   });
   const resolved = { title: movie.title, year: '2025', mediaType: 'movie' };
   const { hits } = await searchSpinFlix('', resolved, resolved.title);
-  assert.deepEqual(hits.map(({ directUrl, verification }) => [directUrl, verification]), [[master, 'manifest-ok']]);
+  assert.deepEqual(hits.map(({ url, verification }) => [url, verification]), [[master, 'manifest-ok']]);
   assert.deepEqual(requests.slice(3), [dead, embed, master]);
   assert.equal(new URL(requests[2]).searchParams.get('url'), embed);
 });
@@ -147,7 +147,7 @@ test('SpinFlix: no publica un stream_url inválido y vuelve a leer la ficha si c
 
   current = fresh;
   const afterRefresh = await searchSpinFlix('', resolved, resolved.title);
-  assert.deepEqual(afterRefresh.hits.map((hit) => hit.directUrl), [fresh]);
+  assert.deepEqual(afterRefresh.hits.map((hit) => hit.url), [fresh]);
   assert.equal(calls.filter((path) => path === '/pelicula/enlace-no-comprobado').length, 2);
 });
 

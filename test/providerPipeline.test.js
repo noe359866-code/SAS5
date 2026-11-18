@@ -46,8 +46,8 @@ test('la sonda separa manifiestos verificados, bloqueos y URLs no comprobadas si
   t.after(() => config.reload());
   t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
   t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [
-    media('https://cdn.example/no.m3u8?signature=secret', { verification: 'cdn-http-403', transportCheck: 'proxy-timeout' }),
-    media('https://cdn.example/unknown.mp4', { verification: 'https://example.invalid/sensitive', transportCheck: 'proxy-http-403?signature=secret' }),
+    media('https://cdn.example/no.m3u8?signature=secret', { verification: 'cdn-http-403' }),
+    media('https://cdn.example/unknown.mp4', { verification: 'https://example.invalid/sensitive' }),
   ]);
   t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media('https://cdn.example/ok.m3u8', { verification: 'manifest-ok' })]);
   const report = await streams.diagnose('movie', 'tt9998812', null);
@@ -56,7 +56,6 @@ test('la sonda separa manifiestos verificados, bloqueos y URLs no comprobadas si
   assert.deepEqual(report.mediaChecks, { 'cdn-http-403': 1, unchecked: 1, 'manifest-ok': 1 });
   assert.equal(report.providers.fanpelis.accepted, 2);
   assert.deepEqual(report.providers.fanpelis.mediaChecks, { 'cdn-http-403': 1, unchecked: 1 });
-  assert.deepEqual(report.providers.fanpelis.transportChecks, { 'proxy-timeout': 1 });
   assert.doesNotMatch(JSON.stringify(report), /signature|secret|sensitive|cdn\.example/);
 });
 
@@ -108,7 +107,7 @@ test('Worker: el JSON de streams no sale de caché después del límite de la fi
 test('duplicados: un HLS verificado no se pierde si la primera fuente devolvió la misma URL sin verificar', async (t) => {
   const master = 'https://s10.vimeos.net/hls2/fixture/shared.m3u8';
   t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [media(master, { verification: 'cdn-http-403' })]);
-  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media(master, { verification: 'manifest-ok', directUrl: master, transport: 'spinflix' })]);
+  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media(master, { verification: 'manifest-ok' })]);
   const report = {};
   const hits = await streams.runProviders(['fanpelis', 'spinflix'], '', { title: 'Control' }, 'Control', report);
   assert.equal(hits.length, 1);
@@ -116,8 +115,8 @@ test('duplicados: un HLS verificado no se pierde si la primera fuente devolvió 
   assert.equal(report.fanpelis.accepted, 1);
   assert.equal(report.fanpelis.relevant, 0);
   assert.equal(report.spinflix.relevant, 1);
-  const stream = streams.toDirectStream(hits[0], null, 'https://addon.example');
-  assert.match(stream.url, /^https:\/\/addon\.example\/hls\?via=spinflix&/);
+  const stream = streams.toDirectStream(hits[0], null);
+  assert.equal(stream.url, master);
   assert.doesNotMatch(stream.name, /sin verificar/);
 });
 
@@ -150,17 +149,4 @@ test('el presupuesto de una fuente cuenta en común JSON y texto sin hacer petic
   await http.text('https://provider.example/playlist');
   await assert.rejects(() => http.json('https://provider.example/extra'), (err) => err.requestLimit && stopProvider(err));
   assert.equal(fetchMock.mock.callCount(), 2);
-});
-
-test('la sonda distingue el fallo del transporte del rechazo del CDN', async () => {
-  const master = 'https://s10.vimeos.net/hls2/fixture/master.m3u8';
-  const checks = [];
-  const candidate = await inspectVimeos(master, { text: async (value) => {
-    const url = new URL(value);
-    checks.push(url.hostname);
-    throw Object.assign(new Error('no incluir texto del servidor'), { status: url.href === master ? 403 : 502 });
-  } }, { spinflixPlayback: true });
-  assert.deepEqual(checks, ['spinoff.link', 's10.vimeos.net']);
-  assert.equal(candidate.transportCheck, 'proxy-http-502');
-  assert.equal(candidate.verification, 'cdn-http-403');
 });

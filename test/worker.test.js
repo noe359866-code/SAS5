@@ -255,60 +255,47 @@ test('catálogos paginados: Worker acepta extra skip en la ruta de Stremio', asy
   } finally { core.handleCatalog = original; }
 });
 
-
-
-test('/hls: el proxy sirve playlists y segmentos, y rechaza lo que no es media', async () => {
-  const originalFetch = global.fetch;
-  const seen = [];
-  global.fetch = async (url, options) => {
-    seen.push({ url: String(url), referer: options && options.headers && options.headers.Referer });
-    if (/master\.m3u8/.test(String(url))) {
-      return new Response('#EXTM3U\n#EXTINF:10,\nhttps://s10.vimeos.net/a/seg-1.ts?t=x\n', {
-        status: 200,
-        headers: { 'content-type': 'application/vnd.apple.mpegurl' },
-      });
-    }
-    if (/seg-1\.ts/.test(String(url))) {
-      return new Response('TS', { status: 200, headers: { 'content-type': 'video/mp2t' } });
-    }
-    return new Response('no', { status: 403 });
-  };
-  try {
-    const master = `https://addon.example/hls?ref=${encodeURIComponent('https://vimeos.net/')}&u=${encodeURIComponent('https://s10.vimeos.net/a/master.m3u8?t=x')}`;
-    let res = await worker.fetch(new Request(master), env, {});
-    assert.equal(res.status, 200);
-    const body = await res.text();
-    assert.match(body, /\/hls\?ref=/);
-    assert.equal(seen[0].referer, 'https://vimeos.net/');
-
-    // El segmento reescrito del cuerpo también funciona.
-    const rewritten = body.split('\n').find((line) => line.startsWith('/hls?'));
-    res = await worker.fetch(new Request(`https://addon.example${rewritten}`), env, {});
-    assert.equal(res.status, 200);
-    assert.equal(await res.text(), 'TS');
-
-    // Fuera de la lista blanca: 403 y sin tocar la red desde ahí.
-    const before = seen.length;
-    res = await worker.fetch(new Request(`https://addon.example/hls?u=${encodeURIComponent('https://evil.example/x.m3u8')}`), env, {});
-    assert.equal(res.status, 403);
-    assert.equal(seen.length, before);
-  } finally {
-    global.fetch = originalFetch;
+test('/hls retirado: ningún GET o HEAD consulta el CDN ni el transporte anterior', async (t) => {
+  const fetchMock = t.mock.method(global, 'fetch', async () => new Response('no se debe consultar'));
+  const master = encodeURIComponent('https://s10.vimeos.net/a/master.m3u8?t=x');
+  for (const query of [`u=${master}`, `via=spinflix&u=${master}`]) {
+    const path = `/hls?${query}`;
+    const res = await get(path);
+    assert.equal(res.status, 404);
+    assert.equal(res.headers.get('cache-control'), 'no-store');
+    assert.equal((await res.json()).error, 'not_found');
+    assert.equal((await get(path, { method: 'HEAD' })).status, 404);
   }
+  assert.equal(fetchMock.mock.callCount(), 0);
 });
 
-test('Worker: el enlace de Fanpelis en /stream sirve HLS, vídeo y audio por SpinFlix', async (t) => {
+test('Worker: /stream publica el HLS original de Fanpelis sin retransmitir ni reutilizar el JSON antiguo', async (t) => {
   const { encodeConfig } = require('../lib/userConfig');
   const base = 'https://worker.example';
   const master = 'https://s9.vimeos.net/hls2/fixture/master.m3u8?t=test';
-  const variant = new URL('video.m3u8?t=test', master).href;
-  const audio = new URL('es.m3u8?t=test', master).href;
-  const embed = 'https://vimeos.net/embed-transport-test.html';
-  const played = [];
+  const embed = 'https://vimeos.net/embed-direct-test.html';
+  const id = 'tt9006134%3A1%3A2';
+  const cachePath = `/series/${id}?p=fanpelis&b=all`;
+  const previous = `${base}/__edge/stream-v3${cachePath}`;
+  const current = `${base}/__edge/stream-v4${cachePath}`;
+  const entries = new Map([[previous, Response.json({ streams: [{ url: `${base}/hls?via=spinflix&u=${encodeURIComponent(master)}` }] })]]);
+  const matches = [];
+  const originalCaches = globalThis.caches;
+  globalThis.caches = { default: {
+    async match(request) { matches.push(request.url); return entries.get(request.url)?.clone(); },
+    async put(request, response) { entries.set(request.url, response.clone()); },
+  } };
+  t.after(() => {
+    if (originalCaches === undefined) delete globalThis.caches;
+    else globalThis.caches = originalCaches;
+  });
+
+  const upstream = [];
   t.mock.method(require('../lib/tvmaze'), 'showLookupByImdb', async () => null);
   t.mock.method(require('../lib/cinemeta'), 'lookup', async () => ({ name: 'Serie del fixture', releaseInfo: '2009' }));
   t.mock.method(global, 'fetch', async (value, init) => {
     const url = new URL(value);
+    upstream.push(url.href);
     assert.equal(init.redirect, 'manual');
     if (url.hostname === 'fanpelis.to') {
       if (url.pathname.endsWith('/search')) return Response.json({ data: { posts: [{ _id: 100, title: 'Serie del fixture', type: 'tvshows' }] } });
@@ -320,47 +307,29 @@ test('Worker: el enlace de Fanpelis en /stream sirve HLS, vídeo y audio por Spi
       return Response.json({ data: { embeds: [{ lang: 'Latino', url: embed }] } });
     }
     if (url.href === embed) return new Response(`<script>file = '${master}'</script>`);
-    assert.equal(url.origin + url.pathname, 'https://spinoff.link/pelis/proxy.php');
-    const media = url.searchParams.get('url');
-    assert.equal(url.searchParams.get('ref'), 'https://s9.vimeos.net/');
-    played.push(media);
-    if (media === master) {
-      const alreadyProxied = `https://spinoff.link/pelis/proxy.php?url=${encodeURIComponent(audio)}&type=key`;
-      return new Response(`#EXTM3U\n#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="es",LANGUAGE="es",URI="${alreadyProxied}"\n#EXT-X-STREAM-INF:RESOLUTION=1280x720,AUDIO="es"\n${variant}\n`);
-    }
-    if (media === variant || media === audio) return new Response(`#EXTM3U\n#EXTINF:1,\n${media === audio ? 'es' : 'video'}.ts?t=test\n`);
-    assert.ok(media.endsWith('.ts?t=test'));
-    assert.equal(init.headers.Range, 'bytes=0-563');
-    const packets = new Uint8Array(564);
-    for (let i = 0; i < packets.length; i += 188) packets[i] = 0x47;
-    return new Response(packets, { status: 206, headers: { 'Content-Type': 'video/mp2t', 'Content-Range': 'bytes 0-563/16000' } });
+    assert.equal(url.href, master, 'solo se comprueba el manifiesto principal en el CDN');
+    return new Response('#EXTM3U\n#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="es",LANGUAGE="es",URI="es.m3u8?t=test"\n#EXT-X-STREAM-INF:RESOLUTION=1280x720,AUDIO="es"\nvideo.m3u8?t=test\n');
   });
-  const send = (raw, init) => worker.fetch(new Request(new URL(raw, base), init), env, {});
-  const path = '/stream/series/tt9006134%3A1%3A2.json';
+  const send = (path) => worker.fetch(new Request(new URL(path, base)), { ...env, STREAM_PROVIDERS: 'fanpelis' }, {});
+  const path = `/stream/series/${id}.json`;
   const selection = encodeConfig({ streams: ['fanpelis'] });
-  const body = await (await send(`/${selection}${path}`)).json();
+  const response = await send(`/${selection}${path}`);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('access-control-allow-origin'), '*');
+  const body = await response.json();
   assert.equal(body.streams.length, 1);
   const [stream] = body.streams;
-  assert.match(stream.title, /S01E02.*Latino.*Fanpelis/);
+  assert.match(stream.title, /S01E02.*720p.*Latino.*Fanpelis/);
   assert.equal(stream.behaviorHints.notWebReady, true);
   assert.equal(stream.behaviorHints.proxyHeaders, undefined);
-  assert.equal(new URL(stream.url).origin, base);
-  assert.equal(new URL(stream.url).searchParams.get('via'), 'spinflix');
-  const playlist = await (await send(stream.url)).text();
-  assert.ok(!playlist.includes('proxy.php'), 'no anidar el proxy de SpinFlix del manifiesto');
-  const videoPath = playlist.split('\n').find((value) => value.startsWith('/hls?'));
-  const audioPath = playlist.match(/URI="([^"]+)"/)[1];
-  for (const mediaPath of [videoPath, audioPath]) {
-    const variant = await (await send(mediaPath)).text();
-    const first = variant.split('\n').find((value) => value.startsWith('/hls?'));
-    const segment = await send(first, { headers: { Range: 'bytes=0-563' } });
-    assert.equal(segment.status, 206);
-    assert.equal(segment.headers.get('Content-Range'), 'bytes 0-563/16000');
-    assert.equal(segment.headers.get('Access-Control-Allow-Origin'), '*');
-    assert.equal(new Uint8Array(await segment.arrayBuffer())[0], 0x47);
-  }
-  assert.equal(played.length, 6);
+  assert.equal(stream.url, master);
+  assert.deepEqual(matches, [current]);
+  assert.equal((await entries.get(current).json()).streams[0].url, master);
+  assert.deepEqual((await (await send(path)).json()).streams, body.streams);
   const disabled = await (await send(`/${encodeConfig({ streams: [] })}${path}`)).json();
   assert.deepEqual(disabled.streams, []);
-  assert.equal(played.length, 6);
+  assert.deepEqual(upstream.map((url) => new URL(url).origin), [
+    'https://fanpelis.to', 'https://fanpelis.to', 'https://fanpelis.to', 'https://vimeos.net', 'https://s9.vimeos.net',
+  ]);
+  assert.equal(upstream.at(-1), master);
 });

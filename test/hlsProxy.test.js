@@ -87,3 +87,15 @@ test('proxy HLS: un CDN que falla se cuenta como 502/504, no revienta', async ()
   res = await hls.handleHlsProxy(req(), new URL(`https://addon.example/hls?u=${encodeURIComponent(MASTER)}`), {});
   assert.equal(res.status, 504);
 });
+
+test('proxy HLS: no sigue redirecciones ni presenta HTML como una playlist', async () => {
+  const url = new URL(`https://addon.example/hls?u=${encodeURIComponent(MASTER)}`);
+  const requests = mockFetch((_url, options) => {
+    assert.equal(options.redirect, 'manual');
+    return new Response(null, { status: 302, headers: { Location: 'https://other.example/example.m3u8' } });
+  });
+  assert.equal((await hls.handleHlsProxy(req(), url, {})).status, 502);
+  assert.equal(requests.length, 1);
+  mockFetch(() => new Response('<html>error del CDN</html>', { status: 200 }));
+  assert.equal((await hls.handleHlsProxy(req(), url, {})).status, 502);
+});

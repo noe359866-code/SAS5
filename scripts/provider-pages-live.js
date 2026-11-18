@@ -9,6 +9,7 @@ const { annotate } = require('./providers-live');
 const controls = [
   ['FlixLatam película', 'https://flixlatam.com/pelicula/matrix'],
   ['FlixLatam serie', 'https://flixlatam.com/serie/breaking-bad'],
+  ['Cuevana búsqueda', 'https://cuevanas3.pro/search/matrix/'],
   ['Cuevana ficha', 'https://cuevanas3.pro/peliculas/matrix-1999/'],
   ['CineCalidad búsqueda', 'https://www.cinecalidad.am/page/1?s=Matrix'],
   ['CineCalidad ficha', 'https://www.cinecalidad.am/ver-pelicula/matrix/'],
@@ -47,24 +48,52 @@ function shape(html, url) {
     .filter((key) => new RegExp(`\\b${key}\\b`, 'i').test(inline)).join(',') || '—';
   const row = $('#seasons .episodios li').first();
   const options = $('[data-option],.ODDIV li[onclick],.pframe,[data-embed]').toArray().slice(0, 10).map(describe).join(' ') || '—';
-  const target = $('a[href*="/ver-pelicula/matrix/"],a[href*="/online/naruto-100724/"]');
+  const target = $('a[href*="/ver-pelicula/matrix/"],a[href*="/online/naruto-100724/"],a[href*="/peliculas/matrix-1999"]');
   const headings = (el) => $(el).find('h2,h3,.title,time,span').toArray().slice(0, 6).map(marker).join(',') || '—';
-  const cards = target.toArray().slice(0, 3).map((el) => `${marker(el.parent)}:${headings(el)}`).join(' ') || '—';
+  const cards = target.toArray().slice(0, 3).map((el) => {
+    const ancestors = $(el).parents().toArray().slice(0, 4).map(marker).join('>');
+    const shape = $(el).find('img[alt]').length ? 'alt' : 'sin-alt';
+    return `${ancestors}:${headings(el)}:${shape}`;
+  }).join(' ') || '—';
   const firstEpisode = row.find('a.episode-link[href]').first().attr('href');
   let episodePath = '—';
   try {
-    const link = new URL(firstEpisode, url);
-    if (link.origin === origin && !link.search && !link.hash && /^\/[\w/-]+$/.test(link.pathname)) episodePath = link.pathname.replace(/\/\d+(?=\/|$)/g, '/:n');
+    const link = firstEpisode && new URL(firstEpisode, url);
+    if (link?.origin === origin && /^\/[\w/-]+$/.test(link.pathname)) {
+      const hash = /^#s\d+-e\d+$/.test(link.hash) ? link.hash : link.hash ? '#…' : '';
+      episodePath = link.pathname.replace(/\/\d+(?=\/|$)/g, '/:n') + (link.search ? '?…' : '') + hash;
+    }
   } catch { /* sin enlace de episodio */ }
   const audioGroup = $('[data-option]').first().parents().toArray().slice(0, 3).map((el) => marker(el)).join(',') || '—';
   return `scripts=${signals}; rutas=${routes}; video=${nodes('video,video source', 6)}; iframes=${nodes('iframe', 6)}; opciones=${options}; grupo=${audioGroup}; episodio=${row.length ? [describe(row[0]), ...row.find('a,button').toArray().slice(0, 5).map(describe)].join(' ') : '—'} ${episodePath}; tarjetas=${cards}`;
 
 }
 
+async function inspectKnownFrame(html, page, host) {
+  const $ = load(html);
+  const links = $('iframe[src]').toArray().map((el) => {
+    try { return new URL($(el).attr('src'), page); } catch { return null; }
+  });
+  const embed = links.find((url) => url?.hostname === host && url.protocol === 'https:' && !url.username && !url.password && !url.port);
+  if (!embed) return '';
+  try {
+    const text = await fetchText(embed.href, { headers: { Referer: page }, timeoutMs: 4000, redirect: 'manual', maxBytes: 1024 * 1024 });
+    const direct = /(?:["']?file["']?\s*:\s*|\bsources\s*:\s*\[\s*)["']https:\/\/[^"']+\.(?:m3u8|mp4)(?:[?'"#])/i.test(text);
+    const $embed = load(text);
+    return `; visor ${host}: video=${$embed('video[src],video source[src]').length}, iframes=${$embed('iframe[src]').length}, literal=${direct}`;
+  } catch (err) {
+    return `; visor ${host}: ${err.challenge ? 'challenge' : err.status ? `HTTP ${err.status}` : 'sin respuesta'}`;
+  }
+}
+
 async function probe([label, url]) {
   try {
     const html = await fetchText(url, { timeoutMs: 8000, redirect: 'manual', maxBytes: 2 * 1024 * 1024 });
-    annotate(label, shape(html, url));
+    let embedState = '';
+    const host = url === 'https://fuegocine.com/movies/watch/toy-story-5/157' ? 'videro.my'
+      : url === 'https://flixlatam.com/pelicula/matrix' ? 'embed69.org' : null;
+    if (host) embedState = await inspectKnownFrame(html, url, host);
+    annotate(label, shape(html, url) + embedState);
   } catch (err) {
     annotate(label, `sin HTML: ${err.challenge ? 'challenge' : err.status ? `HTTP ${err.status}` : err.timeout ? 'timeout' : 'error de red'}`);
   }

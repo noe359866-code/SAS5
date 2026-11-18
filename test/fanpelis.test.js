@@ -208,9 +208,10 @@ test('fanpelis: aparece en /healthz y en los chips de /configure', () => {
 });
 
 test('fanpelis: utilidades de selección e idioma', () => {
-  // Un título que empieza igual puntúa, pero menos que la coincidencia exacta.
+  // Una coincidencia por prefijo no identifica una película.
   const picked = fanpelis.pickCandidates(SEARCH_MOVIE.data.posts, MOVIE);
-  assert.equal(picked[0]._id, 18507);
+  assert.deepEqual(picked.map((item) => item._id), [18507]);
+  assert.deepEqual(fanpelis.pickCandidates([{ ...picked[0], release_date: '2009-05-16' }], MOVIE), []);
   assert.equal(fanpelis.audioLabelOf('Latino'), 'Latino');
   assert.equal(fanpelis.audioLabelOf('Castellano'), 'Castellano');
   assert.equal(fanpelis.audioLabelOf('Subtitulado'), 'Subtitulado');

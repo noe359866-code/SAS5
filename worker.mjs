@@ -356,7 +356,7 @@ async function handleRequest(request, env, ctx) {
         request,
         ctx,
         createConfigure,
-        `${origin}/__edge/configure.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}&kofi=${encodeURIComponent(config.kofiUrl || '')}&sup=${encodeURIComponent(config.supportUrl || '')}`
+        `${origin}/__edge/configure.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}&kofi=${encodeURIComponent(config.kofiUrl || '')}&sup=${encodeURIComponent(config.supportUrl || '')}&streams=${encodeURIComponent(streams.activeProviders(null).join(','))}`
       );
     }
 

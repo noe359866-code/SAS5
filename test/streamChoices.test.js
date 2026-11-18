@@ -43,8 +43,9 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   assert.deepEqual(cfg.streams, ['fanpelis']);
   assert.equal('streamTypes' in cfg, false);
   assert.equal('streamLanguages' in cfg, false);
-  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'fuegocine', 'animeonlineninja', 'cuevana3']);
+  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'fuegocine', 'animeonlineninja', 'cuevana3', 'gnulahd']);
   assert.equal(choice.providerType('fanpelis'), 'direct');
+  assert.equal(choice.providerType('gnulahd'), 'direct');
   assert.equal(choice.providerType('retired-indexer'), null);
   assert.equal(user.normalizeConfig({ streams: [] }, [], [], streams.PROVIDER_KEYS).streams.length, 0);
   assert.equal(user.normalizeConfig({ streams: ['retired-indexer'] }, [], [], streams.PROVIDER_KEYS).streams, null);
@@ -55,12 +56,14 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   } finally { config.streamProviders = originalProviders; }
 });
 
-test('sin STREAM_PROVIDERS se consultan las siete fuentes; los overrides se respetan', (t) => {
+test('sin STREAM_PROVIDERS se consultan las ocho fuentes, incluida GnulaHD experimental; se respetan los overrides', (t) => {
   t.after(() => config.reload());
   config.reload({});
   assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS);
+  assert.ok(streams.activeProviders(null).includes('gnulahd'));
   assert.deepEqual(streams.activeProviders({ streams: [] }), []);
   assert.deepEqual(streams.activeProviders({ streams: ['cuevana3'] }), ['cuevana3']);
+  assert.deepEqual(streams.activeProviders({ streams: ['gnulahd'] }), ['gnulahd']);
   config.reload({ STREAM_PROVIDERS: 'all', PLAYLATIN: 'off' });
   assert.deepEqual(streams.activeProviders(null), streams.PROVIDER_KEYS.filter((key) => key !== 'playlatin'));
   config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix' });

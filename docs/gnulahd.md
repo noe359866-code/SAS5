@@ -1,8 +1,10 @@
 # GnulaHD: evaluación para RamdonLatam / Stremio
 
-**Estado al 18 de noviembre de 2026: candidato, no habilitado.** Se identificaron las cuatro películas y los dos capítulos de la muestra ampliada. No se verificó un medio directo con audio en español ni su reproducción fuera de la web. El registro de fuentes y `/configure` no cambiaron.
+**Estado al 18 de noviembre de 2026: fuente experimental habilitada por defecto.** Aparece marcada como **GnulaHD (experimental)** en `/configure`. Una instalación con selección explícita de fuentes la conserva: si no incluye GnulaHD, hay que marcarla y actualizar la instalación. `STREAM_PROVIDERS` sigue permitiendo limitar o apagar fuentes.
 
-## Identidad e idioma
+El adaptador intenta fichas públicas por título y año y verifica su tipo. En series solo visita el capítulo que enlaza la ficha y comprueba la numeración y el regreso a la serie. No usa búsquedas ni APIs bloqueadas, visores o descargas. Solo ofrece un HLS enlazado en un `<video>` o `<source>` con etiqueta de audio **Latino** o **Castellano** y manifiesto válido. En esta prueba se limita al mismo origen, sin credenciales, firmas ni redirecciones seguidas. Una fuente activa **no** garantiza un resultado: la auditoría no verificó reproducción externa en ninguno de los controles.
+
+## Identidad e idioma observados en la auditoría
 
 | Control | Identidad corroborada | Opciones del menú observado en la web |
 |---|---|---|
@@ -23,7 +25,7 @@ La [primera sonda](https://github.com/noe359866-code/SAS5/actions/runs/442366257
 
 La sonda se limita a las fichas públicas conocidas y sus enlaces publicados de episodios. No ejecuta JavaScript, descarga scripts externos, recorre el buscador o los listados, ni llama a AJAX, REST o rutas de visor que `robots.txt` excluye para clientes de IA. No consulta descargas ni sigue iframes externos. No registra cuerpos de peticiones, URLs de reproducción completas ni valores de sesión. Por tanto, **no evaluó una respuesta del reproductor, el CDN, el audio real ni Stremio**. El resultado no afirma que GnulaHD no reproduzca en su propia web.
 
-## Qué justificaría reconsiderarlo
+## Qué falta verificar para considerarla estable
 
 Primero, observar una reproducción normal y autorizada: *El Origen* permite comparar Latino con Castellano en la misma ficha; *Breaking Bad* T2E3 sirve para comprobar un episodio exacto. Hay que oír el diálogo para corroborar el idioma y distinguir un medio de un iframe. Para compartir el resultado basta indicar título, idioma oído, tipo de respuesta y estado HTTP, sin cookies, tokens, URLs firmadas ni un HAR completo.
 
@@ -31,4 +33,6 @@ Solo si hay una vía permitida y un medio directo, verificar un manifiesto HLS y
 
 ## Repetir la sonda
 
-Ejecuta **GnulaHD en vivo** (`.github/workflows/gnulahd.yml`) o `node scripts/gnulahd-live.js` con Node 22 y las dependencias de desarrollo instaladas. `node --test test/gnulahdLive.test.js` comprueba con HTML simulado la identidad, las exclusiones, la separación de scripts y que no se emitan URLs o valores de peticiones. Un check verde significa que terminó el diagnóstico, no que haya streams compatibles. El workflow no despliega.
+- En la instancia del addon, comprueba `sources.gnulahd` en `/healthz` y `providers.gnulahd` en `/internal/streams-test.json?type=movie&id=tt1375666` (*El Origen*). `no-public-media` significa que encontró la ficha o episodio exacto, pero no un HLS directo con las condiciones anteriores.
+- Con Node 22 y las dependencias instaladas, ejecuta `node scripts/gnulahd-live.js adapter` o **GnulaHD en vivo** (`.github/workflows/gnulahd.yml`) para probar el adaptador registrado en los seis controles. Sin `adapter`, el script solo repite la inspección estática.
+- `node --test test/gnulahd*.test.js` usa HTML y HLS simulados para verificar el flujo y las exclusiones. Un check verde no prueba reproducción ni audio real. El workflow no despliega.

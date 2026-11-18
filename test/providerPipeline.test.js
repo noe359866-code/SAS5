@@ -4,7 +4,6 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const config = require('../lib/config');
 const streams = require('../lib/streams');
-const { inspectVimeos } = require('../lib/vimeos');
 
 const media = (url, extras = {}) => ({ title: 'Control', url, audioLabel: 'Latino', ...extras });
 
@@ -41,48 +40,46 @@ test('el diagnóstico de fuente cuenta medios aceptados independientemente de lo
   assert.equal(report.spinflix.relevant, 0);
 });
 
-test('la sonda separa manifiestos verificados, bloqueos y URLs no comprobadas sin revelar firmas', async (t) => {
+test('el diagnóstico cuenta candidatos aceptados sin sondeos ni URLs firmadas', async (t) => {
   config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix' });
   t.after(() => config.reload());
   t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
   t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [
-    media('https://cdn.example/no.m3u8?signature=secret', { verification: 'cdn-http-403' }),
-    media('https://cdn.example/unknown.mp4', { verification: 'https://example.invalid/sensitive' }),
+    media('https://cdn.example/no.m3u8?signature=secret'),
+    media('https://cdn.example/unknown.mp4'),
   ]);
-  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media('https://cdn.example/ok.m3u8', { verification: 'manifest-ok' })]);
+  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media('https://cdn.example/ok.m3u8')]);
   const report = await streams.diagnose('movie', 'tt9998812', null);
   assert.equal(report.totalStreams, 3);
-  assert.equal(report.verifiedManifests, 1);
-  assert.deepEqual(report.mediaChecks, { 'cdn-http-403': 1, unchecked: 1, 'manifest-ok': 1 });
+  assert.equal(report.mediaProbed, false, 'el diagnóstico declara que no se sondean medios');
+  assert.equal('mediaChecks' in report, false);
   assert.equal(report.providers.fanpelis.accepted, 2);
-  assert.deepEqual(report.providers.fanpelis.mediaChecks, { 'cdn-http-403': 1, unchecked: 1 });
-  assert.doesNotMatch(JSON.stringify(report), /signature|secret|sensitive|cdn\.example/);
+  assert.doesNotMatch(JSON.stringify(report), /signature|secret|cdn\.example/);
 });
 
-test('el límite de resultados no oculta el HLS verificado detrás de enlaces no comprobados', async (t) => {
+test('el límite de resultados se aplica en el orden de las fuentes', async (t) => {
   config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix', STREAM_MAX_RESULTS: '2' });
   t.after(() => config.reload());
   t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
   t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [
-    media('https://cdn.example/no.m3u8', { verification: 'cdn-http-403' }),
-    media('https://cdn.example/unknown.mp4'),
+    media('https://cdn.example/uno.m3u8'),
+    media('https://cdn.example/dos.mp4'),
   ]);
-  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media('https://cdn.example/ok.m3u8', { verification: 'manifest-ok' })]);
+  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media('https://cdn.example/tres.m3u8')]);
   const result = await streams.searchStreams('movie', 'tt9998813', null);
-  assert.deepEqual(result.map((stream) => stream.url), ['https://cdn.example/ok.m3u8', 'https://cdn.example/unknown.mp4']);
-  const unverified = streams.toDirectStream(media('https://cdn.example/no.m3u8', { verification: 'cdn-http-403' }));
-  assert.match(unverified.name, /sin verificar/);
-  assert.equal(unverified.behaviorHints.notWebReady, true);
+  assert.deepEqual(result.map((stream) => stream.url),
+    ['https://cdn.example/uno.m3u8', 'https://cdn.example/dos.mp4']);
+  assert.equal(result[0].name, 'Control');
 });
 
-test('Vimeos no presenta HTML ni enlaces caídos como HLS y no inventa calidad cuando el CDN niega la sonda', async () => {
+test('Vimeos: solo publica .m3u8 con forma válida y no sondea el CDN', async () => {
+  const { vimeosMedia, hlsCandidate } = require('../lib/vimeos');
   const master = 'https://s10.vimeos.net/example/master.m3u8';
-  assert.equal(await inspectVimeos(master, { text: async () => '<html>no video</html>' }), null);
-  for (const status of [403, 404]) {
-    const media = await inspectVimeos(master, { text: async () => { throw Object.assign(new Error('no'), { status }); } });
-    if (status === 404) assert.equal(media, null);
-    else assert.deepEqual(media, { master, expiresAt: null, resolution: null, verification: 'cdn-http-403' });
-  }
+  assert.deepEqual(vimeosMedia(master), { master, expiresAt: null, resolution: null });
+  // Host ajeno, extensión distinta o firma vencida siguen fuera.
+  assert.equal(vimeosMedia('https://cdn.example/x.m3u8'), null);
+  assert.equal(vimeosMedia('https://s10.vimeos.net/x.mp4'), null);
+  assert.equal(hlsCandidate('https://s10.vimeos.net/x.m3u8?s=1600000000&e=60'), null);
 });
 
 test('Worker: el JSON de streams no sale de caché después del límite de la firma', async (t) => {
@@ -104,41 +101,38 @@ test('Worker: el JSON de streams no sale de caché después del límite de la fi
   assert.equal(calls, 2);
 });
 
-test('duplicados: un HLS verificado no se pierde si la primera fuente devolvió la misma URL sin verificar', async (t) => {
+test('duplicados: la primera fuente que entrega la URL se queda con ella', async (t) => {
   const master = 'https://s10.vimeos.net/hls2/fixture/shared.m3u8';
-  t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [media(master, { verification: 'cdn-http-403' })]);
-  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media(master, { verification: 'manifest-ok' })]);
+  t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [media(master)]);
+  t.mock.method(streams.SEARCHERS, 'spinflix', async () => [media(master)]);
   const report = {};
   const hits = await streams.runProviders(['fanpelis', 'spinflix'], '', { title: 'Control' }, 'Control', report);
   assert.equal(hits.length, 1);
-  assert.equal(hits[0].provider, 'spinflix');
+  assert.equal(hits[0].provider, 'fanpelis');
   assert.equal(report.fanpelis.accepted, 1);
-  assert.equal(report.fanpelis.relevant, 0);
-  assert.equal(report.spinflix.relevant, 1);
+  assert.equal(report.fanpelis.relevant, 1);
+  assert.equal(report.spinflix.accepted, 1);
+  assert.equal(report.spinflix.relevant, 0);
   const stream = streams.toDirectStream(hits[0], null);
   assert.equal(stream.url, master);
-  assert.doesNotMatch(stream.name, /sin verificar/);
+  assert.equal(stream.name, 'Control');
 });
 
-test('Worker: los resultados exclusivamente sin verificar se vuelven a sondear en 30 segundos', async (t) => {
+test('Worker: el pool de enlaces publicados se reutiliza durante la ventana de caché', async (t) => {
   const worker = (await import('../worker.mjs')).default;
-  let now = Date.now();
   let calls = 0;
-  t.mock.method(Date, 'now', () => now);
   t.mock.method(global, 'fetch', async () => Response.json({ meta: { name: 'Control' } }));
-  t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [media('https://cdn.example/recheck.m3u8', {
-    verification: ++calls > 1 ? 'manifest-ok' : 'cdn-http-403',
-  })]);
+  t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [media(`https://cdn.example/pool-${++calls}.m3u8`)]);
   const env = { STREAM_PROVIDERS: 'fanpelis', STREAM_STALE_SECONDS: '600' };
   t.after(() => config.reload());
   const request = () => worker.fetch(new Request('https://audit.example/stream/movie/tt9998814.json'), env, {});
   const first = await request();
-  assert.equal(first.headers.get('cache-control'), 'public, max-age=30, s-maxage=30, must-revalidate');
-  assert.match((await first.json()).streams[0].name, /sin verificar/);
-  now += 31_000;
-  const next = await request();
-  assert.doesNotMatch((await next.json()).streams[0].name, /sin verificar/);
-  assert.equal(calls, 2);
+  assert.match((await first.json()).streams[0].url, /pool-1\.m3u8$/);
+  // Sin sondeo no hay nada que «recomprobar»: la segunda petición sale de la
+  // caché y no vuelve a llamar a la fuente.
+  const second = await request();
+  assert.match((await second.json()).streams[0].url, /pool-1\.m3u8$/);
+  assert.equal(calls, 1);
 });
 
 test('el presupuesto de una fuente cuenta en común JSON y texto sin hacer peticiones extra', async (t) => {

@@ -10,7 +10,7 @@ latino. Los episodios se omiten hasta poder identificar el capítulo exacto.
 El resolver analiza campos HLS o MP4 y subtítulos VTT explícitos del visor, incluso cuando el script usa el
 empaquetador compatible con `lib/vimeos.js`, sin ejecutarlo. Solo consulta los
 hosts de visores permitidos y no sigue redirecciones. El dominio CDN extraído no
-se consulta desde el Worker: los resultados aparecen como **sin verificar** y
+se consulta desde el Worker: los resultados se publican **sin comprobar el CDN** y
 pueden fallar por caducidad, Referer, CORS, IP o protección del CDN. No se ha
 probado la reproducción completa ni se ha confirmado en vivo que el HTML
 actual tenga los campos que analiza el adaptador. Solo se implementa la extracción estática básica de VidHide y Dropload; si el host exige redirecciones, cabeceras de reproducción especiales o desafíos, puede fallar. No se implementaron los resolvers Streamtape, Netu, VOE ni el resto de los reproductores.

@@ -401,7 +401,7 @@ async function handleRequest(request, env, ctx) {
         {
           ok: true,
           addon: 'org.comunidad.catalogos.plus',
-          version: '1.6.0',
+          version: '1.6.1',
           runtime: 'cloudflare-workers',
           configurable: true,
           catalogs: core.CATALOGS.length,

@@ -1,6 +1,6 @@
 {
   "name": "stremio-addon-catalogos",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Addon de Stremio con catálogos de películas y series: Tendencias, Populares, Top Valoradas, por plataforma de streaming (Netflix, Prime Video, Disney+, Max, Apple TV+, Paramount+, Star+, Crunchyroll) y por estudio (Marvel, Pixar, A24, Ghibli...). TMDB + TVMaze + OMDB.",
   "main": "api/index.js",
   "scripts": {

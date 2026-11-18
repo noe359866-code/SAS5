@@ -7,7 +7,7 @@ const { searchSpinFlix } = require('../lib/spinflix');
 const BASE = 'https://lamoviebot.tvymas.workers.dev';
 const PLAYLIST = '#EXTM3U\n#EXTINF:1,\nvideo.ts\n';
 
-test('SpinFlix verifica la ficha y devuelve solo HLS con doblaje válido', async (t) => {
+test('SpinFlix verifica la ficha y devuelve el HLS con doblaje válido sin sondearlo', async (t) => {
   const master = 'https://s9.vimeos.net/fixture/master.m3u8';
   const embed = 'https://vimeos.net/embed-fixture';
   const movie = { imdb_id: 'tt900101', title: 'Prueba SpinFlix', year: 2025, slug: 'prueba-spinflix', type: 'movies' };
@@ -22,19 +22,19 @@ test('SpinFlix verifica la ficha y devuelve solo HLS con doblaje válido', async
       { link: 'https://vimeos.net.evil.example/embed', language: 'Latino' },
       { link: embed, language: 'Castellano' },
     ] } });
-    if (raw === master) return new Response('#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=900000,RESOLUTION=1728x720\nv720.m3u8');
+    if (raw === master) throw new Error('el manifiesto no se descarga');
     assert.equal(url.pathname, '/streamurl');
     assert.equal(url.searchParams.get('url'), embed);
     return Response.json({ qualities: [{ url: master }] });
   });
   const resolved = { title: movie.title, year: '2025', mediaType: 'movie', imdbId: movie.imdb_id };
   const hits = await runProviders(['spinflix'], movie.title, resolved, movie.title, {});
-  assert.deepEqual(calls, ['/search', '/pelicula/prueba-spinflix', '/streamurl', '/fixture/master.m3u8']);
+  assert.deepEqual(calls, ['/search', '/pelicula/prueba-spinflix', '/streamurl']);
   assert.equal(hits.length, 1);
   assert.equal(hits[0].provider, 'spinflix');
   assert.equal(hits[0].audioLabel, 'Castellano');
   assert.equal(hits[0].url, master);
-  assert.equal(hits[0].resolution, '720p');
+  assert.equal(hits[0].resolution, null, 'sin sondeo no se anuncia resolución');
 });
 
 test('SpinFlix: consulta sin artículo pero valida el título entero y el año de la ficha', async (t) => {
@@ -59,7 +59,8 @@ test('SpinFlix: consulta sin artículo pero valida el título entero y el año d
   const { hits } = await searchSpinFlix('', resolved, resolved.title);
   assert.deepEqual(queries, ['El Círculo', 'Círculo']);
   assert.deepEqual(details, ['/pelicula/circulo-1999']);
-  assert.deepEqual(hits.map(({ url, verification }) => [url, verification]), [[master, 'manifest-ok']]);
+  assert.deepEqual(hits.map((hit) => hit.url), [master]);
+  assert.equal('verification' in hits[0], false);
 });
 
 test('SpinFlix: verifica IMDb y continúa con otra ficha exacta si el episodio no existe', async (t) => {
@@ -93,10 +94,9 @@ test('SpinFlix: verifica IMDb y continúa con otra ficha exacta si el episodio n
   assert.equal(hits[0].url, master);
 });
 
-test('SpinFlix: filtra antes del límite y busca un HLS distinto si el del resolver no se verifica', async (t) => {
+test('SpinFlix: filtra antes del límite y se queda con el primer HLS válido del resolver', async (t) => {
   const movie = { title: 'Control de resolver', slug: 'control-de-resolver', year: 2025, type: 'movies' };
   const embed = 'https://vimeos.net/embed-fixture-alternativa.html';
-  const dead = 'https://s9.vimeos.net/hls2/fixture/denied.m3u8';
   const master = 'https://s9.vimeos.net/hls2/fixture/working.m3u8';
   const expired = 'https://s9.vimeos.net/hls2/fixture/expired.m3u8?s=1600000000&e=60';
   const mp4 = 'https://s9.vimeos.net/hls2/fixture/not-hls.mp4';
@@ -112,43 +112,38 @@ test('SpinFlix: filtra antes del límite y busca un HLS distinto si el del resol
       { language: 'Latino', link: embed },
       { language: 'Latino', link: embed },
     ] } });
-    if (url.pathname === '/streamurl') return Response.json({ qualities: [{ url: mp4 }, { url: expired }, { url: dead }] });
-    if (url.href === dead) return new Response(null, { status: 403 });
-    if (url.href === embed) return new Response(`<script>const files=['${dead}', '${expired}', '${master}']</script>`);
-    if (url.href === master) return new Response(PLAYLIST);
-    throw new Error('Petición inesperada');
+    // El MP4 y el HLS con la firma vencida se descartan por su forma; el
+    // resto ni se pide al CDN.
+    if (url.pathname === '/streamurl') return Response.json({ qualities: [{ url: mp4 }, { url: expired }, { url: master }] });
+    throw new Error(`no debería pedirse ${url.pathname}`);
   });
   const resolved = { title: movie.title, year: '2025', mediaType: 'movie' };
   const { hits } = await searchSpinFlix('', resolved, resolved.title);
-  assert.deepEqual(hits.map(({ url, verification }) => [url, verification]), [[master, 'manifest-ok']]);
-  assert.deepEqual(requests.slice(3), [dead, embed, master]);
+  assert.deepEqual(hits.map((hit) => hit.url), [master]);
+  assert.equal('verification' in hits[0], false);
+  assert.deepEqual(requests.slice(3), [], 'no se consulta el manifiesto');
   assert.equal(new URL(requests[2]).searchParams.get('url'), embed);
 });
 
-test('SpinFlix: no publica un stream_url inválido y vuelve a leer la ficha si cambia la URL', async (t) => {
-  const movie = { title: 'Enlace no comprobado', slug: 'enlace-no-comprobado', year: 2025, type: 'movies' };
-  const dead = 'https://s9.vimeos.net/hls2/fixture/invalid.m3u8';
-  const fresh = 'https://s9.vimeos.net/hls2/fixture/refreshed.m3u8';
+test('SpinFlix: un stream_url que no es HLS válido no se publica', async (t) => {
+  const movie = { title: 'Enlace no válido', slug: 'enlace-no-valido', year: 2025, type: 'movies' };
+  const mp4 = 'https://s9.vimeos.net/hls2/fixture/pelicula.mp4';
   const calls = [];
-  let current = dead;
   t.mock.method(global, 'fetch', async (raw) => {
     const url = new URL(raw);
     calls.push(url.pathname);
     if (url.pathname === '/search') return Response.json({ results: [movie] });
-    if (url.pathname === '/pelicula/enlace-no-comprobado') return Response.json({ ...movie, embeds: { video: [{ language: 'Latino', stream_url: current }] } });
-    if (url.href === fresh) return new Response(PLAYLIST);
-    return new Response('<html>No es un manifiesto</html>');
+    if (url.pathname === '/pelicula/enlace-no-valido') {
+      return Response.json({ ...movie, embeds: { video: [{ language: 'Latino', stream_url: mp4 }] } });
+    }
+    throw new Error(`petición inesperada ${url.pathname}`);
   });
   const resolved = { title: movie.title, year: '2025', mediaType: 'movie' };
   const out = await searchSpinFlix('', resolved, resolved.title);
   assert.deepEqual(out.hits, []);
   assert.equal(out.reason, 'no-compatible-media');
-  assert.deepEqual(calls, ['/search', '/pelicula/enlace-no-comprobado', '/hls2/fixture/invalid.m3u8']);
-
-  current = fresh;
-  const afterRefresh = await searchSpinFlix('', resolved, resolved.title);
-  assert.deepEqual(afterRefresh.hits.map((hit) => hit.url), [fresh]);
-  assert.equal(calls.filter((path) => path === '/pelicula/enlace-no-comprobado').length, 2);
+  // Sin `link` no hay visor del que extraer: la ficha se lee una sola vez.
+  assert.deepEqual(calls, ['/search', '/pelicula/enlace-no-valido']);
 });
 
 test('SpinFlix: un rechazo del resolver detiene la búsqueda en vez de consultar el visor', async (t) => {

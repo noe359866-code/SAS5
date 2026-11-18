@@ -307,8 +307,7 @@ test('Worker: /stream publica el HLS original de Fanpelis sin retransmitir ni re
       return Response.json({ data: { embeds: [{ lang: 'Latino', url: embed }] } });
     }
     if (url.href === embed) return new Response(`<script>file = '${master}'</script>`);
-    assert.equal(url.href, master, 'solo se comprueba el manifiesto principal en el CDN');
-    return new Response('#EXTM3U\n#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="es",LANGUAGE="es",URI="es.m3u8?t=test"\n#EXT-X-STREAM-INF:RESOLUTION=1280x720,AUDIO="es"\nvideo.m3u8?t=test\n');
+    throw new Error(`no se consulta el CDN: ${url.href}`);
   });
   const send = (path) => worker.fetch(new Request(new URL(path, base)), { ...env, STREAM_PROVIDERS: 'fanpelis' }, {});
   const path = `/stream/series/${id}.json`;
@@ -319,7 +318,8 @@ test('Worker: /stream publica el HLS original de Fanpelis sin retransmitir ni re
   const body = await response.json();
   assert.equal(body.streams.length, 1);
   const [stream] = body.streams;
-  assert.match(stream.title, /S01E02.*720p.*Latino.*Fanpelis/);
+  assert.equal(stream.name, 'Serie del fixture');
+  assert.match(stream.title, /T1E2.*Fanpelis.*Latino/);
   assert.equal(stream.behaviorHints.notWebReady, true);
   assert.equal(stream.behaviorHints.proxyHeaders, undefined);
   assert.equal(stream.url, master);
@@ -329,7 +329,6 @@ test('Worker: /stream publica el HLS original de Fanpelis sin retransmitir ni re
   const disabled = await (await send(`/${encodeConfig({ streams: [] })}${path}`)).json();
   assert.deepEqual(disabled.streams, []);
   assert.deepEqual(upstream.map((url) => new URL(url).origin), [
-    'https://fanpelis.to', 'https://fanpelis.to', 'https://fanpelis.to', 'https://vimeos.net', 'https://s9.vimeos.net',
-  ]);
-  assert.equal(upstream.at(-1), master);
+    'https://fanpelis.to', 'https://fanpelis.to', 'https://fanpelis.to', 'https://vimeos.net',
+  ], 'la búsqueda no toca el CDN');
 });

@@ -8,11 +8,11 @@ Addon gratuito para Stremio con catálogos de películas y series, metadatos en 
 
 | Clave | Web consultada | Identificación y medios compatibles |
 |---|---|---|
-| `fanpelis` | `fanpelis.to` | API de títulos y episodios; si no se verifica el HLS de la primera publicación de un episodio, puede probar otra con la misma temporada y número. |
+| `fanpelis` | `fanpelis.to` | API de títulos y episodios; publica el primer HLS de la primera publicación exacta del episodio. |
 | `spinflix` | `lamoviebot.tvymas.workers.dev` | Busca variantes del título y confirma la ficha por ID o por título completo y año compatible. Si falta el episodio en una ficha candidata, comprueba la siguiente sin cambiar de capítulo. |
 | `gnulahd` | `ww3.gnulahd.nu` | Experimental: verifica la ficha o el episodio exacto y solo admite HLS directo publicado en el HTML con etiqueta de audio explícita. [Estado y cómo probarlo](docs/gnulahd.md). |
 | `videoapp` | `videoapp.zip` | Experimental: obtiene el iframe Vimeos por ID TMDB y busca HLS. Solo publica el resultado si el iframe identifica audio latino o castellano; la muestra de Interestelar no lo indica, por lo que se informa `audio-unverified` y no se anuncia como reproducible. |
-| `pelisplus` | `pelisplushd.la` | Experimental, solo películas: busca la ficha y confirma título y año; intenta extraer HLS o MP4 de visores Streamwish/Filelions, VidHide y Dropload conocidos con audio identificado. Los enlaces se entregan **sin verificar**, y no se garantiza que funcionen en el cliente. [Detalles](docs/pelisplus.md). |
+| `pelisplus` | `pelisplushd.la` | Experimental, solo películas: busca la ficha y confirma título y año; intenta extraer HLS o MP4 de visores Streamwish/Filelions, VidHide y Dropload conocidos con audio identificado. Los enlaces se entregan tal cual, sin comprobar el CDN. [Detalles](docs/pelisplus.md). |
 
 Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro por defecto. Una lista como `fanpelis,spinflix` limita las fuentes; `STREAM_PROVIDERS=off` apaga todas y `FANPELIS=off` desactiva solo Fanpelis. Para pregenerar la web con `npm run build:web`, usa la misma configuración de fuentes que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
 
@@ -20,7 +20,11 @@ Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro po
 
 Se retiraron FlixLatam, PlayLatinSRC, FuegoCine, AnimeOnlineNinja y Cuevana 3 porque no dieron una ruta de reproducción fiable en los controles. Se conservan los informes históricos de [FlixLatam y Cuevana 3](docs/flixlatam-cuevana.md), [FuegoCine](docs/fuegocine.md) y [PlayLatinSRC](docs/playlatinsrc-2026-11-17.md). Las variables `PLAYLATIN` y `PLAYLATIN_URL` ya no tienen efecto.
 
-Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. Fanpelis y SpinFlix filtran los visores por idioma y origen antes de probarlos y mantienen un límite de tiempo y peticiones por búsqueda. Si la API o un visor rechaza el acceso, no se intenta resolver el desafío ni se ejecuta JavaScript externo. Los enlaces con vencimiento conocido se retiran con margen. Cuando dos resultados tienen la misma URL, prevalece el mejor comprobado; si solo hay enlaces sin verificar, se guardan por poco tiempo para volver a comprobarlos pronto.
+Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. Fanpelis y SpinFlix filtran los visores por idioma y origen antes de usarlos y mantienen un límite de tiempo y peticiones por búsqueda. Si la API o un visor rechaza el acceso, no se intenta resolver el desafío ni se ejecuta JavaScript externo. Los enlaces con vencimiento conocido se retiran con margen. Cuando dos fuentes entregan la misma URL, se publica una sola vez.
+
+**Nombre del stream:** Stremio muestra el nombre de la obra («Interestelar», «Breaking Bad») en la fila de fuentes; la descripción queda para lo que se elige —capítulo, servidor y audio— y, debajo, los distintivos de calidad (`1080p · WEB-DL · LAT`). La calidad ya no es el nombre de la entrada.
+
+**Sin comprobar el medio:** el addon ya no descarga manifiestos HLS ni MP4 ni sondea segmentos. Solo valida la forma de la URL (host conocido, extensión, sin credenciales y con firma viva) antes de publicarla, así que una búsqueda gasta menos peticiones y no toca el CDN del proveedor. La contrapartida es que un enlace caído se descubre al abrirlo, no al pedir la lista; los scripts de `scripts/` siguen pudiendo sondear el CDN desde el runner si hace falta revisar algo.
 
 **Sin proxy de reproducción:** `/stream` devuelve la URL original del CDN. El addon puede comprobar el manifiesto al buscar un enlace, pero no retransmite playlists, variantes, claves, audio ni segmentos. Al retirar `/hls`, la reproducción ya no genera invocaciones sucesivas del Worker para esos recursos. `/stream` sigue siendo una consulta dinámica. Si el CDN rechaza el acceso directo o no ofrece CORS para Stremio Web, el enlace puede no reproducirse; no se recurre a un proxy alternativo. Las variables antiguas `SPINFLIX_PROXY_URL` y `HLS_PROXY_HOSTS` ya no tienen efecto; `SPINFLIX_URL` sigue indicando la API de búsqueda.
 
@@ -76,7 +80,7 @@ npm run deploy
 
 - Comprueba `/stream/movie/tt0816692.json` (Interestelar) para distinguir una respuesta vacía de un problema de reproducción. Si usas una URL personal, prueba la ruta con el mismo prefijo de configuración. Si desmarcaste todas las fuentes o las que elegiste siguen registradas pero el despliegue no las permite, abre `/configure` y actualiza la instalación con al menos una fuente habilitada.
 - Para una serie, el ID de un episodio tiene el formato `id:temporada:episodio`, por ejemplo `/stream/series/tt0903747:1:1.json`. El ID de la serie sin episodio no es un ID reproducible.
-- `/internal/streams-test.json?type=movie&id=tt0133093` muestra el diagnóstico de las fuentes de la configuración por defecto. `totalStreams` cuenta candidatos, no reproducciones: `verifiedManifests` y `mediaChecks` distinguen los manifiestos comprobados de los rechazos HTTP del CDN y los medios sin comprobar.
+- `/internal/streams-test.json?type=movie&id=tt0133093` muestra el diagnóstico de las fuentes de la configuración por defecto. `totalStreams` cuenta candidatos, no reproducciones: el addon no sondea el medio (`mediaProbed: false`), así que un enlace publicado puede no reproducirse en el cliente.
 - Para distinguir un fallo del API de un 403 de reproducción, consulta la [sonda del Worker publicado](docs/worker-streams.md). El catálogo y el manifest pueden seguir funcionando aunque el CDN no entregue el vídeo.
 
 ## Desarrollo y pruebas
@@ -98,4 +102,4 @@ node scripts/providers-live.js extra              # Mufasa: El rey león en Fanp
 node scripts/worker-streams-live.js --playback     # API publicada, HLS y primeros segmentos desde el CDN
 ```
 
-La sonda general de Fanpelis y SpinFlix separa los enlaces extraídos de los aceptados y, en los CDN conocidos, comprueba el manifiesto HLS y el acceso HTTP a un segmento desde el runner. La [sonda de enlaces directos](docs/worker-streams.md#cómo-probarlo) toma la URL que el Worker devuelve a Stremio y consulta solo el CDN para el medio, con una lectura acotada de los primeros segmentos. Los informes no guardan URLs firmadas ni comprueban reproducción completa en el cliente. RamdonLatam solo presenta metadatos y enlaces externos.
+La sonda general de Fanpelis y SpinFlix separa los enlaces extraídos de los aceptados y, en los CDN conocidos, comprueba desde el runner el manifiesto HLS y el acceso HTTP a un segmento (el addon en producción ya no hace esa comprobación). La [sonda de enlaces directos](docs/worker-streams.md#cómo-probarlo) toma la URL que el Worker devuelve a Stremio y consulta solo el CDN para el medio, con una lectura acotada de los primeros segmentos. Los informes no guardan URLs firmadas ni comprueban reproducción completa en el cliente. RamdonLatam solo presenta metadatos y enlaces externos.

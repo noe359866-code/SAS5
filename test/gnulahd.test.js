@@ -28,17 +28,17 @@ function mockFetch(t, routes) {
   });
 }
 
-test('GnulaHD: el registro de streams admite el HLS público validado con Castellano explícito', async (t) => {
-  const master = '#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=800000,RESOLUTION=1280x720\nhd.m3u8\n';
-  mockFetch(t, [['/ver/el-origen/', page(movie, video)], [media, master], ['/media/hd.m3u8', manifest]]);
+test('GnulaHD: el registro de streams admite el HLS público con Castellano explícito', async (t) => {
+  // El addon ya no descarga el manifiesto: la ficha basta.
+  mockFetch(t, [['/ver/el-origen/', page(movie, video)]]);
   const report = {};
   const hits = await runProviders(['gnulahd'], movie.title, movie, movie.title, report);
-  assert.deepEqual(report.gnulahd, { ok: true, raw: 1, accepted: 1, relevant: 1, mediaChecks: { 'manifest-ok': 1 } });
-  assert.equal(hits[0].verification, 'manifest-ok');
+  assert.deepEqual(report.gnulahd, { ok: true, raw: 1, accepted: 1, relevant: 1 });
+  assert.equal('verification' in hits[0], false);
   const stream = toDirectStream(hits[0], null);
   assert.equal(stream.url, BASE + media);
+  assert.equal(stream.name, movie.title);
   assert.match(stream.title, /Castellano/);
-  assert.match(stream.name, /720p/);
 });
 
 test('GnulaHD: no confunde el año o el tipo, y puede intentar el título original', async (t) => {
@@ -46,7 +46,6 @@ test('GnulaHD: no confunde el año o el tipo, y puede intentar el título origin
     ['/ver/el-origen/', page({ ...movie, year: 2026 }, video)],
     ['/ver/el-origen-2010/', page(movie, video, 'TVSeries')],
     ['/ver/inception/', page({ ...movie, title: 'Inception' }, `<video src="${media}" data-lang="Español Latino"></video>`)],
-    [media, manifest],
   ]);
   const hits = await searchGnulaHD('', movie);
   assert.equal(hits[0].audioLabel, 'Latino');
@@ -58,7 +57,6 @@ test('GnulaHD: busca solo la ficha, el capítulo publicado y su medio etiquetado
   mockFetch(t, [
     ['/ver/mi-serie/', page(show, `${video}<a href="/mi-serie-1x03/">Otro</a><a href="/mi-serie-2x03/">Correcto</a>`)],
     ['/mi-serie-2x03/', episode('2×03')],
-    [media, manifest],
   ]);
   assert.deepEqual(await searchGnulaHD('', { ...show, season: null }), { skipped: 'episode-required' });
   const hits = await searchGnulaHD('', show);
@@ -95,16 +93,14 @@ test('GnulaHD: no consulta descargas, tráilers, iframes, JS, rutas restringidas
   assert.deepEqual(await searchGnulaHD('', movie), { hits: [], reason: 'no-public-media' });
 });
 
-for (const [name, text] of [
-  ['HTML con extensión m3u8', '<!DOCTYPE html><h1>Visor</h1>'],
-  ['playlist con segmento externo', manifest.replace('primero.ts', 'https://other.example/primero.ts')],
-  ['playlist con pista externa', manifest.replace('#EXT-X-VERSION:3', '#EXT-X-MEDIA:TYPE=AUDIO,URI="https://other.example/audio.m3u8"')],
-]) {
-  test(`GnulaHD: no devuelve ${name}`, async (t) => {
-    mockFetch(t, [['/ver/el-origen/', page(movie, video)], [media, text]]);
-    assert.deepEqual(await searchGnulaHD('', movie), { hits: [], reason: 'unverified-hls' });
-  });
-}
+test('GnulaHD: no descarga el manifiesto, así que la lista sale de una sola consulta', async (t) => {
+  // `mockFetch` falla si sobra alguna ruta: con la ficha basta.
+  mockFetch(t, [['/ver/el-origen/', page(movie, video)]]);
+  const hits = await searchGnulaHD('', movie);
+  assert.equal(hits.length, 1);
+  assert.equal(hits[0].url, BASE + media);
+  assert.equal(hits[0].resolution, null);
+});
 
 test('GnulaHD: no sigue redirects ni cambia a otro cliente cuando se bloquea el acceso', async (t) => {
   mockFetch(t, [['/ver/el-origen/', '', { status: 302, headers: { Location: 'https://other.example/' } }]]);

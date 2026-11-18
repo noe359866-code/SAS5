@@ -59,3 +59,17 @@ etiquetadas como latino o castellano y resuelve embeds públicos de Uqload cuand
 el proveedor indica su audio. No devuelve embeds como si fueran vídeos. Los
 reproductores protegidos, archivos caducados y pistas sin etiqueta no se publican.
 La compatibilidad depende del reproductor disponible para cada título.
+
+### Cuevana 3, CineCalidad y TioPlus
+
+Adaptadores opcionales: añade `cuevana3,cinecalidad,tioplus` a tu lista existente
+`STREAM_PROVIDERS`, por ejemplo:
+
+```env
+STREAM_PROVIDERS=fanpelis,playlatin,flixlatam,cuevana3,cinecalidad,tioplus
+```
+
+Reconocen enlaces directos HTTPS con audio latino o castellano explícito en la
+página. No aceptan iframes HTML como vídeo ni siguen redirecciones. Si solo hay
+reproductores externos sin una fuente directa etiquetada, no devuelven resultados.
+La sonda de Actions informa los resultados por proveedor; no verifica reproducción.

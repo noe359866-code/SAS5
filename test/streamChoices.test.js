@@ -43,7 +43,7 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   assert.deepEqual(cfg.streams, ['fanpelis']);
   assert.equal('streamTypes' in cfg, false);
   assert.equal('streamLanguages' in cfg, false);
-  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin']);
+  assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'flixlatam', 'playlatin', 'cuevana3', 'cinecalidad', 'tioplus']);
   assert.equal(choice.providerType('fanpelis'), 'direct');
   assert.equal(choice.providerType('retired-indexer'), null);
   assert.equal(user.normalizeConfig({ streams: [] }, [], [], streams.PROVIDER_KEYS).streams.length, 0);
@@ -51,7 +51,7 @@ test('configuración: fuentes directas activas y esquema sin selectores de tipo/
   const originalProviders = config.streamProviders;
   try {
     config.streamProviders = ['retired-indexer', 'legacy-source'];
-    const expected = streams.PROVIDER_KEYS.filter((key) => key !== "flixlatam" || config.flixlatamEnabled);
+    const expected = streams.PROVIDER_KEYS.slice(0, 3).filter((key) => key !== "flixlatam" || config.flixlatamEnabled);
     assert.deepEqual(streams.activeProviders(null), expected);
   } finally { config.streamProviders = originalProviders; }
 });

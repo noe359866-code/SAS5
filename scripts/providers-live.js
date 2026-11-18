@@ -9,13 +9,13 @@ const fixtures = [
 (async () => {
   let failed = false;
   for (const resolved of fixtures) {
-    const keys = ['fanpelis', 'playlatin', 'flixlatam'];
+    const keys = ['fanpelis', 'playlatin', 'flixlatam', 'cuevana3', 'cinecalidad', 'tioplus'];
     const report = {};
     const hits = await runProviders(keys, resolved.title, resolved, resolved.title, report, 9000);
     for (const key of keys) {
       const { ok, relevant = 0, skipped } = report[key] || {};
       const message = `${resolved.title} / ${key}: ${ok ? `${relevant} fuentes directas${skipped ? ' (omitido)' : ''}` : report[key]?.error || 'error de consulta'}`;
-      console.log(process.env.GITHUB_ACTIONS && key === 'flixlatam' && !relevant ? `::warning::${message}` : message);
+      console.log(process.env.GITHUB_ACTIONS && !relevant ? `::warning::${message}` : message);
     }
     if (!hits.length) failed = true;
   }

@@ -1,0 +1,131 @@
+{
+  "byse": {
+    "status": 200,
+    "keys": [
+      "id",
+      "code",
+      "title",
+      "description",
+      "duration_seconds",
+      "views",
+      "downloads",
+      "created_at",
+      "owner_id",
+      "owner_login",
+      "poster_url",
+      "allowed_countries",
+      "banned_countries",
+      "banned_ips",
+      "embed_domain_allowed",
+      "premium_only",
+      "download_allowed",
+      "tracks",
+      "playback",
+      "cache_status"
+    ],
+    "urls": [
+      "https://img-place.com/intdacsm8cvn.jpg"
+    ],
+    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"XBXIC6dArzKHy8Y2\",\"payload\":\"xvEvbqKltlVOaxSpMW_CJk7vs0dHDZsw7hSfMNl6MteVGIVmqUUY1rJOT7F18l2ZIO5GTfBF1qnLuOUodHO8NnZEayBYZc8J5Hzpm_F6u2rObJbPIGMYmoBlgryD0rUabeDyul_qoo6I-xSazjTRU79nQbUbYrGK9Zj6ubMUVmEHviLwvRcX_8NBhobuPmOsA6ub9Uci95ZL_6ZW6g__TT4boQN3Ly5swi_4xsXUES31qdgZ-bjhVnhPnREZjkZTaxl5MstFImID0occtVWLuKwyE6mIuXHh4TCMsQQwRTyNCuWptY36xC0eA2wuFJlOyUdJ3jxYeCKRo3xDdU_01l5XGkyKHbR3sieSmV9Z_pwHwq-U4phGT0lHkYU12qf2ZsC1CxqhCqCN4R7t-oVoCoxOBWX0T_"
+  },
+  "mainJs": [
+    {
+      "name": "streamwish",
+      "status": 200,
+      "size": 71214,
+      "hints": [
+        "WRFdLSofWQtdHmkTW5n9WO4XCSoBzCkO",
+        "W6SVCupdLG",
+        "W5BdLSoYbeW",
+        "WOz5W53dLde",
+        "WQPOn03dLW",
+        "WQ9rW4/dLX8",
+        "tSkDlgzu",
+        "W7BdLSoVW4vB",
+        "WPDLW5H4qq",
+        "AXpdLXSj"
+      ],
+      "head": "(function(_0x53868c,_0x2965a6){function _0x21e877(_0x5db535,_0x5952ea,_0x155b6b,_0x430d6c,_0x2f53b5){return _0x5447(_0x5db535- -0x2d3,_0x2f53b5);}function _0x2f6688(_0x2037ac,_0x38acfb,_0x1db3ed,_0xdb5a04,_0x34f3f0){return _0x5447(_0x1db3ed-0x336,_0x38acfb);}function _0x5bb25c(_0x153f20,_0x3daa3,_0x1100ff,_0x493da4,_0x2fd3bf){return _0x5447(_0x493da4- -0x65,_0x3daa3);}function _0xb244a8(_0x243a68,"
+    },
+    {
+      "name": "hglink",
+      "status": 200,
+      "size": 71214,
+      "hints": [
+        "WRFdLSofWQtdHmkTW5n9WO4XCSoBzCkO",
+        "W6SVCupdLG",
+        "W5BdLSoYbeW",
+        "WOz5W53dLde",
+        "WQPOn03dLW",
+        "WQ9rW4/dLX8",
+        "tSkDlgzu",
+        "W7BdLSoVW4vB",
+        "WPDLW5H4qq",
+        "AXpdLXSj"
+      ],
+      "head": "(function(_0x53868c,_0x2965a6){function _0x21e877(_0x5db535,_0x5952ea,_0x155b6b,_0x430d6c,_0x2f53b5){return _0x5447(_0x5db535- -0x2d3,_0x2f53b5);}function _0x2f6688(_0x2037ac,_0x38acfb,_0x1db3ed,_0xdb5a04,_0x34f3f0){return _0x5447(_0x1db3ed-0x336,_0x38acfb);}function _0x5bb25c(_0x153f20,_0x3daa3,_0x1100ff,_0x493da4,_0x2fd3bf){return _0x5447(_0x493da4- -0x65,_0x3daa3);}function _0xb244a8(_0x243a68,"
+    },
+    {
+      "name": "hgcloud",
+      "status": 200,
+      "size": 71214,
+      "hints": [
+        "WRFdLSofWQtdHmkTW5n9WO4XCSoBzCkO",
+        "W6SVCupdLG",
+        "W5BdLSoYbeW",
+        "WOz5W53dLde",
+        "WQPOn03dLW",
+        "WQ9rW4/dLX8",
+        "tSkDlgzu",
+        "W7BdLSoVW4vB",
+        "WPDLW5H4qq",
+        "AXpdLXSj"
+      ],
+      "head": "(function(_0x53868c,_0x2965a6){function _0x21e877(_0x5db535,_0x5952ea,_0x155b6b,_0x430d6c,_0x2f53b5){return _0x5447(_0x5db535- -0x2d3,_0x2f53b5);}function _0x2f6688(_0x2037ac,_0x38acfb,_0x1db3ed,_0xdb5a04,_0x34f3f0){return _0x5447(_0x1db3ed-0x336,_0x38acfb);}function _0x5bb25c(_0x153f20,_0x3daa3,_0x1100ff,_0x493da4,_0x2fd3bf){return _0x5447(_0x493da4- -0x65,_0x3daa3);}function _0xb244a8(_0x243a68,"
+    }
+  ],
+  "ultra": {
+    "search": {
+      "status": 200,
+      "size": 132860,
+      "forms": [],
+      "results": [
+        "https://verpeliculasultra.com/estrenos/1334-vengadores-juego-final.html",
+        "https://verpeliculasultra.com/estrenos/63-thor-ragnarok.html",
+        "https://verpeliculasultra.com/estrenos/904-aquaman-pelicula.html",
+        "https://verpeliculasultra.com/estrenos/119-la-liga-de-la-justicia.html",
+        "https://verpeliculasultra.com/drama/2509-yo-antes-de-ti.html"
+      ]
+    },
+    "serial": {
+      "status": 404,
+      "size": 39192,
+      "links": [
+        "https://verpeliculasultra.com/estrenos/1334-vengadores-juego-final.html",
+        "https://verpeliculasultra.com/estrenos/63-thor-ragnarok.html",
+        "https://verpeliculasultra.com/estrenos/904-aquaman-pelicula.html",
+        "https://verpeliculasultra.com/estrenos/119-la-liga-de-la-justicia.html"
+      ]
+    }
+  },
+  "gnula": {
+    "search": {
+      "status": 403,
+      "size": 5745,
+      "links": []
+    },
+    "season": {
+      "status": 200,
+      "size": 293784,
+      "epLinks": [],
+      "trids": []
+    }
+  },
+  "tube": {
+    "status": 200,
+    "size": 60360,
+    "players": [],
+    "seasons": [],
+    "episodes": []
+  }
+}

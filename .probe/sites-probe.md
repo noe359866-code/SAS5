@@ -55,7 +55,7 @@
 | animeflv.or.at | wp-types | `https://animeflv.or.at/wp-json/wp/v2/types` | 200 | 0 | 0 | — |  |
 | animeflv.or.at | wp-posts | `https://animeflv.or.at/wp-json/wp/v2/posts?…` | 200 | 0 | 0 | — |  |
 | animeflv.or.at | buscar-slash | `https://animeflv.or.at/search/naruto/` | 200 | 0 | 0 | — |  |
-| animeflv.or.at | ficha-naruto | `https://animeflv.or.at/anime/naruto/` | 404 | — | — | — |  |
+| animeflv.or.at | ficha-black-clover | `https://animeflv.or.at/anime/black-clover-2nd-season/` | 200 | 0 | 0 | — |  |
 | animeflv.or.at | archivo-anime | `https://animeflv.or.at/anime/` | 200 | 0 | 0 | — |  |
 | animeyt.cc | portada | `https://animeyt.cc/` | 403 cf | — | — | — |  |
 | animeyt.cc | wp-json | `https://animeyt.cc/wp-json/` | 403 cf | — | — | — |  |

@@ -26,7 +26,7 @@
     "urls": [
       "https://img-place.com/intdacsm8cvn.jpg"
     ],
-    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"sj7XjUZ9viaK_MtH\",\"payload\":\"96OuuM2besn4Wl8OObspq81JhKUJYlclEo22JO1xl8he80tQoCBVtbO5pCw4gAZneJUzlrGwl-Po6C5IkX9-1F-jWsgYTil0R69CxrcEasX4VFhSTSYKwQQzcMdboElZ8Je2WX_r_LvZ1MmmpJnArZjuNxi8Ptg8fw_UtGkbemhtRtPQ8M5tGTxnAjzY_KOydJu3uXURRvmRX9U7eoGR-89T9Htm5oNWgDwor1ipbnfIW70xP-SQURFIMwtBNIldP5qfPF0DaQQeM13F05F7xd_Z4WaaZ2O9gOCUL-ogha32oWl22794RPbo_L-znCMjb60QR4F3t2vPQyPO3PD3zgA_IC9jmPVprzYMdp0SnUSukBInN1qfWnF1YmkMclgppiEZycaSzKj9aoFWRAaYzBXSENacOk"
+    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"u8Evm_GcpzCXSTM6\",\"payload\":\"MCoEW904PJfBs_bZBZfPGihzfj3vYLjTH4edTKky_qkksXOxXUviF0L84IgyorDUPaPb7A5B_HC-IQnfM5vAVpv8pmbglKIZ3LzZOxwvoHBeR0b8wAcaOlTbIb-_KgjHdTihSTJcTTH-zfZy41ibdUbL8IdQqGpyBpDEzUaUXzlySDFtFcEdsai5_7GgtpYfUS7Cy59m0VoHa-bi_iFMsPEqE_giGkUMD2J4o68w0DVyViD23lh3sjMxUtipz-cNowlj00FML-gabjsmL8eLjAP10N8WqS4gCIgSK-KZiSnJ6l9NR1OabjLxxMBmJ_hvkB2uAG-sLZKZjIK9PBXoAQrs3hkIG1PHYzezpxb64T0X-X5FY41lFKs1Kb-92GwsDEjQhH4mXj-IMBrtCvVUXSfDWf8A6j"
   },
   "mainJs": [
     {
@@ -116,18 +116,16 @@
     },
     "season": {
       "status": 200,
-      "size": 329,
+      "size": 293784,
       "epLinks": [],
       "trids": []
     }
   },
   "tube": {
     "status": 200,
-    "size": 60388,
+    "size": 60324,
     "players": [],
-    "seasons": [
-      "https://www.tubeonline.net/serie/kill-jackie-temporada-1-castellano/"
-    ],
+    "seasons": [],
     "episodes": []
   }
 }

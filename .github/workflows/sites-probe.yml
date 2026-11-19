@@ -19,6 +19,7 @@ on:
       - 'scripts/players-probe2.mjs'
       - 'scripts/players-probe3.mjs'
       - 'scripts/players-probe5.mjs'
+      - 'scripts/players-probe6.mjs'
 permissions:
   contents: write
 jobs:
@@ -41,7 +42,9 @@ jobs:
       - name: Detalles finales (byse json, main.js)
         run: node scripts/players-probe3.mjs
       - name: Estructura de series y buscadores
-        run: node scripts/players-probe5.mjs
+        run: node scripts/players-probe5.mjs || true
+      - name: Descifrado de Byse, streamtape, pestañas y series
+        run: node scripts/players-probe6.mjs
       - name: Devolver resultados a la rama
         if: always()
         run: |

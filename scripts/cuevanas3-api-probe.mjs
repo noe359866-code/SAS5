@@ -137,6 +137,29 @@ async function main() {
     rows.push({ step: `single:${postType}`, status: res.status, type: res.type, bytes: res.bytes, posts: 1, hosts: hosts.join(', ') || '-' });
   }
 
+  // --- ¿Dónde están los players? Prueba de rutas candidatas y de la página
+  // real de la ficha (el shell trae `siteConfig.player`, vacío en la portada).
+  const movieSlug = seen.get('movies');
+  const candidates = [
+    `${BASE}/wp-json/wpf/v1/episodes`,
+    `${BASE}/wp-json/wpf/v1/episodes?post_id=57851`,
+    `${BASE}/wp-json/wpf/v1/episodes?id=57851`,
+    `${FAST}/players?postType=movies&slug=${encodeURIComponent(movieSlug || '')}`,
+    `${FAST}/servers?postType=movies&slug=${encodeURIComponent(movieSlug || '')}`,
+    `${FAST}/links?postType=movies&slug=${encodeURIComponent(movieSlug || '')}`,
+    `${FAST}/player?postType=movies&slug=${encodeURIComponent(movieSlug || '')}`,
+    `${FAST}/single/players?slug=${encodeURIComponent(movieSlug || '')}&postType=movies`,
+    movieSlug ? `${BASE}/peliculas/${movieSlug}` : `${BASE}/peliculas`,
+  ];
+  console.log('\n### rutas candidatas de players');
+  for (const url of candidates) {
+    const res = await getJson(url);
+    const brief = res.json ? JSON.stringify(res.json).slice(0, 160) : (res.head || '').replace(/\s+/g, ' ').slice(0, 120);
+    console.log(`  ${res.status} ${res.bytes}B ${redact(url)} -> ${brief}`);
+    rows.push({ step: `cand:${new URL(url).pathname}`, status: res.status, type: res.type, bytes: res.bytes, posts: res.json?.data ? 1 : 0, hosts: '-' });
+    dumps[`cand:${new URL(url).pathname}${new URL(url).search}`] = { status: res.status, json: res.json, head: res.json ? undefined : (res.head || '').slice(0, 800) };
+  }
+
   const fs = await import('node:fs');
   fs.mkdirSync('.probe', { recursive: true });
   // Volcado íntegro (recortando solo la query de las URLs) para leerlo desde

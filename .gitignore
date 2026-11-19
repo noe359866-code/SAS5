@@ -18,3 +18,8 @@ public/internal/
 # se suben a Cloudflare con `wrangler deploy`; no se versionan.
 public/*/manifest.json
 public/*/catalog/
+
+# Volcados de las sondas en vivo (diagnóstico). Se generan en cada ejecución
+# de los workflows y no forman parte del addon. Los workflows los siguen
+# subiendo a la rama con `git add -f`.
+.probe/

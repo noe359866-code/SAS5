@@ -1,0 +1,77 @@
+name: Sitios en vivo (sonda de descubrimiento)
+on:
+  workflow_dispatch:
+    inputs:
+      sites:
+        description: 'Sitios separados por espacio (tubeonline mirando cuevanas3); vacío = todos'
+        required: false
+        default: ''
+      players:
+        description: 'Players concretos (bysejikuar mixdrop …); vacío = no sondear players'
+        required: false
+        default: ''
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/sites-probe.yml'
+      - 'scripts/sites-probe.mjs'
+      - 'scripts/cuevanas3-api-probe.mjs'
+      - 'scripts/anime-sites-probe.mjs'
+      - 'scripts/fuegocine-probe.mjs'
+      - 'scripts/pelisjuanita-probe.mjs'
+      - 'scripts/pelisjuanita-probe2.mjs'
+      - 'scripts/pelisjuanita-probe3.mjs'
+      - 'scripts/players-probe.mjs'
+      - 'scripts/players-probe2.mjs'
+      - 'scripts/players-probe3.mjs'
+      - 'scripts/players-probe5.mjs'
+      - 'scripts/players-probe6.mjs'
+      - 'scripts/players-probe7.mjs'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Descubrimiento en los sitios (informativo, no despliega)
+        run: node scripts/sites-probe.mjs ${{ inputs.sites }}
+      - name: fuegocine (página de reproducción y visores)
+        run: node scripts/fuegocine-probe.mjs || true
+      - name: pelisjuanita (API REST y reproducción)
+        run: node scripts/pelisjuanita-probe.mjs || true
+      - name: pelisjuanita (episodios y reproductor externo)
+        run: node scripts/pelisjuanita-probe2.mjs || true
+      - name: pelisjuanita (idioma en el visor de Vimeos)
+        run: node scripts/pelisjuanita-probe3.mjs || true
+      - name: Bloqueo de animed23/animejara
+        run: node scripts/anime-sites-probe.mjs || true
+      - name: API de cuevanas3 (búsqueda y ficha)
+        run: node scripts/cuevanas3-api-probe.mjs || true
+      - name: Muestras de players
+        run: node scripts/players-probe.mjs ${{ inputs.players }}
+      - name: Pasos del extractor (dl/embed, unpack, ajax, endpoints)
+        run: node scripts/players-probe2.mjs
+      - name: Detalles finales (byse json, main.js)
+        run: node scripts/players-probe3.mjs
+      - name: Estructura de series y buscadores
+        run: node scripts/players-probe5.mjs || true
+      - name: Descifrado de Byse, streamtape, pestañas y series
+        run: node scripts/players-probe6.mjs || true
+      - name: Verificación final (byse, filehosts, streamtape, videohel)
+        run: node scripts/players-probe7.mjs
+      - name: Devolver resultados a la rama
+        if: always()
+        run: |
+          test -s .probe/sites-probe.json || exit 0
+          git config user.name "sonda"
+          git config user.email "sonda@users.noreply.github.com"
+          git add -f .probe
+          git commit -m "sonda: resultados de $(date -u +%FT%TZ) [skip ci]" || exit 0
+          git push

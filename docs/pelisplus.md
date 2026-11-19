@@ -1,5 +1,11 @@
 # PelisPlus experimental
 
+> **Retirada el 19-11-2026.** Esta fuente ya no está registrada en el addon:
+> en las validaciones en vivo no publicó ningún medio utilizable. Se conserva el
+> informe como historia. Motivos y mediciones en
+> [fuentes-retiradas.md](fuentes-retiradas.md).
+
+
 `pelisplus` está activo por defecto, pero una selección personal previa o
 `STREAM_PROVIDERS` pueden excluirlo. El adaptador actual solo trata películas:
 busca por título, verifica el título completo y el año en la ficha, y acepta

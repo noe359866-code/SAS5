@@ -1,0 +1,44 @@
+{
+ "error": false,
+ "data": {
+  "posts": [
+   {
+    "_id": 59165,
+    "title": "Spider-Man de Marvel: Temporada 1 Episodio 1",
+    "slug": "spider-man-de-marvel-temporada-1-episodio-1",
+    "type": "episodes",
+    "season_number": 1,
+    "episode_number": 1
+   },
+   {
+    "_id": 59166,
+    "title": "Spider-Man de Marvel: Temporada 1 Episodio 2",
+    "slug": "spider-man-de-marvel-temporada-1-episodio-2",
+    "type": "episodes",
+    "season_number": 1,
+    "episode_number": 2
+   },
+   {
+    "_id": 59167,
+    "title": "Spider-Man de Marvel: Temporada 1 Episodio 3",
+    "slug": "spider-man-de-marvel-temporada-1-episodio-3",
+    "type": "episodes",
+    "season_number": 1,
+    "episode_number": 3
+   },
+   {
+    "_id": 59168,
+    "title": "Spider-Man de Marvel: Temporada 1 Episodio 4",
+    "slug": "spider-man-de-marvel-temporada-1-episodio-4",
+    "type": "episodes",
+    "season_number": 1,
+    "episode_number": 4
+   }
+  ],
+  "seasons": [
+   "3",
+   "2",
+   "1"
+  ]
+ }
+}

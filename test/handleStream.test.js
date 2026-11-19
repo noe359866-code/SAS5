@@ -66,3 +66,11 @@ test('el título resuelto se publica sin recortes: el año puede ser parte del n
   // recorte es heurístico y se queda con lo que hay antes del año o la calidad.
   assert.equal(streams.toDirectStream({ ...base, title: '1917 2019 2160p' }, null).name, '1917');
 });
+
+test('un stream subtitulado se anuncia con lápiz, no con auriculares', () => {
+  const hit = { provider: 'animeflv', title: 'Ao Ashi Season 2 S2E7 AnimeFLV', url: 'https://player.example/hls.m3u8',
+    quality: 'HLS', audioLabel: 'Subtitulado' };
+  const stream = streams.toDirectStream(hit, null);
+  assert.match(stream.title, /📝 Subtitulado/);
+  assert.doesNotMatch(stream.title, /🎧/);
+});

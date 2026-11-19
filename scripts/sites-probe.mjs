@@ -119,7 +119,7 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
   seen.add(url);
   const res = await get(url, { headers: referer ? { Referer: referer } : {} });
   const scan = res.status === 200 ? scanHtml(res.body, url) : null;
-  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
+  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
     try {
       const fs = await import('node:fs');
       fs.mkdirSync('.probe/html', { recursive: true });
@@ -215,6 +215,23 @@ const SITES = {
     base: 'http://animejara.com',
     pages: [
       { label: 'portada', url: 'http://animejara.com/' },
+    ],
+  },
+  animeflv: {
+    name: 'animeflv.or.at',
+    base: 'https://animeflv.or.at',
+    pages: [
+      { label: 'portada', url: 'https://animeflv.or.at/' },
+      { label: 'wp-json', url: 'https://animeflv.or.at/wp-json/' },
+      { label: 'api-search', url: 'https://animeflv.or.at/api/anime/search?query=naruto' },
+    ],
+  },
+  animeyt: {
+    name: 'animeyt.cc',
+    base: 'https://animeyt.cc',
+    pages: [
+      { label: 'portada', url: 'https://animeyt.cc/' },
+      { label: 'wp-json', url: 'https://animeyt.cc/wp-json/' },
     ],
   },
 };

@@ -39,8 +39,10 @@ Decisiones del adaptador:
   `pelisjuanita.org`. Sin esa cabecera la página llega sin reproductor y todo se
   degradaba a `no-players`; está fijado con una prueba.
 
-Presupuesto por búsqueda: 3 peticiones en películas (búsqueda, reproductor,
-visor) y 5 en series (más temporadas y episodios).
+Presupuesto por búsqueda: 3 peticiones en películas (búsqueda, reproductor y
+visor) y 5 en series (más temporadas y episodios). El API corta en 24 resultados
+por página, así que si el título no aparece y la respuesta trae `has_next`, se
+pide la segunda página: como mucho suma una petición por título probado.
 
 ## Medición en vivo
 
@@ -52,7 +54,7 @@ visor) y 5 en series (más temporadas y episodios).
 | *Spider-Man: Un nuevo día*, *Alien: Romulus*, *Deadpool & Wolverine* | 1 hit HLS cada uno, audio Subtitulado |
 | *Breaking Bad* T1E1, *Naruto* T1E1, *VisionQuest* T1E1 | 1 hit HLS cada uno por la cadena de serie, audio Subtitulado |
 | *El reino prohibido*, *La Odisea* | 1 hit HLS cada uno, audio Subtitulado |
-| *Inception*, *Intensamente 2*, *Ao Ashi*, *Black Clover* | `no-match`: el buscador del sitio no devuelve esas fichas con el título que manda el addon |
+| *Inception*, *Intensamente 2*, *Ao Ashi*, *Black Clover* | `no-match`: el buscador del sitio no devuelve esas fichas con el título que manda el addon (el catálogo es de títulos en español) |
 
 Todas las muestras del sitio salieron marcadas `subDub: "sub"`, es decir,
 versión subtitulada: es el audio que se publica. Si el sitio sirviera una

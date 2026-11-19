@@ -6,10 +6,10 @@
     "hits": 0,
     "trace": [
       "200 https://v3-cinemeta.strem.io/meta/movie/tt33033798.json",
-      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/",
-      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/"
+      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
+      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/ h1=\"Pagina no se encuentra\""
     ],
-    "ms": 668,
+    "ms": 717,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -22,11 +22,11 @@
     "hits": 0,
     "trace": [
       "200 https://v3-cinemeta.strem.io/meta/movie/tt33033798.json",
-      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/",
-      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/",
-      "200 https://mirandogratis.com/spider-man-un-nuevo-dia.html"
+      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
+      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/ h1=\"Pagina no se encuentra\"",
+      "200 https://mirandogratis.com/spider-man-un-nuevo-dia.html h1=\"Ver Peliculas Online Gratis en Español L\""
     ],
-    "ms": 1460,
+    "ms": 1329,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -39,13 +39,13 @@
     "hits": 0,
     "trace": [
       "200 https://v3-cinemeta.strem.io/meta/movie/tt33033798.json",
-      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/",
-      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/",
-      "200 https://mirandogratis.com/spider-man-un-nuevo-dia.html",
-      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia/",
-      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia-2026/"
+      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
+      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/ h1=\"Pagina no se encuentra\"",
+      "200 https://mirandogratis.com/spider-man-un-nuevo-dia.html h1=\"Ver Peliculas Online Gratis en Español L\"",
+      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia/ h1=\"Ver Spider-Man: Un nuevo día (2026) onli\"",
+      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia-2026/ h1=\"G Nula - Ver películas y series online\""
     ],
-    "ms": 921,
+    "ms": 896,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -57,14 +57,14 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/",
-      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/",
-      "200 https://mirandogratis.com/spider-man-un-nuevo-dia.html",
-      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia/",
-      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia-2026/",
+      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
+      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/ h1=\"Pagina no se encuentra\"",
+      "200 https://mirandogratis.com/spider-man-un-nuevo-dia.html h1=\"Ver Peliculas Online Gratis en Español L\"",
+      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia/ h1=\"Ver Spider-Man: Un nuevo día (2026) onli\"",
+      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia-2026/ h1=\"G Nula - Ver películas y series online\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 725,
+    "ms": 789,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -76,14 +76,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia/",
-      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia-2026/",
+      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia/ h1=\"Ver Spider-Man: Un nuevo día (2026) onli\"",
+      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia-2026/ h1=\"G Nula - Ver películas y series online\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
-      "404 https://www.tubeonline.net/pelicula/inception/",
-      "404 https://www.tubeonline.net/pelicula/inception-2010/"
+      "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
+      "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\""
     ],
-    "ms": 282,
+    "ms": 246,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -95,14 +95,14 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia-2026/",
+      "200 https://ver.gnula.one/movies/spider-man-un-nuevo-dia-2026/ h1=\"G Nula - Ver películas y series online\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
-      "404 https://www.tubeonline.net/pelicula/inception/",
-      "404 https://www.tubeonline.net/pelicula/inception-2010/",
-      "200 https://mirandogratis.com/inception.html"
+      "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
+      "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
+      "200 https://mirandogratis.com/inception.html h1=\"Ver Peliculas Online Gratis en Español L\""
     ],
-    "ms": 972,
+    "ms": 902,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -115,13 +115,13 @@
     "hits": 0,
     "trace": [
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
-      "404 https://www.tubeonline.net/pelicula/inception/",
-      "404 https://www.tubeonline.net/pelicula/inception-2010/",
-      "200 https://mirandogratis.com/inception.html",
-      "200 https://ver.gnula.one/movies/inception/",
-      "200 https://ver.gnula.one/movies/inception-2010/"
+      "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
+      "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
+      "200 https://mirandogratis.com/inception.html h1=\"Ver Peliculas Online Gratis en Español L\"",
+      "200 https://ver.gnula.one/movies/inception/ h1=\"G Nula - Ver películas y series online\"",
+      "200 https://ver.gnula.one/movies/inception-2010/ h1=\"G Nula - Ver películas y series online\""
     ],
-    "ms": 1272,
+    "ms": 1050,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -133,14 +133,14 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "404 https://www.tubeonline.net/pelicula/inception/",
-      "404 https://www.tubeonline.net/pelicula/inception-2010/",
-      "200 https://mirandogratis.com/inception.html",
-      "200 https://ver.gnula.one/movies/inception/",
-      "200 https://ver.gnula.one/movies/inception-2010/",
+      "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
+      "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
+      "200 https://mirandogratis.com/inception.html h1=\"Ver Peliculas Online Gratis en Español L\"",
+      "200 https://ver.gnula.one/movies/inception/ h1=\"G Nula - Ver películas y series online\"",
+      "200 https://ver.gnula.one/movies/inception-2010/ h1=\"G Nula - Ver películas y series online\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 541,
+    "ms": 929,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -152,14 +152,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://mirandogratis.com/inception.html",
-      "200 https://ver.gnula.one/movies/inception/",
-      "200 https://ver.gnula.one/movies/inception-2010/",
+      "200 https://mirandogratis.com/inception.html h1=\"Ver Peliculas Online Gratis en Español L\"",
+      "200 https://ver.gnula.one/movies/inception/ h1=\"G Nula - Ver películas y series online\"",
+      "200 https://ver.gnula.one/movies/inception-2010/ h1=\"G Nula - Ver películas y series online\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
-      "200 https://www.tubeonline.net/serie/breaking-bad/"
+      "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\""
     ],
-    "ms": 192,
+    "ms": 164,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -171,14 +171,14 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 https://mirandogratis.com/inception.html",
-      "200 https://ver.gnula.one/movies/inception/",
-      "200 https://ver.gnula.one/movies/inception-2010/",
+      "200 https://mirandogratis.com/inception.html h1=\"Ver Peliculas Online Gratis en Español L\"",
+      "200 https://ver.gnula.one/movies/inception/ h1=\"G Nula - Ver películas y series online\"",
+      "200 https://ver.gnula.one/movies/inception-2010/ h1=\"G Nula - Ver películas y series online\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
-      "200 https://www.tubeonline.net/serie/breaking-bad/"
+      "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\""
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -190,12 +190,12 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "200 https://mirandogratis.com/inception.html",
-      "200 https://ver.gnula.one/movies/inception/",
-      "200 https://ver.gnula.one/movies/inception-2010/",
+      "200 https://mirandogratis.com/inception.html h1=\"Ver Peliculas Online Gratis en Español L\"",
+      "200 https://ver.gnula.one/movies/inception/ h1=\"G Nula - Ver películas y series online\"",
+      "200 https://ver.gnula.one/movies/inception-2010/ h1=\"G Nula - Ver películas y series online\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
-      "200 https://www.tubeonline.net/serie/breaking-bad/"
+      "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\""
     ],
     "ms": 0,
     "quality": [],
@@ -209,12 +209,12 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://mirandogratis.com/inception.html",
-      "200 https://ver.gnula.one/movies/inception/",
-      "200 https://ver.gnula.one/movies/inception-2010/",
+      "200 https://mirandogratis.com/inception.html h1=\"Ver Peliculas Online Gratis en Español L\"",
+      "200 https://ver.gnula.one/movies/inception/ h1=\"G Nula - Ver películas y series online\"",
+      "200 https://ver.gnula.one/movies/inception-2010/ h1=\"G Nula - Ver películas y series online\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
-      "200 https://www.tubeonline.net/serie/breaking-bad/"
+      "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\""
     ],
     "ms": 0,
     "quality": [],

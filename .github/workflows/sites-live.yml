@@ -37,6 +37,8 @@ jobs:
           test -s .probe/sites-live.json || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          git add -f .probe/sites-live.json .probe/sites-live.md .probe/sites-live-trace.txt .probe/sites-live-digest.txt .probe/html/live-*.html .probe/html/live-embed.txt
+          # `git add -A` sobre .probe/: un pathspec que no existe (p. ej.
+          # live-embed.txt si no hubo embeds) no debe tumbar el paso.
+          git add -A .probe/
           git commit -m "sonda: adaptadores de sitios $(date -u +%FT%TZ) [skip ci]" || exit 0
           git push

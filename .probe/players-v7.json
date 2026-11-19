@@ -1,7 +1,7 @@
 {
   "byse": {
     "api": 200,
-    "iv": "EV15l6bNJ5RgsBl3",
+    "iv": "Zt_tCeroYJujw3Fn",
     "payloadBytes": 558,
     "candidates": [
       "joIdOxgwlJdpOHegVvxoB0wUsDQLswSYSnBWOFMNh0s=",
@@ -139,16 +139,16 @@
   "videohel": {
     "status": 200,
     "found": [
-      "vurl@42776: ='unset'; return urlv.link; } //console.log('DOMContentLoaded event'); var vurl = ''; function vRZfRTe(XypCipG){ (function (XypCipG){ var sendint = null; var OZNHw = !1; var TEGt = !1; var was_vast = false; var ATGNYdhH = function(){ /* if('isTrusted' in even",
-      "vurl@49921:  //setTimeout(function(){ if(olplayer.src() != vurl && vurl!= ''){ console.log('VAST adError change url, was: '+olplayer.src()+' now: '+vurl); olplayer.src({ type: 'application/x-",
-      "source@38646:  var arrvast = [ {id: \"BBM\", link: \"https://vast.vstserv.com/vast?spot_id=2009837&utm_source=\"+ancdomain, cp: \"0.8\"}, //{id: \"AAM\", link: \"https://allaboutworldnews.com/add.php?origin=\"+window.location.protocol+\"//vpge.link&al=\"+ancestorOriginLengthP+\"&domain_list=\"+encodeURIComponent(JSON.stringify",
-      "source@106744:  adbact = pass_data.adbact; adbactt = pass_data.t; openedpops++; //e.source.postMessage(\"31da3a57fa00a3b5611263f205d90282\", e.origin); //evt.source.postMessage(\"Response!\", evt.origin); },false); try{ var doc = parent.document; if(!doc){ ",
-      "olplayer.src@47481:  //olplayer.muted(true); //olplayer.chromecast(); /* olplayer.src({ src: 'https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8', type: ",
-      "olplayer.src@49903:  //setTimeout(function(){ if(olplayer.src() != vurl && vurl!= ''){ console.log('VAST adError change url, was: '+olplayer.src()+' now: '+vurl); olplayer.src({ typ",
-      "hls@47608:  src: 'https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8', type: 'application/x-mpegURL' }); */ //olplayer.play(); try{ ",
-      "hls@57704:  1000); if(!isIE11 && supportES6() && typeof p2pml != 'undefined' && p2pml.hlsjs.Engine.isSupported() && typeof videojs.Html5Hlsjs != 'undefined' && typeof engine != 'undefined'){ //loadJs('//vpge.link/js/video.js.p2pstatus.5.js?135'); } ",
-      "mp4@28411: /flv/api/files/thumbs_new/2025/08/22/1755841432o2eg9/1755841432o2eg9-640x480-1.jpg\" src=\"data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAu1tZGF0AAACrQYF//+p3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE1NSByMjkwMSA3ZDBmZjIyIC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwM",
-      "mp4@47668: 8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8', type: 'application/x-mpegURL' }); */ //olplayer.play(); try{ olplayer.ready(function() { console.log('"
+      "vurl@42782: ='unset'; return urlv.link; } //console.log('DOMContentLoaded event'); var vurl = ''; function VxgGt(nrLVElj){ (function (nrLVElj){ var sendint = null; var fkXQQ = !1; var KsgCtGwq = !1; var was_vast = false; var wdpCkRJ = function(){ /* if('isTrusted' in eve",
+      "vurl@49929:  //setTimeout(function(){ if(olplayer.src() != vurl && vurl!= ''){ console.log('VAST adError change url, was: '+olplayer.src()+' now: '+vurl); olplayer.src({ type: 'application/x-",
+      "source@38652:  var arrvast = [ {id: \"BBM\", link: \"https://vast.vstserv.com/vast?spot_id=2009837&utm_source=\"+ancdomain, cp: \"0.8\"}, //{id: \"AAM\", link: \"https://allaboutworldnews.com/add.php?origin=\"+window.location.protocol+\"//vpge.link&al=\"+ancestorOriginLengthP+\"&domain_list=\"+encodeURIComponent(JSON.stringify",
+      "source@106705:  adbact = pass_data.adbact; adbactt = pass_data.t; openedpops++; //e.source.postMessage(\"ae54f3747748636b1d80586447f12cb4\", e.origin); //evt.source.postMessage(\"Response!\", evt.origin); },false); try{ var doc = parent.document; if(!doc){ ",
+      "olplayer.src@47489:  //olplayer.muted(true); //olplayer.chromecast(); /* olplayer.src({ src: 'https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8', type: ",
+      "olplayer.src@49911:  //setTimeout(function(){ if(olplayer.src() != vurl && vurl!= ''){ console.log('VAST adError change url, was: '+olplayer.src()+' now: '+vurl); olplayer.src({ typ",
+      "hls@47616:  src: 'https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8', type: 'application/x-mpegURL' }); */ //olplayer.play(); try{ ",
+      "hls@57712:  1000); if(!isIE11 && supportES6() && typeof p2pml != 'undefined' && p2pml.hlsjs.Engine.isSupported() && typeof videojs.Html5Hlsjs != 'undefined' && typeof engine != 'undefined'){ //loadJs('//vpge.link/js/video.js.p2pstatus.5.js?135'); } ",
+      "mp4@28417: /flv/api/files/thumbs_new/2025/08/22/1755841432o2eg9/1755841432o2eg9-640x480-1.jpg\" src=\"data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAu1tZGF0AAACrQYF//+p3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE1NSByMjkwMSA3ZDBmZjIyIC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwM",
+      "mp4@47676: 8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8', type: 'application/x-mpegURL' }); */ //olplayer.play(); try{ olplayer.ready(function() { console.log('"
     ],
     "jsonish": [
       "https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8",

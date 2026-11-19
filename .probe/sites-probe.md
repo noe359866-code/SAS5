@@ -61,6 +61,7 @@
 | fuegocine.com | wp-json | `https://fuegocine.com/wp-json/` | 404 | — | — | — |  |
 | fuegocine.com | buscador | `https://fuegocine.com/?…` | 200 | 0 | 0 | — |  |
 | fuegocine.com | search-elastic | `https://fuegocine.com/search_elastic?…` | 200 | 0 | 0 | — |  |
+| fuegocine.com | search-elastic-serie | `https://fuegocine.com/search_elastic?…` | 200 | 0 | 0 | — |  |
 | fuegocine.com | ficha-pelicula | `https://fuegocine.com/movies/details/la-odisea/227` | 200 | 0 | 0 | — |  |
 | fuegocine.com | ficha-serie | `https://fuegocine.com/shows/details/visionquest/24` | 200 | 0 | 0 | — |  |
 | fuegocine.com | temporada | `https://fuegocine.com/shows/visionquest/seasons/temporada-1/55` | 200 | 0 | 0 | — |  |

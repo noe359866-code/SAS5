@@ -128,6 +128,9 @@ async function main() {
     const resolved = await resolveControl(control);
     console.log(`\n### ${control.id}: ${resolved.title} (${resolved.year || '—'}) ${resolved.mediaType}`);
     for (const key of keys) {
+      // Pausa entre fuentes: los sitios limitan por velocidad y un desafío
+      // JS no se resuelve sin navegador (no se intenta).
+      await new Promise((resolve) => setTimeout(resolve, 700));
       const started = Date.now();
       let result;
       try {

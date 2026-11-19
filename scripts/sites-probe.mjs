@@ -205,8 +205,9 @@ async function main() {
     fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
   }
   const fs = await import('node:fs');
-  fs.writeFileSync('sites-probe.json', JSON.stringify(out, null, 2));
-  fs.writeFileSync('sites-probe.md', out.map((row) => `| ${row.site} | ${row.page} | \`${row.url}\` | ${row.status}${row.mitigated ? ' cf' : ''} | ${row.iframes} | ${row.media} | ${row.packed ? 'sí' : 'no'} | ${row.hosts} | ${row.detail || ''} |`).join('\n'));
+  fs.mkdirSync('.probe', { recursive: true });
+  fs.writeFileSync('.probe/sites-probe.json', JSON.stringify(out, null, 2));
+  fs.writeFileSync('.probe/sites-probe.md', out.map((row) => `| ${row.site} | ${row.page} | \`${row.url}\` | ${row.status}${row.mitigated ? ' cf' : ''} | ${row.iframes} | ${row.media} | ${row.packed ? 'sí' : 'no'} | ${row.hosts} | ${row.detail || ''} |`).join('\n'));
   console.log('\nJSON', JSON.stringify(out));
 }
 

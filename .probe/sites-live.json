@@ -1,0 +1,134 @@
+[
+  {
+    "control": "tt33033798",
+    "title": "Spider-Man: Un nuevo día",
+    "provider": "tubeonline",
+    "hits": 0,
+    "ms": 854,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt33033798",
+    "title": "Spider-Man: Un nuevo día",
+    "provider": "mirandogratis",
+    "hits": 0,
+    "ms": 645,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "error:HTTP 301 al consultar https://mirandogratis.com/spider-man-u"
+  },
+  {
+    "control": "tt33033798",
+    "title": "Spider-Man: Un nuevo día",
+    "provider": "gnulaone",
+    "hits": 0,
+    "ms": 525,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "error:HTTP 301 al consultar https://ver.gnula.one/movies/spider-ma"
+  },
+  {
+    "control": "tt33033798",
+    "title": "Spider-Man: Un nuevo día",
+    "provider": "ultra",
+    "hits": 0,
+    "ms": 754,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt1375666",
+    "title": "Inception",
+    "provider": "tubeonline",
+    "hits": 0,
+    "ms": 843,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt1375666",
+    "title": "Inception",
+    "provider": "mirandogratis",
+    "hits": 0,
+    "ms": 426,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "error:HTTP 301 al consultar https://mirandogratis.com/inception.ht"
+  },
+  {
+    "control": "tt1375666",
+    "title": "Inception",
+    "provider": "gnulaone",
+    "hits": 0,
+    "ms": 414,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "error:HTTP 301 al consultar https://ver.gnula.one/movies/inception"
+  },
+  {
+    "control": "tt1375666",
+    "title": "Inception",
+    "provider": "ultra",
+    "hits": 0,
+    "ms": 369,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt0903747:1:1",
+    "title": "Breaking Bad",
+    "provider": "tubeonline",
+    "hits": 0,
+    "ms": 138,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt0903747:1:1",
+    "title": "Breaking Bad",
+    "provider": "mirandogratis",
+    "hits": 0,
+    "ms": 0,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "series-not-supported"
+  },
+  {
+    "control": "tt0903747:1:1",
+    "title": "Breaking Bad",
+    "provider": "gnulaone",
+    "hits": 0,
+    "ms": 0,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "series-needs-js"
+  },
+  {
+    "control": "tt0903747:1:1",
+    "title": "Breaking Bad",
+    "provider": "ultra",
+    "hits": 0,
+    "ms": 0,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "series-not-supported"
+  }
+]

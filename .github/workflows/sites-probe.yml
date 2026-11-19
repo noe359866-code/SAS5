@@ -18,6 +18,7 @@ on:
       - 'scripts/players-probe.mjs'
       - 'scripts/players-probe2.mjs'
       - 'scripts/players-probe3.mjs'
+      - 'scripts/players-probe5.mjs'
 permissions:
   contents: write
 jobs:
@@ -37,8 +38,10 @@ jobs:
         run: node scripts/players-probe.mjs ${{ inputs.players }}
       - name: Pasos del extractor (dl/embed, unpack, ajax, endpoints)
         run: node scripts/players-probe2.mjs
-      - name: Detalles finales (byse json, main.js, buscadores)
+      - name: Detalles finales (byse json, main.js)
         run: node scripts/players-probe3.mjs
+      - name: Estructura de series y buscadores
+        run: node scripts/players-probe5.mjs
       - name: Devolver resultados a la rama
         if: always()
         run: |

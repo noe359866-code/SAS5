@@ -11,7 +11,7 @@
       "200 https://www.tubeonline.net/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Resultados encontrados: Spider-Man: Un n\"",
       "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\""
     ],
-    "ms": 1641,
+    "ms": 1055,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -23,18 +23,18 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 https://v3-cinemeta.strem.io/meta/movie/tt33033798.json",
       "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
       "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Resultados encontrados: Spider-Man: Un n\"",
       "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
+      "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
       "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
     ],
-    "ms": 520,
+    "ms": 1287,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "error:HTTP 301 al consultar https://mirandogratis.com/spider-man-u"
+    "verdict": "no-match"
   },
   {
     "control": "tt33033798",
@@ -49,7 +49,7 @@
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 2711,
+    "ms": 3226,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -61,14 +61,14 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://ver.gnula.one/?trembed=2&trid=53363&trtype=1",
       "200 https://links.fiuxy2.com/play/NMB2zwFeBWYf1ruC.html",
       "200 https://ver.gnula.one/?trembed=3&trid=53363&trtype=1",
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1",
+      "200 https://verpeliculasultra.com/",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 533,
+    "ms": 1640,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -80,14 +80,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1",
+      "200 https://verpeliculasultra.com/",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
       "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
     ],
-    "ms": 794,
+    "ms": 909,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -99,18 +99,18 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
       "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\"",
+      "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
     ],
-    "ms": 560,
+    "ms": 1099,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "error:HTTP 301 al consultar https://mirandogratis.com/inception.ht"
+    "verdict": "no-match"
   },
   {
     "control": "tt1375666",
@@ -118,18 +118,18 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
-      "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\"",
+      "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com",
-      "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one"
+      "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
+      "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 566,
+    "ms": 611,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "error:HTTP 301 al consultar https://ver.gnula.one/movies/inception"
+    "verdict": "no-match"
   },
   {
     "control": "tt1375666",
@@ -137,14 +137,14 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
-      "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\"",
+      "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com",
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
+      "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one",
+      "200 https://verpeliculasultra.com/",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 332,
+    "ms": 907,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -163,7 +163,7 @@
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 1161,
+    "ms": 935,
     "quality": [],
     "audio": [],
     "hosts": [],

@@ -1,5 +1,5 @@
 
-## 200 https://cuevanas3.pro/player.php?t=TG2ojAmMAerCDNBIf6iP5B66YwpWSeYXkXNJDIPOvCcYodlcvfsXvAvUFOZDk2sWccOqQGRXurF_j-hQT716F
+## 200 https://cuevanas3.pro/player.php?t=jZEotC_HwrqvOfsfbFaiHiCavU3uQ4bnNjr4YOB_514FXOpBIutcvfaO3oPF77I-bwVUy0IWCLb4accL6mZry
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-2nulhg4mnuz7.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -26,7 +26,7 @@
   title: Spider-Man: Un Nuevo Día | Fuego Cine 2.0
   [iframe] <!-- Estilos optimizados para el reproductor principal y trailers --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-container iframe { width: 100% !important; he
 
-## 200 https://unlimplay.com/f/embed/movie/969681?_et=7a2a6663bb0daed1f2c68e2baf38f719
+## 200 https://unlimplay.com/f/embed/movie/969681?_et=21f620e0a0605b09fbda4e3d139a7a74
   h1: 
   title: UnLimPlay
   [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h
@@ -48,7 +48,7 @@
   [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
   [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
 
-## 200 https://cuevanas3.pro/player.php?t=DweLdkgOGWhtWKpsiurOJCDz2X3KNs0UIdlUzfrjUqdOmrUVJzhTQsc6lBQVz9Zl-MwzGATZdqxnan74hmiT2
+## 200 https://cuevanas3.pro/player.php?t=xw9ox6pO0WyeF8ou70WYaFnvvSS4OFRT9QAeCU975mMuBPHexrPUykrc2k_roM7IztR8DhRy1ND1MlLnZP5m5
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-ccjygcfxujhd.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -85,7 +85,7 @@
   title: 
   [episodios] "genres_tmdb": [ "Drama", "Crimen" ], "temporadas": [ { "season_number": 1, "name": "Temporada 1", "episode_count": 7, "episodios": [ { "episode_number": 1, "name": "Breaking Bad: Temporada 1 Episodio 1", "overview": "Walter White, un profesor de química de 50 años de edad, secretamente comienza a cocinar cristales de metanfetamina para a
 
-## 200 https://cuevanas3.pro/player.php?t=tC00N8VIQ4tE-xtYAizvz1197v4a2MyKZHlKODrO6dtcj42bkKlkpVV-VtpwNl2blrbRFqCOhdXcPUamShk2_
+## 200 https://cuevanas3.pro/player.php?t=otnf1JTEP6Nkj1Hwzz5g69Q54J9o36dKv0JC8Jv7xn5dtsCm-lNsFaP-pOFtUsrEEGSjAENELX-JBzW6NLb6-
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-uhuu5myzvdub.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -117,7 +117,7 @@
   title: vimeos
   [iframe] va el sandbox', main); add('p', 'Para reproducir este video, el administrador de esta página debe quitar el sandbox del iframe.', main); add('code', 'Elimina el atributo: sandbox="..."', main); add('small', '¿Eres visitante? Avisa al administrador del sitio.', main); var media = d.querySelectorAll('video,audio'); for (var i = 0; i < media
 
-## 200 https://cuevanas3.pro/player.php?t=eqi61-Lva_iuTkEozaCxKyFuzd46nUFw_EdgVdw56eamR59Oi8lZReWBfgOnfKVqjzsbhV5saO0m_Zn4ZfZZM
+## 200 https://cuevanas3.pro/player.php?t=FeGFV6AS0FjK0gX3E2rxKJAxc8RpbRHjVVMMZYb5K2ZbE-zP2GmlqQILlEaukmTDJLV9f_oxqBOu2M8ZO3yNw
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-tmbjqufb955w.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -156,7 +156,7 @@
   [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
   [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
 
-## 200 https://cuevanas3.pro/player.php?t=QjLTgyp2dPfZ1LA2ZL759GYVvghetcrLZQw--T5ndKzZQR6xqUNoGpngSu3Ti3j4IpugNROdUCifkgZQBIvE0
+## 200 https://cuevanas3.pro/player.php?t=-gtg6ZWpok1XKcmXiohvaI9NTaqc9gXAcHcI5qMqqCnPXeoHvK0NhQBnrMcv2mMwVgEvoARGM8BBw7DEX-MIK
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-o0unqe46z0g7.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -183,7 +183,7 @@
   title: El reino prohibido
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
 
-## 200 https://cuevanas3.pro/player.php?t=1wPYgmyXHsLRHum00QOCv-sujK9RbhiPwJPRJ6Pxzs7FyYGYFZ2bcBn2RuUVnCuofw4LFGtdVMjZ65IvBRqzD
+## 200 https://cuevanas3.pro/player.php?t=---_mjfmiN-a0nXD27yRdxFI6Ca8_xbTBR96RDfrJyLdpkParbUwUXQCF1OUEGo2_zsssY2fxEXYkFSJV_FJa
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-wa2r4s768i9k.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -246,7 +246,7 @@
   [data-src]  class="button-container"><span class="tooltip-text">HLS</span><button class="iframe_btn iframe_code server_btn submit" data-src="aHR0cHM6Ly9wbGF5ZXIuemlsbGEtbmV0d29ya3MuY29tL20zdTgvNzY0MDUyOGQ1ZjM2ZDc0Mzk3NWRhYjhjZWNhYjA2MWM=" app_type="Sub">OPCIÓN 1</button></div><div class="button-container"><span class="tooltip-text">Voe</span><button
   [iframe]  <div class="single-wrap clear"> <div id="primary" class="content-area"> <main id="main" class="site-main"> <div class="iframe_btn_row server-frames"><div class="button-container"><span class="tooltip-text">HLS</span><button class="iframe_btn iframe_code server_btn submit" data-src="aHR0cHM6Ly9wbGF5ZXIuemlsbGEtbmV0d29ya3MuY29tL20zdTgvNzY0
 
-## 200 https://cuevanas3.pro/player.php?t=80rYpkVfed5ACfd0L8xroqLqYbX81gbela2mx2vDqRbxfCz7sK-93KuKORwuTMPpivkKDcqfrh73QcilTdbPx
+## 200 https://cuevanas3.pro/player.php?t=qHpPzWYdxQ2KZTroxRl7HskrqUumxqhuBAnE5ZQT3AKEEqmGThiTOunjoV0nk4IrwyIbrZpcNATyh_xWpkYZ-
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-m62pdrnlvwpw.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -273,12 +273,17 @@
   title: La Odisea | Fuego Cine 2.0
   [iframe] <!-- Estilos optimizados para el reproductor principal y trailers --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-container iframe { width: 100% !important; he
 
+## 200 https://unlimplay.com/f/embed/movie/1368337?_et=70ce12aca994e73fa9169751599fbebb
+  h1: 
+  title: UnLimPlay
+  [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h
+
 ## 200 https://videoapp.mov/e/movie/1368337
   h1: 
   title: La Odisea
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
 
-## 200 https://cuevanas3.pro/player.php?t=N8kEGybTlKL8UBHTk02EKARh0grHJ_8zaLueFBz2xuJQJGAhWmFglk97xrj46wUtAzExcTenYUd8nO4rgXFCw
+## 200 https://cuevanas3.pro/player.php?t=9mCFSzA3jgdYVYRUPrws2jCEWAySaxSSukKirzwbfC1Jh_SQ_7vVqH2NZWCMAEyoq8KUVoHSMeALbn3-krBtL
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-hc7i1n95d4vx.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -305,7 +310,7 @@
   title: VisionQuest Temporada 1 01x01 - Sin ataduras | Fuego Cine 2.0
   [iframe] div> </div> </nav> </div> <!-- End Navigation Area --> </header> <!-- End Header --> <!-- Estilos para el contenedor de iframes --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-containe
 
-## 200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=969a11913f7370724f80a8bed71af2e4
+## 200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=969a82229783eb21aab1a0c7b3125065
   h1: 
   title: UnLimPlay
   [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h

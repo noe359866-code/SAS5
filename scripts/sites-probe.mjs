@@ -234,6 +234,9 @@ const SITES = {
       { label: 'wp-search', url: 'https://animeflv.or.at/wp-json/wp/v2/search?search=naruto&per_page=10' },
       { label: 'wp-types', url: 'https://animeflv.or.at/wp-json/wp/v2/types' },
       { label: 'wp-posts', url: 'https://animeflv.or.at/wp-json/wp/v2/posts?search=naruto&per_page=5' },
+      { label: 'buscar-slash', url: 'https://animeflv.or.at/search/naruto/' },
+      { label: 'ficha-naruto', url: 'https://animeflv.or.at/anime/naruto/' },
+      { label: 'archivo-anime', url: 'https://animeflv.or.at/anime/' },
     ],
   },
   animeyt: {

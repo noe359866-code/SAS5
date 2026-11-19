@@ -2,13 +2,15 @@
 200	text/html	64668	https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/		Spider-Man: Un nuevo día
 200	embed	0	embed-host: bysejikuar.com		
 200	application/json	90	https://www.tubeonline.net/wp-admin/admin-ajax.php		
-200	application/json	2358	https://bysejikuar.com/api/videos/01j37fv5s579		
+200	byse	2357	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742		
+200	application/json	2357	https://bysejikuar.com/api/videos/01j37fv5s579		
 200	embed	0	embed-host: streamtape.com		
 200	application/json	97	https://www.tubeonline.net/wp-admin/admin-ajax.php		
 404	text/html	21283	https://streamtape.com/e/YZzOKDljYacvDbG/SM1NDA.1080_CAS.mp4		Video not found!
 200	embed	0	embed-host: bysejikuar.com		
 200	application/json	90	https://www.tubeonline.net/wp-admin/admin-ajax.php		
-200	application/json	2358	https://bysejikuar.com/api/videos/309n27lec3zn		
+200	byse	2353	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=740		
+200	application/json	2353	https://bysejikuar.com/api/videos/309n27lec3zn		
 200	embed	0	embed-host: streamtape.com		
 200	application/json	97	https://www.tubeonline.net/wp-admin/admin-ajax.php		
 404	text/html	21283	https://streamtape.com/e/j7AO39kJkKhze2B/SM1NDA.1080_LAT.mp4		Video not found!
@@ -70,14 +72,14 @@
 200	text/html	141330	https://ver.gnula.one/movies/alien-romulus/		Ver Alien: Romulus (2024) online
 200	text/html	1067	https://ver.gnula.one/?trembed=0&trid=49552&trtype=1		
 301	text/html	167	https://links.cuevana.ac/play/dEZQdkR3c3V1M2RXYTBkb1hZRm13QT09.html	https://links.fiuxy2.com/play/dEZQdkR3c3V1M2RXYTBkb1hZRm13QT09.html	301 Moved Permanently
+200	text/html	5853	https://links.fiuxy2.com/play/dEZQdkR3c3V1M2RXYTBkb1hZRm13QT09.html		
 200	text/html	1043	https://ver.gnula.one/?trembed=4&trid=49552&trtype=1		
 200	text/html	1605	https://filemoon.sx/e/gtl2mhgw4is7		
-200	text/html	1038	https://ver.gnula.one/?trembed=7&trid=49552&trtype=1		
 200	text/html	46437	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	148084	https://verpeliculasultra.com/xfsearch/peliculas-2024/		
 200	text/html	58880	https://verpeliculasultra.com/ciencia-ficcion/4702-alien-romulus.html		Ver Alien: Romulus (2024) Online Gratis
-200	text/html	228360	https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09		
-200	text/html	228275	https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09		
+200	text/html	228705	https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09		
+200	text/html	228284	https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09		
 200	application/json	2645	https://v3-cinemeta.strem.io/meta/movie/tt6263850.json		
 200	text/html	63124	https://www.tubeonline.net/pelicula/deadpool-wolverine/		Deadpool &#038; Wolverine
 200	embed	0	embed-host: filemoon.sx		

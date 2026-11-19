@@ -194,15 +194,15 @@
   title: Embed
   [iframe] http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="robots" content="noindex,nofollow"> <style>body,html,.Video,iframe{width: 100%;height: 100%;margin: 0;font-size: 0;}</style> </head> <body oncontextmenu="return false;"> <div class="Video"><iframe width="560" height="315" src="https://links.cuevana.ac/play/dEZQdkR3c3V1M2RXYTBkb1h
 
+## 200 https://links.fiuxy2.com/play/dEZQdkR3c3V1M2RXYTBkb1hZRm13QT09.html
+  h1: 
+  title: Alien: Romulus - LAT
+  [data-src]  class="pl__list" data-panel="play"> <ul class="pl__servers" data-lang="lat"> <li><button type="button" class="pl__srv" data-src="https://filemoon.sx/e/gtl2mhgw4is7#notfound#lang=LAT"> <img src="/static/server/filemoon.png" alt="" width="40" height="40" loading="lazy"> <span><b>Filemoon</b><small>Latino - Servidores en HD</small></span> <
+
 ## 200 https://ver.gnula.one/?trembed=4&trid=49552&trtype=1
   h1: 
   title: Embed
   [iframe] http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="robots" content="noindex,nofollow"> <style>body,html,.Video,iframe{width: 100%;height: 100%;margin: 0;font-size: 0;}</style> </head> <body oncontextmenu="return false;"> <div class="Video"><iframe width="560" height="315" src="https://filemoon.sx/e/gtl2mhgw4is7#notfound#lang=LAT"
-
-## 200 https://ver.gnula.one/?trembed=7&trid=49552&trtype=1
-  h1: 
-  title: Embed
-  [iframe] http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="robots" content="noindex,nofollow"> <style>body,html,.Video,iframe{width: 100%;height: 100%;margin: 0;font-size: 0;}</style> </head> <body oncontextmenu="return false;"> <div class="Video"><iframe width="560" height="315" src="https://voe.sx/e/g4zpnrrd3jay#notfound#lang=LAT" fram
 
 ## 200 https://verpeliculasultra.com/
   h1: Buscar en la página web

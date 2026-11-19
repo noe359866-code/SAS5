@@ -266,3 +266,50 @@ test('mirandogratis: ficha inexistente (404) no lanza', async () => {
     assert.equal(result.reason, 'no-match');
   } finally { stub.restore(); }
 });
+
+// ── Comportamiento de la capa HTTP de los adaptadores ───────────────────
+
+test('providerHttp: sigue un 301 canónico (barra final) una sola vez', async () => {
+  const { providerHttp } = require('../lib/providerHttp');
+  const original = globalThis.fetch;
+  globalThis.fetch = async (url, options) => {
+    if (String(url) === 'https://ver.gnula.one/movies/inception') {
+      return new Response('', { status: 301, headers: { location: 'https://ver.gnula.one/movies/inception/' } });
+    }
+    return new Response('<h1>ok</h1>', { status: 200 });
+  };
+  try {
+    const http = providerHttp(3000, 3);
+    const body = await http.text('https://ver.gnula.one/movies/inception');
+    assert.match(body, /ok/);
+  } finally { globalThis.fetch = original; }
+});
+
+test('providerHttp: un 301 a otra ruta se rechaza en vez de aceptar la portada', async () => {
+  const { providerHttp } = require('../lib/providerHttp');
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => new Response('', { status: 301, headers: { location: 'https://ver.gnula.one/' } });
+  try {
+    const http = providerHttp(3000, 3);
+    await assert.rejects(() => http.text('https://ver.gnula.one/movies/no-existe/'), (err) => err.status === 301);
+  } finally { globalThis.fetch = original; }
+});
+
+test('providerHttp: el POST de Dooplay llega con cuerpo y método', async () => {
+  const { providerHttp } = require('../lib/providerHttp');
+  const seen = [];
+  const original = globalThis.fetch;
+  globalThis.fetch = async (url, options) => {
+    seen.push({ method: options.method, body: options.body, hasRedirect: 'redirect' in options });
+    return new Response('{"embed_url":"https://byseraguci.com/e/x"}', { status: 200, headers: { 'content-type': 'application/json' } });
+  };
+  try {
+    const http = providerHttp(3000, 2);
+    const data = await http.json('https://www.tubeonline.net/wp-admin/admin-ajax.php', {
+      method: 'POST', body: 'action=doo_player_ajax&post=1&nume=2&type=movie',
+    });
+    assert.equal(data.embed_url, 'https://byseraguci.com/e/x');
+    assert.equal(seen[0].method, 'POST');
+    assert.match(seen[0].body, /nume=2/);
+  } finally { globalThis.fetch = original; }
+});

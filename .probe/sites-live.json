@@ -3,29 +3,18 @@
     "control": "tt33033798",
     "title": "Spider-Man: Un nuevo día",
     "provider": "tubeonline",
-    "hits": 2,
+    "hits": 0,
     "trace": [
-      "200 embed-host: vidmoly.org",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: luluvido.com",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: vidara.to",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt33033798.json",
+      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/",
+      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/",
+      "200 https://www.tubeonline.net/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa"
     ],
-    "ms": 4500,
-    "quality": [
-      "HLS",
-      "HLS"
-    ],
-    "audio": [
-      "Castellano",
-      "Latino"
-    ],
-    "hosts": [
-      "https://edge1-waw-sprintcdn.r66nv9ed.com/hls2/04/12190/01j37fv5s579_x/master.m3u8",
-      "https://edge1-waw-sprintcdn.r66nv9ed.com/hls2/02/12190/309n27lec3zn_x/master.m3u8"
-    ],
-    "verdict": "HLS/Castellano https://edge1-waw-sprintcdn.r66nv9ed.com/hls2/04/12190/01j37fv5s579_x/master.m3u8 · HLS/Latino https://edge1-waw-sprintcdn.r66nv9ed.com/hls2/02/12190/309n27lec3zn_x/master.m3u8"
+    "ms": 639,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
   },
   {
     "control": "tt33033798",
@@ -33,14 +22,14 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 embed-host: luluvido.com",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: vidara.to",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
-      "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt33033798.json",
+      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/",
+      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/",
+      "200 https://www.tubeonline.net/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa",
+      "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa",
+      "200 https://mirandogratis.com/spider-man-un-nuevo-dia.html"
     ],
-    "ms": 1111,
+    "ms": 496,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -59,7 +48,7 @@
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 2936,
+    "ms": 2125,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -78,7 +67,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 1657,
+    "ms": 1067,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -88,20 +77,26 @@
     "control": "tt33033798",
     "title": "Spider-Man: Un nuevo día",
     "provider": "cuevanas3",
-    "hits": 0,
+    "hits": 1,
     "trace": [
-      "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1",
-      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=57851",
-      "301 https://cuevana3.gs/player.php?t=ybzKt8Z0nj4dl-4k3dO5qwyMIF7IYY3FMatZYD9_obvuqXw4Vge73_GUCuKcKpaOSvsPG_LAnAVUT9gfSkCo4A&server=vimeos → https://cuevanas3.pro/player.php?t=ybzKt8Z0nj4dl-4k3dO5qwyMIF7IYY3FMatZYD9_obvuq h1=\"301 Moved Permanently\""
+      "301 https://cuevana3.gs/player.php?t=jos4AILjgqA9KDFKUXypgFaspOBTgmIziW8Nlqnl2zTxjwAcDl9NEmxxCwMp7_KRFVHqe7aYfwOWltjiTb2Aag&server=vimeos → https://cuevanas3.pro/player.php?t=jos4AILjgqA9KDFKUXypgFaspOBTgmIziW8Nlqnl2zTxj h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=jos4AILjgqA9KDFKUXypgFaspOBTgmIziW8Nlqnl2zTxjwAcDl9NEmxxCwMp7_KRFVHqe7aYfwOWltjiTb2Aag&server=vimeos",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html"
     ],
-    "ms": 1315,
-    "quality": [],
-    "audio": [],
-    "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":0,\"extracted\":0,\"unsupported\":1}"
+    "ms": 2442,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt1375666",
@@ -109,14 +104,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://cuevanas3.pro/wp-api/v1/player?postId=57851",
-      "301 https://cuevana3.gs/player.php?t=ybzKt8Z0nj4dl-4k3dO5qwyMIF7IYY3FMatZYD9_obvuqXw4Vge73_GUCuKcKpaOSvsPG_LAnAVUT9gfSkCo4A&server=vimeos → https://cuevanas3.pro/player.php?t=ybzKt8Z0nj4dl-4k3dO5qwyMIF7IYY3FMatZYD9_obvuq h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=jos4AILjgqA9KDFKUXypgFaspOBTgmIziW8Nlqnl2zTxjwAcDl9NEmxxCwMp7_KRFVHqe7aYfwOWltjiTb2Aag&server=vimeos",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
-      "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
-      "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
+      "200 https://www.tubeonline.net/pelicula/inception/",
+      "200 https://www.tubeonline.net/pelicula/inception-2010/",
+      "200 https://www.tubeonline.net/?s=Inception"
     ],
-    "ms": 1381,
+    "ms": 556,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -129,13 +124,13 @@
     "hits": 0,
     "trace": [
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
-      "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
-      "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\"",
-      "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
-      "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
+      "200 https://www.tubeonline.net/pelicula/inception/",
+      "200 https://www.tubeonline.net/pelicula/inception-2010/",
+      "200 https://www.tubeonline.net/?s=Inception",
+      "200 https://mirandogratis.com/?s=Inception",
+      "200 https://mirandogratis.com/inception.html"
     ],
-    "ms": 1021,
+    "ms": 389,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -147,14 +142,14 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\"",
-      "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
-      "301 https://mirandogratis.com/inception.html → https://mirandogratis.com",
+      "200 https://www.tubeonline.net/pelicula/inception-2010/",
+      "200 https://www.tubeonline.net/?s=Inception",
+      "200 https://mirandogratis.com/?s=Inception",
+      "200 https://mirandogratis.com/inception.html",
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 1116,
+    "ms": 885,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -166,14 +161,14 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
-      "301 https://mirandogratis.com/inception.html → https://mirandogratis.com",
+      "200 https://mirandogratis.com/?s=Inception",
+      "200 https://mirandogratis.com/inception.html",
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 1407,
+    "ms": 905,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -185,14 +180,14 @@
     "provider": "cuevanas3",
     "hits": 0,
     "trace": [
-      "301 https://mirandogratis.com/inception.html → https://mirandogratis.com",
+      "200 https://mirandogratis.com/inception.html",
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 1416,
+    "ms": 444,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -204,18 +199,18 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\"",
-      "200 https://www.tubeonline.net/episodio/breaking-bad-1x1/ h1=\"Breaking Bad: 1x1\"",
-      "200 embed-host: hqq.ac",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: hqq.ac",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
+      "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
+      "200 https://cuevanas3.pro/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
+      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
+      "200 https://www.tubeonline.net/serie/breaking-bad/",
+      "200 https://www.tubeonline.net/?s=Breaking%20Bad"
     ],
-    "ms": 1847,
+    "ms": 388,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":2,\"extracted\":0,\"unsupported\":0}"
+    "verdict": "no-match"
   },
   {
     "control": "tt0903747:1:1",
@@ -223,12 +218,12 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\"",
-      "200 https://www.tubeonline.net/episodio/breaking-bad-1x1/ h1=\"Breaking Bad: 1x1\"",
-      "200 embed-host: hqq.ac",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: hqq.ac",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
+      "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
+      "200 https://cuevanas3.pro/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
+      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
+      "200 https://www.tubeonline.net/serie/breaking-bad/",
+      "200 https://www.tubeonline.net/?s=Breaking%20Bad"
     ],
     "ms": 0,
     "quality": [],
@@ -242,12 +237,12 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\"",
-      "200 https://www.tubeonline.net/episodio/breaking-bad-1x1/ h1=\"Breaking Bad: 1x1\"",
-      "200 embed-host: hqq.ac",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: hqq.ac",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
+      "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
+      "200 https://cuevanas3.pro/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
+      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
+      "200 https://www.tubeonline.net/serie/breaking-bad/",
+      "200 https://www.tubeonline.net/?s=Breaking%20Bad"
     ],
     "ms": 0,
     "quality": [],
@@ -261,14 +256,14 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\"",
-      "200 https://www.tubeonline.net/episodio/breaking-bad-1x1/ h1=\"Breaking Bad: 1x1\"",
-      "200 embed-host: hqq.ac",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: hqq.ac",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
+      "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
+      "200 https://cuevanas3.pro/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
+      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
+      "200 https://www.tubeonline.net/serie/breaking-bad/",
+      "200 https://www.tubeonline.net/?s=Breaking%20Bad"
     ],
-    "ms": 1,
+    "ms": 0,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -278,20 +273,26 @@
     "control": "tt0903747:1:1",
     "title": "Breaking Bad",
     "provider": "cuevanas3",
-    "hits": 0,
+    "hits": 1,
     "trace": [
-      "200 embed-host: hqq.ac",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=73&season=1&page=1&postsPerPage=50",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=76",
-      "301 https://cuevana3.gs/player.php?t=Gy_ldTh3Byzm_rghEq96ei51dNu_azbt7s0ZATIHvFVZ2t5hiToY66hZq7f1lij7u2VOTMV6VDBAgTfr0iTr5A&server=vimeos → https://cuevanas3.pro/player.php?t=Gy_ldTh3Byzm_rghEq96ei51dNu_azbt7s0ZATIHvFVZ2 h1=\"301 Moved Permanently\""
+      "301 https://cuevana3.gs/player.php?t=to6T204fh5upun558D_3sHo6iP-EMp3VUgzZwQ1ifZdv_H2bcxXuau4YT1iB0CSEJGARZlKWC3jkdCkOTopGVQ&server=vimeos → https://cuevanas3.pro/player.php?t=to6T204fh5upun558D_3sHo6iP-EMp3VUgzZwQ1ifZdv_ h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=to6T204fh5upun558D_3sHo6iP-EMp3VUgzZwQ1ifZdv_H2bcxXuau4YT1iB0CSEJGARZlKWC3jkdCkOTopGVQ&server=vimeos",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html"
     ],
-    "ms": 4709,
-    "quality": [],
-    "audio": [],
-    "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":0,\"extracted\":0,\"unsupported\":1}"
+    "ms": 2962,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
@@ -299,18 +300,18 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 embed-host: vidmoly.to",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: swiftload.io",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: filemoon.sx",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
+      "200 https://cuevanas3.pro/player.php?t=to6T204fh5upun558D_3sHo6iP-EMp3VUgzZwQ1ifZdv_H2bcxXuau4YT1iB0CSEJGARZlKWC3jkdCkOTopGVQ&server=vimeos",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html",
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt18412256.json",
+      "200 https://www.tubeonline.net/pelicula/alien-romulus/",
+      "200 https://www.tubeonline.net/pelicula/alien-romulus-2024/",
+      "200 https://www.tubeonline.net/?s=Alien%3A%20Romulus"
     ],
-    "ms": 2539,
+    "ms": 493,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":8,\"extracted\":0,\"unsupported\":0}"
+    "verdict": "no-match"
   },
   {
     "control": "tt18412256",
@@ -318,18 +319,18 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 embed-host: swiftload.io",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: filemoon.sx",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 https://mirandogratis.com/?s=Alien%3A%20Romulus h1=\"Estas buscando: Alien: Romulus\"",
-      "200 https://mirandogratis.com/alien-romulus.html h1=\"Ver Pelicula Alien: Romulus Online Grati\""
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt18412256.json",
+      "200 https://www.tubeonline.net/pelicula/alien-romulus/",
+      "200 https://www.tubeonline.net/pelicula/alien-romulus-2024/",
+      "200 https://www.tubeonline.net/?s=Alien%3A%20Romulus",
+      "200 https://mirandogratis.com/?s=Alien%3A%20Romulus",
+      "200 https://mirandogratis.com/alien-romulus.html"
     ],
-    "ms": 1184,
+    "ms": 436,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":2,\"extracted\":0,\"unsupported\":0}"
+    "verdict": "no-match"
   },
   {
     "control": "tt18412256",
@@ -344,7 +345,7 @@
       "200 https://ver.gnula.one/?trembed=4&trid=49552&trtype=1",
       "200 https://filemoon.sx/e/gtl2mhgw4is7"
     ],
-    "ms": 2500,
+    "ms": 2478,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -363,7 +364,7 @@
       "200 https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09",
       "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09"
     ],
-    "ms": 2411,
+    "ms": 1978,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -373,20 +374,26 @@
     "control": "tt18412256",
     "title": "Alien: Romulus",
     "provider": "cuevanas3",
-    "hits": 0,
+    "hits": 1,
     "trace": [
-      "200 https://verpeliculasultra.com/ciencia-ficcion/4702-alien-romulus.html h1=\"Ver Alien: Romulus (2024) Online Gratis\"",
-      "200 https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09",
       "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=45223",
-      "301 https://cuevana3.gs/player.php?t=5WtzhhJ13Og9YKqJ9szZDO4V8Kj2KPJHNcreZioIc1c6fEn7FRkjxtdmsFQEl7HXsdNGMXSa5NdPxk8f2SYOLg&server=vimeos → https://cuevanas3.pro/player.php?t=5WtzhhJ13Og9YKqJ9szZDO4V8Kj2KPJHNcreZioIc1c6f h1=\"301 Moved Permanently\""
+      "301 https://cuevana3.gs/player.php?t=mrN-xnzQin6Av3b3p9nUWzsgG3jieVBVC8fYD9yeLdQLYF4BkYLzP2pFL7bxBoUCNb3cDs2Vpz0VGpGSMmPe1w&server=vimeos → https://cuevanas3.pro/player.php?t=mrN-xnzQin6Av3b3p9nUWzsgG3jieVBVC8fYD9yeLdQLY h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=mrN-xnzQin6Av3b3p9nUWzsgG3jieVBVC8fYD9yeLdQLYF4BkYLzP2pFL7bxBoUCNb3cDs2Vpz0VGpGSMmPe1w&server=vimeos",
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html"
     ],
-    "ms": 650,
-    "quality": [],
-    "audio": [],
-    "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":0,\"extracted\":0,\"unsupported\":1}"
+    "ms": 1508,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt6263850",
@@ -394,18 +401,18 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 embed-host: luluvdo.com",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: filemoon.sx",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: vidmoly.to",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
+      "200 https://cuevanas3.pro/player.php?t=mrN-xnzQin6Av3b3p9nUWzsgG3jieVBVC8fYD9yeLdQLYF4BkYLzP2pFL7bxBoUCNb3cDs2Vpz0VGpGSMmPe1w&server=vimeos",
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html",
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt6263850.json",
+      "200 https://www.tubeonline.net/pelicula/deadpool-wolverine/",
+      "200 https://www.tubeonline.net/pelicula/deadpool-wolverine-2024/",
+      "200 https://www.tubeonline.net/?s=Deadpool%20%26%20Wolverine"
     ],
-    "ms": 2719,
+    "ms": 559,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":8,\"extracted\":0,\"unsupported\":0}"
+    "verdict": "no-match"
   },
   {
     "control": "tt6263850",
@@ -413,18 +420,18 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 embed-host: filemoon.sx",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 embed-host: vidmoly.to",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
-      "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\""
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt6263850.json",
+      "200 https://www.tubeonline.net/pelicula/deadpool-wolverine/",
+      "200 https://www.tubeonline.net/pelicula/deadpool-wolverine-2024/",
+      "200 https://www.tubeonline.net/?s=Deadpool%20%26%20Wolverine",
+      "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine",
+      "200 https://mirandogratis.com/deadpool-wolverine.html"
     ],
-    "ms": 1259,
+    "ms": 382,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":2,\"extracted\":0,\"unsupported\":0}"
+    "verdict": "no-match"
   },
   {
     "control": "tt6263850",
@@ -432,14 +439,14 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "200 embed-host: vidmoly.to",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
-      "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\"",
+      "200 https://www.tubeonline.net/pelicula/deadpool-wolverine-2024/",
+      "200 https://www.tubeonline.net/?s=Deadpool%20%26%20Wolverine",
+      "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine",
+      "200 https://mirandogratis.com/deadpool-wolverine.html",
       "301 https://ver.gnula.one/movies/deadpool-wolverine/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/deadpool-wolverine-2024/ → https://ver.gnula.one"
     ],
-    "ms": 1090,
+    "ms": 879,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -451,14 +458,14 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
-      "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\"",
+      "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine",
+      "200 https://mirandogratis.com/deadpool-wolverine.html",
       "301 https://ver.gnula.one/movies/deadpool-wolverine/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/deadpool-wolverine-2024/ → https://ver.gnula.one",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 865,
+    "ms": 983,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -470,14 +477,14 @@
     "provider": "cuevanas3",
     "hits": 0,
     "trace": [
-      "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\"",
+      "200 https://mirandogratis.com/deadpool-wolverine.html",
       "301 https://ver.gnula.one/movies/deadpool-wolverine/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/deadpool-wolverine-2024/ → https://ver.gnula.one",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Deadpool+%26+Wolverine&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 353,
+    "ms": 249,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -492,11 +499,11 @@
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Deadpool+%26+Wolverine&page=1&postType=any&postsPerPage=18",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt22022452.json",
-      "404 https://www.tubeonline.net/pelicula/inside-out-2/ h1=\"Pagina no se encuentra\"",
-      "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\""
+      "200 https://www.tubeonline.net/pelicula/inside-out-2/",
+      "200 https://www.tubeonline.net/pelicula/inside-out-2-2024/",
+      "200 https://www.tubeonline.net/?s=Inside%20Out%202"
     ],
-    "ms": 1219,
+    "ms": 479,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -509,13 +516,13 @@
     "hits": 0,
     "trace": [
       "200 https://v3-cinemeta.strem.io/meta/movie/tt22022452.json",
-      "404 https://www.tubeonline.net/pelicula/inside-out-2/ h1=\"Pagina no se encuentra\"",
-      "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\"",
-      "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
-      "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com"
+      "200 https://www.tubeonline.net/pelicula/inside-out-2/",
+      "200 https://www.tubeonline.net/pelicula/inside-out-2-2024/",
+      "200 https://www.tubeonline.net/?s=Inside%20Out%202",
+      "200 https://mirandogratis.com/?s=Inside%20Out%202",
+      "200 https://mirandogratis.com/inside-out-2.html"
     ],
-    "ms": 1101,
+    "ms": 384,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -527,14 +534,14 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\"",
-      "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
-      "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com",
+      "200 https://www.tubeonline.net/pelicula/inside-out-2-2024/",
+      "200 https://www.tubeonline.net/?s=Inside%20Out%202",
+      "200 https://mirandogratis.com/?s=Inside%20Out%202",
+      "200 https://mirandogratis.com/inside-out-2.html",
       "301 https://ver.gnula.one/movies/inside-out-2/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inside-out-2-2024/ → https://ver.gnula.one"
     ],
-    "ms": 1156,
+    "ms": 901,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -546,14 +553,14 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
-      "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com",
+      "200 https://mirandogratis.com/?s=Inside%20Out%202",
+      "200 https://mirandogratis.com/inside-out-2.html",
       "301 https://ver.gnula.one/movies/inside-out-2/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inside-out-2-2024/ → https://ver.gnula.one",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 1635,
+    "ms": 736,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -565,14 +572,14 @@
     "provider": "cuevanas3",
     "hits": 0,
     "trace": [
-      "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com",
+      "200 https://mirandogratis.com/inside-out-2.html",
       "301 https://ver.gnula.one/movies/inside-out-2/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inside-out-2-2024/ → https://ver.gnula.one",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 303,
+    "ms": 291,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -587,11 +594,11 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
-      "404 https://www.tubeonline.net/pelicula/el-reino-prohibido/ h1=\"Pagina no se encuentra\"",
-      "404 https://www.tubeonline.net/pelicula/el-reino-prohibido-2008/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=El%20reino%20prohibido h1=\"Resultados encontrados: El reino prohibi\""
+      "200 https://www.tubeonline.net/pelicula/el-reino-prohibido/",
+      "200 https://www.tubeonline.net/pelicula/el-reino-prohibido-2008/",
+      "200 https://www.tubeonline.net/?s=El%20reino%20prohibido"
     ],
-    "ms": 1302,
+    "ms": 534,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -601,26 +608,20 @@
     "control": "El reino prohibido",
     "title": "El reino prohibido",
     "provider": "mirandogratis",
-    "hits": 1,
+    "hits": 0,
     "trace": [
-      "200 https://www.tubeonline.net/?s=El%20reino%20prohibido h1=\"Resultados encontrados: El reino prohibi\"",
-      "200 https://mirandogratis.com/?s=El%20reino%20prohibido h1=\"Estas buscando: El reino prohibido\"",
-      "200 https://mirandogratis.com/el-reino-prohibido.html h1=\"Ver Pelicula El reino prohibido Online G\"",
-      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742",
-      "200 https://byseraguci.com/api/videos/yml5zxa71gkc",
-      "302 https://mixdrop.top/e/wlllp17rtn9m7o → https://mxdrop.click/e/wlllp17rtn9m7o h1=\"302 Found\""
+      "200 https://cuevanas3.pro/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
+      "200 https://www.tubeonline.net/pelicula/el-reino-prohibido/",
+      "200 https://www.tubeonline.net/pelicula/el-reino-prohibido-2008/",
+      "200 https://www.tubeonline.net/?s=El%20reino%20prohibido",
+      "200 https://mirandogratis.com/?s=El%20reino%20prohibido",
+      "200 https://mirandogratis.com/el-reino-prohibido.html"
     ],
-    "ms": 1699,
-    "quality": [
-      "HLS"
-    ],
-    "audio": [
-      "Latino"
-    ],
-    "hosts": [
-      "https://edge1-waw-sprintcdn.r66nv9ed.com/hls2/07/12506/yml5zxa71gkc_x/master.m3u8"
-    ],
-    "verdict": "HLS/Latino https://edge1-waw-sprintcdn.r66nv9ed.com/hls2/07/12506/yml5zxa71gkc_x/master.m3u8"
+    "ms": 439,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
   },
   {
     "control": "El reino prohibido",
@@ -628,14 +629,14 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "302 https://mixdrop.top/e/wlllp17rtn9m7o → https://mxdrop.click/e/wlllp17rtn9m7o h1=\"302 Found\"",
+      "200 https://mirandogratis.com/el-reino-prohibido.html",
       "200 https://ver.gnula.one/movies/el-reino-prohibido/ h1=\"Ver El Reino Prohibido (2008) online\"",
       "200 https://ver.gnula.one/?trembed=0&trid=12533&trtype=1",
       "200 https://ver.gnula.one/?trembed=1&trid=12533&trtype=1",
       "301 https://uqload.com/embed-i8zq52o28bqu.html → https://uqload.vc/embed-i8zq52o28bqu.html?utm_source=mirror_com& h1=\"301 Moved Permanently\"",
       "200 https://uqload.vc/embed-i8zq52o28bqu.html?utm_source=mirror_com&"
     ],
-    "ms": 2771,
+    "ms": 1834,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -654,7 +655,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "404 https://verpeliculasultra.com/xfsearch/peliculas-2008/"
     ],
-    "ms": 1064,
+    "ms": 544,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -664,20 +665,26 @@
     "control": "El reino prohibido",
     "title": "El reino prohibido",
     "provider": "cuevanas3",
-    "hits": 0,
+    "hits": 1,
     "trace": [
-      "200 https://uqload.vc/embed-i8zq52o28bqu.html?utm_source=mirror_com&",
-      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "404 https://verpeliculasultra.com/xfsearch/peliculas-2008/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=56111",
-      "301 https://cuevana3.gs/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-BSIsMPMInlg28GZy8pswtytga3M9JC19EyaWom_Sqg&server=vimeos → https://cuevanas3.pro/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-B h1=\"301 Moved Permanently\""
+      "301 https://cuevana3.gs/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos → https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnN h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html"
     ],
-    "ms": 710,
-    "quality": [],
-    "audio": [],
-    "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":0,\"extracted\":0,\"unsupported\":1}"
+    "ms": 1115,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://p6.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://p6.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt0409591:1:1",
@@ -685,14 +692,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://cuevanas3.pro/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
-      "200 https://cuevanas3.pro/wp-api/v1/player?postId=56111",
-      "301 https://cuevana3.gs/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-BSIsMPMInlg28GZy8pswtytga3M9JC19EyaWom_Sqg&server=vimeos → https://cuevanas3.pro/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-B h1=\"301 Moved Permanently\"",
+      "301 https://cuevana3.gs/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos → https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnN h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0409591",
-      "404 https://www.tubeonline.net/serie/naruto/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Naruto h1=\"Resultados encontrados: Naruto\""
+      "200 https://www.tubeonline.net/serie/naruto/",
+      "200 https://www.tubeonline.net/?s=Naruto"
     ],
-    "ms": 983,
+    "ms": 460,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -704,12 +711,12 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 https://cuevanas3.pro/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
-      "200 https://cuevanas3.pro/wp-api/v1/player?postId=56111",
-      "301 https://cuevana3.gs/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-BSIsMPMInlg28GZy8pswtytga3M9JC19EyaWom_Sqg&server=vimeos → https://cuevanas3.pro/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-B h1=\"301 Moved Permanently\"",
+      "301 https://cuevana3.gs/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos → https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnN h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0409591",
-      "404 https://www.tubeonline.net/serie/naruto/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Naruto h1=\"Resultados encontrados: Naruto\""
+      "200 https://www.tubeonline.net/serie/naruto/",
+      "200 https://www.tubeonline.net/?s=Naruto"
     ],
     "ms": 0,
     "quality": [],
@@ -723,14 +730,14 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "200 https://cuevanas3.pro/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
-      "200 https://cuevanas3.pro/wp-api/v1/player?postId=56111",
-      "301 https://cuevana3.gs/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-BSIsMPMInlg28GZy8pswtytga3M9JC19EyaWom_Sqg&server=vimeos → https://cuevanas3.pro/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-B h1=\"301 Moved Permanently\"",
+      "301 https://cuevana3.gs/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos → https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnN h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0409591",
-      "404 https://www.tubeonline.net/serie/naruto/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Naruto h1=\"Resultados encontrados: Naruto\""
+      "200 https://www.tubeonline.net/serie/naruto/",
+      "200 https://www.tubeonline.net/?s=Naruto"
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -742,12 +749,12 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://cuevanas3.pro/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
-      "200 https://cuevanas3.pro/wp-api/v1/player?postId=56111",
-      "301 https://cuevana3.gs/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-BSIsMPMInlg28GZy8pswtytga3M9JC19EyaWom_Sqg&server=vimeos → https://cuevanas3.pro/player.php?t=UuYv2Q5Druql5a6vilJMY2lJy9XRaKKOqfEBazqNixn-B h1=\"301 Moved Permanently\"",
+      "301 https://cuevana3.gs/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos → https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnN h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=weMA1-p7g5uFv3ixA4qSl0euRWyhgXcd23GBoR6840MnNqspUWlI7h0ZlzlHq7fY1sapoiLU34jSz7Hd5JCNBw&server=vimeos",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0409591",
-      "404 https://www.tubeonline.net/serie/naruto/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Naruto h1=\"Resultados encontrados: Naruto\""
+      "200 https://www.tubeonline.net/serie/naruto/",
+      "200 https://www.tubeonline.net/?s=Naruto"
     ],
     "ms": 0,
     "quality": [],
@@ -759,19 +766,25 @@
     "control": "tt0409591:1:1",
     "title": "Naruto",
     "provider": "cuevanas3",
-    "hits": 0,
+    "hits": 1,
     "trace": [
-      "404 https://www.tubeonline.net/serie/naruto/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Naruto h1=\"Resultados encontrados: Naruto\"",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=20794&season=1&page=1&postsPerPage=50",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=20797",
-      "301 https://cuevana3.gs/player.php?t=VN2X87lajC1y88BxJclvIr-DzRJjWkPT-Km2TZ3VqDro197hIYnRtAjjsqhelivRtFceUbWOgvxTJWc1BIz1QA&server=vimeos → https://cuevanas3.pro/player.php?t=VN2X87lajC1y88BxJclvIr-DzRJjWkPT-Km2TZ3VqDro1 h1=\"301 Moved Permanently\""
+      "301 https://cuevana3.gs/player.php?t=cxS4HL7PiEXUjI0BHCTliEd5yNnaNIRxIsmGNviTRHDR33QbKtUpXWUkDQhzOr5SPCb_GnNVc-1_zqzqx5mXKw&server=vimeos → https://cuevanas3.pro/player.php?t=cxS4HL7PiEXUjI0BHCTliEd5yNnaNIRxIsmGNviTRHDR3 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=cxS4HL7PiEXUjI0BHCTliEd5yNnaNIRxIsmGNviTRHDR33QbKtUpXWUkDQhzOr5SPCb_GnNVc-1_zqzqx5mXKw&server=vimeos",
+      "200 https://vimeos.net/embed-wa2r4s768i9k.html"
     ],
-    "ms": 1047,
-    "quality": [],
-    "audio": [],
-    "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":0,\"extracted\":0,\"unsupported\":1}"
+    "ms": 1401,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
   }
 ]

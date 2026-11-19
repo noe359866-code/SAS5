@@ -221,6 +221,26 @@ async function main() {
     dumps[`cand:${new URL(url).pathname}${new URL(url).search}`] = { status: res.status, json: res.json, head: res.json ? undefined : (res.head || '').slice(0, 800) };
   }
 
+  // --- Serie completa: lista de episodios y player del primer episodio.
+  const showId = seen.size ? (dumps['single:tvshows']?.json?.data?._id || 0) : 0;
+  if (showId) {
+    const listUrl = `${FAST}/single/episodes/list?_id=${showId}&season=1&page=1&postsPerPage=10`;
+    const list = await getJson(listUrl);
+    dumps['episodes:list'] = { status: list.status, json: list.json };
+    const posts = Array.isArray(list.json?.data?.posts) ? list.json.data.posts : [];
+    console.log(`\n### /single/episodes/list _id=${showId} -> ${list.status}, ${posts.length} episodios, seasons=${JSON.stringify(list.json?.data?.seasons)}`);
+    if (posts[0]) {
+      console.log(`  primer episodio: ${JSON.stringify(posts[0]).slice(0, 300)}`);
+      const epPlayer = await getJson(`${FAST}/player?postId=${posts[0]._id}`);
+      dumps['episodes:player'] = { status: epPlayer.status, json: epPlayer.json };
+      const embeds = epPlayer.json?.data?.embeds || [];
+      console.log(`  /player?postId=${posts[0]._id} -> ${epPlayer.status}, ${embeds.length} embeds`);
+      for (const e of embeds) console.log(`    ${String(e.server || e.provider).padEnd(12)} | ${String(e.language).padEnd(20)} | ${String(e.quality).padEnd(10)} | season=${e.season} episode=${e.episode} | ${redactParams(e.url)}`);
+      rows.push({ step: 'player:episodio', status: epPlayer.status, type: epPlayer.type, bytes: epPlayer.bytes, posts: embeds.length, hosts: [...new Set(embeds.map((e) => hostOf(e.url)).filter(Boolean))].join(',') || '-' });
+    }
+    rows.push({ step: 'episodes:list', status: list.status, type: list.type, bytes: list.bytes, posts: posts.length, hosts: '-' });
+  }
+
   const fs = await import('node:fs');
   fs.mkdirSync('.probe', { recursive: true });
   // Volcado íntegro (recortando solo la query de las URLs) para leerlo desde

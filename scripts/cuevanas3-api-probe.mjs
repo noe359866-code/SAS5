@@ -206,6 +206,11 @@ async function main() {
     `${BASE}/wp-json/wpf/v1/episodes?post_id=57851&post_type=movies`,
     `${FAST}/single/players?slug=${encodeURIComponent(movieSlug || '')}&postType=movies`,
     movieSlug ? `${BASE}/peliculas/${movieSlug}` : `${BASE}/peliculas`,
+    // ¿Listado de episodios de una serie? (el SPA abre `/episodio/<slug>`)
+    `${FAST}/episodes?postId=57851`,
+    `${FAST}/seasons?postId=57851`,
+    `${FAST}/single/tvshows?slug=${encodeURIComponent(seen.get('tvshows') || '')}&postType=tvshows`,
+    `${FAST}/player?postId=${dumps['search:naruto']?.json?.data?.posts?.[0]?._id || 0}`,
   ];
   console.log('\n### rutas candidatas de players');
   for (const url of candidates) {

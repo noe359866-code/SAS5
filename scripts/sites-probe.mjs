@@ -211,6 +211,8 @@ const SITES = {
       { label: 'chunk-api', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/index-CSASIiGL.js' },
       { label: 'chunk-related', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Related-3DG9WZ8k.js' },
       { label: 'chunk-listing', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Listing-B0UcKnlU.js' },
+      { label: 'chunk-tvshow', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/TvShow-3EzNr2_O.js' },
+      { label: 'chunk-archive', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Archive-KaP3wzuX.js' },
     ],
   },
   animed23: {

@@ -34,5 +34,7 @@
 | cand:/wp-api/v1/seasons | 404 | application/json | 8596 | 0 | - |
 | cand:/wp-api/v1/single/tvshows | 200 | application/json | 1300 | 1 | - |
 | cand:/wp-api/v1/player | 200 | application/json | 44 | 0 | - |
+| player:episodio | 200 | application/json | 12380 | 1 | cuevana3.gs |
+| episodes:list | 200 | application/json | 4426 | 10 | - |
 
 Sonda de API (solo JSON público; URLs con query recortada).

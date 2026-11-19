@@ -31,7 +31,7 @@ const CONTROLS = [
   { type: 'movie', id: 'tt18412256', fallback: { title: 'Alien: Romulus', year: '2024' } },
   { type: 'movie', id: 'tt6263850', fallback: { title: 'Deadpool & Wolverine', year: '2024' } },
   { type: 'movie', id: 'tt22022452', fallback: { title: 'Intensa-Mente 2', year: '2024' } },
-  { type: 'movie', id: 'tt0299977', fallback: { title: 'El reino prohibido', year: '2008' } },
+  { type: 'movie', id: 'tt1343097', fallback: { title: 'El reino prohibido', year: '2008' } },
 ];
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──

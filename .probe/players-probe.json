@@ -1,0 +1,379 @@
+[
+  {
+    "key": "bysejikuar",
+    "status": 200,
+    "mitigated": "",
+    "finalUrl": "https://bysejikuar.com/e/01j37fv5s579/sm1nda-1080-cas",
+    "bytes": 1972,
+    "title": "Byse Frontend",
+    "packed": false,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [],
+    "scripts": [
+      {
+        "inline": true,
+        "bytes": 1111,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " (function () { try { var path = ''; if (typeof window !== 'undefined' && window.locat"
+      }
+    ],
+    "external": [
+      "/assets/index-DocunfmE.js",
+      "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    ]
+  },
+  {
+    "key": "byseraguci",
+    "status": 200,
+    "mitigated": "",
+    "finalUrl": "https://byseraguci.com/e/intdacsm8cvn",
+    "bytes": 1972,
+    "title": "Byse Frontend",
+    "packed": false,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [],
+    "scripts": [
+      {
+        "inline": true,
+        "bytes": 1111,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " (function () { try { var path = ''; if (typeof window !== 'undefined' && window.locat"
+      }
+    ],
+    "external": [
+      "/assets/index-DocunfmE.js",
+      "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    ]
+  },
+  {
+    "key": "mixdrop",
+    "status": 200,
+    "mitigated": "",
+    "finalUrl": "https://mxdrop.click/e/mkkkzkqla6x18g",
+    "bytes": 78387,
+    "title": "",
+    "packed": true,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [],
+    "scripts": [
+      {
+        "inline": true,
+        "bytes": 66704,
+        "packed": false,
+        "m3u8": false,
+        "base64": true,
+        "sources": false,
+        "snippet": " const wpn63s = window.open; (function () { var sfpp45a = document; var c = 0,pops = [\"<script data-cfasync="
+      },
+      {
+        "inline": true,
+        "bytes": 1110,
+        "packed": true,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " MDCore.ref = \"mkkkzkqla6x18g\"; MDCore.sublangs = {\"ar\":\"Arabic\",\"bg\":\"Bulgarian\",\"bs\":\"Bosnian\",\"hr\":\"Croatian\",\"cz\":\"C"
+      },
+      {
+        "inline": true,
+        "bytes": 1007,
+        "packed": false,
+        "m3u8": false,
+        "base64": true,
+        "sources": true,
+        "snippet": " /*<![CDATA[/* */ (function(){var m=window,y=\"c2069f112f2e28a564dac8e686f1db36\",x=[[\"siteId\",274+314+666+3364459],[\"minB"
+      },
+      {
+        "inline": true,
+        "bytes": 78,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": "window.SILVERMINE_VIDEOJS_CHROMECAST_CONFIG = { preloadWebComponents: true, };"
+      }
+    ],
+    "external": [
+      "https://www.google.com/recaptcha/api.js?render=6LetXaoUAAAAAB6axgg4WLG9oZ_6QLTsFXZj-5sd",
+      "https://code.jquery.com/jquery-3.6.0.min.js",
+      "/player/video.min.js?v=8.19",
+      "/player/inc.js?v=2.0.2",
+      "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1",
+      "/player/videoplayer.2.1.7.min.js"
+    ]
+  },
+  {
+    "key": "hglink",
+    "status": 200,
+    "mitigated": "",
+    "finalUrl": "https://hglink.to/e/m10cltm3xblk",
+    "bytes": 819,
+    "title": "Loading...",
+    "packed": false,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [],
+    "scripts": [],
+    "external": [
+      "/main.js?v=1.1.9",
+      "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    ]
+  },
+  {
+    "key": "hgcloud",
+    "status": 200,
+    "mitigated": "",
+    "finalUrl": "https://hgcloud.to/e/aiy9yqjwoul5",
+    "bytes": 819,
+    "title": "Loading...",
+    "packed": false,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [],
+    "scripts": [],
+    "external": [
+      "/main.js?v=1.1.9",
+      "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    ]
+  },
+  {
+    "key": "streamwish",
+    "status": 200,
+    "mitigated": "",
+    "finalUrl": "https://streamwish.to/e/bxv60pjdnzpx",
+    "bytes": 819,
+    "title": "Loading...",
+    "packed": false,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [],
+    "scripts": [],
+    "external": [
+      "/main.js?v=1.1.9",
+      "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    ]
+  },
+  {
+    "key": "vpge",
+    "status": 200,
+    "mitigated": "",
+    "finalUrl": "https://vpge.link/e/SXMyN3Q4K0g1Y2wwZVd0MXh2MDBVQT09",
+    "bytes": 228495,
+    "title": "Video player ",
+    "packed": false,
+    "m3u8Literal": [
+      "https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/"
+    ],
+    "mp4Literal": [
+      "https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/"
+    ],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [
+      {
+        "tag": "img",
+        "attrs": {
+          "data-src": "//vpge.link/player/cbplayer/images/close-button.png"
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "inline": true,
+        "bytes": 49051,
+        "packed": false,
+        "m3u8": true,
+        "base64": false,
+        "sources": true,
+        "snippet": " var loadedmeta = !1, srt_loaded=false, vast_available=false, wasplay=false, ads_was_r = true; console.log('Current Do"
+      },
+      {
+        "inline": true,
+        "bytes": 26863,
+        "packed": false,
+        "m3u8": false,
+        "base64": true,
+        "sources": false,
+        "snippet": " //var _0x3340cc=_0x3d49;(function(_0x53d08c,_0x1feda5){var _0x2e1cb0=_0x3d49,_0x1f4883=_0x53d08c();while(!![]){try{var "
+      },
+      {
+        "inline": true,
+        "bytes": 26263,
+        "packed": false,
+        "m3u8": false,
+        "base64": true,
+        "sources": false,
+        "snippet": " (function() { console.log('CORS check start same'); $(\"script[src*='/cdn-cgi/']\").each(function( i, script ) { //co"
+      },
+      {
+        "inline": true,
+        "bytes": 8137,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " (function() { console.log('cros pre 3'); var refer_url = server_referer; function detectZoom(){var a=function(){r"
+      },
+      {
+        "inline": true,
+        "bytes": 4759,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": true,
+        "snippet": " if (self!=top){ mediaplayerdiv2.innerHTML = ''+ '<video id=\"olvideo\" style=\"background-color: bla"
+      },
+      {
+        "inline": true,
+        "bytes": 4192,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " document.write(unescape('%3C%73%63%72%69%70%74%20%63%6C%61%73%73%3D%22%6E%75%6E%75%73%68%22%3E%0A%0A%66%75%6E%63%74%69%"
+      }
+    ],
+    "external": [
+      "//vpge.link/js/websocket_ip.min.js",
+      "/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+      "//vpge.link/js/video.jquery_plugs/modernizr.js?12",
+      "//unpkg.com/progressbar.js@1.1.0/dist/progressbar.min.js",
+      "//unpkg.com/jquery@2.2.4/dist/jquery.min.js",
+      "//unpkg.com/jquery.cookie@1.4.1/jquery.cookie.js"
+    ]
+  },
+  {
+    "key": "voe",
+    "status": 404,
+    "mitigated": "",
+    "finalUrl": "https://voe.sx/e/xgbyls7nylgd",
+    "bytes": 118974,
+    "title": "404 - No encontrado",
+    "packed": false,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [],
+    "scripts": [
+      {
+        "inline": true,
+        "bytes": 105525,
+        "packed": false,
+        "m3u8": false,
+        "base64": true,
+        "sources": false,
+        "snippet": "window.c5022bca5c8bac1451cf = 'f98a024e';\"use strict\";function Nt(u,n){var c=o();return(Nt=function(n,f){var b,r=c[n-=-8"
+      },
+      {
+        "inline": true,
+        "bytes": 10311,
+        "packed": false,
+        "m3u8": false,
+        "base64": true,
+        "sources": false,
+        "snippet": "!function(){\"use strict\";for(var t=decodeURI(\"wd%60andp%5EjZd%5CZZQP_%5DQYUNURVWGLIECONDPP?MCIL:BI;%3C65?%3C/6:0%3Eq%3C,"
+      },
+      {
+        "inline": true,
+        "bytes": 809,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " f98a024e.add(u7(), {under: false, tab: true, expires: 300, afterOpen: function(pop, po"
+      },
+      {
+        "inline": true,
+        "bytes": 156,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " var u7 = function() { return 'https://ablelaunchshorts.com/2060440'; "
+      }
+    ],
+    "external": [
+      "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js",
+      "//darnobedienceupscale.com/in.js"
+    ]
+  },
+  {
+    "key": "fiuxyhub",
+    "status": 200,
+    "mitigated": "",
+    "finalUrl": "https://links.fiuxy2.com/play/NMB2zwFeBWYf1ruC.html",
+    "bytes": 2886,
+    "title": "Spider-Man: Un nuevo día - LAT",
+    "packed": false,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [
+      {
+        "tag": "button",
+        "attrs": {
+          "data-src": "https://streamwish.to/e/bxv60pjdnzpx#lang=LAT"
+        }
+      },
+      {
+        "tag": "button",
+        "attrs": {
+          "data-src": "https://vidhidepro.com/v/7p0egbcbsti2#lang=LAT"
+        }
+      },
+      {
+        "tag": "button",
+        "attrs": {
+          "data-src": "https://voe.sx/e/xgbyls7nylgd#notfound#lang=LAT"
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "inline": true,
+        "bytes": 152,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); "
+      }
+    ],
+    "external": [
+      "https://www.googletagmanager.com/gtag/js?id=G-776BQBLG1H",
+      "/static/player.js?v=1"
+    ]
+  }
+]

@@ -193,27 +193,14 @@ const SITES = {
       { label: 'ficha película 2', url: 'https://mirandogratis.com/el-reino-prohibido.html' },
     ],
   },
+  // Solo la portada: el resto de estos sitios se sondearon con scripts
+  // dedicados (scripts/cuevanas3-api-probe.mjs y scripts/anime-sites-probe.mjs)
+  // y su estructura ya está descrita en los adaptadores.
   cuevanas3: {
     name: 'cuevanas3.pro',
     base: 'https://cuevanas3.pro',
     pages: [
       { label: 'portada', url: 'https://cuevanas3.pro/' },
-      { label: 'wp-json', url: 'https://cuevanas3.pro/wp-json/' },
-      { label: 'wp-json-wpf', url: 'https://cuevanas3.pro/wp-json/wpf/v1' },
-      { label: 'wp-types', url: 'https://cuevanas3.pro/wp-json/wp/v2/types' },
-      { label: 'wp-search', url: 'https://cuevanas3.pro/wp-json/wp/v2/search?search=spider-man&per_page=5' },
-      { label: 'bundle', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/index-CBH2XN48.js' },
-      { label: 'chunk-search', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Search-DtBbp1z5.js' },
-      { label: 'chunk-movie', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Movie-B-znf5nj.js' },
-      { label: 'chunk-anime', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Anime-BU9eNyux.js' },
-      { label: 'chunk-episode', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Episode-BuDNNfwB.js' },
-      { label: 'chunk-wrapper', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Wrapper-BT-hlZyU.js' },
-      { label: 'chunk-api', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/index-CSASIiGL.js' },
-      { label: 'chunk-related', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Related-3DG9WZ8k.js' },
-      { label: 'chunk-listing', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Listing-B0UcKnlU.js' },
-      { label: 'chunk-tvshow', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/TvShow-3EzNr2_O.js' },
-      { label: 'chunk-episodelist', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/EpisodeList-uvlgMDbq.js' },
-      { label: 'chunk-archive', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Archive-KaP3wzuX.js' },
     ],
   },
   animed23: {

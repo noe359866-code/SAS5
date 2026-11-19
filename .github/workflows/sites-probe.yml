@@ -15,6 +15,7 @@ on:
     paths:
       - '.github/workflows/sites-probe.yml'
       - 'scripts/sites-probe.mjs'
+      - 'scripts/cuevanas3-api-probe.mjs'
       - 'scripts/players-probe.mjs'
       - 'scripts/players-probe2.mjs'
       - 'scripts/players-probe3.mjs'
@@ -36,6 +37,8 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Descubrimiento en los sitios (informativo, no despliega)
         run: node scripts/sites-probe.mjs ${{ inputs.sites }}
+      - name: API de cuevanas3 (búsqueda y ficha)
+        run: node scripts/cuevanas3-api-probe.mjs || true
       - name: Muestras de players
         run: node scripts/players-probe.mjs ${{ inputs.players }}
       - name: Pasos del extractor (dl/embed, unpack, ajax, endpoints)

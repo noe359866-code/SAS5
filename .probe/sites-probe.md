@@ -43,6 +43,10 @@
 | cuevanas3.pro | wp-types | `https://cuevanas3.pro/wp-json/wp/v2/types` | 200 | 0 | 0 | — |  |
 | cuevanas3.pro | wp-search | `https://cuevanas3.pro/wp-json/wp/v2/search?…` | 200 | 0 | 0 | — |  |
 | cuevanas3.pro | bundle | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/index-CBH2XN48.js` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | chunk-search | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Search-DtBbp1z5.js` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | chunk-movie | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Movie-B-znf5nj.js` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | chunk-anime | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Anime-BU9eNyux.js` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | chunk-episode | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Episode-BuDNNfwB.js` | 200 | 0 | 0 | — |  |
 | animed23.com | portada | `https://animed23.com/` | 403 cf | — | — | — |  |
 | animejara.com | portada | `http://animejara.com/` | 403 cf | — | — | — |  |
 

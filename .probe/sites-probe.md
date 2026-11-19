@@ -38,6 +38,8 @@
 | mirandogratis.com | ·mixdrop.top | `https://mixdrop.top/e/wlllp17rtn9m7o` | 200 | 0 | 0 | — |  |
 | mirandogratis.com | ·mirandogratis.com | `https://mirandogratis.com/` | 200 | 0 | 0 | mirandogratis.com |  |
 | cuevanas3.pro | portada | `https://cuevanas3.pro/` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | wp-json | `https://cuevanas3.pro/wp-json/` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | wp-json-wpf | `https://cuevanas3.pro/wp-json/wpf/v1` | 200 | 0 | 0 | — |  |
 | animed23.com | portada | `https://animed23.com/` | 403 cf | — | — | — |  |
 | animejara.com | portada | `http://animejara.com/` | 403 cf | — | — | — |  |
 

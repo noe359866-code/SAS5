@@ -64,7 +64,12 @@ globalThis.fetch = async (url, options = {}) => {
     try {
       const data = JSON.parse(html);
       const embed = typeof data?.embed_url === 'string' ? data.embed_url : '';
-      if (embed) trace.push({ url: `embed-host: ${new URL(embed).hostname}`, status: 200, type: 'embed', location: '', title: '', h1: '', marks: [], bytes: 0 });
+      if (embed) {
+        trace.push({ url: `embed-host: ${new URL(embed).hostname}`, status: 200, type: 'embed', location: '', title: '', h1: '', marks: [], bytes: 0 });
+        // La URL del embed (código, no firmada) para reproducir el fallo del
+        // extractor fuera de la sonda.
+        try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync('.probe/html/live-embed.txt', embed); } catch (_) {}
+      }
     } catch (_) {}
   }
   trace.push({ url: String(url).slice(0, 150), status: response.status, type: type.split(';')[0],

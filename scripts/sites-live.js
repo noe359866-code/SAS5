@@ -24,6 +24,7 @@ const sites = {
   ultra: require('../lib/sites/ultra'),
   cuevanas3: require('../lib/sites/cuevanas3'),
   animeflv: require('../lib/sites/animeflv'),
+  fuegocine: require('../lib/sites/fuegocine'),
 };
 
 const CONTROLS = [
@@ -116,6 +117,7 @@ const SEARCHERS = {
   ultra: (resolved) => sites.ultra.searchUltra(null, resolved, resolved.title, 9000),
   cuevanas3: (resolved) => sites.cuevanas3.searchCuevanas3(null, resolved, resolved.title, 9000),
   animeflv: (resolved) => sites.animeflv.searchAnimeFlv(null, resolved, resolved.title, 9000),
+  fuegocine: (resolved) => sites.fuegocine.searchFuegoCine(null, resolved, resolved.title, 9000),
 };
 
 async function resolveControl(control) {

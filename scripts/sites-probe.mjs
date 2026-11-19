@@ -203,6 +203,10 @@ const SITES = {
       { label: 'wp-types', url: 'https://cuevanas3.pro/wp-json/wp/v2/types' },
       { label: 'wp-search', url: 'https://cuevanas3.pro/wp-json/wp/v2/search?search=spider-man&per_page=5' },
       { label: 'bundle', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/index-CBH2XN48.js' },
+      { label: 'chunk-search', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Search-DtBbp1z5.js' },
+      { label: 'chunk-movie', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Movie-B-znf5nj.js' },
+      { label: 'chunk-anime', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Anime-BU9eNyux.js' },
+      { label: 'chunk-episode', url: 'https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Episode-BuDNNfwB.js' },
     ],
   },
   animed23: {

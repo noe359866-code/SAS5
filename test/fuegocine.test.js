@@ -174,6 +174,28 @@ test('fuegocine película: buscador → watch → visor → HLS latino y subtitu
   } finally { stubbed.restore(); }
 });
 
+test('fuegocine: el enlace de UnLimPlay llega al registro y se publica', async () => {
+  const stubbed = stub([
+    ['/search_elastic', html(SEARCH)],
+    ['/movies/watch/', html(WATCH)],
+    [EMBED_URL, html(EMBED)],
+  ]);
+  const streams = require('../lib/streams');
+  const original = streams.SEARCHERS.fuegocine;
+  try {
+    streams.SEARCHERS.fuegocine = fuego.searchFuegoCine;
+    const report = {};
+    const hits = await streams.runProviders(['fuegocine'], 'Spider-Man Un Nuevo Día', MOVIE, MOVIE.title, report, 5000, { ignorePause: true });
+    assert.equal(report.fuegocine.raw, 2, 'UnLimPlay declara dos audios aprovechables');
+    assert.equal(report.fuegocine.accepted, 2);
+    assert.equal(hits.length, 2);
+    assert.ok(hits.every((hit) => /^https:\/\/unlimplay\.com\/cps\.php/.test(hit.url)));
+  } finally {
+    streams.SEARCHERS.fuegocine = original;
+    stubbed.restore();
+  }
+});
+
 test('fuegocine serie: buscador → ficha → temporada → episodio → visor', async () => {
   const detail = `${BASE}/shows/details/visionquest/24`;
   const stubbed = stub([

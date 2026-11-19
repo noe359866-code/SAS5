@@ -127,6 +127,45 @@ test('animeflv serie: ficha → episodio → HLS directo del player propio', asy
   } finally { stubbed.restore(); }
 });
 
+test('animeflv: el enlace del player propio llega al registro y se publica', async () => {
+  const stubbed = stub([
+    [`${BASE}/anime/ao-ashi-season-2/`, html(FICHA)],
+    [EP_URL, html(EPISODIO)],
+  ]);
+  const streams = require('../lib/streams');
+  const original = streams.SEARCHERS.animeflv;
+  try {
+    // El adaptador real a través del registro: aquí se aplicaba el filtro que
+    // dejaba a la fuente con `raw:1, accepted:0` y sin ningún stream visible.
+    streams.SEARCHERS.animeflv = animeflv.searchAnimeFlv;
+    const report = {};
+    const hits = await streams.runProviders(['animeflv'], 'Ao Ashi S02E07', SHOW, SHOW.title, report, 5000, { ignorePause: true });
+    assert.equal(report.animeflv.raw, 1);
+    assert.equal(report.animeflv.accepted, 1);
+    assert.deepEqual(hits.map((hit) => hit.url), [HLS]);
+  } finally {
+    streams.SEARCHERS.animeflv = original;
+    stubbed.restore();
+  }
+});
+
+test('animeflv: con el título base de TMDB se llega a la ficha de la temporada', async () => {
+  // TMDB devuelve «Ao Ashi» y la temporada por separado; el sitio la publica
+  // como una obra aparte («Ao Ashi Season 2»).
+  const stubbed = stub([
+    ['/anime/ao-ashi', (url) => (url === FICHA_URL ? html(FICHA) : new Response('', { status: 404 }))],
+    [EP_URL, html(EPISODIO)],
+  ]);
+  const TMDB_SHOW = { title: 'Ao Ashi', altTitle: null, mediaType: 'series', season: 2, episode: 7 };
+  try {
+    const out = await animeflv.searchAnimeFlv('Ao Ashi', TMDB_SHOW, 'Ao Ashi', 5000);
+    assert.equal(out.hits.length, 1);
+    assert.equal(out.hits[0].url, HLS);
+    // Se intenta primero el slug del título base y después el de la temporada.
+    assert.deepEqual(stubbed.calls.slice(0, 2), [`${BASE}/anime/ao-ashi/`, FICHA_URL]);
+  } finally { stubbed.restore(); }
+});
+
 test('animeflv: una temporada que no cuadra con la ficha no se abre', async () => {
   const stubbed = stub([[`${BASE}/anime/ao-ashi-season-2/`, html(FICHA)]]);
   try {

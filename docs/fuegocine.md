@@ -49,6 +49,28 @@ los visores se leen con una expresión regular y no con el DOM (el primer
 En el resto de controles ninguna fuente nueva coincide salvo Cuevanas 3, que
 tiene fondo de catálogo; el nicho de FuegoCine son los estrenos.
 
+## Por qué no salía ningún stream (19-11-2026)
+
+El adaptador funcionaba y el registro lo tiraba. El diagnóstico del Worker
+mostraba `fuegocine: raw 3, accepted 0` para *Spider-Man: Un nuevo día*: el
+visor entrega `https://unlimplay.com/cps.php?t=…&e=…&s=…&x=.m3u8`, donde la
+extensión va en el parámetro `x`, y `isDirectMedia` solo aceptaba `.m3u8` al
+final de la **ruta**. Las tres pistas (Latino, Castellano y Subtitulado) se
+descartaban en silencio y la fuente no publicaba nada.
+
+Corregido el filtro (un parámetro cuyo valor es solo la extensión, y el token
+bajo `/m3u8/…` del player de AnimeFLV), la sonda en vivo confirma que el enlace
+es un manifiesto de verdad: `HTTP 200 application/vnd.apple.mpegurl` con
+`#EXTM3U` en la primera línea, con el `User-Agent` del addon y también con
+`Referer: https://unlimplay.com/` y con `Accept: application/vnd.apple.mpegurl`
+([run 44586425089](https://github.com/noe359866-code/SAS5/actions/runs/44586425089)).
+Un `GET` con `Accept: text/html` —lo que hace un navegador— sí devuelve el
+reproductor en lugar del manifiesto, así que la comprobación de la sonda usa las
+cabeceras de un reproductor, no las de una página.
+
+Lo que el addon sigue sin hacer: abrir el manifiesto ni comprobar segmentos. Si
+el CDN devuelve 403 a un cliente concreto, se descubre al reproducir.
+
 ## Diagnóstico del primer intento (histórico)
 
 El adaptador buscaba el título en el sitemap, con portada y listado como respaldo. Para las series usaba el enlace de la ficha si coincidía exactamente con la temporada y el episodio solicitados; si no, consultaba la temporada. No sustituía el capítulo solicitado por el que aparecía primero en la ficha. La sonda no publicaba enlaces firmados ni seguía redirecciones a otros orígenes.

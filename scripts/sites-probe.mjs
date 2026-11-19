@@ -185,6 +185,27 @@ const SITES = {
       { label: 'ficha película 2', url: 'https://mirandogratis.com/el-reino-prohibido.html' },
     ],
   },
+  cuevanas3: {
+    name: 'cuevanas3.pro',
+    base: 'https://cuevanas3.pro',
+    pages: [
+      { label: 'portada', url: 'https://cuevanas3.pro/' },
+    ],
+  },
+  animed23: {
+    name: 'animed23.com',
+    base: 'https://animed23.com',
+    pages: [
+      { label: 'portada', url: 'https://animed23.com/' },
+    ],
+  },
+  animejara: {
+    name: 'animejara.com',
+    base: 'http://animejara.com',
+    pages: [
+      { label: 'portada', url: 'http://animejara.com/' },
+    ],
+  },
 };
 
 async function main() {

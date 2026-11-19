@@ -92,7 +92,7 @@
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
   [f-info]  class="modal-body"> <div class="shortf-left"> <p class="shortf-ptitle"> <strong>La Invitacion</strong> </p> <ul class="f-info"> <li> <span class="f-info-title">Año:</span> <span class="f-info-text">2026</span> </li> <li> <span class="f-info-title">Género:</span> <span class="f-info-text">Comedia, Drama, Romántico</span> </li> </ul> <ul c
 
-## 200 https://cuevanas3.pro/player.php?t=Wt_HBqInlvGeHFhPbzJ2OQUAvZH6FZZq93hzx6_NR0aNvMLV3dlFIp7GGf5OQllI1wF4VR6K-t1MB3Y0zFQnY
+## 200 https://cuevanas3.pro/player.php?t=BHXl3G0QylJS1pSzKhQd1JzQnKu3Ktl1I48qxKsDZuUcihafI30VEYtLwa2PRzrFWLMB4XcvtHNRW7mmj3ttl
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-2nulhg4mnuz7.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -119,10 +119,25 @@
   title: Spider-Man: Un Nuevo Día | Fuego Cine 2.0
   [iframe] <!-- Estilos optimizados para el reproductor principal y trailers --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-container iframe { width: 100% !important; he
 
+## 200 https://unlimplay.com/f/embed/movie/969681?_et=9016114811aa671eb3ce78ee3a35f81e
+  h1: 
+  title: UnLimPlay
+  [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h
+
 ## 200 https://videoapp.mov/e/movie/969681
   h1: 
   title: Spider-Man: Un nuevo día
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
+
+## 200 https://ww3.gnulahd.nu/ver/spider-man-un-nuevo-dia/
+  h1: Spider-Man: Un nuevo día
+  title: Spider-Man: Un nuevo día (2026) Película Completa Español Latino HD | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 200 https://pelisplushd.la/search?s=Spider-Man
+  h1: Pelisplus
+  title: Estas buscando: Spider-Man pagina 1 latino HD - PELISPLUS
+  [data-src] ­a Online Gratis HD" src="/poster/spider-man-un-nuevo-dia-thumb.jpg" srcset="/poster/spider-man-un-nuevo-dia-thumb.jpg" data-srcset="/poster/spider-man-un-nuevo-dia-thumb.jpg 100w, /poster/spider-man-un-nuevo-dia-thumb.jpg 200w, /poster/spider-man-un-nuevo-dia-thumb.jpg 300w" class="responsively-lazy Posters-img" /> <div class="movies cen
 
 ## 200 https://www.tubeonline.net/?s=Inception
   h1: Resultados encontrados: Inception
@@ -152,6 +167,16 @@
   [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
   [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
 
+## 404 https://ww3.gnulahd.nu/ver/inception/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 404 https://ww3.gnulahd.nu/ver/inception-2010/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
 ## 200 https://www.tubeonline.net/serie/breaking-bad/
   h1: Breaking Bad
   title: Ver la Serie Breaking Bad Online Gratis sin Cortes ni Registros
@@ -176,7 +201,7 @@
   title: 
   [iframe] {"embed_url":"https:\/\/hqq.ac\/e\/UkJ4OXFXRFQwaFJwZVFnZlZNTGhzZz09","type":"iframe"}
 
-## 200 https://cuevanas3.pro/player.php?t=zRP5RFp-_kvi8MvMQCGDos_oaAhItfsZQTDnY0mZ5krOU4Sj_Zm4mGz4kVBXTsVgH_XKm7u1qGcekBmkBeXGU
+## 200 https://cuevanas3.pro/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHzfBZCZaWwFSq73M9liSjLGMb9zwy0Vt7ZLqAH5Hb9
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-ccjygcfxujhd.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -202,6 +227,28 @@
   h1: 
   title: Principio del fin
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
+
+## 200 https://vimeos.net/embed-ccjygcfxujhd.html
+  h1: 
+  title: vimeos
+  [iframe] va el sandbox', main); add('p', 'Para reproducir este video, el administrador de esta página debe quitar el sandbox del iframe.', main); add('code', 'Elimina el atributo: sandbox="..."', main); add('small', '¿Eres visitante? Avisa al administrador del sitio.', main); var media = d.querySelectorAll('video,audio'); for (var i = 0; i < media
+
+## 200 https://lamoviebot.tvymas.workers.dev/serie/breaking-bad-2008
+  h1: 
+  title: 
+  [episodios] "genres_tmdb": [ "Drama", "Crimen" ], "temporadas": [ { "season_number": 1, "name": "Temporada 1", "episode_count": 7, "episodios": [ { "episode_number": 1, "name": "Breaking Bad: Temporada 1 Episodio 1", "overview": "Walter White, un profesor de química de 50 años de edad, secretamente comienza a cocinar cristales de metanfetamina para a
+
+## 200 https://ww3.gnulahd.nu/ver/breaking-bad/
+  h1: Breaking Bad
+  title: Breaking Bad (2008) Español Latino HD | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+  [episodios] as temporadas tiene?", "acceptedAnswer": { "@type": "Answer", "text": "La serie consta de 5 temporadas y un total de 62 episodios." } }, { "@type": "Question", "name": "¿Quiénes actúan?", "acceptedAnswer": { "@type": "Answer", "text": "En el reparto aparecen Bryan Cranston, Aaron Paul, Anna Gunn, Dean Norris y otros." } }, { "@type": "Que
+
+## 200 https://ww3.gnulahd.nu/breaking-bad-1x01/
+  h1: Ver Breaking Bad 1×01 Online — Piloto
+  title: Ver Breaking Bad 1x01 Online en Español Latino | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+  [episodios] ns('open'))gnpvDlModal();}}); document.addEventListener('DOMContentLoaded',function(){ _gdLoad(); }); /* ===== Lista de episodios: pestañas por temporada + paginación (temporada actual abierta) ===== */ document.addEventListener('DOMContentLoaded', function () { var container=document.getElementById('gnrd-eplist'); if(!container)return; v
 
 ## 200 https://www.tubeonline.net/pelicula/alien-romulus/
   h1: Alien: Romulus
@@ -307,7 +354,7 @@
   [data-src] ght:6px;width:6px;" alt="close" border="0" onclick="adp.innerHTML = ''; thispays.style.display = 'none'; return false;" data-src='//vpge.link/player/cbplayer/images/close-button.png' loading='lazy' title='close'/> </div> </div> <script data-cfasync="false"> var ppage = 'https%3A%2F%2Fvpge.link%2Fe%2FU0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09'; var 
   [iframe] !--script src="https://www.google.com/recaptcha/api.js?render=6Ldf5F0UAAAAALErn6bLEcv7JldhivPzb93Oy5t9"></script--> <!--iframe src="https://xtremeserve.xyz/wwwwww.php?3" style="display:none;"></iframe--> <script> (function() { console.log('CORS check start same'); $("script[src*='/cdn-cgi/']").each(function( i, script ) { //console.log( s
 
-## 200 https://cuevanas3.pro/player.php?t=WtZijf5Q70JMJXAoYbNSNgWJdOMLJhQGurVccYHBiQljRLroSRocZ52uFvgdONtttO4codgFf6j0nHpdbPTtl
+## 200 https://cuevanas3.pro/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9sCvl89T7BR65Tsjp073qCG48MUxoSffBPFKLfKhDU
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-uhuu5myzvdub.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -333,6 +380,26 @@
   h1: 
   title: Alien: Romulus
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
+
+## 200 https://vimeos.net/embed-uhuu5myzvdub.html
+  h1: 
+  title: vimeos
+  [iframe] va el sandbox', main); add('p', 'Para reproducir este video, el administrador de esta página debe quitar el sandbox del iframe.', main); add('code', 'Elimina el atributo: sandbox="..."', main); add('small', '¿Eres visitante? Avisa al administrador del sitio.', main); var media = d.querySelectorAll('video,audio'); for (var i = 0; i < media
+
+## 200 https://ww3.gnulahd.nu/ver/alien-romulus/
+  h1: Alien: Romulus
+  title: Alien: Romulus (2024) Película Completa Español Latino HD | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 200 https://pelisplushd.la/search?s=Alien%3A%20Romulus
+  h1: Pelisplus
+  title: Estas buscando: Alien: Romulus pagina 1 latino HD - PELISPLUS
+  [data-src] lt="VER Alien: Romulus Online Gratis HD" src="/poster/alien-romulus-thumb.jpg" srcset="/poster/alien-romulus-thumb.jpg" data-srcset="/poster/alien-romulus-thumb.jpg 100w, /poster/alien-romulus-thumb.jpg 200w, /poster/alien-romulus-thumb.jpg 300w" class="responsively-lazy Posters-img" /> <div class="movies centrado"> Película </div> <div c
+
+## 200 https://pelisplushd.la/search?s=Alien
+  h1: Pelisplus
+  title: Estas buscando: Alien pagina 1 latino HD - PELISPLUS
+  [data-src]  Online Gratis HD" src="/poster/la-hora-de-los-valientes-thumb.jpg" srcset="/poster/la-hora-de-los-valientes-thumb.jpg" data-srcset="/poster/la-hora-de-los-valientes-thumb.jpg 100w, /poster/la-hora-de-los-valientes-thumb.jpg 200w, /poster/la-hora-de-los-valientes-thumb.jpg 300w" class="responsively-lazy Posters-img" /> <div class="movies 
 
 ## 200 https://www.tubeonline.net/pelicula/deadpool-wolverine/
   h1: Deadpool &#038; Wolverine
@@ -396,7 +463,7 @@
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
   [f-info]  <div class="modal-body"> <div class="shortf-left"> <p class="shortf-ptitle"> <strong>Arcadian</strong> </p> <ul class="f-info"> <li> <span class="f-info-title">Año:</span> <span class="f-info-text">2024</span> </li> <li> <span class="f-info-title">Género:</span> <span class="f-info-text">Acción, Ciencia Ficción, Drama, Suspense, Terror</
 
-## 200 https://cuevanas3.pro/player.php?t=Uy6V125VUcj_bz-4R3Tl8cqh3hxlnwnk5-OsV3xUitakcOJv43rErWKQi6Wy3-x04Ysl1yeJUoe3h5sCvBUpZ
+## 200 https://cuevanas3.pro/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsjctaGd9ux9MKikACpo760r3DoWp7CfUDeujMHjjvy
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-tmbjqufb955w.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -422,6 +489,11 @@
   h1: 
   title: Deadpool &amp; Wolverine
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
+
+## 200 https://ww3.gnulahd.nu/ver/deadpool-wolverine/
+  h1: Deadpool &#038; Wolverine
+  title: Deadpool &amp; Wolverine (2024) Película Completa Español Latino HD | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
 
 ## 200 https://www.tubeonline.net/?s=Inside%20Out%202
   h1: Resultados encontrados: Inside Out 2
@@ -451,6 +523,16 @@
   title: You searched for inside-out-2 - AnimeFLV
   [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
   [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
+
+## 404 https://ww3.gnulahd.nu/ver/inside-out-2/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 404 https://ww3.gnulahd.nu/ver/inside-out-2-2024/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
 
 ## 200 https://www.tubeonline.net/?s=El%20reino%20prohibido
   h1: Resultados encontrados: El reino prohibido
@@ -489,7 +571,7 @@
   title: peliculas-2008 &raquo; Ver Películas Online Gratis Completas en Español y Latino
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
 
-## 200 https://cuevanas3.pro/player.php?t=sEF5aEmblqiLF5N0hldoAGtP1fyNAAnNaAtsJykxH2goAMuLldrbrz3e-IAN6ypOZnWNSjy8dyEI980PYHnI7
+## 200 https://cuevanas3.pro/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm73LOTPvSYVny2qQW-Qnwq90_notXvfoqEwfXvK1H
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-o0unqe46z0g7.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -516,12 +598,32 @@
   title: El reino prohibido
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
 
+## 404 https://ww3.gnulahd.nu/ver/el-reino-prohibido/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 404 https://ww3.gnulahd.nu/ver/el-reino-prohibido-2008/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 200 https://pelisplushd.la/search?s=El%20reino%20prohibido
+  h1: Pelisplus
+  title: Estas buscando: El reino prohibido pagina 1 latino HD - PELISPLUS
+  [data-src] ibido (2008) Online Gratis HD" src="/poster/el-reino-prohibido-thumb.jpg" srcset="/poster/el-reino-prohibido-thumb.jpg" data-srcset="/poster/el-reino-prohibido-thumb.jpg 100w, /poster/el-reino-prohibido-thumb.jpg 200w, /poster/el-reino-prohibido-thumb.jpg 300w" class="responsively-lazy Posters-img" /> <div class="movies centrado"> Películ
+
+## 200 https://pelisplushd.la/search?s=reino%20prohibido
+  h1: Pelisplus
+  title: Estas buscando: reino prohibido pagina 1 latino HD - PELISPLUS
+  [data-src] ibido (2008) Online Gratis HD" src="/poster/el-reino-prohibido-thumb.jpg" srcset="/poster/el-reino-prohibido-thumb.jpg" data-srcset="/poster/el-reino-prohibido-thumb.jpg 100w, /poster/el-reino-prohibido-thumb.jpg 200w, /poster/el-reino-prohibido-thumb.jpg 300w" class="responsively-lazy Posters-img" /> <div class="movies centrado"> Películ
+
 ## 200 https://www.tubeonline.net/?s=Naruto
   h1: Resultados encontrados: Naruto
   title: Buscó por el término Naruto &#187; TubeOnline.Net
   [episodios] u ul li a:hover{color:#408BEA}header.main .hbox .search form button[type=submit]:hover,.loading,#seasons .se-c .se-a ul.episodios li .episodiotitle a:hover,.sgeneros a:hover,.page_user nav.user ul li a:hover{color:#408BEA}footer.main .fbox .fmenu ul li.current-menu-item a,.posts .meta .autor i,.pag_episodes .item a:hover,a.link_a:hover,ul
 
-## 200 https://cuevanas3.pro/player.php?t=8E4VMYO-kqJWsHMs71JBEJoQCJAvBR_NHIqzHXzDikyYHZRbdDl7Z8VD_bs3GYMRtKFNT58Qo31cIHOdwfur9
+## 200 https://cuevanas3.pro/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS63l0kIT85NoQ3jPpaLco_I3t2kvirlSOZDQPnpmh
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-wa2r4s768i9k.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -548,6 +650,28 @@
   title: Naruto
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
 
+## 200 https://vimeos.net/embed-wa2r4s768i9k.html
+  h1: 
+  title: vimeos
+  [iframe] va el sandbox', main); add('p', 'Para reproducir este video, el administrador de esta página debe quitar el sandbox del iframe.', main); add('code', 'Elimina el atributo: sandbox="..."', main); add('small', '¿Eres visitante? Avisa al administrador del sitio.', main); var media = d.querySelectorAll('video,audio'); for (var i = 0; i < media
+
+## 200 https://lamoviebot.tvymas.workers.dev/anime/naruto-2002
+  h1: 
+  title: 
+  [episodios]  & Adventure", "Sci-Fi & Fantasy" ], "temporadas": [ { "season_number": 1, "name": "Temporada 1", "episode_count": 52, "episodios": [ { "episode_number": 1, "name": "Naruto: Temporada 1 Episodio 1", "overview": "Un pergamino sagrado de la Aldea Oculta de la Hoja ha sido robado y el culpable no es otro que Naruto, un joven aspirante a ninj
+
+## 200 https://ww3.gnulahd.nu/ver/naruto/
+  h1: Naruto
+  title: Ver Naruto (2002) Online en Español Latino HD | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+  [episodios] , function(e){ if(moved){ e.preventDefault(); e.stopPropagation(); moved=false; } }, true); }); })(); /* ===== Lista de episodios (tarjetas): pestañas por temporada + paginación / salto ===== */ document.addEventListener('DOMContentLoaded', function () { var container = document.getElementById('gnrd-eplist'); if (!container) return; var l
+
+## 200 https://ww3.gnulahd.nu/naruto-1x01/
+  h1: Ver Naruto 1×01 Online — Entra en escena Naruto Uzumaki
+  title: Ver Naruto 1x01 Online en Español Latino | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+  [episodios] ns('open'))gnpvDlModal();}}); document.addEventListener('DOMContentLoaded',function(){ _gdLoad(); }); /* ===== Lista de episodios: pestañas por temporada + paginación (temporada actual abierta) ===== */ document.addEventListener('DOMContentLoaded', function () { var container=document.getElementById('gnrd-eplist'); if(!container)return; v
+
 ## 200 https://www.tubeonline.net/?s=Ao%20Ashi%20Season%202
   h1: Resultados encontrados: Ao Ashi Season 2
   title: Buscó por el término Ao Ashi Season 2 &#187; TubeOnline.Net
@@ -566,6 +690,16 @@
   [data-src]  class="button-container"><span class="tooltip-text">HLS</span><button class="iframe_btn iframe_code server_btn submit" data-src="aHR0cHM6Ly9wbGF5ZXIuemlsbGEtbmV0d29ya3MuY29tL20zdTgvYTllOTM1YmY0MDJiMDQ1ZTA5YjIzYzcyNGIyZmIzNWY=" app_type="Sub">OPCIÓN 1</button></div><div class="button-container"><span class="tooltip-text">Voe</span><button
   [iframe]  <div class="single-wrap clear"> <div id="primary" class="content-area"> <main id="main" class="site-main"> <div class="iframe_btn_row server-frames"><div class="button-container"><span class="tooltip-text">HLS</span><button class="iframe_btn iframe_code server_btn submit" data-src="aHR0cHM6Ly9wbGF5ZXIuemlsbGEtbmV0d29ya3MuY29tL20zdTgvYTll
 
+## 404 https://ww3.gnulahd.nu/ver/ao-ashi-season-2/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 404 https://ww3.gnulahd.nu/ver/ao-ashi-season-2-2026/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
 ## 200 https://www.tubeonline.net/?s=Black%20Clover%202nd%20Season
   h1: Resultados encontrados: Black Clover 2nd Season
   title: Buscó por el término Black Clover 2nd Season &#187; TubeOnline.Net
@@ -583,6 +717,16 @@
   title: Black Clover 2nd Season Episodio 7 Sub Español - AnimeFLV
   [data-src]  class="button-container"><span class="tooltip-text">HLS</span><button class="iframe_btn iframe_code server_btn submit" data-src="aHR0cHM6Ly9wbGF5ZXIuemlsbGEtbmV0d29ya3MuY29tL20zdTgvNzY0MDUyOGQ1ZjM2ZDc0Mzk3NWRhYjhjZWNhYjA2MWM=" app_type="Sub">OPCIÓN 1</button></div><div class="button-container"><span class="tooltip-text">Voe</span><button
   [iframe]  <div class="single-wrap clear"> <div id="primary" class="content-area"> <main id="main" class="site-main"> <div class="iframe_btn_row server-frames"><div class="button-container"><span class="tooltip-text">HLS</span><button class="iframe_btn iframe_code server_btn submit" data-src="aHR0cHM6Ly9wbGF5ZXIuemlsbGEtbmV0d29ya3MuY29tL20zdTgvNzY0
+
+## 404 https://ww3.gnulahd.nu/ver/black-clover-2nd-season/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 404 https://ww3.gnulahd.nu/ver/black-clover-2nd-season-2026/
+  h1: Página no encontrada
+  title: Página no encontrada — GNULA HD
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
 
 ## 200 https://www.tubeonline.net/pelicula/la-odisea/
   h1: La Odisea
@@ -644,7 +788,7 @@
   [f-info] 76_la-odisea.jpg" alt="La Odisea" /> <i class="img-shadow"><i></i></i> </div> </div> <div class="film-info"> <ul class="f-info"> <li> <span class="f-info-title">Título:</span> <span class="f-info-text">La Odisea</span> </li> <li> <span class="f-info-title">Título original:</span> <span class="f-info-text">The Odyssey</span> </li> <li> <sp
   [mejs-container] "><span>Sub</span></a></li> </ul> <div class="tabs-sidebar-block" id="ts21"> <div class="video-responsive"> <div class="mejs-container play-btn-cont" data-src="https://hgcloud.to/e/b6xqjtif5f0u"> <div class="play-btn"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"> <polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 
 
-## 200 https://cuevanas3.pro/player.php?t=DBDoYtr5o-tTglsAy8ja418Gc-u7V1tAGOdsHEr-8-zmksY_LHQHacCyUkn8O_8chb5r7dJ3kGXu7ByARglKc
+## 200 https://cuevanas3.pro/player.php?t=ua-e89HVYlP0_wmvZzkCdgBVG3gPZ_gSQBmoPUjUEmL1riJ9rnmXq0nmL6s9cgIoecH4p_PkFFJXxoO-FjL_E
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-m62pdrnlvwpw.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -660,28 +804,48 @@
   [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
   [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
 
-## 200 https://animeflv.or.at/search/la-odisea/
-  h1: Search Results for "la-odisea"
-  title: You searched for la-odisea - AnimeFLV
-  [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
-  [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
-
 ## 200 https://fuegocine.com/movies/watch/la-odisea/227
   h1: 
   title: La Odisea | Fuego Cine 2.0
   [iframe] <!-- Estilos optimizados para el reproductor principal y trailers --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-container iframe { width: 100% !important; he
+
+## 200 https://unlimplay.com/f/embed/movie/1368337?_et=26cce163b12db1ca708c7be80374a194
+  h1: 
+  title: UnLimPlay
+  [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h
 
 ## 200 https://videoapp.mov/e/movie/1368337
   h1: 
   title: La Odisea
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
 
+## 200 https://ww3.gnulahd.nu/ver/la-odisea/
+  h1: La Odisea
+  title: La Odisea (1997) Español Latino HD | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+  [episodios]  Assante, Greta Scacchi, Isabella Rossellini y Bernadette Peters.</li><li>La serie tiene un total de 1 temporada con 12 episodios.</li></ul></div><div class="gnpv-ai-col gnpv-ai-col--faq"><h3 class="gnpv-ai-title"><span>Preguntas frecuentes</span></h3><div class="gnpv-faq-item"><strong class="gnpv-faq-q">Es una adaptación fiel de la Odise
+
+## 200 https://ww3.gnulahd.nu/ver/la-odisea-2026/
+  h1: La Odisea
+  title: La Odisea (2026) Película Completa Español Latino HD | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 200 https://pelisplushd.la/search?s=La%20Odisea
+  h1: Pelisplus
+  title: Estas buscando: La Odisea pagina 1 latino HD - PELISPLUS
+  [data-src] "VER La Odisea Online Gratis HD" src="/poster/la-odisea-1368337-thumb.jpg" srcset="/poster/la-odisea-1368337-thumb.jpg" data-srcset="/poster/la-odisea-1368337-thumb.jpg 100w, /poster/la-odisea-1368337-thumb.jpg 200w, /poster/la-odisea-1368337-thumb.jpg 300w" class="responsively-lazy Posters-img" /> <div class="movies centrado"> Película <
+
+## 200 https://pelisplushd.la/search?s=Odisea
+  h1: Pelisplus
+  title: Estas buscando: Odisea pagina 1 latino HD - PELISPLUS
+  [data-src] "VER La Odisea Online Gratis HD" src="/poster/la-odisea-1368337-thumb.jpg" srcset="/poster/la-odisea-1368337-thumb.jpg" data-srcset="/poster/la-odisea-1368337-thumb.jpg 100w, /poster/la-odisea-1368337-thumb.jpg 200w, /poster/la-odisea-1368337-thumb.jpg 300w" class="responsively-lazy Posters-img" /> <div class="movies centrado"> Película <
+
 ## 200 https://www.tubeonline.net/?s=VisionQuest
   h1: Resultados encontrados: VisionQuest
   title: Buscó por el término VisionQuest &#187; TubeOnline.Net
   [episodios] u ul li a:hover{color:#408BEA}header.main .hbox .search form button[type=submit]:hover,.loading,#seasons .se-c .se-a ul.episodios li .episodiotitle a:hover,.sgeneros a:hover,.page_user nav.user ul li a:hover{color:#408BEA}footer.main .fbox .fmenu ul li.current-menu-item a,.posts .meta .autor i,.pag_episodes .item a:hover,a.link_a:hover,ul
 
-## 200 https://cuevanas3.pro/player.php?t=0bArC18XZzm1T0lby1icxc-j87bunAQn-yg_HTJk127L5lhcrCACNFUlUCJRdQ8t2S4l7FV9Ry4YuDA0eaVMt
+## 200 https://cuevanas3.pro/player.php?t=IWDAJbU_mMgu_uB-oyBP3IGmvjA-NjY9YV8vGUq5tA644XstYRIUjblnPF_MpqAUy9cKudSMY6CZrA6XWkDSe
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-hc7i1n95d4vx.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -708,7 +872,29 @@
   title: VisionQuest Temporada 1 01x01 - Sin ataduras | Fuego Cine 2.0
   [iframe] div> </div> </nav> </div> <!-- End Navigation Area --> </header> <!-- End Header --> <!-- Estilos para el contenedor de iframes --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-containe
 
+## 200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=2e160652d11e5584d303c2bc1a113877
+  h1: 
+  title: UnLimPlay
+  [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h
+
 ## 200 https://videoapp.mov/e/tv/213375/1/1
   h1: 
   title: Sin ataduras
   [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
+
+## 200 https://lamoviebot.tvymas.workers.dev/serie/visionquest-2026
+  h1: 
+  title: 
+  [episodios] db": [ "Sci-Fi & Fantasy", "Drama" ], "temporadas": [ { "season_number": 1, "name": "Temporada 1", "episode_count": 8, "episodios": [ { "episode_number": 1, "name": "VisionQuest: Temporada 1 Episodio 1", "overview": "Visión comienza un viaje de autodescubrimiento y se ve perseguido por una fuerza letal.", "still": "https://lamovie.org/wp-
+
+## 200 https://ww3.gnulahd.nu/ver/visionquest/
+  h1: VisionQuest
+  title: VisionQuest (2026) Español Latino HD | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+  [episodios] >El título original es idéntico al título en español: VisionQuest.</li><li>La serie cuenta con una única temporada de 8 episodios.</li><li>Fue producida por Marvel Studios y Kevin Feige Productions y se emite en Disney+.</li></ul></div><div class="gnpv-ai-col gnpv-ai-col--faq"><h3 class="gnpv-ai-title"><span>Preguntas frecuentes</span></h
+
+## 200 https://ww3.gnulahd.nu/visionquest-1x01/
+  h1: Ver VisionQuest 1×01 Online — Sin ataduras
+  title: Ver VisionQuest 1x01 Online en Español Latino | Gnula
+  [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+  [episodios] ns('open'))gnpvDlModal();}}); document.addEventListener('DOMContentLoaded',function(){ _gdLoad(); }); /* ===== Lista de episodios: pestañas por temporada + paginación (temporada actual abierta) ===== */ document.addEventListener('DOMContentLoaded', function () { var container=document.getElementById('gnrd-eplist'); if(!container)return; v

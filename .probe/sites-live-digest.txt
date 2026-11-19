@@ -315,18 +315,18 @@
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
   [f-info]  <div class="modal-body"> <div class="shortf-left"> <p class="shortf-ptitle"> <strong>Arcadian</strong> </p> <ul class="f-info"> <li> <span class="f-info-title">Año:</span> <span class="f-info-text">2024</span> </li> <li> <span class="f-info-title">Género:</span> <span class="f-info-text">Acción, Ciencia Ficción, Drama, Suspense, Terror</
 
-## 200 https://www.tubeonline.net/?s=Hero
-  h1: Resultados encontrados: Hero
-  title: Buscó por el término Hero &#187; TubeOnline.Net
+## 200 https://www.tubeonline.net/?s=The%20Girl%20Who%20Kicked%20the%20Hornet's%20Nest
+  h1: Resultados encontrados: The Girl Who Kicked the Hornet&#039;s Nest
+  title: Buscó por el término The Girl Who Kicked the Hornet&#039;s Nest &#187; TubeOnlin
   [episodios] u ul li a:hover{color:#408BEA}header.main .hbox .search form button[type=submit]:hover,.loading,#seasons .se-c .se-a ul.episodios li .episodiotitle a:hover,.sgeneros a:hover,.page_user nav.user ul li a:hover{color:#408BEA}footer.main .fbox .fmenu ul li.current-menu-item a,.posts .meta .autor i,.pag_episodes .item a:hover,a.link_a:hover,ul
 
 ## 200 https://verpeliculasultra.com/
   h1: Buscar en la página web
   title: Site search &raquo; Ver Películas Online Gratis Completas en Español y Latino HD
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
-  [f-info] dal-body"> <div class="shortf-left"> <p class="shortf-ptitle"> <strong>La Posesión De La Momia</strong> </p> <ul class="f-info"> <li> <span class="f-info-title">Año:</span> <span class="f-info-text">2026</span> </li> <li> <span class="f-info-title">Género:</span> <span class="f-info-text">Misterio, Terror</span> </li> </ul> <ul class="f-i
 
-## 404 https://verpeliculasultra.com/xfsearch/peliculas-2004/
+## 200 https://verpeliculasultra.com/xfsearch/peliculas-2010/
   h1: 
-  title: peliculas-2004 &raquo; Ver Películas Online Gratis Completas en Español y Latino
+  title: peliculas-2010 &raquo; Ver Películas Online Gratis Completas en Español y Latino
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
+  [f-info] ody"> <div class="shortf-left"> <p class="shortf-ptitle"> <strong>The Town: Ciudad De Ladrones</strong> </p> <ul class="f-info"> <li> <span class="f-info-title">Año:</span> <span class="f-info-text">2010</span> </li> <li> <span class="f-info-title">Género:</span> <span class="f-info-text">Crimen, Drama, Suspense</span> </li> </ul> <ul cla

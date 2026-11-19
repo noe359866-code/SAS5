@@ -2,15 +2,15 @@
 200	text/html	64668	https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/		Spider-Man: Un nuevo día
 200	embed	0	embed-host: bysejikuar.com		
 200	application/json	90	https://www.tubeonline.net/wp-admin/admin-ajax.php		
-200	byse	2358	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742		
-200	application/json	2358	https://bysejikuar.com/api/videos/01j37fv5s579		
+200	byse	2355	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=740		
+200	application/json	2355	https://bysejikuar.com/api/videos/01j37fv5s579		
 200	embed	0	embed-host: streamtape.com		
 200	application/json	97	https://www.tubeonline.net/wp-admin/admin-ajax.php		
 404	text/html	21283	https://streamtape.com/e/YZzOKDljYacvDbG/SM1NDA.1080_CAS.mp4		Video not found!
 200	embed	0	embed-host: bysejikuar.com		
 200	application/json	90	https://www.tubeonline.net/wp-admin/admin-ajax.php		
-200	byse	2356	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742		
-200	application/json	2356	https://bysejikuar.com/api/videos/309n27lec3zn		
+200	byse	2357	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742		
+200	application/json	2357	https://bysejikuar.com/api/videos/309n27lec3zn		
 200	embed	0	embed-host: streamtape.com		
 200	application/json	97	https://www.tubeonline.net/wp-admin/admin-ajax.php		
 404	text/html	21283	https://streamtape.com/e/j7AO39kJkKhze2B/SM1NDA.1080_LAT.mp4		Video not found!
@@ -78,8 +78,8 @@
 200	text/html	46437	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	148084	https://verpeliculasultra.com/xfsearch/peliculas-2024/		
 200	text/html	58880	https://verpeliculasultra.com/ciencia-ficcion/4702-alien-romulus.html		Ver Alien: Romulus (2024) Online Gratis
-200	text/html	228334	https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09		
-200	text/html	228671	https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09		
+200	text/html	227553	https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09		
+200	text/html	228333	https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09		
 200	application/json	2645	https://v3-cinemeta.strem.io/meta/movie/tt6263850.json		
 200	text/html	63124	https://www.tubeonline.net/pelicula/deadpool-wolverine/		Deadpool &#038; Wolverine
 200	embed	0	embed-host: filemoon.sx		
@@ -114,13 +114,13 @@
 301	text/html	0	https://ver.gnula.one/movies/inside-out-2-2024/	https://ver.gnula.one	
 200	text/html	46398	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	148084	https://verpeliculasultra.com/xfsearch/peliculas-2024/		
-200	application/json	2520	https://v3-cinemeta.strem.io/meta/movie/tt0299977.json		
-301	text/html	0	https://www.tubeonline.net/pelicula/hero/	https://www.tubeonline.net/pelicula/heroe-por-encargo/	
-404	text/html	34091	https://www.tubeonline.net/pelicula/hero-2004/		Pagina no se encuentra
-200	text/html	85639	https://www.tubeonline.net/?s=Hero		Resultados encontrados: Hero
-200	text/html	47825	https://mirandogratis.com/?s=Hero		Estas buscando: Hero
-301	text/html	0	https://mirandogratis.com/hero.html	https://mirandogratis.com	
-301	text/html	0	https://ver.gnula.one/movies/hero/	https://ver.gnula.one	
-301	text/html	0	https://ver.gnula.one/movies/hero-2004/	https://ver.gnula.one	
-200	text/html	134432	https://verpeliculasultra.com/		Buscar en la página web
-404	text/html	39484	https://verpeliculasultra.com/xfsearch/peliculas-2004/		
+200	application/json	2739	https://v3-cinemeta.strem.io/meta/movie/tt1343097.json		
+404	text/html	34119	https://www.tubeonline.net/pelicula/the-girl-who-kicked-the-hornet-s-nest/		Pagina no se encuentra
+404	text/html	34124	https://www.tubeonline.net/pelicula/the-girl-who-kicked-the-hornet-s-nest-2010/		Pagina no se encuentra
+200	text/html	60687	https://www.tubeonline.net/?s=The%20Girl%20Who%20Kicked%20the%20Hornet's%20Nest		Resultados encontrados: The Girl Who Kicked the Hornet&#039;s Nest
+200	text/html	22844	https://mirandogratis.com/?s=The%20Girl%20Who%20Kicked%20the%20Hornet's%20Nest		Estas buscando: The Girl Who Kicked the Hornet&#039;s Nest
+301	text/html	0	https://mirandogratis.com/the-girl-who-kicked-the-hornet-s-nest.html	https://mirandogratis.com	
+301	text/html	0	https://ver.gnula.one/movies/the-girl-who-kicked-the-hornet-s-nest/	https://ver.gnula.one	
+301	text/html	0	https://ver.gnula.one/movies/the-girl-who-kicked-the-hornet-s-nest-2010/	https://ver.gnula.one	
+200	text/html	42037	https://verpeliculasultra.com/		Buscar en la página web
+200	text/html	43744	https://verpeliculasultra.com/xfsearch/peliculas-2010/		

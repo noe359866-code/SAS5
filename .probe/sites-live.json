@@ -12,7 +12,7 @@
       "200 embed-host: vidara.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 4464,
+    "ms": 4339,
     "quality": [
       "HLS",
       "HLS"
@@ -40,7 +40,7 @@
       "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
       "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
     ],
-    "ms": 1134,
+    "ms": 1108,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -59,7 +59,7 @@
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 2849,
+    "ms": 3021,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -78,7 +78,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 1396,
+    "ms": 1071,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -97,7 +97,7 @@
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
     ],
-    "ms": 832,
+    "ms": 859,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -116,7 +116,7 @@
       "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
     ],
-    "ms": 1077,
+    "ms": 1261,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -135,7 +135,7 @@
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 117,
+    "ms": 2185,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -154,7 +154,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 1119,
+    "ms": 1110,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -173,7 +173,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 1255,
+    "ms": 1153,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -211,7 +211,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 1,
+    "ms": 0,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -230,7 +230,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -249,7 +249,7 @@
       "200 embed-host: filemoon.sx",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2478,
+    "ms": 2217,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -268,7 +268,7 @@
       "200 https://mirandogratis.com/?s=Alien%3A%20Romulus h1=\"Estas buscando: Alien: Romulus\"",
       "200 https://mirandogratis.com/alien-romulus.html h1=\"Ver Pelicula Alien: Romulus Online Grati\""
     ],
-    "ms": 1152,
+    "ms": 1199,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -287,7 +287,7 @@
       "200 https://ver.gnula.one/?trembed=4&trid=49552&trtype=1",
       "200 https://filemoon.sx/e/gtl2mhgw4is7"
     ],
-    "ms": 2461,
+    "ms": 2404,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -306,7 +306,7 @@
       "200 https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09",
       "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09"
     ],
-    "ms": 2937,
+    "ms": 2344,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -325,7 +325,7 @@
       "200 embed-host: vidmoly.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2533,
+    "ms": 2470,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -344,7 +344,7 @@
       "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
       "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\""
     ],
-    "ms": 1207,
+    "ms": 1340,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -363,7 +363,7 @@
       "301 https://ver.gnula.one/movies/deadpool-wolverine/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/deadpool-wolverine-2024/ → https://ver.gnula.one"
     ],
-    "ms": 87,
+    "ms": 1141,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -382,7 +382,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 940,
+    "ms": 986,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -401,7 +401,7 @@
       "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\""
     ],
-    "ms": 770,
+    "ms": 877,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -420,7 +420,7 @@
       "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
       "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com"
     ],
-    "ms": 992,
+    "ms": 1168,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -439,7 +439,7 @@
       "301 https://ver.gnula.one/movies/inside-out-2/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inside-out-2-2024/ → https://ver.gnula.one"
     ],
-    "ms": 75,
+    "ms": 2340,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -458,83 +458,83 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 867,
+    "ms": 987,
     "quality": [],
     "audio": [],
     "hosts": [],
     "verdict": "no-match"
   },
   {
-    "control": "tt0299977",
-    "title": "Hero",
+    "control": "tt1343097",
+    "title": "The Girl Who Kicked the Hornet's Nest",
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/",
-      "200 https://v3-cinemeta.strem.io/meta/movie/tt0299977.json",
-      "301 https://www.tubeonline.net/pelicula/hero/ → https://www.tubeonline.net/pelicula/heroe-por-encargo/",
-      "404 https://www.tubeonline.net/pelicula/hero-2004/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Hero h1=\"Resultados encontrados: Hero\""
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt1343097.json",
+      "404 https://www.tubeonline.net/pelicula/the-girl-who-kicked-the-hornet-s-nest/ h1=\"Pagina no se encuentra\"",
+      "404 https://www.tubeonline.net/pelicula/the-girl-who-kicked-the-hornet-s-nest-2010/ h1=\"Pagina no se encuentra\"",
+      "200 https://www.tubeonline.net/?s=The%20Girl%20Who%20Kicked%20the%20Hornet's%20Nest h1=\"Resultados encontrados: The Girl Who Kic\""
     ],
-    "ms": 2121,
+    "ms": 1526,
     "quality": [],
     "audio": [],
     "hosts": [],
     "verdict": "no-match"
   },
   {
-    "control": "tt0299977",
-    "title": "Hero",
+    "control": "tt1343097",
+    "title": "The Girl Who Kicked the Hornet's Nest",
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 https://v3-cinemeta.strem.io/meta/movie/tt0299977.json",
-      "301 https://www.tubeonline.net/pelicula/hero/ → https://www.tubeonline.net/pelicula/heroe-por-encargo/",
-      "404 https://www.tubeonline.net/pelicula/hero-2004/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Hero h1=\"Resultados encontrados: Hero\"",
-      "200 https://mirandogratis.com/?s=Hero h1=\"Estas buscando: Hero\"",
-      "301 https://mirandogratis.com/hero.html → https://mirandogratis.com"
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt1343097.json",
+      "404 https://www.tubeonline.net/pelicula/the-girl-who-kicked-the-hornet-s-nest/ h1=\"Pagina no se encuentra\"",
+      "404 https://www.tubeonline.net/pelicula/the-girl-who-kicked-the-hornet-s-nest-2010/ h1=\"Pagina no se encuentra\"",
+      "200 https://www.tubeonline.net/?s=The%20Girl%20Who%20Kicked%20the%20Hornet's%20Nest h1=\"Resultados encontrados: The Girl Who Kic\"",
+      "200 https://mirandogratis.com/?s=The%20Girl%20Who%20Kicked%20the%20Hornet's%20Nest h1=\"Estas buscando: The Girl Who Kicked the \"",
+      "301 https://mirandogratis.com/the-girl-who-kicked-the-hornet-s-nest.html → https://mirandogratis.com"
     ],
-    "ms": 1252,
+    "ms": 1022,
     "quality": [],
     "audio": [],
     "hosts": [],
     "verdict": "no-match"
   },
   {
-    "control": "tt0299977",
-    "title": "Hero",
+    "control": "tt1343097",
+    "title": "The Girl Who Kicked the Hornet's Nest",
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "404 https://www.tubeonline.net/pelicula/hero-2004/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Hero h1=\"Resultados encontrados: Hero\"",
-      "200 https://mirandogratis.com/?s=Hero h1=\"Estas buscando: Hero\"",
-      "301 https://mirandogratis.com/hero.html → https://mirandogratis.com",
-      "301 https://ver.gnula.one/movies/hero/ → https://ver.gnula.one",
-      "301 https://ver.gnula.one/movies/hero-2004/ → https://ver.gnula.one"
+      "404 https://www.tubeonline.net/pelicula/the-girl-who-kicked-the-hornet-s-nest-2010/ h1=\"Pagina no se encuentra\"",
+      "200 https://www.tubeonline.net/?s=The%20Girl%20Who%20Kicked%20the%20Hornet's%20Nest h1=\"Resultados encontrados: The Girl Who Kic\"",
+      "200 https://mirandogratis.com/?s=The%20Girl%20Who%20Kicked%20the%20Hornet's%20Nest h1=\"Estas buscando: The Girl Who Kicked the \"",
+      "301 https://mirandogratis.com/the-girl-who-kicked-the-hornet-s-nest.html → https://mirandogratis.com",
+      "301 https://ver.gnula.one/movies/the-girl-who-kicked-the-hornet-s-nest/ → https://ver.gnula.one",
+      "301 https://ver.gnula.one/movies/the-girl-who-kicked-the-hornet-s-nest-2010/ → https://ver.gnula.one"
     ],
-    "ms": 1157,
+    "ms": 1220,
     "quality": [],
     "audio": [],
     "hosts": [],
     "verdict": "no-match"
   },
   {
-    "control": "tt0299977",
-    "title": "Hero",
+    "control": "tt1343097",
+    "title": "The Girl Who Kicked the Hornet's Nest",
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://mirandogratis.com/?s=Hero h1=\"Estas buscando: Hero\"",
-      "301 https://mirandogratis.com/hero.html → https://mirandogratis.com",
-      "301 https://ver.gnula.one/movies/hero/ → https://ver.gnula.one",
-      "301 https://ver.gnula.one/movies/hero-2004/ → https://ver.gnula.one",
+      "200 https://mirandogratis.com/?s=The%20Girl%20Who%20Kicked%20the%20Hornet's%20Nest h1=\"Estas buscando: The Girl Who Kicked the \"",
+      "301 https://mirandogratis.com/the-girl-who-kicked-the-hornet-s-nest.html → https://mirandogratis.com",
+      "301 https://ver.gnula.one/movies/the-girl-who-kicked-the-hornet-s-nest/ → https://ver.gnula.one",
+      "301 https://ver.gnula.one/movies/the-girl-who-kicked-the-hornet-s-nest-2010/ → https://ver.gnula.one",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
-      "404 https://verpeliculasultra.com/xfsearch/peliculas-2004/"
+      "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 1229,
+    "ms": 908,
     "quality": [],
     "audio": [],
     "hosts": [],

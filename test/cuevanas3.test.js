@@ -226,3 +226,19 @@ test('cuevanas3: sin identidad resuelta no se hacen peticiones', async () => {
     assert.equal(stubbed.calls.length, 0);
   } finally { stubbed.restore(); }
 });
+
+test('cuevanas3: busca también sin el «&», que el LIKE del sitio no separa', async () => {
+  const stubbed = stub([
+    ['q=Deadpool+%26+Wolverine', json({ data: { posts: [] } })],
+    ['q=Deadpool+Wolverine', json({ data: { posts: [{ _id: 48001, title: 'Deadpool & Wolverine (2024)', type: 'movies', release_date: '2024-07-24' }] } })],
+    ['/wp-api/v1/player?postId=48001', json(PLAYER)],
+    ['cuevana3.gs/player.php', html(EMBED_HTML)],
+    ['vimeos.net/embed-', html(packedEmbed(MASTER))],
+  ]);
+  try {
+    const out = await cuevana.searchCuevanas3('Deadpool & Wolverine',
+      { title: 'Deadpool & Wolverine', year: 2024, mediaType: 'movie' }, 'Deadpool & Wolverine', 5000);
+    assert.equal(out.hits.length, 1);
+    assert.ok(stubbed.calls.some((url) => url.includes('q=Deadpool+Wolverine')));
+  } finally { stubbed.restore(); }
+});

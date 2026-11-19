@@ -38,6 +38,10 @@ const CONTROLS = [
   { type: 'series', id: 'tt0409591:1:1', fallback: { title: 'Naruto', year: '2002', season: 1, episode: 1 } },
   { type: 'series', title: 'Ao Ashi Season 2', fallback: { title: 'Ao Ashi Season 2', year: '2026', season: 2, episode: 7 } },
   { type: 'series', title: 'Black Clover 2nd Season', fallback: { title: 'Black Clover 2nd Season', year: '2026', season: 2, episode: 7 } },
+  // Controles con ficha comprobada en fuegocine: uno por cada camino del
+  // adaptador (película con audio subtitulado y serie por temporada).
+  { type: 'movie', title: 'La Odisea', fallback: { title: 'La Odisea', year: '2026' } },
+  { type: 'series', title: 'VisionQuest', fallback: { title: 'VisionQuest', year: '2026', season: 1, episode: 1 } },
 ];
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──

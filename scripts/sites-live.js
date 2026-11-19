@@ -22,6 +22,7 @@ const sites = {
   mirandogratis: require('../lib/sites/mirandogratis'),
   gnulaone: require('../lib/sites/gnulaone'),
   ultra: require('../lib/sites/ultra'),
+  cuevanas3: require('../lib/sites/cuevanas3'),
 };
 
 const CONTROLS = [
@@ -32,6 +33,7 @@ const CONTROLS = [
   { type: 'movie', id: 'tt6263850', fallback: { title: 'Deadpool & Wolverine', year: '2024' } },
   { type: 'movie', id: 'tt22022452', fallback: { title: 'Intensa-Mente 2', year: '2024' } },
   { type: 'movie', title: 'El reino prohibido', fallback: { title: 'El reino prohibido', year: '2008' } },
+  { type: 'series', id: 'tt0409591:1:1', fallback: { title: 'Naruto', year: '2002', season: 1, episode: 1 } },
 ];
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──
@@ -109,6 +111,7 @@ const SEARCHERS = {
   mirandogratis: (resolved) => sites.mirandogratis.searchMirandoGratis(null, resolved, resolved.title, 9000),
   gnulaone: (resolved) => sites.gnulaone.searchGnulaOne(null, resolved, resolved.title, 9000),
   ultra: (resolved) => sites.ultra.searchUltra(null, resolved, resolved.title, 9000),
+  cuevanas3: (resolved) => sites.cuevanas3.searchCuevanas3(null, resolved, resolved.title, 9000),
 };
 
 async function resolveControl(control) {

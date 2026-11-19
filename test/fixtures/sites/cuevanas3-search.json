@@ -1,0 +1,71 @@
+{
+ "error": false,
+ "data": {
+  "posts": [
+   {
+    "_id": 57851,
+    "title": "Spider-Man: Un nuevo día (2026)",
+    "slug": "spider-man-un-nuevo-dia-2026",
+    "type": "movies",
+    "release_date": "2026-07-29"
+   },
+   {
+    "_id": 57626,
+    "title": "Spider-Man de Marvel (2017)",
+    "slug": "spider-man-de-marvel-2017",
+    "type": "animes",
+    "release_date": "2017-08-19"
+   },
+   {
+    "_id": 51128,
+    "title": "Spider-Man de Marvel (2017)",
+    "slug": "spider-man-de-marvel-2017",
+    "type": "tvshows",
+    "release_date": "2017-08-19"
+   },
+   {
+    "_id": 42233,
+    "title": "Spider-Man: Sin camino a casa (2021)",
+    "slug": "spider-man-sin-camino-a-casa-2021",
+    "type": "movies",
+    "release_date": "2021-12-15"
+   },
+   {
+    "_id": 40404,
+    "title": "Spider-Man: A través del Spider-Verso (2023)",
+    "slug": "spider-man-a-traves-del-spider-verso-2023",
+    "type": "movies",
+    "release_date": "2023-05-31"
+   },
+   {
+    "_id": 36588,
+    "title": "Spider-Man 2: Lejos de Casa (2019)",
+    "slug": "spider-man-2-lejos-de-casa-2019",
+    "type": "movies",
+    "release_date": "2019-06-28"
+   },
+   {
+    "_id": 32498,
+    "title": "Spider-Man: Un nuevo universo (2018)",
+    "slug": "spider-man-un-nuevo-universo-2018",
+    "type": "movies",
+    "release_date": "2018-12-06"
+   },
+   {
+    "_id": 32176,
+    "title": "Spider-Man: De regreso a casa (2017)",
+    "slug": "spider-man-de-regreso-a-casa-2017",
+    "type": "movies",
+    "release_date": "2017-07-05"
+   }
+  ],
+  "pagination": {
+   "current_page": 1,
+   "last_page": 1,
+   "per_page": 18,
+   "total": 9,
+   "next_page_url": null,
+   "prev_page_url": null
+  }
+ }
+}

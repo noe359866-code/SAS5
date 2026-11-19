@@ -116,6 +116,26 @@ test('pelisjuanita: el episodio sale con su player_url y solo si es reproducible
 
 // ── Visor ─────────────────────────────────────────────────────────────────
 
+test('pelisjuanita: el reproductor se pide con el Referer del sitio que lo incrusta', async () => {
+  const seen = [];
+  const original = global.fetch;
+  global.fetch = async (url, options = {}) => {
+    seen.push({ url: String(url), referer: options.headers?.Referer || options.headers?.referer || '' });
+    if (String(url).includes('/api/rest/v1/search')) return new Response(JSON.stringify(SEARCH_MOVIE), { headers: { 'content-type': 'application/json' } });
+    if (String(url).includes('videoapp.mov')) return new Response(PLAYER, { headers: { 'content-type': 'text/html' } });
+    return new Response(EMBED, { headers: { 'content-type': 'text/html' } });
+  };
+  try {
+    const out = await pelis.searchPelisJuanita(null, MOVIE, MOVIE.title, 5000);
+    assert.equal(out.hits.length, 1);
+    const playerCall = seen.find((call) => call.url.includes('videoapp.mov'));
+    assert.equal(playerCall.referer, `${BASE}/`);
+    // El embed se pide como lo haría el reproductor.
+    const embedCall = seen.find((call) => call.url.includes('vimeos.net'));
+    assert.equal(embedCall.referer, `${PLAYER_BASE}/`);
+  } finally { global.fetch = original; }
+});
+
 test('pelisjuanita: de la página del reproductor solo vale el iframe de Vimeos', () => {
   assert.equal(pelis.frameOf(PLAYER), EMBED_URL);
   assert.equal(pelis.frameOf(PLAYER_EP), EMBED_EP_URL);

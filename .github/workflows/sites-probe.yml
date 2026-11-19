@@ -3,7 +3,11 @@ on:
   workflow_dispatch:
     inputs:
       sites:
-        description: 'Sitios separados por espacio (gnulaone ultra tubeonline mirando)'
+        description: 'Sitios separados por espacio (gnulaone ultra tubeonline mirando); vacío = todos'
+        required: false
+        default: ''
+      players:
+        description: 'Players concretos (bysejikuar mixdrop …); vacío = no sondear players'
         required: false
         default: ''
   push:
@@ -11,12 +15,13 @@ on:
     paths:
       - '.github/workflows/sites-probe.yml'
       - 'scripts/sites-probe.mjs'
+      - 'scripts/players-probe.mjs'
 permissions:
   contents: write
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -24,14 +29,16 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - name: Descubrimiento (informativo, no despliega)
+      - name: Descubrimiento en los sitios (informativo, no despliega)
         run: node scripts/sites-probe.mjs ${{ inputs.sites }}
+      - name: Muestras de players
+        run: node scripts/players-probe.mjs ${{ inputs.players }}
       - name: Devolver resultados a la rama
         if: always()
         run: |
           test -s .probe/sites-probe.json || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          git add -f .probe/sites-probe.json .probe/sites-probe.md
-          git commit -m "sonda: resultados de $(date -u +%FT%TZ) [skip ci]"
+          git add -f .probe
+          git commit -m "sonda: resultados de $(date -u +%FT%TZ) [skip ci]" || exit 0
           git push

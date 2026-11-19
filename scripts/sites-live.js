@@ -32,16 +32,33 @@ const CONTROLS = [
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──
 const trace = [];
+const liveDigest = [];
 const originalFetch = globalThis.fetch;
 globalThis.fetch = async (url, options = {}) => {
   const response = await originalFetch(url, options);
-  let snippet = '';
-  if (String(options.method || 'GET') === 'GET') {
-    try { snippet = (await response.clone().text()).replace(/\s+/g, ' ').slice(0, 400); } catch (_) { /* cuerpo no legible */ }
+  const type = response.headers.get('content-type') || '';
+  let html = '';
+  if (String(options.method || 'GET') === 'GET' && /html|text/i.test(type)) {
+    try { html = await response.clone().text(); } catch (_) { /* cuerpo no legible */ }
   }
-  trace.push({ url: String(url).slice(0, 140), status: response.status, location: response.headers.get('location') || '',
-    title: /<title[^>]*>([^<]{0,60})/i.exec(snippet)?.[1] || '', h1: /<h1[^>]*>([\s\S]{0,80}?)<\/h1>/i.exec(snippet)?.[1]?.replace(/<[^>]+>/g, '').trim() || '',
-    forms: /player-option-[a-z0-9-]+/gi.exec(snippet)?.[0] || '', kind: /content-type"?:?\s*"?([\w/+.-]+)/i.exec(String(JSON.stringify([...response.headers])))?.[1] || '' });
+  const text = html.replace(/\s+/g, ' ');
+  // Contexto alrededor de las señales que busca cada adaptador: es el dato
+  // que falta cuando la ficha responde 200 pero no hay coincidencia.
+  const marks = ['trembed', 'player-option', 'data-src', 'iframe', 'episodios', 'f-info', 'numerando', 'mejs-container'];
+  const context = {};
+  for (const mark of marks) {
+    const at = text.indexOf(mark);
+    if (at >= 0) context[mark] = text.slice(Math.max(0, at - 120), at + 220);
+  }
+  trace.push({ url: String(url).slice(0, 150), status: response.status, type: type.split(';')[0],
+    location: response.headers.get('location') || '',
+    title: /<title[^>]*>([^<]{0,80})/i.exec(text)?.[1]?.trim() || '',
+    h1: /<h1[^>]*>([\s\S]{0,200}?)<\/h1>/i.exec(text)?.[1]?.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').trim().slice(0, 90) || '',
+    marks: Object.keys(context), bytes: html.length });
+  if (Object.keys(context).length) {
+    liveDigest.push(`\n## ${response.status} ${String(url).slice(0, 120)}\n  h1: ${trace[trace.length - 1].h1}\n  title: ${trace[trace.length - 1].title}\n` +
+      Object.entries(context).map(([mark, ctx]) => `  [${mark}] ${ctx}`).join('\n'));
+  }
   return response;
 };
 
@@ -105,7 +122,8 @@ async function main() {
   }
   md.push('', 'Sonda de adaptadores: solo ficha y embed; no descarga segmentos de vídeo ni imprime URLs firmadas.');
   fs.writeFileSync('.probe/sites-live.md', md.join('\n') + '\n');
-  fs.writeFileSync('.probe/sites-live-trace.txt', trace.map((entry) => `${entry.status}\t${entry.url}\t${entry.location.slice(0, 100)}\t${entry.title}\t${entry.h1}`).join('\n') + '\n');
+  fs.writeFileSync('.probe/sites-live-trace.txt', trace.map((entry) => `${entry.status}\t${entry.type}\t${entry.bytes || 0}\t${entry.url}\t${entry.location.slice(0, 100)}\t${entry.h1}`).join('\n') + '\n');
+  fs.writeFileSync('.probe/sites-live-digest.txt', liveDigest.join('\n'));
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, md.join('\n') + '\n');
   console.log('\nResumen escrito en .probe/sites-live.md');
 }

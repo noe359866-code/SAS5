@@ -249,6 +249,10 @@ const SITES = {
       { label: 'search-elastic', url: 'https://fuegocine.com/search_elastic?s=spider' },
       { label: 'ficha-pelicula', url: 'https://fuegocine.com/movies/details/la-odisea/227' },
       { label: 'ficha-serie', url: 'https://fuegocine.com/shows/details/visionquest/24' },
+      { label: 'temporada', url: 'https://fuegocine.com/shows/visionquest/seasons/temporada-1/55' },
+      { label: 'ver-watch', url: 'https://fuegocine.com/movies/watch/la-odisea/227' },
+      { label: 'ver-play', url: 'https://fuegocine.com/movies/play/la-odisea/227' },
+      { label: 'peliculas-lista', url: 'https://fuegocine.com/movies' },
     ],
   },
   animeyt: {

@@ -224,6 +224,9 @@ const SITES = {
       { label: 'portada', url: 'https://animeflv.or.at/' },
       { label: 'wp-json', url: 'https://animeflv.or.at/wp-json/' },
       { label: 'api-search', url: 'https://animeflv.or.at/api/anime/search?query=naruto' },
+      { label: 'buscador', url: 'https://animeflv.or.at/?s=naruto' },
+      { label: 'ficha-anime', url: 'https://animeflv.or.at/anime/ao-ashi-season-2/' },
+      { label: 'episodio', url: 'https://animeflv.or.at/ver/ao-ashi-season-2-1' },
     ],
   },
   animeyt: {

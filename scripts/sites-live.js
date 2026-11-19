@@ -29,12 +29,12 @@ const sites = {
 };
 
 const CONTROLS = [
-  { type: 'movie', id: 'tt33033798', fallback: { title: 'Spider-Man: Un nuevo día', year: '2026' } },
+  { type: 'movie', id: 'tt33033798', tmdb: 969681, fallback: { title: 'Spider-Man: Un nuevo día', year: '2026' } },
   { type: 'movie', id: 'tt1375666', fallback: { title: 'El Origen', year: '2010' } },
-  { type: 'series', id: 'tt0903747:1:1', fallback: { title: 'Breaking Bad', year: '2008', season: 1, episode: 1 } },
-  { type: 'movie', id: 'tt18412256', fallback: { title: 'Alien: Romulus', year: '2024' } },
-  { type: 'movie', id: 'tt6263850', fallback: { title: 'Deadpool & Wolverine', year: '2024' } },
-  { type: 'movie', id: 'tt22022452', fallback: { title: 'Intensa-Mente 2', year: '2024' } },
+  { type: 'series', id: 'tt0903747:1:1', tmdb: 1396, fallback: { title: 'Breaking Bad', year: '2008', season: 1, episode: 1 } },
+  { type: 'movie', id: 'tt18412256', tmdb: 945961, fallback: { title: 'Alien: Romulus', year: '2024' } },
+  { type: 'movie', id: 'tt6263850', tmdb: 533535, fallback: { title: 'Deadpool & Wolverine', year: '2024' } },
+  { type: 'movie', id: 'tt22022452', tmdb: 1022789, fallback: { title: 'Intensa-Mente 2', year: '2024' } },
   { type: 'movie', title: 'El reino prohibido', fallback: { title: 'El reino prohibido', year: '2008' } },
   { type: 'series', id: 'tt0409591:1:1', fallback: { title: 'Naruto', year: '2002', season: 1, episode: 1 } },
   { type: 'series', title: 'Ao Ashi Season 2', fallback: { title: 'Ao Ashi Season 2', year: '2026', season: 2, episode: 7 } },
@@ -150,7 +150,13 @@ async function resolveControl(control) {
   ]).catch(() => null);
   const season = control.type === 'series' ? Number(control.id.split(':')[1]) : null;
   const episode = control.type === 'series' ? Number(control.id.split(':')[2]) : null;
-  return resolved || { ...control.fallback, mediaType: control.type, altTitle: null, season, episode };
+  const base = resolved || { ...control.fallback, mediaType: control.type, altTitle: null, season, episode };
+  // VideoApp trabaja solo por TMDB: si el catálogo no lo devuelve, se usa el
+  // que declara el propio control para que la medición no lo salte.
+  if (control.tmdb && !base.tmdbId) {
+    return { ...base, tmdbId: control.tmdb, tmdbType: control.type === 'series' ? 'tv' : 'movie' };
+  }
+  return base;
 }
 
 async function main() {

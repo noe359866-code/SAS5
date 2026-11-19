@@ -185,6 +185,7 @@ async function main() {
       // medio, así que se comprueba el contenido de la primera línea. En
       // UnLimPlay se prueban las cabeceras que cambian la respuesta (el
       // visor anuncia `x=.m3u8`, pero un GET anónimo devuelve su reproductor).
+      const mediaNotes = [];
       if (hits.length) {
         const target = hits[0].url;
         const variants = /(?:^|\.)unlimplay\.com$/.test(host(target))
@@ -200,12 +201,15 @@ async function main() {
               originalFetch(target, { headers: { 'User-Agent': UA, ...extra } }),
               new Promise((resolve) => setTimeout(() => resolve(null), 8000)),
             ]);
-            if (!probe) { console.log(`    medio ${label}: sin respuesta en 8 s`); continue; }
+            if (!probe) { mediaNotes.push(`${label}: sin respuesta en 8 s`); console.log(`    medio ${label}: sin respuesta en 8 s`); continue; }
             const body = await probe.text().catch(() => '');
             const head = body.split('\n').map((line) => line.trim()).filter(Boolean)[0] || '(vacío)';
             const kind = /^#EXTM3U/.test(head) ? 'HLS' : /^</.test(head) ? 'HTML' : 'otro';
+            const line = `${label}: HTTP ${probe.status} ${String(probe.headers.get('content-type') || '—').split(';')[0]} tipo=${kind} → ${head.replace(/[?#].*/, '').slice(0, 40)}`;
+            mediaNotes.push(line);
             console.log(`    medio ${label}: HTTP ${probe.status} ${probe.headers.get('content-type') || '—'} tipo=${kind} → ${head.replace(/[?#].*/, '').slice(0, 60)}`);
           } catch (err) {
+            mediaNotes.push(`${label}: error ${String(err && err.message || err).slice(0, 40)}`);
             console.log(`    medio ${label}: error ${String(err && err.message || err).slice(0, 60)}`);
           }
         }
@@ -214,15 +218,16 @@ async function main() {
       const recent = trace.slice(-6).map((entry) => `${entry.status} ${entry.url}${entry.location ? ` → ${entry.location.slice(0, 80)}` : ''}${entry.h1 ? ` h1="${entry.h1.slice(0, 40)}"` : ''}`);
       console.log(`    traza: ${recent.join(' | ')}`);
       rows.push({ control: control.id || control.title, title: resolved.title, provider: key, hits: hits.length, trace: recent,
+        media: mediaNotes,
         ms: Date.now() - started, quality: hits.map((hit) => hit.quality),
         audio: hits.map((hit) => hit.audioLabel || '—'), hosts: hits.map((hit) => redact(hit.url)), verdict });
     }
   }
   fs.mkdirSync('.probe', { recursive: true });
   fs.writeFileSync('.probe/sites-live.json', JSON.stringify(rows, null, 2));
-  const md = ['| Control | Fuente | Hits | ms | Formato | Audio | Destino |', '|---|---|---:|---:|---|---|---|'];
+  const md = ['| Control | Fuente | Hits | ms | Formato | Audio | Medio publicado | Destino |', '|---|---|---:|---:|---|---|---|---|'];
   for (const row of rows) {
-    md.push(`| ${row.title} | ${row.provider} | ${row.hits} | ${row.ms} | ${row.quality.join(',') || '—'} | ${row.audio.join(',') || '—'} | ${String(row.verdict).replace(/\|/g, '/').slice(0, 160)} |`);
+    md.push(`| ${row.title} | ${row.provider} | ${row.hits} | ${row.ms} | ${row.quality.join(',') || '—'} | ${row.audio.join(',') || '—'} | ${(row.media || []).join(' · ').replace(/\|/g, '/') || '—'} | ${String(row.verdict).replace(/\|/g, '/').slice(0, 160)} |`);
   }
   md.push('', 'Sonda de adaptadores: solo ficha y embed; no descarga segmentos de vídeo ni imprime URLs firmadas.');
   fs.writeFileSync('.probe/sites-live.md', md.join('\n') + '\n');

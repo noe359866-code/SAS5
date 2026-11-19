@@ -74,3 +74,16 @@ test('un stream subtitulado se anuncia con lápiz, no con auriculares', () => {
   assert.match(stream.title, /📝 Subtitulado/);
   assert.doesNotMatch(stream.title, /🎧/);
 });
+
+test('solo el HLS de TubeOnLine y MirandoGratis solicita el proxy de Stremio', () => {
+  const origin = 'https://player.example';
+  for (const provider of ['tubeonline', 'mirandogratis', 'fanpelis']) {
+    for (const quality of ['HLS', 'MP4']) {
+      const hit = { provider, quality, playbackOrigin: origin, url: `https://cdn.example/movie.${quality === 'HLS' ? 'm3u8' : 'mp4'}` };
+      const stream = streams.toDirectStream(hit);
+      assert.equal(stream.url, hit.url);
+      assert.deepEqual(stream.behaviorHints.proxyHeaders, quality === 'HLS' && provider !== 'fanpelis'
+        ? { request: { Origin: origin, Referer: `${origin}/` } } : undefined);
+    }
+  }
+});

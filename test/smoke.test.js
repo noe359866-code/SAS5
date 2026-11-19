@@ -32,7 +32,7 @@ test('manifest: contrato Stremio válido', async () => {
   const res = await fetch(`${baseUrl}/manifest.json`);
   assert.equal(res.status, 200);
   const manifest = await res.json();
-  assert.equal(manifest.id, 'org.comunidad.catalogos.plus');
+  assert.equal(manifest.id, 'net.ramdonlatam.catalogos');
   assert.ok(manifest.name);
   assert.ok(Array.isArray(manifest.resources));
   assert.ok(manifest.resources.includes('catalog'));

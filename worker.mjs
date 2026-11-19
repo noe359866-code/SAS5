@@ -148,7 +148,7 @@ async function edgeCached(request, ctx, createResponse, cacheUrl) {
 
   // 2) Cache API del borde. `match` cuenta como subpetición, así que solo se
   //    consulta cuando la memoria no tiene nada.
-  if (!edge) return responseCache.coalesce(key, () => runAndCache(key, createResponse, ctx, null));
+  if (!edge) return loadMiss();
 
   try {
     const cached = await edge.match(new Request(key, { method: 'GET' }));
@@ -161,7 +161,13 @@ async function edgeCached(request, ctx, createResponse, cacheUrl) {
   } catch (_) { /* Cache API no disponible (p. ej. en local) */ }
 
   // 3) Ejecutar el handler una sola vez para las peticiones concurrentes.
-  return responseCache.coalesce(key, () => runAndCache(key, createResponse, ctx, edge));
+  return loadMiss();
+
+  async function loadMiss() {
+    // Compartir datos, no el ReadableStream de una petición con otra app.
+    const entry = await responseCache.coalesce(key, () => runAndCache(key, createResponse, ctx, edge));
+    return rebuildResponse(entry, 'miss');
+  }
 }
 
 /** Reconstruye una respuesta guardada como texto + cabeceras. */
@@ -176,8 +182,7 @@ function rebuildResponse(entry, level = 'memory') {
 
 /** Serializa una respuesta para guardarla en la memoria del isolate. */
 async function serializeResponse(response) {
-  const clone = response.clone();
-  const body = await clone.text();
+  const body = await response.text();
   return JSON.stringify({
     status: response.status,
     headers: [...response.headers],
@@ -192,26 +197,20 @@ async function runAndCache(key, createResponse, ctx, edge) {
   } catch (_) { /* cabeceras inmutables: solo instrumentación */ }
   const policy = response.headers.get('Cache-Control') || '';
   const cacheable = response.status === 200 && !/(?:no-store|private)/i.test(policy);
-  if (!cacheable) return response;
+  const entry = await serializeResponse(response);
+  if (!cacheable) return entry;
   const { ttl, stale } = cacheTtl(policy);
   if (edge) {
     const put = Promise.resolve()
-      .then(() => edge.put(new Request(key, { method: 'GET' }), response.clone()))
+      .then(() => edge.put(new Request(key, { method: 'GET' }), rebuildResponse(entry, 'miss')))
       .catch(() => {});
     if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(put);
     else await put;
   }
   if (ttl > 0) {
-    const store = Promise.resolve()
-      .then(() => serializeResponse(response))
-      // La ventana de gracia se toma del `stale-while-revalidate` publicado (hasta
-      // 24 h): mientras siga en memoria, la petición no ejecuta el handler.
-      .then((entry) => responseCache.set(key, entry, ttl, { staleSeconds: stale }))
-      .catch(() => {});
-    if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(store);
-    else await store;
+    responseCache.set(key, entry, ttl, { staleSeconds: stale });
   }
-  return response;
+  return entry;
 }
 
 function workerRuntime(ctx) {
@@ -420,7 +419,7 @@ async function handleRequest(request, env, ctx) {
       return jsonResponse(
         {
           ok: true,
-          addon: 'org.comunidad.catalogos.plus',
+          addon: 'net.ramdonlatam.catalogos',
           version: '1.7.0',
           runtime: 'cloudflare-workers',
           configurable: true,

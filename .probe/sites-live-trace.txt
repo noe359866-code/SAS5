@@ -1,9 +1,8 @@
-200	application/json	88	https://v3-cinemeta.strem.io/meta/movie/tt33033798.json		
 200	text/html	64881	https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/		Spider-Man: Un nuevo día
 200	embed	0	embed-host: bysejikuar.com		
 200	application/json	90	https://www.tubeonline.net/wp-admin/admin-ajax.php		
-200	byse	2356	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=740		
-200	application/json	2356	https://bysejikuar.com/api/videos/01j37fv5s579		
+200	byse	2357	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742		
+200	application/json	2357	https://bysejikuar.com/api/videos/01j37fv5s579		
 200	embed	0	embed-host: streamtape.com		
 200	application/json	97	https://www.tubeonline.net/wp-admin/admin-ajax.php		
 404	text/html	21283	https://streamtape.com/e/YZzOKDljYacvDbG/SM1NDA.1080_CAS.mp4		Video not found!
@@ -34,11 +33,15 @@
 200	text/html	147803	https://verpeliculasultra.com/xfsearch/peliculas-2026/		
 200	application/json	3267	https://cuevanas3.pro/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18		
 200	application/json	8019	https://cuevanas3.pro/wp-api/v1/player?postId=57851		
-301	text/html	167	https://cuevana3.gs/player.php?t=2jslkZbdDo_86Ao2H_qgMN-9DN4-shbpWjfaiAz-riqKml7I9GvNipXCLAQHpM-Gl7i0wjnY5aC7oYX2I8wxNg&server=vimeos	https://cuevanas3.pro/player.php?t=2jslkZbdDo_86Ao2H_qgMN-9DN4-shbpWjfaiAz-riqKml7I9GvNipXCLAQHpM-Gl	301 Moved Permanently
-200	text/html	7529	https://cuevanas3.pro/player.php?t=2jslkZbdDo_86Ao2H_qgMN-9DN4-shbpWjfaiAz-riqKml7I9GvNipXCLAQHpM-Gl7i0wjnY5aC7oYX2I8wxNg&server=vimeos		
-200	text/html	53050	https://vimeos.net/embed-2nulhg4mnuz7.html		
+301	text/html	167	https://cuevana3.gs/player.php?t=PvEoDF0yF_7UWiQQ2A070emF_Sj8A4i4I1UbvQv0hoGKW_3WylKeoFKLoBc_rWewi4b1DzI-PY-31s8yadmWDg&server=vimeos	https://cuevanas3.pro/player.php?t=PvEoDF0yF_7UWiQQ2A070emF_Sj8A4i4I1UbvQv0hoGKW_3WylKeoFKLoBc_rWewi	301 Moved Permanently
+200	text/html	7529	https://cuevanas3.pro/player.php?t=PvEoDF0yF_7UWiQQ2A070emF_Sj8A4i4I1UbvQv0hoGKW_3WylKeoFKLoBc_rWewi4b1DzI-PY-31s8yadmWDg&server=vimeos		
+200	text/html	53038	https://vimeos.net/embed-2nulhg4mnuz7.html		
 404	text/html	31704	https://animeflv.or.at/anime/spider-man-un-nuevo-dia/		Página no encontrada
 200	text/html	63318	https://animeflv.or.at/search/spider-man-un-nuevo-dia/		Search Results for "spider-man-un-nuevo-dia"
+200	text/html	2649	https://fuegocine.com/search_elastic?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa		
+200	text/html	40650	https://fuegocine.com/movies/watch/spider-man-un-nuevo-d%C3%ADa/140		
+302	text/html	0	https://unlimplay.com/f/embed/movie/969681	/f/embed/movie/969681?_et=500f0878b5b2aeea9b313d9dbac6df89	
+200	text/html	440440	https://unlimplay.com/f/embed/movie/969681?_et=500f0878b5b2aeea9b313d9dbac6df89		
 200	application/json	2628	https://v3-cinemeta.strem.io/meta/movie/tt1375666.json		
 404	text/html	34091	https://www.tubeonline.net/pelicula/inception/		Pagina no se encuentra
 404	text/html	34096	https://www.tubeonline.net/pelicula/inception-2010/		Pagina no se encuentra
@@ -52,6 +55,7 @@
 200	application/json	32	https://cuevanas3.pro/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18		
 404	text/html	31704	https://animeflv.or.at/anime/inception/		Página no encontrada
 200	text/html	63136	https://animeflv.or.at/search/inception/		Search Results for "inception"
+200	text/html	1954	https://fuegocine.com/search_elastic?s=Inception		
 200	application/json	1705	https://api.tvmaze.com/lookup/shows?imdb=tt0903747		
 200	text/html	75819	https://www.tubeonline.net/serie/breaking-bad/		Breaking Bad
 200	text/html	47363	https://www.tubeonline.net/episodio/breaking-bad-1x1/		Breaking Bad: 1x1
@@ -62,11 +66,12 @@
 200	application/json	2598	https://cuevanas3.pro/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18		
 200	application/json	3743	https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=73&season=1&page=1&postsPerPage=50		
 200	application/json	4631	https://cuevanas3.pro/wp-api/v1/player?postId=76		
-301	text/html	167	https://cuevana3.gs/player.php?t=3pQu5-Ef0QJDqLZXEyDUC9C1tCNe1ODKe4zzhb_dFy2YABkLVejoopORVev31FPJM_BsPE5YkfLKZ7GFS4vojw&server=vimeos	https://cuevanas3.pro/player.php?t=3pQu5-Ef0QJDqLZXEyDUC9C1tCNe1ODKe4zzhb_dFy2YABkLVejoopORVev31FPJM	301 Moved Permanently
-200	text/html	7529	https://cuevanas3.pro/player.php?t=3pQu5-Ef0QJDqLZXEyDUC9C1tCNe1ODKe4zzhb_dFy2YABkLVejoopORVev31FPJM_BsPE5YkfLKZ7GFS4vojw&server=vimeos		
-200	text/html	52977	https://vimeos.net/embed-ccjygcfxujhd.html		
+301	text/html	167	https://cuevana3.gs/player.php?t=WT0N7beWbu80PoDQs4MNTDiuVLxostmlwWYHlqFHB32rQopfzyN-CWjG66G8LhHwICQdGxqBFpl2ejTPc6pF8g&server=vimeos	https://cuevanas3.pro/player.php?t=WT0N7beWbu80PoDQs4MNTDiuVLxostmlwWYHlqFHB32rQopfzyN-CWjG66G8LhHwI	301 Moved Permanently
+200	text/html	7529	https://cuevanas3.pro/player.php?t=WT0N7beWbu80PoDQs4MNTDiuVLxostmlwWYHlqFHB32rQopfzyN-CWjG66G8LhHwICQdGxqBFpl2ejTPc6pF8g&server=vimeos		
+200	text/html	52966	https://vimeos.net/embed-ccjygcfxujhd.html		
 404	text/html	31704	https://animeflv.or.at/anime/breaking-bad/		Página no encontrada
 200	text/html	63175	https://animeflv.or.at/search/breaking-bad/		Search Results for "breaking-bad"
+200	text/html	1954	https://fuegocine.com/search_elastic?s=Breaking%20Bad		
 200	application/json	2716	https://v3-cinemeta.strem.io/meta/movie/tt18412256.json		
 200	text/html	56324	https://www.tubeonline.net/pelicula/alien-romulus/		Alien: Romulus
 200	embed	0	embed-host: swiftload.io		
@@ -96,15 +101,16 @@
 200	text/html	46437	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	148084	https://verpeliculasultra.com/xfsearch/peliculas-2024/		
 200	text/html	58880	https://verpeliculasultra.com/ciencia-ficcion/4702-alien-romulus.html		Ver Alien: Romulus (2024) Online Gratis
-200	text/html	228156	https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09		
-200	text/html	228331	https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09		
+200	text/html	228736	https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09		
+200	text/html	228527	https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09		
 200	application/json	1448	https://cuevanas3.pro/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18		
 200	application/json	5103	https://cuevanas3.pro/wp-api/v1/player?postId=45223		
-301	text/html	167	https://cuevana3.gs/player.php?t=zZo0ifBLNy_QU0u0vN1nZu3Nke_pUwnrEFpkvc84CZ45iruJeOpUOdISkB-y5sLjLV_oiMXQR3HQLaGX-RALxA&server=vimeos	https://cuevanas3.pro/player.php?t=zZo0ifBLNy_QU0u0vN1nZu3Nke_pUwnrEFpkvc84CZ45iruJeOpUOdISkB-y5sLjL	301 Moved Permanently
-200	text/html	7529	https://cuevanas3.pro/player.php?t=zZo0ifBLNy_QU0u0vN1nZu3Nke_pUwnrEFpkvc84CZ45iruJeOpUOdISkB-y5sLjLV_oiMXQR3HQLaGX-RALxA&server=vimeos		
-200	text/html	52889	https://vimeos.net/embed-uhuu5myzvdub.html		
+301	text/html	167	https://cuevana3.gs/player.php?t=CyFCtkgTfiPgOj3bw3zfRk-rj6Ly7pA-Vbmh0g2d9s_8qNgKrlugm1LAAlb6uc2-9orPQ5HuzrKvjBHvYhKMLw&server=vimeos	https://cuevanas3.pro/player.php?t=CyFCtkgTfiPgOj3bw3zfRk-rj6Ly7pA-Vbmh0g2d9s_8qNgKrlugm1LAAlb6uc2-9	301 Moved Permanently
+200	text/html	7529	https://cuevanas3.pro/player.php?t=CyFCtkgTfiPgOj3bw3zfRk-rj6Ly7pA-Vbmh0g2d9s_8qNgKrlugm1LAAlb6uc2-9orPQ5HuzrKvjBHvYhKMLw&server=vimeos		
+200	text/html	52878	https://vimeos.net/embed-uhuu5myzvdub.html		
 404	text/html	31704	https://animeflv.or.at/anime/alien-romulus/		Página no encontrada
 200	text/html	63188	https://animeflv.or.at/search/alien-romulus/		Search Results for "alien-romulus"
+200	text/html	1954	https://fuegocine.com/search_elastic?s=Alien%3A%20Romulus		
 200	application/json	2645	https://v3-cinemeta.strem.io/meta/movie/tt6263850.json		
 200	text/html	63082	https://www.tubeonline.net/pelicula/deadpool-wolverine/		Deadpool &#038; Wolverine
 200	embed	0	embed-host: filemoon.sx		
@@ -133,11 +139,12 @@
 200	application/json	32	https://cuevanas3.pro/wp-api/v1/search?q=Deadpool+Wolverine&page=1&postType=any&postsPerPage=18		
 200	application/json	4337	https://cuevanas3.pro/wp-api/v1/search?q=Deadpool&page=1&postType=any&postsPerPage=18		
 200	application/json	9579	https://cuevanas3.pro/wp-api/v1/player?postId=39639		
-301	text/html	167	https://cuevana3.gs/player.php?t=mDVxCKZjj0T6xc4RUgeevHu9y9pn-LZ9mcW86EF4DFiSfOW-X99FHwtd2G3PCKCUo7KsQNjQa8aJQBSiF3NDuQ&server=vimeos	https://cuevanas3.pro/player.php?t=mDVxCKZjj0T6xc4RUgeevHu9y9pn-LZ9mcW86EF4DFiSfOW-X99FHwtd2G3PCKCUo	301 Moved Permanently
-200	text/html	7529	https://cuevanas3.pro/player.php?t=mDVxCKZjj0T6xc4RUgeevHu9y9pn-LZ9mcW86EF4DFiSfOW-X99FHwtd2G3PCKCUo7KsQNjQa8aJQBSiF3NDuQ&server=vimeos		
-200	text/html	53041	https://vimeos.net/embed-tmbjqufb955w.html		
+301	text/html	167	https://cuevana3.gs/player.php?t=eX2fduH7nPqXIKsVDwa4GOeO0FwTGKKzRooK_e1xDuIoJBtTcNHCuYO5IKbJUtzJ76wRhA1RC6513J6ek3lRog&server=vimeos	https://cuevanas3.pro/player.php?t=eX2fduH7nPqXIKsVDwa4GOeO0FwTGKKzRooK_e1xDuIoJBtTcNHCuYO5IKbJUtzJ7	301 Moved Permanently
+200	text/html	7529	https://cuevanas3.pro/player.php?t=eX2fduH7nPqXIKsVDwa4GOeO0FwTGKKzRooK_e1xDuIoJBtTcNHCuYO5IKbJUtzJ76wRhA1RC6513J6ek3lRog&server=vimeos		
+200	text/html	53047	https://vimeos.net/embed-tmbjqufb955w.html		
 404	text/html	31704	https://animeflv.or.at/anime/deadpool-wolverine/		Página no encontrada
 200	text/html	63253	https://animeflv.or.at/search/deadpool-wolverine/		Search Results for "deadpool-wolverine"
+200	text/html	1954	https://fuegocine.com/search_elastic?s=Deadpool%20%26%20Wolverine		
 200	application/json	2848	https://v3-cinemeta.strem.io/meta/movie/tt22022452.json		
 404	text/html	34094	https://www.tubeonline.net/pelicula/inside-out-2/		Pagina no se encuentra
 404	text/html	34099	https://www.tubeonline.net/pelicula/inside-out-2-2024/		Pagina no se encuentra
@@ -152,6 +159,7 @@
 200	application/json	5078	https://cuevanas3.pro/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18		
 404	text/html	31704	https://animeflv.or.at/anime/inside-out-2/		Página no encontrada
 200	text/html	63175	https://animeflv.or.at/search/inside-out-2/		Search Results for "inside-out-2"
+200	text/html	1954	https://fuegocine.com/search_elastic?s=Inside%20Out%202		
 404	text/html	34100	https://www.tubeonline.net/pelicula/el-reino-prohibido/		Pagina no se encuentra
 404	text/html	34105	https://www.tubeonline.net/pelicula/el-reino-prohibido-2008/		Pagina no se encuentra
 200	text/html	60301	https://www.tubeonline.net/?s=El%20reino%20prohibido		Resultados encontrados: El reino prohibido
@@ -169,31 +177,35 @@
 404	text/html	39484	https://verpeliculasultra.com/xfsearch/peliculas-2008/		
 200	application/json	2008	https://cuevanas3.pro/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18		
 200	application/json	4510	https://cuevanas3.pro/wp-api/v1/player?postId=56111		
-301	text/html	167	https://cuevana3.gs/player.php?t=qf5x5E5ab1KYoOF0eJz_vvY_QjeETrshDUsvQWyA-gUUt1nIO0wcOeDM1Xamg1w8eDmkGzRce4I5z-6DQWILnA&server=vimeos	https://cuevanas3.pro/player.php?t=qf5x5E5ab1KYoOF0eJz_vvY_QjeETrshDUsvQWyA-gUUt1nIO0wcOeDM1Xamg1w8e	301 Moved Permanently
-200	text/html	7529	https://cuevanas3.pro/player.php?t=qf5x5E5ab1KYoOF0eJz_vvY_QjeETrshDUsvQWyA-gUUt1nIO0wcOeDM1Xamg1w8eDmkGzRce4I5z-6DQWILnA&server=vimeos		
-200	text/html	52972	https://vimeos.net/embed-o0unqe46z0g7.html		
+301	text/html	167	https://cuevana3.gs/player.php?t=XA1_u5Vi1YhR3onbwDfqZbUPr7-3QBNv1FZpdUKd3m9wLY4qNM5FMrp_sqAhNHdeYJADgMs2rQiVy0kcgIuknA&server=vimeos	https://cuevanas3.pro/player.php?t=XA1_u5Vi1YhR3onbwDfqZbUPr7-3QBNv1FZpdUKd3m9wLY4qNM5FMrp_sqAhNHdeY	301 Moved Permanently
+200	text/html	7529	https://cuevanas3.pro/player.php?t=XA1_u5Vi1YhR3onbwDfqZbUPr7-3QBNv1FZpdUKd3m9wLY4qNM5FMrp_sqAhNHdeYJADgMs2rQiVy0kcgIuknA&server=vimeos		
+200	text/html	52986	https://vimeos.net/embed-o0unqe46z0g7.html		
 404	text/html	31704	https://animeflv.or.at/anime/el-reino-prohibido/		Página no encontrada
 200	text/html	63253	https://animeflv.or.at/search/el-reino-prohibido/		Search Results for "el-reino-prohibido"
+200	text/html	1954	https://fuegocine.com/search_elastic?s=El%20reino%20prohibido		
 200	application/json	2151	https://api.tvmaze.com/lookup/shows?imdb=tt0409591		
 404	text/html	34085	https://www.tubeonline.net/serie/naruto/		Pagina no se encuentra
 200	text/html	60105	https://www.tubeonline.net/?s=Naruto		Resultados encontrados: Naruto
 200	application/json	6444	https://cuevanas3.pro/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18		
 200	application/json	33384	https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=20794&season=1&page=1&postsPerPage=50		
 200	application/json	6038	https://cuevanas3.pro/wp-api/v1/player?postId=20797		
-301	text/html	167	https://cuevana3.gs/player.php?t=9Upw4wYR1n4fGPTS2YzixDD3S3G0wG11RzILRaf_nwaamTfm2NNLe8LfqEE4iDGsCjbyNJSH5yJnIZpG3Kd8Zg&server=vimeos	https://cuevanas3.pro/player.php?t=9Upw4wYR1n4fGPTS2YzixDD3S3G0wG11RzILRaf_nwaamTfm2NNLe8LfqEE4iDGsC	301 Moved Permanently
-200	text/html	7529	https://cuevanas3.pro/player.php?t=9Upw4wYR1n4fGPTS2YzixDD3S3G0wG11RzILRaf_nwaamTfm2NNLe8LfqEE4iDGsCjbyNJSH5yJnIZpG3Kd8Zg&server=vimeos		
-200	text/html	52842	https://vimeos.net/embed-wa2r4s768i9k.html		
+301	text/html	167	https://cuevana3.gs/player.php?t=SXwYCr2oSMYT0NEhKZm7GPJRDgit0V4qSAibpG4M8nKwFxqhbzrN5vqghf-67MExE2Yc4PbIIsAoE6Oc1W5fiA&server=vimeos	https://cuevanas3.pro/player.php?t=SXwYCr2oSMYT0NEhKZm7GPJRDgit0V4qSAibpG4M8nKwFxqhbzrN5vqghf-67MExE	301 Moved Permanently
+200	text/html	7529	https://cuevanas3.pro/player.php?t=SXwYCr2oSMYT0NEhKZm7GPJRDgit0V4qSAibpG4M8nKwFxqhbzrN5vqghf-67MExE2Yc4PbIIsAoE6Oc1W5fiA&server=vimeos		
+200	text/html	52816	https://vimeos.net/embed-wa2r4s768i9k.html		
 404	text/html	31704	https://animeflv.or.at/anime/naruto/		Página no encontrada
 200	text/html	63097	https://animeflv.or.at/search/naruto/		Search Results for "naruto"
+200	text/html	1954	https://fuegocine.com/search_elastic?s=Naruto		
 404	text/html	34095	https://www.tubeonline.net/serie/ao-ashi-season-2/		Pagina no se encuentra
 200	text/html	60271	https://www.tubeonline.net/?s=Ao%20Ashi%20Season%202		Resultados encontrados: Ao Ashi Season 2
 200	application/json	32	https://cuevanas3.pro/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18		
 200	application/json	22549	https://cuevanas3.pro/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18		
 200	text/html	58647	https://animeflv.or.at/anime/ao-ashi-season-2/		Ao Ashi Season 2
-200	text/html	89692	https://animeflv.or.at/2026/11/15/ao-ashi-season-2-episodio-7/		Ao Ashi Season 2 Episodio 7 Sub Español
+200	text/html	89696	https://animeflv.or.at/2026/11/15/ao-ashi-season-2-episodio-7/		Ao Ashi Season 2 Episodio 7 Sub Español
+200	text/html	1954	https://fuegocine.com/search_elastic?s=Ao%20Ashi%20Season%202		
 404	text/html	34102	https://www.tubeonline.net/serie/black-clover-2nd-season/		Pagina no se encuentra
 200	text/html	60383	https://www.tubeonline.net/?s=Black%20Clover%202nd%20Season		Resultados encontrados: Black Clover 2nd Season
 200	application/json	32	https://cuevanas3.pro/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18		
 200	application/json	22290	https://cuevanas3.pro/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18		
 200	text/html	58942	https://animeflv.or.at/anime/black-clover-2nd-season/		Black Clover 2nd Season
 200	text/html	89462	https://animeflv.or.at/2026/11/14/black-clover-2nd-season-episodio-7/		Black Clover 2nd Season Episodio 7 Sub Español
+200	text/html	1954	https://fuegocine.com/search_elastic?s=Black%20Clover%202nd%20Season		

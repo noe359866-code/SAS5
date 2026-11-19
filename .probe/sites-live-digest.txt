@@ -92,7 +92,7 @@
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
   [f-info]  class="modal-body"> <div class="shortf-left"> <p class="shortf-ptitle"> <strong>La Invitacion</strong> </p> <ul class="f-info"> <li> <span class="f-info-title">Año:</span> <span class="f-info-text">2026</span> </li> <li> <span class="f-info-title">Género:</span> <span class="f-info-text">Comedia, Drama, Romántico</span> </li> </ul> <ul c
 
-## 200 https://cuevanas3.pro/player.php?t=2jslkZbdDo_86Ao2H_qgMN-9DN4-shbpWjfaiAz-riqKml7I9GvNipXCLAQHpM-Gl7i0wjnY5aC7oYX2I8wxN
+## 200 https://cuevanas3.pro/player.php?t=PvEoDF0yF_7UWiQQ2A070emF_Sj8A4i4I1UbvQv0hoGKW_3WylKeoFKLoBc_rWewi4b1DzI-PY-31s8yadmWD
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-2nulhg4mnuz7.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -113,6 +113,16 @@
   title: You searched for spider-man-un-nuevo-dia - AnimeFLV
   [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
   [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
+
+## 200 https://fuegocine.com/movies/watch/spider-man-un-nuevo-d%C3%ADa/140
+  h1: 
+  title: Spider-Man: Un Nuevo Día | Fuego Cine 2.0
+  [iframe] <!-- Estilos optimizados para el reproductor principal y trailers --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-container iframe { width: 100% !important; he
+
+## 200 https://unlimplay.com/f/embed/movie/969681?_et=500f0878b5b2aeea9b313d9dbac6df89
+  h1: 
+  title: UnLimPlay
+  [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h
 
 ## 200 https://www.tubeonline.net/?s=Inception
   h1: Resultados encontrados: Inception
@@ -166,7 +176,7 @@
   title: 
   [iframe] {"embed_url":"https:\/\/hqq.ac\/e\/UkJ4OXFXRFQwaFJwZVFnZlZNTGhzZz09","type":"iframe"}
 
-## 200 https://cuevanas3.pro/player.php?t=3pQu5-Ef0QJDqLZXEyDUC9C1tCNe1ODKe4zzhb_dFy2YABkLVejoopORVev31FPJM_BsPE5YkfLKZ7GFS4voj
+## 200 https://cuevanas3.pro/player.php?t=WT0N7beWbu80PoDQs4MNTDiuVLxostmlwWYHlqFHB32rQopfzyN-CWjG66G8LhHwICQdGxqBFpl2ejTPc6pF8
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-ccjygcfxujhd.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -292,7 +302,7 @@
   [data-src] ght:6px;width:6px;" alt="close" border="0" onclick="adp.innerHTML = ''; thispays.style.display = 'none'; return false;" data-src='//vpge.link/player/cbplayer/images/close-button.png' loading='lazy' title='close'/> </div> </div> <script data-cfasync="false"> var ppage = 'https%3A%2F%2Fvpge.link%2Fe%2FU0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09'; var 
   [iframe] !--script src="https://www.google.com/recaptcha/api.js?render=6Ldf5F0UAAAAALErn6bLEcv7JldhivPzb93Oy5t9"></script--> <!--iframe src="https://xtremeserve.xyz/wwwwww.php?3" style="display:none;"></iframe--> <script> (function() { console.log('CORS check start same'); $("script[src*='/cdn-cgi/']").each(function( i, script ) { //console.log( s
 
-## 200 https://cuevanas3.pro/player.php?t=zZo0ifBLNy_QU0u0vN1nZu3Nke_pUwnrEFpkvc84CZ45iruJeOpUOdISkB-y5sLjLV_oiMXQR3HQLaGX-RALx
+## 200 https://cuevanas3.pro/player.php?t=CyFCtkgTfiPgOj3bw3zfRk-rj6Ly7pA-Vbmh0g2d9s_8qNgKrlugm1LAAlb6uc2-9orPQ5HuzrKvjBHvYhKML
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-uhuu5myzvdub.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -376,7 +386,7 @@
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
   [f-info]  <div class="modal-body"> <div class="shortf-left"> <p class="shortf-ptitle"> <strong>Arcadian</strong> </p> <ul class="f-info"> <li> <span class="f-info-title">Año:</span> <span class="f-info-text">2024</span> </li> <li> <span class="f-info-title">Género:</span> <span class="f-info-text">Acción, Ciencia Ficción, Drama, Suspense, Terror</
 
-## 200 https://cuevanas3.pro/player.php?t=mDVxCKZjj0T6xc4RUgeevHu9y9pn-LZ9mcW86EF4DFiSfOW-X99FHwtd2G3PCKCUo7KsQNjQa8aJQBSiF3NDu
+## 200 https://cuevanas3.pro/player.php?t=eX2fduH7nPqXIKsVDwa4GOeO0FwTGKKzRooK_e1xDuIoJBtTcNHCuYO5IKbJUtzJ76wRhA1RC6513J6ek3lRo
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-tmbjqufb955w.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -464,7 +474,7 @@
   title: peliculas-2008 &raquo; Ver Películas Online Gratis Completas en Español y Latino
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
 
-## 200 https://cuevanas3.pro/player.php?t=qf5x5E5ab1KYoOF0eJz_vvY_QjeETrshDUsvQWyA-gUUt1nIO0wcOeDM1Xamg1w8eDmkGzRce4I5z-6DQWILn
+## 200 https://cuevanas3.pro/player.php?t=XA1_u5Vi1YhR3onbwDfqZbUPr7-3QBNv1FZpdUKd3m9wLY4qNM5FMrp_sqAhNHdeYJADgMs2rQiVy0kcgIukn
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-o0unqe46z0g7.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -491,7 +501,7 @@
   title: Buscó por el término Naruto &#187; TubeOnline.Net
   [episodios] u ul li a:hover{color:#408BEA}header.main .hbox .search form button[type=submit]:hover,.loading,#seasons .se-c .se-a ul.episodios li .episodiotitle a:hover,.sgeneros a:hover,.page_user nav.user ul li a:hover{color:#408BEA}footer.main .fbox .fmenu ul li.current-menu-item a,.posts .meta .autor i,.pag_episodes .item a:hover,a.link_a:hover,ul
 
-## 200 https://cuevanas3.pro/player.php?t=9Upw4wYR1n4fGPTS2YzixDD3S3G0wG11RzILRaf_nwaamTfm2NNLe8LfqEE4iDGsCjbyNJSH5yJnIZpG3Kd8Z
+## 200 https://cuevanas3.pro/player.php?t=SXwYCr2oSMYT0NEhKZm7GPJRDgit0V4qSAibpG4M8nKwFxqhbzrN5vqghf-67MExE2Yc4PbIIsAoE6Oc1W5fi
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-wa2r4s768i9k.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write

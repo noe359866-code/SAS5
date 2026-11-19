@@ -26,7 +26,7 @@
     "urls": [
       "https://img-place.com/intdacsm8cvn.jpg"
     ],
-    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"IK_KggNg-8Ac_KAT\",\"payload\":\"K7cWoY58vT7uza5gPhg1uUPYxXVRLeD-39X4iZauVCE1vq8Y6wxRo9O5INDRGKdLM44LqlMFGyvDahC80n6_Y_h6Wikty8hTAPl474cVwfJjmU9tT4ARRf_Qqr3QkIHw_U7ENQDDGNOcXjK1vovWAuuar1be_PGGl2o6T7Wzbbp-UppiRHsq6NG6Z5WwoX7gRJWoQl638ZX8oVLbejE038OS-_EsCTAL_VtGuUB_kQ8rCeZRmvKXyYjMGZVk6rnDDtUBF4tceaKZnuwrdWHGra4q8jRlkJPd-_-F6AYK0MWAyJNkqDwr_9EiEbKQhauID-w45PCxKPqCRrg4rZF_ym-XyBnntcc7MzOcgXf8JRu73SgDOuf9vHTj9TWZOM5eJPLQERh379zwwdHrkkLIE07m_UTvDN"
+    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"LFgrRdIVlA4GXHgi\",\"payload\":\"2uqm4mNPA4HZ8BJcrx-GzUnx7n_psCGmAJlXKa76V96NWrqFp6GUGZ7dc0WW_lDjSKi2-VmbpZNFWwbk4kq8CjhOBAAAAtPR8kS3zTgyyso2ZLdlD9b4K2_NIN12cIdBN44CG4r35lwaRCZJt_sVVZtScJxXmjcn-b11eWz_7ubgjFEA9UNO74Sxda0y15LhUhWHsaCDMbem8n1al6u9js2LknQdEhRikwY6Isu3uXgKFKZNOdjsRdGcR9gL7AGe4u_LXg0i00QYtXSE07tyDYsjX4juck3ww5Iarbmn8Z2wS--y40BML3sPMEFMPCZHMsYOrmoSWIRfBwV10ueBaKM0ZHT8Hkp6iDafeDVxmKkOox0IPdUDBgrHERkp3t4e7Iweh9fm1AGh4KWV7N55Y2UUcXgxta"
   },
   "mainJs": [
     {
@@ -116,7 +116,7 @@
     },
     "season": {
       "status": 200,
-      "size": 329,
+      "size": 293784,
       "epLinks": [],
       "trids": []
     }

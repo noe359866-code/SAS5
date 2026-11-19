@@ -9,7 +9,85 @@
     "iframes": 2,
     "media": 0,
     "packed": false,
-    "hosts": "ver.gnula.one, www.facebook.com"
+    "hosts": "ver.gnula.one, www.facebook.com",
+    "detail": ""
+  },
+  {
+    "site": "ver.gnula.one",
+    "page": "·ver.gnula.one",
+    "url": "https://ver.gnula.one/?…",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 1051,
+    "iframes": 1,
+    "media": 0,
+    "packed": false,
+    "hosts": "links.fiuxy2.com",
+    "detail": ""
+  },
+  {
+    "site": "ver.gnula.one",
+    "page": "··links.fiuxy2.com",
+    "url": "https://links.fiuxy2.com/play/NMB2zwFeBWYf1ruC.html",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 2886,
+    "iframes": 0,
+    "media": 0,
+    "packed": false,
+    "hosts": "streamwish.to, vidhidepro.com, voe.sx",
+    "detail": ""
+  },
+  {
+    "site": "ver.gnula.one",
+    "page": "···streamwish.to",
+    "url": "https://streamwish.to/e/bxv60pjdnzpx",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 819,
+    "iframes": 0,
+    "media": 0,
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "ver.gnula.one",
+    "page": "···vidhidepro.com",
+    "url": "https://vidhidepro.com/v/7p0egbcbsti2",
+    "status": 0,
+    "bytes": 0,
+    "iframes": "—",
+    "media": "—",
+    "packed": false,
+    "hosts": "—",
+    "detail": "TypeError"
+  },
+  {
+    "site": "ver.gnula.one",
+    "page": "···voe.sx",
+    "url": "https://voe.sx/e/xgbyls7nylgd",
+    "status": 404,
+    "mitigated": "",
+    "bytes": 118974,
+    "iframes": "—",
+    "media": "—",
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "ver.gnula.one",
+    "page": "·ver.gnula.one",
+    "url": "https://ver.gnula.one/?…",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 1038,
+    "iframes": 1,
+    "media": 0,
+    "packed": false,
+    "hosts": "voe.sx",
+    "detail": ""
   },
   {
     "site": "ver.gnula.one",
@@ -21,55 +99,8 @@
     "iframes": 0,
     "media": 0,
     "packed": false,
-    "hosts": "—"
-  },
-  {
-    "site": "ver.gnula.one",
-    "page": "embed",
-    "url": "https://ver.gnula.one/?…",
-    "status": 200,
-    "mitigated": "",
-    "bytes": 1051,
-    "iframes": 1,
-    "media": 0,
-    "packed": false,
-    "hosts": "ver.gnula.one"
-  },
-  {
-    "site": "ver.gnula.one",
-    "page": "embed",
-    "url": "https://www.facebook.com/plugins/like.php?…",
-    "status": 200,
-    "mitigated": "",
-    "bytes": 20047,
-    "iframes": 0,
-    "media": 0,
-    "packed": false,
-    "hosts": "www.facebook.com"
-  },
-  {
-    "site": "ver.gnula.one",
-    "page": "embed",
-    "url": "https://ver.gnula.one/?…",
-    "status": 200,
-    "mitigated": "",
-    "bytes": 1038,
-    "iframes": 1,
-    "media": 0,
-    "packed": false,
-    "hosts": "ver.gnula.one"
-  },
-  {
-    "site": "ver.gnula.one",
-    "page": "embed",
-    "url": "https://ver.gnula.one/?…",
-    "status": 200,
-    "mitigated": "",
-    "bytes": 1036,
-    "iframes": 1,
-    "media": 0,
-    "packed": false,
-    "hosts": "ver.gnula.one"
+    "hosts": "—",
+    "detail": ""
   },
   {
     "site": "verpeliculasultra.com",
@@ -81,23 +112,12 @@
     "iframes": 0,
     "media": 0,
     "packed": false,
-    "hosts": "hglink.to, vpge.link"
+    "hosts": "hglink.to, vpge.link",
+    "detail": ""
   },
   {
     "site": "verpeliculasultra.com",
-    "page": "listado",
-    "url": "https://verpeliculasultra.com/xfsearch/peliculas-2025/",
-    "status": 200,
-    "mitigated": "",
-    "bytes": 150220,
-    "iframes": 0,
-    "media": 0,
-    "packed": false,
-    "hosts": "—"
-  },
-  {
-    "site": "verpeliculasultra.com",
-    "page": "embed",
+    "page": "·hglink.to",
     "url": "https://hglink.to/e/m10cltm3xblk",
     "status": 200,
     "mitigated": "",
@@ -105,23 +125,64 @@
     "iframes": 0,
     "media": 0,
     "packed": false,
-    "hosts": "hglink.to"
+    "hosts": "—",
+    "detail": ""
   },
   {
     "site": "verpeliculasultra.com",
-    "page": "embed",
+    "page": "·vpge.link",
     "url": "https://vpge.link/e/SXMyN3Q4K0g1Y2wwZVd0MXh2MDBVQT09",
     "status": 200,
     "mitigated": "",
-    "bytes": 228805,
+    "bytes": 228452,
     "iframes": 0,
     "media": 2,
     "packed": false,
-    "hosts": "vpge.link"
+    "hosts": "vpge.link",
+    "detail": ""
   },
   {
     "site": "verpeliculasultra.com",
-    "page": "embed",
+    "page": "··manifiesto",
+    "url": "https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4",
+    "status": 0,
+    "mitigated": "",
+    "bytes": "",
+    "iframes": "—",
+    "media": "",
+    "packed": false,
+    "hosts": "4fw4gd.cfglobalcdn.com",
+    "detail": "TypeError"
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "··manifiesto",
+    "url": "https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8",
+    "status": 0,
+    "mitigated": "",
+    "bytes": "",
+    "iframes": "—",
+    "media": "",
+    "packed": false,
+    "hosts": "4fw4gd.cfglobalcdn.com",
+    "detail": "TypeError"
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "··vpge.link",
+    "url": "https://vpge.link/player/cbplayer/images/close-button.png",
+    "status": 403,
+    "mitigated": "",
+    "bytes": 15,
+    "iframes": "—",
+    "media": "—",
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "·hglink.to",
     "url": "https://hglink.to/e/wrrwsu87i41t",
     "status": 200,
     "mitigated": "",
@@ -129,19 +190,112 @@
     "iframes": 0,
     "media": 0,
     "packed": false,
-    "hosts": "hglink.to"
+    "hosts": "—",
+    "detail": ""
   },
   {
     "site": "verpeliculasultra.com",
-    "page": "embed",
+    "page": "·vpge.link",
     "url": "https://vpge.link/e/YkpjbzkvQ0FsdEhGUXFuZEJ6UC85dz09",
     "status": 200,
     "mitigated": "",
-    "bytes": 228503,
+    "bytes": 228933,
     "iframes": 0,
     "media": 2,
     "packed": false,
-    "hosts": "vpge.link"
+    "hosts": "vpge.link",
+    "detail": ""
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "··manifiesto",
+    "url": "https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4",
+    "status": 0,
+    "mitigated": "",
+    "bytes": "",
+    "iframes": "—",
+    "media": "",
+    "packed": false,
+    "hosts": "4fw4gd.cfglobalcdn.com",
+    "detail": "TypeError"
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "··manifiesto",
+    "url": "https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8",
+    "status": 0,
+    "mitigated": "",
+    "bytes": "",
+    "iframes": "—",
+    "media": "",
+    "packed": false,
+    "hosts": "4fw4gd.cfglobalcdn.com",
+    "detail": "TypeError"
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "ficha película 2",
+    "url": "https://verpeliculasultra.com/accion/5276-hope.html",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 57054,
+    "iframes": 0,
+    "media": 0,
+    "packed": false,
+    "hosts": "hgcloud.to, powvideo.org",
+    "detail": ""
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "·hgcloud.to",
+    "url": "https://hgcloud.to/e/aiy9yqjwoul5",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 819,
+    "iframes": 0,
+    "media": 0,
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "·powvideo.org",
+    "url": "https://powvideo.org/embed-99ess8o65y66-800x400.html",
+    "status": 403,
+    "mitigated": "challenge",
+    "bytes": 5826,
+    "iframes": "—",
+    "media": "—",
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "·hgcloud.to",
+    "url": "https://hgcloud.to/e/oed9pqmh18ke",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 819,
+    "iframes": 0,
+    "media": 0,
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "verpeliculasultra.com",
+    "page": "·powvideo.org",
+    "url": "https://powvideo.org/embed-av39kc9o0w11-800x400.html",
+    "status": 403,
+    "mitigated": "challenge",
+    "bytes": 5805,
+    "iframes": "—",
+    "media": "—",
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
   },
   {
     "site": "www.tubeonline.net",
@@ -153,7 +307,60 @@
     "iframes": 0,
     "media": 0,
     "packed": false,
-    "hosts": "—"
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "www.tubeonline.net",
+    "page": "·ajax Ver trailer",
+    "url": "https://www.tubeonline.net/wp-admin/admin-ajax.php",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 99,
+    "iframes": "—",
+    "media": "embed ✓",
+    "packed": false,
+    "hosts": "www.youtube.com",
+    "detail": "https://www.youtube.com/embed/HNq73lX47t4?…"
+  },
+  {
+    "site": "www.tubeonline.net",
+    "page": "·embed ajax trailer",
+    "url": "https://www.youtube.com/embed/HNq73lX47t4?…",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 160132,
+    "iframes": 0,
+    "media": 0,
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "www.tubeonline.net",
+    "page": "·ajax Byse",
+    "url": "https://www.tubeonline.net/wp-admin/admin-ajax.php",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 90,
+    "iframes": "—",
+    "media": "embed ✓",
+    "packed": false,
+    "hosts": "bysejikuar.com",
+    "detail": "https://bysejikuar.com/e/01j37fv5s579/sm1nda-1080-cas"
+  },
+  {
+    "site": "www.tubeonline.net",
+    "page": "·embed ajax 1",
+    "url": "https://bysejikuar.com/e/01j37fv5s579/sm1nda-1080-cas",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 1972,
+    "iframes": 0,
+    "media": 0,
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
   },
   {
     "site": "www.tubeonline.net",
@@ -165,19 +372,8 @@
     "iframes": 1,
     "media": 0,
     "packed": false,
-    "hosts": "www.youtube.com"
-  },
-  {
-    "site": "www.tubeonline.net",
-    "page": "embed",
-    "url": "https://www.youtube.com/embed/0AtEBtN4zOc?…",
-    "status": 200,
-    "mitigated": "",
-    "bytes": 158328,
-    "iframes": 0,
-    "media": 0,
-    "packed": false,
-    "hosts": "www.youtube.com"
+    "hosts": "www.youtube.com",
+    "detail": ""
   },
   {
     "site": "mirandogratis.com",
@@ -189,7 +385,47 @@
     "iframes": 3,
     "media": 0,
     "packed": false,
-    "hosts": "byseraguci.com, mixdrop.top, www.youtube.com, mirandogratis.com"
+    "hosts": "byseraguci.com, mixdrop.top, www.youtube.com, mirandogratis.com",
+    "detail": ""
+  },
+  {
+    "site": "mirandogratis.com",
+    "page": "·byseraguci.com",
+    "url": "https://byseraguci.com/e/intdacsm8cvn",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 1972,
+    "iframes": 0,
+    "media": 0,
+    "packed": false,
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "mirandogratis.com",
+    "page": "·mixdrop.top",
+    "url": "https://mixdrop.top/e/mkkkzkqla6x18g",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 78441,
+    "iframes": 0,
+    "media": 0,
+    "packed": true,
+    "hosts": "—",
+    "detail": ""
+  },
+  {
+    "site": "mirandogratis.com",
+    "page": "·mirandogratis.com",
+    "url": "https://mirandogratis.com/",
+    "status": 200,
+    "mitigated": "",
+    "bytes": 50419,
+    "iframes": 0,
+    "media": 0,
+    "packed": false,
+    "hosts": "mirandogratis.com",
+    "detail": ""
   },
   {
     "site": "mirandogratis.com",
@@ -201,47 +437,38 @@
     "iframes": 3,
     "media": 0,
     "packed": false,
-    "hosts": "byseraguci.com, mixdrop.top, www.youtube.com, mirandogratis.com"
+    "hosts": "byseraguci.com, mixdrop.top, www.youtube.com, mirandogratis.com",
+    "detail": ""
   },
   {
     "site": "mirandogratis.com",
-    "page": "embed",
-    "url": "https://byseraguci.com/e/intdacsm8cvn",
+    "page": "·byseraguci.com",
+    "url": "https://byseraguci.com/e/yml5zxa71gkc",
     "status": 200,
     "mitigated": "",
     "bytes": 1972,
     "iframes": 0,
     "media": 0,
     "packed": false,
-    "hosts": "byseraguci.com"
+    "hosts": "—",
+    "detail": ""
   },
   {
     "site": "mirandogratis.com",
-    "page": "embed",
-    "url": "https://mixdrop.top/e/mkkkzkqla6x18g",
+    "page": "·mixdrop.top",
+    "url": "https://mixdrop.top/e/wlllp17rtn9m7o",
     "status": 200,
     "mitigated": "",
-    "bytes": 78400,
+    "bytes": 78447,
     "iframes": 0,
     "media": 0,
     "packed": true,
-    "hosts": "mixdrop.top"
+    "hosts": "—",
+    "detail": ""
   },
   {
     "site": "mirandogratis.com",
-    "page": "embed",
-    "url": "https://www.youtube.com/embed/7cckMeiHhFI",
-    "status": 200,
-    "mitigated": "",
-    "bytes": 158750,
-    "iframes": 0,
-    "media": 0,
-    "packed": false,
-    "hosts": "www.youtube.com"
-  },
-  {
-    "site": "mirandogratis.com",
-    "page": "embed",
+    "page": "·mirandogratis.com",
     "url": "https://mirandogratis.com/",
     "status": 200,
     "mitigated": "",
@@ -249,6 +476,7 @@
     "iframes": 0,
     "media": 0,
     "packed": false,
-    "hosts": "mirandogratis.com"
+    "hosts": "mirandogratis.com",
+    "detail": ""
   }
 ]

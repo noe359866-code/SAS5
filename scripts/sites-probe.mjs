@@ -119,6 +119,14 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
   seen.add(url);
   const res = await get(url, { headers: referer ? { Referer: referer } : {} });
   const scan = res.status === 200 ? scanHtml(res.body, url) : null;
+  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara/.test(site)) {
+    try {
+      const fs = await import('node:fs');
+      fs.mkdirSync('.probe/html', { recursive: true });
+      const name = `${site}-${label}`.replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 60);
+      fs.writeFileSync(`.probe/html/disc-${name}.html`, res.body);
+    } catch { /* diagnóstico */ }
+  }
   rows.push({
     site, page: `${'·'.repeat(depth)}${label}`, url: redact(url), status: res.status, mitigated: res.mitigated,
     bytes: res.bytes, iframes: scan?.iframes.length ?? '—', media: scan?.media.length ?? '—',

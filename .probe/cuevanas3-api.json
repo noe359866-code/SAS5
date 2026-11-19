@@ -1,0 +1,707 @@
+{
+  "search:spider-man": {
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "",
+      "data": {
+        "posts": [
+          {
+            "_id": 57851,
+            "title": "Spider-Man: Un nuevo día (2026)",
+            "overview": "A medida qué Spider-Man está en la cima de su carrera protegiendo la ciudad de Nueva York, una serie de crímenes inusuales lo arrastran a una red de misterios más grande de lo que jamás haya enfrentado.",
+            "slug": "spider-man-un-nuevo-dia-2026",
+            "images": {
+              "poster": "/thumbs/7e45c27b773a3ac057c085d6bee64344_hd.webp",
+              "backdrop": "/backdrops/7e45c27b773a3ac057c085d6bee64344.webp",
+              "logo": "/logos/7e45c27b773a3ac057c085d6bee64344.webp"
+            },
+            "trailer": "P3uI5sLosKU",
+            "rating": "7.9",
+            "community_rating": "2.0",
+            "community_vote_count": 16,
+            "genres": [
+              25,
+              26,
+              27
+            ],
+            "quality": [
+              29
+            ],
+            "years": [
+              19320
+            ],
+            "type": "movies",
+            "release_date": "2026-07-29",
+            "last_update": "2026-08-19 03:27:26",
+            "vote_count": "1885",
+            "runtime": "145.0",
+            "original_title": "Spider-Man: Brand New Day",
+            "gallery": "/vjMvFSmGUxEtqVdaZgvFee9XkZl.jpg\n/b0LviwKbDto7Qq0D4DzGoVHpF4C.jpg\n/sYsaVy047cfGTLMfcRihee3ShnM.jpg\n/7iwUUcKURMT7aKfCwMy6YnGtchD.jpg\n/lOGsRrIl1QuE6s7x2BIkidHpKGj.jpg\n/8bKQz53MOaym6MceShihpmP4mkA.jpg\n/5glivQffWJkRJttJ5g5LW14kmeC.jpg\n/xsczQwxDK9NdZ9ETd59GvogbyIZ.jpg\n/eLH38y1TXuH5iWY4qHMCMAutuu4.jpg\n/5cY4DgCWhABURo3Kedt5hBwhzxF.jpg",
+            "poster": "/fBFjaDWfNslvrs6bJjknmG27wOS.jpg",
+            "backdrop": "/qeQJx07rK2xm8SD2sJxFKhE7gs0.jpg",
+            "tagline": "Puede que el mundo se haya olvidado de Peter Parker, pero él no se ha olvidado de ellos."
+          },
+          {
+            "_id": 57626,
+            "title": "Spider-Man de Marvel (2017)",
+            "overview": "Un adolescente inseguro pero valiente e inteligente llamado Peter Parker, un nuevo estudiante de Midtown High, es mordido por una araña radiactiva y se le otorgan poderes. Se convierte en un héroe llamado Spider-Man después de la muerte de su tío y debe adaptarse a esta nueva forma de vida.",
+            "slug": "spider-man-de-marvel-2017",
+            "images": {
+              "poster": "/thumbs/5523a66dbd89313ecdd5acddf40d6ace_hd.webp",
+              "backdrop": "/backdrops/5523a66dbd89313ecdd5acddf40d6ace.webp",
+              "logo": "/logos/5523a66dbd89313ecdd5acddf40d6ace.webp"
+            },
+            "trailer": "X814eTVbEyI",
+            "rating": "7.5",
+            "community_rating": "5.0",
+            "community_vote_count": 1,
+            "genres": [
+              53,
+              54,
+              80,
+              252
+            ],
+            "quality": [
+              164
+            ],
+            "years": [
+              3307
+            ],
+            "type": "animes",
+            "release_date": "2017-08-19",
+            "last_update": "2026-08-17 22:29:22",
+            "vote_count": "",
+            "runtime": "0.0",
+            "original_title": "Marvel's Spider-Man",
+            "gallery": "/qDum1yhNftUMaIB3pPiZ7PLsIto.jpg\n/atkOOO7Ct4qqeSx4EHWCWkFy4ns.jpg\n/6xoAxqDAmsl8xuuDivSb2eAUzKT.jpg\n/9zIFxEiurX1zVuBffHjwFRJTXDT.jpg\n/AqvGpSrx9I0ihhzxR8tc1rABvvE.jpg\n/7PpN2MAd90cY6wZs3kw5NsIKtG5.jpg\n/4GHcYkz4P8p4yygp9hCqJKptpiO.jpg\n",
+            "poster": "/dKdcyyHUR5WTMnrbPdYN5y9xPVp.jpg",
+            "backdrop": "/qDum1yhNftUMaIB3pPiZ7PLsIto.jpg",
+            "tagline": ""
+          },
+          {
+            "_id": 51128,
+            "title": "Spider-Man de Marvel (2017)",
+            "overview": "Un adolescente inseguro pero valiente e inteligente llamado Peter Parker, un nuevo estudiante de Midtown High, es mordido por una araña radiactiva y se le otorgan poderes. Se convierte en un héroe llamado Spider-Man después de la muerte de su tío y debe adaptarse a esta nueva forma de vida.",
+            "slug": "spider-man-de-marvel-2017",
+            "images": {
+              "poster": "/thumbs/5523a66dbd89313ecdd5acddf40d6ace_hd.webp",
+              "backdrop": "/backdrops/5523a66dbd89313ecdd5acddf40d6ace.webp",
+              "logo": "/logos/5523a66dbd89313ecdd5acddf40d6ace.webp"
+            },
+            "trailer": "X814eTVbEyI",
+            "rating": "7.5",
+            "community_rating": "5.0",
+            "community_vote_count": 1,
+            "genres": [
+              53,
+              54,
+              80,
+              252
+            ],
+            "quality": [
+              164
+            ],
+            "years": [
+              3307
+            ],
+            "type": "tvshows",
+            "release_date": "2017-08-19",
+            "last_update": "2026-07-10 20:14:08",
+            "vote_count": "",
+            "runtime": "21.0",
+            "original_title": "Marvel's Spider-Man",
+            "gallery": "/qDum1yhNftUMaIB3pPiZ7PLsIto.jpg\n/atkOOO7Ct4qqeSx4EHWCWkFy4ns.jpg\n/6xoAxqDAmsl8xuuDivSb2eAUzKT.jpg\n/9zIFxEiurX1zVuBffHjwFRJTXDT.jpg\n/AqvGpSrx9I0ihhzxR8tc1rABvvE.jpg\n/7PpN2MAd90cY6wZs3kw5NsIKtG5.jpg\n/4GHcYkz4P8p4yygp9hCqJKptpiO.jpg\n",
+            "poster": "/dKdcyyHUR5WTMnrbPdYN5y9xPVp.jpg",
+            "backdrop": "/qDum1yhNftUMaIB3pPiZ7PLsIto.jpg",
+            "tagline": ""
+          },
+          {
+            "_id": 42233,
+            "title": "Spider-Man: Sin camino a casa (2021)",
+            "overview": "Peter Parker es desenmascarado y ya no puede separar su vida normal de los altos riesgos de ser un súper héroe. Cuando pide ayuda al Doctor Strange para recuperar su secreto, el hechizo crea un agujero en su mundo, liberando a los villanos más poderosos que han luchado con cualquier Spider-Man, en cualquier universo. Ahora Peter debe de superar su reto más grande, que no solo alterara su propio futuro pero el del multiverso, forzándolo a descubrir lo que realmente significa ser Spider-Man.",
+            "slug": "spider-man-sin-camino-a-casa-2021",
+            "images": {
+              "poster": "/thumbs/99d364e41030613ecea8d8fc29d85873_hd.webp",
+              "backdrop": "/backdrops/99d364e41030613ecea8d8fc29d85873.webp",
+              "logo": "/logos/99d364e41030613ecea8d8fc29d85873.webp"
+            },
+            "trailer": "1mTjfMFyPi8",
+            "rating": "7.9",
+            "community_rating": "2.7",
+            "community_vote_count": 6,
+            "genres": [
+              25,
+              26,
+              27
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              4064
+            ],
+            "type": "movies",
+            "release_date": "2021-12-15",
+            "last_update": "2026-03-12 05:36:05",
+            "vote_count": "21653",
+            "runtime": "148.0",
+            "original_title": "Spider-Man: No Way Home",
+            "gallery": "/Bwh7Lol5k3hSqYOtqXWxbbJVMx.jpg\n/zD5v1E4joAzFvmAEytt7fM3ivyT.jpg\n/tyQo080tijexyUHBvWPwQt26bZa.jpg\n/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg\n/nqUThBjou0TAWXu93Q4SNFpgqai.jpg\n/AeK2MPOpYrOOgZNfFnfwp0L8tNn.jpg\n/aYBSKWOf8g2oD1ZGfeMQvMRLe9E.jpg\n/VlHt27nCqOuTnuX6bku8QZapzO.jpg\n/uhYpkLSnlOXTQDmNnu1X4MHMt1S.jpg\n/aRNMwIvEnYEMwGHLCAACyuq2I1K.jpg",
+            "poster": "/miZFgV81xG324rpUknQX8dtXuBl.jpg",
+            "backdrop": "/Bwh7Lol5k3hSqYOtqXWxbbJVMx.jpg",
+            "tagline": "Un gran poder conlleva una gran responsabilidad."
+          },
+          {
+            "_id": 40404,
+            "title": "Spider-Man: A través del Spider-Verso (2023)",
+            "overview": "Después de reunirse con Gwen Stacy, Miles Morales, el amigable Spider-Man del vecindario de tiempo completo de Brooklyn, es catapultado a través del Multiverso, donde se encuentra con un equipo de Spider-People encargado de proteger su existencia. Pero cuando los héroes chocan sobre cómo manejar una nueva amenaza, Miles se enfrenta a las otras arañas y debe redefinir lo que significa ser un héroe para poder salvar a las personas que más ama.",
+            "slug": "spider-man-a-traves-del-spider-verso-2023",
+            "images": {
+              "poster": "/thumbs/c02cd78b36a40396482ff62024b91848_hd.webp",
+              "backdrop": "/backdrops/c02cd78b36a40396482ff62024b91848.webp",
+              "logo": "/logos/c02cd78b36a40396482ff62024b91848.webp"
+            },
+            "trailer": "yFrxzaBLDQM",
+            "rating": "8.3",
+            "community_rating": "4.7",
+            "community_vote_count": 3,
+            "genres": [
+              25,
+              26,
+              27,
+              53
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              4144
+            ],
+            "type": "movies",
+            "release_date": "2023-05-31",
+            "last_update": "2026-03-12 05:03:17",
+            "vote_count": "8333",
+            "runtime": "140.0",
+            "original_title": "Spider-Man: Across the Spider-Verse",
+            "gallery": "/9xfDWXAUbFXQK585JvByT5pEAhe.jpg\n/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg\n/jbthbh0KzaUWFPYvkfmXAamjI8j.jpg\n/4HodYYKEIsGOdinkGi2Ucz6X9i0.jpg\n/kGWpZewzInbzTuaIHcy0bFgzXuM.jpg\n/e59QkHTueqRelzq0thn5deCEKIG.jpg\n/fmNeiPNzjUbN2FY0d4Q9GnfyHsp.jpg\n/bpvjzk0QXbJPV4wVwrHuYiq1TbP.jpg\n/2I5eBh98Q4aPq8WdQrHdTC8ARhY.jpg\n/dlebyCnmdwXtJfHNicBYhudz5EJ.jpg",
+            "poster": "/rXhgHQmtjTIQOEDU8E2TbUFMjWM.jpg",
+            "backdrop": "/9xfDWXAUbFXQK585JvByT5pEAhe.jpg",
+            "tagline": "Es cómo usas la máscara lo que importa."
+          },
+          {
+            "_id": 36588,
+            "title": "Spider-Man 2: Lejos de Casa (2019)",
+            "overview": "Peter Parker decide irse junto a MJ, Ned y el resto de sus amigos a pasar unas vacaciones a Europa. Sin embargo, el plan de Parker por dejar de lado sus superpoderes durante unas semanas se ven truncados cuando Nick Fury contacta con él para solicitarle ayuda para frenar el ataque de unas criaturas elementales que están causando el caos en el continente. En ese momento, Parker vuelve a ponerse el traje de Spider-Man para cumplir con su labor.",
+            "slug": "spider-man-2-lejos-de-casa-2019",
+            "images": {
+              "poster": "/thumbs/c1259936a8728d7687b7e7ad85bc1e67_hd.webp",
+              "backdrop": "/backdrops/c1259936a8728d7687b7e7ad85bc1e67.webp",
+              "logo": "/logos/c1259936a8728d7687b7e7ad85bc1e67.webp"
+            },
+            "trailer": "LFoz8ZJWmPs",
+            "rating": "7.4",
+            "community_rating": "2.3",
+            "community_vote_count": 3,
+            "genres": [
+              25,
+              26,
+              27
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              3412
+            ],
+            "type": "movies",
+            "release_date": "2019-06-28",
+            "last_update": "2026-03-12 03:52:08",
+            "vote_count": "16741",
+            "runtime": "130.0",
+            "original_title": "Spider-Man: Far From Home",
+            "gallery": "/34jW8LvjRplM8Pv06cBFDpLlenR.jpg\n/vamhMTvh9m9zFHDoR0v1nRtf6T4.jpg\n/ng6SSB3JhbcpKTwbPDsRwUYK8Cq.jpg\n/3o4NzKxeGSSsrrHnwGKrd3qHK0V.jpg\n/dihW2yTsvQlust7mSuAqJDtqW7k.jpg\n/6V3KHX1ajN7KLS20oqys3z2itPm.jpg\n/5myQbDzw3l8K9yofUXRJ4UTVgam.jpg\n/hSzmNczQBnYjbd5rhShdfmPwqti.jpg\n/iqAQ1rPcTtaVl5kSfaHyLL4f9um.jpg\n/fVsy8Z646SZUP6qLJrQCAwi0jhq.jpg",
+            "poster": "/o59zDVJDIehGcWZsMUGU5SN0V0D.jpg",
+            "backdrop": "/34jW8LvjRplM8Pv06cBFDpLlenR.jpg",
+            "tagline": "Es hora de pasar a la acción."
+          },
+          {
+            "_id": 32498,
+            "title": "Spider-Man: Un nuevo universo (2018)",
+            "overview": "En un universo paralelo donde Peter Parker ha muerto, un jóven de secundaria llamado Miles Morales es el nuevo Spider-Man. Sin embargo, cuando el líder mafioso Wilson Fisk (a.k.a Kingpin) construye el \"Super Colisionador\" trae a una versión alternativa de Peter Parker que tratará de enseñarle a Miles como ser un mejor Spider-Man. Pero no será el único Spider Man en entrar a este universo, 4 versiones alternas de Spidey aparecerán y buscarán regresar a su universo antes de que toda la realidad colapse.",
+            "slug": "spider-man-un-nuevo-universo-2018",
+            "images": {
+              "poster": "/thumbs/52f47b1901c71ec2c0503bcea0f6e571_hd.webp",
+              "backdrop": "/backdrops/52f47b1901c71ec2c0503bcea0f6e571.webp",
+              "logo": "/logos/52f47b1901c71ec2c0503bcea0f6e571.webp"
+            },
+            "trailer": "tg52up16eq0",
+            "rating": "8.4",
+            "community_rating": "5.0",
+            "community_vote_count": 2,
+            "genres": [
+              25,
+              26,
+              27,
+              53
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              3661
+            ],
+            "type": "movies",
+            "release_date": "2018-12-06",
+            "last_update": "2026-03-12 02:55:25",
+            "vote_count": "16947",
+            "runtime": "117.0",
+            "original_title": "Spider-Man: Into the Spider-Verse",
+            "gallery": "/8mnXR9rey5uQ08rZAvzojKWbDQS.jpg\n/b9YkKJcW3pPaXgMZu9uoT7v9yRB.jpg\n/qGQf2OHIkoh89K8XeKQzhxczf96.jpg\n/hlCq6Qh9GVtuNcGZF4mQYluaZix.jpg\n/kJq2u9aSji9gMXFrruIuACnX7nT.jpg\n/1ntePsIqeklfmrQJqZPncCydsqY.jpg\n/iASTQonh4X7lOcA2jvCskhvppEY.jpg\n/oc0zEejZ8OJVQrqBeiBG5Ulp8Cm.jpg\n/gci9kykK3oDlQuR1n8c8DvvjOsz.jpg\n/e7CE5vx4KqUuz0peKdHRVZB0Pn8.jpg",
+            "poster": "/e47p9fHR6jMrrLeoa7l5hU05vhR.jpg",
+            "backdrop": "/8mnXR9rey5uQ08rZAvzojKWbDQS.jpg",
+            "tagline": "Entra en un universo donde más de uno lleva la máscara."
+          },
+          {
+            "_id": 32176,
+            "title": "Spider-Man: De regreso a casa (2017)",
+            "overview": "Peter Parker comienza a experimentar su recién descubierta identidad como el superhéroe Spider-Man (El Hombre Araña). Después de la experiencia vivida con los Vengadores, Peter regresa a casa, donde vive con su tía. Bajo la atenta mirada de su mentor Tony Stark, Peter intenta mantener una vida normal como cualquier joven de su edad, pero interrumpe en su rutina diaria el nuevo villano Vulture y, con él, lo más importante de la vida de Peter comenzará a verse amenazado.",
+            "slug": "spider-man-de-regreso-a-casa-2017",
+            "images": {
+              "poster": "/thumbs/e2d86a2d5ba5368e086858f56bcb5533_hd.webp",
+              "backdrop": "/backdrops/e2d86a2d5ba5368e086858f56bcb5533.webp",
+              "logo": "/logos/e2d86a2d5ba5368e086858f56bcb5533.webp"
+            },
+            "trailer": "xEvV3OsE2WM",
+            "rating": "7.3",
+            "community_rating": "2.5",
+            "community_vote_count": 2,
+            "genres": [
+              25,
+              26,
+              27
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              3307
+            ],
+            "type": "movies",
+            "release_date": "2017-07-05",
+            "last_update": "2026-03-12 02:51:32",
+            "vote_count": "22924",
+            "runtime": "133.0",
+            "original_title": "Spider-Man: Homecoming",
+            "gallery": "/tPpYGm2mVecue7Bk3gNVoSPA5qn.jpg\n/fn4n6uOYcB6Uh89nbNPoU2w80RV.jpg\n/lAsr1ytUq0ATWdCbcjf59pupPFy.jpg\n/b5EhDAly33c6Allclns7u22hHUb.jpg\n/vc8bCGjdVp0UbMNLzHnHSLRbBWQ.jpg\n/tTlAA0REGPXSZPBfWyTW9ipIv1I.jpg\n/2j91PzOC2gSWKn53AIIAQi0UYI.jpg\n/vMNEvp4wKAkDIODZjz5BsqVWY9y.jpg\n/msBGdhaCLuoEPLxzV7yHXsqfgcV.jpg\n/sDClXq6niPCHY2I6wwbYw2FZUU2.jpg",
+            "poster": "/81qIJbnS2L0rUAAB55G8CZODpS5.jpg",
+            "backdrop": "/tPpYGm2mVecue7Bk3gNVoSPA5qn.jpg",
+            "tagline": "La tarea puede esperar, la ciudad no."
+          },
+          {
+            "_id": 18425,
+            "title": "Tu amigo y vecino Spider-Man (2025)",
+            "overview": "Peter Parker está en camino a convertirse en héroe, pero su recorrido no será para nada ordinario.",
+            "slug": "tu-amigo-y-vecino-spider-man-2025",
+            "images": {
+              "poster": "/thumbs/e36b352dc582e07840e74094f10c6957_hd.webp",
+              "backdrop": "/backdrops/e36b352dc582e07840e74094f10c6957.webp",
+              "logo": "/logos/e36b352dc582e07840e74094f10c6957.webp"
+            },
+            "trailer": "N3J2JRQg040",
+            "rating": "7.8",
+            "community_rating": "0.0",
+            "community_vote_count": 0,
+            "genres": [
+              53,
+              80,
+              252,
+              253
+            ],
+            "quality": [
+              164
+            ],
+            "years": [
+              11889
+            ],
+            "type": "tvshows",
+            "release_date": "2025-01-29",
+            "last_update": "2026-03-12 00:38:04",
+            "vote_count": "",
+            "runtime": "0.0",
+            "original_title": "Your Friendly Neighborhood Spider-Man",
+            "gallery": "/kkT2B2gmynoh9kZMo1gromLNeqy.jpg\n/dhnOkC9UatbhUMnlWe4yXcsWtFB.jpg\n/2EczHFLIzOSDz4NRIf1ucXLL2mB.jpg\n/bIHesRfHfP6XZbVLHjiQF9whCaI.jpg\n/7CaXcLBWf41nHyX33DmpIpcOSg4.jpg\n/5aylUwpjwTKadsrrOpvF7ZPSEGK.jpg\n/n1bDhikQdipWv7QeqA7P6JFkM1.jpg\n/bB8Ikx6sYowC6qEOiGcDTnmdEaA.jpg\n/zf7AE8e6zKzdACvEiuzHjUltyQ3.jpg\n/tfdkqKFIpcUyoZHg5YTaVbcRyMr.jpg",
+            "poster": "/aSe4aB8tiPQMoQt9B4SKFgIymwL.jpg",
+            "backdrop": "/kkT2B2gmynoh9kZMo1gromLNeqy.jpg",
+            "tagline": ""
+          }
+        ],
+        "pagination": {
+          "current_page": 1,
+          "last_page": 1,
+          "per_page": 18,
+          "total": 9,
+          "next_page_url": null,
+          "prev_page_url": null
+        }
+      }
+    }
+  },
+  "search:el reino prohibido": {
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "",
+      "data": {
+        "posts": [
+          {
+            "_id": 56111,
+            "title": "El reino prohibido (2008)",
+            "overview": "Un joven llamado Jason (Michael Angarano), que siente una gran pasión por el cine de Kung Fu, visita regularmente una casa de empeños en el barrio chino buscando películas. En una de sus visitas descubre un bastón que ha visto en un sueño recientemente y más tarde se ve envuelto en un atraco en la misma casa de empeños, tras el cual huye con el bastón. En medio de la huida cae desde una azotea y es milagrosamente transportado a la China medieval.  Con la ayuda del Luchador Borracho (Jackie Chan), el Monje Silencioso (Jet Li), y el Gorrión Dorado (Yifei Liu), deberá entregar el bastón al Rey Mono, quien fue transformado en una estatua de piedra hace tiempo atrás.",
+            "slug": "el-reino-prohibido-2008",
+            "images": {
+              "poster": "/thumbs/25e2a30f44898b9f3e978b1786dcd85c_hd.webp",
+              "backdrop": "/backdrops/25e2a30f44898b9f3e978b1786dcd85c.webp",
+              "logo": "/logos/25e2a30f44898b9f3e978b1786dcd85c.webp"
+            },
+            "trailer": "KPtXwW-Erww",
+            "rating": "6.6",
+            "community_rating": "0.0",
+            "community_vote_count": 0,
+            "genres": [
+              25,
+              26,
+              163
+            ],
+            "quality": [
+              29
+            ],
+            "years": [
+              279
+            ],
+            "type": "movies",
+            "release_date": "2008-04-17",
+            "last_update": "2026-08-06 15:07:12",
+            "vote_count": "1956",
+            "runtime": "113.0",
+            "original_title": "The Forbidden Kingdom",
+            "gallery": "/9a59H9qoAzMcj1NWurMgvg9iLaT.jpg\n/omvtRhwBgwB8EWDjWMt95rDGPsv.jpg\n/kK9uFkhrJvfp4FHSsYfd0gE6S3s.jpg\n/rS7e9Cw6NjUve8BhVqx1MFDBNWe.jpg\n/7Sx8JOIDukuEl989gJtWdHe27HJ.jpg\n/6TchY4GxS7ijo8USTOTLDi4BCep.jpg\n/uHEIor72s21FRiwX2XkeRDlToPy.jpg\n/yeDy7iZ8Ubm01eJKbS68TpMsoOs.jpg\n/nmzC90DsRZVHmhCsRPrjPdd79fT.jpg\n/kYUOTCbyWJ4ESH8kIiNimDhusHA.jpg",
+            "poster": "/2Cl8oOuNiBPJGNYZzbyRR6BDhKd.jpg",
+            "backdrop": "/9a59H9qoAzMcj1NWurMgvg9iLaT.jpg",
+            "tagline": "La batalla por la eternidad es la fantasía de toda una vida."
+          }
+        ],
+        "pagination": {
+          "current_page": 1,
+          "last_page": 1,
+          "per_page": 18,
+          "total": 1,
+          "next_page_url": null,
+          "prev_page_url": null
+        }
+      }
+    }
+  },
+  "search:naruto": {
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "",
+      "data": {
+        "posts": [
+          {
+            "_id": 56414,
+            "title": "Boruto: Naruto Next Generations (2017)",
+            "overview": "En Konoha han entrado en una era de paz y modernidad. Los altos edificios despuntan en las calles, las pantallas gigantes muestran imágenes de todo tipo y los medios de transporte conectan los vairos distritos. Pese a que sigue siendo una aldea ninja, el número de civiles ha aumentado y la vida de los ninja ha cambiado. Boruto Uzumaki es hijo del Séptimo Hokage, Naruto Uzumaki, y se ha unido a la Academia Ninja para aprender. Otros estudiantes lo menosprecian de inmediato y consideran que solo está ahí por ser \"hijo del Hokage\", pero pronto Boruto disipará todas esas dudas sobre él.",
+            "slug": "boruto-naruto-next-generations-2017",
+            "images": {
+              "poster": "/thumbs/536509f2f9b11efb3edb715e6fe92f18_hd.webp",
+              "backdrop": "/backdrops/536509f2f9b11efb3edb715e6fe92f18.webp",
+              "logo": "/logos/536509f2f9b11efb3edb715e6fe92f18.webp"
+            },
+            "trailer": "nQeIObeB--8",
+            "rating": "7.8",
+            "community_rating": "0.0",
+            "community_vote_count": 0,
+            "genres": [
+              53,
+              80,
+              253
+            ],
+            "quality": [
+              164
+            ],
+            "years": [
+              3307
+            ],
+            "type": "tvshows",
+            "release_date": "2017-04-05",
+            "last_update": "2026-08-10 09:01:06",
+            "vote_count": "",
+            "runtime": "25.0",
+            "original_title": "BORUTO-ボルト- NARUTO NEXT GENERATIONS",
+            "gallery": "/4jDRuUk02VGAVMBJXabI9r0Cj6j.jpg\n/4O5xDFV1QucFo2IqMNB0c61liil.jpg\n/wL4WeLEBsXLvC07tbJtKfTaIVtg.jpg\n/dsdejNR0GJ84LU3EnKY6Cu7DGsw.jpg\n/kKljWpY22ojZZqthn6KO8zvOMN4.jpg\n/fA2ZkasP7MWEUgJelvzkjlXSoqu.jpg\n/pXEXmVadJAQnx9W0VMcJiAsg9Ja.jpg\n/yjmhaMbPrW5yhdxWe436vrZulQK.jpg\n",
+            "poster": "/qlJS7iG25kzrlX8Bn13kfn1Qay4.jpg",
+            "backdrop": "/4jDRuUk02VGAVMBJXabI9r0Cj6j.jpg",
+            "tagline": ""
+          },
+          {
+            "_id": 35260,
+            "title": "Boruto: Naruto Next Generations (2017)",
+            "overview": "En Konoha han entrado en una era de paz y modernidad. Los altos edificios despuntan en las calles, las pantallas gigantes muestran imágenes de todo tipo y los medios de transporte conectan los vairos distritos. Pese a que sigue siendo una aldea ninja, el número de civiles ha aumentado y la vida de los ninja ha cambiado. Boruto Uzumaki es hijo del Séptimo Hokage, Naruto Uzumaki, y se ha unido a la Academia Ninja para aprender. Otros estudiantes lo menosprecian de inmediato y consideran que solo está ahí por ser \"hijo del Hokage\", pero pronto Boruto disipará todas esas dudas sobre él.",
+            "slug": "boruto-naruto-next-generations-2017",
+            "images": {
+              "poster": "/thumbs/536509f2f9b11efb3edb715e6fe92f18_hd.webp",
+              "backdrop": "/backdrops/536509f2f9b11efb3edb715e6fe92f18.webp",
+              "logo": "/logos/536509f2f9b11efb3edb715e6fe92f18.webp"
+            },
+            "trailer": "nQeIObeB--8",
+            "rating": "7.8",
+            "community_rating": "0.0",
+            "community_vote_count": 0,
+            "genres": [
+              53,
+              80,
+              253
+            ],
+            "quality": [
+              164
+            ],
+            "years": [
+              3307
+            ],
+            "type": "animes",
+            "release_date": "2017-04-05",
+            "last_update": "2026-03-12 03:34:04",
+            "vote_count": "",
+            "runtime": "25.0",
+            "original_title": "BORUTO-ボルト- NARUTO NEXT GENERATIONS",
+            "gallery": "/4jDRuUk02VGAVMBJXabI9r0Cj6j.jpg\n/4O5xDFV1QucFo2IqMNB0c61liil.jpg\n/wL4WeLEBsXLvC07tbJtKfTaIVtg.jpg\n/dsdejNR0GJ84LU3EnKY6Cu7DGsw.jpg\n/kKljWpY22ojZZqthn6KO8zvOMN4.jpg\n",
+            "poster": "/qlJS7iG25kzrlX8Bn13kfn1Qay4.jpg",
+            "backdrop": "/4jDRuUk02VGAVMBJXabI9r0Cj6j.jpg",
+            "tagline": ""
+          },
+          {
+            "_id": 20794,
+            "title": "Naruto (2002)",
+            "overview": "Narra la historia de un ninja adolescente hiperactivo, impredecible y ruidoso llamado Naruto Uzumaki, quien aspira a convertirse afanosamente en Hokage, el máximo grado ninja en su aldea, con el propósito de ser reconocido como alguien importante dentro de la misma.",
+            "slug": "naruto-2002",
+            "images": {
+              "poster": "/thumbs/17d6278aaf26be24980654e102a111fc_hd.webp",
+              "backdrop": "/backdrops/17d6278aaf26be24980654e102a111fc.webp",
+              "logo": "/logos/17d6278aaf26be24980654e102a111fc.webp"
+            },
+            "trailer": "-G9BqkgZXRA",
+            "rating": "8.4",
+            "community_rating": "5.0",
+            "community_vote_count": 2,
+            "genres": [
+              53,
+              252,
+              253
+            ],
+            "quality": [
+              164
+            ],
+            "years": [
+              573
+            ],
+            "type": "animes",
+            "release_date": "2002-10-03",
+            "last_update": "2026-03-12 00:59:18",
+            "vote_count": "",
+            "runtime": "24.0",
+            "original_title": "ナルト",
+            "gallery": "/mpsYIytXhDXjI9yYC1Fp1S3PxsS.jpg\n/xuJ0F9RfKvVSJNDg2usurQ9WvY5.jpg\n/koY8N9Y8IcLlb2eJXz50X1hFUL5.jpg\n/5F0HVEgkgP99fEWDjPyikGt9jQi.jpg\n/9fwJ5ZOF14XjxDsIPDvEvnIo9r0.jpg\n/6sHC954QPhrrLsT6WPkSie9hVmI.jpg\n/c0tA3OONvFiWP3R0d0TMR4k90XE.jpg\n/vFMXmS8uS83bINXJp2ct3F2iRZM.jpg\n/dUahkPz8jhwSYcaXxH9qr291A67.jpg\n/qSkN8iour1QcbAoyHOoypBfkX5C.jpg",
+            "poster": "/oOkvQ1anSMvdYbUGGf7NAnfwHUt.jpg",
+            "backdrop": "/mpsYIytXhDXjI9yYC1Fp1S3PxsS.jpg",
+            "tagline": ""
+          },
+          {
+            "_id": 8425,
+            "title": "Naruto Shippuden (2007)",
+            "overview": "La acción empieza tras los dos años y medio que el protagonista, Naruto Uzumaki, ha pasado entrenando con su maestro Jiraiya. En ella reaparecen todos los personajes de la anterior serie pero con más experiencia y fuerza. Además, la Organización Akatsuki entra definitivamente en acción, tras su breve aparición en la parte anterior, y se revelan sus objetivos. El enemigo principal de la parte anterior de Naruto, Orochimaru, ha estado mientras tanto entrenando a Sasuke Uchiha, antiguo compañero de Naruto, que abandonó voluntariamente la aldea para ganar fuerza gracias a este personaje, y así poder tomar venganza contra su hermano, Itachi Uchiha.",
+            "slug": "naruto-shippuden-2007",
+            "images": {
+              "poster": "/thumbs/29a3d252405fb67dcf7e17e04522fff0_hd.webp",
+              "backdrop": "/backdrops/29a3d252405fb67dcf7e17e04522fff0.webp",
+              "logo": "/logos/29a3d252405fb67dcf7e17e04522fff0.webp"
+            },
+            "trailer": "22R0j8UKRzY",
+            "rating": "8.5",
+            "community_rating": "5.0",
+            "community_vote_count": 1,
+            "genres": [
+              53,
+              252,
+              253
+            ],
+            "quality": [
+              164
+            ],
+            "years": [
+              309
+            ],
+            "type": "animes",
+            "release_date": "2007-02-15",
+            "last_update": "2026-03-11 23:23:16",
+            "vote_count": "",
+            "runtime": "25.0",
+            "original_title": "ナルト 疾風伝",
+            "gallery": "/z0YhJvomqedHF85bplUJEotkN5l.jpg\n/fV99ovmaQwZkLGh26NCDZM7Qvho.jpg\n/swFtS1S5556BFrQNJkwTTmyBFIT.jpg\n/nAeS7F2B22XQOLh5HVNXn8G3ZRk.jpg\n/deng9qeymn2LTdkXLMpMu68ILn0.jpg\n/aUwCZ85zB1b39xZZOomVynuHewm.jpg\n/s6HrhfPZah1qR4aliPf9xCaRdah.jpg\n/c2yoZd3tOKofFgY6WvlH30AXGYM.jpg\n/z6ES1hCbLozoquj5wilidrtKBPp.jpg\n/rDGCj1mi7J8aS1EwqtvjKVp4d1j.jpg",
+            "poster": "/ews8shcDbRG3tY33dF0jClNvgIK.jpg",
+            "backdrop": "/z0YhJvomqedHF85bplUJEotkN5l.jpg",
+            "tagline": ""
+          }
+        ],
+        "pagination": {
+          "current_page": 1,
+          "last_page": 1,
+          "per_page": 18,
+          "total": 4,
+          "next_page_url": null,
+          "prev_page_url": null
+        }
+      }
+    }
+  },
+  "single:movies": {
+    "slug": "spider-man-un-nuevo-dia-2026",
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "",
+      "data": {
+        "_id": 57851,
+        "title": "Spider-Man: Un nuevo día (2026)",
+        "overview": "A medida qué Spider-Man está en la cima de su carrera protegiendo la ciudad de Nueva York, una serie de crímenes inusuales lo arrastran a una red de misterios más grande de lo que jamás haya enfrentado.",
+        "slug": "spider-man-un-nuevo-dia-2026",
+        "images": {
+          "poster": "/thumbs/7e45c27b773a3ac057c085d6bee64344_hd.webp",
+          "backdrop": "/backdrops/7e45c27b773a3ac057c085d6bee64344.webp",
+          "logo": "/logos/7e45c27b773a3ac057c085d6bee64344.webp"
+        },
+        "trailer": "P3uI5sLosKU",
+        "rating": "7.9",
+        "community_rating": "2.0",
+        "community_vote_count": 16,
+        "genres": [
+          25,
+          26,
+          27
+        ],
+        "quality": [
+          29
+        ],
+        "years": [
+          19320
+        ],
+        "type": "movies",
+        "release_date": "2026-07-29",
+        "last_update": "2026-08-19 03:27:26",
+        "vote_count": "1885",
+        "runtime": "145.0",
+        "original_title": "Spider-Man: Brand New Day",
+        "gallery": "/vjMvFSmGUxEtqVdaZgvFee9XkZl.jpg\n/b0LviwKbDto7Qq0D4DzGoVHpF4C.jpg\n/sYsaVy047cfGTLMfcRihee3ShnM.jpg\n/7iwUUcKURMT7aKfCwMy6YnGtchD.jpg\n/lOGsRrIl1QuE6s7x2BIkidHpKGj.jpg\n/8bKQz53MOaym6MceShihpmP4mkA.jpg\n/5glivQffWJkRJttJ5g5LW14kmeC.jpg\n/xsczQwxDK9NdZ9ETd59GvogbyIZ.jpg\n/eLH38y1TXuH5iWY4qHMCMAutuu4.jpg\n/5cY4DgCWhABURo3Kedt5hBwhzxF.jpg",
+        "poster": "/fBFjaDWfNslvrs6bJjknmG27wOS.jpg",
+        "backdrop": "/qeQJx07rK2xm8SD2sJxFKhE7gs0.jpg",
+        "tagline": "Puede que el mundo se haya olvidado de Peter Parker, pero él no se ha olvidado de ellos."
+      }
+    }
+  },
+  "single:animes": {
+    "slug": "spider-man-de-marvel-2017",
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "",
+      "data": {
+        "_id": 57626,
+        "title": "Spider-Man de Marvel (2017)",
+        "overview": "Un adolescente inseguro pero valiente e inteligente llamado Peter Parker, un nuevo estudiante de Midtown High, es mordido por una araña radiactiva y se le otorgan poderes. Se convierte en un héroe llamado Spider-Man después de la muerte de su tío y debe adaptarse a esta nueva forma de vida.",
+        "slug": "spider-man-de-marvel-2017",
+        "images": {
+          "poster": "/thumbs/5523a66dbd89313ecdd5acddf40d6ace_hd.webp",
+          "backdrop": "/backdrops/5523a66dbd89313ecdd5acddf40d6ace.webp",
+          "logo": "/logos/5523a66dbd89313ecdd5acddf40d6ace.webp"
+        },
+        "trailer": "X814eTVbEyI",
+        "rating": "7.5",
+        "community_rating": "5.0",
+        "community_vote_count": 1,
+        "genres": [
+          53,
+          54,
+          80,
+          252
+        ],
+        "quality": [
+          164
+        ],
+        "years": [
+          3307
+        ],
+        "type": "animes",
+        "release_date": "2017-08-19",
+        "last_update": "2026-08-17 22:29:22",
+        "vote_count": "",
+        "runtime": "0.0",
+        "original_title": "Marvel's Spider-Man",
+        "gallery": "/qDum1yhNftUMaIB3pPiZ7PLsIto.jpg\n/atkOOO7Ct4qqeSx4EHWCWkFy4ns.jpg\n/6xoAxqDAmsl8xuuDivSb2eAUzKT.jpg\n/9zIFxEiurX1zVuBffHjwFRJTXDT.jpg\n/AqvGpSrx9I0ihhzxR8tc1rABvvE.jpg\n/7PpN2MAd90cY6wZs3kw5NsIKtG5.jpg\n/4GHcYkz4P8p4yygp9hCqJKptpiO.jpg\n",
+        "poster": "/dKdcyyHUR5WTMnrbPdYN5y9xPVp.jpg",
+        "backdrop": "/qDum1yhNftUMaIB3pPiZ7PLsIto.jpg",
+        "tagline": ""
+      }
+    }
+  },
+  "single:tvshows": {
+    "slug": "spider-man-de-marvel-2017",
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "",
+      "data": {
+        "_id": 51128,
+        "title": "Spider-Man de Marvel (2017)",
+        "overview": "Un adolescente inseguro pero valiente e inteligente llamado Peter Parker, un nuevo estudiante de Midtown High, es mordido por una araña radiactiva y se le otorgan poderes. Se convierte en un héroe llamado Spider-Man después de la muerte de su tío y debe adaptarse a esta nueva forma de vida.",
+        "slug": "spider-man-de-marvel-2017",
+        "images": {
+          "poster": "/thumbs/5523a66dbd89313ecdd5acddf40d6ace_hd.webp",
+          "backdrop": "/backdrops/5523a66dbd89313ecdd5acddf40d6ace.webp",
+          "logo": "/logos/5523a66dbd89313ecdd5acddf40d6ace.webp"
+        },
+        "trailer": "X814eTVbEyI",
+        "rating": "7.5",
+        "community_rating": "5.0",
+        "community_vote_count": 1,
+        "genres": [
+          53,
+          54,
+          80,
+          252
+        ],
+        "quality": [
+          164
+        ],
+        "years": [
+          3307
+        ],
+        "type": "tvshows",
+        "release_date": "2017-08-19",
+        "last_update": "2026-07-10 20:14:08",
+        "vote_count": "",
+        "runtime": "21.0",
+        "original_title": "Marvel's Spider-Man",
+        "gallery": "/qDum1yhNftUMaIB3pPiZ7PLsIto.jpg\n/atkOOO7Ct4qqeSx4EHWCWkFy4ns.jpg\n/6xoAxqDAmsl8xuuDivSb2eAUzKT.jpg\n/9zIFxEiurX1zVuBffHjwFRJTXDT.jpg\n/AqvGpSrx9I0ihhzxR8tc1rABvvE.jpg\n/7PpN2MAd90cY6wZs3kw5NsIKtG5.jpg\n/4GHcYkz4P8p4yygp9hCqJKptpiO.jpg\n",
+        "poster": "/dKdcyyHUR5WTMnrbPdYN5y9xPVp.jpg",
+        "backdrop": "/qDum1yhNftUMaIB3pPiZ7PLsIto.jpg",
+        "tagline": ""
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       providers:
-        description: 'Adaptadores (tubeonline mirandogratis cuevanas3 animeflv fuegocine pelisjuanita); vacío = todos'
+        description: 'Adaptadores (cuevanas3 animeflv fuegocine pelisjuanita); vacío = todos'
         required: false
         default: ''
   push:

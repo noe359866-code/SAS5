@@ -10,16 +10,14 @@
  * segmentos de vídeo (solo la ficha y el embed).
  *
  * Uso:
- *   node scripts/sites-live.js                       # los cuatro adaptadores
- *   node scripts/sites-live.js tubeonline cuevanas3 # solo esos
+ *   node scripts/sites-live.js                       # todos los adaptadores y proveedores
+ *   node scripts/sites-live.js cuevanas3 animeflv  # solo esos
  *   node scripts/sites-live.js --json                # escribe .probe/sites-live.json
  */
 
 const fs = require('node:fs');
 const streams = require('../lib/streams');
 const sites = {
-  tubeonline: require('../lib/sites/tubeonline'),
-  mirandogratis: require('../lib/sites/mirandogratis'),
   cuevanas3: require('../lib/sites/cuevanas3'),
   animeflv: require('../lib/sites/animeflv'),
   fuegocine: require('../lib/sites/fuegocine'),
@@ -67,7 +65,7 @@ globalThis.fetch = async (url, options = {}) => {
   // incluidos los POST de los buscadores del sitio.
   if (/html|text/i.test(type) && html.length) {
     const host = (() => { try { return new URL(String(url)).hostname; } catch { return ''; } })();
-    if (/(?:tubeonline|mirandogratis)/.test(host)) {
+    if (/(?:cuevanas3|animeflv|fuegocine|pelisjuanita|unlimplay|vimeos)/.test(host)) {
       const name = (String(options.method || 'GET') === 'GET' ? '' : 'post-')
         + String(url).replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 80);
       try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync(`.probe/html/live-${name}.html`, html); } catch (_) {}
@@ -114,8 +112,6 @@ const redact = (raw) => {
 };
 
 const SEARCHERS = {
-  tubeonline: (resolved) => sites.tubeonline.searchTubeOnline(null, resolved, resolved.title, 9000),
-  mirandogratis: (resolved) => sites.mirandogratis.searchMirandoGratis(null, resolved, resolved.title, 9000),
   cuevanas3: (resolved) => sites.cuevanas3.searchCuevanas3(null, resolved, resolved.title, 9000),
   animeflv: (resolved) => sites.animeflv.searchAnimeFlv(null, resolved, resolved.title, 9000),
   fuegocine: (resolved) => sites.fuegocine.searchFuegoCine(null, resolved, resolved.title, 9000),

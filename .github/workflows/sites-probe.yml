@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       sites:
-        description: 'Sitios separados por espacio (tubeonline mirando cuevanas3); vacío = todos'
+        description: 'Sitios separados por espacio (cuevanas3 animeflv fuegocine pelisjuanita); vacío = todos'
         required: false
         default: ''
       players:

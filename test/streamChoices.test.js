@@ -47,7 +47,7 @@ test('configuración: solo las fuentes directas y sin selectores de tipo/idioma'
   assert.equal('streamTypes' in cfg, false);
   assert.equal('streamLanguages' in cfg, false);
   assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'spinflix',
-    'tubeonline', 'mirandogratis', 'cuevanas3', 'animeflv', 'fuegocine', 'pelisjuanita']);
+    'cuevanas3', 'animeflv', 'fuegocine', 'pelisjuanita']);
   assert.deepEqual(Object.keys(streams.SEARCHERS).sort(), [...streams.PROVIDER_KEYS].sort());
   assert.deepEqual(Object.keys(choice.PROVIDER_LANGUAGES), streams.PROVIDER_KEYS);
   for (const key of streams.PROVIDER_KEYS) assert.equal(choice.providerType(key), 'direct');
@@ -58,12 +58,12 @@ test('las fuentes vigentes siguen activas por defecto; se respetan las listas ex
   t.after(() => config.reload());
   config.reload({});
   assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'spinflix',
-    'tubeonline', 'mirandogratis', 'cuevanas3', 'animeflv', 'fuegocine', 'pelisjuanita']);
+    'cuevanas3', 'animeflv', 'fuegocine', 'pelisjuanita']);
   assert.deepEqual(streams.activeProviders({ streams: [] }), []);
   assert.deepEqual(streams.activeProviders({ streams: ['pelisjuanita'] }), ['pelisjuanita']);
   config.reload({ STREAM_PROVIDERS: 'all', FANPELIS: 'off' });
   assert.deepEqual(streams.activeProviders(null), ['spinflix',
-    'tubeonline', 'mirandogratis', 'cuevanas3', 'animeflv', 'fuegocine', 'pelisjuanita']);
+    'cuevanas3', 'animeflv', 'fuegocine', 'pelisjuanita']);
   assert.deepEqual(streams.activeProviders({ streams: ['fanpelis'] }), []);
   config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix' });
   assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'spinflix']);
@@ -80,7 +80,8 @@ test('los enlaces antiguos conservan su selección válida y nunca reactivan una
   // porque ninguna publicó un medio utilizable en las validaciones en vivo
   // (ver docs/fuentes-retiradas.md).
   const retired = ['flixlatam', 'playlatin', 'animeonlineninja', 'cuevana3', 'cinecalidad', 'tioplus',
-    'gnulahd', 'videoapp', 'pelisplus', 'gnulaone', 'ultra'];
+    'gnulahd', 'videoapp', 'pelisplus', 'gnulaone', 'ultra',
+    'tubeonline', 'mirandogratis'];
   for (const key of retired) assert.equal(choice.providerType(key), null);
   const readSegment = (segment) => user.decodeConfig(segment, [], [], streams.PROVIDER_KEYS);
   // Simula una URL instalada antes del retiro, sin pasar por el encoder actual.
@@ -101,7 +102,7 @@ test('los enlaces antiguos conservan su selección válida y nunca reactivan una
   assert.deepEqual(streams.activeProviders(decode(retired)), ['spinflix']);
   config.reload({ STREAM_PROVIDERS: retired.join(',') });
   assert.deepEqual(streams.activeProviders(decode(retired)), ['fanpelis', 'spinflix',
-    'tubeonline', 'mirandogratis', 'cuevanas3', 'animeflv', 'fuegocine', 'pelisjuanita']);
+    'cuevanas3', 'animeflv', 'fuegocine', 'pelisjuanita']);
   assert.deepEqual(decode([]).streams, []);
   assert.deepEqual(streams.activeProviders(decode([])), []);
   config.reload({ STREAM_PROVIDERS: 'off' });

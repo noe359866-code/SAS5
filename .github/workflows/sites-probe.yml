@@ -26,3 +26,11 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Descubrimiento (informativo, no despliega)
         run: node scripts/sites-probe.mjs ${{ inputs.sites }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sites-probe
+          path: |
+            sites-probe.json
+            sites-probe.md
+          if-no-files-found: ignore

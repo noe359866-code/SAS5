@@ -119,7 +119,7 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
   seen.add(url);
   const res = await get(url, { headers: referer ? { Referer: referer } : {} });
   const scan = res.status === 200 ? scanHtml(res.body, url) : null;
-  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara/.test(site)) {
+  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara/.test(site) && (res.type.includes('json') || res.type.includes('html') || res.type.includes('text'))) {
     try {
       const fs = await import('node:fs');
       fs.mkdirSync('.probe/html', { recursive: true });
@@ -198,6 +198,8 @@ const SITES = {
     base: 'https://cuevanas3.pro',
     pages: [
       { label: 'portada', url: 'https://cuevanas3.pro/' },
+      { label: 'wp-json', url: 'https://cuevanas3.pro/wp-json/' },
+      { label: 'wp-json-wpf', url: 'https://cuevanas3.pro/wp-json/wpf/v1' },
     ],
   },
   animed23: {

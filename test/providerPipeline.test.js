@@ -11,22 +11,22 @@ test('un challenge no deja sin resultados al resto y evita volver a consultar la
   let blockedCalls = 0;
   config.reload({ STREAM_PROVIDER_COOLDOWN_SECONDS: '300' });
   t.after(() => config.reload());
-  t.mock.method(streams.SEARCHERS, 'tubeonline', async () => {
+  t.mock.method(streams.SEARCHERS, 'cuevanas3', async () => {
     blockedCalls++;
     throw Object.assign(new Error('detalle no público'), { challenge: true, status: 403 });
   });
   t.mock.method(streams.SEARCHERS, 'fanpelis', async () => [media('https://cdn.example/movie.mp4')]);
   const resolved = { title: 'Control', mediaType: 'movie' };
-  const order = ['tubeonline', 'fanpelis'];
+  const order = ['cuevanas3', 'fanpelis'];
   const report = {};
   const hits = await streams.runProviders(order, 'Control', resolved, 'Control', report);
   assert.equal(hits.length, 1);
-  assert.equal(report.tubeonline.reason, 'challenge');
-  assert.equal(report.tubeonline.status, 403);
+  assert.equal(report.cuevanas3.reason, 'challenge');
+  assert.equal(report.cuevanas3.status, 403);
   assert.doesNotMatch(JSON.stringify(report), /detalle no público/);
   await streams.runProviders(order, 'Control', resolved, 'Control', report);
   assert.equal(blockedCalls, 1);
-  assert.equal(report.tubeonline.paused, true);
+  assert.equal(report.cuevanas3.paused, true);
 });
 
 test('el diagnóstico de fuente cuenta medios aceptados independientemente de los duplicados de otra fuente', async (t) => {

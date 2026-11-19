@@ -18,7 +18,7 @@
  *
  * Uso:
  *   node scripts/sites-probe.mjs                    # todos los sitios
- *   node scripts/sites-probe.mjs tubeonline mirando  # solo los indicados
+ *   node scripts/sites-probe.mjs cuevanas3 animeflv  # solo los indicados
  */
 
 import { load } from 'cheerio';
@@ -87,7 +87,7 @@ function scanHtml(html, base) {
       if (value && /^(?:https?:)?\/\//.test(value)) dataUrls.add(new URL(value, base).href);
     }
   }
-  // Dooplay (tubeonline y clones): cada servidor es un <li data-post data-nume>
+  // Dooplay: cada servidor es un <li data-post data-nume>
   // y el embed real se pide por admin-ajax.php?action=doo_player_ajax.
   const ajaxPlayers = [];
   for (const el of $('[data-post][data-nume]').toArray()) {
@@ -161,22 +161,6 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
 }
 
 const SITES = {
-  tubeonline: {
-    name: 'www.tubeonline.net',
-    base: 'https://www.tubeonline.net',
-    pages: [
-      { label: 'ficha película', url: 'https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/' },
-      { label: 'ficha serie', url: 'https://www.tubeonline.net/serie/el-agente-nocturno/' },
-    ],
-  },
-  mirando: {
-    name: 'mirandogratis.com',
-    base: 'https://mirandogratis.com',
-    pages: [
-      { label: 'ficha película', url: 'https://mirandogratis.com/el-sacrificio-de-tess.html' },
-      { label: 'ficha película 2', url: 'https://mirandogratis.com/el-reino-prohibido.html' },
-    ],
-  },
   // Solo la portada: el resto de estos sitios se sondearon con scripts
   // dedicados (scripts/cuevanas3-api-probe.mjs y scripts/anime-sites-probe.mjs)
   // y su estructura ya está descrita en los adaptadores.

@@ -7,19 +7,19 @@
  * Ejecuta `lib/sites/*` con peticiones reales desde el runner de GitHub
  * Actions y resume, por título y por fuente, qué devolvió: aceptados, motivo
  * del descarte y peticiones gastadas. No imprime URLs firmadas ni descarga
- * segmentos de vídeo (solo la ficha y el embed).
+ * segmentos de vídeo: de cada enlace publicado se lee solo la primera línea
+ * del manifiesto, para distinguir un HLS real de una página del reproductor.
  *
  * Uso:
- *   node scripts/sites-live.js                       # los cuatro adaptadores
- *   node scripts/sites-live.js tubeonline cuevanas3 # solo esos
+ *   node scripts/sites-live.js                       # todos los adaptadores y proveedores
+ *   node scripts/sites-live.js cuevanas3 animeflv  # solo esos
  *   node scripts/sites-live.js --json                # escribe .probe/sites-live.json
  */
 
 const fs = require('node:fs');
 const streams = require('../lib/streams');
+const { UA } = require('../lib/extractors');
 const sites = {
-  tubeonline: require('../lib/sites/tubeonline'),
-  mirandogratis: require('../lib/sites/mirandogratis'),
   cuevanas3: require('../lib/sites/cuevanas3'),
   animeflv: require('../lib/sites/animeflv'),
   fuegocine: require('../lib/sites/fuegocine'),
@@ -67,7 +67,7 @@ globalThis.fetch = async (url, options = {}) => {
   // incluidos los POST de los buscadores del sitio.
   if (/html|text/i.test(type) && html.length) {
     const host = (() => { try { return new URL(String(url)).hostname; } catch { return ''; } })();
-    if (/(?:tubeonline|mirandogratis)/.test(host)) {
+    if (/(?:cuevanas3|animeflv|fuegocine|pelisjuanita|unlimplay|vimeos)/.test(host)) {
       const name = (String(options.method || 'GET') === 'GET' ? '' : 'post-')
         + String(url).replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 80);
       try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync(`.probe/html/live-${name}.html`, html); } catch (_) {}
@@ -109,13 +109,13 @@ globalThis.fetch = async (url, options = {}) => {
   return response;
 };
 
+const host = (raw) => { try { return new URL(raw).hostname; } catch { return ''; } };
+
 const redact = (raw) => {
   try { const url = new URL(raw); return `${url.origin}${url.pathname}`; } catch { return '—'; }
 };
 
 const SEARCHERS = {
-  tubeonline: (resolved) => sites.tubeonline.searchTubeOnline(null, resolved, resolved.title, 9000),
-  mirandogratis: (resolved) => sites.mirandogratis.searchMirandoGratis(null, resolved, resolved.title, 9000),
   cuevanas3: (resolved) => sites.cuevanas3.searchCuevanas3(null, resolved, resolved.title, 9000),
   animeflv: (resolved) => sites.animeflv.searchAnimeFlv(null, resolved, resolved.title, 9000),
   fuegocine: (resolved) => sites.fuegocine.searchFuegoCine(null, resolved, resolved.title, 9000),
@@ -181,19 +181,53 @@ async function main() {
         ? hits.map((hit) => `${hit.quality}${hit.audioLabel ? `/${hit.audioLabel}` : ''} ${redact(hit.url)}`).join(' · ')
         : `${result.reason || result.skipped || 'sin motivo'}${result.notes ? ` ${JSON.stringify(result.notes)}` : ''}`;
       console.log(`- ${key}: ${hits.length} hit(s) en ${Date.now() - started} ms → ${verdict}`);
+      // Qué devuelve el enlace publicado: el registro solo acepta formas de
+      // medio, así que se comprueba el contenido de la primera línea. En
+      // UnLimPlay se prueban las cabeceras que cambian la respuesta (el
+      // visor anuncia `x=.m3u8`, pero un GET anónimo devuelve su reproductor).
+      const mediaNotes = [];
+      if (hits.length) {
+        const target = hits[0].url;
+        const variants = /(?:^|\.)unlimplay\.com$/.test(host(target))
+          ? [
+            ['UA', {}],
+            ['UA+Referer', { Referer: 'https://unlimplay.com/' }],
+            ['UA+Accept-HLS', { Accept: 'application/vnd.apple.mpegurl,*/*' }],
+          ]
+          : [['UA', {}]];
+        for (const [label, extra] of variants) {
+          try {
+            const probe = await Promise.race([
+              originalFetch(target, { headers: { 'User-Agent': UA, ...extra } }),
+              new Promise((resolve) => setTimeout(() => resolve(null), 8000)),
+            ]);
+            if (!probe) { mediaNotes.push(`${label}: sin respuesta en 8 s`); console.log(`    medio ${label}: sin respuesta en 8 s`); continue; }
+            const body = await probe.text().catch(() => '');
+            const head = body.split('\n').map((line) => line.trim()).filter(Boolean)[0] || '(vacío)';
+            const kind = /^#EXTM3U/.test(head) ? 'HLS' : /^</.test(head) ? 'HTML' : 'otro';
+            const line = `${label}: HTTP ${probe.status} ${String(probe.headers.get('content-type') || '—').split(';')[0]} tipo=${kind} → ${head.replace(/[?#].*/, '').slice(0, 40)}`;
+            mediaNotes.push(line);
+            console.log(`    medio ${label}: HTTP ${probe.status} ${probe.headers.get('content-type') || '—'} tipo=${kind} → ${head.replace(/[?#].*/, '').slice(0, 60)}`);
+          } catch (err) {
+            mediaNotes.push(`${label}: error ${String(err && err.message || err).slice(0, 40)}`);
+            console.log(`    medio ${label}: error ${String(err && err.message || err).slice(0, 60)}`);
+          }
+        }
+      }
       // Últimas peticiones de esta fuente, para explicar el descarte.
       const recent = trace.slice(-6).map((entry) => `${entry.status} ${entry.url}${entry.location ? ` → ${entry.location.slice(0, 80)}` : ''}${entry.h1 ? ` h1="${entry.h1.slice(0, 40)}"` : ''}`);
       console.log(`    traza: ${recent.join(' | ')}`);
       rows.push({ control: control.id || control.title, title: resolved.title, provider: key, hits: hits.length, trace: recent,
+        media: mediaNotes,
         ms: Date.now() - started, quality: hits.map((hit) => hit.quality),
         audio: hits.map((hit) => hit.audioLabel || '—'), hosts: hits.map((hit) => redact(hit.url)), verdict });
     }
   }
   fs.mkdirSync('.probe', { recursive: true });
   fs.writeFileSync('.probe/sites-live.json', JSON.stringify(rows, null, 2));
-  const md = ['| Control | Fuente | Hits | ms | Formato | Audio | Destino |', '|---|---|---:|---:|---|---|---|'];
+  const md = ['| Control | Fuente | Hits | ms | Formato | Audio | Medio publicado | Destino |', '|---|---|---:|---:|---|---|---|---|'];
   for (const row of rows) {
-    md.push(`| ${row.title} | ${row.provider} | ${row.hits} | ${row.ms} | ${row.quality.join(',') || '—'} | ${row.audio.join(',') || '—'} | ${String(row.verdict).replace(/\|/g, '/').slice(0, 160)} |`);
+    md.push(`| ${row.title} | ${row.provider} | ${row.hits} | ${row.ms} | ${row.quality.join(',') || '—'} | ${row.audio.join(',') || '—'} | ${(row.media || []).join(' · ').replace(/\|/g, '/') || '—'} | ${String(row.verdict).replace(/\|/g, '/').slice(0, 160)} |`);
   }
   md.push('', 'Sonda de adaptadores: solo ficha y embed; no descarga segmentos de vídeo ni imprime URLs firmadas.');
   fs.writeFileSync('.probe/sites-live.md', md.join('\n') + '\n');

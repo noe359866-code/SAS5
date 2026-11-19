@@ -1,9 +1,10 @@
 # Fuentes retiradas
 
-Registro de las fuentes que se quitaron del addon y por qué. Una fuente se
-retira cuando, en las validaciones en vivo, **no publica ningún medio
+Registro de las fuentes que se quitaron del addon y por qué. El criterio
+habitual es que, en las validaciones en vivo, **no publiquen ningún medio
 utilizable**: ni un HLS ni un MP4 con audio en español o subtitulado. No basta
-con que la web responda 200 ni con que la ficha exista.
+con que la web responda 200 ni con que la ficha exista. Cuando el retiro es una
+decisión de producto y no un fallo medido, se dice explícitamente.
 
 ## 19-11-2026: GnulaHD, VideoApp, PelisPlus, GnulaOne y Ultra
 
@@ -31,11 +32,30 @@ oportunidad justa: los controles declaran su `tmdbId`, porque VideoApp solo
 trabaja por ID de TMDB y sin ese dato se saltaba los doce controles
 (`tmdb-or-episode-required`), lo que no medía nada.
 
-### Fuentes que se quedan
+## 19-11-2026 (segunda poda): TubeOnLine y MirandoGratis
+
+Se retiran por **decisión de producto**, no porque estuvieran rotas. Rendían
+poco y lo poco que daban era frágil:
+
+| Fuente | Resultado | Por qué se retira |
+|---|---|---|
+| `tubeonline` (`www.tubeonline.net`) | 2 de 12 | Dooplay con `admin-ajax.php`: funcionaba cuando el embed salía por Byse, pero los demás visores eran opacos y gastaba hasta 12 subpeticiones por búsqueda, las más caras del registro. |
+| `mirandogratis` (`mirandogratis.com`) | 2 de 12 | Solo películas (`series-not-supported` en los 5 controles de serie) y dependía de que el iframe de la pestaña activa estuviera en el HTML. |
+
+Ambas acertaban en los mismos dos controles de catálogo antiguo, así que no
+aportaban cobertura que no dieran ya Fanpelis, SpinFlix o Cuevana 3, y en
+cambio eran de las que más CPU y subpeticiones consumían en un plan Free
+(10 ms de CPU y 50 subpeticiones por invocación).
+
+Con esto quedan **seis fuentes**: Fanpelis, SpinFlix, Cuevana 3, AnimeFLV,
+FuegoCine y PelisJuanita.
+
+### Fuentes que se quedaron entonces
 
 Ocho, todas con resultados reales en la misma sonda: Fanpelis (3), SpinFlix
 (4), TubeOnLine (2), MirandoGratis (2), Cuevana 3 (8), AnimeFLV (2), FuegoCine
-(2-3) y PelisJuanita (8).
+(2-3) y PelisJuanita (8). En la segunda poda se retiraron TubeOnLine y
+MirandoGratis.
 
 ## Fuentes descartadas antes de integrarse
 

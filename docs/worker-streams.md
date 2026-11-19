@@ -6,7 +6,7 @@
 
 Esto elimina las invocaciones al Worker que antes generaba cada petición de reproducción a `/hls`. La búsqueda de streams sigue siendo dinámica y puede hacer consultas a los proveedores al faltar la caché. El cambio no reinicia una cuota agotada ni garantiza que el uso total quede por debajo del límite del plan gratuito.
 
-El addon no envía `behaviorHints.proxyHeaders`: [Stremio puede transformar ese hint en una URL de su servidor de streaming](https://github.com/Stremio/stremio-core/blob/development/src/types/resource/stream.rs). Se mantiene `notWebReady` para anunciar los límites de compatibilidad de HLS según el [SDK de Stremio](https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/stream.md). Un CDN puede contestar distinto según el cliente o la red. Un `403` directo o la falta de CORS pueden impedir la reproducción; el addon no sustituye el CDN por otro proxy.
+El addon envía `behaviorHints.proxyHeaders` solo en los HLS que declaran el origen del reproductor (hoy PelisJuanita, cuyo CDN rechaza peticiones sin `Referer`); el resto de enlaces va directo. [Stremio puede transformar ese hint en una URL de su servidor de streaming](https://github.com/Stremio/stremio-core/blob/development/src/types/resource/stream.rs), así que el cliente debe admitir ese proxy. Se mantiene `notWebReady` para anunciar los límites de compatibilidad de HLS según el [SDK de Stremio](https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/stream.md). Un CDN puede contestar distinto según el cliente o la red. Un `403` directo o la falta de CORS pueden impedir la reproducción; el addon no sustituye el CDN por otro proxy.
 
 ## Cómo probarlo
 

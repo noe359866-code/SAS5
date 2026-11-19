@@ -22,6 +22,14 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const TIMEOUT = 15_000;
 const MAX_BYTES = 2 * 1024 * 1024;
 
+const redactParams = (raw) => {
+  try {
+    const u = new URL(raw);
+    const names = [...u.searchParams.keys()];
+    return `${u.origin}${u.pathname}${names.length ? '?' + names.map((n) => `${n}=…`).join('&') : ''}`;
+  } catch { return String(raw || '').slice(0, 160); }
+};
+
 const redact = (raw) => {
   try {
     const u = new URL(raw);
@@ -48,7 +56,7 @@ async function getJson(url) {
     const body = text.slice(0, MAX_BYTES);
     let json = null;
     try { json = JSON.parse(body); } catch { /* no es JSON */ }
-    return { status: res.status, type: (res.headers.get('content-type') || '').split(';')[0], bytes: body.length, json, head: body.slice(0, 200) };
+    return { status: res.status, type: (res.headers.get('content-type') || '').split(';')[0], bytes: body.length, json, head: body.slice(0, 4000) };
   } catch (err) {
     return { status: 0, error: err.message, json: null };
   } finally { clearTimeout(timer); }
@@ -83,6 +91,9 @@ const QUERIES = [
   { q: 'spider-man', postType: 'any' },
   { q: 'el reino prohibido', postType: 'any' },
   { q: 'naruto', postType: 'any' },
+  { q: 'deadpool', postType: 'any' },
+  { q: 'inception', postType: 'any' },
+  { q: 'el conjuro', postType: 'any' },
 ];
 
 async function main() {
@@ -135,6 +146,45 @@ async function main() {
       }
     }
     rows.push({ step: `single:${postType}`, status: res.status, type: res.type, bytes: res.bytes, posts: 1, hosts: hosts.join(', ') || '-' });
+  }
+
+  // --- Censo de servidores: para varias películas, /player?postId -> embeds[]
+  console.log('\n### censo de servidores por película');
+  const census = {};
+  for (const { q } of QUERIES) {
+    const key = `search:${q}`;
+    const posts = dumps[key]?.json?.data?.posts || [];
+    const movie = posts.find((p) => p.type === 'movies') || posts[0];
+    if (!movie?._id) continue;
+      const url = `${FAST}/player?postId=${movie._id}`;
+      const res = await getJson(url);
+      const data = res.json?.data;
+      const embeds = Array.isArray(data?.embeds) ? data.embeds : [];
+      dumps[`player:${movie.slug}`] = { status: res.status, json: res.json };
+      console.log(`\n### /player?postId=${movie._id} (${movie.title}) -> ${res.status}, ${embeds.length} embeds`);
+      for (const e of embeds) {
+        const host = hostOf(e.url);
+        census[e.server || e.provider] = census[e.server || e.provider] || { n: 0, host };
+        census[e.server || e.provider].n += 1;
+        console.log(`  ${String(e.server || e.provider).padEnd(12)} | ${String(e.languageLabel || e.language).padEnd(24)} | ${String(e.quality).padEnd(12)} | ${e.medium} | ${redactParams(e.url)}`);
+      }
+      if (!embeds.length) console.log(`  data: ${JSON.stringify(res.json).slice(0, 200)}`);
+      rows.push({ step: `player:${movie.type}`, status: res.status, type: res.type, bytes: res.bytes, posts: embeds.length, hosts: [...new Set(embeds.map((e) => hostOf(e.url)).filter(Boolean))].join(',') || '-' });
+  }
+  console.log(`\n### resumen por servidor: ${JSON.stringify(census)}`);
+
+  // --- Página del player: se pide UNA vez para ver qué iframe publica.
+  for (const [, entry] of Object.entries(dumps)) {
+    const embeds = entry?.json?.data?.embeds;
+    if (!Array.isArray(embeds) || !embeds.length) continue;
+    const embed = embeds[0];
+    if (!/^https?:\/\//.test(embed.url || '')) continue;
+    const res = await getJson(embed.url);
+    const html = typeof res.head === 'string' ? res.head : '';
+    console.log(`\n### embed ${redactParams(embed.url)} -> ${res.status} ${res.bytes}B`);
+    rows.push({ step: 'embed', status: res.status, type: res.type, bytes: res.bytes, posts: 0, hosts: hostOf(embed.url) || '-' });
+    dumps['embed:html'] = { url: redactParams(embed.url), status: res.status, head: html.slice(0, 3000), json: res.json };
+    break;
   }
 
   // --- ¿Dónde están los players? Prueba de rutas candidatas y de la página

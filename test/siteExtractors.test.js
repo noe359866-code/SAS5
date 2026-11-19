@@ -251,6 +251,7 @@ test('tubeonline: el embed sale de admin-ajax y se extrae una sola vez', async (
     assert.equal(result.hits[0].url, 'https://cdn.example.com/t/master.m3u8');
     const ajax = stub.calls.filter((call) => call.url.endsWith('admin-ajax.php'));
     assert.equal(ajax.length, 2, 'un POST por servidor publicado');
+    // Byse (extraíble) se prueba antes que Vidara (opaco).
     assert.match(ajax[0].body, /action=doo_player_ajax&post=999&nume=1&type=movie/);
   } finally { stub.restore(); }
 });

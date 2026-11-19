@@ -38,7 +38,7 @@ globalThis.fetch = async (url, options = {}) => {
   const response = await originalFetch(url, options);
   const type = response.headers.get('content-type') || '';
   let html = '';
-  if (String(options.method || 'GET') === 'GET' && /html|text/i.test(type)) {
+  if (/html|text|json/i.test(type)) {
     try { html = await response.clone().text(); } catch (_) { /* cuerpo no legible */ }
   }
   const text = html.replace(/\s+/g, ' ');
@@ -54,12 +54,13 @@ globalThis.fetch = async (url, options = {}) => {
   if (String(options.method || 'GET') === 'GET' && /html|text/i.test(type) && html.length) {
     const host = (() => { try { return new URL(String(url)).hostname; } catch { return ''; } })();
     if (/(?:tubeonline|mirandogratis|gnula\.one|verpeliculasultra)/.test(host)) {
-      const name = String(url).replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 80);
+      const name = (String(options.method || 'GET') === 'GET' ? '' : 'post-')
+        + String(url).replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 80);
       try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync(`.probe/html/live-${name}.html`, html); } catch (_) {}
     }
   }
   // Host del embed que devuelve Dooplay (sin la URL firmada).
-  if (/admin-ajax\.php/.test(String(url)) && /json/i.test(type)) {
+  if (/admin-ajax\.php/.test(String(url)) && /json/i.test(type) && html) {
     try {
       const data = JSON.parse(html);
       const embed = typeof data?.embed_url === 'string' ? data.embed_url : '';

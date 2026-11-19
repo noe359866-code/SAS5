@@ -18,6 +18,7 @@ const fuego = require('../lib/sites/fuegocine');
 
 const fixture = (name) => fs.readFileSync(path.join(__dirname, 'fixtures', 'sites', name), 'utf8');
 const SEARCH = fixture('fuegocine-search.html');
+const SEARCH_SERIE = fixture('fuegocine-search-serie.html');
 const SERIE = fixture('fuegocine-serie.html');
 const TEMPORADA = fixture('fuegocine-temporada.html');
 const WATCH = fixture('fuegocine-watch.html');
@@ -34,17 +35,18 @@ const EMBED_URL = 'https://unlimplay.com/f/embed/movie/1368337';
 const MOVIE = { title: 'Spider-Man: Un Nuevo Día', altTitle: null, year: 2026, mediaType: 'movie' };
 const SERIES = { title: 'VisionQuest', altTitle: null, year: 2026, mediaType: 'series', season: 1, episode: 1 };
 
-const html = (body, status = 200) => new Response(body, { status, headers: { 'content-type': 'text/html; charset=utf-8' } });
+// Cada respuesta se construye al vuelo: un `Response` solo se puede leer una vez.
+const html = (body, status = 200) => () => new Response(body, { status, headers: { 'content-type': 'text/html; charset=utf-8' } });
 
 function stub(routes) {
   const calls = [];
   const original = global.fetch;
   global.fetch = async (url) => {
     const target = String(url);
-    calls.push(global.decodeURI ? target : target);
+    calls.push(target);
     for (const [needle, reply] of routes) {
       if (!target.includes(needle)) continue;
-      return typeof reply === 'function' ? reply(target) : reply;
+      return reply(target);
     }
     return new Response('', { status: 404 });
   };
@@ -168,22 +170,39 @@ test('fuegocine película: buscador → watch → visor → HLS latino y subtitu
   } finally { stubbed.restore(); }
 });
 
-test('fuegocine serie: ficha → temporada → episodio → visor', async () => {
+test('fuegocine serie: buscador → ficha → temporada → episodio → visor', async () => {
   const detail = `${BASE}/shows/details/visionquest/24`;
-  const episodeUrl = `${BASE}/shows/visionquest/01x01-sin-ataduras/49`;
   const stubbed = stub([
-    ['/search_elastic', html(SEARCH)],
+    ['/search_elastic', html(SEARCH_SERIE)],
     [detail, html(SERIE)],
     [`${BASE}/shows/visionquest/seasons/temporada-1/55`, html(TEMPORADA)],
-    [episodeUrl, html(WATCH)],
-    [EMBED_URL, html(EMBED)],
+    [EPISODE_URL, html(EPISODE)],
+    ['https://unlimplay.com/f/embed/tv/213375/1/1', html(EPISODE_EMBED)],
   ]);
   try {
     const out = await fuego.searchFuegoCine('VisionQuest', SERIES, SERIES.title, 6000);
-    // El recorte del buscador solo trae la película, así que no hay ficha de
-    // serie y se degrada sin inventar: lo comprobamos explícitamente.
-    assert.deepEqual(out.hits, []);
-    assert.equal(out.reason, 'no-match');
+    assert.deepEqual(out.hits.map((hit) => hit.audioLabel), ['Latino', 'Subtitulado']);
+    assert.ok(out.hits.every((hit) => /^https:\/\/unlimplay\.com\/cps\.php\?/.test(hit.url)));
+    assert.equal(out.hits[0].title, 'VisionQuest S1E1 FuegoCine');
+    // El visor del episodio trae tres servidores: solo se abre unlimplay.
+    assert.ok(stubbed.calls.includes('https://unlimplay.com/f/embed/tv/213375/1/1'));
+    assert.ok(!stubbed.calls.some((url) => /embedorigin|fcplayer2/.test(url)));
+  } finally { stubbed.restore(); }
+});
+
+test('fuegocine serie: sin temporada ni episodio se degrada con su motivo', async () => {
+  const detail = `${BASE}/shows/details/visionquest/24`;
+  const base = [
+    ['/search_elastic', html(SEARCH_SERIE)],
+    [detail, html(SERIE)],
+  ];
+  let stubbed = stub(base);
+  try {
+    assert.equal((await fuego.searchFuegoCine('VisionQuest', { ...SERIES, season: 9 }, 'VisionQuest', 6000)).reason, 'no-season');
+  } finally { stubbed.restore(); }
+  stubbed = stub([...base, [`${BASE}/shows/visionquest/seasons/temporada-1/55`, html(TEMPORADA)]]);
+  try {
+    assert.equal((await fuego.searchFuegoCine('VisionQuest', { ...SERIES, episode: 99 }, 'VisionQuest', 6000)).reason, 'no-episode');
   } finally { stubbed.restore(); }
 });
 

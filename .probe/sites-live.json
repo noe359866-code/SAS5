@@ -12,7 +12,7 @@
       "200 embed-host: vidara.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 3389,
+    "ms": 3520,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -31,7 +31,7 @@
       "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
       "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
     ],
-    "ms": 1107,
+    "ms": 1142,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -50,7 +50,7 @@
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 2610,
+    "ms": 2135,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -69,7 +69,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 1118,
+    "ms": 1129,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -88,7 +88,7 @@
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
     ],
-    "ms": 728,
+    "ms": 747,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -107,7 +107,7 @@
       "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
     ],
-    "ms": 899,
+    "ms": 895,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -126,7 +126,7 @@
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 84,
+    "ms": 851,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -145,7 +145,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 645,
+    "ms": 586,
     "quality": [],
     "audio": [],
     "hosts": [],

@@ -5,7 +5,7 @@
 | ver.gnula.one | ··links.fiuxy2.com | `https://links.fiuxy2.com/play/NMB2zwFeBWYf1ruC.html` | 200 | 0 | 0 | streamwish.to, vidhidepro.com, voe.sx |  |
 | ver.gnula.one | ···streamwish.to | `https://streamwish.to/e/bxv60pjdnzpx` | 200 | 0 | 0 | — |  |
 | ver.gnula.one | ···vidhidepro.com | `https://vidhidepro.com/v/7p0egbcbsti2` | 0 | — | — | — | TypeError |
-| ver.gnula.one | ···voe.sx | `https://voe.sx/e/xgbyls7nylgd` | 403 | — | — | — |  |
+| ver.gnula.one | ···voe.sx | `https://voe.sx/e/xgbyls7nylgd` | 404 | — | — | — |  |
 | ver.gnula.one | ·ver.gnula.one | `https://ver.gnula.one/?…` | 200 | 1 | 0 | voe.sx |  |
 | ver.gnula.one | ficha serie | `https://ver.gnula.one/tvshows/the-last-of-us/` | 200 | 0 | 0 | — |  |
 | verpeliculasultra.com | ficha película | `https://verpeliculasultra.com/accion/4997-f1-la-pelicula.html` | 200 | 0 | 0 | hglink.to, vpge.link |  |

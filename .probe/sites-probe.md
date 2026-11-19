@@ -38,22 +38,6 @@
 | mirandogratis.com | ·mixdrop.top | `https://mixdrop.top/e/wlllp17rtn9m7o` | 200 | 0 | 0 | — |  |
 | mirandogratis.com | ·mirandogratis.com | `https://mirandogratis.com/` | 200 | 0 | 0 | mirandogratis.com |  |
 | cuevanas3.pro | portada | `https://cuevanas3.pro/` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | wp-json | `https://cuevanas3.pro/wp-json/` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | wp-json-wpf | `https://cuevanas3.pro/wp-json/wpf/v1` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | wp-types | `https://cuevanas3.pro/wp-json/wp/v2/types` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | wp-search | `https://cuevanas3.pro/wp-json/wp/v2/search?…` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | bundle | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/index-CBH2XN48.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-search | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Search-DtBbp1z5.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-movie | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Movie-B-znf5nj.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-anime | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Anime-BU9eNyux.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-episode | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Episode-BuDNNfwB.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-wrapper | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Wrapper-BT-hlZyU.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-api | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/index-CSASIiGL.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-related | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Related-3DG9WZ8k.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-listing | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Listing-B0UcKnlU.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-tvshow | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/TvShow-3EzNr2_O.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-episodelist | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/EpisodeList-uvlgMDbq.js` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | chunk-archive | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Archive-KaP3wzuX.js` | 200 | 0 | 0 | — |  |
 | animed23.com | portada | `https://animed23.com/` | 403 cf | — | — | — |  |
 | animejara.com | portada | `http://animejara.com/` | 403 cf | — | — | — |  |
 

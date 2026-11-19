@@ -5,17 +5,18 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://v3-cinemeta.strem.io/meta/movie/tt33033798.json",
-      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
-      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Resultados encontrados: Spider-Man: Un n\"",
-      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\""
+      "200 embed-host: vidmoly.org",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: luluvido.com",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: vidara.to",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 1055,
+    "ms": 3389,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "no-match"
+    "verdict": "no-extractable-embed {\"opaque\":4,\"extracted\":0,\"unsupported\":4}"
   },
   {
     "control": "tt33033798",
@@ -23,14 +24,14 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
-      "404 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/ h1=\"Pagina no se encuentra\"",
-      "200 https://www.tubeonline.net/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Resultados encontrados: Spider-Man: Un n\"",
-      "200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
+      "200 embed-host: luluvido.com",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: vidara.to",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
       "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
       "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
     ],
-    "ms": 1287,
+    "ms": 1107,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -49,7 +50,7 @@
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 3226,
+    "ms": 2610,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -65,10 +66,10 @@
       "200 https://ver.gnula.one/?trembed=3&trid=53363&trtype=1",
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1",
-      "200 https://verpeliculasultra.com/",
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 1640,
+    "ms": 1118,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -80,14 +81,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://verpeliculasultra.com/",
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
       "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
     ],
-    "ms": 909,
+    "ms": 728,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -106,7 +107,7 @@
       "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
     ],
-    "ms": 1099,
+    "ms": 899,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -125,7 +126,7 @@
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 611,
+    "ms": 84,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -141,10 +142,10 @@
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com",
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one",
-      "200 https://verpeliculasultra.com/",
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 907,
+    "ms": 645,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -156,14 +157,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
-      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
       "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\"",
       "200 https://www.tubeonline.net/episodio/breaking-bad-1x1/ h1=\"Breaking Bad: 1x1\"",
+      "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 935,
+    "ms": 859,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -175,11 +176,11 @@
     "provider": "mirandogratis",
     "hits": 0,
     "trace": [
-      "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
-      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
       "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\"",
       "200 https://www.tubeonline.net/episodio/breaking-bad-1x1/ h1=\"Breaking Bad: 1x1\"",
+      "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
     "ms": 0,
@@ -194,11 +195,11 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
-      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
       "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\"",
       "200 https://www.tubeonline.net/episodio/breaking-bad-1x1/ h1=\"Breaking Bad: 1x1\"",
+      "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
     "ms": 0,
@@ -213,11 +214,11 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
-      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
       "200 https://www.tubeonline.net/serie/breaking-bad/ h1=\"Breaking Bad\"",
       "200 https://www.tubeonline.net/episodio/breaking-bad-1x1/ h1=\"Breaking Bad: 1x1\"",
+      "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
     "ms": 0,

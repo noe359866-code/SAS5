@@ -1,8 +1,23 @@
-200	application/json	0	https://v3-cinemeta.strem.io/meta/movie/tt33033798.json		
+200	application/json	88	https://v3-cinemeta.strem.io/meta/movie/tt33033798.json		
 200	text/html	64668	https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/		Spider-Man: Un nuevo día
-404	text/html	34110	https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/		Pagina no se encuentra
-200	text/html	63188	https://www.tubeonline.net/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa		Resultados encontrados: Spider-Man: Un nuevo día
-200	text/html	64668	https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/		Spider-Man: Un nuevo día
+200	embed	0	embed-host: bysejikuar.com		
+200	application/json	90	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: streamtape.com		
+200	application/json	97	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+404	text/html	21283	https://streamtape.com/e/YZzOKDljYacvDbG/SM1NDA.1080_CAS.mp4		Video not found!
+200	embed	0	embed-host: bysejikuar.com		
+200	application/json	90	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: streamtape.com		
+200	application/json	97	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+404	text/html	21283	https://streamtape.com/e/j7AO39kJkKhze2B/SM1NDA.1080_LAT.mp4		Video not found!
+200	embed	0	embed-host: vidara.to		
+200	application/json	69	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: vidmoly.org		
+200	application/json	78	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: luluvido.com		
+200	application/json	71	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: vidara.to		
+200	application/json	69	https://www.tubeonline.net/wp-admin/admin-ajax.php		
 200	text/html	23808	https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa		Estas buscando: Spider-Man: Un nuevo día
 301	text/html	0	https://mirandogratis.com/spider-man-un-nuevo-dia.html	https://mirandogratis.com	
 200	text/html	128538	https://ver.gnula.one/movies/spider-man-un-nuevo-dia/		Ver Spider-Man: Un nuevo día (2026) online
@@ -11,9 +26,9 @@
 200	text/html	1038	https://ver.gnula.one/?trembed=3&trid=53363&trtype=1		
 404	text/html	118974	https://voe.sx/e/xgbyls7nylgd		
 200	text/html	1036	https://ver.gnula.one/?trembed=6&trid=53363&trtype=1		
-200	text/html	0	https://verpeliculasultra.com/		
+200	text/html	42017	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	147803	https://verpeliculasultra.com/xfsearch/peliculas-2026/		
-200	application/json	0	https://v3-cinemeta.strem.io/meta/movie/tt1375666.json		
+200	application/json	2628	https://v3-cinemeta.strem.io/meta/movie/tt1375666.json		
 404	text/html	34091	https://www.tubeonline.net/pelicula/inception/		Pagina no se encuentra
 404	text/html	34096	https://www.tubeonline.net/pelicula/inception-2010/		Pagina no se encuentra
 200	text/html	60153	https://www.tubeonline.net/?s=Inception		Resultados encontrados: Inception
@@ -21,10 +36,12 @@
 301	text/html	0	https://mirandogratis.com/inception.html	https://mirandogratis.com	
 301	text/html	0	https://ver.gnula.one/movies/inception/	https://ver.gnula.one	
 301	text/html	0	https://ver.gnula.one/movies/inception-2010/	https://ver.gnula.one	
-200	text/html	0	https://verpeliculasultra.com/		
+200	text/html	42004	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	43744	https://verpeliculasultra.com/xfsearch/peliculas-2010/		
-200	application/json	0	https://api.tvmaze.com/lookup/shows?imdb=tt0903747		
+200	application/json	1705	https://api.tvmaze.com/lookup/shows?imdb=tt0903747		
 200	text/html	75817	https://www.tubeonline.net/serie/breaking-bad/		Breaking Bad
 200	text/html	47363	https://www.tubeonline.net/episodio/breaking-bad-1x1/		Breaking Bad: 1x1
-200	application/json	0	https://www.tubeonline.net/wp-admin/admin-ajax.php		
-200	application/json	0	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: hqq.ac		
+200	application/json	85	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: hqq.ac		
+200	application/json	85	https://www.tubeonline.net/wp-admin/admin-ajax.php		

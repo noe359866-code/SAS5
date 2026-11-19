@@ -40,6 +40,9 @@
 | cuevanas3.pro | portada | `https://cuevanas3.pro/` | 200 | 0 | 0 | — |  |
 | cuevanas3.pro | wp-json | `https://cuevanas3.pro/wp-json/` | 200 | 0 | 0 | — |  |
 | cuevanas3.pro | wp-json-wpf | `https://cuevanas3.pro/wp-json/wpf/v1` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | wp-types | `https://cuevanas3.pro/wp-json/wp/v2/types` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | wp-search | `https://cuevanas3.pro/wp-json/wp/v2/search?…` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | bundle | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/index-CBH2XN48.js` | 200 | 0 | 0 | — |  |
 | animed23.com | portada | `https://animed23.com/` | 403 cf | — | — | — |  |
 | animejara.com | portada | `http://animejara.com/` | 403 cf | — | — | — |  |
 

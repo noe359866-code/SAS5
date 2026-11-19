@@ -46,6 +46,9 @@
 | animeflv.or.at | buscador | `https://animeflv.or.at/?…` | 200 | 0 | 0 | — |  |
 | animeflv.or.at | ficha-anime | `https://animeflv.or.at/anime/ao-ashi-season-2/` | 200 | 0 | 0 | — |  |
 | animeflv.or.at | episodio | `https://animeflv.or.at/ver/ao-ashi-season-2-1` | 404 | — | — | — |  |
+| animeflv.or.at | episodio-slash | `https://animeflv.or.at/ver/ao-ashi-season-2-1/` | 404 | — | — | — |  |
+| animeflv.or.at | sitemap | `https://animeflv.or.at/sitemap.xml` | 200 | 0 | 0 | — |  |
+| animeflv.or.at | sitemap-index | `https://animeflv.or.at/sitemap_index.xml` | 200 | 0 | 0 | — |  |
 | animeyt.cc | portada | `https://animeyt.cc/` | 403 cf | — | — | — |  |
 | animeyt.cc | wp-json | `https://animeyt.cc/wp-json/` | 403 cf | — | — | — |  |
 

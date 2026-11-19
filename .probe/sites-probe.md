@@ -60,6 +60,9 @@
 | fuegocine.com | portada | `https://fuegocine.com/` | 200 | 0 | 0 | — |  |
 | fuegocine.com | wp-json | `https://fuegocine.com/wp-json/` | 404 | — | — | — |  |
 | fuegocine.com | buscador | `https://fuegocine.com/?…` | 200 | 0 | 0 | — |  |
+| fuegocine.com | search-elastic | `https://fuegocine.com/search_elastic?…` | 200 | 0 | 0 | — |  |
+| fuegocine.com | ficha-pelicula | `https://fuegocine.com/movies/details/la-odisea/227` | 200 | 0 | 0 | — |  |
+| fuegocine.com | ficha-serie | `https://fuegocine.com/shows/details/visionquest/24` | 200 | 0 | 0 | — |  |
 | animeyt.cc | portada | `https://animeyt.cc/` | 403 cf | — | — | — |  |
 | animeyt.cc | wp-json | `https://animeyt.cc/wp-json/` | 403 cf | — | — | — |  |
 

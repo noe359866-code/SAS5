@@ -15,6 +15,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const fuego = require('../lib/sites/fuegocine');
+const { isDirectMedia } = require('../lib/directMedia');
 
 const fixture = (name) => fs.readFileSync(path.join(__dirname, 'fixtures', 'sites', name), 'utf8');
 const SEARCH = fixture('fuegocine-search.html');
@@ -165,6 +166,9 @@ test('fuegocine película: buscador → watch → visor → HLS latino y subtitu
     assert.ok(out.hits.every((hit) => hit.provider === 'fuegocine' && hit.quality === 'HLS'));
     assert.ok(out.hits.every((hit) => /^https:\/\/unlimplay\.com\/cps\.php/.test(hit.url)));
     assert.ok(out.hits.every((hit) => hit.expiresAt === 1795116600000));
+    // `cps.php?…&x=.m3u8` no lleva la extensión en la ruta: el filtro del
+    // registro también tiene que reconocerlo como medio directo.
+    assert.ok(out.hits.every((hit) => isDirectMedia(hit.url)));
     // No se abre ni videro (Cloudflare) ni abyssplayer (JS).
     assert.ok(!stubbed.calls.some((url) => /videro|abyssplayer/.test(url)));
   } finally { stubbed.restore(); }

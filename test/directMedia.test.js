@@ -13,6 +13,20 @@ test('filtra iframes, anuncios y la antigua ruta del relay; conserva MP4 y HLS',
   assert.equal(isDirectMedia('https://ads.example.org/playlist.m3u8'), false);
   assert.equal(isDirectMedia('javascript:alert(1)'), false);
 });
+
+test('acepta el HLS cuya forma no lleva extensión en la ruta', () => {
+  // El player propio de AnimeFLV sirve el master como token bajo /m3u8/.
+  assert.equal(isDirectMedia('https://player.zilla-networks.com/m3u8/6db32c99cc153255de897d502f9cd079'), true);
+  // UnLimPlay declara la extensión en el parámetro: `x=.m3u8`.
+  assert.equal(isDirectMedia('https://unlimplay.com/cps.php?t=s_668fd14a&e=1795116600&s=94fb74eb&x=.m3u8'), true);
+  assert.equal(isDirectMedia('https://unlimplay.com/cps.php?t=s_668fd14a&x=.mp4'), true);
+  // Lo que no cambia: un relé con la URL dentro del parámetro sigue fuera, y
+  // un segmento suelto bajo /m3u8/ sin token tampoco pasa.
+  assert.equal(isDirectMedia('https://relay.example/hls?u=' + encodeURIComponent('https://cdn.example/master.m3u8')), false);
+  assert.equal(isDirectMedia('https://example.com/m3u8/'), false);
+  assert.equal(isDirectMedia('https://example.com/hls'), false);
+  assert.equal(isDirectMedia('https://unlimplay.com/cps.php?t=x&x=m3u8'), false);
+});
 test('el pipeline no presenta embeds como vídeos y lo informa al diagnóstico', async () => {
   const old = streams.SEARCHERS.fanpelis;
   try {

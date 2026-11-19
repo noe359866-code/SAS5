@@ -7,7 +7,8 @@
  * Ejecuta `lib/sites/*` con peticiones reales desde el runner de GitHub
  * Actions y resume, por título y por fuente, qué devolvió: aceptados, motivo
  * del descarte y peticiones gastadas. No imprime URLs firmadas ni descarga
- * segmentos de vídeo (solo la ficha y el embed).
+ * segmentos de vídeo: de cada enlace publicado se lee solo la primera línea
+ * del manifiesto, para distinguir un HLS real de una página del reproductor.
  *
  * Uso:
  *   node scripts/sites-live.js                       # todos los adaptadores y proveedores
@@ -17,6 +18,7 @@
 
 const fs = require('node:fs');
 const streams = require('../lib/streams');
+const { UA } = require('../lib/extractors');
 const sites = {
   cuevanas3: require('../lib/sites/cuevanas3'),
   animeflv: require('../lib/sites/animeflv'),
@@ -107,6 +109,8 @@ globalThis.fetch = async (url, options = {}) => {
   return response;
 };
 
+const host = (raw) => { try { return new URL(raw).hostname; } catch { return ''; } };
+
 const redact = (raw) => {
   try { const url = new URL(raw); return `${url.origin}${url.pathname}`; } catch { return '—'; }
 };
@@ -177,6 +181,35 @@ async function main() {
         ? hits.map((hit) => `${hit.quality}${hit.audioLabel ? `/${hit.audioLabel}` : ''} ${redact(hit.url)}`).join(' · ')
         : `${result.reason || result.skipped || 'sin motivo'}${result.notes ? ` ${JSON.stringify(result.notes)}` : ''}`;
       console.log(`- ${key}: ${hits.length} hit(s) en ${Date.now() - started} ms → ${verdict}`);
+      // Qué devuelve el enlace publicado: el registro solo acepta formas de
+      // medio, así que se comprueba el contenido de la primera línea. En
+      // UnLimPlay se prueban las cabeceras que cambian la respuesta (el
+      // visor anuncia `x=.m3u8`, pero un GET anónimo devuelve su reproductor).
+      if (hits.length) {
+        const target = hits[0].url;
+        const variants = /(?:^|\.)unlimplay\.com$/.test(host(target))
+          ? [
+            ['UA', {}],
+            ['UA+Referer', { Referer: 'https://unlimplay.com/' }],
+            ['UA+Accept-HLS', { Accept: 'application/vnd.apple.mpegurl,*/*' }],
+          ]
+          : [['UA', {}]];
+        for (const [label, extra] of variants) {
+          try {
+            const probe = await Promise.race([
+              originalFetch(target, { headers: { 'User-Agent': UA, ...extra } }),
+              new Promise((resolve) => setTimeout(() => resolve(null), 8000)),
+            ]);
+            if (!probe) { console.log(`    medio ${label}: sin respuesta en 8 s`); continue; }
+            const body = await probe.text().catch(() => '');
+            const head = body.split('\n').map((line) => line.trim()).filter(Boolean)[0] || '(vacío)';
+            const kind = /^#EXTM3U/.test(head) ? 'HLS' : /^</.test(head) ? 'HTML' : 'otro';
+            console.log(`    medio ${label}: HTTP ${probe.status} ${probe.headers.get('content-type') || '—'} tipo=${kind} → ${head.replace(/[?#].*/, '').slice(0, 60)}`);
+          } catch (err) {
+            console.log(`    medio ${label}: error ${String(err && err.message || err).slice(0, 60)}`);
+          }
+        }
+      }
       // Últimas peticiones de esta fuente, para explicar el descarte.
       const recent = trace.slice(-6).map((entry) => `${entry.status} ${entry.url}${entry.location ? ` → ${entry.location.slice(0, 80)}` : ''}${entry.h1 ? ` h1="${entry.h1.slice(0, 40)}"` : ''}`);
       console.log(`    traza: ${recent.join(' | ')}`);

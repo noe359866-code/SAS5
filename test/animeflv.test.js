@@ -16,6 +16,7 @@ const path = require('node:path');
 const { load } = require('cheerio');
 
 const animeflv = require('../lib/sites/animeflv');
+const { isDirectMedia } = require('../lib/directMedia');
 const cache = require('../lib/cache');
 
 const fixture = (name) => fs.readFileSync(path.join(__dirname, 'fixtures', 'sites', name), 'utf8');
@@ -117,6 +118,9 @@ test('animeflv serie: ficha → episodio → HLS directo del player propio', asy
     assert.equal(hit.quality, 'HLS');
     assert.equal(hit.audioLabel, 'Subtitulado');
     assert.match(hit.title, /S2E7/);
+    // El registro descarta lo que no parece medio directo: el HLS sin
+    // extensión del player propio tiene que pasar ese filtro.
+    assert.equal(isDirectMedia(hit.url), true);
     // El HLS se publica por su forma: no se pide el manifiesto ni se abren los
     // visores opacos que iban detrás en la lista.
     assert.deepEqual(stubbed.calls, [FICHA_URL, EP_URL]);

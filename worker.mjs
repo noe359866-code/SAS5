@@ -35,6 +35,26 @@ import logoData from './lib/logoData.js';
 import configRegistry from './lib/configRegistry.js';
 
 const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
+
+// Manifest web (iconos y color de la marca). El archivo gemelo vive en
+// public/site.webmanifest, que el edge sirve gratis; esto es solo la red de
+// seguridad cuando la petición llega al Worker.
+const SITE_MANIFEST = JSON.stringify({
+  name: 'RamdonLatam · Addon de Stremio',
+  short_name: 'RamdonLatam',
+  description: 'Catálogos de películas y series por plataforma y estudio para Stremio, en español latino.',
+  start_url: '/',
+  scope: '/',
+  display: 'standalone',
+  background_color: '#060f1a',
+  theme_color: '#060f1a',
+  lang: 'es',
+  icons: [
+    { src: '/assets/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+    { src: '/assets/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+    { src: '/assets/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+  ],
+});
 const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+?)(?:\/([^/]+))?\.json$/;
 const META_RE = /^\/meta\/(movie|series)\/(.+)\.json$/;
 const STREAM_RE = /^\/stream\/(movie|series)\/(.+)\.json$/;
@@ -401,7 +421,7 @@ async function handleRequest(request, env, ctx) {
         {
           ok: true,
           addon: 'org.comunidad.catalogos.plus',
-          version: '1.6.1',
+          version: '1.7.0',
           runtime: 'cloudflare-workers',
           configurable: true,
           catalogs: core.CATALOGS.length,
@@ -439,13 +459,28 @@ async function handleRequest(request, env, ctx) {
       );
     }
 
-    // ── Logo embebido ─────────────────────────────────────────
+    // ── Marca embebida ────────────────────────────────────────
+    // El logo va en memoria (lib/logoData.js) para que el manifest y las
+    // cabeceras OG nunca apunten a un archivo que falte. Los demás derivados
+    // (iconos, favicon, tarjeta social) los sirve el edge desde public/assets.
     if (path === '/assets/logo.png' || path === '/logo.png') {
       return new Response(LOGO_BYTES, {
         status: 200,
         headers: corsHeaders({
           'Content-Type': 'image/png',
           'Cache-Control': 'public, max-age=604800, immutable',
+        }),
+      });
+    }
+
+    // Manifest web del sitio: sin esto el navegador pediría /site.webmanifest
+    // al Worker en cada visita (y gastaría cuota). Se responde desde memoria.
+    if (path === '/site.webmanifest') {
+      return new Response(SITE_MANIFEST, {
+        status: 200,
+        headers: corsHeaders({
+          'Content-Type': 'application/manifest+json; charset=utf-8',
+          'Cache-Control': 'public, max-age=86400',
         }),
       });
     }

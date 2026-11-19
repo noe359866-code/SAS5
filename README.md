@@ -2,6 +2,18 @@
 
 Addon gratuito para Stremio con catálogos de películas y series, metadatos en español latino y fuentes de reproducción directa con audio latino o castellano.
 
+<p align="center">
+  <img src="assets/brand/logo-1024.png" alt="RamdonLatam" width="120" height="120" />
+</p>
+
+## Marca y web
+
+La marca es una baraja de tres fichas abanicadas con un botón de reproducción en la de delante: los títulos se barajan, se eligen y se ven. Azul noche (`#0a1e30`) de fondo y el naranja de siempre (`#f5821f`) en las fichas y en el acento de la interfaz.
+
+- **Maestro vectorial:** `assets/brand/logo.svg` es el único archivo que se edita a mano.
+- **Derivados:** `node scripts/brand-assets.mjs` genera `assets/logo.png` (512²), `assets/brand/logo-1024.png`, `assets/icon-192.png`, `assets/icon-512.png`, `assets/favicon.svg`, `assets/og-cover.png` (1200×630), las copias de `public/assets/` y el base64 de `lib/logoData.js` (el logo que el Worker sirve desde memoria).
+- **Web:** la portada y `/configure` comparten el sistema de diseño de `lib/theme.js` (piel «RamdonLatam»: azul noche, foco y acción principal en naranja de marca, cristal azulado y baraja CSS en el hero) y funcionan sin fuentes, CSS ni scripts de terceros. Los iconos y el `site.webmanifest` los sirve el edge desde `public/`.
+
 ## Fuentes de reproducción
 
 **Fanpelis, SpinFlix, GnulaHD, VideoApp y PelisPlus están habilitadas por defecto** (las tres últimas son experimentales). `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha, un iframe o una descarga no son un stream.
@@ -89,6 +101,7 @@ npm run deploy
 npm test
 npm run build:web
 npm run prerender
+node scripts/brand-assets.mjs   # solo si cambia assets/brand/logo.svg
 ```
 
 `npm test` usa respuestas simuladas. Para probar el código contra las webs reales, ejecuta **Tests** (`.github/workflows/providers.yml`) con *Run workflow* en GitHub Actions. También corre al hacer push a una rama `arena/` que modifique los adaptadores o sondas. No requiere claves de TMDB ni despliega el Worker.

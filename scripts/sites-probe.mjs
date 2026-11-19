@@ -119,7 +119,7 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
   seen.add(url);
   const res = await get(url, { headers: referer ? { Referer: referer } : {} });
   const scan = res.status === 200 ? scanHtml(res.body, url) : null;
-  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt|fuegocine/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
+  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt|fuegocine|pelisjuanita/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
     try {
       const fs = await import('node:fs');
       fs.mkdirSync('.probe/html', { recursive: true });
@@ -255,6 +255,20 @@ const SITES = {
       { label: 'ver-watch', url: 'https://fuegocine.com/movies/watch/la-odisea/227' },
       { label: 'ver-play', url: 'https://fuegocine.com/movies/play/la-odisea/227' },
       { label: 'peliculas-lista', url: 'https://fuegocine.com/movies' },
+    ],
+  },
+  pelisjuanita: {
+    name: 'pelisjuanita.org',
+    base: 'https://pelisjuanita.org',
+    pages: [
+      { label: 'portada', url: 'https://pelisjuanita.org/' },
+      { label: 'robots', url: 'https://pelisjuanita.org/robots.txt' },
+      { label: 'sitemap', url: 'https://pelisjuanita.org/sitemap.xml' },
+      { label: 'wp-json', url: 'https://pelisjuanita.org/wp-json/' },
+      { label: 'buscador', url: 'https://pelisjuanita.org/?s=spider-man' },
+      { label: 'buscador-limpio', url: 'https://pelisjuanita.org/buscar?q=spider-man' },
+      { label: 'peliculas', url: 'https://pelisjuanita.org/peliculas' },
+      { label: 'series', url: 'https://pelisjuanita.org/series' },
     ],
   },
   animeyt: {

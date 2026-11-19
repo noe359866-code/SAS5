@@ -1,0 +1,28 @@
+name: Sitios en vivo (sonda de descubrimiento)
+on:
+  workflow_dispatch:
+    inputs:
+      sites:
+        description: 'Sitios separados por espacio (gnulaone ultra tubeonline mirando)'
+        required: false
+        default: ''
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/sites-probe.yml'
+      - 'scripts/sites-probe.mjs'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Descubrimiento (informativo, no despliega)
+        run: node scripts/sites-probe.mjs ${{ inputs.sites }}

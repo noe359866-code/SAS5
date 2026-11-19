@@ -18,7 +18,7 @@
  *
  * Uso:
  *   node scripts/sites-probe.mjs                    # todos los sitios
- *   node scripts/sites-probe.mjs gnulaone ultra     # solo los indicados
+ *   node scripts/sites-probe.mjs tubeonline mirando  # solo los indicados
  */
 
 import { load } from 'cheerio';
@@ -161,22 +161,6 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
 }
 
 const SITES = {
-  gnulaone: {
-    name: 'ver.gnula.one',
-    base: 'https://ver.gnula.one',
-    pages: [
-      { label: 'ficha película', url: 'https://ver.gnula.one/movies/spider-man-un-nuevo-dia/' },
-      { label: 'ficha serie', url: 'https://ver.gnula.one/tvshows/the-last-of-us/' },
-    ],
-  },
-  ultra: {
-    name: 'verpeliculasultra.com',
-    base: 'https://verpeliculasultra.com',
-    pages: [
-      { label: 'ficha película', url: 'https://verpeliculasultra.com/accion/4997-f1-la-pelicula.html' },
-      { label: 'ficha película 2', url: 'https://verpeliculasultra.com/accion/5276-hope.html' },
-    ],
-  },
   tubeonline: {
     name: 'www.tubeonline.net',
     base: 'https://www.tubeonline.net',

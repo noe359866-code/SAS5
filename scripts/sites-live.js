@@ -11,7 +11,7 @@
  *
  * Uso:
  *   node scripts/sites-live.js                       # los cuatro adaptadores
- *   node scripts/sites-live.js tubeonline ultra      # solo esos
+ *   node scripts/sites-live.js tubeonline cuevanas3 # solo esos
  *   node scripts/sites-live.js --json                # escribe .probe/sites-live.json
  */
 
@@ -20,8 +20,6 @@ const streams = require('../lib/streams');
 const sites = {
   tubeonline: require('../lib/sites/tubeonline'),
   mirandogratis: require('../lib/sites/mirandogratis'),
-  gnulaone: require('../lib/sites/gnulaone'),
-  ultra: require('../lib/sites/ultra'),
   cuevanas3: require('../lib/sites/cuevanas3'),
   animeflv: require('../lib/sites/animeflv'),
   fuegocine: require('../lib/sites/fuegocine'),
@@ -66,10 +64,10 @@ globalThis.fetch = async (url, options = {}) => {
     if (at >= 0) context[mark] = text.slice(Math.max(0, at - 120), at + 220);
   }
   // HTML completo de las páginas que importan para corregir selectores,
-  // incluidos los POST (buscador DLE de ultra) y el hub de Fiuxy (gnulaone).
+  // incluidos los POST de los buscadores del sitio.
   if (/html|text/i.test(type) && html.length) {
     const host = (() => { try { return new URL(String(url)).hostname; } catch { return ''; } })();
-    if (/(?:tubeonline|mirandogratis|gnula\.one|verpeliculasultra|fiuxy)/.test(host)) {
+    if (/(?:tubeonline|mirandogratis)/.test(host)) {
       const name = (String(options.method || 'GET') === 'GET' ? '' : 'post-')
         + String(url).replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 80);
       try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync(`.probe/html/live-${name}.html`, html); } catch (_) {}
@@ -118,8 +116,6 @@ const redact = (raw) => {
 const SEARCHERS = {
   tubeonline: (resolved) => sites.tubeonline.searchTubeOnline(null, resolved, resolved.title, 9000),
   mirandogratis: (resolved) => sites.mirandogratis.searchMirandoGratis(null, resolved, resolved.title, 9000),
-  gnulaone: (resolved) => sites.gnulaone.searchGnulaOne(null, resolved, resolved.title, 9000),
-  ultra: (resolved) => sites.ultra.searchUltra(null, resolved, resolved.title, 9000),
   cuevanas3: (resolved) => sites.cuevanas3.searchCuevanas3(null, resolved, resolved.title, 9000),
   animeflv: (resolved) => sites.animeflv.searchAnimeFlv(null, resolved, resolved.title, 9000),
   fuegocine: (resolved) => sites.fuegocine.searchFuegoCine(null, resolved, resolved.title, 9000),
@@ -128,7 +124,7 @@ const SEARCHERS = {
 
 // Proveedores del registro que no son «sitios»: se miden con el mismo control
 // para decidir con datos, en el mismo JSON, si siguen aportando algo.
-const REGISTRY = ['fanpelis', 'spinflix', 'gnulahd', 'videoapp', 'pelisplus'];
+const REGISTRY = ['fanpelis', 'spinflix'];
 for (const key of REGISTRY) {
   if (streams.SEARCHERS[key]) SEARCHERS[key] = (resolved) => streams.SEARCHERS[key](null, resolved, resolved.title, 9000);
 }

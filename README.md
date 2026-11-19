@@ -16,23 +16,24 @@ La marca es una baraja de tres fichas abanicadas con un botón de reproducción 
 
 ## Fuentes de reproducción
 
-**Fanpelis, SpinFlix, GnulaHD, VideoApp y PelisPlus están habilitadas por defecto** (las tres últimas son experimentales). `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha, un iframe o una descarga no son un stream.
+**Ocho fuentes están habilitadas por defecto**: Fanpelis, SpinFlix, TubeOnLine, MirandoGratis, Cuevana 3, AnimeFLV, FuegoCine y PelisJuanita. `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha, un iframe o una descarga no son un stream.
 
 | Clave | Web consultada | Identificación y medios compatibles |
 |---|---|---|
 | `fanpelis` | `fanpelis.to` | API de títulos y episodios; publica el primer HLS de la primera publicación exacta del episodio. |
 | `spinflix` | `lamoviebot.tvymas.workers.dev` | Busca variantes del título y confirma la ficha por ID o por título completo y año compatible. Si falta el episodio en una ficha candidata, comprueba la siguiente sin cambiar de capítulo. |
-| `gnulahd` | `ww3.gnulahd.nu` | Experimental: verifica la ficha o el episodio exacto y solo admite HLS directo publicado en el HTML con etiqueta de audio explícita. [Estado y cómo probarlo](docs/gnulahd.md). |
-| `videoapp` | `videoapp.zip` | Experimental: obtiene el iframe Vimeos por ID TMDB y busca HLS. Solo publica el resultado si el iframe identifica audio latino o castellano; la muestra de Interestelar no lo indica, por lo que se informa `audio-unverified` y no se anuncia como reproducible. |
-| `pelisplus` | `pelisplushd.la` | Experimental, solo películas: busca la ficha y confirma título y año; intenta extraer HLS o MP4 de visores Streamwish/Filelions, VidHide y Dropload conocidos con audio identificado. Los enlaces se entregan tal cual, sin comprobar el CDN. [Detalles](docs/pelisplus.md). |
+| `tubeonline` | `www.tubeonline.net` | Dooplay: ficha de película o serie, episodio por su `numerando`, y cada servidor por `data-post` → `admin-ajax.php`. Extrae Byse y MixDrop; los visores con JS o Cloudflare se cuentan y no se abren. |
+| `mirandogratis` | `mirandogratis.com` | Fichas planas `/<slug>.html` con pestañas de opciones; extrae Byse y MixDrop. Solo películas. |
+| `cuevanas3` | `cuevanas3.pro` | SPA React sobre una API JSON propia (`/wp-api/v1/search`, `/player`): la ficha ya trae idioma y calidad por visor. Resuelve Vimeos y los visores extraíbles. |
+| `animeflv` | `animeflv.or.at` | Anime subtitulado al español: episodios desde el JSON de la ficha y embeds en base64. Publica HLS del player propio y Byse con la etiqueta «Subtitulado». |
 | `fuegocine` | `fuegocine.com` | Busca en `/search_elastic?s=`, confirma título y tipo, abre `/movies/watch/…` (o temporada y episodio en series) y solo lee el visor de UnLimPlay, que declara el audio por grupo (`latino`, `castellano`, `subtitulado`) y publica un HLS firmado por idioma. Videro, abyssplayer y embedorigin se cuentan como opacos sin abrirlos. [Detalles](docs/fuegocine.md). |
 | `pelisjuanita` | `pelisjuanita.org` | SPA con API propia: busca en `/api/rest/v1/search`, confirma tipo y año, y en series pide temporada y episodio a la API antes de abrir `videoapp.mov`. El visor de Vimeos declara la versión (`sub`/`lat`) y entrega un HLS firmado con sus subtítulos. [Detalles](docs/pelisjuanita.md). |
 
 Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro por defecto. Una lista como `fanpelis,spinflix` limita las fuentes; `STREAM_PROVIDERS=off` apaga todas y `FANPELIS=off` desactiva solo Fanpelis. Para pregenerar la web con `npm run build:web`, usa la misma configuración de fuentes que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
 
-**Instalaciones existentes:** las claves se guardan por nombre. Se descartan las fuentes retiradas sin añadir otras a una selección que aún contenga claves vigentes. La clave `pelisplus` vuelve a estar registrada; una configuración antigua que la incluya puede reactivarla. Si una lista antigua solo contiene fuentes retiradas, se aplica el valor por defecto, como antes: las fuentes que permite el despliegue para un enlace personal y el registro actual para `STREAM_PROVIDERS`. Una selección personal vacía (`streams: []`) y `STREAM_PROVIDERS=off` siguen apagando todas las fuentes.
+**Instalaciones existentes:** las claves se guardan por nombre. Se descartan las fuentes retiradas sin añadir otras a una selección que aún contenga claves vigentes. Las claves `gnulahd`, `videoapp`, `pelisplus`, `gnulaone` y `ultra` se retiraron el 19-11-2026: una configuración antigua que las incluya las descarta sin tocar las vigentes. Si una lista antigua solo contiene fuentes retiradas, se aplica el valor por defecto, como antes: las fuentes que permite el despliegue para un enlace personal y el registro actual para `STREAM_PROVIDERS`. Una selección personal vacía (`streams: []`) y `STREAM_PROVIDERS=off` siguen apagando todas las fuentes.
 
-Se retiraron FlixLatam, PlayLatinSRC, AnimeOnlineNinja y Cuevana 3 porque no dieron una ruta de reproducción fiable en los controles. FuegoCine volvió el 19-11-2026 con otro camino: el fallo de entonces era el sitemap, y la ruta que sí publica el medio es la página `/movies/watch/…` con el visor de UnLimPlay. Se conservan los informes históricos de [FlixLatam y Cuevana 3](docs/flixlatam-cuevana.md), [FuegoCine](docs/fuegocine.md) y [PlayLatinSRC](docs/playlatinsrc-2026-11-17.md). Las variables `PLAYLATIN` y `PLAYLATIN_URL` ya no tienen efecto.
+Se retiraron FlixLatam, PlayLatinSRC, AnimeOnlineNinja y Cuevana 3 porque no dieron una ruta de reproducción fiable en los controles. El 19-11-2026 se retiraron también GnulaHD, VideoApp, PelisPlus, GnulaOne y Ultra: entre las dos últimas validaciones en vivo no publicaron ni un medio utilizable en 12 controles, y su historial acumulaba 32 ejecuciones sin un solo resultado (ver [fuentes retiradas](docs/fuentes-retiradas.md)). FuegoCine volvió el 19-11-2026 con otro camino: el fallo de entonces era el sitemap, y la ruta que sí publica el medio es la página `/movies/watch/…` con el visor de UnLimPlay. Se conservan los informes históricos de [FlixLatam y Cuevana 3](docs/flixlatam-cuevana.md), [FuegoCine](docs/fuegocine.md) y [PlayLatinSRC](docs/playlatinsrc-2026-11-17.md). Las variables `PLAYLATIN` y `PLAYLATIN_URL` ya no tienen efecto.
 
 Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. Fanpelis y SpinFlix filtran los visores por idioma y origen antes de usarlos y mantienen un límite de tiempo y peticiones por búsqueda. Si la API o un visor rechaza el acceso, no se intenta resolver el desafío ni se ejecuta JavaScript externo. Los enlaces con vencimiento conocido se retiran con margen. Cuando dos fuentes entregan la misma URL, se publica una sola vez.
 
@@ -110,7 +111,6 @@ node scripts/brand-assets.mjs   # solo si cambia assets/brand/logo.svg
 
 ```sh
 node scripts/providers-live.js                    # controles generales
-node scripts/gnulahd-live.js adapter               # solo GnulaHD experimental
 node scripts/providers-live.js peliculas          # Matrix
 node scripts/providers-live.js series             # Breaking Bad T1E1
 node scripts/providers-live.js extra              # Mufasa: El rey león en Fanpelis

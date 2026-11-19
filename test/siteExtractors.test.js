@@ -15,8 +15,6 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const { extractorFor, sourcesFromHtml, extractEmbed } = require('../lib/extractors');
-const gnula = require('../lib/sites/gnulaone');
-const ultra = require('../lib/sites/ultra');
 const tube = require('../lib/sites/tubeonline');
 const mirando = require('../lib/sites/mirandogratis');
 
@@ -160,71 +158,10 @@ test('extractEmbed: un visor desconocido no gasta peticiones', async () => {
 
 // ── Proveedores de sitio ─────────────────────────────────────────────────
 
-test('gnulaone: slug, candidatos y enlaces trembed de la ficha medida', () => {
-  assert.equal(gnula.slugify('Spider-Man: Un nuevo día'), 'spider-man-un-nuevo-dia');
-  assert.deepEqual(gnula.candidatePages(['Spider-Man: Un nuevo día'], '2026', 'movie'), [
-    'https://ver.gnula.one/movies/spider-man-un-nuevo-dia/',
-    'https://ver.gnula.one/movies/spider-man-un-nuevo-dia-2026/',
-  ]);
-  const { load } = require('cheerio');
-  const $ = load(fixture('gnula-movie.html'));
-  const links = gnula.embedLinks($, 'https://ver.gnula.one/movies/spider-man-un-nuevo-dia/');
-  assert.equal(links.length, 4, 'solo los ?trembed, sin repetir');
-  assert.equal(links[0].label, 'Latino · Links');
-  assert.equal(gnula.audioFromLink(links[0].label), 'Latino');
-  assert.equal(gnula.audioFromLink(links[3].label), 'Castellano');
-  assert.equal(gnula.matchDetail($, ['Spider-Man: Un nuevo día'], '2026', 'movie'), true);
-  assert.equal(gnula.matchDetail($, ['Otra película'], '2026', 'movie'), false);
-});
 
-test('gnulaone: sigue trembed → hub y no gasta peticiones en visores opacos', async () => {
-  const stub = stubFetch({
-    'https://ver.gnula.one/movies/spider-man-un-nuevo-dia/': fixture('gnula-movie.html'),
-    're:^https://ver\\.gnula\\.one/\\?trembed=': fixture('gnula-trembed.html'),
-    'https://links.fiuxy2.com/play/': `<button data-src="https://streamwish.to/e/opaco1#lang=LAT">Streamwish</button>
-      <button data-src="https://mixdrop.top/e/mkkkzkqla6x18g#lang=LAT">MixDrop</button>`,
-    'https://mixdrop.top/e/': fixture('mixdrop-embed.html'),
-  });
-  try {
-    const result = await gnula.searchGnulaOne('x', { title: 'Spider-Man: Un nuevo día', year: '2026', mediaType: 'movie' }, undefined, 4000);
-    assert.ok(Array.isArray(result.hits), JSON.stringify(result));
-    assert.equal(result.hits.length, 1, 'solo el visor extraíble');
-    assert.equal(result.hits[0].audioLabel, 'Latino');
-    assert.match(result.hits[0].url, /mxcontent\.net\/v2\/mkkkzkqla6x18g\.mp4/);
-    assert.ok(!stub.calls.some((call) => call.url.includes('streamwish')), 'no se abre el visor opaco');
-  } finally { stub.restore(); }
-});
 
-test('gnulaone: una serie sin enlaces de episodio se declara, no se inventa', async () => {
-  const stub = stubFetch({});
-  const result = await gnula.searchGnulaOne('x', { title: 'The Last of Us', year: '2023', mediaType: 'series', season: 1, episode: 1 }, undefined, 2000);
-  stub.restore();
-  assert.equal(result.skipped, 'series-needs-js');
-});
 
-test('ultra: identidad por ficha (h1 + f-info) y pestañas de idioma', () => {
-  const { load } = require('cheerio');
-  const $ = load(fixture('ultra-hope.html'));
-  assert.equal(ultra.matchMovie($, { title: 'Hope', altTitle: 'Hopeu', year: '2026' }), true);
-  assert.equal(ultra.matchMovie($, { title: 'Otra', year: '2026' }), false);
-  assert.equal(ultra.matchMovie($, { title: 'Hope', year: '2020' }), false);
-  const blocks = ultra.playerBlocks($, 'https://verpeliculasultra.com/accion/5276-hope.html');
-  assert.deepEqual(blocks.map((b) => b.language), ['Latino', 'Español', 'Subtitulada', 'Subtitulada']);
-  assert.equal(blocks[0].url, 'https://hgcloud.to/e/aiy9yqjwoul5');
-  assert.equal(blocks[1].url, 'https://powvideo.org/embed-99ess8o65y66-800x400.html');
-});
 
-test('ultra: solo películas; el año ya no es obligatorio (buscador DLE)', async () => {
-  assert.equal((await ultra.searchUltra('x', { title: 'Hope', mediaType: 'series', year: '2026' })).skipped, 'series-not-supported');
-  // Sin año el buscador DLE sigue funcionando: busca y no encuentra nada.
-  const stub = stubFetch({});
-  try {
-    const result = await ultra.searchUltra('x', { title: 'Hope', mediaType: 'movie' });
-    assert.equal(result.reason, 'no-match');
-    assert.ok(stub.calls.some((call) => call.method === 'POST' && /do=search/.test(call.body)),
-      'el buscador DLE es un POST con do=search');
-  } finally { stub.restore(); }
-});
 
 test('tubeonline: episodio exacto por numerando y servidores por data-post', () => {
   const { load } = require('cheerio');

@@ -69,7 +69,11 @@ reproductor en lugar del manifiesto, así que la comprobación de la sonda usa l
 cabeceras de un reproductor, no las de una página.
 
 Lo que el addon sigue sin hacer: abrir el manifiesto ni comprobar segmentos. Si
-el CDN devuelve 403 a un cliente concreto, se descubre al reproducir.
+el CDN devuelve 403 a un cliente concreto, se descubre al reproducir, y el
+visor no es constante: en la misma pasada, los enlaces de *La Odisea*
+respondieron **502** con cualquier cabecera mientras los de *VisionQuest* y
+*Spider-Man* devolvían el manifiesto. Es un fallo del CDN de UnLimPlay, no del
+adaptador; los enlaces caducan por `e` y se retiran antes de tiempo.
 
 ## Diagnóstico del primer intento (histórico)
 

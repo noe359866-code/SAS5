@@ -51,6 +51,8 @@
 | cuevanas3.pro | chunk-api | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/index-CSASIiGL.js` | 200 | 0 | 0 | — |  |
 | cuevanas3.pro | chunk-related | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Related-3DG9WZ8k.js` | 200 | 0 | 0 | — |  |
 | cuevanas3.pro | chunk-listing | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Listing-B0UcKnlU.js` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | chunk-tvshow | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/TvShow-3EzNr2_O.js` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | chunk-archive | `https://cuevanas3.pro/wp-content/themes/cuevana/assets/build/static/assets/Archive-KaP3wzuX.js` | 200 | 0 | 0 | — |  |
 | animed23.com | portada | `https://animed23.com/` | 403 cf | — | — | — |  |
 | animejara.com | portada | `http://animejara.com/` | 403 cf | — | — | — |  |
 

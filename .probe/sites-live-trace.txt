@@ -1,9 +1,29 @@
 200	application/json	88	https://v3-cinemeta.strem.io/meta/movie/tt33033798.json		
-200	text/html	12680	https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/		
-200	text/html	12685	https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia-2026/		
-200	text/html	12572	https://www.tubeonline.net/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa		
-200	text/html	12545	https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa		
-200	text/html	12517	https://mirandogratis.com/spider-man-un-nuevo-dia.html		
+200	text/html	64668	https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/		Spider-Man: Un nuevo día
+200	embed	0	embed-host: bysejikuar.com		
+200	application/json	90	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	byse	2359	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742		
+200	application/json	2359	https://bysejikuar.com/api/videos/01j37fv5s579		
+200	embed	0	embed-host: streamtape.com		
+200	application/json	97	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+404	text/html	21283	https://streamtape.com/e/YZzOKDljYacvDbG/SM1NDA.1080_CAS.mp4		Video not found!
+200	embed	0	embed-host: bysejikuar.com		
+200	application/json	90	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	byse	2357	byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742		
+200	application/json	2357	https://bysejikuar.com/api/videos/309n27lec3zn		
+200	embed	0	embed-host: streamtape.com		
+200	application/json	97	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+404	text/html	21283	https://streamtape.com/e/j7AO39kJkKhze2B/SM1NDA.1080_LAT.mp4		Video not found!
+200	embed	0	embed-host: vidara.to		
+200	application/json	69	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: vidmoly.org		
+200	application/json	78	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: luluvido.com		
+200	application/json	71	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: vidara.to		
+200	application/json	69	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	text/html	23808	https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa		Estas buscando: Spider-Man: Un nuevo día
+301	text/html	0	https://mirandogratis.com/spider-man-un-nuevo-dia.html	https://mirandogratis.com	
 200	text/html	128538	https://ver.gnula.one/movies/spider-man-un-nuevo-dia/		Ver Spider-Man: Un nuevo día (2026) online
 200	text/html	1051	https://ver.gnula.one/?trembed=2&trid=53363&trtype=1		
 200	text/html	2886	https://links.fiuxy2.com/play/NMB2zwFeBWYf1ruC.html		
@@ -13,24 +33,42 @@
 200	text/html	42017	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	147803	https://verpeliculasultra.com/xfsearch/peliculas-2026/		
 200	application/json	2628	https://v3-cinemeta.strem.io/meta/movie/tt1375666.json		
-200	text/html	12581	https://www.tubeonline.net/pelicula/inception/		
-200	text/html	12566	https://www.tubeonline.net/pelicula/inception-2010/		
-200	text/html	12554	https://www.tubeonline.net/?s=Inception		
-200	text/html	12536	https://mirandogratis.com/?s=Inception		
-200	text/html	12534	https://mirandogratis.com/inception.html		
+404	text/html	34091	https://www.tubeonline.net/pelicula/inception/		Pagina no se encuentra
+404	text/html	34096	https://www.tubeonline.net/pelicula/inception-2010/		Pagina no se encuentra
+200	text/html	60153	https://www.tubeonline.net/?s=Inception		Resultados encontrados: Inception
+200	text/html	22619	https://mirandogratis.com/?s=Inception		Estas buscando: Inception
+301	text/html	0	https://mirandogratis.com/inception.html	https://mirandogratis.com	
 301	text/html	0	https://ver.gnula.one/movies/inception/	https://ver.gnula.one	
 301	text/html	0	https://ver.gnula.one/movies/inception-2010/	https://ver.gnula.one	
 200	text/html	42004	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	43744	https://verpeliculasultra.com/xfsearch/peliculas-2010/		
 200	application/json	1705	https://api.tvmaze.com/lookup/shows?imdb=tt0903747		
-200	text/html	12570	https://www.tubeonline.net/serie/breaking-bad/		
-200	text/html	12570	https://www.tubeonline.net/?s=Breaking%20Bad		
+200	text/html	75817	https://www.tubeonline.net/serie/breaking-bad/		Breaking Bad
+200	text/html	47363	https://www.tubeonline.net/episodio/breaking-bad-1x1/		Breaking Bad: 1x1
+200	embed	0	embed-host: hqq.ac		
+200	application/json	85	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: hqq.ac		
+200	application/json	85	https://www.tubeonline.net/wp-admin/admin-ajax.php		
 200	application/json	2716	https://v3-cinemeta.strem.io/meta/movie/tt18412256.json		
-200	text/html	12574	https://www.tubeonline.net/pelicula/alien-romulus/		
-200	text/html	12579	https://www.tubeonline.net/pelicula/alien-romulus-2024/		
-200	text/html	12576	https://www.tubeonline.net/?s=Alien%3A%20Romulus		
-200	text/html	12483	https://mirandogratis.com/?s=Alien%3A%20Romulus		
-200	text/html	12472	https://mirandogratis.com/alien-romulus.html		
+200	text/html	56275	https://www.tubeonline.net/pelicula/alien-romulus/		Alien: Romulus
+200	embed	0	embed-host: swiftload.io		
+200	application/json	70	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: filemoon.sx		
+200	application/json	92	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: vidmoly.to		
+200	application/json	77	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: swiftload.io		
+200	application/json	70	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: filemoon.sx		
+200	application/json	91	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: vidmoly.to		
+200	application/json	77	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: swiftload.io		
+200	application/json	70	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: filemoon.sx		
+200	application/json	92	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	text/html	23593	https://mirandogratis.com/?s=Alien%3A%20Romulus		Estas buscando: Alien: Romulus
+200	text/html	26414	https://mirandogratis.com/alien-romulus.html		Ver Pelicula Alien: Romulus Online Gratis en Español Latino Completa
 200	text/html	141330	https://ver.gnula.one/movies/alien-romulus/		Ver Alien: Romulus (2024) online
 200	text/html	1067	https://ver.gnula.one/?trembed=0&trid=49552&trtype=1		
 301	text/html	167	https://links.cuevana.ac/play/dEZQdkR3c3V1M2RXYTBkb1hZRm13QT09.html	https://links.fiuxy2.com/play/dEZQdkR3c3V1M2RXYTBkb1hZRm13QT09.html	301 Moved Permanently
@@ -40,24 +78,38 @@
 200	text/html	46437	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	148084	https://verpeliculasultra.com/xfsearch/peliculas-2024/		
 200	text/html	58880	https://verpeliculasultra.com/ciencia-ficcion/4702-alien-romulus.html		Ver Alien: Romulus (2024) Online Gratis
-200	text/html	228620	https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09		
-200	text/html	228518	https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09		
+200	text/html	228977	https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09		
+200	text/html	228480	https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09		
 200	application/json	2645	https://v3-cinemeta.strem.io/meta/movie/tt6263850.json		
-200	text/html	12538	https://www.tubeonline.net/pelicula/deadpool-wolverine/		
-200	text/html	12543	https://www.tubeonline.net/pelicula/deadpool-wolverine-2024/		
-200	text/html	12575	https://www.tubeonline.net/?s=Deadpool%20%26%20Wolverine		
-200	text/html	12487	https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine		
-200	text/html	12517	https://mirandogratis.com/deadpool-wolverine.html		
+200	text/html	63124	https://www.tubeonline.net/pelicula/deadpool-wolverine/		Deadpool &#038; Wolverine
+200	embed	0	embed-host: filemoon.sx		
+200	application/json	91	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: vidmoly.to		
+200	application/json	77	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: luluvdo.com		
+200	application/json	70	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: filemoon.sx		
+200	application/json	93	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: vidmoly.to		
+200	application/json	77	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: luluvdo.com		
+200	application/json	70	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: filemoon.sx		
+200	application/json	93	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	embed	0	embed-host: vidmoly.to		
+200	application/json	77	https://www.tubeonline.net/wp-admin/admin-ajax.php		
+200	text/html	23726	https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine		Estas buscando: Deadpool &amp; Wolverine
+200	text/html	25396	https://mirandogratis.com/deadpool-wolverine.html		Ver Pelicula Deadpool &#038; Wolverine Online Gratis en Español Latino Completa
 301	text/html	0	https://ver.gnula.one/movies/deadpool-wolverine/	https://ver.gnula.one	
 301	text/html	0	https://ver.gnula.one/movies/deadpool-wolverine-2024/	https://ver.gnula.one	
 200	text/html	46508	https://verpeliculasultra.com/		Buscar en la página web
 200	text/html	148084	https://verpeliculasultra.com/xfsearch/peliculas-2024/		
 200	application/json	2848	https://v3-cinemeta.strem.io/meta/movie/tt22022452.json		
-200	text/html	12548	https://www.tubeonline.net/pelicula/inside-out-2/		
-200	text/html	12553	https://www.tubeonline.net/pelicula/inside-out-2-2024/		
-200	text/html	12549	https://www.tubeonline.net/?s=Inside%20Out%202		
-200	text/html	12596	https://mirandogratis.com/?s=Inside%20Out%202		
-200	text/html	12586	https://mirandogratis.com/inside-out-2.html		
+404	text/html	34094	https://www.tubeonline.net/pelicula/inside-out-2/		Pagina no se encuentra
+404	text/html	34099	https://www.tubeonline.net/pelicula/inside-out-2-2024/		Pagina no se encuentra
+200	text/html	60665	https://www.tubeonline.net/?s=Inside%20Out%202		Resultados encontrados: Inside Out 2
+200	text/html	23592	https://mirandogratis.com/?s=Inside%20Out%202		Estas buscando: Inside Out 2
+301	text/html	0	https://mirandogratis.com/inside-out-2.html	https://mirandogratis.com	
 301	text/html	0	https://ver.gnula.one/movies/inside-out-2/	https://ver.gnula.one	
 301	text/html	0	https://ver.gnula.one/movies/inside-out-2-2024/	https://ver.gnula.one	
 200	text/html	46398	https://verpeliculasultra.com/		Buscar en la página web

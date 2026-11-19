@@ -12,7 +12,7 @@
       "200 embed-host: vidara.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 5648,
+    "ms": 3634,
     "quality": [
       "HLS",
       "HLS"
@@ -40,7 +40,7 @@
       "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
       "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
     ],
-    "ms": 1149,
+    "ms": 1356,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -59,7 +59,7 @@
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 2327,
+    "ms": 2659,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -78,7 +78,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 2087,
+    "ms": 1963,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -93,11 +93,11 @@
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=57851",
-      "301 https://cuevana3.gs/player.php?t=BHXl3G0QylJS1pSzKhQd1JzQnKu3Ktl1I48qxKsDZuUcihafI30VEYtLwa2PRzrFWLMB4XcvtHNRW7mmj3ttlw&server=vimeos → https://cuevanas3.pro/player.php?t=BHXl3G0QylJS1pSzKhQd1JzQnKu3Ktl1I48qxKsDZuUci h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=BHXl3G0QylJS1pSzKhQd1JzQnKu3Ktl1I48qxKsDZuUcihafI30VEYtLwa2PRzrFWLMB4XcvtHNRW7mmj3ttlw&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCmnRJ5SkrRwlMK7VMgUUjiKyyQMjL3p45up1RiwV8Xg&server=vimeos → https://cuevanas3.pro/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCm h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCmnRJ5SkrRwlMK7VMgUUjiKyyQMjL3p45up1RiwV8Xg&server=vimeos",
       "200 https://vimeos.net/embed-2nulhg4mnuz7.html"
     ],
-    "ms": 3279,
+    "ms": 2231,
     "quality": [
       "HLS"
     ],
@@ -105,9 +105,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://p2.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p2.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt33033798",
@@ -116,13 +116,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=57851",
-      "301 https://cuevana3.gs/player.php?t=BHXl3G0QylJS1pSzKhQd1JzQnKu3Ktl1I48qxKsDZuUcihafI30VEYtLwa2PRzrFWLMB4XcvtHNRW7mmj3ttlw&server=vimeos → https://cuevanas3.pro/player.php?t=BHXl3G0QylJS1pSzKhQd1JzQnKu3Ktl1I48qxKsDZuUci h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=BHXl3G0QylJS1pSzKhQd1JzQnKu3Ktl1I48qxKsDZuUcihafI30VEYtLwa2PRzrFWLMB4XcvtHNRW7mmj3ttlw&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCmnRJ5SkrRwlMK7VMgUUjiKyyQMjL3p45up1RiwV8Xg&server=vimeos → https://cuevanas3.pro/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCm h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCmnRJ5SkrRwlMK7VMgUUjiKyyQMjL3p45up1RiwV8Xg&server=vimeos",
       "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
       "404 https://animeflv.or.at/anime/spider-man-un-nuevo-dia/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/spider-man-un-nuevo-dia/ h1=\"Search Results for \"spider-man-un-nuevo-\""
     ],
-    "ms": 556,
+    "ms": 813,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -132,32 +132,20 @@
     "control": "tt33033798",
     "title": "Spider-Man: Un nuevo día",
     "provider": "fuegocine",
-    "hits": 3,
+    "hits": 0,
     "trace": [
+      "301 https://cuevana3.gs/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCmnRJ5SkrRwlMK7VMgUUjiKyyQMjL3p45up1RiwV8Xg&server=vimeos → https://cuevanas3.pro/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCm h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCmnRJ5SkrRwlMK7VMgUUjiKyyQMjL3p45up1RiwV8Xg&server=vimeos",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
       "404 https://animeflv.or.at/anime/spider-man-un-nuevo-dia/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/spider-man-un-nuevo-dia/ h1=\"Search Results for \"spider-man-un-nuevo-\"",
-      "200 https://fuegocine.com/search_elastic?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa",
-      "200 https://fuegocine.com/movies/watch/spider-man-un-nuevo-d%C3%ADa/140",
-      "302 https://unlimplay.com/f/embed/movie/969681 → /f/embed/movie/969681?_et=9016114811aa671eb3ce78ee3a35f81e",
-      "200 https://unlimplay.com/f/embed/movie/969681?_et=9016114811aa671eb3ce78ee3a35f81e"
+      "200 https://fuegocine.com/search_elastic?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa"
     ],
-    "ms": 2328,
-    "quality": [
-      "HLS",
-      "HLS",
-      "HLS"
-    ],
-    "audio": [
-      "Latino",
-      "Castellano",
-      "Subtitulado"
-    ],
-    "hosts": [
-      "https://unlimplay.com/cps.php",
-      "https://unlimplay.com/cps.php",
-      "https://unlimplay.com/cps.php"
-    ],
-    "verdict": "HLS/Latino https://unlimplay.com/cps.php · HLS/Castellano https://unlimplay.com/cps.php · HLS/Subtitulado https://unlimplay.com/cps.php"
+    "ms": 9002,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "error:Timeout de 8521 ms al consultar https://fuegocine.com/movies"
   },
   {
     "control": "tt33033798",
@@ -165,14 +153,14 @@
     "provider": "pelisjuanita",
     "hits": 1,
     "trace": [
-      "200 https://fuegocine.com/movies/watch/spider-man-un-nuevo-d%C3%ADa/140",
-      "302 https://unlimplay.com/f/embed/movie/969681 → /f/embed/movie/969681?_et=9016114811aa671eb3ce78ee3a35f81e",
-      "200 https://unlimplay.com/f/embed/movie/969681?_et=9016114811aa671eb3ce78ee3a35f81e",
+      "404 https://animeflv.or.at/anime/spider-man-un-nuevo-dia/ h1=\"Página no encontrada\"",
+      "200 https://animeflv.or.at/search/spider-man-un-nuevo-dia/ h1=\"Search Results for \"spider-man-un-nuevo-\"",
+      "200 https://fuegocine.com/search_elastic?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa",
       "200 https://pelisjuanita.org/api/rest/v1/search?q=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa&page=1",
       "200 https://videoapp.mov/e/movie/969681",
       "200 https://vimeos.net/embed-2nulhg4mnuz7.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 794,
+    "ms": 1415,
     "quality": [
       "HLS"
     ],
@@ -180,9 +168,9 @@
       "Subtitulado"
     ],
     "hosts": [
-      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://p2.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Subtitulado https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Subtitulado https://p2.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt33033798",
@@ -197,7 +185,7 @@
       "200 https://fanpelis.to/api/rest/player?post_id=63465&_any=1",
       "200 https://fanpelis.to/api/rest/search?query=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa&post_type=movies&posts_per_page=8"
     ],
-    "ms": 986,
+    "ms": 1074,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -216,7 +204,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/pelicula/spider-man-un-nuevo-dia-2026",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Spider-Man&page=1"
     ],
-    "ms": 2875,
+    "ms": 2314,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -235,7 +223,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Spider-Man&page=1",
       "200 https://ww3.gnulahd.nu/ver/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\""
     ],
-    "ms": 805,
+    "ms": 856,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -247,18 +235,18 @@
     "provider": "videoapp",
     "hits": 0,
     "trace": [
-      "200 https://fanpelis.to/api/rest/player?post_id=63465&_any=1",
-      "200 https://fanpelis.to/api/rest/search?query=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa&post_type=movies&posts_per_page=8",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa&page=1",
       "200 https://lamoviebot.tvymas.workers.dev/pelicula/spider-man-un-nuevo-dia-2026",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Spider-Man&page=1",
-      "200 https://ww3.gnulahd.nu/ver/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\""
+      "200 https://ww3.gnulahd.nu/ver/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
+      "200 https://videoapp.zip/e/movie/969681",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 1,
+    "ms": 925,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "tmdb-or-episode-required"
+    "verdict": "audio-unverified"
   },
   {
     "control": "tt33033798",
@@ -266,14 +254,14 @@
     "provider": "pelisplus",
     "hits": 0,
     "trace": [
-      "200 https://lamoviebot.tvymas.workers.dev/search?q=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa&page=1",
-      "200 https://lamoviebot.tvymas.workers.dev/pelicula/spider-man-un-nuevo-dia-2026",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Spider-Man&page=1",
       "200 https://ww3.gnulahd.nu/ver/spider-man-un-nuevo-dia/ h1=\"Spider-Man: Un nuevo día\"",
+      "200 https://videoapp.zip/e/movie/969681",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://pelisplushd.la/search?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Pelisplus\"",
       "200 https://pelisplushd.la/search?s=Spider-Man h1=\"Pelisplus\""
     ],
-    "ms": 387,
+    "ms": 306,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -292,7 +280,7 @@
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
     ],
-    "ms": 672,
+    "ms": 663,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -311,7 +299,7 @@
       "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
     ],
-    "ms": 1014,
+    "ms": 1028,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -330,7 +318,7 @@
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 1089,
+    "ms": 1034,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -349,7 +337,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 899,
+    "ms": 1272,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -368,7 +356,7 @@
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 377,
+    "ms": 1190,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -387,7 +375,7 @@
       "404 https://animeflv.or.at/anime/inception/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/inception/ h1=\"Search Results for \"inception\"\""
     ],
-    "ms": 782,
+    "ms": 439,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -406,7 +394,7 @@
       "200 https://animeflv.or.at/search/inception/ h1=\"Search Results for \"inception\"\"",
       "200 https://fuegocine.com/search_elastic?s=Inception"
     ],
-    "ms": 267,
+    "ms": 285,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -425,7 +413,7 @@
       "200 https://fuegocine.com/search_elastic?s=Inception",
       "200 https://pelisjuanita.org/api/rest/v1/search?q=Inception&page=1"
     ],
-    "ms": 241,
+    "ms": 299,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -444,7 +432,7 @@
       "200 https://pelisjuanita.org/api/rest/v1/search?q=Inception&page=1",
       "200 https://fanpelis.to/api/rest/search?query=Inception&post_type=movies&posts_per_page=8"
     ],
-    "ms": 476,
+    "ms": 471,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -463,7 +451,7 @@
       "200 https://fanpelis.to/api/rest/search?query=Inception&post_type=movies&posts_per_page=8",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Inception&page=1"
     ],
-    "ms": 1309,
+    "ms": 386,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -482,7 +470,7 @@
       "404 https://ww3.gnulahd.nu/ver/inception/ h1=\"Página no encontrada\"",
       "404 https://ww3.gnulahd.nu/ver/inception-2010/ h1=\"Página no encontrada\""
     ],
-    "ms": 1171,
+    "ms": 558,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -520,7 +508,7 @@
       "404 https://ww3.gnulahd.nu/ver/inception-2010/ h1=\"Página no encontrada\"",
       "200 https://pelisplushd.la/search?s=Inception h1=\"Pelisplus\""
     ],
-    "ms": 413,
+    "ms": 161,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -539,7 +527,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 920,
+    "ms": 761,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -611,11 +599,11 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=73&season=1&page=1&postsPerPage=50",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=76",
-      "301 https://cuevana3.gs/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHzfBZCZaWwFSq73M9liSjLGMb9zwy0Vt7ZLqAH5Hb9g&server=vimeos → https://cuevanas3.pro/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHz h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHzfBZCZaWwFSq73M9liSjLGMb9zwy0Vt7ZLqAH5Hb9g&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pmoiKbeH0lGUlHRf_ccWbIF2kQe67ePatpVfOHYxblA&server=vimeos → https://cuevanas3.pro/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pm h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pmoiKbeH0lGUlHRf_ccWbIF2kQe67ePatpVfOHYxblA&server=vimeos",
       "200 https://vimeos.net/embed-ccjygcfxujhd.html"
     ],
-    "ms": 2172,
+    "ms": 1922,
     "quality": [
       "HLS"
     ],
@@ -634,13 +622,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=76",
-      "301 https://cuevana3.gs/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHzfBZCZaWwFSq73M9liSjLGMb9zwy0Vt7ZLqAH5Hb9g&server=vimeos → https://cuevanas3.pro/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHz h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHzfBZCZaWwFSq73M9liSjLGMb9zwy0Vt7ZLqAH5Hb9g&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pmoiKbeH0lGUlHRf_ccWbIF2kQe67ePatpVfOHYxblA&server=vimeos → https://cuevanas3.pro/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pm h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pmoiKbeH0lGUlHRf_ccWbIF2kQe67ePatpVfOHYxblA&server=vimeos",
       "200 https://vimeos.net/embed-ccjygcfxujhd.html",
       "404 https://animeflv.or.at/anime/breaking-bad/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/breaking-bad/ h1=\"Search Results for \"breaking-bad\"\""
     ],
-    "ms": 617,
+    "ms": 446,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -652,14 +640,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHzfBZCZaWwFSq73M9liSjLGMb9zwy0Vt7ZLqAH5Hb9g&server=vimeos → https://cuevanas3.pro/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHz h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHzfBZCZaWwFSq73M9liSjLGMb9zwy0Vt7ZLqAH5Hb9g&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pmoiKbeH0lGUlHRf_ccWbIF2kQe67ePatpVfOHYxblA&server=vimeos → https://cuevanas3.pro/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pm h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pmoiKbeH0lGUlHRf_ccWbIF2kQe67ePatpVfOHYxblA&server=vimeos",
       "200 https://vimeos.net/embed-ccjygcfxujhd.html",
       "404 https://animeflv.or.at/anime/breaking-bad/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/breaking-bad/ h1=\"Search Results for \"breaking-bad\"\"",
       "200 https://fuegocine.com/search_elastic?s=Breaking%20Bad"
     ],
-    "ms": 259,
+    "ms": 310,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -678,7 +666,7 @@
       "200 https://videoapp.mov/e/tv/1396/1/1",
       "200 https://vimeos.net/embed-ccjygcfxujhd.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 1707,
+    "ms": 1917,
     "quality": [
       "HLS"
     ],
@@ -686,9 +674,9 @@
       "Subtitulado"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+      "https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Subtitulado https://p3.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Subtitulado https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt0903747:1:1",
@@ -703,7 +691,7 @@
       "200 https://fanpelis.to/api/rest/player?post_id=26785&_any=1",
       "200 https://vimeos.net/embed-ccjygcfxujhd.html"
     ],
-    "ms": 2369,
+    "ms": 1865,
     "quality": [
       "HLS"
     ],
@@ -711,9 +699,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt0903747:1:1",
@@ -728,7 +716,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/serie/breaking-bad-2008/1/1",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-ccjygcfxujhd.html"
     ],
-    "ms": 5279,
+    "ms": 2918,
     "quality": [
       "HLS"
     ],
@@ -736,9 +724,9 @@
       "Lat"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+      "https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Lat https://p3.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Lat https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt0903747:1:1",
@@ -753,7 +741,7 @@
       "200 https://ww3.gnulahd.nu/ver/breaking-bad/ h1=\"Breaking Bad\"",
       "200 https://ww3.gnulahd.nu/breaking-bad-1x01/ h1=\"Ver Breaking Bad 1×01 Online — Piloto\""
     ],
-    "ms": 1246,
+    "ms": 1002,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -765,18 +753,18 @@
     "provider": "videoapp",
     "hits": 0,
     "trace": [
-      "200 https://lamoviebot.tvymas.workers.dev/search?q=Breaking%20Bad&page=1",
-      "200 https://lamoviebot.tvymas.workers.dev/serie/breaking-bad-2008",
       "200 https://lamoviebot.tvymas.workers.dev/serie/breaking-bad-2008/1/1",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-ccjygcfxujhd.html",
       "200 https://ww3.gnulahd.nu/ver/breaking-bad/ h1=\"Breaking Bad\"",
-      "200 https://ww3.gnulahd.nu/breaking-bad-1x01/ h1=\"Ver Breaking Bad 1×01 Online — Piloto\""
+      "200 https://ww3.gnulahd.nu/breaking-bad-1x01/ h1=\"Ver Breaking Bad 1×01 Online — Piloto\"",
+      "200 https://videoapp.zip/e/tv/1396/1/1",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 1,
+    "ms": 819,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "tmdb-or-episode-required"
+    "verdict": "audio-unverified"
   },
   {
     "control": "tt0903747:1:1",
@@ -784,14 +772,14 @@
     "provider": "pelisplus",
     "hits": 0,
     "trace": [
-      "200 https://lamoviebot.tvymas.workers.dev/search?q=Breaking%20Bad&page=1",
-      "200 https://lamoviebot.tvymas.workers.dev/serie/breaking-bad-2008",
       "200 https://lamoviebot.tvymas.workers.dev/serie/breaking-bad-2008/1/1",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-ccjygcfxujhd.html",
       "200 https://ww3.gnulahd.nu/ver/breaking-bad/ h1=\"Breaking Bad\"",
-      "200 https://ww3.gnulahd.nu/breaking-bad-1x01/ h1=\"Ver Breaking Bad 1×01 Online — Piloto\""
+      "200 https://ww3.gnulahd.nu/breaking-bad-1x01/ h1=\"Ver Breaking Bad 1×01 Online — Piloto\"",
+      "200 https://videoapp.zip/e/tv/1396/1/1",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -810,7 +798,7 @@
       "200 embed-host: filemoon.sx",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2434,
+    "ms": 1924,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -829,7 +817,7 @@
       "200 https://mirandogratis.com/?s=Alien%3A%20Romulus h1=\"Estas buscando: Alien: Romulus\"",
       "200 https://mirandogratis.com/alien-romulus.html h1=\"Ver Pelicula Alien: Romulus Online Grati\""
     ],
-    "ms": 1174,
+    "ms": 978,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -848,7 +836,7 @@
       "200 https://ver.gnula.one/?trembed=4&trid=49552&trtype=1",
       "200 https://filemoon.sx/e/gtl2mhgw4is7"
     ],
-    "ms": 1929,
+    "ms": 3180,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -867,7 +855,7 @@
       "200 https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09",
       "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09"
     ],
-    "ms": 3170,
+    "ms": 2421,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -882,11 +870,11 @@
       "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=45223",
-      "301 https://cuevana3.gs/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9sCvl89T7BR65Tsjp073qCG48MUxoSffBPFKLfKhDUg&server=vimeos → https://cuevanas3.pro/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9s h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9sCvl89T7BR65Tsjp073qCG48MUxoSffBPFKLfKhDUg&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysEYDpWcfDL_EhUWsmdBy2KA3Nl1N-wZ0uup0GAVet7g&server=vimeos → https://cuevanas3.pro/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysE h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysEYDpWcfDL_EhUWsmdBy2KA3Nl1N-wZ0uup0GAVet7g&server=vimeos",
       "200 https://vimeos.net/embed-uhuu5myzvdub.html"
     ],
-    "ms": 1984,
+    "ms": 1387,
     "quality": [
       "HLS"
     ],
@@ -894,9 +882,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
@@ -905,13 +893,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=45223",
-      "301 https://cuevana3.gs/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9sCvl89T7BR65Tsjp073qCG48MUxoSffBPFKLfKhDUg&server=vimeos → https://cuevanas3.pro/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9s h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9sCvl89T7BR65Tsjp073qCG48MUxoSffBPFKLfKhDUg&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysEYDpWcfDL_EhUWsmdBy2KA3Nl1N-wZ0uup0GAVet7g&server=vimeos → https://cuevanas3.pro/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysE h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysEYDpWcfDL_EhUWsmdBy2KA3Nl1N-wZ0uup0GAVet7g&server=vimeos",
       "200 https://vimeos.net/embed-uhuu5myzvdub.html",
       "404 https://animeflv.or.at/anime/alien-romulus/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/alien-romulus/ h1=\"Search Results for \"alien-romulus\"\""
     ],
-    "ms": 480,
+    "ms": 534,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -923,14 +911,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9sCvl89T7BR65Tsjp073qCG48MUxoSffBPFKLfKhDUg&server=vimeos → https://cuevanas3.pro/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9s h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9sCvl89T7BR65Tsjp073qCG48MUxoSffBPFKLfKhDUg&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysEYDpWcfDL_EhUWsmdBy2KA3Nl1N-wZ0uup0GAVet7g&server=vimeos → https://cuevanas3.pro/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysE h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysEYDpWcfDL_EhUWsmdBy2KA3Nl1N-wZ0uup0GAVet7g&server=vimeos",
       "200 https://vimeos.net/embed-uhuu5myzvdub.html",
       "404 https://animeflv.or.at/anime/alien-romulus/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/alien-romulus/ h1=\"Search Results for \"alien-romulus\"\"",
       "200 https://fuegocine.com/search_elastic?s=Alien%3A%20Romulus"
     ],
-    "ms": 311,
+    "ms": 384,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -949,7 +937,7 @@
       "200 https://videoapp.mov/e/movie/945961",
       "200 https://vimeos.net/embed-uhuu5myzvdub.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 782,
+    "ms": 749,
     "quality": [
       "HLS"
     ],
@@ -974,7 +962,7 @@
       "200 https://fanpelis.to/api/rest/player?post_id=16761&_any=1",
       "200 https://vimeos.net/embed-uhuu5myzvdub.html"
     ],
-    "ms": 1637,
+    "ms": 2336,
     "quality": [
       "HLS"
     ],
@@ -982,9 +970,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
@@ -999,7 +987,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/pelicula/alien-romulus-2024",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-uhuu5myzvdub.html"
     ],
-    "ms": 2776,
+    "ms": 2867,
     "quality": [
       "HLS"
     ],
@@ -1007,9 +995,9 @@
       "Lat"
     ],
     "hosts": [
-      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Lat https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Lat https://vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
@@ -1024,7 +1012,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-uhuu5myzvdub.html",
       "200 https://ww3.gnulahd.nu/ver/alien-romulus/ h1=\"Alien: Romulus\""
     ],
-    "ms": 594,
+    "ms": 524,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1036,18 +1024,18 @@
     "provider": "videoapp",
     "hits": 0,
     "trace": [
-      "200 https://fanpelis.to/api/rest/player?post_id=16761&_any=1",
-      "200 https://vimeos.net/embed-uhuu5myzvdub.html",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Alien%3A%20Romulus&page=1",
       "200 https://lamoviebot.tvymas.workers.dev/pelicula/alien-romulus-2024",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-uhuu5myzvdub.html",
-      "200 https://ww3.gnulahd.nu/ver/alien-romulus/ h1=\"Alien: Romulus\""
+      "200 https://ww3.gnulahd.nu/ver/alien-romulus/ h1=\"Alien: Romulus\"",
+      "200 https://videoapp.zip/e/movie/945961",
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 1,
+    "ms": 540,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "tmdb-or-episode-required"
+    "verdict": "audio-unverified"
   },
   {
     "control": "tt18412256",
@@ -1055,14 +1043,14 @@
     "provider": "pelisplus",
     "hits": 0,
     "trace": [
-      "200 https://lamoviebot.tvymas.workers.dev/search?q=Alien%3A%20Romulus&page=1",
-      "200 https://lamoviebot.tvymas.workers.dev/pelicula/alien-romulus-2024",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-uhuu5myzvdub.html",
       "200 https://ww3.gnulahd.nu/ver/alien-romulus/ h1=\"Alien: Romulus\"",
+      "200 https://videoapp.zip/e/movie/945961",
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://pelisplushd.la/search?s=Alien%3A%20Romulus h1=\"Pelisplus\"",
       "200 https://pelisplushd.la/search?s=Alien h1=\"Pelisplus\""
     ],
-    "ms": 517,
+    "ms": 275,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1081,7 +1069,7 @@
       "200 embed-host: vidmoly.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2001,
+    "ms": 1894,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1100,7 +1088,7 @@
       "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
       "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\""
     ],
-    "ms": 1317,
+    "ms": 1376,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1119,7 +1107,7 @@
       "301 https://ver.gnula.one/movies/deadpool-wolverine/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/deadpool-wolverine-2024/ → https://ver.gnula.one"
     ],
-    "ms": 1094,
+    "ms": 1054,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1138,7 +1126,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 1074,
+    "ms": 1516,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1153,11 +1141,11 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Deadpool+Wolverine&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Deadpool&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=39639",
-      "301 https://cuevana3.gs/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsjctaGd9ux9MKikACpo760r3DoWp7CfUDeujMHjjvyQ&server=vimeos → https://cuevanas3.pro/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsj h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsjctaGd9ux9MKikACpo760r3DoWp7CfUDeujMHjjvyQ&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_KlbhTCRK1nzV76mbM67vVpgdzsiElu3r8GgUYhb1Q&server=vimeos → https://cuevanas3.pro/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_ h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_KlbhTCRK1nzV76mbM67vVpgdzsiElu3r8GgUYhb1Q&server=vimeos",
       "200 https://vimeos.net/embed-tmbjqufb955w.html"
     ],
-    "ms": 2990,
+    "ms": 2561,
     "quality": [
       "HLS"
     ],
@@ -1176,13 +1164,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=39639",
-      "301 https://cuevana3.gs/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsjctaGd9ux9MKikACpo760r3DoWp7CfUDeujMHjjvyQ&server=vimeos → https://cuevanas3.pro/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsj h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsjctaGd9ux9MKikACpo760r3DoWp7CfUDeujMHjjvyQ&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_KlbhTCRK1nzV76mbM67vVpgdzsiElu3r8GgUYhb1Q&server=vimeos → https://cuevanas3.pro/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_ h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_KlbhTCRK1nzV76mbM67vVpgdzsiElu3r8GgUYhb1Q&server=vimeos",
       "200 https://vimeos.net/embed-tmbjqufb955w.html",
       "404 https://animeflv.or.at/anime/deadpool-wolverine/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/deadpool-wolverine/ h1=\"Search Results for \"deadpool-wolverine\"\""
     ],
-    "ms": 439,
+    "ms": 470,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1194,14 +1182,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsjctaGd9ux9MKikACpo760r3DoWp7CfUDeujMHjjvyQ&server=vimeos → https://cuevanas3.pro/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsj h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsjctaGd9ux9MKikACpo760r3DoWp7CfUDeujMHjjvyQ&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_KlbhTCRK1nzV76mbM67vVpgdzsiElu3r8GgUYhb1Q&server=vimeos → https://cuevanas3.pro/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_ h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_KlbhTCRK1nzV76mbM67vVpgdzsiElu3r8GgUYhb1Q&server=vimeos",
       "200 https://vimeos.net/embed-tmbjqufb955w.html",
       "404 https://animeflv.or.at/anime/deadpool-wolverine/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/deadpool-wolverine/ h1=\"Search Results for \"deadpool-wolverine\"\"",
       "200 https://fuegocine.com/search_elastic?s=Deadpool%20%26%20Wolverine"
     ],
-    "ms": 273,
+    "ms": 299,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1220,7 +1208,7 @@
       "200 https://videoapp.mov/e/movie/533535",
       "200 https://vimeos.net/embed-tmbjqufb955w.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 741,
+    "ms": 714,
     "quality": [
       "HLS"
     ],
@@ -1228,9 +1216,9 @@
       "Subtitulado"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+      "https://p2.vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Subtitulado https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Subtitulado https://p2.vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt6263850",
@@ -1245,7 +1233,7 @@
       "200 https://vimeos.net/embed-tmbjqufb955w.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://fanpelis.to/api/rest/search?query=Deadpool%20%26%20Wolverine&post_type=movies&posts_per_page=8"
     ],
-    "ms": 435,
+    "ms": 456,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1264,7 +1252,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/pelicula/deadpool-wolverine-2024",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-tmbjqufb955w.html"
     ],
-    "ms": 3984,
+    "ms": 1741,
     "quality": [
       "HLS"
     ],
@@ -1289,7 +1277,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-tmbjqufb955w.html",
       "200 https://ww3.gnulahd.nu/ver/deadpool-wolverine/ h1=\"Deadpool &#038; Wolverine\""
     ],
-    "ms": 1283,
+    "ms": 527,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1301,18 +1289,18 @@
     "provider": "videoapp",
     "hits": 0,
     "trace": [
-      "200 https://vimeos.net/embed-tmbjqufb955w.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
-      "200 https://fanpelis.to/api/rest/search?query=Deadpool%20%26%20Wolverine&post_type=movies&posts_per_page=8",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Deadpool%20%26%20Wolverine&page=1",
       "200 https://lamoviebot.tvymas.workers.dev/pelicula/deadpool-wolverine-2024",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-tmbjqufb955w.html",
-      "200 https://ww3.gnulahd.nu/ver/deadpool-wolverine/ h1=\"Deadpool &#038; Wolverine\""
+      "200 https://ww3.gnulahd.nu/ver/deadpool-wolverine/ h1=\"Deadpool &#038; Wolverine\"",
+      "200 https://videoapp.zip/e/movie/533535",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 1,
+    "ms": 557,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "tmdb-or-episode-required"
+    "verdict": "audio-unverified"
   },
   {
     "control": "tt6263850",
@@ -1320,14 +1308,14 @@
     "provider": "pelisplus",
     "hits": 0,
     "trace": [
-      "200 https://fanpelis.to/api/rest/search?query=Deadpool%20%26%20Wolverine&post_type=movies&posts_per_page=8",
-      "200 https://lamoviebot.tvymas.workers.dev/search?q=Deadpool%20%26%20Wolverine&page=1",
       "200 https://lamoviebot.tvymas.workers.dev/pelicula/deadpool-wolverine-2024",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-tmbjqufb955w.html",
       "200 https://ww3.gnulahd.nu/ver/deadpool-wolverine/ h1=\"Deadpool &#038; Wolverine\"",
+      "200 https://videoapp.zip/e/movie/533535",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://pelisplushd.la/search?s=Deadpool%20%26%20Wolverine h1=\"Pelisplus\""
     ],
-    "ms": 198,
+    "ms": 151,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1339,14 +1327,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "200 https://ww3.gnulahd.nu/ver/deadpool-wolverine/ h1=\"Deadpool &#038; Wolverine\"",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://pelisplushd.la/search?s=Deadpool%20%26%20Wolverine h1=\"Pelisplus\"",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt22022452.json",
       "404 https://www.tubeonline.net/pelicula/inside-out-2/ h1=\"Pagina no se encuentra\"",
       "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\""
     ],
-    "ms": 1118,
+    "ms": 670,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1365,7 +1353,7 @@
       "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
       "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com"
     ],
-    "ms": 1769,
+    "ms": 1278,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1384,7 +1372,7 @@
       "301 https://ver.gnula.one/movies/inside-out-2/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inside-out-2-2024/ → https://ver.gnula.one"
     ],
-    "ms": 1158,
+    "ms": 1119,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1403,7 +1391,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 922,
+    "ms": 1411,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1422,7 +1410,7 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 845,
+    "ms": 661,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1441,7 +1429,7 @@
       "404 https://animeflv.or.at/anime/inside-out-2/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/inside-out-2/ h1=\"Search Results for \"inside-out-2\"\""
     ],
-    "ms": 419,
+    "ms": 429,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1460,7 +1448,7 @@
       "200 https://animeflv.or.at/search/inside-out-2/ h1=\"Search Results for \"inside-out-2\"\"",
       "200 https://fuegocine.com/search_elastic?s=Inside%20Out%202"
     ],
-    "ms": 283,
+    "ms": 289,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1479,7 +1467,7 @@
       "200 https://fuegocine.com/search_elastic?s=Inside%20Out%202",
       "200 https://pelisjuanita.org/api/rest/v1/search?q=Inside%20Out%202&page=1"
     ],
-    "ms": 262,
+    "ms": 299,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1498,7 +1486,7 @@
       "200 https://pelisjuanita.org/api/rest/v1/search?q=Inside%20Out%202&page=1",
       "200 https://fanpelis.to/api/rest/search?query=Inside%20Out%202&post_type=movies&posts_per_page=8"
     ],
-    "ms": 773,
+    "ms": 470,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1517,7 +1505,7 @@
       "200 https://fanpelis.to/api/rest/search?query=Inside%20Out%202&post_type=movies&posts_per_page=8",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Inside%20Out%202&page=1"
     ],
-    "ms": 834,
+    "ms": 518,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1536,7 +1524,7 @@
       "404 https://ww3.gnulahd.nu/ver/inside-out-2/ h1=\"Página no encontrada\"",
       "404 https://ww3.gnulahd.nu/ver/inside-out-2-2024/ h1=\"Página no encontrada\""
     ],
-    "ms": 1424,
+    "ms": 534,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1548,18 +1536,18 @@
     "provider": "videoapp",
     "hits": 0,
     "trace": [
-      "200 https://fuegocine.com/search_elastic?s=Inside%20Out%202",
-      "200 https://pelisjuanita.org/api/rest/v1/search?q=Inside%20Out%202&page=1",
       "200 https://fanpelis.to/api/rest/search?query=Inside%20Out%202&post_type=movies&posts_per_page=8",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Inside%20Out%202&page=1",
       "404 https://ww3.gnulahd.nu/ver/inside-out-2/ h1=\"Página no encontrada\"",
-      "404 https://ww3.gnulahd.nu/ver/inside-out-2-2024/ h1=\"Página no encontrada\""
+      "404 https://ww3.gnulahd.nu/ver/inside-out-2-2024/ h1=\"Página no encontrada\"",
+      "200 https://videoapp.zip/e/movie/1022789",
+      "200 https://vimeos.net/embed-q61bcyylnprb.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 1,
+    "ms": 545,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "tmdb-or-episode-required"
+    "verdict": "audio-unverified"
   },
   {
     "control": "tt22022452",
@@ -1567,14 +1555,14 @@
     "provider": "pelisplus",
     "hits": 0,
     "trace": [
-      "200 https://pelisjuanita.org/api/rest/v1/search?q=Inside%20Out%202&page=1",
-      "200 https://fanpelis.to/api/rest/search?query=Inside%20Out%202&post_type=movies&posts_per_page=8",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Inside%20Out%202&page=1",
       "404 https://ww3.gnulahd.nu/ver/inside-out-2/ h1=\"Página no encontrada\"",
       "404 https://ww3.gnulahd.nu/ver/inside-out-2-2024/ h1=\"Página no encontrada\"",
+      "200 https://videoapp.zip/e/movie/1022789",
+      "200 https://vimeos.net/embed-q61bcyylnprb.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://pelisplushd.la/search?s=Inside%20Out%202 h1=\"Pelisplus\""
     ],
-    "ms": 192,
+    "ms": 141,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1586,14 +1574,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "404 https://ww3.gnulahd.nu/ver/inside-out-2/ h1=\"Página no encontrada\"",
-      "404 https://ww3.gnulahd.nu/ver/inside-out-2-2024/ h1=\"Página no encontrada\"",
+      "200 https://videoapp.zip/e/movie/1022789",
+      "200 https://vimeos.net/embed-q61bcyylnprb.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://pelisplushd.la/search?s=Inside%20Out%202 h1=\"Pelisplus\"",
       "404 https://www.tubeonline.net/pelicula/el-reino-prohibido/ h1=\"Pagina no se encuentra\"",
       "404 https://www.tubeonline.net/pelicula/el-reino-prohibido-2008/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=El%20reino%20prohibido h1=\"Resultados encontrados: El reino prohibi\""
     ],
-    "ms": 1141,
+    "ms": 611,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1608,11 +1596,11 @@
       "200 https://www.tubeonline.net/?s=El%20reino%20prohibido h1=\"Resultados encontrados: El reino prohibi\"",
       "200 https://mirandogratis.com/?s=El%20reino%20prohibido h1=\"Estas buscando: El reino prohibido\"",
       "200 https://mirandogratis.com/el-reino-prohibido.html h1=\"Ver Pelicula El reino prohibido Online G\"",
-      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742",
+      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=740",
       "200 https://byseraguci.com/api/videos/yml5zxa71gkc",
       "302 https://mixdrop.top/e/wlllp17rtn9m7o → https://mxdrop.click/e/wlllp17rtn9m7o h1=\"302 Found\""
     ],
-    "ms": 1874,
+    "ms": 1991,
     "quality": [
       "HLS"
     ],
@@ -1637,7 +1625,7 @@
       "301 https://uqload.com/embed-i8zq52o28bqu.html → https://uqload.vc/embed-i8zq52o28bqu.html?utm_source=mirror_com& h1=\"301 Moved Permanently\"",
       "200 https://uqload.vc/embed-i8zq52o28bqu.html?utm_source=mirror_com&"
     ],
-    "ms": 2030,
+    "ms": 2231,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1656,7 +1644,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "404 https://verpeliculasultra.com/xfsearch/peliculas-2008/"
     ],
-    "ms": 804,
+    "ms": 967,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1671,11 +1659,11 @@
       "404 https://verpeliculasultra.com/xfsearch/peliculas-2008/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=56111",
-      "301 https://cuevana3.gs/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm73LOTPvSYVny2qQW-Qnwq90_notXvfoqEwfXvK1HA&server=vimeos → https://cuevanas3.pro/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm73LOTPvSYVny2qQW-Qnwq90_notXvfoqEwfXvK1HA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPBMkAZaEd__81jR9axadn-1kccZZVtVPTo04KXbNLrw&server=vimeos → https://cuevanas3.pro/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPB h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPBMkAZaEd__81jR9axadn-1kccZZVtVPTo04KXbNLrw&server=vimeos",
       "200 https://vimeos.net/embed-o0unqe46z0g7.html"
     ],
-    "ms": 1639,
+    "ms": 1521,
     "quality": [
       "HLS"
     ],
@@ -1694,13 +1682,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=56111",
-      "301 https://cuevana3.gs/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm73LOTPvSYVny2qQW-Qnwq90_notXvfoqEwfXvK1HA&server=vimeos → https://cuevanas3.pro/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm73LOTPvSYVny2qQW-Qnwq90_notXvfoqEwfXvK1HA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPBMkAZaEd__81jR9axadn-1kccZZVtVPTo04KXbNLrw&server=vimeos → https://cuevanas3.pro/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPB h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPBMkAZaEd__81jR9axadn-1kccZZVtVPTo04KXbNLrw&server=vimeos",
       "200 https://vimeos.net/embed-o0unqe46z0g7.html",
       "404 https://animeflv.or.at/anime/el-reino-prohibido/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/el-reino-prohibido/ h1=\"Search Results for \"el-reino-prohibido\"\""
     ],
-    "ms": 715,
+    "ms": 822,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1712,14 +1700,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm73LOTPvSYVny2qQW-Qnwq90_notXvfoqEwfXvK1HA&server=vimeos → https://cuevanas3.pro/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm73LOTPvSYVny2qQW-Qnwq90_notXvfoqEwfXvK1HA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPBMkAZaEd__81jR9axadn-1kccZZVtVPTo04KXbNLrw&server=vimeos → https://cuevanas3.pro/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPB h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPBMkAZaEd__81jR9axadn-1kccZZVtVPTo04KXbNLrw&server=vimeos",
       "200 https://vimeos.net/embed-o0unqe46z0g7.html",
       "404 https://animeflv.or.at/anime/el-reino-prohibido/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/el-reino-prohibido/ h1=\"Search Results for \"el-reino-prohibido\"\"",
       "200 https://fuegocine.com/search_elastic?s=El%20reino%20prohibido"
     ],
-    "ms": 311,
+    "ms": 407,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1738,7 +1726,7 @@
       "200 https://videoapp.mov/e/movie/1729",
       "200 https://vimeos.net/embed-o0unqe46z0g7.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 702,
+    "ms": 1323,
     "quality": [
       "HLS"
     ],
@@ -1746,9 +1734,9 @@
       "Subtitulado"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+      "https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Subtitulado https://p3.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Subtitulado https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "El reino prohibido",
@@ -1763,7 +1751,7 @@
       "200 https://fanpelis.to/api/rest/search?query=reino%20prohibido&post_type=movies&posts_per_page=8",
       "200 https://fanpelis.to/api/rest/player?post_id=61800&_any=1"
     ],
-    "ms": 878,
+    "ms": 919,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1782,7 +1770,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/pelicula/el-reino-prohibido-2008",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=reino%20prohibido&page=1"
     ],
-    "ms": 2035,
+    "ms": 1314,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1801,7 +1789,7 @@
       "404 https://ww3.gnulahd.nu/ver/el-reino-prohibido/ h1=\"Página no encontrada\"",
       "404 https://ww3.gnulahd.nu/ver/el-reino-prohibido-2008/ h1=\"Página no encontrada\""
     ],
-    "ms": 1235,
+    "ms": 517,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1839,7 +1827,7 @@
       "200 https://pelisplushd.la/search?s=El%20reino%20prohibido h1=\"Pelisplus\"",
       "200 https://pelisplushd.la/search?s=reino%20prohibido h1=\"Pelisplus\""
     ],
-    "ms": 609,
+    "ms": 285,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1858,7 +1846,7 @@
       "404 https://www.tubeonline.net/serie/naruto/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Naruto h1=\"Resultados encontrados: Naruto\""
     ],
-    "ms": 606,
+    "ms": 531,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1930,11 +1918,11 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=20794&season=1&page=1&postsPerPage=50",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=20797",
-      "301 https://cuevana3.gs/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS63l0kIT85NoQ3jPpaLco_I3t2kvirlSOZDQPnpmhA&server=vimeos → https://cuevanas3.pro/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS63l0kIT85NoQ3jPpaLco_I3t2kvirlSOZDQPnpmhA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6uivIK82hR6NkwYDM0hvPRG7EK_3zlGm-mTYYKb9AA&server=vimeos → https://cuevanas3.pro/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6uivIK82hR6NkwYDM0hvPRG7EK_3zlGm-mTYYKb9AA&server=vimeos",
       "200 https://vimeos.net/embed-wa2r4s768i9k.html"
     ],
-    "ms": 3628,
+    "ms": 1627,
     "quality": [
       "HLS"
     ],
@@ -1942,9 +1930,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+      "https://p2.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    "verdict": "HLS/Latino https://p2.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
   },
   {
     "control": "tt0409591:1:1",
@@ -1953,13 +1941,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=20797",
-      "301 https://cuevana3.gs/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS63l0kIT85NoQ3jPpaLco_I3t2kvirlSOZDQPnpmhA&server=vimeos → https://cuevanas3.pro/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS63l0kIT85NoQ3jPpaLco_I3t2kvirlSOZDQPnpmhA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6uivIK82hR6NkwYDM0hvPRG7EK_3zlGm-mTYYKb9AA&server=vimeos → https://cuevanas3.pro/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6uivIK82hR6NkwYDM0hvPRG7EK_3zlGm-mTYYKb9AA&server=vimeos",
       "200 https://vimeos.net/embed-wa2r4s768i9k.html",
       "404 https://animeflv.or.at/anime/naruto/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/naruto/ h1=\"Search Results for \"naruto\"\""
     ],
-    "ms": 423,
+    "ms": 1118,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1971,14 +1959,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS63l0kIT85NoQ3jPpaLco_I3t2kvirlSOZDQPnpmhA&server=vimeos → https://cuevanas3.pro/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS63l0kIT85NoQ3jPpaLco_I3t2kvirlSOZDQPnpmhA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6uivIK82hR6NkwYDM0hvPRG7EK_3zlGm-mTYYKb9AA&server=vimeos → https://cuevanas3.pro/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6uivIK82hR6NkwYDM0hvPRG7EK_3zlGm-mTYYKb9AA&server=vimeos",
       "200 https://vimeos.net/embed-wa2r4s768i9k.html",
       "404 https://animeflv.or.at/anime/naruto/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/naruto/ h1=\"Search Results for \"naruto\"\"",
       "200 https://fuegocine.com/search_elastic?s=Naruto"
     ],
-    "ms": 250,
+    "ms": 290,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1997,7 +1985,7 @@
       "200 https://videoapp.mov/e/anime/46260/1/1",
       "200 https://vimeos.net/embed-wa2r4s768i9k.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 1151,
+    "ms": 1301,
     "quality": [
       "HLS"
     ],
@@ -2005,9 +1993,9 @@
       "Subtitulado"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+      "https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
     ],
-    "verdict": "HLS/Subtitulado https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    "verdict": "HLS/Subtitulado https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
   },
   {
     "control": "tt0409591:1:1",
@@ -2022,7 +2010,7 @@
       "200 https://fanpelis.to/api/rest/player?post_id=3808&_any=1",
       "200 https://vimeos.net/embed-wa2r4s768i9k.html"
     ],
-    "ms": 4163,
+    "ms": 1293,
     "quality": [
       "HLS"
     ],
@@ -2030,9 +2018,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+      "https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
   },
   {
     "control": "tt0409591:1:1",
@@ -2047,7 +2035,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/anime/naruto-2002/1/1",
       "200 https://lamoviebot.tvymas.workers.dev/streamurl?url=https%3A%2F%2Fvimeos.net%2Fembed-wa2r4s768i9k.html"
     ],
-    "ms": 6972,
+    "ms": 3339,
     "quality": [
       "HLS"
     ],
@@ -2055,9 +2043,9 @@
       "Lat"
     ],
     "hosts": [
-      "https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+      "https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
     ],
-    "verdict": "HLS/Lat https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    "verdict": "HLS/Lat https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
   },
   {
     "control": "tt0409591:1:1",
@@ -2072,7 +2060,7 @@
       "200 https://ww3.gnulahd.nu/ver/naruto/ h1=\"Naruto\"",
       "200 https://ww3.gnulahd.nu/naruto-1x01/ h1=\"Ver Naruto 1×01 Online — Entra en escena\""
     ],
-    "ms": 825,
+    "ms": 785,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2129,7 +2117,7 @@
       "404 https://www.tubeonline.net/serie/ao-ashi-season-2/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Ao%20Ashi%20Season%202 h1=\"Resultados encontrados: Ao Ashi Season 2\""
     ],
-    "ms": 558,
+    "ms": 574,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2167,7 +2155,7 @@
       "404 https://www.tubeonline.net/serie/ao-ashi-season-2/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Ao%20Ashi%20Season%202 h1=\"Resultados encontrados: Ao Ashi Season 2\""
     ],
-    "ms": 1,
+    "ms": 0,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2205,7 +2193,7 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 936,
+    "ms": 754,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2224,7 +2212,7 @@
       "200 https://animeflv.or.at/anime/ao-ashi-season-2/ h1=\"Ao Ashi Season 2\"",
       "200 https://animeflv.or.at/2026/11/15/ao-ashi-season-2-episodio-7/ h1=\"Ao Ashi Season 2 Episodio 7 Sub Español\""
     ],
-    "ms": 333,
+    "ms": 336,
     "quality": [
       "HLS"
     ],
@@ -2249,7 +2237,7 @@
       "200 https://animeflv.or.at/2026/11/15/ao-ashi-season-2-episodio-7/ h1=\"Ao Ashi Season 2 Episodio 7 Sub Español\"",
       "200 https://fuegocine.com/search_elastic?s=Ao%20Ashi%20Season%202"
     ],
-    "ms": 253,
+    "ms": 285,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2268,7 +2256,7 @@
       "200 https://fuegocine.com/search_elastic?s=Ao%20Ashi%20Season%202",
       "200 https://pelisjuanita.org/api/rest/v1/search?q=Ao%20Ashi%20Season%202&page=1"
     ],
-    "ms": 240,
+    "ms": 292,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2287,7 +2275,7 @@
       "200 https://pelisjuanita.org/api/rest/v1/search?q=Ao%20Ashi%20Season%202&page=1",
       "200 https://fanpelis.to/api/rest/search?query=Ao%20Ashi%20Season%202&post_type=tvshows%2Canimes&posts_per_page=8"
     ],
-    "ms": 462,
+    "ms": 400,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2306,7 +2294,7 @@
       "200 https://fanpelis.to/api/rest/search?query=Ao%20Ashi%20Season%202&post_type=tvshows%2Canimes&posts_per_page=8",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Ao%20Ashi%20Season%202&page=1"
     ],
-    "ms": 361,
+    "ms": 529,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2325,7 +2313,7 @@
       "404 https://ww3.gnulahd.nu/ver/ao-ashi-season-2/ h1=\"Página no encontrada\"",
       "404 https://ww3.gnulahd.nu/ver/ao-ashi-season-2-2026/ h1=\"Página no encontrada\""
     ],
-    "ms": 1092,
+    "ms": 530,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2344,7 +2332,7 @@
       "404 https://ww3.gnulahd.nu/ver/ao-ashi-season-2/ h1=\"Página no encontrada\"",
       "404 https://ww3.gnulahd.nu/ver/ao-ashi-season-2-2026/ h1=\"Página no encontrada\""
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2363,7 +2351,7 @@
       "404 https://ww3.gnulahd.nu/ver/ao-ashi-season-2/ h1=\"Página no encontrada\"",
       "404 https://ww3.gnulahd.nu/ver/ao-ashi-season-2-2026/ h1=\"Página no encontrada\""
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2382,7 +2370,7 @@
       "404 https://www.tubeonline.net/serie/black-clover-2nd-season/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Black%20Clover%202nd%20Season h1=\"Resultados encontrados: Black Clover 2nd\""
     ],
-    "ms": 725,
+    "ms": 656,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2458,7 +2446,7 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 1249,
+    "ms": 1456,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2477,7 +2465,7 @@
       "200 https://animeflv.or.at/anime/black-clover-2nd-season/ h1=\"Black Clover 2nd Season\"",
       "200 https://animeflv.or.at/2026/11/14/black-clover-2nd-season-episodio-7/ h1=\"Black Clover 2nd Season Episodio 7 Sub E\""
     ],
-    "ms": 466,
+    "ms": 625,
     "quality": [
       "HLS"
     ],
@@ -2502,7 +2490,7 @@
       "200 https://animeflv.or.at/2026/11/14/black-clover-2nd-season-episodio-7/ h1=\"Black Clover 2nd Season Episodio 7 Sub E\"",
       "200 https://fuegocine.com/search_elastic?s=Black%20Clover%202nd%20Season"
     ],
-    "ms": 264,
+    "ms": 290,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2521,7 +2509,7 @@
       "200 https://fuegocine.com/search_elastic?s=Black%20Clover%202nd%20Season",
       "200 https://pelisjuanita.org/api/rest/v1/search?q=Black%20Clover%202nd%20Season&page=1"
     ],
-    "ms": 664,
+    "ms": 297,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2540,7 +2528,7 @@
       "200 https://pelisjuanita.org/api/rest/v1/search?q=Black%20Clover%202nd%20Season&page=1",
       "200 https://fanpelis.to/api/rest/search?query=Black%20Clover%202nd%20Season&post_type=tvshows%2Canimes&posts_per_page=8"
     ],
-    "ms": 377,
+    "ms": 602,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2559,7 +2547,7 @@
       "200 https://fanpelis.to/api/rest/search?query=Black%20Clover%202nd%20Season&post_type=tvshows%2Canimes&posts_per_page=8",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Black%20Clover%202nd%20Season&page=1"
     ],
-    "ms": 692,
+    "ms": 512,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2578,7 +2566,7 @@
       "404 https://ww3.gnulahd.nu/ver/black-clover-2nd-season/ h1=\"Página no encontrada\"",
       "404 https://ww3.gnulahd.nu/ver/black-clover-2nd-season-2026/ h1=\"Página no encontrada\""
     ],
-    "ms": 1207,
+    "ms": 510,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2635,7 +2623,7 @@
       "200 embed-host: luluvdo.com",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2039,
+    "ms": 2087,
     "quality": [
       "HLS"
     ],
@@ -2660,7 +2648,7 @@
       "200 https://byseraguci.com/api/videos/lp12frkrgwny",
       "302 https://mixdrop.top/e/1nn9zd10tprg3w → https://mxdrop.click/e/1nn9zd10tprg3w h1=\"302 Found\""
     ],
-    "ms": 1688,
+    "ms": 2301,
     "quality": [
       "HLS"
     ],
@@ -2685,7 +2673,7 @@
       "301 https://ver.gnula.one/movies/la-odisea/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/la-odisea-2026/ → https://ver.gnula.one"
     ],
-    "ms": 1224,
+    "ms": 1131,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2704,7 +2692,7 @@
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://verpeliculasultra.com/accion/5260-la-odisea.html h1=\"Ver La Odisea (2026) Online Gratis\""
     ],
-    "ms": 1445,
+    "ms": 1928,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2719,11 +2707,11 @@
       "200 https://verpeliculasultra.com/accion/5260-la-odisea.html h1=\"Ver La Odisea (2026) Online Gratis\"",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=La+Odisea&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=53108",
-      "301 https://cuevana3.gs/player.php?t=ua-e89HVYlP0_wmvZzkCdgBVG3gPZ_gSQBmoPUjUEmL1riJ9rnmXq0nmL6s9cgIoecH4p_PkFFJXxoO-FjL_EA&server=vimeos → https://cuevanas3.pro/player.php?t=ua-e89HVYlP0_wmvZzkCdgBVG3gPZ_gSQBmoPUjUEmL1r h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=ua-e89HVYlP0_wmvZzkCdgBVG3gPZ_gSQBmoPUjUEmL1riJ9rnmXq0nmL6s9cgIoecH4p_PkFFJXxoO-FjL_EA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=KVVz7XDUJ9OgV-w4bPg_bEcKPvgMxHivsbHPEdQ7Fajm6hruqJ6iVqFNJgKNSq2baqeh7iqjqorm1EBnQ6GzSg&server=vimeos → https://cuevanas3.pro/player.php?t=KVVz7XDUJ9OgV-w4bPg_bEcKPvgMxHivsbHPEdQ7Fajm6 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=KVVz7XDUJ9OgV-w4bPg_bEcKPvgMxHivsbHPEdQ7Fajm6hruqJ6iVqFNJgKNSq2baqeh7iqjqorm1EBnQ6GzSg&server=vimeos",
       "200 https://vimeos.net/embed-m62pdrnlvwpw.html"
     ],
-    "ms": 1440,
+    "ms": 1847,
     "quality": [
       "HLS"
     ],
@@ -2741,14 +2729,14 @@
     "provider": "animeflv",
     "hits": 0,
     "trace": [
-      "200 https://cuevanas3.pro/wp-api/v1/search?q=La+Odisea&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=53108",
-      "301 https://cuevana3.gs/player.php?t=ua-e89HVYlP0_wmvZzkCdgBVG3gPZ_gSQBmoPUjUEmL1riJ9rnmXq0nmL6s9cgIoecH4p_PkFFJXxoO-FjL_EA&server=vimeos → https://cuevanas3.pro/player.php?t=ua-e89HVYlP0_wmvZzkCdgBVG3gPZ_gSQBmoPUjUEmL1r h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=ua-e89HVYlP0_wmvZzkCdgBVG3gPZ_gSQBmoPUjUEmL1riJ9rnmXq0nmL6s9cgIoecH4p_PkFFJXxoO-FjL_EA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=KVVz7XDUJ9OgV-w4bPg_bEcKPvgMxHivsbHPEdQ7Fajm6hruqJ6iVqFNJgKNSq2baqeh7iqjqorm1EBnQ6GzSg&server=vimeos → https://cuevanas3.pro/player.php?t=KVVz7XDUJ9OgV-w4bPg_bEcKPvgMxHivsbHPEdQ7Fajm6 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=KVVz7XDUJ9OgV-w4bPg_bEcKPvgMxHivsbHPEdQ7Fajm6hruqJ6iVqFNJgKNSq2baqeh7iqjqorm1EBnQ6GzSg&server=vimeos",
       "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
-      "404 https://animeflv.or.at/anime/la-odisea/ h1=\"Página no encontrada\""
+      "404 https://animeflv.or.at/anime/la-odisea/ h1=\"Página no encontrada\"",
+      "200 https://animeflv.or.at/search/la-odisea/ h1=\"Search Results for \"la-odisea\"\""
     ],
-    "ms": 310,
+    "ms": 461,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2760,14 +2748,14 @@
     "provider": "fuegocine",
     "hits": 2,
     "trace": [
-      "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
       "404 https://animeflv.or.at/anime/la-odisea/ h1=\"Página no encontrada\"",
+      "200 https://animeflv.or.at/search/la-odisea/ h1=\"Search Results for \"la-odisea\"\"",
       "200 https://fuegocine.com/search_elastic?s=La%20Odisea",
       "200 https://fuegocine.com/movies/watch/la-odisea/227",
-      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=26cce163b12db1ca708c7be80374a194",
-      "200 https://unlimplay.com/f/embed/movie/1368337?_et=26cce163b12db1ca708c7be80374a194"
+      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=2154184e81bcc5f43e5b877a8a04f68b",
+      "200 https://unlimplay.com/f/embed/movie/1368337?_et=2154184e81bcc5f43e5b877a8a04f68b"
     ],
-    "ms": 3731,
+    "ms": 2461,
     "quality": [
       "HLS",
       "HLS"
@@ -2789,13 +2777,13 @@
     "hits": 1,
     "trace": [
       "200 https://fuegocine.com/movies/watch/la-odisea/227",
-      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=26cce163b12db1ca708c7be80374a194",
-      "200 https://unlimplay.com/f/embed/movie/1368337?_et=26cce163b12db1ca708c7be80374a194",
+      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=2154184e81bcc5f43e5b877a8a04f68b",
+      "200 https://unlimplay.com/f/embed/movie/1368337?_et=2154184e81bcc5f43e5b877a8a04f68b",
       "200 https://pelisjuanita.org/api/rest/v1/search?q=La%20Odisea&page=1",
       "200 https://videoapp.mov/e/movie/1368337",
       "200 https://vimeos.net/embed-m62pdrnlvwpw.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 1003,
+    "ms": 1299,
     "quality": [
       "HLS"
     ],
@@ -2803,9 +2791,9 @@
       "Subtitulado"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+      "https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Subtitulado https://p3.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Subtitulado https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "La Odisea",
@@ -2820,7 +2808,7 @@
       "200 https://fanpelis.to/api/rest/player?post_id=58646&_any=1",
       "200 https://fanpelis.to/api/rest/search?query=Odisea&post_type=movies&posts_per_page=8"
     ],
-    "ms": 3192,
+    "ms": 976,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2839,7 +2827,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/pelicula/la-odisea-2026",
       "200 https://lamoviebot.tvymas.workers.dev/search?q=Odisea&page=1"
     ],
-    "ms": 2335,
+    "ms": 1663,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2858,7 +2846,7 @@
       "200 https://ww3.gnulahd.nu/ver/la-odisea/ h1=\"La Odisea\"",
       "200 https://ww3.gnulahd.nu/ver/la-odisea-2026/ h1=\"La Odisea\""
     ],
-    "ms": 1099,
+    "ms": 745,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2896,7 +2884,7 @@
       "200 https://pelisplushd.la/search?s=La%20Odisea h1=\"Pelisplus\"",
       "200 https://pelisplushd.la/search?s=Odisea h1=\"Pelisplus\""
     ],
-    "ms": 371,
+    "ms": 234,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2915,7 +2903,7 @@
       "404 https://www.tubeonline.net/serie/visionquest/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=VisionQuest h1=\"Resultados encontrados: VisionQuest\""
     ],
-    "ms": 965,
+    "ms": 475,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2934,7 +2922,7 @@
       "404 https://www.tubeonline.net/serie/visionquest/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=VisionQuest h1=\"Resultados encontrados: VisionQuest\""
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -2987,11 +2975,11 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=VisionQuest&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=65144&season=1&page=1&postsPerPage=50",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=65146",
-      "301 https://cuevana3.gs/player.php?t=IWDAJbU_mMgu_uB-oyBP3IGmvjA-NjY9YV8vGUq5tA644XstYRIUjblnPF_MpqAUy9cKudSMY6CZrA6XWkDSeQ&server=vimeos → https://cuevanas3.pro/player.php?t=IWDAJbU_mMgu_uB-oyBP3IGmvjA-NjY9YV8vGUq5tA644 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=IWDAJbU_mMgu_uB-oyBP3IGmvjA-NjY9YV8vGUq5tA644XstYRIUjblnPF_MpqAUy9cKudSMY6CZrA6XWkDSeQ&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=UBr8GCvjsADP1x1CySEjVRLpcRRJoPuF72DtiQEjb_oq1tixZ9HAfyGgjxbLuohv9hhP3E0Rg2rF-5wJAM63Aw&server=vimeos → https://cuevanas3.pro/player.php?t=UBr8GCvjsADP1x1CySEjVRLpcRRJoPuF72DtiQEjb_oq1 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=UBr8GCvjsADP1x1CySEjVRLpcRRJoPuF72DtiQEjb_oq1tixZ9HAfyGgjxbLuohv9hhP3E0Rg2rF-5wJAM63Aw&server=vimeos",
       "200 https://vimeos.net/embed-hc7i1n95d4vx.html"
     ],
-    "ms": 2540,
+    "ms": 1615,
     "quality": [
       "HLS"
     ],
@@ -2999,9 +2987,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p6.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p6.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "VisionQuest",
@@ -3010,13 +2998,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=65146",
-      "301 https://cuevana3.gs/player.php?t=IWDAJbU_mMgu_uB-oyBP3IGmvjA-NjY9YV8vGUq5tA644XstYRIUjblnPF_MpqAUy9cKudSMY6CZrA6XWkDSeQ&server=vimeos → https://cuevanas3.pro/player.php?t=IWDAJbU_mMgu_uB-oyBP3IGmvjA-NjY9YV8vGUq5tA644 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=IWDAJbU_mMgu_uB-oyBP3IGmvjA-NjY9YV8vGUq5tA644XstYRIUjblnPF_MpqAUy9cKudSMY6CZrA6XWkDSeQ&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=UBr8GCvjsADP1x1CySEjVRLpcRRJoPuF72DtiQEjb_oq1tixZ9HAfyGgjxbLuohv9hhP3E0Rg2rF-5wJAM63Aw&server=vimeos → https://cuevanas3.pro/player.php?t=UBr8GCvjsADP1x1CySEjVRLpcRRJoPuF72DtiQEjb_oq1 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=UBr8GCvjsADP1x1CySEjVRLpcRRJoPuF72DtiQEjb_oq1tixZ9HAfyGgjxbLuohv9hhP3E0Rg2rF-5wJAM63Aw&server=vimeos",
       "200 https://vimeos.net/embed-hc7i1n95d4vx.html",
       "404 https://animeflv.or.at/anime/visionquest/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/visionquest/ h1=\"Search Results for \"visionquest\"\""
     ],
-    "ms": 646,
+    "ms": 484,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -3032,10 +3020,10 @@
       "200 https://fuegocine.com/shows/details/visionquest/24",
       "200 https://fuegocine.com/shows/visionquest/seasons/temporada-1/55",
       "200 https://fuegocine.com/shows/visionquest/01x01-sin-ataduras/49",
-      "302 https://unlimplay.com/f/embed/tv/213375/1/1 → /f/embed/tv/213375/1/1?_et=2e160652d11e5584d303c2bc1a113877",
-      "200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=2e160652d11e5584d303c2bc1a113877"
+      "302 https://unlimplay.com/f/embed/tv/213375/1/1 → /f/embed/tv/213375/1/1?_et=3bc1057021391dec2218f6c089fa8459",
+      "200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=3bc1057021391dec2218f6c089fa8459"
     ],
-    "ms": 3276,
+    "ms": 2779,
     "quality": [
       "HLS",
       "HLS"
@@ -3056,14 +3044,14 @@
     "provider": "pelisjuanita",
     "hits": 1,
     "trace": [
-      "200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=2e160652d11e5584d303c2bc1a113877",
+      "200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=3bc1057021391dec2218f6c089fa8459",
       "200 https://pelisjuanita.org/api/rest/v1/search?q=VisionQuest&page=1",
       "200 https://pelisjuanita.org/api/rest/v1/episode-seasons?item_id=10543570",
       "200 https://pelisjuanita.org/api/rest/v1/episodes?item_id=10543570&season=1&limit=30&page=1",
       "200 https://videoapp.mov/e/tv/213375/1/1",
       "200 https://vimeos.net/embed-hc7i1n95d4vx.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
-    "ms": 1468,
+    "ms": 4067,
     "quality": [
       "HLS"
     ],
@@ -3071,9 +3059,9 @@
       "Subtitulado"
     ],
     "hosts": [
-      "https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Subtitulado https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Subtitulado https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "VisionQuest",
@@ -3088,7 +3076,7 @@
       "200 https://fanpelis.to/api/rest/episodes?post_id=69826",
       "200 https://fanpelis.to/api/rest/player?post_id=69828&_any=1"
     ],
-    "ms": 1221,
+    "ms": 1361,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -3107,7 +3095,7 @@
       "200 https://lamoviebot.tvymas.workers.dev/serie/visionquest-2026",
       "200 https://lamoviebot.tvymas.workers.dev/serie/visionquest-2026/1/1"
     ],
-    "ms": 2440,
+    "ms": 1993,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -3126,7 +3114,7 @@
       "200 https://ww3.gnulahd.nu/ver/visionquest/ h1=\"VisionQuest\"",
       "200 https://ww3.gnulahd.nu/visionquest-1x01/ h1=\"Ver VisionQuest 1×01 Online — Sin atadur\""
     ],
-    "ms": 1620,
+    "ms": 1098,
     "quality": [],
     "audio": [],
     "hosts": [],

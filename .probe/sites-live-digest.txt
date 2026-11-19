@@ -92,7 +92,7 @@
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
   [f-info]  class="modal-body"> <div class="shortf-left"> <p class="shortf-ptitle"> <strong>La Invitacion</strong> </p> <ul class="f-info"> <li> <span class="f-info-title">Año:</span> <span class="f-info-text">2026</span> </li> <li> <span class="f-info-title">Género:</span> <span class="f-info-text">Comedia, Drama, Romántico</span> </li> </ul> <ul c
 
-## 200 https://cuevanas3.pro/player.php?t=BHXl3G0QylJS1pSzKhQd1JzQnKu3Ktl1I48qxKsDZuUcihafI30VEYtLwa2PRzrFWLMB4XcvtHNRW7mmj3ttl
+## 200 https://cuevanas3.pro/player.php?t=yznXcrP3KKBKbDhQzeIzT1-0ZATpFAf0AawrzPjlYETCmnRJ5SkrRwlMK7VMgUUjiKyyQMjL3p45up1RiwV8X
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-2nulhg4mnuz7.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -114,16 +114,6 @@
   [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
   [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
 
-## 200 https://fuegocine.com/movies/watch/spider-man-un-nuevo-d%C3%ADa/140
-  h1: 
-  title: Spider-Man: Un Nuevo Día | Fuego Cine 2.0
-  [iframe] <!-- Estilos optimizados para el reproductor principal y trailers --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-container iframe { width: 100% !important; he
-
-## 200 https://unlimplay.com/f/embed/movie/969681?_et=9016114811aa671eb3ce78ee3a35f81e
-  h1: 
-  title: UnLimPlay
-  [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h
-
 ## 200 https://videoapp.mov/e/movie/969681
   h1: 
   title: Spider-Man: Un nuevo día
@@ -133,6 +123,11 @@
   h1: Spider-Man: Un nuevo día
   title: Spider-Man: Un nuevo día (2026) Película Completa Español Latino HD | Gnula
   [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 200 https://videoapp.zip/e/movie/969681
+  h1: 
+  title: Spider-Man: Un nuevo día
+  [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
 
 ## 200 https://pelisplushd.la/search?s=Spider-Man
   h1: Pelisplus
@@ -201,7 +196,7 @@
   title: 
   [iframe] {"embed_url":"https:\/\/hqq.ac\/e\/UkJ4OXFXRFQwaFJwZVFnZlZNTGhzZz09","type":"iframe"}
 
-## 200 https://cuevanas3.pro/player.php?t=VRWaillRLDt2oD2F_ARDgtjlJzvSe2C_Hj5F0WaaGvpHzfBZCZaWwFSq73M9liSjLGMb9zwy0Vt7ZLqAH5Hb9
+## 200 https://cuevanas3.pro/player.php?t=ZebvAd4GdofCHKH-p5DFNW6JzIQ96Y9ueZnhBahrUp8pmoiKbeH0lGUlHRf_ccWbIF2kQe67ePatpVfOHYxbl
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-ccjygcfxujhd.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -249,6 +244,11 @@
   title: Ver Breaking Bad 1x01 Online en Español Latino | Gnula
   [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
   [episodios] ns('open'))gnpvDlModal();}}); document.addEventListener('DOMContentLoaded',function(){ _gdLoad(); }); /* ===== Lista de episodios: pestañas por temporada + paginación (temporada actual abierta) ===== */ document.addEventListener('DOMContentLoaded', function () { var container=document.getElementById('gnrd-eplist'); if(!container)return; v
+
+## 200 https://videoapp.zip/e/tv/1396/1/1
+  h1: 
+  title: Principio del fin
+  [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
 
 ## 200 https://www.tubeonline.net/pelicula/alien-romulus/
   h1: Alien: Romulus
@@ -354,7 +354,7 @@
   [data-src] ght:6px;width:6px;" alt="close" border="0" onclick="adp.innerHTML = ''; thispays.style.display = 'none'; return false;" data-src='//vpge.link/player/cbplayer/images/close-button.png' loading='lazy' title='close'/> </div> </div> <script data-cfasync="false"> var ppage = 'https%3A%2F%2Fvpge.link%2Fe%2FU0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09'; var 
   [iframe] !--script src="https://www.google.com/recaptcha/api.js?render=6Ldf5F0UAAAAALErn6bLEcv7JldhivPzb93Oy5t9"></script--> <!--iframe src="https://xtremeserve.xyz/wwwwww.php?3" style="display:none;"></iframe--> <script> (function() { console.log('CORS check start same'); $("script[src*='/cdn-cgi/']").each(function( i, script ) { //console.log( s
 
-## 200 https://cuevanas3.pro/player.php?t=UfFP0kaswt2g_VKNrSZWl3w--O4bvMpnCh1SEgRbXMN9sCvl89T7BR65Tsjp073qCG48MUxoSffBPFKLfKhDU
+## 200 https://cuevanas3.pro/player.php?t=aEW9VpLFIW2nOZ_eRDz4DJNSguSONtVPfO1_8u8xjjysEYDpWcfDL_EhUWsmdBy2KA3Nl1N-wZ0uup0GAVet7
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-uhuu5myzvdub.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -390,6 +390,11 @@
   h1: Alien: Romulus
   title: Alien: Romulus (2024) Película Completa Español Latino HD | Gnula
   [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 200 https://videoapp.zip/e/movie/945961
+  h1: 
+  title: Alien: Romulus
+  [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
 
 ## 200 https://pelisplushd.la/search?s=Alien%3A%20Romulus
   h1: Pelisplus
@@ -463,7 +468,7 @@
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
   [f-info]  <div class="modal-body"> <div class="shortf-left"> <p class="shortf-ptitle"> <strong>Arcadian</strong> </p> <ul class="f-info"> <li> <span class="f-info-title">Año:</span> <span class="f-info-text">2024</span> </li> <li> <span class="f-info-title">Género:</span> <span class="f-info-text">Acción, Ciencia Ficción, Drama, Suspense, Terror</
 
-## 200 https://cuevanas3.pro/player.php?t=aHou6RzWPhjJWoXIvEcJZ98XdP8g-P61CaJ_8BNw4mXsjctaGd9ux9MKikACpo760r3DoWp7CfUDeujMHjjvy
+## 200 https://cuevanas3.pro/player.php?t=7XyS2usOfRoOj2s4la3VfQJA_VE5EzbGd0dvUk4qezrD_KlbhTCRK1nzV76mbM67vVpgdzsiElu3r8GgUYhb1
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-tmbjqufb955w.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -494,6 +499,11 @@
   h1: Deadpool &#038; Wolverine
   title: Deadpool &amp; Wolverine (2024) Película Completa Español Latino HD | Gnula
   [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
+
+## 200 https://videoapp.zip/e/movie/533535
+  h1: 
+  title: Deadpool &amp; Wolverine
+  [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
 
 ## 200 https://www.tubeonline.net/?s=Inside%20Out%202
   h1: Resultados encontrados: Inside Out 2
@@ -534,6 +544,11 @@
   title: Página no encontrada — GNULA HD
   [iframe] e se desborde */ padding: 10px 20px; /* Agrega espaciado interno: 10px arriba y abajo, 20px a los lados */ } /* Para el iframe del video */ .video-cell iframe { width: 100%; height: 180%; border: none; object-fit: contain; /* Asegura que el contenido del video se ajuste sin distorsionarse */ } /* Estilos para el título con clase 'titulo-e
 
+## 200 https://videoapp.zip/e/movie/1022789
+  h1: 
+  title: IntensaMente 2
+  [iframe] } html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)} #app{position:relative;width:100%;height:100%} iframe{position:absolute;inset:0;width:100%;height:100%;border:0} .logo{position:absolute;top:12px;left:12px;height:28px;z-index:5;pointer-events:none;opacity:.9} .veil{position:absolute;inset:0;display:flex;align-items:
+
 ## 200 https://www.tubeonline.net/?s=El%20reino%20prohibido
   h1: Resultados encontrados: El reino prohibido
   title: Buscó por el término El reino prohibido &#187; TubeOnline.Net
@@ -571,7 +586,7 @@
   title: peliculas-2008 &raquo; Ver Películas Online Gratis Completas en Español y Latino
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
 
-## 200 https://cuevanas3.pro/player.php?t=LdU6hRidT3nIcJQvFySbKK-o0URK9ib55ldTTpmhTIrBm73LOTPvSYVny2qQW-Qnwq90_notXvfoqEwfXvK1H
+## 200 https://cuevanas3.pro/player.php?t=pKgDYaS5jxFtXSzKVt9qCPOTGp5NRcpHg1Jo0Tgoj9YPBMkAZaEd__81jR9axadn-1kccZZVtVPTo04KXbNLr
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-o0unqe46z0g7.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -623,7 +638,7 @@
   title: Buscó por el término Naruto &#187; TubeOnline.Net
   [episodios] u ul li a:hover{color:#408BEA}header.main .hbox .search form button[type=submit]:hover,.loading,#seasons .se-c .se-a ul.episodios li .episodiotitle a:hover,.sgeneros a:hover,.page_user nav.user ul li a:hover{color:#408BEA}footer.main .fbox .fmenu ul li.current-menu-item a,.posts .meta .autor i,.pag_episodes .item a:hover,a.link_a:hover,ul
 
-## 200 https://cuevanas3.pro/player.php?t=kQ0zRAf0M9sCzIYoKMU9YSmOx052tpFqoJzPYIFghxxrS63l0kIT85NoQ3jPpaLco_I3t2kvirlSOZDQPnpmh
+## 200 https://cuevanas3.pro/player.php?t=dnqU6ZdALHLnOg6di1IO0hXRzwjcnVA-pJlwCXlxJP-p6uivIK82hR6NkwYDM0hvPRG7EK_3zlGm-mTYYKb9A
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-wa2r4s768i9k.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -788,7 +803,7 @@
   [f-info] 76_la-odisea.jpg" alt="La Odisea" /> <i class="img-shadow"><i></i></i> </div> </div> <div class="film-info"> <ul class="f-info"> <li> <span class="f-info-title">Título:</span> <span class="f-info-text">La Odisea</span> </li> <li> <span class="f-info-title">Título original:</span> <span class="f-info-text">The Odyssey</span> </li> <li> <sp
   [mejs-container] "><span>Sub</span></a></li> </ul> <div class="tabs-sidebar-block" id="ts21"> <div class="video-responsive"> <div class="mejs-container play-btn-cont" data-src="https://hgcloud.to/e/b6xqjtif5f0u"> <div class="play-btn"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"> <polygon class="play-btn__svg" points="9.33 6.69 9.33 19.39 
 
-## 200 https://cuevanas3.pro/player.php?t=ua-e89HVYlP0_wmvZzkCdgBVG3gPZ_gSQBmoPUjUEmL1riJ9rnmXq0nmL6s9cgIoecH4p_PkFFJXxoO-FjL_E
+## 200 https://cuevanas3.pro/player.php?t=KVVz7XDUJ9OgV-w4bPg_bEcKPvgMxHivsbHPEdQ7Fajm6hruqJ6iVqFNJgKNSq2baqeh7iqjqorm1EBnQ6GzS
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-m62pdrnlvwpw.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -804,12 +819,18 @@
   [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
   [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
 
+## 200 https://animeflv.or.at/search/la-odisea/
+  h1: Search Results for "la-odisea"
+  title: You searched for la-odisea - AnimeFLV
+  [data-src] item) { item.classList.remove('active_frame'); }); button.classList.add('active_frame'); loadEmbed(button.getAttribute('data-src')); }); }); if (poster) { poster.addEventListener('click', function() { var activeButton = document.querySelector('.iframe_code.active_frame'); var encodedSrc = activeButton ? activeButton.getAttribute('data-src
+  [iframe] no-prefetch a"}}]},"eagerness":"conservative"}]} </script> <script> (function() { var holder = document.getElementById('iframeHolder'); var iframe = document.getElementById('load'); var poster = document.getElementById('iframePoster'); if (!holder || !iframe) { return; } function loadEmbed(encodedSrc) { if (!encodedSrc) { return false; } 
+
 ## 200 https://fuegocine.com/movies/watch/la-odisea/227
   h1: 
   title: La Odisea | Fuego Cine 2.0
   [iframe] <!-- Estilos optimizados para el reproductor principal y trailers --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-container iframe { width: 100% !important; he
 
-## 200 https://unlimplay.com/f/embed/movie/1368337?_et=26cce163b12db1ca708c7be80374a194
+## 200 https://unlimplay.com/f/embed/movie/1368337?_et=2154184e81bcc5f43e5b877a8a04f68b
   h1: 
   title: UnLimPlay
   [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h
@@ -845,7 +866,7 @@
   title: Buscó por el término VisionQuest &#187; TubeOnline.Net
   [episodios] u ul li a:hover{color:#408BEA}header.main .hbox .search form button[type=submit]:hover,.loading,#seasons .se-c .se-a ul.episodios li .episodiotitle a:hover,.sgeneros a:hover,.page_user nav.user ul li a:hover{color:#408BEA}footer.main .fbox .fmenu ul li.current-menu-item a,.posts .meta .autor i,.pag_episodes .item a:hover,a.link_a:hover,ul
 
-## 200 https://cuevanas3.pro/player.php?t=IWDAJbU_mMgu_uB-oyBP3IGmvjA-NjY9YV8vGUq5tA644XstYRIUjblnPF_MpqAUy9cKudSMY6CZrA6XWkDSe
+## 200 https://cuevanas3.pro/player.php?t=UBr8GCvjsADP1x1CySEjVRLpcRRJoPuF72DtiQEjb_oq1tixZ9HAfyGgjxbLuohv9hhP3E0Rg2rF-5wJAM63A
   h1: 
   title: 
   [iframe] ntent="0"> <style> html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; } iframe { border: none; width: 100%; height: 100%; display: block; } </style> </head> <body> <iframe src="https://vimeos.net/embed-hc7i1n95d4vx.html" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write
@@ -872,7 +893,7 @@
   title: VisionQuest Temporada 1 01x01 - Sin ataduras | Fuego Cine 2.0
   [iframe] div> </div> </nav> </div> <!-- End Navigation Area --> </header> <!-- End Header --> <!-- Estilos para el contenedor de iframes --> <style type="text/css"> .iframe-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; max-height: 500px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 8px; } .iframe-containe
 
-## 200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=2e160652d11e5584d303c2bc1a113877
+## 200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=3bc1057021391dec2218f6c089fa8459
   h1: 
   title: UnLimPlay
   [iframe] vascript"> // ── Service Worker AdBlocker ────────────────────────────────────────────────── // Intercepta requests del iframe y bloquea dominios de publicidad. if (true && 'serviceWorker' in navigator) { // [ULP-PANEL] navigator.serviceWorker.register('/sw-adblock.js', { scope: '/' }) .then(reg => { // Actualizar automáticamente cuando h

@@ -31,7 +31,7 @@ const CONTROLS = [
   { type: 'movie', id: 'tt18412256', fallback: { title: 'Alien: Romulus', year: '2024' } },
   { type: 'movie', id: 'tt6263850', fallback: { title: 'Deadpool & Wolverine', year: '2024' } },
   { type: 'movie', id: 'tt22022452', fallback: { title: 'Intensa-Mente 2', year: '2024' } },
-  { type: 'movie', id: 'tt1343097', fallback: { title: 'El reino prohibido', year: '2008' } },
+  { type: 'movie', title: 'El reino prohibido', fallback: { title: 'El reino prohibido', year: '2008' } },
 ];
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──
@@ -112,6 +112,12 @@ const SEARCHERS = {
 };
 
 async function resolveControl(control) {
+  if (control.title) {
+    const season = control.type === 'series' ? Number(String(control.id || '').split(':')[1]) || null : null;
+    const episode = control.type === 'series' ? Number(String(control.id || '').split(':')[2]) || null : null;
+    return { title: control.title, altTitle: null, year: control.fallback?.year || null,
+      mediaType: control.type, season, episode };
+  }
   const resolved = await Promise.race([
     streams.resolveTitle(control.type, control.id),
     new Promise((resolve) => setTimeout(() => resolve(null), 9000)),
@@ -127,7 +133,7 @@ async function main() {
   const rows = [];
   for (const control of CONTROLS) {
     const resolved = await resolveControl(control);
-    console.log(`\n### ${control.id}: ${resolved.title} (${resolved.year || '—'}) ${resolved.mediaType}`);
+    console.log(`\n### ${control.id || control.title}: ${resolved.title} (${resolved.year || '—'}) ${resolved.mediaType}`);
     for (const key of keys) {
       // Pausa entre fuentes: los sitios limitan por velocidad y un desafío
       // JS no se resuelve sin navegador (no se intenta).
@@ -150,7 +156,7 @@ async function main() {
       // Últimas peticiones de esta fuente, para explicar el descarte.
       const recent = trace.slice(-6).map((entry) => `${entry.status} ${entry.url}${entry.location ? ` → ${entry.location.slice(0, 80)}` : ''}${entry.h1 ? ` h1="${entry.h1.slice(0, 40)}"` : ''}`);
       console.log(`    traza: ${recent.join(' | ')}`);
-      rows.push({ control: control.id, title: resolved.title, provider: key, hits: hits.length, trace: recent,
+      rows.push({ control: control.id || control.title, title: resolved.title, provider: key, hits: hits.length, trace: recent,
         ms: Date.now() - started, quality: hits.map((hit) => hit.quality),
         audio: hits.map((hit) => hit.audioLabel || '—'), hosts: hits.map((hit) => redact(hit.url)), verdict });
     }

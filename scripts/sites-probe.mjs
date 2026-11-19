@@ -119,7 +119,7 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
   seen.add(url);
   const res = await get(url, { headers: referer ? { Referer: referer } : {} });
   const scan = res.status === 200 ? scanHtml(res.body, url) : null;
-  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
+  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt|fuegocine/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
     try {
       const fs = await import('node:fs');
       fs.mkdirSync('.probe/html', { recursive: true });
@@ -237,6 +237,15 @@ const SITES = {
       { label: 'buscar-slash', url: 'https://animeflv.or.at/search/naruto/' },
       { label: 'ficha-black-clover', url: 'https://animeflv.or.at/anime/black-clover-2nd-season/' },
       { label: 'archivo-anime', url: 'https://animeflv.or.at/anime/' },
+    ],
+  },
+  fuegocine: {
+    name: 'fuegocine.com',
+    base: 'https://fuegocine.com',
+    pages: [
+      { label: 'portada', url: 'https://fuegocine.com/' },
+      { label: 'wp-json', url: 'https://fuegocine.com/wp-json/' },
+      { label: 'buscador', url: 'https://fuegocine.com/?s=spider-man' },
     ],
   },
   animeyt: {

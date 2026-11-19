@@ -41,6 +41,6 @@ jobs:
           # material de diagnóstico y no tienen por qué viajar en el PR. `-f`
           # porque `.probe/` está en .gitignore; el push va por refspec
           # explícita para que funcione también con el checkout en HEAD separado.
-          git add -f .probe/sites-live.md .probe/sites-live.json 2>/dev/null || true
+          git add -f .probe/sites-live.md 2>/dev/null || true
           git diff --cached --quiet || git commit -m "sonda: adaptadores de sitios $(date -u +%FT%TZ) [skip ci]"
           git push origin HEAD:refs/heads/${{ github.ref_name }} || true

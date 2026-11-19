@@ -89,9 +89,12 @@ test('fanpelis película: búsqueda → player → embed → URL original del ma
   assert.equal(hit.provider, 'fanpelis');
   assert.equal(hit.relevant, true);
   assert.match(hit.title, /Matrix 1999/);
-  assert.match(hit.title, /720p/);
-  assert.equal(hit.resolution, '720p', 'manda el manifiesto, no la calidad de la ficha');
   assert.match(hit.title, /Latino/);
+  // Sin sondeo: no se anuncia una resolución que nadie ha visto y el .m3u8
+  // no se descarga.
+  assert.equal(hit.resolution, null);
+  assert.equal('verification' in hit, false);
+  assert.ok(!calls.includes(MASTER), 'el manifiesto no se pide al CDN');
   assert.equal(hit.audioLabel, 'Latino');
   assert.equal(hit.url, MASTER);
   // Se eligió la ficha de 1999, no la de 2003 ni la de 2021.
@@ -239,7 +242,7 @@ test('fanpelis: la API solo indexa el título traducido, así que se prueba sin 
   assert.ok(queries.includes('Matrix'), `probó: ${queries.join(', ')}`);
 });
 
-test('fanpelis: una copia exacta del episodio con HLS comprobado desplaza al primer visor rechazado', async () => {
+test('fanpelis: sin sondeo se publica el primer episodio exacto con enlace válido', async () => {
   const obsolete = 'https://vimeos.net/embed-fixture-obsoleto.html';
   const denied = 'https://s9.vimeos.net/hls2/fixture/denied.m3u8';
   const calls = mockApi([
@@ -252,9 +255,10 @@ test('fanpelis: una copia exacta del episodio con HLS comprobado desplaza al pri
     [EMBED, html(packedEmbed(MASTER))],
   ]);
   const { hits } = await fanpelis.searchFanpelis(SERIES.title, SERIES, SERIES.title, 1000);
-  assert.deepEqual(hits.map(({ url, verification }) => [url, verification]), [[MASTER, 'manifest-ok']]);
+  assert.deepEqual(hits.map((hit) => hit.url), [denied]);
+  assert.equal('verification' in hits[0], false);
   assert.match(hits[0].title, /S01E01/);
-  assert.deepEqual(calls.filter((url) => url.includes('/api/rest/player')).map((url) => new URL(url).searchParams.get('post_id')), ['26785', '26786']);
+  assert.deepEqual(calls.filter((url) => url.includes('/api/rest/player')).map((url) => new URL(url).searchParams.get('post_id')), ['26785']);
 });
 
 test('fanpelis: idiomas descartados, hosts ajenos y enlaces repetidos no consumen el cupo de visores', async () => {
@@ -285,7 +289,7 @@ test('fanpelis: el HTTP 429 del reproductor detiene la búsqueda antes de pedir 
   assert.equal(calls.filter((url) => url.includes('/api/rest/player')).length, 1);
 });
 
-test('fanpelis: busca otra ficha antes de conformarse con un manifiesto rechazado', async () => {
+test('fanpelis: publica la primera ficha con enlace válido, sin comprobar el manifiesto', async () => {
   const first = 'https://vimeos.net/embed-first.html';
   const denied = 'https://s9.vimeos.net/hls2/fixture/denied.m3u8';
   const posts = [
@@ -301,9 +305,10 @@ test('fanpelis: busca otra ficha antes de conformarse con un manifiesto rechazad
     [EMBED, () => html(packedEmbed(MASTER))],
   ]);
   const result = await fanpelis.searchFanpelis('Matrix', MOVIE, MOVIE.title, 1000);
-  assert.equal(result.hits[0].url, MASTER);
-  assert.equal(result.hits[0].verification, 'manifest-ok');
-  assert.equal(calls.filter((url) => url.includes('/api/rest/player')).length, 2);
+  assert.equal(result.hits[0].url, denied);
+  assert.equal('verification' in result.hits[0], false);
+  assert.equal(calls.filter((url) => url.includes('/api/rest/player')).length, 1,
+    'con un enlace válido no se sigue probando fichas');
 });
 
 test('fanpelis: un error 500 del player no se confunde con ausencia de medios', async () => {

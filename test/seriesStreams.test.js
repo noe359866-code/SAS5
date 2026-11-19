@@ -43,9 +43,8 @@ test('una ficha TMDB personal permite pedir el stream de su episodio a una fuent
       });
       if (url.pathname === '/streamurl' && url.searchParams.get('url') === embed) return json({ videos: { hls: [master] } });
     }
-    if (url.href === master) {
-      return new Response('#EXTM3U\n#EXTINF:1,\npilot.ts\n');
-    }
+    // El manifiesto ya no se pide: si se llegara aquí, el test fallaría.
+    if (url.href === master) throw new Error('no se sonda el CDN');
     throw new Error(`Petición inesperada: ${url.hostname}${url.pathname}`);
   });
   const env = { TMDB_API_KEY: 'mock', SPINFLIX_URL: provider };
@@ -64,13 +63,14 @@ test('una ficha TMDB personal permite pedir el stream de su episodio a una fuent
   assert.equal(streamResponse.status, 200);
   const { streams } = await streamResponse.json();
   assert.deepEqual(streams.map((stream) => stream.url), [master]);
-  assert.match(streams[0].title, /S01E01.*Latino.*SpinFlix/);
+  assert.equal(streams[0].name, 'Serie de prueba');
+  assert.match(streams[0].title, /T1E1.*SpinFlix.*Lat/);
   assert.deepEqual(requests.filter((url) => url.origin === provider).map((url) => url.pathname), [
     '/search', '/serie/serie-de-prueba', providerPath, '/streamurl',
   ]);
   assert.deepEqual([...new Set(requests.map((url) => url.hostname))].sort(), [
-    'api.themoviedb.org', 's9.vimeos.net', 'spinflix.example', 'v3-cinemeta.strem.io',
-  ]);
+    'api.themoviedb.org', 'spinflix.example', 'v3-cinemeta.strem.io',
+  ], 'el CDN no se consulta al buscar');
 });
 
 test('sin IMDb usa los episodios de TMDB y no cachea una ficha sin episodios por un fallo transitorio', async (t) => {

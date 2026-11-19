@@ -95,10 +95,13 @@ test('streams: la línea de badges entra en el título del stream', () => {
     sources: [],
   };
   const conBadges = toStream(hit, { badges: null });
+  // El nombre visible es la obra; la calidad y el resto van en la descripción.
+  assert.equal(conBadges.name, 'Dune: Part Two');
   assert.ok(conBadges.title.includes('4K · DV · HEVC · Atmos · 7.1 · REMUX · MKV · Netflix · MULTI'));
   const sinBadges = toStream(hit, { badges: [] });
   assert.ok(!sinBadges.title.includes('REMUX · MKV'));
-  assert.ok(sinBadges.title.startsWith(REMUX + '\n'));
+  assert.match(sinBadges.title, /2160p/);
+  assert.match(sinBadges.title, /🎧 Latino/);
 });
 
 test('/configure: sección de etiquetas con chips, vista previa y guía de Nuvio', () => {

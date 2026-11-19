@@ -77,8 +77,8 @@ async function main(group) {
     const hits = await runProviders(keys, fixture.title, fixture, fixture.title, report, 6000);
     const checks = await Promise.all(fixture.keys.map(async (key) => {
       const hit = hits.find((item) => item.provider === key);
-      const check = await probeMedia(hit);
-      return hit?.verification ? `${hit.verification}; ${check}` : check;
+      // El addon no sondea el medio; la sonda del runner sí (ver checkPlayback).
+      return probeMedia(hit);
     }));
     for (const [index, key] of fixture.keys.entries()) {
       const entry = report[key];

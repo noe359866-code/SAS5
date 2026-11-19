@@ -25,7 +25,7 @@ test('PelisPlus: búsqueda, validación de ficha, idioma y extracción HLS sin e
   const hits = await runProviders(['pelisplus'], '', movie, movie.title, report, 1000);
   assert.equal(hits.length, 1);
   assert.equal(hits[0].url, master);
-  assert.equal(hits[0].verification, 'cdn-unverified');
+  assert.equal('verification' in hits[0], false);
   assert.equal(hits[0].audioLabel, 'Latino');
   assert.equal(calls.length, 3, 'no se consulta el CDN de dominio desconocido');
 });
@@ -83,7 +83,7 @@ test('PelisPlus: desempaqueta fuente HLS sin ejecutar JavaScript', () => {
   assert.deepEqual(extractPlayer(packed, 'https://dhtpre.com/e/test').urls, ['https://cdn.example.net/master.m3u8']);
 });
 
-test('PelisPlus: MP4 y subtítulos se transmiten como resultado sin verificar', async (t) => {
+test('PelisPlus: MP4 y subtítulos se transmiten tal cual los publica el visor', async (t) => {
   const player = detail.replace('https://streamwish.to/e/fixture', 'https://dropload.tv/e/fixture');
   t.mock.method(global, 'fetch', async (raw) => {
     if (String(raw).includes('/search?')) return new Response(search);
@@ -93,6 +93,6 @@ test('PelisPlus: MP4 y subtítulos se transmiten como resultado sin verificar', 
   });
   const hits = await runProviders(['pelisplus'], '', movie, movie.title, {}, 1000);
   assert.equal(hits[0].quality, 'MP4');
-  assert.equal(hits[0].verification, 'cdn-unverified');
+  assert.equal('verification' in hits[0], false);
   assert.equal(hits[0].subtitles[0].lang, 'es');
 });

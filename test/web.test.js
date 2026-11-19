@@ -90,24 +90,34 @@ test('la portada y el configurador comparten la identidad de RamdonLatam y el di
   assert.match(configureHtml, /Refinamiento visual del configurador/);
   assert.match(configureHtml, /@media \(max-width: 760px\)/);
   for (const [label, html] of [['portada', homeHtml], ['configure', configureHtml]]) {
-    // Negro profundo, SF primero y barra translúcida con blur.
-    assert.match(html, /--bg: #000;/, label);
-    assert.match(html, /<meta name="theme-color" content="#000000" \/>/, label);
+    // Azul noche de la marca, SF primero y barra translúcida con blur.
+    assert.match(html, /--bg: #060f1a;/, label);
+    assert.match(html, /--card: #0e2337;/, label);
+    assert.match(html, /<meta name="theme-color" content="#060f1a" \/>/, label);
     assert.match(html, /-apple-system,BlinkMacSystemFont,'SF Pro Display'/, label);
     assert.match(html, /backdrop-filter: saturate\(180%\) blur\(20px\)/, label);
-    // Botones y controles de píldora; la acción principal es blanca sobre negro.
+    // Botones y controles de píldora; la acción principal es el naranja de marca.
     assert.match(html, /border-radius: 980px/, label);
-    assert.match(html, /\.btn-primary \{ color: #000;/, label);
+    assert.match(html, /\.btn-primary \{[^}]*color: #10283d;/, label);
+    assert.match(html, /--grad: linear-gradient\(180deg,#ffa552 0%,#f5821f 52%,#e8680f 100%\)/, label);
     assert.match(html, /Ramdon<i>Latam<\/i>/, label);
-    // El acento violeta→cian de la capa anterior no vuelve en ninguna regla.
+    // El icono de la marca es el nuevo: master vectorial + PNG del Worker.
+    assert.match(html, /<img src="\/assets\/logo.png"[^>]*width="32" height="32"/, label);
+    assert.match(html, /<link rel="icon" href="\/assets\/favicon.svg" type="image\/svg\+xml" \/>/, label);
+    // El azul de sistema de la piel anterior y el violeta→cian no vuelven.
     assert.equal(html.includes('rgba(124,92,255'), false, `${label}: queda violeta de marca`);
+    assert.equal(html.includes('2997ff'), false, `${label}: queda azul de sistema`);
     // En la configuración predeterminada solo está el enlace externo de soporte.
     assert.equal((html.match(/<a class="nav-ext" /g) || []).length, 1, label);
     assert.match(html, /\.nav-fit-2 \.nav-links \.nav-ext \{ display: none; \}/, label);
     // Los estantes llevan su marco (.rail-view), donde el script cuelga las flechas.
     assert.match(html, /<div class="rail-view"><div class="rail-scroll" data-autoscroll="1">/, label);
   }
+  // El hero monta la baraja de la marca (tres fichas) además del arte de fondo.
   assert.match(homeHtml, /class="hero-backdrop" aria-hidden="true">\s*<img src="\/assets\/pacific-dusk.jpg" alt="" fetchpriority="high"/);
+  assert.match(homeHtml, /class="hero-deck" aria-hidden="true">/);
+  assert.equal((homeHtml.match(/class="deck-card/g) || []).length, 3);
+  assert.match(homeHtml, /<meta property="og:image" content="https:\/\/addon\.example\/assets\/og-cover\.png" \/>/);
 });
 
 

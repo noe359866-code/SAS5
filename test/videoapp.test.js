@@ -27,16 +27,15 @@ test('VideoApp: extrae HLS del iframe y conserva el audio solo cuando está iden
     assert.equal(options.redirect, 'manual');
     if (raw === 'https://videoapp.zip/e/movie/157336') return new Response(fixture('data-lang="Latino"'));
     if (raw === embed) return new Response(`<script>var source = '${master}'</script>`);
-    if (raw === master) return new Response('#EXTM3U\n#EXTINF:5,\nsegment.ts\n');
-    throw new Error('unexpected request');
+    throw new Error('el manifiesto no se descarga');
   });
   const report = {};
   const hits = await runProviders(['videoapp'], '', movie, movie.title, report, 1000);
   assert.equal(hits.length, 1);
   assert.equal(hits[0].url, master);
-  assert.equal(hits[0].verification, 'manifest-ok');
+  assert.equal('verification' in hits[0], false);
   assert.equal(hits[0].audioLabel, 'Latino');
-  assert.equal(seen.length, 3);
+  assert.equal(seen.length, 2, 'ficha e iframe; el CDN no se toca');
   assert.ok(!JSON.stringify(report).includes('fixture-token'));
 });
 
@@ -44,8 +43,7 @@ test('VideoApp: la muestra sin etiqueta de audio no se presenta falsamente como 
   t.mock.method(global, 'fetch', async (raw) => {
     if (raw === 'https://videoapp.zip/e/movie/157336') return new Response(fixture());
     if (raw === embed) return new Response(`<script>var source = '${master}'</script>`);
-    if (raw === master) return new Response('#EXTM3U\n#EXTINF:5,\nsegment.ts\n');
-    throw new Error('unexpected request');
+    throw new Error('el manifiesto no se descarga');
   });
   assert.deepEqual(await searchVideoApp('', movie, movie.title, 1000), { hits: [], reason: 'audio-unverified' });
 });

@@ -4,7 +4,7 @@
  * Servidor Express + Router del SDK de Stremio (mismo entrypoint local y serverless).
  *  - GET /                 → landing page con botón de instalación
  *  - GET /manifest.json    → manifest (logo resuelto al host actual)
- *  - GET /assets/logo.png  → logo generado
+ *  - GET /assets/logo.png  → logo de la marca (scripts/brand-assets.mjs)
  *  - GET /healthz          → estado del servicio y de las fuentes de datos
  *  - /catalog/... y /meta/... → servidos por el SDK oficial de Stremio
  */
@@ -81,8 +81,15 @@ function sameOrigin(req) {
   return false;
 }
 
-// 3. Assets estáticos (logo)
+// 3. Assets estáticos (logo, iconos, favicon y tarjeta social)
 app.use('/assets', express.static(path.join(__dirname, '..', 'assets'), { maxAge: '7d' }));
+
+// Manifest web del sitio: el mismo archivo que el Worker y el edge sirven.
+app.get('/site.webmanifest', (req, res) => {
+  res.setHeader('Content-Type', 'application/manifest+json; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.sendFile(path.join(__dirname, '..', 'public', 'site.webmanifest'));
+});
 
 function buildCacheControl(cacheSeconds, staleSeconds = 86400) {
   if (!cacheSeconds || cacheSeconds <= 0) return 'no-store';

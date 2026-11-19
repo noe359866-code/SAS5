@@ -12,7 +12,7 @@
       "200 embed-host: vidara.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 3999,
+    "ms": 4362,
     "quality": [
       "HLS",
       "HLS"
@@ -40,7 +40,7 @@
       "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
       "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
     ],
-    "ms": 1621,
+    "ms": 1132,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -56,10 +56,10 @@
       "200 https://ver.gnula.one/?trembed=2&trid=53363&trtype=1",
       "200 https://links.fiuxy2.com/play/NMB2zwFeBWYf1ruC.html",
       "200 https://ver.gnula.one/?trembed=3&trid=53363&trtype=1",
-      "404 https://voe.sx/e/xgbyls7nylgd",
+      "403 https://voe.sx/e/xgbyls7nylgd h1=\"Checking your browser before accessing\"",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 3028,
+    "ms": 2661,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -73,12 +73,12 @@
     "trace": [
       "200 https://links.fiuxy2.com/play/NMB2zwFeBWYf1ruC.html",
       "200 https://ver.gnula.one/?trembed=3&trid=53363&trtype=1",
-      "404 https://voe.sx/e/xgbyls7nylgd",
+      "403 https://voe.sx/e/xgbyls7nylgd h1=\"Checking your browser before accessing\"",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 1580,
+    "ms": 1372,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -93,11 +93,11 @@
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=57851",
-      "301 https://cuevana3.gs/player.php?t=K_sTRzkvvLvO3Azq5bT6OblQc9rlptaSiY1qtFsgy-VMJkwiFvk-Df8TNUg6TejJYaIwzLD-oLT_T4vHrLND7Q&server=vimeos → https://cuevanas3.pro/player.php?t=K_sTRzkvvLvO3Azq5bT6OblQc9rlptaSiY1qtFsgy-VMJ h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=K_sTRzkvvLvO3Azq5bT6OblQc9rlptaSiY1qtFsgy-VMJkwiFvk-Df8TNUg6TejJYaIwzLD-oLT_T4vHrLND7Q&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=EgJ_Qhssw2QTi2Q1yDEviX5Q1lp_GVM2mODaWPCj1KZ4RCwzfJMqrZN9gtNNwfNTjia5XFx33xdJFV2RXYyQFw&server=vimeos → https://cuevanas3.pro/player.php?t=EgJ_Qhssw2QTi2Q1yDEviX5Q1lp_GVM2mODaWPCj1KZ4R h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=EgJ_Qhssw2QTi2Q1yDEviX5Q1lp_GVM2mODaWPCj1KZ4RCwzfJMqrZN9gtNNwfNTjia5XFx33xdJFV2RXYyQFw&server=vimeos",
       "200 https://vimeos.net/embed-2nulhg4mnuz7.html"
     ],
-    "ms": 2977,
+    "ms": 2548,
     "quality": [
       "HLS"
     ],
@@ -105,9 +105,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt33033798",
@@ -116,13 +116,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=57851",
-      "301 https://cuevana3.gs/player.php?t=K_sTRzkvvLvO3Azq5bT6OblQc9rlptaSiY1qtFsgy-VMJkwiFvk-Df8TNUg6TejJYaIwzLD-oLT_T4vHrLND7Q&server=vimeos → https://cuevanas3.pro/player.php?t=K_sTRzkvvLvO3Azq5bT6OblQc9rlptaSiY1qtFsgy-VMJ h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=K_sTRzkvvLvO3Azq5bT6OblQc9rlptaSiY1qtFsgy-VMJkwiFvk-Df8TNUg6TejJYaIwzLD-oLT_T4vHrLND7Q&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=EgJ_Qhssw2QTi2Q1yDEviX5Q1lp_GVM2mODaWPCj1KZ4RCwzfJMqrZN9gtNNwfNTjia5XFx33xdJFV2RXYyQFw&server=vimeos → https://cuevanas3.pro/player.php?t=EgJ_Qhssw2QTi2Q1yDEviX5Q1lp_GVM2mODaWPCj1KZ4R h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=EgJ_Qhssw2QTi2Q1yDEviX5Q1lp_GVM2mODaWPCj1KZ4RCwzfJMqrZN9gtNNwfNTjia5XFx33xdJFV2RXYyQFw&server=vimeos",
       "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
       "404 https://animeflv.or.at/anime/spider-man-un-nuevo-dia/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/spider-man-un-nuevo-dia/ h1=\"Search Results for \"spider-man-un-nuevo-\""
     ],
-    "ms": 1215,
+    "ms": 1108,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -138,10 +138,10 @@
       "200 https://animeflv.or.at/search/spider-man-un-nuevo-dia/ h1=\"Search Results for \"spider-man-un-nuevo-\"",
       "200 https://fuegocine.com/search_elastic?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa",
       "200 https://fuegocine.com/movies/watch/spider-man-un-nuevo-d%C3%ADa/140",
-      "302 https://unlimplay.com/f/embed/movie/969681 → /f/embed/movie/969681?_et=daba41a8bacf34b4075ad0af75d45d1e",
-      "200 https://unlimplay.com/f/embed/movie/969681?_et=daba41a8bacf34b4075ad0af75d45d1e"
+      "302 https://unlimplay.com/f/embed/movie/969681 → /f/embed/movie/969681?_et=4d62cf53537bb6e8c1419953b43b25f2",
+      "200 https://unlimplay.com/f/embed/movie/969681?_et=4d62cf53537bb6e8c1419953b43b25f2"
     ],
-    "ms": 5311,
+    "ms": 4088,
     "quality": [
       "HLS",
       "HLS",
@@ -165,14 +165,14 @@
     "provider": "tubeonline",
     "hits": 0,
     "trace": [
-      "302 https://unlimplay.com/f/embed/movie/969681 → /f/embed/movie/969681?_et=daba41a8bacf34b4075ad0af75d45d1e",
-      "200 https://unlimplay.com/f/embed/movie/969681?_et=daba41a8bacf34b4075ad0af75d45d1e",
+      "302 https://unlimplay.com/f/embed/movie/969681 → /f/embed/movie/969681?_et=4d62cf53537bb6e8c1419953b43b25f2",
+      "200 https://unlimplay.com/f/embed/movie/969681?_et=4d62cf53537bb6e8c1419953b43b25f2",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
       "404 https://www.tubeonline.net/pelicula/inception/ h1=\"Pagina no se encuentra\"",
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
     ],
-    "ms": 997,
+    "ms": 835,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -191,7 +191,7 @@
       "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
     ],
-    "ms": 1075,
+    "ms": 1050,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -210,7 +210,7 @@
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 2110,
+    "ms": 1195,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -229,7 +229,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 736,
+    "ms": 683,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -248,7 +248,7 @@
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 406,
+    "ms": 920,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -267,7 +267,7 @@
       "404 https://animeflv.or.at/anime/inception/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/inception/ h1=\"Search Results for \"inception\"\""
     ],
-    "ms": 601,
+    "ms": 529,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -286,7 +286,7 @@
       "200 https://animeflv.or.at/search/inception/ h1=\"Search Results for \"inception\"\"",
       "200 https://fuegocine.com/search_elastic?s=Inception"
     ],
-    "ms": 378,
+    "ms": 402,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -305,7 +305,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 1234,
+    "ms": 1220,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -324,7 +324,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 1,
+    "ms": 0,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -362,7 +362,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 1,
+    "ms": 0,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -377,11 +377,11 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=73&season=1&page=1&postsPerPage=50",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=76",
-      "301 https://cuevana3.gs/player.php?t=TIt16Q8RkPi61ad1Wt0TmCTiM4tyMumGWGpezfrbJfvE-FkMaGMrMqrx0DI_flMyV0tCfWrZfTdL-RipiMi-8Q&server=vimeos → https://cuevanas3.pro/player.php?t=TIt16Q8RkPi61ad1Wt0TmCTiM4tyMumGWGpezfrbJfvE- h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=TIt16Q8RkPi61ad1Wt0TmCTiM4tyMumGWGpezfrbJfvE-FkMaGMrMqrx0DI_flMyV0tCfWrZfTdL-RipiMi-8Q&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=_S7uYDd2wOVFwhuQIRygdlOLSw_CWNZYomheFJ0HVgeEDThA8RBxz9I6hYjT6iU5EJoZgu12dr3GGLuv61qtsA&server=vimeos → https://cuevanas3.pro/player.php?t=_S7uYDd2wOVFwhuQIRygdlOLSw_CWNZYomheFJ0HVgeED h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=_S7uYDd2wOVFwhuQIRygdlOLSw_CWNZYomheFJ0HVgeEDThA8RBxz9I6hYjT6iU5EJoZgu12dr3GGLuv61qtsA&server=vimeos",
       "200 https://vimeos.net/embed-ccjygcfxujhd.html"
     ],
-    "ms": 1964,
+    "ms": 1600,
     "quality": [
       "HLS"
     ],
@@ -400,13 +400,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=76",
-      "301 https://cuevana3.gs/player.php?t=TIt16Q8RkPi61ad1Wt0TmCTiM4tyMumGWGpezfrbJfvE-FkMaGMrMqrx0DI_flMyV0tCfWrZfTdL-RipiMi-8Q&server=vimeos → https://cuevanas3.pro/player.php?t=TIt16Q8RkPi61ad1Wt0TmCTiM4tyMumGWGpezfrbJfvE- h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=TIt16Q8RkPi61ad1Wt0TmCTiM4tyMumGWGpezfrbJfvE-FkMaGMrMqrx0DI_flMyV0tCfWrZfTdL-RipiMi-8Q&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=_S7uYDd2wOVFwhuQIRygdlOLSw_CWNZYomheFJ0HVgeEDThA8RBxz9I6hYjT6iU5EJoZgu12dr3GGLuv61qtsA&server=vimeos → https://cuevanas3.pro/player.php?t=_S7uYDd2wOVFwhuQIRygdlOLSw_CWNZYomheFJ0HVgeED h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=_S7uYDd2wOVFwhuQIRygdlOLSw_CWNZYomheFJ0HVgeEDThA8RBxz9I6hYjT6iU5EJoZgu12dr3GGLuv61qtsA&server=vimeos",
       "200 https://vimeos.net/embed-ccjygcfxujhd.html",
       "404 https://animeflv.or.at/anime/breaking-bad/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/breaking-bad/ h1=\"Search Results for \"breaking-bad\"\""
     ],
-    "ms": 633,
+    "ms": 516,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -418,14 +418,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=TIt16Q8RkPi61ad1Wt0TmCTiM4tyMumGWGpezfrbJfvE-FkMaGMrMqrx0DI_flMyV0tCfWrZfTdL-RipiMi-8Q&server=vimeos → https://cuevanas3.pro/player.php?t=TIt16Q8RkPi61ad1Wt0TmCTiM4tyMumGWGpezfrbJfvE- h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=TIt16Q8RkPi61ad1Wt0TmCTiM4tyMumGWGpezfrbJfvE-FkMaGMrMqrx0DI_flMyV0tCfWrZfTdL-RipiMi-8Q&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=_S7uYDd2wOVFwhuQIRygdlOLSw_CWNZYomheFJ0HVgeEDThA8RBxz9I6hYjT6iU5EJoZgu12dr3GGLuv61qtsA&server=vimeos → https://cuevanas3.pro/player.php?t=_S7uYDd2wOVFwhuQIRygdlOLSw_CWNZYomheFJ0HVgeED h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=_S7uYDd2wOVFwhuQIRygdlOLSw_CWNZYomheFJ0HVgeEDThA8RBxz9I6hYjT6iU5EJoZgu12dr3GGLuv61qtsA&server=vimeos",
       "200 https://vimeos.net/embed-ccjygcfxujhd.html",
       "404 https://animeflv.or.at/anime/breaking-bad/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/breaking-bad/ h1=\"Search Results for \"breaking-bad\"\"",
       "200 https://fuegocine.com/search_elastic?s=Breaking%20Bad"
     ],
-    "ms": 365,
+    "ms": 472,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -444,7 +444,7 @@
       "200 embed-host: filemoon.sx",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2805,
+    "ms": 2246,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -463,7 +463,7 @@
       "200 https://mirandogratis.com/?s=Alien%3A%20Romulus h1=\"Estas buscando: Alien: Romulus\"",
       "200 https://mirandogratis.com/alien-romulus.html h1=\"Ver Pelicula Alien: Romulus Online Grati\""
     ],
-    "ms": 1324,
+    "ms": 1189,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -482,7 +482,7 @@
       "200 https://ver.gnula.one/?trembed=4&trid=49552&trtype=1",
       "200 https://filemoon.sx/e/gtl2mhgw4is7"
     ],
-    "ms": 2757,
+    "ms": 2230,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -501,7 +501,7 @@
       "200 https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09",
       "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09"
     ],
-    "ms": 2322,
+    "ms": 2628,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -516,11 +516,11 @@
       "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=45223",
-      "301 https://cuevana3.gs/player.php?t=alMAuXzhCLiOjQQzXAbGZSCwudyK2CVret-_79pfZk4G8sD8vLCARcR1poUu13hWlHTJkZ8a24zYFwwVteGlKg&server=vimeos → https://cuevanas3.pro/player.php?t=alMAuXzhCLiOjQQzXAbGZSCwudyK2CVret-_79pfZk4G8 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=alMAuXzhCLiOjQQzXAbGZSCwudyK2CVret-_79pfZk4G8sD8vLCARcR1poUu13hWlHTJkZ8a24zYFwwVteGlKg&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=iUYFboh1Guxh0gn0S9w9pCp9pQICA4efxjJmrwZnNHKFdVfWbGzw45Sv_y8GMGxVjyavZK7VqPk6xdcGAlJ08Q&server=vimeos → https://cuevanas3.pro/player.php?t=iUYFboh1Guxh0gn0S9w9pCp9pQICA4efxjJmrwZnNHKFd h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=iUYFboh1Guxh0gn0S9w9pCp9pQICA4efxjJmrwZnNHKFdVfWbGzw45Sv_y8GMGxVjyavZK7VqPk6xdcGAlJ08Q&server=vimeos",
       "200 https://vimeos.net/embed-uhuu5myzvdub.html"
     ],
-    "ms": 1654,
+    "ms": 1706,
     "quality": [
       "HLS"
     ],
@@ -528,9 +528,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://p3.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
@@ -539,13 +539,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=45223",
-      "301 https://cuevana3.gs/player.php?t=alMAuXzhCLiOjQQzXAbGZSCwudyK2CVret-_79pfZk4G8sD8vLCARcR1poUu13hWlHTJkZ8a24zYFwwVteGlKg&server=vimeos → https://cuevanas3.pro/player.php?t=alMAuXzhCLiOjQQzXAbGZSCwudyK2CVret-_79pfZk4G8 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=alMAuXzhCLiOjQQzXAbGZSCwudyK2CVret-_79pfZk4G8sD8vLCARcR1poUu13hWlHTJkZ8a24zYFwwVteGlKg&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=iUYFboh1Guxh0gn0S9w9pCp9pQICA4efxjJmrwZnNHKFdVfWbGzw45Sv_y8GMGxVjyavZK7VqPk6xdcGAlJ08Q&server=vimeos → https://cuevanas3.pro/player.php?t=iUYFboh1Guxh0gn0S9w9pCp9pQICA4efxjJmrwZnNHKFd h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=iUYFboh1Guxh0gn0S9w9pCp9pQICA4efxjJmrwZnNHKFdVfWbGzw45Sv_y8GMGxVjyavZK7VqPk6xdcGAlJ08Q&server=vimeos",
       "200 https://vimeos.net/embed-uhuu5myzvdub.html",
       "404 https://animeflv.or.at/anime/alien-romulus/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/alien-romulus/ h1=\"Search Results for \"alien-romulus\"\""
     ],
-    "ms": 611,
+    "ms": 977,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -557,14 +557,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=alMAuXzhCLiOjQQzXAbGZSCwudyK2CVret-_79pfZk4G8sD8vLCARcR1poUu13hWlHTJkZ8a24zYFwwVteGlKg&server=vimeos → https://cuevanas3.pro/player.php?t=alMAuXzhCLiOjQQzXAbGZSCwudyK2CVret-_79pfZk4G8 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=alMAuXzhCLiOjQQzXAbGZSCwudyK2CVret-_79pfZk4G8sD8vLCARcR1poUu13hWlHTJkZ8a24zYFwwVteGlKg&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=iUYFboh1Guxh0gn0S9w9pCp9pQICA4efxjJmrwZnNHKFdVfWbGzw45Sv_y8GMGxVjyavZK7VqPk6xdcGAlJ08Q&server=vimeos → https://cuevanas3.pro/player.php?t=iUYFboh1Guxh0gn0S9w9pCp9pQICA4efxjJmrwZnNHKFd h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=iUYFboh1Guxh0gn0S9w9pCp9pQICA4efxjJmrwZnNHKFdVfWbGzw45Sv_y8GMGxVjyavZK7VqPk6xdcGAlJ08Q&server=vimeos",
       "200 https://vimeos.net/embed-uhuu5myzvdub.html",
       "404 https://animeflv.or.at/anime/alien-romulus/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/alien-romulus/ h1=\"Search Results for \"alien-romulus\"\"",
       "200 https://fuegocine.com/search_elastic?s=Alien%3A%20Romulus"
     ],
-    "ms": 397,
+    "ms": 554,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -583,7 +583,7 @@
       "200 embed-host: vidmoly.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2563,
+    "ms": 2233,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -602,7 +602,7 @@
       "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
       "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\""
     ],
-    "ms": 1264,
+    "ms": 1172,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -621,7 +621,7 @@
       "301 https://ver.gnula.one/movies/deadpool-wolverine/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/deadpool-wolverine-2024/ → https://ver.gnula.one"
     ],
-    "ms": 1281,
+    "ms": 1159,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -640,7 +640,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 990,
+    "ms": 923,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -655,11 +655,11 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Deadpool+Wolverine&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Deadpool&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=39639",
-      "301 https://cuevana3.gs/player.php?t=zV9V14nenqKHjUu-nJqcB751H0uOxgeuVtRusn_Nvt90_tplFx3soOccZINlsn6ddEOCvQnSh1bs87O0pzuHOw&server=vimeos → https://cuevanas3.pro/player.php?t=zV9V14nenqKHjUu-nJqcB751H0uOxgeuVtRusn_Nvt90_ h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=zV9V14nenqKHjUu-nJqcB751H0uOxgeuVtRusn_Nvt90_tplFx3soOccZINlsn6ddEOCvQnSh1bs87O0pzuHOw&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=P38AaUEjIwNDfLMd6h89ya6WgR_5fxA2DT19-Wl5M0Y2xuydiiRHcink9N04abkiC97DthG4gmltMET-7R-pgw&server=vimeos → https://cuevanas3.pro/player.php?t=P38AaUEjIwNDfLMd6h89ya6WgR_5fxA2DT19-Wl5M0Y2x h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=P38AaUEjIwNDfLMd6h89ya6WgR_5fxA2DT19-Wl5M0Y2xuydiiRHcink9N04abkiC97DthG4gmltMET-7R-pgw&server=vimeos",
       "200 https://vimeos.net/embed-tmbjqufb955w.html"
     ],
-    "ms": 3470,
+    "ms": 2395,
     "quality": [
       "HLS"
     ],
@@ -667,9 +667,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt6263850",
@@ -678,13 +678,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=39639",
-      "301 https://cuevana3.gs/player.php?t=zV9V14nenqKHjUu-nJqcB751H0uOxgeuVtRusn_Nvt90_tplFx3soOccZINlsn6ddEOCvQnSh1bs87O0pzuHOw&server=vimeos → https://cuevanas3.pro/player.php?t=zV9V14nenqKHjUu-nJqcB751H0uOxgeuVtRusn_Nvt90_ h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=zV9V14nenqKHjUu-nJqcB751H0uOxgeuVtRusn_Nvt90_tplFx3soOccZINlsn6ddEOCvQnSh1bs87O0pzuHOw&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=P38AaUEjIwNDfLMd6h89ya6WgR_5fxA2DT19-Wl5M0Y2xuydiiRHcink9N04abkiC97DthG4gmltMET-7R-pgw&server=vimeos → https://cuevanas3.pro/player.php?t=P38AaUEjIwNDfLMd6h89ya6WgR_5fxA2DT19-Wl5M0Y2x h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=P38AaUEjIwNDfLMd6h89ya6WgR_5fxA2DT19-Wl5M0Y2xuydiiRHcink9N04abkiC97DthG4gmltMET-7R-pgw&server=vimeos",
       "200 https://vimeos.net/embed-tmbjqufb955w.html",
       "404 https://animeflv.or.at/anime/deadpool-wolverine/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/deadpool-wolverine/ h1=\"Search Results for \"deadpool-wolverine\"\""
     ],
-    "ms": 592,
+    "ms": 507,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -696,14 +696,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=zV9V14nenqKHjUu-nJqcB751H0uOxgeuVtRusn_Nvt90_tplFx3soOccZINlsn6ddEOCvQnSh1bs87O0pzuHOw&server=vimeos → https://cuevanas3.pro/player.php?t=zV9V14nenqKHjUu-nJqcB751H0uOxgeuVtRusn_Nvt90_ h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=zV9V14nenqKHjUu-nJqcB751H0uOxgeuVtRusn_Nvt90_tplFx3soOccZINlsn6ddEOCvQnSh1bs87O0pzuHOw&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=P38AaUEjIwNDfLMd6h89ya6WgR_5fxA2DT19-Wl5M0Y2xuydiiRHcink9N04abkiC97DthG4gmltMET-7R-pgw&server=vimeos → https://cuevanas3.pro/player.php?t=P38AaUEjIwNDfLMd6h89ya6WgR_5fxA2DT19-Wl5M0Y2x h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=P38AaUEjIwNDfLMd6h89ya6WgR_5fxA2DT19-Wl5M0Y2xuydiiRHcink9N04abkiC97DthG4gmltMET-7R-pgw&server=vimeos",
       "200 https://vimeos.net/embed-tmbjqufb955w.html",
       "404 https://animeflv.or.at/anime/deadpool-wolverine/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/deadpool-wolverine/ h1=\"Search Results for \"deadpool-wolverine\"\"",
       "200 https://fuegocine.com/search_elastic?s=Deadpool%20%26%20Wolverine"
     ],
-    "ms": 466,
+    "ms": 483,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -722,7 +722,7 @@
       "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\""
     ],
-    "ms": 904,
+    "ms": 762,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -741,7 +741,7 @@
       "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
       "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com"
     ],
-    "ms": 1138,
+    "ms": 1094,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -760,7 +760,7 @@
       "301 https://ver.gnula.one/movies/inside-out-2/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inside-out-2-2024/ → https://ver.gnula.one"
     ],
-    "ms": 898,
+    "ms": 1153,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -779,7 +779,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 991,
+    "ms": 947,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -798,7 +798,7 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 761,
+    "ms": 690,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -817,7 +817,7 @@
       "404 https://animeflv.or.at/anime/inside-out-2/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/inside-out-2/ h1=\"Search Results for \"inside-out-2\"\""
     ],
-    "ms": 586,
+    "ms": 528,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -836,7 +836,7 @@
       "200 https://animeflv.or.at/search/inside-out-2/ h1=\"Search Results for \"inside-out-2\"\"",
       "200 https://fuegocine.com/search_elastic?s=Inside%20Out%202"
     ],
-    "ms": 383,
+    "ms": 587,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -855,7 +855,7 @@
       "404 https://www.tubeonline.net/pelicula/el-reino-prohibido-2008/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=El%20reino%20prohibido h1=\"Resultados encontrados: El reino prohibi\""
     ],
-    "ms": 925,
+    "ms": 787,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -870,11 +870,11 @@
       "200 https://www.tubeonline.net/?s=El%20reino%20prohibido h1=\"Resultados encontrados: El reino prohibi\"",
       "200 https://mirandogratis.com/?s=El%20reino%20prohibido h1=\"Estas buscando: El reino prohibido\"",
       "200 https://mirandogratis.com/el-reino-prohibido.html h1=\"Ver Pelicula El reino prohibido Online G\"",
-      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742",
+      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=736",
       "200 https://byseraguci.com/api/videos/yml5zxa71gkc",
       "302 https://mixdrop.top/e/wlllp17rtn9m7o → https://mxdrop.click/e/wlllp17rtn9m7o h1=\"302 Found\""
     ],
-    "ms": 1907,
+    "ms": 1692,
     "quality": [
       "HLS"
     ],
@@ -899,7 +899,7 @@
       "301 https://uqload.com/embed-i8zq52o28bqu.html → https://uqload.vc/embed-i8zq52o28bqu.html?utm_source=mirror_com& h1=\"301 Moved Permanently\"",
       "200 https://uqload.vc/embed-i8zq52o28bqu.html?utm_source=mirror_com&"
     ],
-    "ms": 2873,
+    "ms": 2304,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -918,7 +918,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "404 https://verpeliculasultra.com/xfsearch/peliculas-2008/"
     ],
-    "ms": 756,
+    "ms": 652,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -933,11 +933,11 @@
       "404 https://verpeliculasultra.com/xfsearch/peliculas-2008/",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=56111",
-      "301 https://cuevana3.gs/player.php?t=jsHePnkrnpqTdv24c6BNZ2WF6wUbwacfDXvZvKfD93s1BP1PAki6XuF-TTomcBoRfa5KqiJ16SuZnCEC3PI2Jg&server=vimeos → https://cuevanas3.pro/player.php?t=jsHePnkrnpqTdv24c6BNZ2WF6wUbwacfDXvZvKfD93s1B h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=jsHePnkrnpqTdv24c6BNZ2WF6wUbwacfDXvZvKfD93s1BP1PAki6XuF-TTomcBoRfa5KqiJ16SuZnCEC3PI2Jg&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=6d9AcnzUg-HFAJwxn9Bsohl62CFp1FYNgxz3xo0x62EYurnOKAGzxmhkyrSCt61sSvDdpjPSndn5M-ge4zNFoQ&server=vimeos → https://cuevanas3.pro/player.php?t=6d9AcnzUg-HFAJwxn9Bsohl62CFp1FYNgxz3xo0x62EYu h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=6d9AcnzUg-HFAJwxn9Bsohl62CFp1FYNgxz3xo0x62EYurnOKAGzxmhkyrSCt61sSvDdpjPSndn5M-ge4zNFoQ&server=vimeos",
       "200 https://vimeos.net/embed-o0unqe46z0g7.html"
     ],
-    "ms": 1651,
+    "ms": 1393,
     "quality": [
       "HLS"
     ],
@@ -956,13 +956,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=56111",
-      "301 https://cuevana3.gs/player.php?t=jsHePnkrnpqTdv24c6BNZ2WF6wUbwacfDXvZvKfD93s1BP1PAki6XuF-TTomcBoRfa5KqiJ16SuZnCEC3PI2Jg&server=vimeos → https://cuevanas3.pro/player.php?t=jsHePnkrnpqTdv24c6BNZ2WF6wUbwacfDXvZvKfD93s1B h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=jsHePnkrnpqTdv24c6BNZ2WF6wUbwacfDXvZvKfD93s1BP1PAki6XuF-TTomcBoRfa5KqiJ16SuZnCEC3PI2Jg&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=6d9AcnzUg-HFAJwxn9Bsohl62CFp1FYNgxz3xo0x62EYurnOKAGzxmhkyrSCt61sSvDdpjPSndn5M-ge4zNFoQ&server=vimeos → https://cuevanas3.pro/player.php?t=6d9AcnzUg-HFAJwxn9Bsohl62CFp1FYNgxz3xo0x62EYu h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=6d9AcnzUg-HFAJwxn9Bsohl62CFp1FYNgxz3xo0x62EYurnOKAGzxmhkyrSCt61sSvDdpjPSndn5M-ge4zNFoQ&server=vimeos",
       "200 https://vimeos.net/embed-o0unqe46z0g7.html",
       "404 https://animeflv.or.at/anime/el-reino-prohibido/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/el-reino-prohibido/ h1=\"Search Results for \"el-reino-prohibido\"\""
     ],
-    "ms": 627,
+    "ms": 849,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -974,14 +974,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=jsHePnkrnpqTdv24c6BNZ2WF6wUbwacfDXvZvKfD93s1BP1PAki6XuF-TTomcBoRfa5KqiJ16SuZnCEC3PI2Jg&server=vimeos → https://cuevanas3.pro/player.php?t=jsHePnkrnpqTdv24c6BNZ2WF6wUbwacfDXvZvKfD93s1B h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=jsHePnkrnpqTdv24c6BNZ2WF6wUbwacfDXvZvKfD93s1BP1PAki6XuF-TTomcBoRfa5KqiJ16SuZnCEC3PI2Jg&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=6d9AcnzUg-HFAJwxn9Bsohl62CFp1FYNgxz3xo0x62EYurnOKAGzxmhkyrSCt61sSvDdpjPSndn5M-ge4zNFoQ&server=vimeos → https://cuevanas3.pro/player.php?t=6d9AcnzUg-HFAJwxn9Bsohl62CFp1FYNgxz3xo0x62EYu h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=6d9AcnzUg-HFAJwxn9Bsohl62CFp1FYNgxz3xo0x62EYurnOKAGzxmhkyrSCt61sSvDdpjPSndn5M-ge4zNFoQ&server=vimeos",
       "200 https://vimeos.net/embed-o0unqe46z0g7.html",
       "404 https://animeflv.or.at/anime/el-reino-prohibido/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/el-reino-prohibido/ h1=\"Search Results for \"el-reino-prohibido\"\"",
       "200 https://fuegocine.com/search_elastic?s=El%20reino%20prohibido"
     ],
-    "ms": 430,
+    "ms": 395,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1000,7 +1000,7 @@
       "404 https://www.tubeonline.net/serie/naruto/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Naruto h1=\"Resultados encontrados: Naruto\""
     ],
-    "ms": 827,
+    "ms": 646,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1019,7 +1019,7 @@
       "404 https://www.tubeonline.net/serie/naruto/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Naruto h1=\"Resultados encontrados: Naruto\""
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1057,7 +1057,7 @@
       "404 https://www.tubeonline.net/serie/naruto/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Naruto h1=\"Resultados encontrados: Naruto\""
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1072,11 +1072,11 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=20794&season=1&page=1&postsPerPage=50",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=20797",
-      "301 https://cuevana3.gs/player.php?t=yXfuQOuMnHEP1UXwlTdSzZPwhsQHIYH4TsO08x2V4Gp55ssdSVnYnhVmopRMG3R4as57j-Qix2d2lw6JPKofgQ&server=vimeos → https://cuevanas3.pro/player.php?t=yXfuQOuMnHEP1UXwlTdSzZPwhsQHIYH4TsO08x2V4Gp55 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=yXfuQOuMnHEP1UXwlTdSzZPwhsQHIYH4TsO08x2V4Gp55ssdSVnYnhVmopRMG3R4as57j-Qix2d2lw6JPKofgQ&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=MMQEhbuwwGdPG1sG8p3XFA8NJZuwn5e-03uCOg7VlUWJKKxRvThZ4HQHd4s66OVjF6g4Gp9I54NmBSfyJxcYeA&server=vimeos → https://cuevanas3.pro/player.php?t=MMQEhbuwwGdPG1sG8p3XFA8NJZuwn5e-03uCOg7VlUWJK h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=MMQEhbuwwGdPG1sG8p3XFA8NJZuwn5e-03uCOg7VlUWJKKxRvThZ4HQHd4s66OVjF6g4Gp9I54NmBSfyJxcYeA&server=vimeos",
       "200 https://vimeos.net/embed-wa2r4s768i9k.html"
     ],
-    "ms": 3717,
+    "ms": 1627,
     "quality": [
       "HLS"
     ],
@@ -1084,9 +1084,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+      "https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
   },
   {
     "control": "tt0409591:1:1",
@@ -1095,13 +1095,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=20797",
-      "301 https://cuevana3.gs/player.php?t=yXfuQOuMnHEP1UXwlTdSzZPwhsQHIYH4TsO08x2V4Gp55ssdSVnYnhVmopRMG3R4as57j-Qix2d2lw6JPKofgQ&server=vimeos → https://cuevanas3.pro/player.php?t=yXfuQOuMnHEP1UXwlTdSzZPwhsQHIYH4TsO08x2V4Gp55 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=yXfuQOuMnHEP1UXwlTdSzZPwhsQHIYH4TsO08x2V4Gp55ssdSVnYnhVmopRMG3R4as57j-Qix2d2lw6JPKofgQ&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=MMQEhbuwwGdPG1sG8p3XFA8NJZuwn5e-03uCOg7VlUWJKKxRvThZ4HQHd4s66OVjF6g4Gp9I54NmBSfyJxcYeA&server=vimeos → https://cuevanas3.pro/player.php?t=MMQEhbuwwGdPG1sG8p3XFA8NJZuwn5e-03uCOg7VlUWJK h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=MMQEhbuwwGdPG1sG8p3XFA8NJZuwn5e-03uCOg7VlUWJKKxRvThZ4HQHd4s66OVjF6g4Gp9I54NmBSfyJxcYeA&server=vimeos",
       "200 https://vimeos.net/embed-wa2r4s768i9k.html",
       "404 https://animeflv.or.at/anime/naruto/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/naruto/ h1=\"Search Results for \"naruto\"\""
     ],
-    "ms": 629,
+    "ms": 544,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1113,14 +1113,14 @@
     "provider": "fuegocine",
     "hits": 0,
     "trace": [
-      "301 https://cuevana3.gs/player.php?t=yXfuQOuMnHEP1UXwlTdSzZPwhsQHIYH4TsO08x2V4Gp55ssdSVnYnhVmopRMG3R4as57j-Qix2d2lw6JPKofgQ&server=vimeos → https://cuevanas3.pro/player.php?t=yXfuQOuMnHEP1UXwlTdSzZPwhsQHIYH4TsO08x2V4Gp55 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=yXfuQOuMnHEP1UXwlTdSzZPwhsQHIYH4TsO08x2V4Gp55ssdSVnYnhVmopRMG3R4as57j-Qix2d2lw6JPKofgQ&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=MMQEhbuwwGdPG1sG8p3XFA8NJZuwn5e-03uCOg7VlUWJKKxRvThZ4HQHd4s66OVjF6g4Gp9I54NmBSfyJxcYeA&server=vimeos → https://cuevanas3.pro/player.php?t=MMQEhbuwwGdPG1sG8p3XFA8NJZuwn5e-03uCOg7VlUWJK h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=MMQEhbuwwGdPG1sG8p3XFA8NJZuwn5e-03uCOg7VlUWJKKxRvThZ4HQHd4s66OVjF6g4Gp9I54NmBSfyJxcYeA&server=vimeos",
       "200 https://vimeos.net/embed-wa2r4s768i9k.html",
       "404 https://animeflv.or.at/anime/naruto/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/naruto/ h1=\"Search Results for \"naruto\"\"",
       "200 https://fuegocine.com/search_elastic?s=Naruto"
     ],
-    "ms": 383,
+    "ms": 505,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1139,7 +1139,7 @@
       "404 https://www.tubeonline.net/serie/ao-ashi-season-2/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Ao%20Ashi%20Season%202 h1=\"Resultados encontrados: Ao Ashi Season 2\""
     ],
-    "ms": 843,
+    "ms": 710,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1158,7 +1158,7 @@
       "404 https://www.tubeonline.net/serie/ao-ashi-season-2/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Ao%20Ashi%20Season%202 h1=\"Resultados encontrados: Ao Ashi Season 2\""
     ],
-    "ms": 1,
+    "ms": 0,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1215,7 +1215,7 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 2399,
+    "ms": 657,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1234,7 +1234,7 @@
       "200 https://animeflv.or.at/anime/ao-ashi-season-2/ h1=\"Ao Ashi Season 2\"",
       "200 https://animeflv.or.at/2026/11/15/ao-ashi-season-2-episodio-7/ h1=\"Ao Ashi Season 2 Episodio 7 Sub Español\""
     ],
-    "ms": 515,
+    "ms": 1040,
     "quality": [
       "HLS"
     ],
@@ -1259,7 +1259,7 @@
       "200 https://animeflv.or.at/2026/11/15/ao-ashi-season-2-episodio-7/ h1=\"Ao Ashi Season 2 Episodio 7 Sub Español\"",
       "200 https://fuegocine.com/search_elastic?s=Ao%20Ashi%20Season%202"
     ],
-    "ms": 387,
+    "ms": 451,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1278,7 +1278,7 @@
       "404 https://www.tubeonline.net/serie/black-clover-2nd-season/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Black%20Clover%202nd%20Season h1=\"Resultados encontrados: Black Clover 2nd\""
     ],
-    "ms": 759,
+    "ms": 607,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1297,7 +1297,7 @@
       "404 https://www.tubeonline.net/serie/black-clover-2nd-season/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Black%20Clover%202nd%20Season h1=\"Resultados encontrados: Black Clover 2nd\""
     ],
-    "ms": 0,
+    "ms": 1,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1354,7 +1354,7 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
     ],
-    "ms": 1179,
+    "ms": 700,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1373,7 +1373,7 @@
       "200 https://animeflv.or.at/anime/black-clover-2nd-season/ h1=\"Black Clover 2nd Season\"",
       "200 https://animeflv.or.at/2026/11/14/black-clover-2nd-season-episodio-7/ h1=\"Black Clover 2nd Season Episodio 7 Sub E\""
     ],
-    "ms": 1111,
+    "ms": 558,
     "quality": [
       "HLS"
     ],
@@ -1398,7 +1398,7 @@
       "200 https://animeflv.or.at/2026/11/14/black-clover-2nd-season-episodio-7/ h1=\"Black Clover 2nd Season Episodio 7 Sub E\"",
       "200 https://fuegocine.com/search_elastic?s=Black%20Clover%202nd%20Season"
     ],
-    "ms": 765,
+    "ms": 479,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1417,7 +1417,7 @@
       "200 embed-host: luluvdo.com",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2489,
+    "ms": 2179,
     "quality": [
       "HLS"
     ],
@@ -1438,11 +1438,11 @@
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
       "200 https://mirandogratis.com/?s=La%20Odisea h1=\"Estas buscando: La Odisea\"",
       "200 https://mirandogratis.com/la-odisea.html h1=\"Ver Pelicula La odisea Online Gratis en \"",
-      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=750",
+      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=744",
       "200 https://byseraguci.com/api/videos/lp12frkrgwny",
       "302 https://mixdrop.top/e/1nn9zd10tprg3w → https://mxdrop.click/e/1nn9zd10tprg3w h1=\"302 Found\""
     ],
-    "ms": 1742,
+    "ms": 1671,
     "quality": [
       "HLS"
     ],
@@ -1461,13 +1461,13 @@
     "hits": 0,
     "trace": [
       "200 https://mirandogratis.com/la-odisea.html h1=\"Ver Pelicula La odisea Online Gratis en \"",
-      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=750",
+      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=744",
       "200 https://byseraguci.com/api/videos/lp12frkrgwny",
       "302 https://mixdrop.top/e/1nn9zd10tprg3w → https://mxdrop.click/e/1nn9zd10tprg3w h1=\"302 Found\"",
       "301 https://ver.gnula.one/movies/la-odisea/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/la-odisea-2026/ → https://ver.gnula.one"
     ],
-    "ms": 1308,
+    "ms": 1108,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1486,7 +1486,7 @@
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/",
       "200 https://verpeliculasultra.com/accion/5260-la-odisea.html h1=\"Ver La Odisea (2026) Online Gratis\""
     ],
-    "ms": 2923,
+    "ms": 1555,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1501,11 +1501,11 @@
       "200 https://verpeliculasultra.com/accion/5260-la-odisea.html h1=\"Ver La Odisea (2026) Online Gratis\"",
       "200 https://cuevanas3.pro/wp-api/v1/search?q=La+Odisea&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=53108",
-      "301 https://cuevana3.gs/player.php?t=9EbLJmwUOcMNmxmCwvADgpSktV8Pp2cDMwmo5u1nFu790mCAx5ZQe5N5uEYt9cpSJ43QNasBnfRHS6RUvmVCLA&server=vimeos → https://cuevanas3.pro/player.php?t=9EbLJmwUOcMNmxmCwvADgpSktV8Pp2cDMwmo5u1nFu790 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=9EbLJmwUOcMNmxmCwvADgpSktV8Pp2cDMwmo5u1nFu790mCAx5ZQe5N5uEYt9cpSJ43QNasBnfRHS6RUvmVCLA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=pqMcgG_WbMi4_rxMd-2YKS8wQUeJvvgO7i2HLUE2AGRN5D-CTxRzI9hAR4cSpGbMPQOn16LaSiN85RlW-N5ALg&server=vimeos → https://cuevanas3.pro/player.php?t=pqMcgG_WbMi4_rxMd-2YKS8wQUeJvvgO7i2HLUE2AGRN5 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=pqMcgG_WbMi4_rxMd-2YKS8wQUeJvvgO7i2HLUE2AGRN5D-CTxRzI9hAR4cSpGbMPQOn16LaSiN85RlW-N5ALg&server=vimeos",
       "200 https://vimeos.net/embed-m62pdrnlvwpw.html"
     ],
-    "ms": 3386,
+    "ms": 1432,
     "quality": [
       "HLS"
     ],
@@ -1524,13 +1524,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=53108",
-      "301 https://cuevana3.gs/player.php?t=9EbLJmwUOcMNmxmCwvADgpSktV8Pp2cDMwmo5u1nFu790mCAx5ZQe5N5uEYt9cpSJ43QNasBnfRHS6RUvmVCLA&server=vimeos → https://cuevanas3.pro/player.php?t=9EbLJmwUOcMNmxmCwvADgpSktV8Pp2cDMwmo5u1nFu790 h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=9EbLJmwUOcMNmxmCwvADgpSktV8Pp2cDMwmo5u1nFu790mCAx5ZQe5N5uEYt9cpSJ43QNasBnfRHS6RUvmVCLA&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=pqMcgG_WbMi4_rxMd-2YKS8wQUeJvvgO7i2HLUE2AGRN5D-CTxRzI9hAR4cSpGbMPQOn16LaSiN85RlW-N5ALg&server=vimeos → https://cuevanas3.pro/player.php?t=pqMcgG_WbMi4_rxMd-2YKS8wQUeJvvgO7i2HLUE2AGRN5 h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=pqMcgG_WbMi4_rxMd-2YKS8wQUeJvvgO7i2HLUE2AGRN5D-CTxRzI9hAR4cSpGbMPQOn16LaSiN85RlW-N5ALg&server=vimeos",
       "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
       "404 https://animeflv.or.at/anime/la-odisea/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/la-odisea/ h1=\"Search Results for \"la-odisea\"\""
     ],
-    "ms": 740,
+    "ms": 510,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1546,10 +1546,10 @@
       "200 https://animeflv.or.at/search/la-odisea/ h1=\"Search Results for \"la-odisea\"\"",
       "200 https://fuegocine.com/search_elastic?s=La%20Odisea",
       "200 https://fuegocine.com/movies/watch/la-odisea/227",
-      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f",
-      "200 https://unlimplay.com/f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f"
+      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643",
+      "200 https://unlimplay.com/f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643"
     ],
-    "ms": 2826,
+    "ms": 5576,
     "quality": [
       "HLS",
       "HLS"
@@ -1572,12 +1572,12 @@
     "trace": [
       "200 https://fuegocine.com/search_elastic?s=La%20Odisea",
       "200 https://fuegocine.com/movies/watch/la-odisea/227",
-      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f",
-      "200 https://unlimplay.com/f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f",
+      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643",
+      "200 https://unlimplay.com/f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643",
       "404 https://www.tubeonline.net/serie/visionquest/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=VisionQuest h1=\"Resultados encontrados: VisionQuest\""
     ],
-    "ms": 994,
+    "ms": 638,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1591,8 +1591,8 @@
     "trace": [
       "200 https://fuegocine.com/search_elastic?s=La%20Odisea",
       "200 https://fuegocine.com/movies/watch/la-odisea/227",
-      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f",
-      "200 https://unlimplay.com/f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f",
+      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643",
+      "200 https://unlimplay.com/f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643",
       "404 https://www.tubeonline.net/serie/visionquest/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=VisionQuest h1=\"Resultados encontrados: VisionQuest\""
     ],
@@ -1610,8 +1610,8 @@
     "trace": [
       "200 https://fuegocine.com/search_elastic?s=La%20Odisea",
       "200 https://fuegocine.com/movies/watch/la-odisea/227",
-      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f",
-      "200 https://unlimplay.com/f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f",
+      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643",
+      "200 https://unlimplay.com/f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643",
       "404 https://www.tubeonline.net/serie/visionquest/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=VisionQuest h1=\"Resultados encontrados: VisionQuest\""
     ],
@@ -1629,8 +1629,8 @@
     "trace": [
       "200 https://fuegocine.com/search_elastic?s=La%20Odisea",
       "200 https://fuegocine.com/movies/watch/la-odisea/227",
-      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f",
-      "200 https://unlimplay.com/f/embed/movie/1368337?_et=bdcf0bfb5d17650496795da97927f75f",
+      "302 https://unlimplay.com/f/embed/movie/1368337 → /f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643",
+      "200 https://unlimplay.com/f/embed/movie/1368337?_et=d1500edaae1c1e68ec392fe193a85643",
       "404 https://www.tubeonline.net/serie/visionquest/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=VisionQuest h1=\"Resultados encontrados: VisionQuest\""
     ],
@@ -1649,11 +1649,11 @@
       "200 https://cuevanas3.pro/wp-api/v1/search?q=VisionQuest&page=1&postType=any&postsPerPage=18",
       "200 https://cuevanas3.pro/wp-api/v1/single/episodes/list?_id=65144&season=1&page=1&postsPerPage=50",
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=65146",
-      "301 https://cuevana3.gs/player.php?t=XHIri6GpL9ll0VpUNwqSZWeRsoByqyYcBneVni1bOwv6c-mS-o1xRup9rqVmqULg_rT-pWG9ZqQKOey9Ilmrhw&server=vimeos → https://cuevanas3.pro/player.php?t=XHIri6GpL9ll0VpUNwqSZWeRsoByqyYcBneVni1bOwv6c h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=XHIri6GpL9ll0VpUNwqSZWeRsoByqyYcBneVni1bOwv6c-mS-o1xRup9rqVmqULg_rT-pWG9ZqQKOey9Ilmrhw&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=vAD2jDwFo4c_2qUtVGEYCjbzVSCeU2yGBCzB6ciFY82bKRPMF1bKo4yGt3GNYn4cPY3Mh99IZ6uMEaVH84yDqg&server=vimeos → https://cuevanas3.pro/player.php?t=vAD2jDwFo4c_2qUtVGEYCjbzVSCeU2yGBCzB6ciFY82bK h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=vAD2jDwFo4c_2qUtVGEYCjbzVSCeU2yGBCzB6ciFY82bKRPMF1bKo4yGt3GNYn4cPY3Mh99IZ6uMEaVH84yDqg&server=vimeos",
       "200 https://vimeos.net/embed-hc7i1n95d4vx.html"
     ],
-    "ms": 2979,
+    "ms": 1974,
     "quality": [
       "HLS"
     ],
@@ -1661,9 +1661,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "VisionQuest",
@@ -1672,13 +1672,13 @@
     "hits": 0,
     "trace": [
       "200 https://cuevanas3.pro/wp-api/v1/player?postId=65146",
-      "301 https://cuevana3.gs/player.php?t=XHIri6GpL9ll0VpUNwqSZWeRsoByqyYcBneVni1bOwv6c-mS-o1xRup9rqVmqULg_rT-pWG9ZqQKOey9Ilmrhw&server=vimeos → https://cuevanas3.pro/player.php?t=XHIri6GpL9ll0VpUNwqSZWeRsoByqyYcBneVni1bOwv6c h1=\"301 Moved Permanently\"",
-      "200 https://cuevanas3.pro/player.php?t=XHIri6GpL9ll0VpUNwqSZWeRsoByqyYcBneVni1bOwv6c-mS-o1xRup9rqVmqULg_rT-pWG9ZqQKOey9Ilmrhw&server=vimeos",
+      "301 https://cuevana3.gs/player.php?t=vAD2jDwFo4c_2qUtVGEYCjbzVSCeU2yGBCzB6ciFY82bKRPMF1bKo4yGt3GNYn4cPY3Mh99IZ6uMEaVH84yDqg&server=vimeos → https://cuevanas3.pro/player.php?t=vAD2jDwFo4c_2qUtVGEYCjbzVSCeU2yGBCzB6ciFY82bK h1=\"301 Moved Permanently\"",
+      "200 https://cuevanas3.pro/player.php?t=vAD2jDwFo4c_2qUtVGEYCjbzVSCeU2yGBCzB6ciFY82bKRPMF1bKo4yGt3GNYn4cPY3Mh99IZ6uMEaVH84yDqg&server=vimeos",
       "200 https://vimeos.net/embed-hc7i1n95d4vx.html",
       "404 https://animeflv.or.at/anime/visionquest/ h1=\"Página no encontrada\"",
       "200 https://animeflv.or.at/search/visionquest/ h1=\"Search Results for \"visionquest\"\""
     ],
-    "ms": 708,
+    "ms": 533,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1688,19 +1688,28 @@
     "control": "VisionQuest",
     "title": "VisionQuest",
     "provider": "fuegocine",
-    "hits": 0,
+    "hits": 2,
     "trace": [
-      "404 https://animeflv.or.at/anime/visionquest/ h1=\"Página no encontrada\"",
-      "200 https://animeflv.or.at/search/visionquest/ h1=\"Search Results for \"visionquest\"\"",
       "200 https://fuegocine.com/search_elastic?s=VisionQuest",
       "200 https://fuegocine.com/shows/details/visionquest/24",
       "200 https://fuegocine.com/shows/visionquest/seasons/temporada-1/55",
-      "200 https://fuegocine.com/shows/visionquest/01x01-sin-ataduras/49"
+      "200 https://fuegocine.com/shows/visionquest/01x01-sin-ataduras/49",
+      "302 https://unlimplay.com/f/embed/tv/213375/1/1 → /f/embed/tv/213375/1/1?_et=cf0112cce18e59b7805cfef48af4227e",
+      "200 https://unlimplay.com/f/embed/tv/213375/1/1?_et=cf0112cce18e59b7805cfef48af4227e"
     ],
-    "ms": 2028,
-    "quality": [],
-    "audio": [],
-    "hosts": [],
-    "verdict": "no-extractable-embed {\"opaque\":1,\"extracted\":0,\"unsupported\":0}"
+    "ms": 3070,
+    "quality": [
+      "HLS",
+      "HLS"
+    ],
+    "audio": [
+      "Latino",
+      "Subtitulado"
+    ],
+    "hosts": [
+      "https://unlimplay.com/cps.php",
+      "https://unlimplay.com/cps.php"
+    ],
+    "verdict": "HLS/Latino https://unlimplay.com/cps.php · HLS/Subtitulado https://unlimplay.com/cps.php"
   }
 ]

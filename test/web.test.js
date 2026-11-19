@@ -675,7 +675,7 @@ test('/configure: solo ofrece fuentes que el despliegue realmente consulta', () 
   const defaults = withEnv({}, () => configure());
   const offered = (html) => [...html.matchAll(/data-group="streams" data-key="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(offered(defaults), ['fanpelis', 'spinflix', 'gnulahd', 'videoapp', 'pelisplus',
-    'tubeonline', 'mirandogratis', 'gnulaone', 'ultra', 'cuevanas3', 'animeflv', 'fuegocine']);
+    'tubeonline', 'mirandogratis', 'gnulaone', 'ultra', 'cuevanas3', 'animeflv', 'fuegocine', 'pelisjuanita']);
   for (const key of PROVIDER_KEYS) assert.ok(defaults.includes(`checked data-group="streams" data-key="${key}"`), key);
   assert.match(defaults, /data-key="gnulahd" \/><span>GnulaHD \(experimental\)<\/span>/);
   assert.equal(runConfigure().url, `${ORIGIN}/manifest.json`);

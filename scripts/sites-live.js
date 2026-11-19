@@ -25,6 +25,7 @@ const sites = {
   cuevanas3: require('../lib/sites/cuevanas3'),
   animeflv: require('../lib/sites/animeflv'),
   fuegocine: require('../lib/sites/fuegocine'),
+  pelisjuanita: require('../lib/sites/pelisjuanita'),
 };
 
 const CONTROLS = [
@@ -122,6 +123,7 @@ const SEARCHERS = {
   cuevanas3: (resolved) => sites.cuevanas3.searchCuevanas3(null, resolved, resolved.title, 9000),
   animeflv: (resolved) => sites.animeflv.searchAnimeFlv(null, resolved, resolved.title, 9000),
   fuegocine: (resolved) => sites.fuegocine.searchFuegoCine(null, resolved, resolved.title, 9000),
+  pelisjuanita: (resolved) => sites.pelisjuanita.searchPelisJuanita(null, resolved, resolved.title, 9000),
 };
 
 async function resolveControl(control) {

@@ -76,6 +76,17 @@ globalThis.fetch = async (url, options = {}) => {
       }
     } catch (_) {}
   }
+  if (/\/api\/videos\//.test(String(url)) && /json/i.test(type) && html) {
+    try {
+      const data = JSON.parse(html);
+      const pb = data && typeof data === 'object' ? data.playback : null;
+      const shape = pb && typeof pb === 'object'
+        ? `playback{${Object.keys(pb).join(',')} algo=${pb.algorithm} parts=${Array.isArray(pb.key_parts) ? pb.key_parts.length : 'no'} ivLen=${String(pb.iv || '').length} payloadLen=${String(pb.payload || '').length}`
+        : `keys=${data && typeof data === 'object' ? Object.keys(data).join(',') : typeof data}`;
+      trace.push({ url: `byse-api: ${shape}`, status: response.status, type: 'byse', location: '', title: '', h1: '', marks: [], bytes: html.length });
+      try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync('.probe/html/live-byse-api.json', html); } catch (_) {}
+    } catch (_) {}
+  }
   trace.push({ url: String(url).slice(0, 150), status: response.status, type: type.split(';')[0],
     location: response.headers.get('location') || '',
     title: /<title[^>]*>([^<]{0,80})/i.exec(text)?.[1]?.trim() || '',

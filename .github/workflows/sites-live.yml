@@ -1,0 +1,42 @@
+name: Adaptadores de sitios en vivo
+on:
+  workflow_dispatch:
+    inputs:
+      providers:
+        description: 'Adaptadores (tubeonline mirandogratis gnulaone ultra); vacío = todos'
+        required: false
+        default: ''
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/sites-live.yml'
+      - 'scripts/sites-live.js'
+      - 'lib/sites/**'
+      - 'lib/extractors.js'
+      - 'lib/mediaParse.js'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Pruebas de los adaptadores (sin red)
+        run: node --test test/siteExtractors.test.js test/mediaParse.test.js
+      - name: Adaptadores contra los sitios reales
+        run: node scripts/sites-live.js ${{ inputs.providers }}
+      - name: Devolver resultados a la rama
+        if: always()
+        run: |
+          test -s .probe/sites-live.json || exit 0
+          git config user.name "sonda"
+          git config user.email "sonda@users.noreply.github.com"
+          git add -f .probe/sites-live.json .probe/sites-live.md
+          git commit -m "sonda: adaptadores de sitios $(date -u +%FT%TZ) [skip ci]" || exit 0
+          git push

@@ -57,6 +57,9 @@
 | animeflv.or.at | buscar-slash | `https://animeflv.or.at/search/naruto/` | 200 | 0 | 0 | — |  |
 | animeflv.or.at | ficha-black-clover | `https://animeflv.or.at/anime/black-clover-2nd-season/` | 200 | 0 | 0 | — |  |
 | animeflv.or.at | archivo-anime | `https://animeflv.or.at/anime/` | 200 | 0 | 0 | — |  |
+| fuegocine.com | portada | `https://fuegocine.com/` | 200 | 0 | 0 | — |  |
+| fuegocine.com | wp-json | `https://fuegocine.com/wp-json/` | 404 | — | — | — |  |
+| fuegocine.com | buscador | `https://fuegocine.com/?…` | 200 | 0 | 0 | — |  |
 | animeyt.cc | portada | `https://animeyt.cc/` | 403 cf | — | — | — |  |
 | animeyt.cc | wp-json | `https://animeyt.cc/wp-json/` | 403 cf | — | — | — |  |
 

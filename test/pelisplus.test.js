@@ -33,7 +33,7 @@ test('PelisPlus: búsqueda, validación de ficha, idioma y extracción HLS sin e
 test('PelisPlus: no acepta título, año, idioma o iframe incorrectos', async (t) => {
   assert.deepEqual(searchCandidates(search, { ...movie, title: 'Matrix', altTitle: '' }), []);
   const $ = load(`<li class="playurl" data-name="Latino" data-url="https://streamwish.to.evil.test/e/id"></li>
-   <li class="playurl" data-name="Subtitulado" data-url="https://streamwish.to/e/id"></li>`);
+   <li class="playurl" data-name="Inglés" data-url="https://streamwish.to/e/id"></li>`);
   assert.deepEqual(playerEmbeds($), []);
   const calls = [];
   t.mock.method(global, 'fetch', async (raw) => {

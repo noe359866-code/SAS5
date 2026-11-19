@@ -23,6 +23,7 @@ const sites = {
   gnulaone: require('../lib/sites/gnulaone'),
   ultra: require('../lib/sites/ultra'),
   cuevanas3: require('../lib/sites/cuevanas3'),
+  animeflv: require('../lib/sites/animeflv'),
 };
 
 const CONTROLS = [
@@ -34,6 +35,8 @@ const CONTROLS = [
   { type: 'movie', id: 'tt22022452', fallback: { title: 'Intensa-Mente 2', year: '2024' } },
   { type: 'movie', title: 'El reino prohibido', fallback: { title: 'El reino prohibido', year: '2008' } },
   { type: 'series', id: 'tt0409591:1:1', fallback: { title: 'Naruto', year: '2002', season: 1, episode: 1 } },
+  { type: 'series', title: 'Ao Ashi Season 2', fallback: { title: 'Ao Ashi Season 2', year: '2026', season: 2, episode: 7 } },
+  { type: 'series', title: 'Black Clover 2nd Season', fallback: { title: 'Black Clover 2nd Season', year: '2026', season: 2, episode: 7 } },
 ];
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──
@@ -112,6 +115,7 @@ const SEARCHERS = {
   gnulaone: (resolved) => sites.gnulaone.searchGnulaOne(null, resolved, resolved.title, 9000),
   ultra: (resolved) => sites.ultra.searchUltra(null, resolved, resolved.title, 9000),
   cuevanas3: (resolved) => sites.cuevanas3.searchCuevanas3(null, resolved, resolved.title, 9000),
+  animeflv: (resolved) => sites.animeflv.searchAnimeFlv(null, resolved, resolved.title, 9000),
 };
 
 async function resolveControl(control) {

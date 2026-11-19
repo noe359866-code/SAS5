@@ -107,7 +107,7 @@ test('SpinFlix: filtra antes del límite y se queda con el primer HLS válido de
     if (url.pathname === '/search') return Response.json({ results: [movie] });
     if (url.pathname === '/pelicula/control-de-resolver') return Response.json({ ...movie, embeds: { video: [
       { language: 'Latino + ENG', link: 'https://vimeos.net/embed-eng' },
-      { language: 'Subtitulado', link: 'https://vimeos.net/embed-sub' },
+      { language: 'Japonés', link: 'https://vimeos.net/embed-jp' },
       { language: 'Latino', link: 'https://vimeos.net.evil.example/embed' },
       { language: 'Latino', link: embed },
       { language: 'Latino', link: embed },

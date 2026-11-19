@@ -267,7 +267,7 @@ test('fanpelis: idiomas descartados, hosts ajenos y enlaces repetidos no consume
     ['/api/rest/search', json(SEARCH_MOVIE)],
     ['/api/rest/player', json({ data: { embeds: [
       { lang: 'Inglés', url: 'https://vimeos.net/embed-english.html' },
-      { lang: 'Subtitulado', url: 'https://vimeos.net/embed-sub.html' },
+      { lang: '', url: 'https://vimeos.net/embed-sin-idioma.html' },
       { lang: 'Latino', url: 'https://vimeos.net.evil.example/embed' },
       ...Array.from({ length: 5 }, () => ({ lang: 'Latino', url: obsolete })),
       { lang: 'Castellano', url: EMBED },

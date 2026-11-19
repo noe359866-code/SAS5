@@ -70,7 +70,7 @@ test('API Express: healthz solo anuncia las fuentes vigentes', async (t) => {
   assert.equal(response.status, 200);
   const body = response.json();
   assert.deepEqual(body.streamProviders, ['spinflix']);
-  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: false, spinflix: true, gnulahd: false, videoapp: false, pelisplus: false, tubeonline: false, mirandogratis: false, gnulaone: false, ultra: false, cuevanas3: false });
+  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: false, spinflix: true, gnulahd: false, videoapp: false, pelisplus: false, tubeonline: false, mirandogratis: false, gnulaone: false, ultra: false, cuevanas3: false, animeflv: false });
 });
 
 test('API Express entrega extras de paginación para catálogos personales', async () => {

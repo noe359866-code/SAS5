@@ -230,6 +230,10 @@ const SITES = {
       { label: 'episodio-slash', url: 'https://animeflv.or.at/ver/ao-ashi-season-2-1/' },
       { label: 'sitemap', url: 'https://animeflv.or.at/sitemap.xml' },
       { label: 'sitemap-index', url: 'https://animeflv.or.at/sitemap_index.xml' },
+      { label: 'episodio-real', url: 'https://animeflv.or.at/2026/10/04/ao-ashi-season-2-episodio-1/' },
+      { label: 'wp-search', url: 'https://animeflv.or.at/wp-json/wp/v2/search?search=naruto&per_page=10' },
+      { label: 'wp-types', url: 'https://animeflv.or.at/wp-json/wp/v2/types' },
+      { label: 'wp-posts', url: 'https://animeflv.or.at/wp-json/wp/v2/posts?search=naruto&per_page=5' },
     ],
   },
   animeyt: {

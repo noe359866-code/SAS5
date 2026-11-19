@@ -194,9 +194,16 @@ test('ultra: identidad por ficha (h1 + f-info) y pestañas de idioma', () => {
   assert.equal(blocks[1].url, 'https://powvideo.org/embed-99ess8o65y66-800x400.html');
 });
 
-test('ultra: solo películas y solo con año', async () => {
+test('ultra: solo películas; el año ya no es obligatorio (buscador DLE)', async () => {
   assert.equal((await ultra.searchUltra('x', { title: 'Hope', mediaType: 'series', year: '2026' })).skipped, 'series-not-supported');
-  assert.equal((await ultra.searchUltra('x', { title: 'Hope', mediaType: 'movie' })).skipped, 'year-required');
+  // Sin año el buscador DLE sigue funcionando: busca y no encuentra nada.
+  const stub = stubFetch({});
+  try {
+    const result = await ultra.searchUltra('x', { title: 'Hope', mediaType: 'movie' });
+    assert.equal(result.reason, 'no-match');
+    assert.ok(stub.calls.some((call) => call.method === 'POST' && /do=search/.test(call.body)),
+      'el buscador DLE es un POST con do=search');
+  } finally { stub.restore(); }
 });
 
 test('tubeonline: episodio exacto por numerando y servidores por data-post', () => {

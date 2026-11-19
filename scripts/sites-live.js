@@ -50,6 +50,22 @@ globalThis.fetch = async (url, options = {}) => {
     const at = text.indexOf(mark);
     if (at >= 0) context[mark] = text.slice(Math.max(0, at - 120), at + 220);
   }
+  // HTML completo de las páginas que importan para corregir selectores.
+  if (String(options.method || 'GET') === 'GET' && /html|text/i.test(type) && html.length) {
+    const host = (() => { try { return new URL(String(url)).hostname; } catch { return ''; } })();
+    if (/(?:tubeonline|mirandogratis|gnula\.one|verpeliculasultra)/.test(host)) {
+      const name = String(url).replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 80);
+      try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync(`.probe/html/live-${name}.html`, html); } catch (_) {}
+    }
+  }
+  // Host del embed que devuelve Dooplay (sin la URL firmada).
+  if (/admin-ajax\.php/.test(String(url)) && /json/i.test(type)) {
+    try {
+      const data = JSON.parse(html);
+      const embed = typeof data?.embed_url === 'string' ? data.embed_url : '';
+      if (embed) trace.push({ url: `embed-host: ${new URL(embed).hostname}`, status: 200, type: 'embed', location: '', title: '', h1: '', marks: [], bytes: 0 });
+    } catch (_) {}
+  }
   trace.push({ url: String(url).slice(0, 150), status: response.status, type: type.split(';')[0],
     location: response.headers.get('location') || '',
     title: /<title[^>]*>([^<]{0,80})/i.exec(text)?.[1]?.trim() || '',

@@ -63,6 +63,15 @@
 | fuegocine.com | search-elastic | `https://fuegocine.com/search_elastic?…` | 200 | 0 | 0 | — |  |
 | fuegocine.com | ficha-pelicula | `https://fuegocine.com/movies/details/la-odisea/227` | 200 | 0 | 0 | — |  |
 | fuegocine.com | ficha-serie | `https://fuegocine.com/shows/details/visionquest/24` | 200 | 0 | 0 | — |  |
+| fuegocine.com | temporada | `https://fuegocine.com/shows/visionquest/seasons/temporada-1/55` | 200 | 0 | 0 | — |  |
+| fuegocine.com | ver-watch | `https://fuegocine.com/movies/watch/la-odisea/227` | 200 | 3 | 0 | videro.my, player.abyssplayer.com, unlimplay.com |  |
+| fuegocine.com | ·videro.my | `https://videro.my/e/ueuf2z2cltcp6sw` | 403 cf | — | — | — |  |
+| fuegocine.com | ·player.abyssplayer.com | `https://player.abyssplayer.com/KxBGoCWcV` | 200 | 0 | 0 | — |  |
+| fuegocine.com | ·unlimplay.com | `https://unlimplay.com/f/embed/movie/1368337` | 200 | 0 | 9 | — |  |
+| fuegocine.com | ··manifiesto | `https://unlimplay.com/cps.php?…` | 200 | — | HLS ✓ | unlimplay.com | 852x480 1280x720 audio=Español/English seg=0 |
+| fuegocine.com | ··manifiesto | `https://unlimplay.com/cps.php?…` | 200 | — | HLS ✓ | unlimplay.com | 1280x720 audio=— seg=0 |
+| fuegocine.com | ver-play | `https://fuegocine.com/movies/play/la-odisea/227` | 404 | — | — | — |  |
+| fuegocine.com | peliculas-lista | `https://fuegocine.com/movies` | 200 | 0 | 0 | — |  |
 | animeyt.cc | portada | `https://animeyt.cc/` | 403 cf | — | — | — |  |
 | animeyt.cc | wp-json | `https://animeyt.cc/wp-json/` | 403 cf | — | — | — |  |
 

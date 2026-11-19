@@ -12,7 +12,7 @@
       "200 embed-host: vidara.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 3191,
+    "ms": 3731,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -31,7 +31,7 @@
       "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
       "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
     ],
-    "ms": 1132,
+    "ms": 991,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -50,7 +50,7 @@
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 2229,
+    "ms": 2591,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -69,7 +69,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 1257,
+    "ms": 1302,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -88,7 +88,7 @@
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
     ],
-    "ms": 780,
+    "ms": 696,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -107,7 +107,7 @@
       "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
     ],
-    "ms": 1029,
+    "ms": 900,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -126,7 +126,7 @@
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 517,
+    "ms": 985,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -145,7 +145,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 765,
+    "ms": 560,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -164,7 +164,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 1039,
+    "ms": 708,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -240,7 +240,7 @@
       "200 embed-host: filemoon.sx",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2669,
+    "ms": 2050,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -259,7 +259,7 @@
       "200 https://mirandogratis.com/?s=Alien%3A%20Romulus h1=\"Estas buscando: Alien: Romulus\"",
       "200 https://mirandogratis.com/alien-romulus.html h1=\"Ver Pelicula Alien: Romulus Online Grati\""
     ],
-    "ms": 1231,
+    "ms": 1134,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -271,18 +271,18 @@
     "provider": "gnulaone",
     "hits": 0,
     "trace": [
-      "200 embed-host: filemoon.sx",
-      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
-      "200 https://mirandogratis.com/?s=Alien%3A%20Romulus h1=\"Estas buscando: Alien: Romulus\"",
-      "200 https://mirandogratis.com/alien-romulus.html h1=\"Ver Pelicula Alien: Romulus Online Grati\"",
       "200 https://ver.gnula.one/movies/alien-romulus/ h1=\"Ver Alien: Romulus (2024) online\"",
-      "301 https://ver.gnula.one/movies/alien-romulus-2024/ → https://ver.gnula.one"
+      "200 https://ver.gnula.one/?trembed=0&trid=49552&trtype=1",
+      "301 https://links.cuevana.ac/play/dEZQdkR3c3V1M2RXYTBkb1hZRm13QT09.html → https://links.fiuxy2.com/play/dEZQdkR3c3V1M2RXYTBkb1hZRm13QT09.html h1=\"301 Moved Permanently\"",
+      "200 https://ver.gnula.one/?trembed=4&trid=49552&trtype=1",
+      "200 https://filemoon.sx/e/gtl2mhgw4is7",
+      "200 https://ver.gnula.one/?trembed=7&trid=49552&trtype=1"
     ],
-    "ms": 143,
+    "ms": 2677,
     "quality": [],
     "audio": [],
     "hosts": [],
-    "verdict": "no-match"
+    "verdict": "no-extractable-embed {\"opaque\":0,\"extracted\":0,\"unsupported\":6}"
   },
   {
     "control": "tt18412256",
@@ -290,17 +290,169 @@
     "provider": "ultra",
     "hits": 0,
     "trace": [
-      "301 https://ver.gnula.one/movies/alien-romulus-2024/ → https://ver.gnula.one",
+      "200 https://ver.gnula.one/?trembed=7&trid=49552&trtype=1",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/",
       "200 https://verpeliculasultra.com/ciencia-ficcion/4702-alien-romulus.html h1=\"Ver Alien: Romulus (2024) Online Gratis\"",
       "200 https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09",
       "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09"
     ],
-    "ms": 2049,
+    "ms": 1998,
     "quality": [],
     "audio": [],
     "hosts": [],
     "verdict": "no-extractable-embed {\"opaque\":2,\"extracted\":0,\"unsupported\":2}"
+  },
+  {
+    "control": "tt6263850",
+    "title": "Deadpool & Wolverine",
+    "provider": "tubeonline",
+    "hits": 0,
+    "trace": [
+      "200 embed-host: luluvdo.com",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: filemoon.sx",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: vidmoly.to",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
+    ],
+    "ms": 2199,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-extractable-embed {\"opaque\":8,\"extracted\":0,\"unsupported\":0}"
+  },
+  {
+    "control": "tt6263850",
+    "title": "Deadpool & Wolverine",
+    "provider": "mirandogratis",
+    "hits": 0,
+    "trace": [
+      "200 embed-host: filemoon.sx",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: vidmoly.to",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
+      "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\""
+    ],
+    "ms": 1105,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-extractable-embed {\"opaque\":2,\"extracted\":0,\"unsupported\":0}"
+  },
+  {
+    "control": "tt6263850",
+    "title": "Deadpool & Wolverine",
+    "provider": "gnulaone",
+    "hits": 0,
+    "trace": [
+      "200 embed-host: vidmoly.to",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
+      "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\"",
+      "301 https://ver.gnula.one/movies/deadpool-wolverine/ → https://ver.gnula.one",
+      "301 https://ver.gnula.one/movies/deadpool-wolverine-2024/ → https://ver.gnula.one"
+    ],
+    "ms": 1031,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt6263850",
+    "title": "Deadpool & Wolverine",
+    "provider": "ultra",
+    "hits": 0,
+    "trace": [
+      "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
+      "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\"",
+      "301 https://ver.gnula.one/movies/deadpool-wolverine/ → https://ver.gnula.one",
+      "301 https://ver.gnula.one/movies/deadpool-wolverine-2024/ → https://ver.gnula.one",
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
+      "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
+    ],
+    "ms": 1253,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt22022452",
+    "title": "Inside Out 2",
+    "provider": "tubeonline",
+    "hits": 0,
+    "trace": [
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
+      "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/",
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt22022452.json",
+      "404 https://www.tubeonline.net/pelicula/inside-out-2/ h1=\"Pagina no se encuentra\"",
+      "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
+      "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\""
+    ],
+    "ms": 1100,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt22022452",
+    "title": "Inside Out 2",
+    "provider": "mirandogratis",
+    "hits": 0,
+    "trace": [
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt22022452.json",
+      "404 https://www.tubeonline.net/pelicula/inside-out-2/ h1=\"Pagina no se encuentra\"",
+      "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
+      "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\"",
+      "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
+      "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com"
+    ],
+    "ms": 845,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt22022452",
+    "title": "Inside Out 2",
+    "provider": "gnulaone",
+    "hits": 0,
+    "trace": [
+      "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
+      "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\"",
+      "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
+      "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com",
+      "301 https://ver.gnula.one/movies/inside-out-2/ → https://ver.gnula.one",
+      "301 https://ver.gnula.one/movies/inside-out-2-2024/ → https://ver.gnula.one"
+    ],
+    "ms": 933,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt22022452",
+    "title": "Inside Out 2",
+    "provider": "ultra",
+    "hits": 0,
+    "trace": [
+      "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
+      "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com",
+      "301 https://ver.gnula.one/movies/inside-out-2/ → https://ver.gnula.one",
+      "301 https://ver.gnula.one/movies/inside-out-2-2024/ → https://ver.gnula.one",
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
+      "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
+    ],
+    "ms": 1086,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
   }
 ]

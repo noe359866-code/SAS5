@@ -16,6 +16,7 @@ on:
       - '.github/workflows/sites-probe.yml'
       - 'scripts/sites-probe.mjs'
       - 'scripts/players-probe.mjs'
+      - 'scripts/players-probe2.mjs'
 permissions:
   contents: write
 jobs:
@@ -33,6 +34,8 @@ jobs:
         run: node scripts/sites-probe.mjs ${{ inputs.sites }}
       - name: Muestras de players
         run: node scripts/players-probe.mjs ${{ inputs.players }}
+      - name: Pasos del extractor (dl/embed, unpack, ajax, endpoints)
+        run: node scripts/players-probe2.mjs
       - name: Devolver resultados a la rama
         if: always()
         run: |

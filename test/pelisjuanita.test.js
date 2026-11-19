@@ -90,6 +90,39 @@ test('pelisjuanita: se exige título y tipo, y el año desempata los remakes', (
   assert.equal(pelis.pick(series, { ...SERIE, mediaType: 'movie' }), null);
 });
 
+test('pelisjuanita: si la primera página no basta, se pide la segunda', async () => {
+  // Página 1: la respuesta real de un buscador de series (sin la película),
+  // con `has_next` como lo devuelve el API cuando hay más resultados.
+  const firstPage = { ...SEARCH_SERIE, pagination: { ...SEARCH_SERIE.pagination, has_next: true, total_pages: 2 } };
+  const pages = [];
+  const original = global.fetch;
+  global.fetch = async (url) => {
+    const target = String(url);
+    if (target.includes('/api/rest/v1/search')) {
+      const page = /[?&]page=2\b/.test(target) ? 2 : 1;
+      pages.push(page);
+      return new Response(JSON.stringify(page === 1 ? firstPage : SEARCH_MOVIE), { headers: { 'content-type': 'application/json' } });
+    }
+    if (target.includes('videoapp.mov')) return new Response(PLAYER, { headers: { 'content-type': 'text/html' } });
+    return new Response(EMBED, { headers: { 'content-type': 'text/html' } });
+  };
+  try {
+    const out = await pelis.searchPelisJuanita(null, MOVIE, MOVIE.title, 5000);
+    assert.equal(out.hits.length, 1);
+    assert.deepEqual(pages, [1, 2]);
+  } finally { global.fetch = original; }
+});
+
+test('pelisjuanita: sin más páginas no se repite la búsqueda', async () => {
+  const stubbed = stub([
+    ['/api/rest/v1/search', res(JSON.stringify({ items: [], pagination: { has_next: false }, q: 'x' }))],
+  ]);
+  try {
+    await pelis.searchPelisJuanita(null, { ...MOVIE, title: 'Nada que ver' }, 'Nada que ver', 5000);
+    assert.equal(stubbed.calls.filter((url) => url.includes('/api/rest/v1/search')).length, 1);
+  } finally { stubbed.restore(); }
+});
+
 test('pelisjuanita: el reproductor de una película es el de su TMDB', () => {
   assert.equal(pelis.playerUrlOf({ tmdbId: 969681 }), `${PLAYER_BASE}/e/movie/969681`);
   assert.equal(pelis.playerUrlOf({ tmdbId: null }), null);
@@ -184,7 +217,7 @@ test('pelisjuanita película: búsqueda → reproductor → Vimeos → HLS subti
     assert.equal(hit.subtitles.length, 2);
     // Nunca se pide el manifiesto.
     assert.ok(!stubbed.calls.some((url) => url.includes('.m3u8')));
-    // Cuatro peticiones: búsqueda, player, embed… y nada más.
+    // Tres peticiones: búsqueda, player y embed. Ni una más.
     assert.equal(stubbed.calls.length, 3);
   } finally { stubbed.restore(); }
 });

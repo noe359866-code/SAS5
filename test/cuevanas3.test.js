@@ -103,6 +103,25 @@ test('cuevanas3: el player.php real se resuelve al iframe de Vimeos', () => {
   assert.deepEqual(frames, [VIMEOS]);
 });
 
+test('cuevanas3: el 301 de cuevana3.gs al propio sitio se sigue a mano', async () => {
+  // El embed se publica en otro host y responde 301 a cuevanas3.pro; con
+  // `redirect: 'manual'` eso llega como error y hay que seguirlo.
+  const stubbed = stub([
+    ['cuevana3.gs/player.php', () => new Response('', { status: 301, headers: { location: 'https://cuevanas3.pro/player.php?t=abc' } })],
+    ['cuevanas3.pro/player.php', html(EMBED_HTML)],
+  ]);
+  try {
+    const frames = await cuevana.framesOf({ text: (url, options) => global.fetch(url, options).then(async (res) => {
+      if (res.status >= 300 && res.status < 400) {
+        throw Object.assign(new Error(`HTTP ${res.status}`), { status: res.status, location: res.headers.get('location') });
+      }
+      return res.text();
+    }) }, 'https://cuevana3.gs/player.php?t=abc', 'https://cuevanas3.pro/');
+    assert.deepEqual(frames, [VIMEOS]);
+    assert.ok(stubbed.calls.some((url) => url.startsWith('https://cuevanas3.pro/player.php')));
+  } finally { stubbed.restore(); }
+});
+
 test('cuevanas3: un enlace que ya es un visor conocido no gasta una petición', async () => {
   const stubbed = stub([]);
   try {

@@ -40,5 +40,10 @@
 | cuevanas3.pro | portada | `https://cuevanas3.pro/` | 200 | 0 | 0 | — |  |
 | animed23.com | portada | `https://animed23.com/` | 403 cf | — | — | — |  |
 | animejara.com | portada | `http://animejara.com/` | 403 cf | — | — | — |  |
+| animeflv.or.at | portada | `https://animeflv.or.at/` | 200 | 0 | 0 | — |  |
+| animeflv.or.at | wp-json | `https://animeflv.or.at/wp-json/` | 200 | 0 | 0 | — |  |
+| animeflv.or.at | api-search | `https://animeflv.or.at/api/anime/search?…` | 404 | — | — | — |  |
+| animeyt.cc | portada | `https://animeyt.cc/` | 403 cf | — | — | — |  |
+| animeyt.cc | wp-json | `https://animeyt.cc/wp-json/` | 403 cf | — | — | — |  |
 
 Sonda de descubrimiento: solo HTML público y la cabecera de un manifiesto; no descarga vídeo ni imprime URLs firmadas.

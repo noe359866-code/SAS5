@@ -246,6 +246,9 @@ const SITES = {
       { label: 'portada', url: 'https://fuegocine.com/' },
       { label: 'wp-json', url: 'https://fuegocine.com/wp-json/' },
       { label: 'buscador', url: 'https://fuegocine.com/?s=spider-man' },
+      { label: 'search-elastic', url: 'https://fuegocine.com/search_elastic?s=spider' },
+      { label: 'ficha-pelicula', url: 'https://fuegocine.com/movies/details/la-odisea/227' },
+      { label: 'ficha-serie', url: 'https://fuegocine.com/shows/details/visionquest/24' },
     ],
   },
   animeyt: {

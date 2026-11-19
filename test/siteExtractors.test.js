@@ -92,6 +92,26 @@ test('byse: una petición a su API y descifrado AES-256-GCM', async () => {
   assert.ok(mp, 'el módulo sigue cargando');
 });
 
+test('byse: el código va tras /e/ aunque venga el nombre del archivo', async () => {
+  // Dooplay devuelve `https://bysejikuar.com/e/<code>/<slug-del-archivo>`:
+  // el código no es el último segmento.
+  const crypto = require('node:crypto');
+  const parts = [crypto.randomBytes(24), crypto.randomBytes(8)];
+  const iv = crypto.randomBytes(12);
+  const plain = JSON.stringify({ sources: [{ file: 'https://cdn.example.com/b/master.m3u8' }] });
+  const cipher = crypto.createCipheriv('aes-256-gcm', Buffer.concat(parts), iv);
+  const payload = Buffer.concat([cipher.update(plain, 'utf8'), cipher.final(), cipher.getAuthTag()]);
+  const api = JSON.stringify({ playback: { algorithm: 'AES-256-GCM', iv: iv.toString('base64url'),
+    key_parts: parts.map((p) => p.toString('base64url')), payload: payload.toString('base64url') } });
+  const stub = stubFetch({ 're:^https://bysejikuar\\.com/api/videos/': { body: api, type: 'application/json' } });
+  try {
+    const result = await extractEmbed('https://bysejikuar.com/e/01j37fv5s579/sm1nda-1080-cas', { timeoutMs: 3000 });
+    assert.equal(result.ok, true);
+    assert.equal(result.sources[0].url, 'https://cdn.example.com/b/master.m3u8');
+    assert.equal(stub.calls[0].url, 'https://bysejikuar.com/api/videos/01j37fv5s579');
+  } finally { stub.restore(); }
+});
+
 test('byse: un playback indescifrable no rompe ni publica nada', async () => {
   const api = JSON.stringify({ playback: { algorithm: 'AES-256-GCM', iv: 'AAAAAAAAAAAAAAAA', key_parts: ['AAAA'], payload: 'AAAA' } });
   const stub = stubFetch({ 're:^https://byseraguci\\.com/api/videos/': { body: api, type: 'application/json' } });

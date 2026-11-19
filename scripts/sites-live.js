@@ -29,6 +29,8 @@ const CONTROLS = [
   { type: 'movie', id: 'tt1375666', fallback: { title: 'El Origen', year: '2010' } },
   { type: 'series', id: 'tt0903747:1:1', fallback: { title: 'Breaking Bad', year: '2008', season: 1, episode: 1 } },
   { type: 'movie', id: 'tt18412256', fallback: { title: 'Alien: Romulus', year: '2024' } },
+  { type: 'movie', id: 'tt6263850', fallback: { title: 'Deadpool & Wolverine', year: '2024' } },
+  { type: 'movie', id: 'tt22022452', fallback: { title: 'Intensa-Mente 2', year: '2024' } },
 ];
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──

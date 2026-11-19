@@ -22,8 +22,12 @@ const SERIE = fixture('fuegocine-serie.html');
 const TEMPORADA = fixture('fuegocine-temporada.html');
 const WATCH = fixture('fuegocine-watch.html');
 const EMBED = fixture('fuegocine-embed.html');
+// Episodio real: el sitio escribe `<iframe src=…>` SIN cerrar.
+const EPISODE = fixture('fuegocine-episodio.html');
+const EPISODE_EMBED = fixture('fuegocine-embed-episodio.html');
 
 const BASE = 'https://fuegocine.com';
+const EPISODE_URL = `${BASE}/shows/visionquest/01x01-sin-ataduras/49`;
 const DETAIL = `${BASE}/movies/details/spider-man-un-nuevo-d%C3%ADa/140`;
 const WATCH_URL = `${BASE}/movies/watch/spider-man-un-nuevo-d%C3%ADa/140`;
 const EMBED_URL = 'https://unlimplay.com/f/embed/movie/1368337';
@@ -93,6 +97,26 @@ test('fuegocine: de la página de reproducción solo sirve el visor de unlimplay
     'https://player.abyssplayer.com/KxBGoCWcV',
     EMBED_URL,
   ]);
+});
+
+test('fuegocine: los episodios publican los visores sin cerrar la etiqueta', () => {
+  // Si se leyera con el DOM, el primer `<iframe>` se tragaría a los demás.
+  assert.deepEqual(fuego.framesOf(EPISODE, EPISODE_URL), [
+    'https://embedorigin.cc/e/vq7y85csf5k1',
+    'https://fcplayer2.blogspot.com/?url=U2FsdGVkX194HdjlQEeV0ioJKS%2F2GpA5pEtScC30JnIxNSKlXdFwPAiaeZD831KYOETx3dectPJQnlFHtSaCfS9fk9tLsumosB2f8sYoYZw%3D&cover=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fhzuvw1ypblYg2uJxVgz1dkeIvKd.jpg',
+    'https://unlimplay.com/f/embed/tv/213375/1/1',
+  ]);
+});
+
+test('fuegocine: en el episodio «español» solo publica un manifiesto mf.php, no un HLS', () => {
+  const groups = fuego.embedsOf(EPISODE_EMBED);
+  assert.deepEqual(Object.keys(groups), ['latino', 'español', 'subtitulado']);
+  assert.equal(fuego.audioOf('español'), 'Castellano');
+  // Latino y subtitulado traen `cps.php?x=.m3u8`; castellano, solo `mf.php`,
+  // que es un manifiesto y el addon no lo descarga: se descarta.
+  assert.match(fuego.hlsFromGroup(groups.latino).url, /^https:\/\/unlimplay\.com\/cps\.php\?/);
+  assert.match(fuego.hlsFromGroup(groups.subtitulado).url, /^https:\/\/unlimplay\.com\/cps\.php\?/);
+  assert.equal(fuego.hlsFromGroup(groups['español']), null);
 });
 
 test('fuegocine: el visor publica los idiomas y un HLS firmado por cada uno', () => {

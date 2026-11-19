@@ -247,6 +247,8 @@ const SITES = {
       { label: 'wp-json', url: 'https://fuegocine.com/wp-json/' },
       { label: 'buscador', url: 'https://fuegocine.com/?s=spider-man' },
       { label: 'search-elastic', url: 'https://fuegocine.com/search_elastic?s=spider' },
+      // Recorte real de una búsqueda de serie: es el fixture del adaptador.
+      { label: 'search-elastic-serie', url: 'https://fuegocine.com/search_elastic?s=VisionQuest' },
       { label: 'ficha-pelicula', url: 'https://fuegocine.com/movies/details/la-odisea/227' },
       { label: 'ficha-serie', url: 'https://fuegocine.com/shows/details/visionquest/24' },
       { label: 'temporada', url: 'https://fuegocine.com/shows/visionquest/seasons/temporada-1/55' },

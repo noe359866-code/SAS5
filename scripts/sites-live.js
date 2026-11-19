@@ -120,8 +120,12 @@ const SEARCHERS = {
 
 async function resolveControl(control) {
   if (control.title) {
-    const season = control.type === 'series' ? Number(String(control.id || '').split(':')[1]) || null : null;
-    const episode = control.type === 'series' ? Number(String(control.id || '').split(':')[2]) || null : null;
+    // Un control sin IMDb (`title` a secas) declara su temporada y episodio en
+    // `fallback`: sin ellos el adaptador de series no puede abrir nada.
+    const season = control.type === 'series'
+      ? Number(String(control.id || '').split(':')[1]) || control.fallback?.season || null : null;
+    const episode = control.type === 'series'
+      ? Number(String(control.id || '').split(':')[2]) || control.fallback?.episode || null : null;
     return { title: control.title, altTitle: null, year: control.fallback?.year || null,
       mediaType: control.type, season, episode };
   }

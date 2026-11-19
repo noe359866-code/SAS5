@@ -41,7 +41,9 @@ Habilitada no significa **disponible**: una fuente puede responder con error, no
 
 **Sin comprobar el medio:** el addon ya no descarga manifiestos HLS ni MP4 ni sondea segmentos. Solo valida la forma de la URL (host conocido, extensión, sin credenciales y con firma viva) antes de publicarla, así que una búsqueda gasta menos peticiones y no toca el CDN del proveedor. La contrapartida es que un enlace caído se descubre al abrirlo, no al pedir la lista; los scripts de `scripts/` siguen pudiendo sondear el CDN desde el runner si hace falta revisar algo.
 
-**Sin proxy de reproducción:** `/stream` devuelve la URL original del CDN. El addon puede comprobar el manifiesto al buscar un enlace, pero no retransmite playlists, variantes, claves, audio ni segmentos. Al retirar `/hls`, la reproducción ya no genera invocaciones sucesivas del Worker para esos recursos. `/stream` sigue siendo una consulta dinámica. Si el CDN rechaza el acceso directo o no ofrece CORS para Stremio Web, el enlace puede no reproducirse; no se recurre a un proxy alternativo. Las variables antiguas `SPINFLIX_PROXY_URL` y `HLS_PROXY_HOSTS` ya no tienen efecto; `SPINFLIX_URL` sigue indicando la API de búsqueda.
+**Proxy de reproducción:** solo los HLS de TubeOnLine y MirandoGratis solicitan el proxy del servicio de streaming de Stremio (`behaviorHints.proxyHeaders`) con el origen del reproductor. Requieren un cliente que admita ese proxy. Los MP4 y las demás fuentes siguen directos. El addon no retransmite vídeo ni expone un proxy público.
+
+**Republicación:** tras desplegar, comprueba que `/manifest.json` devuelve `net.ramdonlatam.catalogos` como `id` y envía esa URL HTTPS a stremioaddons.net. Para mantener también el addon anterior, usa una URL de despliegue distinta.
 
 ## Fichas y catálogos
 

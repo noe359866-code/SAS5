@@ -242,7 +242,7 @@ test('prerenderConfigs escribe el manifest y solo los catálogos que pidió el p
         ],
       }],
       resolve: async (type, id) => ({ metas: [{ id: 'tt1', type, name: 'Uno' }], cacheMaxAge: 21600 }),
-      manifest: (c) => ({ id: 'org.comunidad.catalogos.plus', name: `RamdonLatam · ${c.region}` }),
+      manifest: (c) => ({ id: 'net.ramdonlatam.catalogos', name: `RamdonLatam · ${c.region}` }),
     });
 
     assert.deepEqual(result.manifests, [`/${segment}/manifest.json`]);

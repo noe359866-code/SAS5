@@ -23,7 +23,7 @@ test('manifest: válido, con logo apuntando al Worker', async () => {
   assert.equal(res.status, 200);
   assert.equal(res.headers.get('access-control-allow-origin'), '*');
   const manifest = await res.json();
-  assert.equal(manifest.id, 'org.comunidad.catalogos.plus');
+  assert.equal(manifest.id, 'net.ramdonlatam.catalogos');
   assert.equal(manifest.resources.includes('catalog'), true);
   assert.equal(manifest.catalogs.length >= 30, true);
   assert.equal(manifest.logo, 'http://worker.local/assets/logo.png');
@@ -125,7 +125,7 @@ test('Worker usa Cache API compartida para rutas públicas (la memoria del isola
     assert.equal(second.status, 200);
     assert.equal(matches, 1, 'la memoria evita consultar la Cache API');
     assert.equal(second.headers.get('x-catalogos-cache'), 'memory');
-    assert.equal((await second.json()).id, 'org.comunidad.catalogos.plus');
+    assert.equal((await second.json()).id, 'net.ramdonlatam.catalogos');
 
     // Con la caché de memoria desactivada (RESPONSE_CACHE_MB=0) se vuelve al
     // comportamiento clásico: dos consultas a la Cache API y una escritura.
@@ -332,4 +332,13 @@ test('Worker: /stream publica el HLS original de Fanpelis sin retransmitir ni re
   assert.deepEqual(upstream.map((url) => new URL(url).origin), [
     'https://fanpelis.to', 'https://fanpelis.to', 'https://fanpelis.to', 'https://vimeos.net',
   ], 'la búsqueda no toca el CDN');
+});
+
+test('dos apps que piden el mismo manifest en frío reciben cuerpos independientes', async () => {
+  const url = 'https://simultaneo.example/manifest.json';
+  const responses = await Promise.all(Array.from({ length: 2 }, () => worker.fetch(new Request(url), env, {})));
+  for (const response of responses) {
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).id, 'net.ramdonlatam.catalogos');
+  }
 });

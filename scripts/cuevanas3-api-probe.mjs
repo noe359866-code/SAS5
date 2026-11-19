@@ -87,12 +87,14 @@ const QUERIES = [
 
 async function main() {
   const rows = [];
+  const dumps = {};
   const seen = new Map(); // postType -> slug de la primera ficha
 
   for (const { q, postType } of QUERIES) {
     const url = `${FAST}/search?q=${encodeURIComponent(q)}&page=1&postType=${postType}&postsPerPage=18`;
     const res = await getJson(url);
     const data = res.json?.data;
+    dumps[`search:${q}`] = { status: res.status, json: res.json, head: res.json ? undefined : res.head };
     const posts = Array.isArray(data?.posts) ? data.posts : [];
     console.log(`\n### /search q="${q}" -> ${res.status} ${res.type} ${res.bytes}B, ${posts.length} posts`);
     if (posts.length) {
@@ -114,6 +116,7 @@ async function main() {
     const url = `${FAST}/single/${encodeURIComponent(postType)}?slug=${encodeURIComponent(slug)}&postType=${encodeURIComponent(postType)}`;
     const res = await getJson(url);
     const data = res.json?.data;
+    dumps[`single:${postType}`] = { slug, status: res.status, json: res.json, head: res.json ? undefined : res.head };
     console.log(`\n### /single/${postType} slug=${slug} -> ${res.status} ${res.type} ${res.bytes}B`);
     if (!data) { console.log(`  sin data (${res.head?.slice(0, 160) || res.error})`); rows.push({ step: `single:${postType}`, status: res.status, type: res.type, bytes: res.bytes, posts: 0, hosts: '-' }); continue; }
     const { keys, urls } = inspect(data);
@@ -136,6 +139,19 @@ async function main() {
 
   const fs = await import('node:fs');
   fs.mkdirSync('.probe', { recursive: true });
+  // Volcado íntegro (recortando solo la query de las URLs) para leerlo desde
+  // la rama: los logs de Actions no se consultan desde el sandbox.
+  const strip = (node) => {
+    if (typeof node === 'string') return /^https?:\/\//.test(node) ? redact(node) : node;
+    if (Array.isArray(node)) return node.map(strip);
+    if (node && typeof node === 'object') {
+      const out = {};
+      for (const [k, v] of Object.entries(node)) out[k] = strip(v);
+      return out;
+    }
+    return node;
+  };
+  fs.writeFileSync('.probe/cuevanas3-api.json', JSON.stringify(strip(dumps), null, 2));
   const md = ['| Paso | HTTP | Tipo | Bytes | Posts | Hosts |', '|---|---|---|---|---|---|'];
   for (const row of rows) md.push(`| ${row.step} | ${row.status} | ${row.type} | ${row.bytes} | ${row.posts} | ${row.hosts} |`);
   md.push('', 'Sonda de API (solo JSON público; URLs con query recortada).');

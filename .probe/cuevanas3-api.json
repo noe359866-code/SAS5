@@ -570,6 +570,305 @@
       }
     }
   },
+  "search:deadpool": {
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "",
+      "data": {
+        "posts": [
+          {
+            "_id": 39639,
+            "title": "Deadpool &amp; Wolverine (2024)",
+            "overview": "Un Wade Wilson apático se esfuerza en la vida civil. Sus días como el mercenario moralmente flexible Deadpool quedaron atrás. Cuando su mundo natal se enfrenta a una amenaza existencial, Wade debe, a regañadientes, volver a la acción junto a un reacio Wolverine.",
+            "slug": "deadpool-wolverine-2024",
+            "images": {
+              "poster": "/thumbs/37da4919d860049eeacad9e36552208c_hd.webp",
+              "backdrop": "/backdrops/37da4919d860049eeacad9e36552208c.webp",
+              "logo": "/logos/37da4919d860049eeacad9e36552208c.webp"
+            },
+            "trailer": "Idh8n5XuYIA",
+            "rating": "7.6",
+            "community_rating": "5.0",
+            "community_vote_count": 3,
+            "genres": [
+              26,
+              27,
+              80
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              1762
+            ],
+            "type": "movies",
+            "release_date": "2024-07-24",
+            "last_update": "2026-03-12 04:49:05",
+            "vote_count": "8348",
+            "runtime": "128.0",
+            "original_title": "Deadpool & Wolverine",
+            "gallery": "/ufpeVEM64uZHPpzzeiDNIAdaeOD.jpg\n/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg\n/dvBCdCohwWbsP5qAaglOXagDMtk.jpg\n/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg\n/cOoVcVQ3i1m5b2xtqKBtoTSbxC1.jpg\n/mbY234XwMwEofAdX8yddNcK82wi.jpg\n/hzr7GhCoWTeQQMKDR6LXhN8x9fs.jpg\n/nU5NrhR5VUedB0UIcKdDpOkTnna.jpg\n/9l1eZiJHmhr5jIlthMdJN5WYoff.jpg\n/f6TCICUC8OSBtZDKgg18T6PjfIM.jpg",
+            "poster": "/6aY3OzCIdxoBMYdiH5s17rWFFFA.jpg",
+            "backdrop": "/ufpeVEM64uZHPpzzeiDNIAdaeOD.jpg",
+            "tagline": "Acabaron juntos."
+          },
+          {
+            "_id": 34959,
+            "title": "Deadpool 2 (2018)",
+            "overview": "El mercenario mutante malhablado Wade Wilson (alias Deadpool), reúne a un equipo de mutantes para proteger a un joven con habilidades sobrenaturales del brutal cyborg Cable, que viaja a través del tiempo.",
+            "slug": "deadpool-2-2018",
+            "images": {
+              "poster": "/thumbs/d5bad99607c828772bf18dd99a52a1ae_hd.webp",
+              "backdrop": "/backdrops/d5bad99607c828772bf18dd99a52a1ae.webp",
+              "logo": "/logos/d5bad99607c828772bf18dd99a52a1ae.webp"
+            },
+            "trailer": "20bpjtCbCz0",
+            "rating": "7.5",
+            "community_rating": "3.0",
+            "community_vote_count": 3,
+            "genres": [
+              25,
+              26,
+              80
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              3661
+            ],
+            "type": "movies",
+            "release_date": "2018-05-15",
+            "last_update": "2026-03-12 03:27:25",
+            "vote_count": "18999",
+            "runtime": "120.0",
+            "original_title": "Deadpool 2",
+            "gallery": "/3P52oz9HPQWxcwHOwxtyrVV1LKi.jpg\n/lRPH3X1q0Pp3s27df1BveqwLBA8.jpg\n/1CzUuIdalmARzfYyEX3vGmBy6dn.jpg\n/7MdbvcfkFj6Ft5wNITCKI3c7EEA.jpg\n/sGtXDnT08Nkb5NQq2oGD3os1zg9.jpg\n/l6jEz6DvnjaPnuWnVseSFJlxDoZ.jpg\n/avhDOCbHBaxzqmxZIYDThh7ITTc.jpg\n/bc5aovzdNEl1JhrpqenuUNek3pd.jpg\n/16nOLYcUUieCfpcxPwAKzSCcnZn.jpg\n/wMJ73k0BCDvHXlra1wLelJmXixY.jpg",
+            "poster": "/84NUrv5kuMUDDlOPqi97KGJMdLm.jpg",
+            "backdrop": "/3P52oz9HPQWxcwHOwxtyrVV1LKi.jpg",
+            "tagline": "No se viene solo."
+          },
+          {
+            "_id": 31288,
+            "title": "Deadpool (2016)",
+            "overview": "Basado en el anti-héroe menos convencional de la Marvel, Deadpool narra el origen de un ex-operativo de la fuerzas especiales llamado Wade Wilson, reconvertido a mercenario, y que tras ser sometido a un cruel experimento adquiere poderes de curación rápida, adoptando Wade entonces el alter ego de Deadpool. Armado con sus nuevas habilidades y un oscuro y retorcido sentido del humor, Deadpool intentará dar caza al hombre que casi destruye su vida.",
+            "slug": "deadpool-2016",
+            "images": {
+              "poster": "/thumbs/f9b58e6b291993ffeefd68a23e24ff61_hd.webp",
+              "backdrop": "/backdrops/f9b58e6b291993ffeefd68a23e24ff61.webp",
+              "logo": "/logos/f9b58e6b291993ffeefd68a23e24ff61.webp"
+            },
+            "trailer": "9vN6DHB6bJc",
+            "rating": "7.6",
+            "community_rating": "5.0",
+            "community_vote_count": 2,
+            "genres": [
+              25,
+              26,
+              80
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              2699
+            ],
+            "type": "movies",
+            "release_date": "2016-02-09",
+            "last_update": "2026-03-12 02:42:23",
+            "vote_count": "32442",
+            "runtime": "108.0",
+            "original_title": "Deadpool",
+            "gallery": "/en971MEXui9diirXlogOrPKmsEn.jpg\n/k2VX0gFu2BEJhvduQTq2ioYp8z7.jpg\n/rFj9IKlL75B2pXhZA60jkNWvxeW.jpg\n/n28I7FNYIT934OoHhKZn4IIDsrQ.jpg\n/wsPO5Jny82b0pksjSvjUHEYHDkz.jpg\n/rw3z3ZuTCxhhHCztfR4eqEqRpGV.jpg\n/MJvUuCAgurK1JgXUJvGrDa37Ke.jpg\n/9zWEKQwaefQ5QIC8QfbbZD2aYCl.jpg\n/jNUYL4RroNF1KRGilpVqCSujWSf.jpg\n/zZvBe8xGX2gPlWURJfRNwF40rF3.jpg",
+            "poster": "/3TUYy0XvhPQBhrXJwRIaOoYFOBO.jpg",
+            "backdrop": "/en971MEXui9diirXlogOrPKmsEn.jpg",
+            "tagline": "Súper Héroe, súper rudo, súper nalgas."
+          }
+        ],
+        "pagination": {
+          "current_page": 1,
+          "last_page": 1,
+          "per_page": 18,
+          "total": 3,
+          "next_page_url": null,
+          "prev_page_url": null
+        }
+      }
+    }
+  },
+  "search:inception": {
+    "status": 200,
+    "json": {
+      "error": true,
+      "message": "empty"
+    }
+  },
+  "search:el conjuro": {
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "",
+      "data": {
+        "posts": [
+          {
+            "_id": 45708,
+            "title": "El Conjuro 4: Últimos ritos (2025)",
+            "overview": "En 1986, los investigadores paranormales, Ed y Lorraine Warren, salen de su retiro para investigar, junto con su hija adulta Judy y su compañero Tony, el caso Smurl, una entidad demoníaca más oscura.",
+            "slug": "el-conjuro-4-ultimos-ritos-2025",
+            "images": {
+              "poster": "/thumbs/0a54e1609a0eafeb42c124b4d6041f59_hd.webp",
+              "backdrop": "/backdrops/0a54e1609a0eafeb42c124b4d6041f59.webp",
+              "logo": "/logos/0a54e1609a0eafeb42c124b4d6041f59.webp"
+            },
+            "trailer": "p4aWdkM5xF8",
+            "rating": "6.9",
+            "community_rating": "2.5",
+            "community_vote_count": 2,
+            "genres": [
+              1502
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              11889
+            ],
+            "type": "movies",
+            "release_date": "2025-09-03",
+            "last_update": "2026-03-12 08:52:18",
+            "vote_count": "1684",
+            "runtime": "136.0",
+            "original_title": "The Conjuring: Last Rites",
+            "gallery": "/tcBX2dtkNozZ0uDLVaxXrE6rqyN.jpg\n/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg\n/rDh02R6QAQ6HIbWy0k4B8niVvzL.jpg\n/9DYFYhmbXRGsMhfUgXM3VSP9uLX.jpg\n/2xzu7jicZ0El63EXmyLemcqv9y4.jpg\n/i8MupUe4xgmYXoRNAQMYvuoexSU.jpg\n/xt9Eyld0tgafiq6Jz1o10nqeKpP.jpg\n/ewJggg0L1Gd1jPQmDceRcRKtTmH.jpg\n/fJXqP9S9llRUy9tuccuwvIYFBA4.jpg\n/tbvz0YoYhlNTlefppcDqqZuTRmc.jpg",
+            "poster": "/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg",
+            "backdrop": "/tcBX2dtkNozZ0uDLVaxXrE6rqyN.jpg",
+            "tagline": "Descubre por qué este fue su último caso."
+          },
+          {
+            "_id": 36193,
+            "title": "El Conjuro 3: El diablo me obligó a hacerlo (2021)",
+            "overview": "Los investigadores de fenómenos paranormales Ed y Lorraine Warren se enfrentan a un nuevo caso: el de un hombre acusado de un terrible asesinato, que asegura haber sido poseído por un demonio.",
+            "slug": "el-conjuro-3-el-diablo-me-obligo-a-hacerlo-2021",
+            "images": {
+              "poster": "/thumbs/86049e2503dea5a01004e72d69efb123_hd.webp",
+              "backdrop": "/backdrops/86049e2503dea5a01004e72d69efb123.webp",
+              "logo": "/logos/86049e2503dea5a01004e72d69efb123.webp"
+            },
+            "trailer": "tLFnRAzcaEc",
+            "rating": "7.4",
+            "community_rating": "1.5",
+            "community_vote_count": 2,
+            "genres": [
+              345,
+              401,
+              1502
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              4064
+            ],
+            "type": "movies",
+            "release_date": "2021-05-25",
+            "last_update": "2026-03-12 03:48:05",
+            "vote_count": "6438",
+            "runtime": "111.0",
+            "original_title": "The Conjuring: The Devil Made Me Do It",
+            "gallery": "/6Z0FhoZM56YkuXhvklMTpc7rc5u.jpg\n/qi6Edc1OPcyENecGtz8TF0DUr9e.jpg\n/7jNZNEFerP57NWnGOZdvSDePp37.jpg\n/9aCwb5jo3QarVzu31PXeiFf6qsH.jpg\n/tNM35gMLlS8u9CkUka0pzmW17Oi.jpg\n/tmEBKz0wYH0HKLuLpxIci4V4oRm.jpg\n/uJCuB74TgutCXTqkxdntAeNybJi.jpg\n/gr2bdQ12cK4VA7EaIgtmDcbdALP.jpg\n/ciebZK9gmWz8hLoWLXrKBdQmSBr.jpg\n/smvuRWmBXVCf9fniit2pk5uLISK.jpg",
+            "poster": "/k8HN29t4VxiOagq9jaVVwZJ6wIB.jpg",
+            "backdrop": "/6Z0FhoZM56YkuXhvklMTpc7rc5u.jpg",
+            "tagline": "El caso demoníaco que conmocionó a Estados Unidos."
+          },
+          {
+            "_id": 30154,
+            "title": "El Conjuro 2 (2016)",
+            "overview": "En está ocasión, Lorraine y Ed Warren viajan al norte de Londres para ayudar a una madre soltera que cría a cuatro hijos sola en una casa plagada de espíritus malignos.",
+            "slug": "el-conjuro-2-2016",
+            "images": {
+              "poster": "/thumbs/951a5bbaff09ec026c845023581cba39_hd.webp",
+              "backdrop": "/backdrops/951a5bbaff09ec026c845023581cba39.webp",
+              "logo": "/logos/951a5bbaff09ec026c845023581cba39.webp"
+            },
+            "trailer": "VFsmuRPClr4",
+            "rating": "7.3",
+            "community_rating": "5.0",
+            "community_vote_count": 2,
+            "genres": [
+              1502
+            ],
+            "quality": [
+              28,
+              29
+            ],
+            "years": [
+              2699
+            ],
+            "type": "movies",
+            "release_date": "2016-06-08",
+            "last_update": "2026-03-12 02:29:13",
+            "vote_count": "9063",
+            "runtime": "134.0",
+            "original_title": "The Conjuring 2",
+            "gallery": "/mFCS5OuhPYT79KXu5jl7RqznPR1.jpg\n/rOwEWgbryAxp7D1xpzREqh3EOTX.jpg\n/3tMV2dYmvxMr511fD7Ap79tRFls.jpg\n/ev5Ti7Q0REkoVLO7PkKaq1yZYQE.jpg\n/4mfFtlGeInPrQVm1hpv7th02yjx.jpg\n/i6mO9SMUK6UNvqRxI2BqgYQnPSk.jpg\n/8ZOKxGpGTc3YVduorvBIbQhncBu.jpg\n/3ZWii9hKDsiA5LLZ3fy1o6RwHnA.jpg\n/8Y13s49mOey8MYWiEYNEA9rVywW.jpg\n/4qcGLQbUtIQCZXmppZodlfHvhJ6.jpg",
+            "poster": "/x4jUJ0fF60SSOeUUTkaRtmnDvwG.jpg",
+            "backdrop": "/mFCS5OuhPYT79KXu5jl7RqznPR1.jpg",
+            "tagline": "La próxima historia real de los archivos de casos de Ed y Lorraine Warren."
+          },
+          {
+            "_id": 27336,
+            "title": "El Conjuro (2013)",
+            "overview": "Una familia aterrorizada pide ayuda a los investigadores paranormales Ed y Lorraine Warren a investigar una presencia oscura en su granja. Al ser obligados a enfrentarse a una entidad poderosa, los Warren se ven atrapados en el caso más aterrador de sus vidas.",
+            "slug": "el-conjuro-2013",
+            "images": {
+              "poster": "/thumbs/1564910da5a0f5ba86702374f525fbb3_hd.webp",
+              "backdrop": "/backdrops/1564910da5a0f5ba86702374f525fbb3.webp",
+              "logo": "/logos/1564910da5a0f5ba86702374f525fbb3.webp"
+            },
+            "trailer": "k10ETZ41q5o",
+            "rating": "7.5",
+            "community_rating": "4.5",
+            "community_vote_count": 2,
+            "genres": [
+              345,
+              1502
+            ],
+            "quality": [
+              29,
+              59697
+            ],
+            "years": [
+              811
+            ],
+            "type": "movies",
+            "release_date": "2013-07-18",
+            "last_update": "2026-03-12 01:58:25",
+            "vote_count": "12546",
+            "runtime": "112.0",
+            "original_title": "The Conjuring",
+            "gallery": "/aQCCpAIdWAp6wyFgjMry4okwrZo.jpg\n/bCKRxNF0hIglIwp9K2O9obtF2gR.jpg\n/ecKQlAEG95k62SMGhvX83oEqANK.jpg\n/mXndmCbpvlqnD6po0EMfxEZcUSn.jpg\n/hPUDpQ1W7VZAqBQTi0tZx0EPEsL.jpg\n/l5yp73psXVRYy2ce09lD8yDuu2g.jpg\n/d6VujmUENEyjczFQUgZSL1OA02R.jpg\n/6HkIkXERJHl2Eab1zLrof8EYsBR.jpg\n/tYJue86lW7GZuVxS2phYEkAJA8n.jpg\n/ogbUktEq60qm14hPq8iYgHEJH30.jpg",
+            "poster": "/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg",
+            "backdrop": "/aQCCpAIdWAp6wyFgjMry4okwrZo.jpg",
+            "tagline": "Basado en los archivos de casos reales de los Warren."
+          }
+        ],
+        "pagination": {
+          "current_page": 1,
+          "last_page": 1,
+          "per_page": 18,
+          "total": 4,
+          "next_page_url": null,
+          "prev_page_url": null
+        }
+      }
+    }
+  },
   "single:movies": {
     "slug": "spider-man-un-nuevo-dia-2026",
     "status": 200,
@@ -703,6 +1002,917 @@
         "tagline": ""
       }
     }
+  },
+  "player:spider-man-un-nuevo-dia-2026": {
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "ok",
+      "data": {
+        "embeds": [
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "embed",
+            "provider": "lamovie",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "LaMovie",
+            "size": null,
+            "subtitle": false,
+            "url": "https://cuevana3.gs/player.php?…",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          }
+        ],
+        "downloads": [
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Utorrent",
+            "size": null,
+            "subtitle": false,
+            "url": "magnet:?xt=urn:btih:a92688161722fa5f696d44f36bcf2284a520dd47&dn=Spider.Man.Un.Nuevo.Dia.2026.1080p-Dual-Lat",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "mediafire",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "mediafire",
+            "size": null,
+            "subtitle": false,
+            "url": "https://www.mediafire.com/file/j14214vlsmu783q/Spoicng9UAd5CpLfoS.rar/file",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "mega",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "mega",
+            "size": null,
+            "subtitle": false,
+            "url": "https://mega.nz/file/UjgnFKbB",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "megaup",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "megaup",
+            "size": null,
+            "subtitle": false,
+            "url": "https://megaup.net/8902db2232e93945268435a861c0992e/Spider.Man.Un.Nuevo.Dia.2026.1080P-Dual-Lat.mkv",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "1fichier",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "1fichier",
+            "size": null,
+            "subtitle": false,
+            "url": "https://1fichier.com/?…",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "lamovie",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "LaMovie",
+            "size": null,
+            "subtitle": false,
+            "url": "https://vimeos.net/d/2nulhg4mnuz7",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "goodstream",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "GoodstreamOne",
+            "size": null,
+            "subtitle": false,
+            "url": "https://goodstream.one/d/mfsb61iy08rz",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "doodstream",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Doodstream",
+            "size": null,
+            "subtitle": false,
+            "url": "https://dsvplay.com/d/9p3qpqblxxlt",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "WEB-DL 4k HDR",
+            "qualityLabel": "web-dl 4k hdr",
+            "resolution": null,
+            "server": "Utorrent",
+            "size": "25.7 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:6b9546d1e3338e1948b6f2009b2d3d2e9301d56c&dn=Spider.Man.Un.Nuevo.Dia.2026.WEB-DL.4k.HDR-Dual-Lat&xl=27669903476&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "WEB-DL 1080p",
+            "qualityLabel": "web-dl 1080p",
+            "resolution": null,
+            "server": "Utorrent",
+            "size": "9.63 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:fd55b2535e302687f1aa3ef0e7b4ae77213726aa&dn=Spider.Man.Un.Nuevo.Dia.2026.WEB-DL.1080p-Dual-Lat&xl=10348487071&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "1080p",
+            "qualityLabel": "1080p",
+            "resolution": null,
+            "server": "Utorrent",
+            "size": "2.85 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:7a3e3743f6465ff363ce2ac318d5a04edc858ade&dn=Spider.Man.Un.Nuevo.Dia.2026.1080p-Dual-Lat&xl=3065537689&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "720p",
+            "qualityLabel": "720p",
+            "resolution": null,
+            "server": "Utorrent",
+            "size": "1.54 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:b159d21275a453fa1b6fffaeea7abb3ed5ee5b9d&dn=Spider.Man.Un.Nuevo.Dia.2026.720p-Dual-Lat&xl=1657380932&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "DVDRip",
+            "qualityLabel": "dvdrip",
+            "resolution": null,
+            "server": "Utorrent",
+            "size": "856 MB",
+            "subtitle": false,
+            "url": "magnet:?xt=urn:btih:e09036b29b16986296b9a5245cba55ce0240f613&dn=Spider.Man.Un.Nuevo.Dia.2026.DVDRip-Lat&xl=897624066&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          }
+        ]
+      }
+    }
+  },
+  "player:el-reino-prohibido-2008": {
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "ok",
+      "data": {
+        "embeds": [
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "embed",
+            "provider": "lamovie",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "LaMovie",
+            "size": null,
+            "subtitle": false,
+            "url": "https://cuevana3.gs/player.php?…",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          }
+        ],
+        "downloads": [
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Utorrent",
+            "size": null,
+            "subtitle": false,
+            "url": "magnet:?xt=urn:btih:05f65e1c6cfc36de8d51a4d483628b907afb9b96&dn=El.Reino.Prohibido.2008.1080P-Dual-Lat&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "1fichier",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "1fichier",
+            "size": null,
+            "subtitle": false,
+            "url": "https://1fichier.com/?…",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "megaup",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "megaup",
+            "size": null,
+            "subtitle": false,
+            "url": "https://megaup.net/34892566e9913f297897e9e9aae38a8c/El.Reino.Prohibido.2008.1080P-Dual-Lat.mkv",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "mediafire",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "mediafire",
+            "size": null,
+            "subtitle": false,
+            "url": "https://www.mediafire.com/file/next22b93xn3nwq/elrepr08W01Ntg.rar/file",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "mega",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "mega",
+            "size": null,
+            "subtitle": false,
+            "url": "https://mega.nz/file/sjBg2bIL",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "voe",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Voe",
+            "size": null,
+            "subtitle": false,
+            "url": "https://voe.sx/8puxzgjirizg/download",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "goodstream",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "GoodstreamOne",
+            "size": null,
+            "subtitle": false,
+            "url": "https://goodstream.one/d/15x3rrd35nnm",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "lamovie",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "LaMovie",
+            "size": null,
+            "subtitle": false,
+            "url": "https://vimeos.net/d/o0unqe46z0g7",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino - Inglés",
+            "legacyLanguageLabel": "latino - inglés",
+            "medium": "download",
+            "provider": "doodstream",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Doodstream",
+            "size": null,
+            "subtitle": false,
+            "url": "https://dsvplay.com/d/iq8mnbnk3j3k",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino - inglés"
+          },
+          {
+            "format": null,
+            "language": "Castellano",
+            "legacyLanguageLabel": "castellano",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "DVDRip",
+            "qualityLabel": "dvdrip",
+            "resolution": null,
+            "server": "Utorrent",
+            "size": "700 MB",
+            "subtitle": false,
+            "url": "magnet:?xt=urn:btih:z43bl6eyk5ngiurhv4y6bwtqozdjyhtp&dn=El+reino+prohibido+%28DVDRip%29+%28EliteTorrent.net%29&tr=http://tpb.tracker.thepiratebay.org:80/announce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "castellano"
+          }
+        ]
+      }
+    }
+  },
+  "player:boruto-naruto-next-generations-2017": {
+    "status": 200,
+    "json": {
+      "error": true,
+      "message": "Invalid post type"
+    }
+  },
+  "player:deadpool-wolverine-2024": {
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "ok",
+      "data": {
+        "embeds": [
+          {
+            "format": null,
+            "language": "Latino",
+            "legacyLanguageLabel": "latino",
+            "medium": "embed",
+            "provider": "online",
+            "quality": "Full HD",
+            "qualityLabel": "full hd",
+            "resolution": null,
+            "server": "Online",
+            "size": null,
+            "subtitle": false,
+            "url": "https://cuevana3.gs/player.php?…",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino"
+          }
+        ],
+        "downloads": [
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "voe",
+            "size": null,
+            "subtitle": false,
+            "url": "magnet:?xt=urn:btih:5a222f72078f6ed82ad5a49789c92ffc681223e5&dn=Deadpool.%26.Wolverine.2024.1080P-Dual-Lat&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "voe",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "voe",
+            "size": null,
+            "subtitle": false,
+            "url": "https://megaup.net/0681f7cbd3cd36a7ab5be416b4c03fc4/Deadpool.&.Wolverine.2024.1080P-Dual-Lat.mkv",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "1fichier",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "1Fichier",
+            "size": null,
+            "subtitle": false,
+            "url": "https://1fichier.com/?…",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "mediafire",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Mediafire",
+            "size": null,
+            "subtitle": false,
+            "url": "https://www.mediafire.com/file/llk0yux2ghjv3bu/DWDOFEJFERK.rar/file",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "mega",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Mega",
+            "size": null,
+            "subtitle": false,
+            "url": "https://mega.nz/file/pR4wjJaZ",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "WEB-DL 4k HDR",
+            "qualityLabel": "web-dl 4k hdr",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "23 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:3d9801224b876770c73889dd08c8607be287b904&dn=Deadpool.%26.Wolverine.2024.WEB-DL.4k.HDR-Dual-Lat&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "WEB-DL 1080p",
+            "qualityLabel": "web-dl 1080p",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "10 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:539a1e24228e92fdafe5fae268a6aac3fd647567&dn=Deadpool.%26.Wolverine.2024.WEB-DL.1080p-Dual-Lat&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "2.50 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:32f29bae163deb42b6f2dd21a4d14623270bcf5d&dn=Deadpool.%26.Wolverine.2024.1080p-Dual-Lat&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "Dual 720p",
+            "qualityLabel": "dual 720p",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "1.33 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:8a5bee69bcab2b594ac4030a57f7253347430ea0&dn=Deadpool.%26.Wolverine.2024.720p-Dual-Lat&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino",
+            "legacyLanguageLabel": "latino",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "WEBRip",
+            "qualityLabel": "webrip",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "2.34 GB",
+            "subtitle": false,
+            "url": "magnet:?xt=urn:btih:1ede2f5f8bcaa47a18165eb3bc92d85645ecd5e5&dn=Deadpool.Wolverine.2024.1080p.WEBRip.LAT.DUB.1XBET.mp4&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino"
+          }
+        ]
+      }
+    }
+  },
+  "player:el-conjuro-4-ultimos-ritos-2025": {
+    "status": 200,
+    "json": {
+      "error": false,
+      "message": "ok",
+      "data": {
+        "embeds": [
+          {
+            "format": null,
+            "language": "Latino",
+            "legacyLanguageLabel": "latino",
+            "medium": "embed",
+            "provider": "online",
+            "quality": "Full HD",
+            "qualityLabel": "full hd",
+            "resolution": null,
+            "server": "Online",
+            "size": null,
+            "subtitle": false,
+            "url": "https://cuevana3.gs/player.php?…",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino"
+          }
+        ],
+        "downloads": [
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Torrent",
+            "size": null,
+            "subtitle": false,
+            "url": "magnet:?xt=urn:btih:0a1190838ea8d747e5d75fa1068089e6e63d46e5&dn=El.Conjuro.4.Ultimos.ritos.2025.1080p-Dual-Lat&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=wss%3A%2F%2Fwstracker.online&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "mega",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Mega",
+            "size": null,
+            "subtitle": false,
+            "url": "https://mega.nz/file/W5BxxbqI",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "mediafire",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Mediafire",
+            "size": null,
+            "subtitle": false,
+            "url": "https://www.mediafire.com/file/bts24rywl753n5c/ElgsMBs3rqnLDRFVqi.rar/file",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "megaup",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Megaup",
+            "size": null,
+            "subtitle": false,
+            "url": "https://megaup.net/e15bbe41ead7f014cef330045cb35e92/El.Conjuro.4.Ultimos.Ritos.2025.1080P-Dual-Lat.mkv",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "voe",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "voe",
+            "size": null,
+            "subtitle": false,
+            "url": "https://1fichier.com/?…",
+            "sid": 6,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "WEB-DL 4k HDR",
+            "qualityLabel": "web-dl 4k hdr",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "15.3 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:a4c3532b769779e4a69875b3f34637d99a52df04&dn=El.Conjuro.4.Ultimos.ritos.2025.WEB-DL.4k.HDR-Dual-Lat&xl=16482636397&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=wss%3A%2F%2Fwstracker.online&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "WEB-DL 1080p",
+            "qualityLabel": "web-dl 1080p",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "8.19 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:901752bf52dc0777a7967dc1b047529e6c631ec3&dn=El.Conjuro.4.Ultimos.ritos.2025.WEB-DL.1080p-Dual-Lat&xl=8804171439&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=wss%3A%2F%2Fwstracker.online&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "Dual 1080p",
+            "qualityLabel": "dual 1080p",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "2.31 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:ac5d9a01592a7a32825b5e66415afdaa3b77f584&dn=El.Conjuro.4.Ultimos.ritos.2025.1080p-Dual-Lat&xl=2482241083&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=wss%3A%2F%2Fwstracker.online&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino/Inglés",
+            "legacyLanguageLabel": "latino/inglés",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "Dual 720p",
+            "qualityLabel": "dual 720p",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "1.17 GB",
+            "subtitle": true,
+            "url": "magnet:?xt=urn:btih:ba690fe17a8ab0205de51a112f37e367d08f3269&dn=El.Conjuro.4.Ultimos.ritos.2025.720p-Dual-Lat&xl=1266233324&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=wss%3A%2F%2Fwstracker.online&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino/inglés"
+          },
+          {
+            "format": null,
+            "language": "Latino",
+            "legacyLanguageLabel": "latino",
+            "medium": "download",
+            "provider": "utorrent",
+            "quality": "DVDRip",
+            "qualityLabel": "dvdrip",
+            "resolution": null,
+            "server": "Torrent",
+            "size": "682 MB",
+            "subtitle": false,
+            "url": "magnet:?xt=urn:btih:2505f9ddeaef08f9afe0d3ac0ff63efb31a1797f&dn=El.Conjuro.4.Ultimos.ritos.2025.DVDRip-Lat&xl=695002331&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=wss%3A%2F%2Fwstracker.online&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=http%3A%2F%2Ft.nyaatracker.com%2F%3A80announce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Fbt.xxx-tracker.com%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Fretracker.telecom.by%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.justseed.it%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.mgts.by%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Fretracker.lanta-net.ru%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.swateam.org.uk%3A2710%2Fannounce",
+            "sid": 5,
+            "season": 0,
+            "episode": 0,
+            "lang": "latino"
+          }
+        ]
+      }
+    }
+  },
+  "embed:html": {
+    "url": "https://cuevana3.gs/player.php?…",
+    "status": 200,
+    "head": "<!DOCTYPE html>\r\n<html lang=\"es\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <title></title>\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\r\n  <meta name=\"robots\" content=\"noindex,nofollow,noarchive,nosnippet\">\r\n  <meta name=\"googlebot\" content=\"noindex,nofollow,noarchive,nosnippet\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n  <meta http-equiv=\"Cache-Control\" content=\"no-store, no-cache, must-revalidate, max-age=0\">\r\n  <meta http-equiv=\"Pragma\" content=\"no-cache\">\r\n  <meta http-equiv=\"Expires\" content=\"0\">\r\n  <style>\r\n    html, body {\r\n      margin: 0;\r\n      padding: 0;\r\n      height: 100%;\r\n      width: 100%;\r\n      overflow: hidden;\r\n      background: #000;\r\n    }\r\n    iframe {\r\n      border: none;\r\n      width: 100%;\r\n      height: 100%;\r\n      display: block;\r\n    }\r\n  </style>\r\n</head>\r\n<body>\r\n  <iframe \r\n    src=\"https://vimeos.net/embed-2nulhg4mnuz7.html\" \r\n    allow=\"accelerometer; autoplay; camera; clipboard-read; clipboard-write; display-capture; encrypted-media; fullscreen; geolocation; gyroscope; microphone; midi; payment; usb; vr; xr-spatial-tracking; picture-in-picture; gamepad; *\"\r\n    allowfullscreen\r\n    referrerpolicy=\"unsafe-url\"\r\n  ></iframe>\r\n      <script type=\"text/javascript\" async>\r\n        (function () {\r\n        \tconst domain = \"cuevana.gs\";\r\n        \tconst adAngleOverrollHost = \"\";\r\n        \tconst adAngleOverrollSelector = \"body\";\r\n        \tconst adAngleOverrollLang = \"en\";\r\n        \tconst libJS = \"https://cvt-s2.agl003.com/o/f/lib.js\";\r\n        \tconst cpHOST = `bb597b77de7440619f0e27524573ad12%7C${domain}`;\r\n        \tconst vastURL =\r\n        \t\t\"https://cvt-s2.agl003.com/v/_jMvMjk5MDQ4ZTUtO-EzNSWWYzYxL-EyZDUtNGNmM2IWNmE1NTBl.xml\";\r\n        \tfunction buildIframeHTML(config, adConfig) {\r\n        \t\tconst doc = document.implementation.createHTMLDocument(\"\");\r\n        \t\tconst meta = doc.createElement(\"meta\");\r\n        \t\tmeta.setAttribute(\"charset\", \"utf-8\");\r\n        \t\tdoc.head.appendChild(meta);\r\n        \t\tconst style = doc.createElement(\"style\");\r\n        \t\tstyle.textContent = `\r\n                    html, body { margin:0; width:100%; height:100%; font-family: arial; }\r\n                    #${config.CONTAINER_ID} { width:100vw; height:100vh; display:block; position:fixed; }\r\n                `;\r\n        \t\tdoc.head.appendChild(style);\r\n        \t\tconst container = doc.createElement(\"div\");\r\n        \t\tcontainer.id = config.CONTAINER_ID;\r\n        \t\tdoc.body.appendChild(container);\r\n        \t\tconst scriptLib = doc.createElement(\"script\");\r\n        \t\tscriptLib.src = config.AD_SCRIPT_URL;\r\n        \t\tdoc.body.appendChild(scriptLib);\r\n        \t\tconst scriptInit = doc.createElement(\"script\");\r\n        \t\tscriptInit.textContent = `\r\n                    window.onload = () => {\r\n                    try {\r\n                        if (typeof adAngleOverRollAds === 'function') {\r\n                            adAngleOverRollAds({\r\n                                rek: ",
+    "json": null
   },
   "cand:/wp-json/wpf/v1/episodes": {
     "status": 200,
@@ -1840,6 +3050,6 @@
   "cand:/peliculas/spider-man-un-nuevo-dia-2026": {
     "status": 200,
     "json": null,
-    "head": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html lang=\"es\" prefix=\"og: http://ogp.me/ns#\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta "
+    "head": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html lang=\"es\" prefix=\"og: http://ogp.me/ns#\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Spider-Man: Un nuevo día (2026) Película Completa Online – Cuevana</title>\n\n\t\t<!-- All in One SEO 5.0.4 - aioseo.com -->\n\t<meta name=\"description\" content=\"A medida qué Spider-Man está en la cima de su carrera protegiendo la ciudad de Nueva York, una serie de crímenes inusuales lo arrastran a una red de misterios más grande de lo que jamás haya enfrentado.\" />\n\t<meta name=\"robots\" content=\"max-image-preview:large\" />\n\t<link rel=\"canonical\" href=\"https://cuevanas3.pro/peliculas/spider-man-un-nuevo-dia-2026/\" />\n\t\t<meta "
   }
 }

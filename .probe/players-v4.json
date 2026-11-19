@@ -26,7 +26,7 @@
     "urls": [
       "https://img-place.com/intdacsm8cvn.jpg"
     ],
-    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"FIOzBT96svhah6Ec\",\"payload\":\"L52zdXGHs06ttte7NQCpwHSdXw5Qu3pevlgHbzC9wxax0JJwrSHk_hDFoaVaiyRjLzEhIpy0Om-2svQFTQadenLQLDm2JJeYbhrWoDRgm2F4cvMTZxJ4zz0YNdPBAnwwFRp1AAF2LzQq-VVZS6EbGKfT2TfIVD8uVu_K1nANeBFRanYzqVS3mBioiMYBK_R2uCSSUJbg6WmPm6nxnRf1nyhh9lBpLs4tR01MJL4WZCsbjgERn0eBBmlWJtX5KajnuPbtxyJFaKLx6_-Hh-IWaLCKSytXfZE0Hij8oEFCYzkcx_ESKhoJD5jJRNJsZA-6Ds6xroOhljLGisCNKeXn0hY0Y_eM4cg2NIrDqgukTHk-DwjCUO7E-MNnS25M9YQPjDOPBXRiBZ2bx1iGG50NDs26DgC5Il"
+    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"yU4QeBNVZbAuQXNJ\",\"payload\":\"cQ78THzW6XE8M9qpWsnQ5yYePRuKZXGGWfJ_e1BCYqYPS28aCdOx4ibeq79hhgu1JAxK1xXxBo_UGtayKizM7vbUK0qsW2qpFW4eroDiRBUC4nhujjTTpuH_rvBRAzvzoHv6VEv77N3ri1qFPA0GhFzonf-akM94eDrcgJd2yDqjYM7rqH6NffjicwZcKKUFZGNQXUMz61T740jORXYgdwSbY8fyAmP6pmP79tdRc78B8zPjAhJ5Kxr-JcxAilgqqhe4GjzKhLiw7Q3bmcT78Ug4EvvugAz4RTdRCk0SAIYBJXRNaRIRVRQEr2MdbjrFPdJ_vgIq8TWOSlGMAZ8AoavUj5_pJGQLszYBg6kwr7ed6asn1xvlHx7BXDiT3UNhTjydrRLfZVfYLX6-kRqzk4VPCnVB-W"
   },
   "mainJs": [
     {
@@ -116,14 +116,14 @@
     },
     "season": {
       "status": 200,
-      "size": 329,
+      "size": 293784,
       "epLinks": [],
       "trids": []
     }
   },
   "tube": {
     "status": 200,
-    "size": 12239,
+    "size": 60360,
     "players": [],
     "seasons": [],
     "episodes": []

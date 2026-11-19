@@ -100,18 +100,33 @@
       "labels": []
     },
     "mirando": {
-      "status": 403,
-      "size": 107,
-      "options": [],
-      "frames": [],
-      "audio": []
+      "status": 200,
+      "size": 25411,
+      "options": [
+        "opzero=",
+        "op0=",
+        "op1=",
+        "op2="
+      ],
+      "frames": [
+        "https://byseraguci.com/e/yml5zxa71gkc",
+        "https://mixdrop.top/e/wlllp17rtn9m7o",
+        "https://www.youtube.com/embed/MuEWMxgKa1E"
+      ],
+      "audio": [
+        "Audio"
+      ]
     }
   },
   "series": {
-    "status": 403,
-    "size": 107,
-    "seasons": [],
+    "status": 200,
+    "size": 53059,
+    "seasons": [
+      "/serie/kill-jackie-temporada-1-castellano/"
+    ],
     "episodes": [],
-    "eps2": []
+    "eps2": [
+      "/wp-content/uploads/2017/08/favicon-150x150.png"
+    ]
   }
 }

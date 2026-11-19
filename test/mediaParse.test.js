@@ -81,6 +81,28 @@ test('decryptPlayback: une key_parts y descifra AES-256-GCM de verdad', async ()
   assert.equal(await mp.decryptPlayback({ algorithm: 'AES-128-CBC', iv: playback.iv, key_parts: parts.map((p) => p.toString('base64url')), payload: playback.payload }), null);
 });
 
+test('decryptPlayback: las partes de 16 bytes son la clave entre señuelos de 24', async () => {
+  // Formato real de Byse (medido el 19-11-2026): 30 `key_parts`, 28 señuelos
+  // de 24 bytes y las dos mitades de la clave (16 bytes) en posiciones
+  // aleatorias. La clave es la concatenación de las partes de 16 bytes.
+  const key = crypto.randomBytes(32);
+  const shares = [key.subarray(0, 16), key.subarray(16, 32)];
+  const decoys = Array.from({ length: 28 }, () => crypto.randomBytes(24));
+  const parts = [...decoys.slice(0, 9), shares[0], ...decoys.slice(9, 20), shares[1], ...decoys.slice(20)];
+  assert.equal(parts.length, 30);
+  const iv = crypto.randomBytes(12);
+  const plain = JSON.stringify({ sources: [{ url: 'https://cdn.example.com/hls/master.m3u8', label: '1080p' }] });
+  const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
+  const encrypted = Buffer.concat([cipher.update(plain, 'utf8'), cipher.final(), cipher.getAuthTag()]);
+  const playback = { algorithm: 'AES-256-GCM', version: 1, iv: iv.toString('base64url'),
+    key_parts: parts.map((p) => p.toString('base64url')), payload: encrypted.toString('base64url') };
+  const payload = await mp.decryptPlayback(playback);
+  assert.deepEqual(payload, JSON.parse(plain));
+  // Sin las partes de 16 bytes la clave no suma 32 y no se descifra.
+  const noShares = { ...playback, key_parts: decoys.map((p) => p.toString('base64url')) };
+  assert.equal(await mp.decryptPlayback(noShares), null);
+});
+
 test('playbackSources: acepta variantes de campo y descarta lo que no es medio', () => {
   const sources = mp.playbackSources({
     sources: [

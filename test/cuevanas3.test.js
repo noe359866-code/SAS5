@@ -242,3 +242,26 @@ test('cuevanas3: busca también sin el «&», que el LIKE del sitio no separa', 
     assert.ok(stubbed.calls.some((url) => url.includes('q=Deadpool+Wolverine')));
   } finally { stubbed.restore(); }
 });
+
+test('cuevanas3: el título con entidades («&amp;») coincide con el pedido', () => {
+  const posts = [{ _id: 39639, title: 'Deadpool &amp; Wolverine (2024)', type: 'movies', release_date: '2024-07-24' }];
+  assert.equal(cuevana.decodeEntities(posts[0].title), 'Deadpool & Wolverine (2024)');
+  assert.equal(cuevana.pickPost(posts, { title: 'Deadpool & Wolverine', year: 2024, mediaType: 'movie' })._id, 39639);
+});
+
+test('cuevanas3: si la consulta literal no encuentra nada, prueba la primera palabra', async () => {
+  const stubbed = stub([
+    ['q=Deadpool+%26+Wolverine', json({ data: { posts: [] } })],
+    ['q=Deadpool+Wolverine', json({ data: { posts: [] } })],
+    ['q=Deadpool&', json({ data: { posts: [{ _id: 39639, title: 'Deadpool &amp; Wolverine (2024)', type: 'movies', release_date: '2024-07-24' }] } })],
+    ['/wp-api/v1/player?postId=39639', json(PLAYER)],
+    ['cuevana3.gs/player.php', html(EMBED_HTML)],
+    ['vimeos.net/embed-', html(packedEmbed(MASTER))],
+  ]);
+  try {
+    const out = await cuevana.searchCuevanas3('Deadpool & Wolverine',
+      { title: 'Deadpool & Wolverine', year: 2024, mediaType: 'movie' }, 'Deadpool & Wolverine', 6000);
+    assert.equal(out.hits.length, 1);
+    assert.ok(stubbed.calls.some((url) => url.includes('q=Deadpool&')));
+  } finally { stubbed.restore(); }
+});

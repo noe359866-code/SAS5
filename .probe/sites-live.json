@@ -12,7 +12,7 @@
       "200 embed-host: vidara.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 3520,
+    "ms": 3191,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -31,7 +31,7 @@
       "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
       "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
     ],
-    "ms": 1142,
+    "ms": 1132,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -50,7 +50,7 @@
       "404 https://voe.sx/e/xgbyls7nylgd",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 2135,
+    "ms": 2229,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -69,7 +69,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 1129,
+    "ms": 1257,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -88,7 +88,7 @@
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
     ],
-    "ms": 747,
+    "ms": 780,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -107,7 +107,7 @@
       "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
     ],
-    "ms": 895,
+    "ms": 1029,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -126,7 +126,7 @@
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 851,
+    "ms": 517,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -145,7 +145,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 586,
+    "ms": 765,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -164,7 +164,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 859,
+    "ms": 1039,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -226,5 +226,81 @@
     "audio": [],
     "hosts": [],
     "verdict": "series-not-supported"
+  },
+  {
+    "control": "tt18412256",
+    "title": "Alien: Romulus",
+    "provider": "tubeonline",
+    "hits": 0,
+    "trace": [
+      "200 embed-host: vidmoly.to",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: swiftload.io",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: filemoon.sx",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
+    ],
+    "ms": 2669,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-extractable-embed {\"opaque\":8,\"extracted\":0,\"unsupported\":0}"
+  },
+  {
+    "control": "tt18412256",
+    "title": "Alien: Romulus",
+    "provider": "mirandogratis",
+    "hits": 0,
+    "trace": [
+      "200 embed-host: swiftload.io",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 embed-host: filemoon.sx",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 https://mirandogratis.com/?s=Alien%3A%20Romulus h1=\"Estas buscando: Alien: Romulus\"",
+      "200 https://mirandogratis.com/alien-romulus.html h1=\"Ver Pelicula Alien: Romulus Online Grati\""
+    ],
+    "ms": 1231,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-extractable-embed {\"opaque\":2,\"extracted\":0,\"unsupported\":0}"
+  },
+  {
+    "control": "tt18412256",
+    "title": "Alien: Romulus",
+    "provider": "gnulaone",
+    "hits": 0,
+    "trace": [
+      "200 embed-host: filemoon.sx",
+      "200 https://www.tubeonline.net/wp-admin/admin-ajax.php",
+      "200 https://mirandogratis.com/?s=Alien%3A%20Romulus h1=\"Estas buscando: Alien: Romulus\"",
+      "200 https://mirandogratis.com/alien-romulus.html h1=\"Ver Pelicula Alien: Romulus Online Grati\"",
+      "200 https://ver.gnula.one/movies/alien-romulus/ h1=\"Ver Alien: Romulus (2024) online\"",
+      "301 https://ver.gnula.one/movies/alien-romulus-2024/ → https://ver.gnula.one"
+    ],
+    "ms": 143,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt18412256",
+    "title": "Alien: Romulus",
+    "provider": "ultra",
+    "hits": 0,
+    "trace": [
+      "301 https://ver.gnula.one/movies/alien-romulus-2024/ → https://ver.gnula.one",
+      "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
+      "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/",
+      "200 https://verpeliculasultra.com/ciencia-ficcion/4702-alien-romulus.html h1=\"Ver Alien: Romulus (2024) Online Gratis\"",
+      "200 https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09",
+      "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09"
+    ],
+    "ms": 2049,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-extractable-embed {\"opaque\":2,\"extracted\":0,\"unsupported\":2}"
   }
 ]

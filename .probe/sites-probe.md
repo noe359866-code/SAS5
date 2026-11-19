@@ -73,6 +73,14 @@
 | fuegocine.com | ··manifiesto | `https://unlimplay.com/cps.php?…` | 200 | — | HLS ✓ | unlimplay.com | 1280x720 audio=— seg=0 |
 | fuegocine.com | ver-play | `https://fuegocine.com/movies/play/la-odisea/227` | 404 | — | — | — |  |
 | fuegocine.com | peliculas-lista | `https://fuegocine.com/movies` | 200 | 0 | 0 | — |  |
+| pelisjuanita.org | portada | `https://pelisjuanita.org/` | 200 | 0 | 0 | — |  |
+| pelisjuanita.org | robots | `https://pelisjuanita.org/robots.txt` | 200 | 0 | 0 | — |  |
+| pelisjuanita.org | sitemap | `https://pelisjuanita.org/sitemap.xml` | 200 | 0 | 0 | — |  |
+| pelisjuanita.org | wp-json | `https://pelisjuanita.org/wp-json/` | 404 | — | — | — |  |
+| pelisjuanita.org | buscador | `https://pelisjuanita.org/?…` | 200 | 0 | 0 | — |  |
+| pelisjuanita.org | buscador-limpio | `https://pelisjuanita.org/buscar?…` | 200 | 0 | 0 | — |  |
+| pelisjuanita.org | peliculas | `https://pelisjuanita.org/peliculas` | 200 | 0 | 0 | — |  |
+| pelisjuanita.org | series | `https://pelisjuanita.org/series` | 200 | 0 | 0 | — |  |
 | animeyt.cc | portada | `https://animeyt.cc/` | 403 cf | — | — | — |  |
 | animeyt.cc | wp-json | `https://animeyt.cc/wp-json/` | 403 cf | — | — | — |  |
 

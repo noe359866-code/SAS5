@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       providers:
-        description: 'Adaptadores (tubeonline mirandogratis gnulaone ultra); vacío = todos'
+        description: 'Adaptadores (tubeonline mirandogratis gnulaone ultra cuevanas3 animeflv fuegocine); vacío = todos'
         required: false
         default: ''
   push:

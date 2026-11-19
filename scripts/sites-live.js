@@ -126,6 +126,13 @@ const SEARCHERS = {
   pelisjuanita: (resolved) => sites.pelisjuanita.searchPelisJuanita(null, resolved, resolved.title, 9000),
 };
 
+// Proveedores del registro que no son «sitios»: se miden con el mismo control
+// para decidir con datos, en el mismo JSON, si siguen aportando algo.
+const REGISTRY = ['fanpelis', 'spinflix', 'gnulahd', 'videoapp', 'pelisplus'];
+for (const key of REGISTRY) {
+  if (streams.SEARCHERS[key]) SEARCHERS[key] = (resolved) => streams.SEARCHERS[key](null, resolved, resolved.title, 9000);
+}
+
 async function resolveControl(control) {
   if (control.title) {
     // Un control sin IMDb (`title` a secas) declara su temporada y episodio en

@@ -12,7 +12,7 @@
       "200 embed-host: vidara.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 4536,
+    "ms": 5417,
     "quality": [
       "HLS",
       "HLS"
@@ -40,7 +40,7 @@
       "200 https://mirandogratis.com/?s=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Estas buscando: Spider-Man: Un nuevo día\"",
       "301 https://mirandogratis.com/spider-man-un-nuevo-dia.html → https://mirandogratis.com"
     ],
-    "ms": 1145,
+    "ms": 1170,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -56,10 +56,10 @@
       "200 https://ver.gnula.one/?trembed=2&trid=53363&trtype=1",
       "200 https://links.fiuxy2.com/play/NMB2zwFeBWYf1ruC.html",
       "200 https://ver.gnula.one/?trembed=3&trid=53363&trtype=1",
-      "404 https://voe.sx/e/xgbyls7nylgd",
+      "403 https://voe.sx/e/xgbyls7nylgd h1=\"Checking your browser before accessing\"",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1"
     ],
-    "ms": 2849,
+    "ms": 1980,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -73,12 +73,12 @@
     "trace": [
       "200 https://links.fiuxy2.com/play/NMB2zwFeBWYf1ruC.html",
       "200 https://ver.gnula.one/?trembed=3&trid=53363&trtype=1",
-      "404 https://voe.sx/e/xgbyls7nylgd",
+      "403 https://voe.sx/e/xgbyls7nylgd h1=\"Checking your browser before accessing\"",
       "200 https://ver.gnula.one/?trembed=6&trid=53363&trtype=1",
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2026/"
     ],
-    "ms": 1526,
+    "ms": 1253,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -97,7 +97,7 @@
       "404 https://www.tubeonline.net/pelicula/inception-2010/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inception h1=\"Resultados encontrados: Inception\""
     ],
-    "ms": 1498,
+    "ms": 975,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -116,7 +116,7 @@
       "200 https://mirandogratis.com/?s=Inception h1=\"Estas buscando: Inception\"",
       "301 https://mirandogratis.com/inception.html → https://mirandogratis.com"
     ],
-    "ms": 1192,
+    "ms": 1042,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -135,7 +135,7 @@
       "301 https://ver.gnula.one/movies/inception/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inception-2010/ → https://ver.gnula.one"
     ],
-    "ms": 1167,
+    "ms": 1089,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -154,7 +154,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2010/"
     ],
-    "ms": 1173,
+    "ms": 652,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -173,7 +173,7 @@
       "200 embed-host: hqq.ac",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 1126,
+    "ms": 1151,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -249,7 +249,7 @@
       "200 embed-host: filemoon.sx",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2085,
+    "ms": 2225,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -268,7 +268,7 @@
       "200 https://mirandogratis.com/?s=Alien%3A%20Romulus h1=\"Estas buscando: Alien: Romulus\"",
       "200 https://mirandogratis.com/alien-romulus.html h1=\"Ver Pelicula Alien: Romulus Online Grati\""
     ],
-    "ms": 1282,
+    "ms": 1535,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -287,7 +287,7 @@
       "200 https://ver.gnula.one/?trembed=4&trid=49552&trtype=1",
       "200 https://filemoon.sx/e/gtl2mhgw4is7"
     ],
-    "ms": 2852,
+    "ms": 3176,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -306,7 +306,7 @@
       "200 https://vpge.link/e/VEFyTHc4cEJGMDZLejdOSTM4czZpUT09",
       "200 https://vpge.link/e/U0d2WEpIQUkzUS9ocXBiVmxPUzVPQT09"
     ],
-    "ms": 2171,
+    "ms": 3140,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -325,7 +325,7 @@
       "200 embed-host: vidmoly.to",
       "200 https://www.tubeonline.net/wp-admin/admin-ajax.php"
     ],
-    "ms": 2588,
+    "ms": 2825,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -344,7 +344,7 @@
       "200 https://mirandogratis.com/?s=Deadpool%20%26%20Wolverine h1=\"Estas buscando: Deadpool &amp; Wolverine\"",
       "200 https://mirandogratis.com/deadpool-wolverine.html h1=\"Ver Pelicula Deadpool &#038; Wolverine O\""
     ],
-    "ms": 1200,
+    "ms": 2172,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -363,7 +363,7 @@
       "301 https://ver.gnula.one/movies/deadpool-wolverine/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/deadpool-wolverine-2024/ → https://ver.gnula.one"
     ],
-    "ms": 1143,
+    "ms": 1106,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -382,7 +382,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 921,
+    "ms": 892,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -401,7 +401,7 @@
       "404 https://www.tubeonline.net/pelicula/inside-out-2-2024/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=Inside%20Out%202 h1=\"Resultados encontrados: Inside Out 2\""
     ],
-    "ms": 860,
+    "ms": 872,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -420,7 +420,7 @@
       "200 https://mirandogratis.com/?s=Inside%20Out%202 h1=\"Estas buscando: Inside Out 2\"",
       "301 https://mirandogratis.com/inside-out-2.html → https://mirandogratis.com"
     ],
-    "ms": 1071,
+    "ms": 1064,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -439,7 +439,7 @@
       "301 https://ver.gnula.one/movies/inside-out-2/ → https://ver.gnula.one",
       "301 https://ver.gnula.one/movies/inside-out-2-2024/ → https://ver.gnula.one"
     ],
-    "ms": 753,
+    "ms": 1103,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -458,7 +458,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "200 https://verpeliculasultra.com/xfsearch/peliculas-2024/"
     ],
-    "ms": 1471,
+    "ms": 865,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -477,7 +477,7 @@
       "404 https://www.tubeonline.net/pelicula/el-reino-prohibido-2008/ h1=\"Pagina no se encuentra\"",
       "200 https://www.tubeonline.net/?s=El%20reino%20prohibido h1=\"Resultados encontrados: El reino prohibi\""
     ],
-    "ms": 1544,
+    "ms": 908,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -492,11 +492,11 @@
       "200 https://www.tubeonline.net/?s=El%20reino%20prohibido h1=\"Resultados encontrados: El reino prohibi\"",
       "200 https://mirandogratis.com/?s=El%20reino%20prohibido h1=\"Estas buscando: El reino prohibido\"",
       "200 https://mirandogratis.com/el-reino-prohibido.html h1=\"Ver Pelicula El reino prohibido Online G\"",
-      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=742",
+      "200 byse-api: playback{algorithm,iv,payload,key_parts,version,expires_at algo=AES-256-GCM parts=30 ivLen=16 payloadLen=736",
       "200 https://byseraguci.com/api/videos/yml5zxa71gkc",
       "302 https://mixdrop.top/e/wlllp17rtn9m7o → https://mxdrop.click/e/wlllp17rtn9m7o h1=\"302 Found\""
     ],
-    "ms": 1968,
+    "ms": 1811,
     "quality": [
       "HLS"
     ],
@@ -521,7 +521,7 @@
       "301 https://uqload.com/embed-i8zq52o28bqu.html → https://uqload.vc/embed-i8zq52o28bqu.html?utm_source=mirror_com& h1=\"301 Moved Permanently\"",
       "200 https://uqload.vc/embed-i8zq52o28bqu.html?utm_source=mirror_com&"
     ],
-    "ms": 2936,
+    "ms": 2473,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -540,7 +540,7 @@
       "200 https://verpeliculasultra.com/ h1=\"Buscar en la página web\"",
       "404 https://verpeliculasultra.com/xfsearch/peliculas-2008/"
     ],
-    "ms": 1074,
+    "ms": 647,
     "quality": [],
     "audio": [],
     "hosts": [],

@@ -28,6 +28,7 @@ const CONTROLS = [
   { type: 'movie', id: 'tt33033798', fallback: { title: 'Spider-Man: Un nuevo día', year: '2026' } },
   { type: 'movie', id: 'tt1375666', fallback: { title: 'El Origen', year: '2010' } },
   { type: 'series', id: 'tt0903747:1:1', fallback: { title: 'Breaking Bad', year: '2008', season: 1, episode: 1 } },
+  { type: 'movie', id: 'tt18412256', fallback: { title: 'Alien: Romulus', year: '2024' } },
 ];
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──
@@ -50,10 +51,11 @@ globalThis.fetch = async (url, options = {}) => {
     const at = text.indexOf(mark);
     if (at >= 0) context[mark] = text.slice(Math.max(0, at - 120), at + 220);
   }
-  // HTML completo de las páginas que importan para corregir selectores.
-  if (String(options.method || 'GET') === 'GET' && /html|text/i.test(type) && html.length) {
+  // HTML completo de las páginas que importan para corregir selectores,
+  // incluidos los POST (buscador DLE de ultra) y el hub de Fiuxy (gnulaone).
+  if (/html|text/i.test(type) && html.length) {
     const host = (() => { try { return new URL(String(url)).hostname; } catch { return ''; } })();
-    if (/(?:tubeonline|mirandogratis|gnula\.one|verpeliculasultra)/.test(host)) {
+    if (/(?:tubeonline|mirandogratis|gnula\.one|verpeliculasultra|fiuxy)/.test(host)) {
       const name = (String(options.method || 'GET') === 'GET' ? '' : 'post-')
         + String(url).replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 80);
       try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync(`.probe/html/live-${name}.html`, html); } catch (_) {}
@@ -67,8 +69,8 @@ globalThis.fetch = async (url, options = {}) => {
       if (embed) {
         trace.push({ url: `embed-host: ${new URL(embed).hostname}`, status: 200, type: 'embed', location: '', title: '', h1: '', marks: [], bytes: 0 });
         // La URL del embed (código, no firmada) para reproducir el fallo del
-        // extractor fuera de la sonda.
-        try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync('.probe/html/live-embed.txt', embed); } catch (_) {}
+        // extractor fuera de la sonda. Se acumulan: hay uno por servidor.
+        try { fs.mkdirSync('.probe/html', { recursive: true }); fs.appendFileSync('.probe/html/live-embed.txt', embed + '\n'); } catch (_) {}
       }
     } catch (_) {}
   }

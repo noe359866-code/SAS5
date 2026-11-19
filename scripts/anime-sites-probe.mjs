@@ -79,6 +79,15 @@ async function main() {
 
   const fs = await import('node:fs');
   fs.mkdirSync('.probe', { recursive: true });
+  // El robots.txt de animed23 sí se sirve: se guarda entero por si anuncia
+  // sitemaps en otro origen (una API fuera del reto de Cloudflare).
+  for (const target of TARGETS) {
+    const res = await probe(`${target.base}/robots.txt`, UA_BOT);
+    if (res.status === 200 && res.bytes) {
+      const body = await (await fetch(`${target.base}/robots.txt`, { headers: { 'User-Agent': UA_BOT } })).text().catch(() => '');
+      fs.writeFileSync(`.probe/robots-${target.name}.txt`, body);
+    }
+  }
   const md = ['| Sitio | Ruta | UA | HTTP | CF | Server | Tipo | Bytes | Extracto |', '|---|---|---|---|---|---|---|---|---|'];
   for (const row of rows) {
     md.push(`| ${row.site} | \`${row.path}\` | ${row.ua} | ${row.status} | ${row.cf} | ${row.server} | ${row.type} | ${row.bytes} | ${String(row.excerpt || '').replace(/\|/g, '/')} |`);

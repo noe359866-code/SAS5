@@ -2,7 +2,7 @@
 ## 200 https://www.tubeonline.net/pelicula/spider-man-un-nuevo-dia/
   h1: Spider-Man: Un nuevo día
   title: Ver Spider-Man: Un nuevo día Online Gratis Sin Registros
-  [player-option] ideo-error'>Reportar</a></h2><div id='playeroptions' class='options'><ul id='playeroptionsul' class='ajax_mode'><li id='player-option-trailer' class='dooplay_player_option' data-post='38715' data-type='movie' data-nume='trailer'><i class='fas fa-play-circle'></i><span class='title'>Ver trailer</span><span class='flag'><i class='yt fab fa-
+  [player-option] '>Reportar</a></h2><div id='playeroptions' class='options scrolling'><ul id='playeroptionsul' class='ajax_mode'><li id='player-option-trailer' class='dooplay_player_option' data-post='38715' data-type='movie' data-nume='trailer'><i class='fas fa-play-circle'></i><span class='title'>Ver trailer</span><span class='flag'><i class='yt fab fa-
 
 ## 200 https://www.tubeonline.net/wp-admin/admin-ajax.php
   h1: 
@@ -239,7 +239,7 @@
 ## 200 https://www.tubeonline.net/pelicula/deadpool-wolverine/
   h1: Deadpool &#038; Wolverine
   title: Ver Deadpool &amp; Wolverine Online Gratis Sin Registros
-  [player-option] ideo-error'>Reportar</a></h2><div id='playeroptions' class='options'><ul id='playeroptionsul' class='ajax_mode'><li id='player-option-trailer' class='dooplay_player_option' data-post='37065' data-type='movie' data-nume='trailer'><i class='fas fa-play-circle'></i><span class='title'>Ver trailer</span><span class='flag'><i class='yt fab fa-
+  [player-option] '>Reportar</a></h2><div id='playeroptions' class='options scrolling'><ul id='playeroptionsul' class='ajax_mode'><li id='player-option-trailer' class='dooplay_player_option' data-post='37065' data-type='movie' data-nume='trailer'><i class='fas fa-play-circle'></i><span class='title'>Ver trailer</span><span class='flag'><i class='yt fab fa-
 
 ## 200 https://www.tubeonline.net/wp-admin/admin-ajax.php
   h1: 
@@ -351,3 +351,8 @@
   h1: 
   title: peliculas-2008 &raquo; Ver Películas Online Gratis Completas en Español y Latino
   [iframe] 7</span></a></li> <li><a href="/xfsearch/peliculas-2016/"><span>2016</span></a></li> </ul> </li> <li><a href="/xfsearch/iframe-subtitulada/">Subtituladas</a></li> <li><a href="/xfsearch/iframe-espanol/">Español</a></li> <li><a href="/xfsearch/iframe-latino/">Latino</a></li> <li><a href="/xfsearch/mas-vistas/">Más vistas</a></li> <li><a hr
+
+## 200 https://www.tubeonline.net/?s=Naruto
+  h1: Resultados encontrados: Naruto
+  title: Buscó por el término Naruto &#187; TubeOnline.Net
+  [episodios] u ul li a:hover{color:#408BEA}header.main .hbox .search form button[type=submit]:hover,.loading,#seasons .se-c .se-a ul.episodios li .episodiotitle a:hover,.sgeneros a:hover,.page_user nav.user ul li a:hover{color:#408BEA}footer.main .fbox .fmenu ul li.current-menu-item a,.posts .meta .autor i,.pag_episodes .item a:hover,a.link_a:hover,ul

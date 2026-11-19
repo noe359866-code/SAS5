@@ -26,7 +26,7 @@
     "urls": [
       "https://img-place.com/intdacsm8cvn.jpg"
     ],
-    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"_tf0kZp0KiqUjJjU\",\"payload\":\"fJg8QLlHouSjFhvHX_9CfLW4KTjyhxqACD_-ofRtNlfhe1ZI4zcnSe7U0VLvzN02bQTC9exPKluHHHoX6hHx-rlnM5LCMtw36iWRNvu8M9oAIssD7bhHs7qEU-RT7oMqvtPHzez8my4C7k9wM1xIaQWb5AMUZfdn7WlttBfUoXDTa7TArvvPQwlGYIFmubYuwYh0Ndiq4Smki0XJpU1JhwQTsORNFzYH6lVjp2rAMH6Qq65cos1_2U0RIIO1RWyuTT5LL-qmxZrnri8hb8hR37bGJukWgDjk_tfXPa-FTWzWyG3dRQGbHGeToLfO0N2dYkXRYVWQqt6RuIwrU7rLQHHCO4ehmQp7TUjBCqUkT9oPlPjKtJALGT_-v1JEmpq5XSmKRSmWccZTrAQbbq3OKQBSmjAXGJ"
+    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"HBf_JUEGjPPizQ1u\",\"payload\":\"ozDxQrXuMlrmN7AimEks7BsFWsN0YaOJQKEqUoRS3Tql9EBSWPGm2FasQJ1om-f-Zr5nHXNVxjFYt1QPZvNeBsqpV8skELT3c7wDp9LBBVvPQAdH_Siy-e37l0Yl61LJASxVWNIkHFCgfJV5hzgMT-y5scVKkRZP2edIPMObAh4AN_B6fG6AmfEQBu2ExkEJ28OWFkGYZXyr57lfV0Ct4OsZ8uoaIZHmIhuf7BUoqCrkJuySvjODO5p82TS3sdlZMAf3J0REfFD1tBK5EmjDWxaSaKnc87Ir_CVZVBo8kyUiAMfQZXZDwAlgBI2yWdTmnHRt2yU_bshxMzNtJXHJ0bt_lyalTFE4bHVMoDV0b3BY9Gno3SSIF0YE_XMPen-g-m8ykgNCrxQ8PwMSi1Vvr5W5LjdB9W"
   },
   "mainJs": [
     {
@@ -111,12 +111,12 @@
   "gnula": {
     "search": {
       "status": 403,
-      "size": 5724,
+      "size": 5745,
       "links": []
     },
     "season": {
       "status": 200,
-      "size": 293784,
+      "size": 329,
       "epLinks": [],
       "trids": []
     }

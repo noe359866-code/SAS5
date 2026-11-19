@@ -26,7 +26,7 @@
     "urls": [
       "https://img-place.com/intdacsm8cvn.jpg"
     ],
-    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"CQ3gQJd5_wS7SJ9-\",\"payload\":\"XSU-mWj__tSigfmUuLo0MbVHtyJqoKa3Vqi8w4aG8P5Z2f2GP1IrSw2iv_sTc1YrJoh5RQ1xAMIvrRAApvJ0rAchCUSU5jSvnlNETerwWDiRqk36WGbG9skcOXz6_CB0b4B0lLS9vpCZ6Vhs85Rp2fpJVp7DoflK8IcaZAIgczAuv5aIxv8GcMYiU_f5YIaywFck6lds--3pWcEMLw-mdWRB39mjNgs4aD676FTPLkEXT4ZUwo2wT1yKUbwILdKc4yicqioDCMNmrFOjVQ6IQC0jZtlmlncftuuu9mBupns57GbrC4leBlYxp8xIiniLI8rlGUCwpsBon8TFNrSOYQckROBrGwk0UHGkZqCg2MJ8_u_vVV3VkKDoYQ9Iwaio6Rx3VP-1V09FlBcnBaiQzW3vKgPlsL"
+    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":5,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"FIOzBT96svhah6Ec\",\"payload\":\"L52zdXGHs06ttte7NQCpwHSdXw5Qu3pevlgHbzC9wxax0JJwrSHk_hDFoaVaiyRjLzEhIpy0Om-2svQFTQadenLQLDm2JJeYbhrWoDRgm2F4cvMTZxJ4zz0YNdPBAnwwFRp1AAF2LzQq-VVZS6EbGKfT2TfIVD8uVu_K1nANeBFRanYzqVS3mBioiMYBK_R2uCSSUJbg6WmPm6nxnRf1nyhh9lBpLs4tR01MJL4WZCsbjgERn0eBBmlWJtX5KajnuPbtxyJFaKLx6_-Hh-IWaLCKSytXfZE0Hij8oEFCYzkcx_ESKhoJD5jJRNJsZA-6Ds6xroOhljLGisCNKeXn0hY0Y_eM4cg2NIrDqgukTHk-DwjCUO7E-MNnS25M9YQPjDOPBXRiBZ2bx1iGG50NDs26DgC5Il"
   },
   "mainJs": [
     {
@@ -116,14 +116,14 @@
     },
     "season": {
       "status": 200,
-      "size": 293784,
+      "size": 329,
       "epLinks": [],
       "trids": []
     }
   },
   "tube": {
     "status": 200,
-    "size": 60360,
+    "size": 12239,
     "players": [],
     "seasons": [],
     "episodes": []

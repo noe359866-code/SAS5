@@ -18,6 +18,7 @@ on:
       - 'scripts/cuevanas3-api-probe.mjs'
       - 'scripts/anime-sites-probe.mjs'
       - 'scripts/fuegocine-probe.mjs'
+      - 'scripts/pelisjuanita-probe.mjs'
       - 'scripts/players-probe.mjs'
       - 'scripts/players-probe2.mjs'
       - 'scripts/players-probe3.mjs'
@@ -41,6 +42,8 @@ jobs:
         run: node scripts/sites-probe.mjs ${{ inputs.sites }}
       - name: fuegocine (página de reproducción y visores)
         run: node scripts/fuegocine-probe.mjs || true
+      - name: pelisjuanita (API REST y reproducción)
+        run: node scripts/pelisjuanita-probe.mjs || true
       - name: Bloqueo de animed23/animejara
         run: node scripts/anime-sites-probe.mjs || true
       - name: API de cuevanas3 (búsqueda y ficha)

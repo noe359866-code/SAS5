@@ -9,7 +9,7 @@
  * lectura del manifiesto.
  */
 
-const { createRequire } = require('node:module');
+import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 const { providerHttp } = require('../lib/providerHttp');
@@ -19,9 +19,7 @@ const rows = [];
 const row = (step, note) => { rows.push({ step, note }); console.log(`| ${step} | ${note} |`); };
 const short = (err) => `${err?.status ? `HTTP ${err.status} ` : ''}${String(err?.message || err).slice(0, 90)}`;
 
-async function main() {
-  const fs = await import('node:fs');
-  fs.mkdirSync('.probe', { recursive: true });
+async function steps() {
   const http = providerHttp(20_000, 20);
 
   // 1. Buscador con el cliente del adaptador.
@@ -43,7 +41,7 @@ async function main() {
     // 3. Episodio y visores.
     const episodeUrl = eps[0]?.url || `${page}/1`;
     let episode = '';
-    try { episode = await http.text(episodeUrl, { referer: page, maxBytes: 1024 * 1024 }); row('GET episodio', `ok ${episode.length}B`); }
+    try { episode = await http.text(episodeUrl, { headers: { Referer: page }, maxBytes: 1024 * 1024 }); row('GET episodio', `ok ${episode.length}B`); }
     catch (err) { row('GET episodio', `error ${short(err)}`); continue; }
     const servers = anime.serversOf(episode);
     row('servidores', `${servers.length} · ${servers.slice(0, 6).map((s) => `${s.server}/${s.group}`).join(' ')}`);
@@ -69,6 +67,18 @@ async function main() {
     for (const hit of (out.hits || []).slice(0, 4)) row('  hit', `${hit.quality} ${hit.audioLabel} · ${hit.url.replace(/[a-f0-9]{16,}/g, '«hex»')}`);
   } catch (err) { row('searchAnimeAv1', `error ${short(err)}`); }
 
+}
+
+async function main() {
+  const fs = await import('node:fs');
+  fs.mkdirSync('.probe', { recursive: true });
+  try {
+    await steps();
+  } catch (err) {
+    row('error', short(err));
+    console.error(err);
+  }
+  // El resumen se escribe pase lo que pase: un fallo también es una medición.
   const md = ['| Paso | Resultado |', '|---|---|'];
   for (const r of rows) md.push(`| ${r.step} | ${String(r.note).replace(/\|/g, '/')} |`);
   md.push('', 'AnimeAV1: depuración con el cliente del adaptador.');
@@ -76,4 +86,4 @@ async function main() {
   console.log(`\n${md.join('\n')}`);
 }
 
-main().catch((err) => { console.error(err); process.exit(1); });
+main().catch((err) => { console.error(err); process.exitCode = 1; });

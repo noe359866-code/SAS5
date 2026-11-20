@@ -1,15 +1,63 @@
 [
   {
     "key": "bysejikuar",
-    "status": 0,
+    "status": 200,
     "mitigated": "",
-    "error": "AbortError"
+    "finalUrl": "https://bysejikuar.com/e/01j37fv5s579/sm1nda-1080-cas",
+    "bytes": 1972,
+    "title": "Byse Frontend",
+    "packed": false,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [],
+    "scripts": [
+      {
+        "inline": true,
+        "bytes": 1111,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " (function () { try { var path = ''; if (typeof window !== 'undefined' && window.locat"
+      }
+    ],
+    "external": [
+      "/assets/index-DocunfmE.js",
+      "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    ]
   },
   {
     "key": "byseraguci",
-    "status": 0,
+    "status": 200,
     "mitigated": "",
-    "error": "AbortError"
+    "finalUrl": "https://byseraguci.com/e/intdacsm8cvn",
+    "bytes": 1972,
+    "title": "Byse Frontend",
+    "packed": false,
+    "m3u8Literal": [],
+    "mp4Literal": [],
+    "iframes": [],
+    "forms": [],
+    "metaRefresh": "",
+    "dataAttrs": [],
+    "scripts": [
+      {
+        "inline": true,
+        "bytes": 1111,
+        "packed": false,
+        "m3u8": false,
+        "base64": false,
+        "sources": false,
+        "snippet": " (function () { try { var path = ''; if (typeof window !== 'undefined' && window.locat"
+      }
+    ],
+    "external": [
+      "/assets/index-DocunfmE.js",
+      "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    ]
   },
   {
     "key": "mixdrop",
@@ -28,7 +76,7 @@
     "scripts": [
       {
         "inline": true,
-        "bytes": 66708,
+        "bytes": 66704,
         "packed": false,
         "m3u8": false,
         "base64": true,
@@ -46,12 +94,12 @@
       },
       {
         "inline": true,
-        "bytes": 1011,
+        "bytes": 1015,
         "packed": false,
         "m3u8": false,
         "base64": true,
         "sources": true,
-        "snippet": " /*<![CDATA[/* */ (function(){var s=window,d=\"c2069f112f2e28a564dac8e686f1db36\",y=[[\"siteId\",468-710-307-702+3366964],[\""
+        "snippet": " /*<![CDATA[/* */ (function(){var u=window,d=\"c2069f112f2e28a564dac8e686f1db36\",h=[[\"siteId\",104+605-752*394+3661292],[\""
       },
       {
         "inline": true,
@@ -137,7 +185,7 @@
     "status": 200,
     "mitigated": "",
     "finalUrl": "https://vpge.link/e/SXMyN3Q4K0g1Y2wwZVd0MXh2MDBVQT09",
-    "bytes": 228605,
+    "bytes": 228287,
     "title": "Video player ",
     "packed": false,
     "m3u8Literal": [
@@ -160,7 +208,7 @@
     "scripts": [
       {
         "inline": true,
-        "bytes": 49219,
+        "bytes": 49264,
         "packed": false,
         "m3u8": true,
         "base64": false,
@@ -178,7 +226,7 @@
       },
       {
         "inline": true,
-        "bytes": 26216,
+        "bytes": 25814,
         "packed": false,
         "m3u8": false,
         "base64": true,
@@ -187,7 +235,7 @@
       },
       {
         "inline": true,
-        "bytes": 8133,
+        "bytes": 8144,
         "packed": false,
         "m3u8": false,
         "base64": false,

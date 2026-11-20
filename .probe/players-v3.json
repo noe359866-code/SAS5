@@ -103,7 +103,7 @@
   "mixdrop": {
     "status": 200,
     "fields": {
-      "wurl": "//1y04jx1s6.mxcontent.net/v2/mkkkzkqla6x18g.mp4?s=o1rcZ3rAzONL0Q-ny2s3SA&e=1795181193&_t=1795164217",
+      "wurl": "//1y04jx1s6.mxcontent.net/v2/mkkkzkqla6x18g.mp4?s=JXaqcOYX4lVeotOiYh2jNQ&e=1795203850&_t=1795185243",
       "furl": " ",
       "vfile": "168b9eac36b1a5cde6f8304b044822cc.mp4",
       "vserver": "1y04jx1s6",
@@ -144,51 +144,59 @@
     "report": [
       {
         "url": "byseraguci.com/api/v1/videos/intdacsm8cvn",
-        "status": 0,
-        "bytes": 0,
-        "head": ""
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
       },
       {
         "url": "byseraguci.com/api/video/intdacsm8cvn",
-        "status": 0,
-        "bytes": 0,
-        "head": ""
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
       },
       {
         "url": "byseraguci.com/api/videos/intdacsm8cvn",
-        "status": 0,
-        "bytes": 0,
-        "head": ""
+        "status": 200,
+        "type": "application/json",
+        "bytes": 2364,
+        "head": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":10,\"downloads\":0,\"created"
       },
       {
         "url": "byseraguci.com/api/embed/intdacsm8cvn",
-        "status": 0,
-        "bytes": 0,
-        "head": ""
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
       },
       {
         "url": "bysejikuar.com/api/v1/videos/01j37fv5s579",
-        "status": 0,
-        "bytes": 0,
-        "head": ""
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
       },
       {
         "url": "bysejikuar.com/api/video/01j37fv5s579",
-        "status": 0,
-        "bytes": 0,
-        "head": ""
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
       },
       {
         "url": "bysejikuar.com/api/videos/01j37fv5s579",
-        "status": 0,
-        "bytes": 0,
-        "head": ""
+        "status": 200,
+        "type": "application/json",
+        "bytes": 2358,
+        "head": "{\"id\":60952069,\"code\":\"01j37fv5s579\",\"title\":\"SM1NDA 1080 CAS\",\"description\":\"\",\"duration_seconds\":8701,\"views\":490,\"downloads\":88,\"created_"
       },
       {
         "url": "bysejikuar.com/api/embed/01j37fv5s579",
-        "status": 0,
-        "bytes": 0,
-        "head": ""
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
       }
     ],
     "bundle": {

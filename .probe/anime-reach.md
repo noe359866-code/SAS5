@@ -14,18 +14,17 @@
 | av1 /1150 | ok 62346B · visores=5 |
 | av1 /1180 | ok 62400B · visores=5 |
 | av1 alcance | llega al episodio 1180 construyendo la URL |
+| av1 verifica /1180 | menciona el número · sin enlace propio · h1=«Episodio 1180» · visores=5 |
+| av1 verifica /1000 | menciona el número · sin enlace propio · h1=«Episodio 1000» · visores=5 |
+| av1 imposible /9999 | error HTTP 404 HTTP 404 al consultar https://animeav1.com/media/one-piece/9999 (lo esperado) |
 | — AnimeFLV — | · |
 | flv ficha | 60110B · 14 episodios · min=1167 max=1180 |
 | flv paginación | sin enlaces de página |
-| flv /1000 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/ver/one-piece-1000 |
-| flv /1060 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/ver/one-piece-1060 |
-| flv /1080 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/ver/one-piece-1080 |
-| flv /1100 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/ver/one-piece-1100 |
-| flv /1110 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/ver/one-piece-1110 |
-| flv /1120 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/ver/one-piece-1120 |
-| flv /1140 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/ver/one-piece-1140 |
-| flv /1150 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/ver/one-piece-1150 |
-| flv /1180 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/ver/one-piece-1180 |
-| flv alcance | no se pudo construir ninguna URL |
+| flv permalinks | 1169→https://animeflv.or.at/2026/07/12/one-piece-episodio-1169/ · 1168→https://animeflv.or.at/2026/06/28/one-piece-episodio-1168/ · 1167→https://animeflv.or.at/2026/06/23/one-piece-episodio-1167/ |
+| flv prefijo | https://animeflv.or.at/2026/06/23/one-piece-episodio |
+| flv prefijo /1000 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/2026/06/23/one-piece-epis |
+| flv prefijo /1100 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/2026/06/23/one-piece-epis |
+| flv prefijo /1150 | error HTTP 404 HTTP 404 al consultar https://animeflv.or.at/2026/06/23/one-piece-epis |
+| flv prefijo alcance | no se pudo construir ninguna URL |
 
 Alcance de episodios en AnimeAV1 y AnimeFLV (One Piece).

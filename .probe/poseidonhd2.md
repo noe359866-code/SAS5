@@ -11,12 +11,12 @@
 | player streamwish | 200 | text/html | 10822 | manual=200 · iframes=0 · medios=0 |
 | episodio NEXT_DATA | 200 | text/html | 142188 | episode=sí · videos latino=5 spanish=0 english=0 |
 | player episodio voesx | 200 | text/html | 10810 | iframes=0 medios=0 |
-| muestreo de repuestos | 200 | text/html | 202930 | 59 fichas en portada, 10 recorridas · visores: voesx(18), doodstream(17), streamwish(18), vidara(15), vidhide(15), filemoon(3), streamtape(2), netu(2) · medios directos: 0 |
+| muestreo de repuestos | 200 | text/html | 202930 | 59 fichas en portada, 10 recorridas · visores: voesx(18), doodstream(17), streamwish(18), vidhide(17), vidara(16), filemoon(3), streamtape(2), netu(2) · medios directos: 0 |
 | extracción voesx | 200 | text/html | 10810 | https://voe.sx/e/ntapujpdqng5 · opaque (JS / Cloudflare) |
 | extracción doodstream | 200 | text/html | 10823 | https://doodstream.com/e/awxt4s356kun · doodstream sin extractor · embed 403 text/html 5817B · sin pass_md5 en el embed |
 | extracción streamwish | 200 | text/html | 10822 | https://streamwish.to/e/7fhisizmuyms · opaque (JS / Cloudflare) |
+| extracción vidhide | 200 | text/html | 10823 | https://vidhidepro.com/v/obfbsw4y6arx · opaque (JS / Cloudflare) |
 | extracción vidara | 200 | text/html | 10815 | https://vidara.to/e/Qm7S4r0XJwOnQ · desconocido |
-| extracción vidhide | 200 | text/html | 10823 | https://vidhidepro.com/v/p5gpcih0q4ix · opaque (JS / Cloudflare) |
 | extracción filemoon | 200 | text/html | 10821 | https://bysejikuar.com/e/zc2gluck0i0s · byse → sin-referer=fetch-error player.poseidonhd2.co=fetch-error www.poseidonhd2.co=fetch-error |
 | extracción streamtape | 200 | text/html | 10825 | https://streamtape.com/e/8RJg1w83GWSMB2 · streamtape → sin-referer=fetch-error player.poseidonhd2.co=fetch-error www.poseidonhd2.co=fetch-error |
 | extracción netu | 200 | text/html | 10810 | https://waaw.to/f/Hoh91aaAgCfo · desconocido |

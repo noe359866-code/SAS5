@@ -483,7 +483,7 @@
     "url": "https://player.abyssplayer.com/KxBGoCWcV",
     "status": 200,
     "mitigated": "",
-    "bytes": 10758,
+    "bytes": 10779,
     "iframes": 0,
     "media": 0,
     "packed": false,
@@ -496,9 +496,9 @@
     "url": "https://unlimplay.com/f/embed/movie/1368337",
     "status": 200,
     "mitigated": "",
-    "bytes": 456796,
+    "bytes": 456176,
     "iframes": 0,
-    "media": 8,
+    "media": 6,
     "packed": false,
     "hosts": "—",
     "detail": ""
@@ -527,7 +527,7 @@
     "media": "HLS ✓",
     "packed": false,
     "hosts": "unlimplay.com",
-    "detail": "1920x1080 audio=Español/English seg=0"
+    "detail": "1920x1080 audio=— seg=0"
   },
   {
     "site": "fuegocine.com",
@@ -561,7 +561,7 @@
     "url": "https://pelisjuanita.org/",
     "status": 200,
     "mitigated": "",
-    "bytes": 28381,
+    "bytes": 28398,
     "iframes": 0,
     "media": 0,
     "packed": false,

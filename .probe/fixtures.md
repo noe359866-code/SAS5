@@ -10,3 +10,6 @@
 | lamovie episodios | 200 8064B |
 | lamovie player episodio | 200 3699B |
 | lamovie player película | 200 5720B |
+| animeav1 catálogo | 200 92676B |
+| animeav1 ficha | 200 35014B |
+| animeav1 episodio | 200 24388B |

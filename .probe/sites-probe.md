@@ -3,12 +3,12 @@
 | seriesretro.com | pelicula | `https://seriesretro.com/peliculas/la-odisea` | 200 | 0 | 0 | cvt-s2.agl003.com |  |
 | seriesretro.com | ·cvt-s2.agl003.com | `https://cvt-s2.agl003.com/o/s/114ceb8fd4b175d08f041c62576b2f82.js` | 200 | 0 | 0 | — |  |
 | seriesflix.life | portada | `https://seriesflix.life/` | 200 | 0 | 0 | — |  |
-| documaniatv.com | documental | `https://www.documaniatv.com/social/sicarios-video_fd2ea8244.html` | 403 | — | — | — |  |
+| documaniatv.com | documental | `https://www.documaniatv.com/social/sicarios-video_fd2ea8244.html` | 403 cf | — | — | — |  |
 | poseidonhd2.co | portada | `https://www.poseidonhd2.co/` | 200 | 0 | 0 | — |  |
 | poseidonhd2.co | pelicula | `https://www.poseidonhd2.co/pelicula/1368337/la-odisea` | 200 | 0 | 0 | — |  |
 | poseidonhd2.co | episodio | `https://www.poseidonhd2.co/serie/58841/policias-de-chicago/temporada/13/episodio/21` | 200 | 0 | 0 | — |  |
 | poseidonhd2.co | buscador | `https://www.poseidonhd2.co/search?…` | 200 | 0 | 0 | — |  |
-| cuevanas3.pro | portada | `https://cuevanas3.pro/` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | portada | `https://cuevanas3.pro/` | 0 | — | — | — | AbortError |
 | animed23.com | portada | `https://animed23.com/` | 403 cf | — | — | — |  |
 | animejara.com | portada | `http://animejara.com/` | 403 cf | — | — | — |  |
 | animeflv.or.at | portada | `https://animeflv.or.at/` | 200 | 0 | 0 | — |  |

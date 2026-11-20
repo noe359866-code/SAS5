@@ -123,5 +123,8 @@ jobs:
           # Otro job puede haber empujado mientras corría la sonda: sin rebasar,
           # el push se rechazaba en silencio y el resumen de esta pasada se perdía.
           git fetch origin || true
-          git rebase origin/${{ github.ref_name }} || git rebase --abort || true
+          # `sites-live.md` lo reescriben también las sondas de adaptadores: al
+          # rebasar, un conflicto en un resumen generado dejaba el push en nada.
+          # `-X theirs` conserva la medición de esta pasada, que es la nueva.
+          git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true
           git push origin HEAD:refs/heads/${{ github.ref_name }} || true

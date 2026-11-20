@@ -131,6 +131,20 @@ test('allpeliculas: la ficha con el título pegado («IntensaMente 2») se acept
   assert.ok(titleQueries([pedida.title, pedida.altTitle]).includes('IntensaMente 2'));
 });
 
+test('allpeliculas: la consulta lleva la página como número, no el tipo de obra', async () => {
+  // Un `page=movie` en la URL (el tipo de obra pasado como página) es un fallo
+  // silencioso: el sitio lo ignora y siempre devuelve la página 1.
+  const stubbed = stub([['/wp-api/v1/search', json({ data: { posts: [] } })]]);
+  try {
+    await allpeliculas.searchAllpeliculas('La Odisea', PELICULA, PELICULA.title, 5000);
+    const searches = stubbed.calls.filter((url) => url.includes('/wp-api/v1/search'));
+    assert.ok(searches.length > 0);
+    // `page` es siempre un número (1, y 2 en el repaso de la segunda página).
+    assert.ok(searches.every((url) => /[?&]page=\d+(&|$)/.test(url)), searches.join('\n'));
+    assert.ok(!searches.some((url) => /page=(movie|tvshows)/.test(url)));
+  } finally { stubbed.restore(); }
+});
+
 test('allpeliculas: la consulta con el guion quitado llega al buscador', async () => {
   const stubbed = stub([['/wp-api/v1/search', json({ data: { posts: [] } })]]);
   try {

@@ -206,7 +206,15 @@ async function main() {
             ['UA+Referer', { Referer: 'https://unlimplay.com/' }],
             ['UA+Accept-HLS', { Accept: 'application/vnd.apple.mpegurl,*/*' }],
           ]
-          : [['UA', {}]];
+          // Vimeos publica el manifiesto detrás de su propio visor: si el CDN
+          // exige `Referer`/`Origin`, se prueba aquí antes de darlo por roto.
+          : /(?:^|\.)vimeos\.(?:net|com|zip|xyz|site|org)$/.test(host(target))
+            ? [
+              ['UA', {}],
+              ['UA+Referer', { Referer: 'https://vimeos.net/' }],
+              ['UA+Origin', { Origin: 'https://vimeos.net', Referer: 'https://vimeos.net/' }],
+            ]
+            : [['UA', {}]];
         for (const [label, extra] of variants) {
           try {
             const probe = await Promise.race([

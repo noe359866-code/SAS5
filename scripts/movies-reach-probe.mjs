@@ -42,7 +42,7 @@ const SITES = [
 ];
 
 async function searchRaw(http, site, query) {
-  const url = DIALECTS.wpa.search(site.api, query, 'movie');
+  const url = DIALECTS.wpa.search(site.api, query, { mediaType: 'movie' });
   const started = Date.now();
   const data = await http.json(url, { maxBytes: 512 * 1024 });
   const posts = data?.data?.posts || [];

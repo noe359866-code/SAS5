@@ -164,14 +164,13 @@ const SITES = {
   // Solo la portada: el resto de estos sitios se sondearon con scripts
   // dedicados (scripts/cuevanas3-api-probe.mjs y scripts/anime-sites-probe.mjs)
   // y su estructura ya está descrita en los adaptadores.
+  // Las tres se descartaron el 20-11-2026 (docs/candidatas-2026-11-20.md): se
+  // deja una página de cada una para poder volver a medirlas.
   seriesretro: {
     name: 'seriesretro.com',
     base: 'https://seriesretro.com',
     pages: [
-      { label: 'portada', url: 'https://seriesretro.com/' },
       { label: 'pelicula', url: 'https://seriesretro.com/peliculas/la-odisea' },
-      { label: 'serie', url: 'https://seriesretro.com/series/dexter-resurrection' },
-      { label: 'buscar', url: 'https://seriesretro.com/?s=odisea' },
     ],
   },
   seriesflix: {
@@ -179,18 +178,13 @@ const SITES = {
     base: 'https://seriesflix.life',
     pages: [
       { label: 'portada', url: 'https://seriesflix.life/' },
-      { label: 'peliculas', url: 'https://seriesflix.life/peliculas' },
-      { label: 'buscar', url: 'https://seriesflix.life/search?q=odisea' },
-      { label: 'api', url: 'https://seriesflix.life/api' },
     ],
   },
   documaniatv: {
     name: 'documaniatv.com',
     base: 'https://www.documaniatv.com',
     pages: [
-      { label: 'portada', url: 'https://www.documaniatv.com/' },
       { label: 'documental', url: 'https://www.documaniatv.com/social/sicarios-video_fd2ea8244.html' },
-      { label: 'serie-documental', url: 'https://www.documaniatv.com/historia/monstruos-la-verdad-tras-el-mito-1-demonios-video_abee2e29e.html' },
     ],
   },
   poseidonhd2: {

@@ -62,6 +62,10 @@ MirandoGratis.
 - `animeyt.cc`: 403 de Cloudflare en todo el sitio; solo `/feed/` responde.
 - `animed23.com` y `animejara.com`: reto de Cloudflare que no se resuelve sin
   navegador.
+- `seriesretro.com`, `seriesflix.life` y `documaniatv.com`: la primera no sirve
+  la sección de reproducción a un cliente de servidor, la segunda es una SPA sin
+  datos en el HTML y con el buscador en 403, y la tercera responde 403 de
+  Cloudflare. Medición en [candidatas-2026-11-20.md](candidatas-2026-11-20.md).
 - `poseidonhd2.co`: la ficha llega bien desde TMDb, pero todos sus visores son
   Voe, Doodstream (403), StreamWish, Vidhide, Vidara o Netu, que exigen ejecutar
   JS. Cero medios directos en 91 opciones de vídeo; el detalle está en

@@ -103,7 +103,7 @@
   "mixdrop": {
     "status": 200,
     "fields": {
-      "wurl": "//1y04jx1s6.mxcontent.net/v2/mkkkzkqla6x18g.mp4?s=EzdaquiA9UoZjAWgpF6cwg&e=1795176789&_t=1795162621",
+      "wurl": "//1y04jx1s6.mxcontent.net/v2/mkkkzkqla6x18g.mp4?s=8-WH4pJ1U_PVaq3ehk6egQ&e=1795178165&_t=1795164770",
       "furl": " ",
       "vfile": "168b9eac36b1a5cde6f8304b044822cc.mp4",
       "vserver": "1y04jx1s6",
@@ -192,13 +192,8 @@
       }
     ],
     "bundle": {
-      "status": 200,
-      "media": [
-        "assets/videoPagesBundle-Bgi0QmPo.js",
-        "assets/videoPagesBundle-DR9JZKr5.css",
-        "embed",
-        "video"
-      ]
+      "status": 0,
+      "media": []
     }
   },
   "videohel": {

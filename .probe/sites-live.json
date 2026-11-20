@@ -13,7 +13,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2044,
+    "ms": 2190,
     "quality": [
       "HLS"
     ],
@@ -21,9 +21,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt33033798",
@@ -41,7 +41,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1395,
+    "ms": 1901,
     "quality": [
       "HLS"
     ],
@@ -49,9 +49,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt33033798",
@@ -67,7 +67,7 @@
       "404 https://animeav1.com/media/spider-man h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 2587,
+    "ms": 972,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -87,7 +87,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 540,
+    "ms": 473,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -107,7 +107,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 337,
+    "ms": 522,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -127,7 +127,7 @@
       "404 https://animeav1.com/media/inception h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1248,
+    "ms": 465,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -149,7 +149,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2496,
+    "ms": 2344,
     "quality": [
       "HLS"
     ],
@@ -157,9 +157,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+      "https://p3.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt0903747:1:1",
@@ -177,7 +177,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2936,
+    "ms": 2026,
     "quality": [
       "HLS"
     ],
@@ -185,9 +185,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+      "https://p2.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p2.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt0903747:1:1",
@@ -203,7 +203,7 @@
       "404 https://animeav1.com/media/breaking-bad h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 706,
+    "ms": 503,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -225,7 +225,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2201,
+    "ms": 1650,
     "quality": [
       "HLS"
     ],
@@ -253,7 +253,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1368,
+    "ms": 1925,
     "quality": [
       "HLS"
     ],
@@ -261,9 +261,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://p3.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
@@ -279,7 +279,7 @@
       "404 https://animeav1.com/media/alien h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1020,
+    "ms": 914,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -301,7 +301,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2268,
+    "ms": 2680,
     "quality": [
       "HLS"
     ],
@@ -309,9 +309,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+      "https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt6263850",
@@ -329,7 +329,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 3217,
+    "ms": 1797,
     "quality": [
       "HLS"
     ],
@@ -337,9 +337,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt6263850",
@@ -355,7 +355,7 @@
       "404 https://animeav1.com/media/deadpool-wolverine h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 892,
+    "ms": 491,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -375,7 +375,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 864,
+    "ms": 819,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -395,7 +395,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 725,
+    "ms": 721,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -415,7 +415,7 @@
       "404 https://animeav1.com/media/inside-out-2 h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 530,
+    "ms": 445,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -437,7 +437,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2353,
+    "ms": 1517,
     "quality": [
       "HLS"
     ],
@@ -445,9 +445,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+      "https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "El reino prohibido",
@@ -465,7 +465,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1956,
+    "ms": 1761,
     "quality": [
       "HLS"
     ],
@@ -473,9 +473,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+      "https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "El reino prohibido",
@@ -491,7 +491,7 @@
       "404 https://animeav1.com/media/reino-prohibido h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1264,
+    "ms": 1127,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -513,7 +513,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 3131,
+    "ms": 2280,
     "quality": [
       "HLS"
     ],
@@ -521,9 +521,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p2.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+      "https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p2.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
   },
   {
     "control": "tt0409591:1:1",
@@ -541,7 +541,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 3852,
+    "ms": 2341,
     "quality": [
       "HLS"
     ],
@@ -567,7 +567,7 @@
       "404 https://streamtape.com/e/vgb4w2964qtYLw/ h1=\"Video not found!\""
     ],
     "media": [],
-    "ms": 14002,
+    "ms": 14001,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -587,7 +587,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 889,
+    "ms": 817,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -607,7 +607,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 775,
+    "ms": 807,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -627,7 +627,7 @@
       "200 https://player.zilla-networks.com/m3u8/a9e935bf402b045e09b23c724b2fb35f"
     ],
     "media": [],
-    "ms": 10417,
+    "ms": 10271,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -647,7 +647,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 917,
+    "ms": 820,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -667,7 +667,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 922,
+    "ms": 810,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -687,7 +687,7 @@
       "200 https://animeav1.com/media/black-clover-2nd-season h1=\"Black Clover 2nd Season\""
     ],
     "media": [],
-    "ms": 751,
+    "ms": 838,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -709,7 +709,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1813,
+    "ms": 1889,
     "quality": [
       "HLS"
     ],
@@ -737,7 +737,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1858,
+    "ms": 1761,
     "quality": [
       "HLS"
     ],
@@ -745,9 +745,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p7.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+      "https://p4.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p7.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p4.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "La Odisea",
@@ -763,7 +763,7 @@
       "404 https://animeav1.com/media/odisea h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1186,
+    "ms": 1249,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -785,7 +785,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2429,
+    "ms": 2113,
     "quality": [
       "HLS"
     ],
@@ -813,7 +813,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1974,
+    "ms": 1748,
     "quality": [
       "HLS"
     ],
@@ -839,7 +839,7 @@
       "404 https://animeav1.com/media/visionquest h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 503,
+    "ms": 471,
     "quality": [],
     "audio": [],
     "hosts": [],

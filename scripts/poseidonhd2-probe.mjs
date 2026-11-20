@@ -191,6 +191,53 @@ async function main() {
   log({ step: 'muestreo de repuestos', url: `${BASE}/`, status: home.status, type: home.type, bytes: home.body.length,
     note: `${unique.length} fichas en portada, 10 recorridas · visores: ${[...lockers.entries()].map(([k, v]) => `${k}(${v.count}${v.host && v.host !== 'player.poseidonhd2.co' ? `→${v.host}` : ''})`).join(', ') || 'ninguno'} · medios directos: ${directMedia.length}` });
 
+  // 6) ¿Se puede extraer algo? Para cada visor distinto se resuelve el salto
+  //    propio y se prueba el extractor del addon; Doodstream se prueba aparte
+  //    (pass_md5 -> MP4) porque aún no tiene extractor.
+  const { createRequire } = await import('node:module');
+  const require = createRequire(import.meta.url);
+  const { extractorFor } = require('../lib/extractors');
+  const samples = new Map();
+  for (const slug of unique.slice(0, 10)) {
+    const page = await get(pageUrl(slug));
+    const data = nextData(page.body);
+    const node = data?.props?.pageProps?.thisMovie || data?.props?.pageProps?.episode
+      || data?.props?.pageProps?.serie || null;
+    for (const list of Object.values(node?.videos || {})) {
+      for (const item of Array.isArray(list) ? list : []) {
+        if (item?.cyberlocker && !samples.has(item.cyberlocker)) samples.set(item.cyberlocker, item.result);
+      }
+    }
+  }
+  const found = (html) => [...new Set(String(html).matchAll(/https?:\/\/[^"'<> ]{10,160}/g)
+    .map((m) => m[0]).filter((url) => !/poseidonhd2|yandex|cloudflare|adangle|agl003|adme2|doo\.lat|google|gstatic/.test(url)))][0] || '';
+  for (const [locker, result] of samples) {
+    const jump = await get(result, { referer: `${BASE}/` });
+    const embed = found(jump.body);
+    const kind = embed ? extractorFor(embed) : 'sin-enlace';
+    let verdict = `${kind || 'desconocido'}`;
+    if (!embed) verdict = 'el player.php no publica el destino';
+    else if (kind && kind !== 'opaque') {
+      const { extractEmbed } = require('../lib/extractors');
+      try {
+        const out = await extractEmbed(embed, { timeoutMs: 9000, referer: `${BASE}/` });
+        verdict = `${kind} → ok=${out.ok} fuentes=${out.sources?.length || 0}${out.reason ? ` (${out.reason})` : ''}`;
+      } catch (err) { verdict = `${kind} → error ${String(err?.message || err).slice(0, 40)}`; }
+    } else if (kind === 'opaque') verdict = 'opaque (JS / Cloudflare)';
+    else if (/(?:^|\.)doodstream\./.test(hostOf(embed))) {
+      const pass = /\/pass_md5\/[^"'\\ ]+/i.exec(jump.body);
+      const emb = await get(embed, { referer: `${BASE}/` });
+      verdict = `doodstream sin extractor · embed ${emb.status} ${emb.type} ${emb.body.length}B`;
+      if (pass) {
+        const api = await get(`${new URL(embed).origin}${pass[0]}`, { referer: embed });
+        const looksUrl = /^https?:\/\//.test(api.body.trim());
+        verdict += ` · pass_md5 ${api.status} ${api.type} ${looksUrl ? 'devuelve URL base' : 'no es URL'}`;
+      } else verdict += ' · sin pass_md5 en el embed';
+    }
+    log({ step: `extracción ${locker}`, url: redact(result), status: jump.status, type: jump.type, bytes: jump.body.length,
+      note: `${embed ? redact(embed) : '—'} · ${verdict}` });
+  }
+
   // Resumen en markdown para poder leerlo desde la rama.
   const md = ['| Paso | HTTP | Tipo | Bytes | Nota |', '|---|---|---|---:|---|'];
   for (const row of rows) md.push(`| ${row.step} | ${row.status} | ${row.type || '-'} | ${row.bytes ?? '-'} | ${row.note} |`);

@@ -76,6 +76,14 @@ para todas las fuentes que lo usan:
   mira una página más: «El Origen» llena la primera con otros títulos que
   también lo llevan.
 
+## Episodios más allá de la primera página
+
+La lista de episodios de la API viene de **50 en 50** y el adaptador miraba solo
+la primera: una telenovela o un anime largo respondía `no-episode` aunque el
+episodio existiera. Ahora, si la primera página viene llena y el episodio no
+está, se piden las siguientes (hasta seis páginas, 300 episodios) y se corta en
+cuanto aparece.
+
 ## Validación en vivo (20-11-2026)
 
 `scripts/sites-live.js allpeliculas lamovie`, los 12 controles del addon

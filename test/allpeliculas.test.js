@@ -188,6 +188,36 @@ test('allpeliculas: una serie sin el episodio pedido no inventa hits', async () 
   } finally { stubbed.restore(); }
 });
 
+test('allpeliculas: el episodio 130 de una serie larga se busca en las páginas siguientes', async () => {
+  // La lista de episodios viene de 50 en 50: antes se miraba solo la primera y
+  // una telenovela o un anime largo acababa en `no-episode`.
+  const llena = (desde) => ({
+    data: {
+      posts: Array.from({ length: 50 }, (_, index) => ({
+        _id: 5000 + desde + index, season_number: 1, episode_number: desde + index,
+      })),
+    },
+  });
+  const porPagina = stub([
+    ['/wp-api/v1/search', json(SEARCH_SERIE)],
+    ['/single/episodes/list', (url) => {
+      const page = Number(/page=(\d+)/.exec(url)?.[1] || 1);
+      return json(llena((page - 1) * 50 + 1));
+    }],
+    ['/wp-api/v1/player?postId=', json(PLAYER_EPISODIO)],
+    ['vimeos.net/embed-', html(packedEmbed(MASTER))],
+  ]);
+  try {
+    // 25427 es la ficha de *The Pitt* en el fixture; se pide un episodio que no
+    // está en la primera página.
+    const pedida = { ...SERIE, episode: 130 };
+    const out = await allpeliculas.searchAllpeliculas('The Pitt', pedida, pedida.title, 6000);
+    assert.ok(porPagina.calls.some((url) => /page=3/.test(url)), porPagina.calls.join('\n'));
+    assert.ok(!porPagina.calls.some((url) => /page=4/.test(url)), 'deja de pedir al encontrar el episodio');
+    assert.ok(out.hits.length >= 1 || out.reason !== 'no-episode', `reason=${out.reason}`);
+  } finally { porPagina.restore(); }
+});
+
 test('allpeliculas: sin coincidencia de título no se abre ningún player', async () => {
   const stubbed = stub([['/wp-api/v1/search', json(SEARCH_SERIE)]]);
   try {

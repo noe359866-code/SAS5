@@ -13,7 +13,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1521,
+    "ms": 2525,
     "quality": [
       "HLS"
     ],
@@ -21,9 +21,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt33033798",
@@ -41,7 +41,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1076,
+    "ms": 4170,
     "quality": [
       "HLS"
     ],
@@ -49,9 +49,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt1375666",
@@ -67,7 +67,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 271,
+    "ms": 693,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -87,7 +87,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 266,
+    "ms": 363,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -109,7 +109,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2163,
+    "ms": 2313,
     "quality": [
       "HLS"
     ],
@@ -137,7 +137,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2028,
+    "ms": 2652,
     "quality": [
       "HLS"
     ],
@@ -145,9 +145,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+      "https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
@@ -165,7 +165,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1108,
+    "ms": 1927,
     "quality": [
       "HLS"
     ],
@@ -173,9 +173,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
@@ -193,7 +193,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2430,
+    "ms": 1673,
     "quality": [
       "HLS"
     ],
@@ -201,9 +201,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt6263850",
@@ -221,7 +221,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2470,
+    "ms": 2927,
     "quality": [
       "HLS"
     ],
@@ -229,9 +229,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+      "https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt6263850",
@@ -249,7 +249,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1498,
+    "ms": 1869,
     "quality": [
       "HLS"
     ],
@@ -275,7 +275,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 691,
+    "ms": 844,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -295,7 +295,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 662,
+    "ms": 725,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -317,7 +317,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 4231,
+    "ms": 4692,
     "quality": [
       "HLS"
     ],
@@ -325,9 +325,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p6.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+      "https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p6.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "El reino prohibido",
@@ -345,7 +345,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2674,
+    "ms": 1389,
     "quality": [
       "HLS"
     ],
@@ -373,7 +373,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2685,
+    "ms": 4680,
     "quality": [
       "HLS"
     ],
@@ -401,7 +401,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 4325,
+    "ms": 2970,
     "quality": [
       "HLS"
     ],
@@ -409,9 +409,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+      "https://p3.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
   },
   {
     "control": "Ao Ashi Season 2",
@@ -427,7 +427,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 770,
+    "ms": 1069,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -447,7 +447,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 1175,
+    "ms": 737,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -467,7 +467,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 576,
+    "ms": 677,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -487,7 +487,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 755,
+    "ms": 737,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -509,7 +509,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1514,
+    "ms": 1757,
     "quality": [
       "HLS"
     ],
@@ -517,9 +517,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+      "https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "La Odisea",
@@ -537,7 +537,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1028,
+    "ms": 1759,
     "quality": [
       "HLS"
     ],
@@ -545,9 +545,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+      "https://p4.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p4.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "VisionQuest",
@@ -565,7 +565,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1614,
+    "ms": 2197,
     "quality": [
       "HLS"
     ],
@@ -573,9 +573,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+      "https://p6.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p6.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "VisionQuest",
@@ -593,7 +593,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1198,
+    "ms": 3038,
     "quality": [
       "HLS"
     ],
@@ -601,8 +601,8 @@
       "Latino"
     ],
     "hosts": [
-      "https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+      "https://p6.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p6.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
   }
 ]

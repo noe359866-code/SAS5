@@ -44,6 +44,12 @@ const CONTROLS = [
   // adaptador (película con audio subtitulado y serie por temporada).
   { type: 'movie', title: 'La Odisea', fallback: { title: 'La Odisea', year: '2026' } },
   { type: 'series', title: 'VisionQuest', fallback: { title: 'VisionQuest', year: '2026', season: 1, episode: 1 } },
+  // Controles con el título **español que usa el addon en producción**
+  // (`config.tmdbLanguage = 'es-MX'`). Sin TMDB en el runner, `resolveTitle`
+  // caía en Cinemeta y medía con el título inglés, que no es el que se consulta
+  // de verdad: los sitios guardan «IntensaMente 2» y «El Origen».
+  { type: 'movie', title: 'Intensa-Mente 2', fallback: { title: 'Intensa-Mente 2', year: '2024' } },
+  { type: 'movie', title: 'El Origen', fallback: { title: 'El Origen', year: '2010' } },
 ];
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──

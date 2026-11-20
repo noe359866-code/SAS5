@@ -167,6 +167,45 @@ test('animeav1: la temporada del slug manda cuando el h1 no la menciona', () => 
   assert.equal(anime.seasonOfSlug('https://animeav1.com/media/ore-dake-level-up-na-ken'), null);
 });
 
+test('animeav1: la temporada también se reconoce en la forma «2nd-season»', () => {
+  // `/media/black-clover-2nd-season` es la ficha de la temporada 2 medida en
+  // vivo; sin reconocerla, la serie quedaba en `no-match`.
+  assert.equal(anime.seasonOfSlug(`${BASE}/media/black-clover-2nd-season`), 2);
+  assert.equal(anime.seasonOfSlug(`${BASE}/media/black-clover-3rd-season`), 3);
+  assert.equal(anime.seasonOfSlug(`${BASE}/media/naruto`), null);
+});
+
+test('animeav1: la ficha «2nd-season» del buscador sirve para pedir la temporada 2', async () => {
+  // Dos fichas hermanas en el buscador: la de la temporada 1 (se descarta por
+  // el slug) y la de la 2, que es la que acaba sirviendo los episodios.
+  const listing = `<html><body>
+    <article><a href="/media/black-clover"><img alt="Portada de Black Clover"></a><h3>Black Clover</h3></article>
+    <article><a href="/media/black-clover-2nd-season"><img alt="Portada de Black Clover"></a><h3>Black Clover</h3></article>
+  </body></html>`;
+  const pedida = { title: 'Black Clover', year: 2017, mediaType: 'series', season: 2, episode: 1 };
+  assert.deepEqual(anime.listingMatches(listing, pedida), [
+    `${BASE}/media/black-clover`,
+    `${BASE}/media/black-clover-2nd-season`,
+  ]);
+  const fichaDos = FICHA
+    .replace(/ore-dake-level-up-na-ken/g, 'black-clover-2nd-season')
+    .replace(/Ore dake Level Up na Ken/g, 'Black Clover');
+  const stubbed = stub([
+    ['/catalogo?search=', () => html(listing)],
+    [`${BASE}/media/black-clover-2nd-season/1`, () => html(EPISODIO)],
+    ['/media/black-clover-2nd-season', () => html(fichaDos)],
+    ['/media/black-clover', () => html(FICHA)],
+    ['player.zilla-networks.com/m3u8/', () => new Response('#EXTM3U\n#EXT-X-VERSION:3\n', { status: 200, headers: { 'content-type': 'application/x-mpegURL' } })],
+  ]);
+  try {
+    const out = await anime.searchAnimeAv1('Black Clover', pedida, pedida.title, 6000);
+    assert.ok(out.hits.length >= 1, `hits=${out.hits.length} ${out.reason}`);
+    assert.ok(stubbed.calls.some((url) => url === `${BASE}/media/black-clover-2nd-season`), 'se abrió la ficha de la temporada 2');
+    assert.ok(stubbed.calls.some((url) => url === `${BASE}/media/black-clover-2nd-season/1`), 'episodio 1 de la temporada 2');
+    assert.ok(!stubbed.calls.some((url) => url === `${BASE}/media/black-clover/1`), 'no se abrió el episodio de la temporada 1');
+  } finally { stubbed.restore(); }
+});
+
 test('animeav1: una ficha de otra temporada no se usa para la pedida', async () => {
   const stubbed = stub([
     ['/catalogo?search=', html(CATALOGO)],

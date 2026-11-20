@@ -71,7 +71,14 @@ async function seriesretro(fs) {
     const res = await get(page, { headers });
     const marks = ['data-post', 'data-nume', 'playeroptionsul', 'vimeos', 'admin-ajax', 'doo_player', '<iframe', '<video', '.m3u8', '.mp4']
       .map((mark) => `${mark}=${count(res.body, mark.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))}`).join(' ');
-    log(`seriesretro película (${label})`, redact(page), res, `${marks} · tipo=${res.type}`);
+    const ids = [...new Set([...res.body.matchAll(/(?:id|class)=["']([^"']*(?:player|server|option|video|embed|online|reprodu)[^"']*)["']/gi)].map((m) => m[1]))].slice(0, 8);
+    const scripts = [...new Set([...res.body.matchAll(/<script[^>]+src=["']([^"']+)["']/gi)].map((m) => m[1]))]
+      .map((src) => { try { return new URL(src, page).hostname; } catch { return '?'; } });
+    const excerptAt = (needle) => {
+      const at = res.body.toLowerCase().indexOf(needle.toLowerCase());
+      return at < 0 ? '' : res.body.slice(Math.max(0, at - 60), at + 160).replace(/\s+/g, ' ').replace(/</g, '‹').slice(0, 200);
+    };
+    log(`seriesretro película (${label})`, redact(page), res, `${marks} · tipo=${res.type} · ids=${ids.join(',') || '—'} · scripts=${[...new Set(scripts)].join(',') || '—'} · reproducir=«${excerptAt('Reproduc') || 'sin sección'}»`);
     if (label === 'navegador' && res.body) fs.writeFileSync('.probe/html/seriesretro-pelicula.html', res.body);
 
     // Players de Dooplay → embed por admin-ajax.
@@ -128,8 +135,11 @@ async function seriesflix(fs) {
   for (const src of scripts.slice(0, 3)) {
     const url = new URL(src, 'https://seriesflix.life').href;
     const js = await get(url, { headers: { ...BROWSER, Accept: '*/*', Referer: 'https://seriesflix.life/' } });
-    const apis = [...new Set([...js.body.matchAll(/["'](https?:\/\/[a-z0-9.-]+\/(?:api|v\d|wp-json)[^"']{0,40})["']/gi)].map((m) => m[1]))].slice(0, 4);
-    log(`seriesflix script ${hosts[scripts.indexOf(src)] || '?'}`, redact(url), js, `${apis.length ? apis.map(redact).join(' ') : 'sin rutas de API'}`);
+    const absolute = [...new Set([...js.body.matchAll(/["'](https?:\/\/[a-z0-9.-]+\/(?:api|v\d|wp-json)[^"']{0,40})["']/gi)].map((m) => m[1]))].slice(0, 4);
+    const relative = [...new Set([...js.body.matchAll(/["'](\/(?:api|v\d|wp-json)\/[^"']{0,40})["']/gi)].map((m) => m[1]))].slice(0, 6);
+    const fetches = count(js.body, 'fetch\\(');
+    log(`seriesflix script ${hosts[scripts.indexOf(src)] || '?'}`, redact(url), js,
+      `fetch()=${fetches} · rutas absolutas: ${absolute.length ? absolute.map(redact).join(' ') : '—'} · relativas: ${relative.length ? relative.join(' ') : '—'}`);
   }
 
   const search = await get('https://seriesflix.life/search?q=odisea', { headers: BROWSER });

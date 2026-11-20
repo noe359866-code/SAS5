@@ -1,0 +1,218 @@
+{
+  "filehosts": [
+    {
+      "name": "streamwish",
+      "url": "https://streamwish.to/dl?…",
+      "status": 200,
+      "type": "text/html",
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "unMedia": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/style.css\" rel=\"stylesheet\" type=\"text/css\" "
+    },
+    {
+      "name": "streamwish",
+      "url": "https://streamwish.to/dl?…",
+      "status": 200,
+      "type": "text/html",
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "unMedia": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/style.css\" rel=\"stylesheet\" type=\"text/css\" "
+    },
+    {
+      "name": "streamwish",
+      "url": "https://streamwish.to/e/bxv60pjdnzpx?…",
+      "status": 200,
+      "type": "text/html",
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "unMedia": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/style.css\" rel=\"stylesheet\" type=\"text/css\" "
+    },
+    {
+      "name": "hglink",
+      "url": "https://hglink.to/dl?…",
+      "status": 200,
+      "type": "text/html",
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "unMedia": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/style.css\" rel=\"stylesheet\" type=\"text/css\" "
+    },
+    {
+      "name": "hglink",
+      "url": "https://hglink.to/dl?…",
+      "status": 200,
+      "type": "text/html",
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "unMedia": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/style.css\" rel=\"stylesheet\" type=\"text/css\" "
+    },
+    {
+      "name": "hglink",
+      "url": "https://hglink.to/e/m10cltm3xblk?…",
+      "status": 200,
+      "type": "text/html",
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "unMedia": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/style.css\" rel=\"stylesheet\" type=\"text/css\" "
+    },
+    {
+      "name": "hgcloud",
+      "url": "https://hgcloud.to/dl?…",
+      "status": 200,
+      "type": "text/html",
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "unMedia": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/style.css\" rel=\"stylesheet\" type=\"text/css\" "
+    },
+    {
+      "name": "hgcloud",
+      "url": "https://hgcloud.to/dl?…",
+      "status": 200,
+      "type": "text/html",
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "unMedia": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/style.css\" rel=\"stylesheet\" type=\"text/css\" "
+    },
+    {
+      "name": "hgcloud",
+      "url": "https://hgcloud.to/e/aiy9yqjwoul5?…",
+      "status": 200,
+      "type": "text/html",
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "unMedia": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/style.css\" rel=\"stylesheet\" type=\"text/css\" "
+    }
+  ],
+  "mixdrop": {
+    "status": 200,
+    "fields": {
+      "wurl": "//1y04jx1s6.mxcontent.net/v2/mkkkzkqla6x18g.mp4?s=iL8DjXjVp2irck3okdD7jg&e=1795157159&_t=1795145368",
+      "furl": " ",
+      "vfile": "168b9eac36b1a5cde6f8304b044822cc.mp4",
+      "vserver": "1y04jx1s6",
+      "referrer": "https%3A%2F%2Fmirandogratis.com%2F"
+    },
+    "m3u8": []
+  },
+  "voe": [
+    {
+      "host": "streamwish.to",
+      "path": "/e/bxv60pjdnzpx",
+      "status": 200,
+      "bytes": 452,
+      "packed": false,
+      "media": [],
+      "snippet": "<!DOCTYPE html> <head> <title>Loading...</title> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link href=\"/styl"
+    },
+    {
+      "host": "vidhidepro.com",
+      "path": "/v/7p0egbcbsti2",
+      "status": 0,
+      "bytes": 0,
+      "packed": false,
+      "media": [],
+      "snippet": ""
+    },
+    {
+      "host": "voe.sx",
+      "path": "/e/xgbyls7nylgd",
+      "status": 404,
+      "bytes": 118974,
+      "packed": false,
+      "media": [],
+      "snippet": "<!DOCTYPE html> <html lang=\"es\"> <head> <meta charset=\"utf-8\"> <title>404 - No encontrado</title> <meta http-equiv=\"Cache-Control\" content=\"no-store, no-cache, "
+    }
+  ],
+  "byse": {
+    "report": [
+      {
+        "url": "byseraguci.com/api/v1/videos/intdacsm8cvn",
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
+      },
+      {
+        "url": "byseraguci.com/api/video/intdacsm8cvn",
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
+      },
+      {
+        "url": "byseraguci.com/api/videos/intdacsm8cvn",
+        "status": 200,
+        "type": "application/json",
+        "bytes": 2361,
+        "head": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":9,\"downloads\":0,\"created_"
+      },
+      {
+        "url": "byseraguci.com/api/embed/intdacsm8cvn",
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
+      },
+      {
+        "url": "bysejikuar.com/api/v1/videos/01j37fv5s579",
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
+      },
+      {
+        "url": "bysejikuar.com/api/video/01j37fv5s579",
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
+      },
+      {
+        "url": "bysejikuar.com/api/videos/01j37fv5s579",
+        "status": 200,
+        "type": "application/json",
+        "bytes": 2358,
+        "head": "{\"id\":60952069,\"code\":\"01j37fv5s579\",\"title\":\"SM1NDA 1080 CAS\",\"description\":\"\",\"duration_seconds\":8701,\"views\":488,\"downloads\":88,\"created_"
+      },
+      {
+        "url": "bysejikuar.com/api/embed/01j37fv5s579",
+        "status": 404,
+        "type": "text/plain",
+        "bytes": 19,
+        "head": "404 page not found "
+      }
+    ],
+    "bundle": {
+      "status": 200,
+      "media": [
+        "assets/videoPagesBundle-Bgi0QmPo.js",
+        "assets/videoPagesBundle-DR9JZKr5.css",
+        "embed",
+        "video"
+      ]
+    }
+  },
+  "videohel": {
+    "status": 200,
+    "m3u8": [
+      "https://4fw4gd.cfglobalcdn.com/secip/1/861rQM940fF8R1fZDCdglg/OTQuMjUuMTcwLjI2/1606597200/hls-vod-s03/flv/api/files/videos/2018/08/01/153311550983uua.mp4.m3u8"
+    ]
+  }
+}

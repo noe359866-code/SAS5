@@ -41,6 +41,29 @@ async function ficha(http, label, page, episodesOf) {
   return eps;
 }
 
+/**
+ * ¿La página construida es de verdad ese episodio? Se comprueba que el número
+ * aparezca como episodio en el HTML y que un número imposible no devuelva la
+ * misma página (eso convertiría la construcción en un falso positivo).
+ */
+async function verifyBuilt(http, label, urlOf, numbers, serversOf, impossible) {
+  for (const n of [numbers[numbers.length - 1], numbers[0]]) {
+    try {
+      const body = await http.text(urlOf(n), { maxBytes: 512 * 1024 });
+      const marks = [
+        new RegExp(`(?:episodio|episode|cap[ií]tulo)\\s*0*${n}\\b`, 'i').test(body) ? 'menciona el número' : 'no menciona el número',
+        new RegExp(`/media/[^"/]+/${n}\\b`).test(body) ? 'enlace propio' : 'sin enlace propio',
+      ];
+      const h1 = /<h1[^>]*>([\s\S]{0,120}?)<\/h1>/i.exec(body)?.[1]?.replace(/<[^>]+>/g, '').trim() || '';
+      row(`${label} verifica /${n}`, `${marks.join(' · ')} · h1=«${h1.slice(0, 60)}» · visores=${serversOf(body).length}`);
+    } catch (err) { row(`${label} verifica /${n}`, `error ${short(err)}`); }
+  }
+  try {
+    const body = await http.text(urlOf(impossible), { maxBytes: 512 * 1024 });
+    row(`${label} imposible /${impossible}`, `responde ${body.length}B · visores=${serversOf(body).length} (si responde igual, construir la URL no identifica el episodio)`);
+  } catch (err) { row(`${label} imposible /${impossible}`, `error ${short(err)} (lo esperado)`); }
+}
+
 async function probeDirect(http, label, urlOf, numbers, serversOf) {
   const found = [];
   for (const n of numbers) {
@@ -62,10 +85,21 @@ async function steps() {
   row('— AnimeAV1 —', '·');
   await ficha(http, 'av1', `${av1.BASE}/media/one-piece`, (html) => av1.episodesOf(html, `${av1.BASE}/media/one-piece`));
   await probeDirect(http, 'av1', (n) => `${av1.BASE}/media/one-piece/${n}`, NUMBERS, av1.serversOf);
+  await verifyBuilt(http, 'av1', (n) => `${av1.BASE}/media/one-piece/${n}`, [1000, 1180], av1.serversOf, 9999);
 
   row('— AnimeFLV —', '·');
   await ficha(http, 'flv', `${flv.BASE}/anime/one-piece/`, (html) => flv.episodesOf(html));
-  await probeDirect(http, 'flv', (n) => `${flv.BASE}/ver/one-piece-${n}`, NUMBERS, flv.serversOf);
+  let flvPrefix = '';
+  try {
+    const html = await http.text(`${flv.BASE}/anime/one-piece/`, { maxBytes: 2 * 1024 * 1024 });
+    const eps = flv.episodesOf(html);
+    const last = eps[eps.length - 1];
+    row('flv permalinks', eps.slice(-3).map((e) => `${e.number}→${e.permalink}`).join(' · '));
+    // El prefijo del permalink es todo lo anterior al número: se prueba con él.
+    flvPrefix = last?.permalink?.replace(new RegExp(`-?${last.number}/?$`), '') || '';
+    row('flv prefijo', flvPrefix || 'no se pudo derivar');
+  } catch (err) { row('flv permalinks', `error ${short(err)}`); }
+  if (flvPrefix) await probeDirect(http, 'flv prefijo', (n) => `${flvPrefix}-${n}`, [1000, 1100, 1150], flv.serversOf);
 }
 
 async function main() {

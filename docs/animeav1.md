@@ -55,7 +55,9 @@ Las fichas de película (`/media/one-piece-film-red`, `/media/suzume-no-tojimari
 no llevan bloque `embeds:` en el HTML: publican el medio como su **único
 episodio** (`/media/<slug>/1`, 1 entrada). El adaptador abre esa entrada y
 publica el hit sin `SxE`; antes se descartaba con `no-episode` porque se buscaba
-un número que una película no tiene.
+un número que una película no tiene. Medido en vivo el 20-11-2026
+(`.probe/sites-live.md`): *One Piece Film: Red* → **2 hits HLS**, «Latino» y
+«Subtitulado».
 
 ### Episodios que la ficha no pinta
 
@@ -67,7 +69,9 @@ lo descarta como `no-episode`.
 
 Medido el 20-11-2026 (`.probe/anime-reach.md`): `/media/one-piece/1180`
 responde con `h1` «Episodio 1180» y 5 visores; `/media/one-piece/9999` da 404,
-así que construir la URL **no** produce falsos positivos.
+así que construir la URL **no** produce falsos positivos. El adaptador completo,
+pidiendo ese episodio, devuelve **1 hit HLS/Subtitulado (`One Piece S1E1180`)** en
+1,6 s.
 
 ### Identidad y temporadas
 

@@ -75,20 +75,15 @@
       ]
     },
     "serial": {
-      "status": 404,
-      "size": 39192,
-      "links": [
-        "https://verpeliculasultra.com/estrenos/1334-vengadores-juego-final.html",
-        "https://verpeliculasultra.com/estrenos/63-thor-ragnarok.html",
-        "https://verpeliculasultra.com/estrenos/904-aquaman-pelicula.html",
-        "https://verpeliculasultra.com/estrenos/119-la-liga-de-la-justicia.html"
-      ]
+      "status": 0,
+      "size": 0,
+      "links": []
     }
   },
   "gnula": {
     "search": {
       "status": 403,
-      "size": 5745,
+      "size": 5724,
       "links": []
     },
     "season": {

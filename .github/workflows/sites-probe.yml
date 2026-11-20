@@ -115,6 +115,10 @@ jobs:
           git config user.email "sonda@users.noreply.github.com"
           # Solo los resúmenes: los volcados HTML de `.probe/html` son material
           # de diagnóstico y no tienen por qué viajar en la rama.
-          git add -f .probe/*.md .probe/*.json .probe/fixtures/*.json 2>/dev/null || true
+          git add -f .probe/*.md .probe/*.json .probe/fixtures/*.json .probe/fixtures/*.html 2>/dev/null || true
           git diff --cached --quiet || git commit -m "sonda: resultados de $(date -u +%FT%TZ) [skip ci]"
+          # Otro job puede haber empujado mientras corría la sonda: sin rebasar,
+          # el push se rechazaba en silencio y el resumen de esta pasada se perdía.
+          git fetch origin || true
+          git rebase origin/${{ github.ref_name }} || git rebase --abort || true
           git push origin HEAD:refs/heads/${{ github.ref_name }} || true

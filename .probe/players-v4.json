@@ -64,7 +64,7 @@
   "ultra": {
     "search": {
       "status": 200,
-      "size": 132860,
+      "size": 132766,
       "forms": [],
       "results": [
         "https://verpeliculasultra.com/estrenos/1334-vengadores-juego-final.html",
@@ -76,7 +76,7 @@
     },
     "serial": {
       "status": 404,
-      "size": 39192,
+      "size": 39098,
       "links": [
         "https://verpeliculasultra.com/estrenos/1334-vengadores-juego-final.html",
         "https://verpeliculasultra.com/estrenos/63-thor-ragnarok.html",

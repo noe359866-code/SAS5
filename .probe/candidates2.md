@@ -25,27 +25,27 @@
 | entrepeliculasyseries.nz | wp-api /search | 404 | 155 | text/html · sin posts |
 | entrepeliculasyseries.nz | buscar (/?s=) | 403 | 4559 | resultados=0 · fichas=0 |
 | gnula.life | wp-api /search | 404 | 16231 | text/html · sin posts |
-| gnula.life | buscar (/?s=) | 200 | 80967 | resultados=45 · fichas=3 · https://gnula.life/archives/series/top/day |
+| gnula.life | buscar (/?s=) | 200 | 80824 | resultados=45 · fichas=3 · https://gnula.life/archives/series/top/day |
 | gnula.life | · ficha | 200 | 59040 | iframes=1 · www.googletagmanager.com=— · medios=0 |
 | homecine.to | wp-api /search | 404 | 43677 | text/html · sin posts |
-| homecine.to | buscar (/search) | 200 | 74926 | resultados=0 · fichas=3 · https://www3.homecine.to/series/search-party/feed |
+| homecine.to | buscar (/search) | 200 | 74802 | resultados=0 · fichas=3 · https://www3.homecine.to/series/search-party/feed |
 | homecine.to | · ficha | 200 | 697 | iframes=0 · medios=0 |
 | pelispedia.mov | wp-api /search | 404 | 155 | text/html · sin posts |
 | pelispedia.mov | buscar (/?s=) | 200 | 392333 | resultados=0 · fichas=3 · https://pelispedia.mov/series/populares |
 | pelispedia.mov | · ficha | 200 | 190222 | iframes=0 · medios=0 |
 | seriesmetro.net | wp-api /search | 404 | 32162 | text/html · sin posts |
 | seriesmetro.net | buscar (/?s=) | 200 | 40786 | resultados=7 · fichas=3 · https://www3.seriesmetro.net/serie/the-pitt/ |
-| seriesmetro.net | · ficha | 200 | 60267 | iframes=1 · www.youtube.com=— · medios=0 |
+| seriesmetro.net | · ficha | 200 | 60219 | iframes=1 · www.youtube.com=— · medios=0 |
 | sololatino.net | wp-api /search | 403 | 5903 | text/html · sin posts |
 | sololatino.net | buscar (/?s=) | 403 | 5677 | resultados=0 · fichas=0 |
 | tioplus.app | wp-api /search | 521 | 948 | application/json · sin posts |
-| tioplus.app | buscar (/?s=) | 521 | 6969 | resultados=0 · fichas=0 |
+| tioplus.app | buscar (/?s=) | 521 | 6968 | resultados=0 · fichas=0 |
 | vimeus.com | wp-api /search | 200 | 186 | text/html · sin posts |
 | vimeus.com | buscar (/search) | 200 | 125 | resultados=0 · fichas=0 |
 | vitaminagg.vip | wp-api /search | 403 | 5924 | text/html · sin posts |
 | vitaminagg.vip | buscar (/?s=) | 403 | 5677 | resultados=0 · fichas=0 |
 | cuevana3.eu | wp-api /search | 404 | 10832 | text/html · sin posts |
-| cuevana3.eu | buscar (/?s=) | 200 | 290078 | resultados=8 · fichas=3 · https://wv3.cuevana3.eu/series/estrenos |
+| cuevana3.eu | buscar (/?s=) | 200 | 246474 | resultados=8 · fichas=3 · https://wv3.cuevana3.eu/series/estrenos |
 | cuevana3.eu | · ficha | 200 | 145211 | iframes=0 · medios=0 |
 
 Segunda tanda de candidatas (complementos latinos de Nuvio): solo HTML y JSON público.

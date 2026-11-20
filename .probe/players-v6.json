@@ -11,10 +11,20 @@
   },
   "tabs": {
     "ultra": {
-      "status": 0,
-      "size": 0,
-      "tabs": [],
-      "frames": [],
+      "status": 200,
+      "size": 57157,
+      "tabs": [
+        "ts21=",
+        "ts2=",
+        "ts31=",
+        "ts3="
+      ],
+      "frames": [
+        "https://hgcloud.to/e/aiy9yqjwoul5",
+        "https://powvideo.org/embed-99ess8o65y66-800x400.html",
+        "https://hgcloud.to/e/oed9pqmh18ke",
+        "https://powvideo.org/embed-av39kc9o0w11-800x400.html"
+      ],
       "labels": []
     },
     "mirando": {

@@ -48,7 +48,8 @@ cambio eran de las que más CPU y subpeticiones consumían en un plan Free
 (10 ms de CPU y 50 subpeticiones por invocación).
 
 Con esto quedan **seis fuentes**: Fanpelis, SpinFlix, Cuevana 3, AnimeFLV,
-FuegoCine y PelisJuanita.
+FuegoCine y PelisJuanita. El 20-11-2026 se sumaron Allpelículas y LaMovie
+(ver [allpeliculas-lamovie.md](allpeliculas-lamovie.md)): ocho en total.
 
 ### Fuentes que se quedaron entonces
 

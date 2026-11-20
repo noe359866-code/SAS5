@@ -1,18 +1,8 @@
 | Sitio | Paso | Resultado |
 |---|---|---|
-| allpeliculas.la | buscar | 200 · «The Pitt (2025)» tvshows:25427 |
-| allpeliculas.la | episodio | 1x1 · 25434 |
-| allpeliculas.la | player | 1 embed(s) · vimeos.net/Latino/Full HD |
-| allpeliculas.la | vimeos | ok · kind=hls · subtítulos=0 · caduca=sí · 401ms |
-| lamovie.org | buscar | 200 · «The Pitt (2025)» tvshows:17925 |
-| lamovie.org | episodio | 1x1 · 17928 |
-| lamovie.org | player | 1 embed(s) · vimeos.net/latino/Full HD |
-| lamovie.org | vimeos | ok · kind=hls · subtítulos=0 · caduca=sí · 383ms |
-| allcalidad.re | buscar | «La Odisea: El Regreso (2024)» 72531 |
-| allcalidad.re | player | 1 embed(s) · vimeos.net/latino - inglés |
-| allcalidad.re | vimeos | ok · kind=hls · subtítulos=0 · caduca=sí · 356ms |
-| hackstore2.com | ficha | «La Odisea» 94577 |
-| hackstore2.com | player | 1 embed(s) · vimeos.net/latino - inglés |
-| hackstore2.com | vimeos | ok · kind=hls · subtítulos=0 · caduca=sí · 373ms |
+| allpeliculas.la | error | Timeout de 12000 ms al consultar https://allpeliculas.la/wp-api/v1/search |
+| lamovie.org | error | Timeout de 12000 ms al consultar https://lamovie.org/wp-api/v1/search |
+| allcalidad.re | error | Timeout de 11999 ms al consultar https://allcalidad.re/api/rest/search |
+| hackstore2.com | error | Timeout de 12000 ms al consultar https://hackstore2.com/api/rest/single |
 
 Cadena buscar → episodio → player → Vimeos resuelto con el código del addon.

@@ -10,6 +10,10 @@
  * las variantes que sirven los demás players de ese host (`/m3u8/<token>`).
  */
 
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 const HEADERS = { 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'es-MX,es;q=0.9,en;q=0.6' };
 const TIMEOUT = 20_000;

@@ -24,6 +24,7 @@ on:
       - 'scripts/candidates3-probe.mjs'
       - 'scripts/vimeos-chain-probe.mjs'
       - 'scripts/calidad-chain-probe.mjs'
+      - 'scripts/fixtures-capture.mjs'
       - 'scripts/pelisjuanita-probe.mjs'
       - 'scripts/pelisjuanita-probe2.mjs'
       - 'scripts/pelisjuanita-probe3.mjs'
@@ -62,6 +63,8 @@ jobs:
         run: node scripts/vimeos-chain-probe.mjs || true
       - name: cuarta sonda (series en allcalidad y películas wp-api)
         run: node scripts/calidad-chain-probe.mjs || true
+      - name: captura de fixtures (allpeliculas y lamovie)
+        run: node scripts/fixtures-capture.mjs || true
       - name: pelisjuanita (API REST y reproducción)
         run: node scripts/pelisjuanita-probe.mjs || true
       - name: pelisjuanita (episodios y reproductor externo)

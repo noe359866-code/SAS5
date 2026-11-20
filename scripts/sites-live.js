@@ -24,6 +24,8 @@ const sites = {
   animeflv: require('../lib/sites/animeflv'),
   fuegocine: require('../lib/sites/fuegocine'),
   pelisjuanita: require('../lib/sites/pelisjuanita'),
+  allpeliculas: require('../lib/sites/allpeliculas'),
+  lamovie: require('../lib/sites/lamovie'),
 };
 
 const CONTROLS = [
@@ -67,7 +69,7 @@ globalThis.fetch = async (url, options = {}) => {
   // incluidos los POST de los buscadores del sitio.
   if (/html|text/i.test(type) && html.length) {
     const host = (() => { try { return new URL(String(url)).hostname; } catch { return ''; } })();
-    if (/(?:cuevanas3|animeflv|fuegocine|pelisjuanita|unlimplay|vimeos)/.test(host)) {
+    if (/(?:cuevanas3|allpeliculas|lamovie|animeflv|fuegocine|pelisjuanita|unlimplay|vimeos)/.test(host)) {
       const name = (String(options.method || 'GET') === 'GET' ? '' : 'post-')
         + String(url).replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 80);
       try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync(`.probe/html/live-${name}.html`, html); } catch (_) {}
@@ -120,6 +122,8 @@ const SEARCHERS = {
   animeflv: (resolved) => sites.animeflv.searchAnimeFlv(null, resolved, resolved.title, 9000),
   fuegocine: (resolved) => sites.fuegocine.searchFuegoCine(null, resolved, resolved.title, 9000),
   pelisjuanita: (resolved) => sites.pelisjuanita.searchPelisJuanita(null, resolved, resolved.title, 9000),
+  allpeliculas: (resolved) => sites.allpeliculas.searchAllpeliculas(null, resolved, resolved.title, 9000),
+  lamovie: (resolved) => sites.lamovie.searchLamovie(null, resolved, resolved.title, 9000),
 };
 
 // Proveedores del registro que no son «sitios»: se miden con el mismo control

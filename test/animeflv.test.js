@@ -127,6 +127,26 @@ test('animeflv serie: ficha → episodio → HLS directo del player propio', asy
   } finally { stubbed.restore(); }
 });
 
+test('animeflv: una película se sirve con la única entrada de su ficha', async () => {
+  // La ficha de una película no trae número que pedir: se abre su única
+  // entrada y el título se publica sin «SxE».
+  const unaSola = JSON.stringify([{ post_id: 4242, permalink: `${BASE}/2026/05/01/one-piece-film-red-pelicula/`, number: 1, range: 1 }]);
+  const pelicula = FICHA.replace(/(<script[^>]*animeflv-episodes-data[^>]*>)[\s\S]*?(<\/script>)/, `$1${unaSola}$2`)
+    .replace(/<h1[^>]*class="[^"]*anime-title[^"]*"[^>]*>[\s\S]*?<\/h1>/i, '<h1 class="anime-title">One Piece Film: Red</h1>');
+  const stubbed = stub([
+    [`${BASE}/anime/one-piece-film-red/`, html(pelicula)],
+    [`${BASE}/2026/05/01/one-piece-film-red-pelicula/`, html(EPISODIO)],
+  ]);
+  try {
+    const filme = { title: 'One Piece Film: Red', year: 2022, mediaType: 'movie' };
+    const out = await animeflv.searchAnimeFlv('One Piece Film: Red', filme, filme.title, 5000);
+    assert.equal(out.hits.length, 1, `hits=${out.hits.length} ${out.reason}`);
+    assert.equal(out.hits[0].provider, 'animeflv');
+    assert.equal(out.hits[0].url, HLS);
+    assert.match(out.hits[0].title, /One Piece Film: Red AnimeFLV/);
+  } finally { stubbed.restore(); }
+});
+
 test('animeflv: el enlace del player propio llega al registro y se publica', async () => {
   const stubbed = stub([
     [`${BASE}/anime/ao-ashi-season-2/`, html(FICHA)],

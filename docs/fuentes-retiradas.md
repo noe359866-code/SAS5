@@ -48,7 +48,8 @@ cambio eran de las que más CPU y subpeticiones consumían en un plan Free
 (10 ms de CPU y 50 subpeticiones por invocación).
 
 Con esto quedan **seis fuentes**: Fanpelis, SpinFlix, Cuevana 3, AnimeFLV,
-FuegoCine y PelisJuanita.
+FuegoCine y PelisJuanita. El 20-11-2026 se sumaron Allpelículas y LaMovie
+(ver [allpeliculas-lamovie.md](allpeliculas-lamovie.md)): ocho en total.
 
 ### Fuentes que se quedaron entonces
 
@@ -62,6 +63,14 @@ MirandoGratis.
 - `animeyt.cc`: 403 de Cloudflare en todo el sitio; solo `/feed/` responde.
 - `animed23.com` y `animejara.com`: reto de Cloudflare que no se resuelve sin
   navegador.
+- `seriesretro.com`, `seriesflix.life` y `documaniatv.com`: la primera no sirve
+  la sección de reproducción a un cliente de servidor, la segunda es una SPA sin
+  datos en el HTML y con el buscador en 403, y la tercera responde 403 de
+  Cloudflare. Medición en [candidatas-2026-11-20.md](candidatas-2026-11-20.md).
+- `poseidonhd2.co`: la ficha llega bien desde TMDb, pero todos sus visores son
+  Voe, Doodstream (403), StreamWish, Vidhide, Vidara o Netu, que exigen ejecutar
+  JS. Cero medios directos en 91 opciones de vídeo; el detalle está en
+  [poseidonhd2.md](poseidonhd2.md).
 - FlixLatam, PlayLatinSRC, AnimeOnlineNinja y Cuevana 3 antiguos: se retiraron
   por falta de una ruta de reproducción fiable; quedan sus informes en
   [flixlatam-cuevana.md](flixlatam-cuevana.md) y

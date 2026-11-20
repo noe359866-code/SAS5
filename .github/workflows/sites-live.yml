@@ -19,7 +19,7 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -31,6 +31,10 @@ jobs:
         run: node --test test/siteExtractors.test.js test/mediaParse.test.js
       - name: Adaptadores contra los sitios reales
         run: node scripts/sites-live.js ${{ inputs.providers }}
+      - name: Alcance de episodios (One Piece hasta el último cap)
+        run: node scripts/anime-reach-probe.mjs || true
+      - name: Buscador crudo de películas (títulos que no aparecen)
+        run: node scripts/movies-reach-probe.mjs || true
       - name: Devolver resultados a la rama
         if: always()
         run: |
@@ -41,6 +45,10 @@ jobs:
           # material de diagnóstico y no tienen por qué viajar en el PR. `-f`
           # porque `.probe/` está en .gitignore; el push va por refspec
           # explícita para que funcione también con el checkout en HEAD separado.
-          git add -f .probe/sites-live.md 2>/dev/null || true
+          git add -f .probe/sites-live.md .probe/anime-reach.md .probe/movies-reach.md 2>/dev/null || true
           git diff --cached --quiet || git commit -m "sonda: adaptadores de sitios $(date -u +%FT%TZ) [skip ci]"
+          # La sonda de descubrimiento empuja cada pocos minutos: sin rebasar,
+          # el push de este job se rechazaba en silencio y el resumen se perdía.
+          git fetch origin || true
+          git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true
           git push origin HEAD:refs/heads/${{ github.ref_name }} || true

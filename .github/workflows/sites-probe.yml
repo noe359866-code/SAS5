@@ -18,6 +18,22 @@ on:
       - 'scripts/cuevanas3-api-probe.mjs'
       - 'scripts/anime-sites-probe.mjs'
       - 'scripts/fuegocine-probe.mjs'
+      - 'scripts/poseidonhd2-probe.mjs'
+      - 'scripts/candidates-probe.mjs'
+      - 'scripts/candidates2-probe.mjs'
+      - 'scripts/candidates3-probe.mjs'
+      - 'scripts/vimeos-chain-probe.mjs'
+      - 'scripts/calidad-chain-probe.mjs'
+      - 'scripts/fixtures-capture.mjs'
+      - 'scripts/anime-candidates-probe.mjs'
+      - 'scripts/anime-players-probe.mjs'
+      - 'scripts/anime-players2-probe.mjs'
+      - 'scripts/anime-players3-probe.mjs'
+      - 'scripts/anime-players4-probe.mjs'
+      - 'scripts/animeav1-probe.mjs'
+      - 'scripts/animeav1-debug.mjs'
+      - 'scripts/anime-reach-probe.mjs'
+      - 'scripts/movies-reach-probe.mjs'
       - 'scripts/pelisjuanita-probe.mjs'
       - 'scripts/pelisjuanita-probe2.mjs'
       - 'scripts/pelisjuanita-probe3.mjs'
@@ -44,6 +60,40 @@ jobs:
         run: node scripts/sites-probe.mjs ${{ inputs.sites }}
       - name: fuegocine (página de reproducción y visores)
         run: node scripts/fuegocine-probe.mjs || true
+      - name: poseidonhd2 (NEXT_DATA, player.php y buscador)
+        run: node scripts/poseidonhd2-probe.mjs || true
+      - name: candidatas (seriesretro, seriesflix, documaniatv)
+        run: node scripts/candidates-probe.mjs || true
+      - name: candidatas 2 (APIs latinas, embed69 y WordPress)
+        run: node scripts/candidates2-probe.mjs || true
+      - name: candidatas 3 (cadena buscar → player → embed)
+        run: node scripts/candidates3-probe.mjs || true
+      - name: cadena Vimeos (resolución con el código del addon)
+        run: node scripts/vimeos-chain-probe.mjs || true
+      - name: cuarta sonda (series en allcalidad y películas wp-api)
+        run: node scripts/calidad-chain-probe.mjs || true
+      - name: captura de fixtures (allpeliculas y lamovie)
+        run: node scripts/fixtures-capture.mjs || true
+      - name: candidatas de anime
+        run: node scripts/anime-candidates-probe.mjs || true
+      - name: visores de anime (videos, data-player, embeds SUB/DUB)
+        run: node scripts/anime-players-probe.mjs || true
+      - name: anime, tercera vuelta (AnimeAV1 y TioAnime)
+        run: node scripts/anime-players2-probe.mjs || true
+      - name: anime, cuarta vuelta (dentro de los visores de AnimeAV1)
+        run: node scripts/anime-players3-probe.mjs || true
+      - name: anime, quinta vuelta (anatomía del player propio)
+        run: node scripts/anime-players4-probe.mjs || true
+      - name: animeav1 (marcado de buscador, ficha y episodio)
+        run: node scripts/animeav1-probe.mjs || true
+      - name: animeav1 (depuración con el cliente del adaptador)
+        run: node scripts/animeav1-debug.mjs || true
+      - name: alcance de episodios (One Piece) en los sitios de anime
+        run: node scripts/anime-reach-probe.mjs || true
+      - name: buscador crudo de películas (títulos que no aparecen)
+        run: node scripts/movies-reach-probe.mjs || true
+      - name: adaptadores nuevos contra los sitios reales
+        run: node scripts/sites-live.js allpeliculas lamovie animeav1 || true
       - name: pelisjuanita (API REST y reproducción)
         run: node scripts/pelisjuanita-probe.mjs || true
       - name: pelisjuanita (episodios y reproductor externo)
@@ -72,6 +122,15 @@ jobs:
           test -s .probe/sites-probe.json || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          git add -f .probe
-          git commit -m "sonda: resultados de $(date -u +%FT%TZ) [skip ci]" || exit 0
-          git push
+          # Solo los resúmenes: los volcados HTML de `.probe/html` son material
+          # de diagnóstico y no tienen por qué viajar en la rama.
+          git add -f .probe/*.md .probe/*.json .probe/fixtures/*.json .probe/fixtures/*.html 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "sonda: resultados de $(date -u +%FT%TZ) [skip ci]"
+          # Otro job puede haber empujado mientras corría la sonda: sin rebasar,
+          # el push se rechazaba en silencio y el resumen de esta pasada se perdía.
+          git fetch origin || true
+          # `sites-live.md` lo reescriben también las sondas de adaptadores: al
+          # rebasar, un conflicto en un resumen generado dejaba el push en nada.
+          # `-X theirs` conserva la medición de esta pasada, que es la nueva.
+          git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true
+          git push origin HEAD:refs/heads/${{ github.ref_name }} || true

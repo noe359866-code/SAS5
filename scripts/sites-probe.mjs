@@ -119,7 +119,7 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
   seen.add(url);
   const res = await get(url, { headers: referer ? { Referer: referer } : {} });
   const scan = res.status === 200 ? scanHtml(res.body, url) : null;
-  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt|fuegocine|pelisjuanita/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
+  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt|fuegocine|pelisjuanita|poseidonhd2|seriesretro|seriesflix|documaniatv/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
     try {
       const fs = await import('node:fs');
       fs.mkdirSync('.probe/html', { recursive: true });
@@ -164,6 +164,41 @@ const SITES = {
   // Solo la portada: el resto de estos sitios se sondearon con scripts
   // dedicados (scripts/cuevanas3-api-probe.mjs y scripts/anime-sites-probe.mjs)
   // y su estructura ya está descrita en los adaptadores.
+  // Las tres se descartaron el 20-11-2026 (docs/candidatas-2026-11-20.md): se
+  // deja una página de cada una para poder volver a medirlas.
+  seriesretro: {
+    name: 'seriesretro.com',
+    base: 'https://seriesretro.com',
+    pages: [
+      { label: 'pelicula', url: 'https://seriesretro.com/peliculas/la-odisea' },
+    ],
+  },
+  seriesflix: {
+    name: 'seriesflix.life',
+    base: 'https://seriesflix.life',
+    pages: [
+      { label: 'portada', url: 'https://seriesflix.life/' },
+    ],
+  },
+  documaniatv: {
+    name: 'documaniatv.com',
+    base: 'https://www.documaniatv.com',
+    pages: [
+      { label: 'documental', url: 'https://www.documaniatv.com/social/sicarios-video_fd2ea8244.html' },
+    ],
+  },
+  poseidonhd2: {
+    name: 'poseidonhd2.co',
+    base: 'https://www.poseidonhd2.co',
+    pages: [
+      { label: 'portada', url: 'https://www.poseidonhd2.co/' },
+      // Descartado el 20-11-2026 (docs/poseidonhd2.md): se dejan solo las
+      // páginas que sirven para volver a comprobarlo.
+      { label: 'pelicula', url: 'https://www.poseidonhd2.co/pelicula/1368337/la-odisea' },
+      { label: 'episodio', url: 'https://www.poseidonhd2.co/serie/58841/policias-de-chicago/temporada/13/episodio/21' },
+      { label: 'buscador', url: 'https://www.poseidonhd2.co/search?q=odisea' },
+    ],
+  },
   cuevanas3: {
     name: 'cuevanas3.pro',
     base: 'https://cuevanas3.pro',

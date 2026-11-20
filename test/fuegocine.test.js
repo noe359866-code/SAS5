@@ -17,6 +17,8 @@ const path = require('node:path');
 const fuego = require('../lib/sites/fuegocine');
 const { isDirectMedia } = require('../lib/directMedia');
 
+// Los recortes llevan la firma de UnLimPlay con su caducidad (`e`) fija en
+// 2100: con la fecha real del día de la medición, las pruebas caducaban.
 const fixture = (name) => fs.readFileSync(path.join(__dirname, 'fixtures', 'sites', name), 'utf8');
 const SEARCH = fixture('fuegocine-search.html');
 const SEARCH_SERIE = fixture('fuegocine-search-serie.html');
@@ -130,7 +132,7 @@ test('fuegocine: el visor publica los idiomas y un HLS firmado por cada uno', ()
   assert.match(latino.url, /^https:\/\/unlimplay\.com\/cps\.php\?t=.+&x=\.m3u8$/);
   assert.match(subtitulado.url, /^https:\/\/unlimplay\.com\/cps\.php\?t=.+&x=\.m3u8$/);
   assert.notEqual(latino.url, subtitulado.url);
-  assert.equal(latino.expiresAt, 1795116600000);
+  assert.equal(latino.expiresAt, 4102444800000);
   // El grupo «subtitulado» no se confunde con latino.
   assert.equal(fuego.audioOf('latino'), 'Latino');
   assert.equal(fuego.audioOf('sub'), 'Subtitulado');
@@ -139,14 +141,14 @@ test('fuegocine: el visor publica los idiomas y un HLS firmado por cada uno', ()
 });
 
 test('fuegocine: el HLS solo se acepta del cps.php del visor y con la firma viva', () => {
-  const ok = 'https://unlimplay.com/cps.php?t=s_abc&e=1795116600&s=deadbeef&x=.m3u8';
+  const ok = 'https://unlimplay.com/cps.php?t=s_abc&e=4102444800&s=deadbeef&x=.m3u8';
   assert.equal(fuego.cpsHls(ok).url, ok);
   // Fuera del visor, otra ruta, otro formato o sin token.
-  assert.equal(fuego.cpsHls('https://unlimplay.com.evil.test/cps.php?t=s_abc&e=1795116600&x=.m3u8'), null);
-  assert.equal(fuego.cpsHls('https://otro.example/cps.php?t=s_abc&e=1795116600&x=.m3u8'), null);
+  assert.equal(fuego.cpsHls('https://unlimplay.com.evil.test/cps.php?t=s_abc&e=4102444800&x=.m3u8'), null);
+  assert.equal(fuego.cpsHls('https://otro.example/cps.php?t=s_abc&e=4102444800&x=.m3u8'), null);
   assert.equal(fuego.cpsHls('https://unlimplay.com/mf.php?man=xm-1&s=abc'), null);
-  assert.equal(fuego.cpsHls('https://unlimplay.com/cps.php?t=s_abc&e=1795116600&x=.mp4'), null);
-  assert.equal(fuego.cpsHls('https://unlimplay.com/cps.php?e=1795116600&x=.m3u8'), null);
+  assert.equal(fuego.cpsHls('https://unlimplay.com/cps.php?t=s_abc&e=4102444800&x=.mp4'), null);
+  assert.equal(fuego.cpsHls('https://unlimplay.com/cps.php?e=4102444800&x=.m3u8'), null);
   // Firma caducada: no se publica.
   assert.equal(fuego.cpsHls('https://unlimplay.com/cps.php?t=s_abc&e=1600000000&s=deadbeef&x=.m3u8'), null);
 });
@@ -165,7 +167,7 @@ test('fuegocine película: buscador → watch → visor → HLS latino y subtitu
     assert.deepEqual(out.hits.map((hit) => hit.audioLabel), ['Latino', 'Subtitulado']);
     assert.ok(out.hits.every((hit) => hit.provider === 'fuegocine' && hit.quality === 'HLS'));
     assert.ok(out.hits.every((hit) => /^https:\/\/unlimplay\.com\/cps\.php/.test(hit.url)));
-    assert.ok(out.hits.every((hit) => hit.expiresAt === 1795116600000));
+    assert.ok(out.hits.every((hit) => hit.expiresAt === 4102444800000));
     // `cps.php?…&x=.m3u8` no lleva la extensión en la ruta: el filtro del
     // registro también tiene que reconocerlo como medio directo.
     assert.ok(out.hits.every((hit) => isDirectMedia(hit.url)));

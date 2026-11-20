@@ -164,6 +164,20 @@ const SITES = {
   // Solo la portada: el resto de estos sitios se sondearon con scripts
   // dedicados (scripts/cuevanas3-api-probe.mjs y scripts/anime-sites-probe.mjs)
   // y su estructura ya está descrita en los adaptadores.
+  poseidonhd2: {
+    name: 'poseidonhd2.co',
+    base: 'https://www.poseidonhd2.co',
+    pages: [
+      { label: 'portada', url: 'https://www.poseidonhd2.co/' },
+      { label: 'pelicula', url: 'https://www.poseidonhd2.co/pelicula/1368337/la-odisea' },
+      { label: 'pelicula-sin-slug', url: 'https://www.poseidonhd2.co/pelicula/1368337' },
+      { label: 'serie', url: 'https://www.poseidonhd2.co/serie/58841/policias-de-chicago' },
+      { label: 'episodio', url: 'https://www.poseidonhd2.co/serie/58841/policias-de-chicago/temporada/13/episodio/21' },
+      { label: 'buscar-q', url: 'https://www.poseidonhd2.co/buscar?q=odisea' },
+      { label: 'buscar-slash', url: 'https://www.poseidonhd2.co/search?q=odisea' },
+      { label: 'api-search', url: 'https://www.poseidonhd2.co/api/search?q=odisea' },
+    ],
+  },
   cuevanas3: {
     name: 'cuevanas3.pro',
     base: 'https://cuevanas3.pro',

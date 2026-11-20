@@ -126,8 +126,54 @@ const WP = [
   ['cuevana3.eu', 'https://wv3.cuevana3.eu'],
 ];
 
+/** CMS `/wp-api/v1` (lamovie, hackstore.mx y familia): buscador y player JSON. */
+async function wpApi(site, base) {
+  const search = await get(`${base}/wp-api/v1/search?q=the+pitt&postType=any&postsPerPage=6`, { headers: { Accept: 'application/json', Referer: `${base}/` } });
+  let data = null;
+  try { data = JSON.parse(search.body); } catch { /* no JSON */ }
+  const posts = (data && data.data && data.data.posts) || [];
+  row(site, 'wp-api /search', search, posts.length
+    ? `posts=${posts.length} · ${posts[0].type} «${String(posts[0].title).slice(0, 30)}» id=${String(posts[0]._id).slice(0, 20)}`
+    : search.error || `${search.type} · sin posts`);
+  if (!posts.length) return false;
+  const player = await get(`${base}/wp-api/v1/player?postId=${posts[0]._id}&demo=0`, { headers: { Accept: 'application/json', Referer: `${base}/` } });
+  let play = null;
+  try { play = JSON.parse(player.body); } catch { /* no JSON */ }
+  const embeds = (play && play.data && play.data.embeds) || [];
+  const hosts = [...new Set(embeds.map((e) => { try { return new URL(e.url).hostname; } catch { return '?'; } }))];
+  const langs = [...new Set(embeds.map((e) => e.lang).filter(Boolean))].slice(0, 5);
+  row(site, 'wp-api /player', player, `embeds=${embeds.length}${langs.length ? ` · lang=${langs.join('/')}` : ''}${hosts.length ? ` · ${hosts.slice(0, 5).map((h) => `${h}=${classify(h)}`).join(' ')}` : ''}`);
+  return true;
+}
+
+/** vimeus.com: embed por TMDb con `view_key` fijo y JSON `#data`. */
+async function vimeus() {
+  const key = 'ttapaNFkp2YbIFMawxmnqCPcs0pRVzbjrI5r1-da5M4';
+  const rutas = [
+    ['película tmdb=13', `https://vimeus.com/e/movie?tmdb=13&view_key=${key}`],
+    ['serie tmdb=1396', `https://vimeus.com/e/serie?tmdb=1396&se=1&ep=1&view_key=${key}`],
+  ];
+  for (const [label, url] of rutas) {
+    const res = await get(url, { headers: { Referer: 'https://vimeus.com/' } });
+    const match = res.body.match(/<script\s+type=["']text\/json["']\s+id=["']data["']>\s*(\{[\s\S]*?\})\s*<\/script>/i);
+    let note = res.error || res.type;
+    if (match) {
+      try {
+        const data = JSON.parse(match[1]);
+        const embeds = data.servers || data.embeds || data.videos || (data.data && (data.data.servers || data.data.embeds)) || (Array.isArray(data) ? data : []);
+        const list = Array.isArray(embeds) ? embeds : [];
+        const hosts = [...new Set(list.map((e) => { try { return new URL(String(e.url || e.file || '')).hostname; } catch { return '?'; } }))];
+        const langs = [...new Set(list.map((e) => e.lang || e.language || e.audio).filter(Boolean))].slice(0, 5);
+        note = `JSON #data · claves=${Object.keys(data).slice(0, 6).join(',')} · servidores=${list.length}${langs.length ? ` · lang=${langs.join('/')}` : ''}${hosts.length ? ` · ${hosts.slice(0, 5).map((h) => `${h}=${classify(h)}`).join(' ')}` : ''}`;
+      } catch (err) { note = `JSON #data ilegible (${String(err.message).slice(0, 30)})`; }
+    }
+    row('vimeus.com', label, res, note);
+  }
+}
+
 async function wordpress() {
   for (const [site, base] of WP) {
+    if (await wpApi(site, base)) continue;
     const search = await get(`${base}/?s=the+pitt`);
     const alt = search.status !== 200 || (search.body.match(/<article/gi) || []).length === 0
       ? await get(`${base}/search?q=the+pitt`) : null;
@@ -164,11 +210,14 @@ async function main() {
     { label: 'API /single', url: 'https://hackstore.mx/wp-api/v1/single/movies?slug=la-odisea&postType=movies' },
     { label: 'API /player', url: 'https://hackstore.mx/wp-api/v1/player?postId=1' },
   ]);
+  await wpApi('lamovie.org', 'https://lamovie.org');
+  await wpApi('lamovie.cc', 'https://lamovie.cc');
   await jsonApi('pelisgo.online', 'https://pelisgo.online', [
     { label: 'API /search', url: 'https://pelisgo.online/api/search?q=odisea&limit=4' },
   ]);
 
   await embed69();
+  await vimeus();
   await wordpress();
 
   const md = ['| Sitio | Paso | HTTP | Bytes | Nota |', '|---|---|---|---:|---|'];

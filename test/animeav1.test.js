@@ -186,6 +186,31 @@ test('animeav1: la temporada del slug manda cuando el h1 no la menciona', () => 
   assert.equal(anime.seasonOfSlug('https://animeav1.com/media/ore-dake-level-up-na-ken'), null);
 });
 
+test('animeav1: una película se sirve con la única entrada de su ficha', async () => {
+  // Las fichas de película (`/media/one-piece-film-red`) publican el medio como
+  // «episodio 1» y no tienen número que pedir: antes se descartaban con
+  // `no-episode`.
+  const pelicula = FICHA
+    .replace(/ore-dake-level-up-na-ken/g, 'one-piece-film-red')
+    .replace(/Ore dake Level Up na Ken/g, 'One Piece Film: Red')
+    .replace(/<h1[^>]*>[\s\S]*?<\/h1>/i, '<h1 class="fs-1">One Piece Film: Red</h1>');
+  const stubbed = stub([
+    ['/catalogo?search=', () => html('<article><a href="/media/one-piece-film-red"><h3>One Piece Film: Red</h3></a></article>')],
+    [`${BASE}/media/one-piece-film-red/1`, () => html(EPISODIO)],
+    ['/media/one-piece-film-red', () => html(pelicula)],
+    ['player.zilla-networks.com/m3u8/', () => new Response('#EXTM3U\n', { status: 200, headers: { 'content-type': 'application/x-mpegURL' } })],
+  ]);
+  try {
+    const out = await anime.searchAnimeAv1('One Piece Film: Red',
+      { title: 'One Piece Film: Red', year: 2022, mediaType: 'movie' }, 'One Piece Film: Red', 6000);
+    assert.ok(out.hits.length >= 1, `hits=${out.hits.length} ${out.reason}`);
+    for (const hit of out.hits) {
+      assert.equal(hit.provider, 'animeav1');
+      assert.match(hit.title, /One Piece Film: Red AnimeAV1$/);
+    }
+  } finally { stubbed.restore(); }
+});
+
 test('animeav1: un episodio que la ficha no lista se construye y se resuelve', async () => {
   // La ficha solo pinta 50 episodios (One Piece: 1–50) y no pagina, pero
   // `/media/<slug>/<n>` responde con visores hasta el último emitido.

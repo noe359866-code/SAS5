@@ -50,6 +50,10 @@ const CONTROLS = [
   // de verdad: los sitios guardan «IntensaMente 2» y «El Origen».
   { type: 'movie', title: 'Intensa-Mente 2', fallback: { title: 'Intensa-Mente 2', year: '2024' } },
   { type: 'movie', title: 'El Origen', fallback: { title: 'El Origen', year: '2010' } },
+  // Películas de anime: las fichas de los sitios de anime las publican como su
+  // propio «episodio 1», sin número que pedir.
+  { type: 'movie', title: 'One Piece Film: Red', fallback: { title: 'One Piece Film: Red', year: '2022' } },
+  { type: 'movie', title: 'Jujutsu Kaisen 0', fallback: { title: 'Jujutsu Kaisen 0', year: '2021' } },
 ];
 
 // ── Diagnóstico: qué URLs probó cada adaptador y qué devolvió la última ──

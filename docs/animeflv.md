@@ -34,6 +34,18 @@ cuando el slug no es el que se dedujo del título.
    `… Part N` y `… Temporada N`, y la identidad de la ficha las acepta. Si el
    título de TMDB ya trae la temporada, no se duplica.
 
+## Películas y series largas
+
+- **Películas.** Las fichas de película (`/anime/<slug>`) publican el medio como
+  su única entrada de episodio, sin número que pedir. Antes se descartaban con
+  `no-episode`; ahora se abre esa entrada y se publica sin `SxE`.
+- **Series largas.** El espejo que se mide (`animeflv.or.at`) es un WordPress
+  con permalinks por **fecha** (`/2026/07/12/one-piece-episodio-1169/`), así que
+  la URL de un episodio viejo no se puede construir: la fecha no se deduce del
+  número. La ficha de One Piece lista del 1167 al 1180, y esos sí se sirven. En
+  el dominio clásico (`/ver/<slug>-<n>`) la construcción no es necesaria porque
+  la ficha lista todos los episodios.
+
 ## Límites conocidos
 
 - **Catálogo corto.** El sitio publica sobre todo lo que está en emisión. Un

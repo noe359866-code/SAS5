@@ -49,6 +49,14 @@ ordenan por lo que el addon puede reproducir: primero el propio, después los
 extraíbles (Byse, StreamTape) y al final los opacos, que se cuentan y no se
 abren. Los `downloads` (Mega, 1Fichier, TransferIt) no cuentan como visores.
 
+### Películas
+
+Las fichas de película (`/media/one-piece-film-red`, `/media/suzume-no-tojimari`)
+no llevan bloque `embeds:` en el HTML: publican el medio como su **único
+episodio** (`/media/<slug>/1`, 1 entrada). El adaptador abre esa entrada y
+publica el hit sin `SxE`; antes se descartaba con `no-episode` porque se buscaba
+un número que una película no tiene.
+
 ### Episodios que la ficha no pinta
 
 La ficha publica como mucho **50 episodios y no pagina**: One Piece muestra
@@ -78,7 +86,7 @@ como `lat` y la subtitulada como `sub`, no como doblaje.
 
 ## Estado
 
-- Pruebas: `test/animeav1.test.js`, 19 casos con HTML real capturado
+- Pruebas: `test/animeav1.test.js`, 20 casos con HTML real capturado
   (`test/fixtures/sites/animeav1-*.html`); dos de ellos reproducen fallos
   medidos en vivo: el tope de lectura del manifiesto y el gasto inútil en
   visores de terceros cuando el propio ya sirve SUB y DUB, o cuando el episodio

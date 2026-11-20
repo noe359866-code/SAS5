@@ -54,6 +54,36 @@ Cadena medida con *The Pitt* 1x1 el 20-11-2026 (`.probe/vimeos-chain.md`):
 | player | 1 embed · `vimeos.net` · Latino · Full HD | 1 embed · `vimeos.net` · latino · Full HD |
 | Vimeos resuelto | HLS ✓ · 503 ms | HLS ✓ · 449 ms |
 
+## Validación en vivo (20-11-2026)
+
+`scripts/sites-live.js allpeliculas lamovie`, los 12 controles del addon
+(`.probe/sites-live.md`): **8 de 12** en cada una, todos con `HLS` y audio
+`Latino` verificado en el manifiesto.
+
+| Control | Allpelículas | LaMovie |
+|---|---|---|
+| Spider-Man: Un nuevo día | HLS/Latino | HLS/Latino |
+| Breaking Bad 1x1 | HLS/Latino | HLS/Latino |
+| Alien: Romulus | HLS/Latino | HLS/Latino |
+| Deadpool & Wolverine | HLS/Latino | HLS/Latino |
+| El reino prohibido | HLS/Latino | HLS/Latino |
+| Naruto 1x1 | HLS/Latino | HLS/Latino |
+| La Odisea | HLS/Latino | HLS/Latino |
+| VisionQuest | HLS/Latino | HLS/Latino |
+| Inception, Inside Out 2, Ao Ashi 2, Black Clover 2 | `no-match` | `no-match` |
+
+Los tiempos van de 1,1 s a 3,5 s por fuente y control.
+
+### Son frentes del mismo catálogo que Cuevana 3
+
+En los controles medidos, **Allpelículas, LaMovie y Cuevana 3 devuelven el
+mismo HLS de Vimeos** (mismo identificador de la biblioteca; solo cambia el nodo
+del CDN que responde). Es decir: no aportan obras nuevas, aportan **frentes
+alternativos**. Se mantienen porque son baratas (tres peticiones por búsqueda),
+porque sobreviven a la caída de un dominio y porque su índice de búsqueda no es
+idéntico al de Cuevana 3. Quien prefiera el catálogo sin duplicados puede
+desmarcarlas en `/configure`.
+
 ## Qué se dejó fuera y por qué
 
 - **`lamovie.cc`** es el espejo de LaMovie: no respondió dentro del plazo

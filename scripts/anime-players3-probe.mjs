@@ -60,6 +60,14 @@ async function firstBytesIsHls(url, referer) {
   } catch (err) { return { status: 0, hls: false, type: '', error: String(err?.name || err).slice(0, 30) }; } finally { clearTimeout(timer); }
 }
 
+/** Cuerpo legible sin valores de consulta ni tokens largos. */
+function digest(body) {
+  return String(body)
+    .replace(/https?:\/\/[^\s"'<>]+/g, (raw) => { try { const u = new URL(raw); return `«${u.hostname}${u.pathname}»`; } catch { return '«url»'; } })
+    .replace(/[a-f0-9]{16,}/gi, '«hex»')
+    .replace(/\s+/g, ' ').trim().slice(0, 700);
+}
+
 async function main() {
   const fs = await import('node:fs');
   fs.mkdirSync('.probe', { recursive: true });
@@ -97,6 +105,14 @@ async function main() {
     if (frames.length) row(`player ${audio} (iframe)`, frames.slice(0, 3).map((f) => shape(new URL(f, own.url).href)).join(' · '));
     const mediaUrls = [...new Set([...res.body.matchAll(/https?:[^\s"'<>\\]+?\.m3u8[^\s"'<>\\]*/gi)].map((m) => m[0]))]
       .concat([...new Set([...res.body.matchAll(/["'](\/m3u8\/[a-f0-9]+)["']/gi)].map((m) => new URL(m[1], own.url).href))]);
+    if (res.body.length < 3000) row(`player ${audio} (cuerpo)`, digest(res.body));
+    const token = (own.url.match(/\/play\/([a-z0-9]+)/i) || [])[1];
+    if (token) {
+      for (const path of [`/m3u8/${token}`, `/api/play/${token}`]) {
+        const variant = await req(`https://player.zilla-networks.com${path}`, own.url);
+        row(`player ${audio} (variante ${path.replace(token, '«tok»')})`, `${variant.status} ${variant.type} ${variant.body.length}B hls=${/^\s*#EXTM3U/.test(variant.body)}`);
+      }
+    }
     if (mediaUrls.length) {
       const probe = await firstBytesIsHls(mediaUrls[0], own.url);
       row(`player ${audio} (manifiesto)`, `${shape(mediaUrls[0])} → ${probe.status} hls=${probe.hls} ${probe.type}`);

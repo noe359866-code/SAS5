@@ -169,13 +169,11 @@ const SITES = {
     base: 'https://www.poseidonhd2.co',
     pages: [
       { label: 'portada', url: 'https://www.poseidonhd2.co/' },
+      // Descartado el 20-11-2026 (docs/poseidonhd2.md): se dejan solo las
+      // páginas que sirven para volver a comprobarlo.
       { label: 'pelicula', url: 'https://www.poseidonhd2.co/pelicula/1368337/la-odisea' },
-      { label: 'pelicula-sin-slug', url: 'https://www.poseidonhd2.co/pelicula/1368337' },
-      { label: 'serie', url: 'https://www.poseidonhd2.co/serie/58841/policias-de-chicago' },
       { label: 'episodio', url: 'https://www.poseidonhd2.co/serie/58841/policias-de-chicago/temporada/13/episodio/21' },
-      { label: 'buscar-q', url: 'https://www.poseidonhd2.co/buscar?q=odisea' },
-      { label: 'buscar-slash', url: 'https://www.poseidonhd2.co/search?q=odisea' },
-      { label: 'api-search', url: 'https://www.poseidonhd2.co/api/search?q=odisea' },
+      { label: 'buscador', url: 'https://www.poseidonhd2.co/search?q=odisea' },
     ],
   },
   cuevanas3: {

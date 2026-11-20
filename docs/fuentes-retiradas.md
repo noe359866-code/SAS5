@@ -62,6 +62,10 @@ MirandoGratis.
 - `animeyt.cc`: 403 de Cloudflare en todo el sitio; solo `/feed/` responde.
 - `animed23.com` y `animejara.com`: reto de Cloudflare que no se resuelve sin
   navegador.
+- `poseidonhd2.co`: la ficha llega bien desde TMDb, pero todos sus visores son
+  Voe, Doodstream (403), StreamWish, Vidhide, Vidara o Netu, que exigen ejecutar
+  JS. Cero medios directos en 91 opciones de vídeo; el detalle está en
+  [poseidonhd2.md](poseidonhd2.md).
 - FlixLatam, PlayLatinSRC, AnimeOnlineNinja y Cuevana 3 antiguos: se retiraron
   por falta de una ruta de reproducción fiable; quedan sus informes en
   [flixlatam-cuevana.md](flixlatam-cuevana.md) y

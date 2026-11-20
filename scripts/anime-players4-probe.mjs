@@ -94,7 +94,10 @@ async function main() {
   finish();
 }
 
+let written = false;
 function finish() {
+  if (written) return;
+  written = true;
   const fs = require('node:fs');
   const md = ['| Paso | Resultado |', '|---|---|'];
   for (const r of rows) md.push(`| ${r.step} | ${String(r.note).replace(/\|/g, '/')} |`);
@@ -103,4 +106,7 @@ function finish() {
   console.log(`\n${md.join('\n')}`);
 }
 
-main().catch((err) => { console.error(err); process.exit(1); });
+main().catch((err) => {
+  row('error', String(err?.message || err).slice(0, 200));
+});
+process.on('beforeExit', () => { try { finish(); } catch { /* ya escrito */ } });

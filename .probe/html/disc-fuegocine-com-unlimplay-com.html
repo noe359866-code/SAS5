@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="/img/unlimplay-icon-64.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/hls.js@1.7.4/dist/hls.min.js" crossorigin>
-<link rel="preconnect" href="https://p4.vimeos.zip" crossorigin>
+<link rel="preconnect" href="https://p3.vimeos.zip" crossorigin>
 <link rel="preconnect" href="https://voe.sx" crossorigin>
 <link rel="preconnect" href="https://doodstream.com" crossorigin>
 <link rel="dns-prefetch" href="https://fastream.to">
@@ -20,7 +20,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
 </style>
 </head>
 <body>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">
+<script type="fdc5803ace542727d3870efe-text/javascript">
 // [3.9.59] Diagnóstico: con ?ulpdebug=1 los mensajes internos del reproductor se mandan a la página que lo contiene
 (function () { try {
     if (!/[?&]ulpdebug=1/.test(location.search + document.referrer) || window.top === window) return;
@@ -30,7 +30,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
     ['playing', 'waiting', 'error', 'loadeddata'].forEach(ev => document.addEventListener(ev, e => { if (e.target && e.target.tagName === 'VIDEO') send('video', [ev, e.target.id || '', (e.target.currentTime || 0).toFixed(1), e.target.error ? e.target.error.message : '']); }, true));
 } catch (_) {} })();
 </script>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">
+<script type="fdc5803ace542727d3870efe-text/javascript">
 // ── Service Worker AdBlocker ──────────────────────────────────────────────────
 // Intercepta requests del iframe y bloquea dominios de publicidad.
 if (true && 'serviceWorker' in navigator) { // [ULP-PANEL]
@@ -1447,12 +1447,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
     </div>
   </div>
   <div id="ulp-ap-right">
-    <label id="ulp-ap-switch" title="Activar/Desactivar autoplay" onclick="if (!window.__cfRLUnblockHandlers) return false; event.stopPropagation()" data-cf-modified-1a485e217742fe08aeaf87a5-="">
-      <input type="checkbox" id="ulp-ap-chk" checked onchange="if (!window.__cfRLUnblockHandlers) return false; ulpAutoplayToggle(this.checked)" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+    <label id="ulp-ap-switch" title="Activar/Desactivar autoplay" onclick="if (!window.__cfRLUnblockHandlers) return false; event.stopPropagation()" data-cf-modified-fdc5803ace542727d3870efe-="">
+      <input type="checkbox" id="ulp-ap-chk" checked onchange="if (!window.__cfRLUnblockHandlers) return false; ulpAutoplayToggle(this.checked)" data-cf-modified-fdc5803ace542727d3870efe-="">
       <span id="ulp-ap-sw-track"></span>
       <span id="ulp-ap-sw-thumb"></span>
     </label>
-    <button id="ulp-ap-playnow" onclick="if (!window.__cfRLUnblockHandlers) return false; ulpAutoplayNow()" data-cf-modified-1a485e217742fe08aeaf87a5-="">▶ Ahora</button>
+    <button id="ulp-ap-playnow" onclick="if (!window.__cfRLUnblockHandlers) return false; ulpAutoplayNow()" data-cf-modified-fdc5803ace542727d3870efe-="">▶ Ahora</button>
   </div>
   <div id="ulp-ap-bar"></div>
 </div>
@@ -1463,7 +1463,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
     <div id="lbar"></div>
     <div id="sbar"></div>
     <!-- Botón Auto HLS -->
-    <button class="ctrl-action-btn" id="btn-auto-hls" onclick="if (!window.__cfRLUnblockHandlers) return false; (function(){var chk=document.getElementById('ulp-smart-chk');var enabled=chk?!chk.checked:(localStorage.getItem('ulp_smart')==='false');if(chk)chk.checked=enabled;ulpSmartToggle(enabled);document.getElementById('btn-auto-hls').classList.toggle('auto-hls-on',enabled);})()" aria-label="Auto HLS" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+    <button class="ctrl-action-btn" id="btn-auto-hls" onclick="if (!window.__cfRLUnblockHandlers) return false; (function(){var chk=document.getElementById('ulp-smart-chk');var enabled=chk?!chk.checked:(localStorage.getItem('ulp_smart')==='false');if(chk)chk.checked=enabled;ulpSmartToggle(enabled);document.getElementById('btn-auto-hls').classList.toggle('auto-hls-on',enabled);})()" aria-label="Auto HLS" data-cf-modified-fdc5803ace542727d3870efe-="">
       <span class="ca-tip">Auto HLS</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
@@ -1487,7 +1487,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
         s.classList.add('open','open-from-btn');
         btn.classList.add('srv-open');
       }
-    })()" aria-label="Servidores" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+    })()" aria-label="Servidores" data-cf-modified-fdc5803ace542727d3870efe-="">
       <span class="ca-tip">Servidores</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="10" width="20" height="5" rx="1"/><rect x="2" y="17" width="20" height="5" rx="1"/>
@@ -1495,7 +1495,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
       </svg>
     </button>
     <!-- Fullscreen real -->
-    <button class="ctrl-action-btn" id="btn-fs" onclick="if (!window.__cfRLUnblockHandlers) return false; toggleFullscreen()" aria-label="Pantalla completa" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+    <button class="ctrl-action-btn" id="btn-fs" onclick="if (!window.__cfRLUnblockHandlers) return false; toggleFullscreen()" aria-label="Pantalla completa" data-cf-modified-fdc5803ace542727d3870efe-="">
       <span class="ca-tip">Pantalla completa</span>
       <svg id="fs-icon-expand" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
@@ -1507,7 +1507,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
       </svg>
     </button>
     <!-- Botón Picture-in-Picture -->
-    <button class="ctrl-action-btn" id="btn-pip" onclick="if (!window.__cfRLUnblockHandlers) return false; togglePip()" aria-label="Picture in Picture" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+    <button class="ctrl-action-btn" id="btn-pip" onclick="if (!window.__cfRLUnblockHandlers) return false; togglePip()" aria-label="Picture in Picture" data-cf-modified-fdc5803ace542727d3870efe-="">
       <span class="ca-tip">Ventana PiP</span>
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="3" width="20" height="15" rx="2"/>
@@ -1515,7 +1515,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
       </svg>
     </button>
     <!-- Botón ocultar barra -->
-    <button class="ctrl-action-btn" id="btn-hide-bar" onclick="if (!window.__cfRLUnblockHandlers) return false; toggleTopbar()" aria-label="Ocultar barra" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+    <button class="ctrl-action-btn" id="btn-hide-bar" onclick="if (!window.__cfRLUnblockHandlers) return false; toggleTopbar()" aria-label="Ocultar barra" data-cf-modified-fdc5803ace542727d3870efe-="">
       <span class="ca-tip">Ocultar barra</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="18 15 12 9 6 15"/>
@@ -1524,13 +1524,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
     </div><!-- /topbar-row1 -->
   </div><!-- /topbar -->
   <!-- Pestaña para restaurar la barra -->
-  <div id="bar-restore" onclick="if (!window.__cfRLUnblockHandlers) return false; toggleTopbar()" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+  <div id="bar-restore" onclick="if (!window.__cfRLUnblockHandlers) return false; toggleTopbar()" data-cf-modified-fdc5803ace542727d3870efe-="">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     Mostrar barra
   </div>
   <div id="iarea"><div class="ulp-iabd" aria-hidden="true"></div>    <div id="click-shield"></div>
     <!-- Botón manual para saltar a otro servidor cuando el iframe falla silenciosamente -->
-    <button id="iframe-skip-btn" onclick="if (!window.__cfRLUnblockHandlers) return false; (function(){var b=document.getElementById('iframe-skip-btn');if(b)b.classList.remove('on');if(typeof tryNextIframe==='function')tryNextIframe();})()" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+    <button id="iframe-skip-btn" onclick="if (!window.__cfRLUnblockHandlers) return false; (function(){var b=document.getElementById('iframe-skip-btn');if(b)b.classList.remove('on');if(typeof tryNextIframe==='function')tryNextIframe();})()" data-cf-modified-fdc5803ace542727d3870efe-="">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
       ¿No carga? Probar otro    </button>
     <button id="overlay-play" title="Reproducir">
@@ -1547,12 +1547,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
         <div id="notice-accept-row" style="display:none;align-items:center;gap:8px;flex-wrap:wrap">
           <span style="font-size:10px;color:rgba(255,255,255,.45)">Recomendamos usar un bloqueador de anuncios</span>
           <button id="notice-accept-btn" onclick="if (!window.__cfRLUnblockHandlers) return false; closeNotice()" style="margin-left:auto;padding:4px 14px;border-radius:20px;border:1.5px solid rgba(245,158,11,.6);
-                   background:rgba(245,158,11,.15);color:#fbbf24;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+                   background:rgba(245,158,11,.15);color:#fbbf24;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" data-cf-modified-fdc5803ace542727d3870efe-="">
             Entendido
           </button>
         </div>
       </div>
-      <button id="nclose" onclick="if (!window.__cfRLUnblockHandlers) return false; closeNotice()" style="align-self:flex-start;margin-top:1px" data-cf-modified-1a485e217742fe08aeaf87a5-="">×</button>
+      <button id="nclose" onclick="if (!window.__cfRLUnblockHandlers) return false; closeNotice()" style="align-self:flex-start;margin-top:1px" data-cf-modified-fdc5803ace542727d3870efe-="">×</button>
       <div id="notice-bar"></div>
     </div>
     <div id="epanel" class="err-panel">
@@ -1569,11 +1569,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
         </div>
         <div class="err-divider"></div>
         <div class="err-actions">
-          <button class="err-btn secondary" onclick="if (!window.__cfRLUnblockHandlers) return false; q('epanel').classList.remove('on')" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+          <button class="err-btn secondary" onclick="if (!window.__cfRLUnblockHandlers) return false; q('epanel').classList.remove('on')" data-cf-modified-fdc5803ace542727d3870efe-="">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             Cerrar
           </button>
-          <button class="err-btn primary" id="ep-nxt-btn" onclick="if (!window.__cfRLUnblockHandlers) return false; tryNext()" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+          <button class="err-btn primary" id="ep-nxt-btn" onclick="if (!window.__cfRLUnblockHandlers) return false; tryNext()" data-cf-modified-fdc5803ace542727d3870efe-="">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
             Reintentar servidores          </button>
         </div>
@@ -1593,7 +1593,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
         </div>
         <div class="err-divider"></div>
         <div class="err-actions">
-          <button class="err-btn primary" onclick="if (!window.__cfRLUnblockHandlers) return false; location.reload()" data-cf-modified-1a485e217742fe08aeaf87a5-="">
+          <button class="err-btn primary" onclick="if (!window.__cfRLUnblockHandlers) return false; location.reload()" data-cf-modified-fdc5803ace542727d3870efe-="">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
             Reintentar
           </button>
@@ -1623,9 +1623,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:#08080a;color:#fff;f
 .ulp-sz-s .ulp-mf-aud{top:48px;right:8px;font-size:10.5px;padding:4px 6px;max-width:140px}
 .ulp-mode-hls #btn-auto-hls,.ulp-mode-iframe #btn-auto-hls,.ulp-mode-hls .drop-hls-item,.ulp-mode-iframe .drop-hls-item{display:none!important}
 .ulp-mode-hls .drop-hls-item+.drop-hls-sep,.ulp-mode-iframe .drop-hls-item+.drop-hls-sep,.drop-hls-sep.ulp-sep-off{display:none!important}</style>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">
+<script type="fdc5803ace542727d3870efe-text/javascript">
 // Embeds resueltos desde PHP (sin fetch del browser, sin CORS)
-const EMBEDS = {"latino":{"XMovie":"https://unlimplay.com/mf.php?man=xm-035DC8C1084744C6AB570AECCE0699D3&s=6826f1657cc4f7f368bdca2f&ulpman=1&ulpmf=1","direct":"https://unlimplay.com/cps.php?t=s_80b2c599c56859d7d182&e=1795157400&s=a290bda936bcf40fa662efb7&x=.m3u8","streamwish":"https://unlimplay.com/cps.php?t=s_c4e012154148&e=1795157400&s=6f8ca6a704a52f8086d4496e&x=.m3u8","vidhide":"https://unlimplay.com/cps.php?t=s_a82dd4605674&e=1795157400&s=99dd501f0fe44dcc8eebd80c&x=.m3u8","vidara":"https://unlimplay.com/cps.php?t=s_65dbe1159665&e=1795157400&s=66f7d44e139adb42b4109ccb&x=.m3u8","vimeos":"https://unlimplay.com/cps.php?t=s_abd90395ee29&e=1795157400&s=828bf0b593d830f8cab3cd67&x=.m3u8","voe":"https://voe.sx/e/qrnarsqlkvtd","doodstream":"https://doodstream.com/e/uswmj6aebftu"},"subtitulado":{"streamwish":"https://unlimplay.com/cps.php?t=s_761ec08ba9b7&e=1795157400&s=29d7840bc4b9ac96480413b2&x=.m3u8","vidhide":"https://unlimplay.com/cps.php?t=s_af83ae83fea9&e=1795157400&s=da2de9d83498d6e592aafd7f&x=.m3u8","vidara":"https://unlimplay.com/cps.php?t=s_7d112d29d2ed&e=1795157400&s=46da25abc661bca38ec2e49a&x=.m3u8","voe":"https://voe.sx/e/vcec7k1htwou","doodstream":"https://doodstream.com/e/xz7dst0cphq8"}};
+const EMBEDS = {"latino":{"XMovie":"https://unlimplay.com/mf.php?man=xm-035DC8C1084744C6AB570AECCE0699D3&s=6826f1657cc4f7f368bdca2f&ulpman=1&ulpmf=1","direct":"https://unlimplay.com/cps.php?t=s_198dc935a57e2ac148d1&e=1795157400&s=05b555081044a9f5142a04ad&x=.m3u8","streamwish":"https://unlimplay.com/cps.php?t=s_c4e012154148&e=1795157400&s=6f8ca6a704a52f8086d4496e&x=.m3u8","vidhide":"https://unlimplay.com/cps.php?t=s_4b897c901bc1&e=1795157400&s=8d9ab96e36a731ed28637118&x=.m3u8","vidara":"https://unlimplay.com/cps.php?t=s_b4a0971cd90a&e=1795157400&s=14c413c0b2955abbbad6def7&x=.m3u8","vimeos":"https://unlimplay.com/cps.php?t=s_abd90395ee29&e=1795157400&s=828bf0b593d830f8cab3cd67&x=.m3u8","voe":"https://voe.sx/e/qrnarsqlkvtd","doodstream":"https://doodstream.com/e/uswmj6aebftu"},"subtitulado":{"streamwish":"https://unlimplay.com/cps.php?t=s_7ed66f411c77&e=1795157400&s=c73fecb8197200e7a3bffcd3&x=.m3u8","vidhide":"https://unlimplay.com/cps.php?t=s_38f0b1c84a15&e=1795157400&s=460955faa98dc61f8e918cca&x=.m3u8","vidara":"https://unlimplay.com/cps.php?t=s_93f65d488669&e=1795157400&s=6fc2797b417ff187b4de1a10&x=.m3u8","voe":"https://voe.sx/e/vcec7k1htwou","doodstream":"https://doodstream.com/e/xz7dst0cphq8"}};
 var ULP_ORIG = {"latino":{"streamwish":"https://embedwish.com/e/oyr2nl0uuxar","vidhide":"https://morencius.com/v/rqkzgx2yzq23","vidara":"https://vidara.to/e/ic2DH3h8t3QR6","vimeos":"https://vimeos.net/embed-m62pdrnlvwpw.html"},"subtitulado":{"streamwish":"https://embedwish.com/e/ztfrmjdemdui","vidhide":"https://morencius.com/v/n2hu3tnnszwz","vidara":"https://vidara.to/e/pc0B3zGPie4rC"}}; // [ULP-PANEL] idioma → servidor → embed original (renovar enlaces HLS vencidos)
 // [3.9.49] XMovie/XSerie vienen en HEVC (H.265). En navegadores que no lo reproducen (Firefox, PC sin aceleración…)
 // esos servidores no se muestran (no se convierte nada), salvo que esté encendida la conversión a H.264 (mf.hevc_h264).
@@ -1722,7 +1722,7 @@ function _ulpCaptureM3u8(name, embedUrl, timeoutMs) {
 // [ULP-PANEL] Memoria de velocidad: qué servidor HLS conectó más rápido (este título y en general)
 // [ULP-PANEL] CDN que se piden SIN Referer (Fastream rechaza el Referer de otro sitio, pero acepta sin Referer)
 const ULP_NOREF = ["fastream"];
-const ULP_SPEED = {"on":true,"wait":2500,"key":"movie:1368337","g":{"vidhide":{"ms":24449,"r":0.312,"n":3413},"streamtape":{"ms":6689,"r":0,"n":394},"xserie":{"ms":5938,"r":0.761,"n":18449},"direct":{"ms":12154,"r":0.154,"n":8794},"streamwish":{"ms":9722,"r":0.292,"n":8586},"voe":{"ms":35221,"r":0.012,"n":2858},"xmovie":{"ms":5118,"r":0.93,"n":15920},"filelions":{"ms":27057,"r":0.124,"n":1489},"mediafire":{"ms":14818,"r":0.686,"n":7169},"filemoon":{"ms":29725,"r":0,"n":479},"videoapp":{"ms":4802,"r":0.006,"n":5115},"vidara":{"ms":23840,"r":0.32,"n":1061},"earnvids":{"ms":8000,"r":0,"n":34},"doodstream":{"ms":6243,"r":0,"n":468},"netu":{"ms":8000,"r":0,"n":268},"hls":{"ms":16526,"r":0.119,"n":46},"yourupload":{"ms":16825,"r":0.035,"n":45},"byse":{"ms":15215,"r":0.064,"n":273},"vimeos":{"ms":14566,"r":0.122,"n":1782},"mp4upload":{"ms":7226,"r":0.786,"n":317},"uqload":{"ms":8270,"r":0.399,"n":8},"ok":{"ms":12357,"r":0.236,"n":6},"okru":{"ms":48939,"r":0.764,"n":4},"wolfstream":{"ms":8000,"r":0,"n":14},"fastream":{"ms":8000,"r":0,"n":1},"streamsb":{"ms":8000,"r":0,"n":13},"minochinos":{"ms":8000,"r":0,"n":1},"mixdrop":{"ms":7454,"r":1,"n":4}},"t":{"latino":{"XMovie":{"ms":2705,"ok":1,"f":0,"age":39},"mediafire":{"ms":23543,"ok":0,"f":1,"age":1264},"vidhide":{"ms":19545,"ok":0,"f":9,"age":16923},"vidara":{"ms":84295,"ok":0,"f":9,"age":16902},"direct":{"ms":19222,"ok":0,"f":9,"age":9645},"vimeos":{"ms":10722,"ok":0,"f":9,"age":17027},"videoapp":{"ms":36550,"ok":0,"f":4,"age":163080},"streamwish":{"ms":33863,"ok":1,"f":0,"age":603},"filemoon":{"ms":51531,"ok":0,"f":7,"age":16944},"voe 2":{"ms":87342,"ok":1,"f":0,"age":147158},"doodstream":{"ms":10569,"ok":0,"f":2,"age":250243},"voe":{"ms":5995,"ok":0,"f":1,"age":163894}},"subtitulado":{"streamwish":{"ms":9453,"ok":1,"f":0,"age":127},"vidhide":{"ms":74008,"ok":1,"f":0,"age":181380},"vidara":{"ms":64003,"ok":1,"f":0,"age":181491},"voe":{"ms":5660,"ok":0,"f":1,"age":357889},"doodstream":{"ms":8853,"ok":0,"f":1,"age":266363}}}};
+const ULP_SPEED = {"on":true,"wait":2500,"key":"movie:1368337","g":{"vidhide":{"ms":24449,"r":0.226,"n":3415},"streamtape":{"ms":6689,"r":0,"n":395},"xserie":{"ms":4210,"r":0.821,"n":18476},"direct":{"ms":14739,"r":0.157,"n":8804},"streamwish":{"ms":12549,"r":0.411,"n":8596},"voe":{"ms":28197,"r":0.136,"n":2860},"xmovie":{"ms":12875,"r":0.699,"n":15941},"filelions":{"ms":27057,"r":0.089,"n":1491},"mediafire":{"ms":12103,"r":0.435,"n":7178},"filemoon":{"ms":29725,"r":0,"n":479},"videoapp":{"ms":4802,"r":0.006,"n":5115},"vidara":{"ms":23840,"r":0.232,"n":1063},"earnvids":{"ms":8000,"r":0,"n":34},"doodstream":{"ms":6243,"r":0,"n":468},"netu":{"ms":8000,"r":0,"n":268},"hls":{"ms":16526,"r":0.119,"n":46},"yourupload":{"ms":16825,"r":0.035,"n":45},"byse":{"ms":15215,"r":0.054,"n":274},"vimeos":{"ms":14566,"r":0.075,"n":1785},"mp4upload":{"ms":7226,"r":0.786,"n":317},"uqload":{"ms":8270,"r":0.399,"n":8},"ok":{"ms":12357,"r":0.236,"n":6},"okru":{"ms":48939,"r":0.764,"n":4},"wolfstream":{"ms":8000,"r":0,"n":14},"fastream":{"ms":8000,"r":0,"n":1},"streamsb":{"ms":8000,"r":0,"n":13},"minochinos":{"ms":8000,"r":0,"n":1},"mixdrop":{"ms":7454,"r":1,"n":4}},"t":{"latino":{"XMovie":{"ms":4351,"ok":1,"f":0,"age":244},"mediafire":{"ms":23543,"ok":0,"f":1,"age":1611},"vidhide":{"ms":19545,"ok":0,"f":9,"age":17270},"vidara":{"ms":84295,"ok":0,"f":9,"age":17249},"direct":{"ms":19222,"ok":0,"f":9,"age":9992},"vimeos":{"ms":10722,"ok":0,"f":9,"age":17374},"videoapp":{"ms":36550,"ok":0,"f":4,"age":163427},"streamwish":{"ms":33863,"ok":1,"f":0,"age":950},"filemoon":{"ms":51531,"ok":0,"f":7,"age":17291},"voe 2":{"ms":87342,"ok":1,"f":0,"age":147505},"doodstream":{"ms":10569,"ok":0,"f":2,"age":250590},"voe":{"ms":5995,"ok":0,"f":1,"age":164241}},"subtitulado":{"streamwish":{"ms":10447,"ok":1,"f":0,"age":332},"vidhide":{"ms":74008,"ok":1,"f":0,"age":181727},"vidara":{"ms":64003,"ok":0,"f":1,"age":343},"voe":{"ms":5660,"ok":0,"f":1,"age":358236},"doodstream":{"ms":8853,"ok":0,"f":1,"age":266710}}}};
 window._hlsReady = typeof Hls !== 'undefined'
     ? Promise.resolve()
     : new Promise(res => {
@@ -2650,7 +2650,7 @@ function ulpRenew(name) {
 // ── Token de sesión HMAC — válido 5 min — se envía en X-ULP-Token ────────────
 // Generado en PHP al renderizar el player. Nunca sale de este cliente.
 // Los endpoints internos lo validan para impedir llamadas directas externas.
-var ULP_SESSION_TOKEN = "MTM2ODMzNzptb3ZpZToxNzk1MTM1NzIyOjczNGI5ZjJiZTczYzNiZDc6ZjAyZjEyZjllN2VlMmFlMDE4YTdiMTY4YjZiNGI5NzhhNWViMWI4NTAwNzlhNTFlNDlhYzg1NDUwNmZkOWYwOA";
+var ULP_SESSION_TOKEN = "MTM2ODMzNzptb3ZpZToxNzk1MTM2MDY5Ojk2NzUzYjhkNTg3Y2VkOGQ6YmM4N2M0NDVlOWE5OThhMDkwNTc3NWFjOWJmZDlhODY1NzljY2Q5NTdhMDU3OWEwOWIyYTllMjQyOGY5M2FhZg";
 // [ULP-PANEL] El token dura 300 s: se renueva solo mientras la página está abierta
 // (y al volver a la pestaña o desbloquear el celular), así cambiar de servidor siempre conecta.
 var ULP_TOK_TTL = 300, ULP_TOK_AT = Date.now(), _ulpTokP = null;
@@ -7116,7 +7116,7 @@ function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
         });
 })();
 </script>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">
+<script type="fdc5803ace542727d3870efe-text/javascript">
 // ── FULLSCREEN & PIP ──────────────────────────────────────────────────────────
 (function(){
     // ─── Fullscreen ────────────────────────────────────────────────────────
@@ -7402,7 +7402,7 @@ function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
 }
 #ulp-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">
+<script type="fdc5803ace542727d3870efe-text/javascript">
 // ── Toast de acciones del topbar ──────────────────────────────────────────────
 (function(){
   let _toastEl = null, _toastTimer = null;
@@ -7420,7 +7420,7 @@ function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
 })();
 </script>
 
-<script type="1a485e217742fe08aeaf87a5-text/javascript">
+<script type="fdc5803ace542727d3870efe-text/javascript">
 // ── BLOQUEO DE DEVTOOLS ───────────────────────────────────────────────────────
 (function(){
     // 1) Deshabilitar click derecho
@@ -7470,8 +7470,8 @@ function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
     }
 })();
 </script>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">try{console.log("[ULP] tiempos ms",{"total":26,"cache":"hit"})}catch(e){}</script><script type="1a485e217742fe08aeaf87a5-text/javascript">if(typeof finalizePlayer==="function"){finalizePlayer({"latino":{"XMovie":"https://unlimplay.com/mf.php?man=xm-035DC8C1084744C6AB570AECCE0699D3&s=6826f1657cc4f7f368bdca2f&ulpman=1&ulpmf=1","direct":"https://unlimplay.com/cps.php?t=s_80b2c599c56859d7d182&e=1795157400&s=a290bda936bcf40fa662efb7&x=.m3u8","streamwish":"https://unlimplay.com/cps.php?t=s_c4e012154148&e=1795157400&s=6f8ca6a704a52f8086d4496e&x=.m3u8","vidhide":"https://unlimplay.com/cps.php?t=s_a82dd4605674&e=1795157400&s=99dd501f0fe44dcc8eebd80c&x=.m3u8","vidara":"https://unlimplay.com/cps.php?t=s_65dbe1159665&e=1795157400&s=66f7d44e139adb42b4109ccb&x=.m3u8","vimeos":"https://unlimplay.com/cps.php?t=s_abd90395ee29&e=1795157400&s=828bf0b593d830f8cab3cd67&x=.m3u8","voe":"https://voe.sx/e/qrnarsqlkvtd","doodstream":"https://doodstream.com/e/uswmj6aebftu"},"subtitulado":{"streamwish":"https://unlimplay.com/cps.php?t=s_761ec08ba9b7&e=1795157400&s=29d7840bc4b9ac96480413b2&x=.m3u8","vidhide":"https://unlimplay.com/cps.php?t=s_af83ae83fea9&e=1795157400&s=da2de9d83498d6e592aafd7f&x=.m3u8","vidara":"https://unlimplay.com/cps.php?t=s_7d112d29d2ed&e=1795157400&s=46da25abc661bca38ec2e49a&x=.m3u8","voe":"https://voe.sx/e/vcec7k1htwou","doodstream":"https://doodstream.com/e/xz7dst0cphq8"}});}</script>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">(function(){var _wUrl="https:\/\/vimeos.unlimplay.com\/?id=1368337";var _proxy="https:\/\/vimeos.unlimplay.com\/stream.m3u8?url=";    fetch(_wUrl,{headers:{'Accept':'application/json'}})
+<script type="fdc5803ace542727d3870efe-text/javascript">try{window.ULP_ORIG=window.ULP_ORIG||{};var _o={"latino":{"vidhide":"https://morencius.com/v/rqkzgx2yzq23","vidara":"https://vidara.to/e/ic2DH3h8t3QR6"},"subtitulado":{"streamwish":"https://embedwish.com/e/ztfrmjdemdui","vidhide":"https://morencius.com/v/n2hu3tnnszwz","vidara":"https://vidara.to/e/pc0B3zGPie4rC"}};for(var _l in _o){ULP_ORIG[_l]=Object.assign(ULP_ORIG[_l]||{},_o[_l]);}}catch(e){}</script><script type="fdc5803ace542727d3870efe-text/javascript">try{console.log("[ULP] tiempos ms",{"total":36,"cache":"stale"})}catch(e){}</script><script type="fdc5803ace542727d3870efe-text/javascript">if(typeof finalizePlayer==="function"){finalizePlayer({"latino":{"XMovie":"https://unlimplay.com/mf.php?man=xm-035DC8C1084744C6AB570AECCE0699D3&s=6826f1657cc4f7f368bdca2f&ulpman=1&ulpmf=1","direct":"https://unlimplay.com/cps.php?t=s_198dc935a57e2ac148d1&e=1795157400&s=05b555081044a9f5142a04ad&x=.m3u8","streamwish":"https://unlimplay.com/cps.php?t=s_c4e012154148&e=1795157400&s=6f8ca6a704a52f8086d4496e&x=.m3u8","vidhide":"https://unlimplay.com/cps.php?t=s_4b897c901bc1&e=1795157400&s=8d9ab96e36a731ed28637118&x=.m3u8","vidara":"https://unlimplay.com/cps.php?t=s_b4a0971cd90a&e=1795157400&s=14c413c0b2955abbbad6def7&x=.m3u8","vimeos":"https://unlimplay.com/cps.php?t=s_abd90395ee29&e=1795157400&s=828bf0b593d830f8cab3cd67&x=.m3u8","voe":"https://voe.sx/e/qrnarsqlkvtd","doodstream":"https://doodstream.com/e/uswmj6aebftu"},"subtitulado":{"streamwish":"https://unlimplay.com/cps.php?t=s_7ed66f411c77&e=1795157400&s=c73fecb8197200e7a3bffcd3&x=.m3u8","vidhide":"https://unlimplay.com/cps.php?t=s_38f0b1c84a15&e=1795157400&s=460955faa98dc61f8e918cca&x=.m3u8","vidara":"https://unlimplay.com/cps.php?t=s_93f65d488669&e=1795157400&s=6fc2797b417ff187b4de1a10&x=.m3u8","voe":"https://voe.sx/e/vcec7k1htwou","doodstream":"https://doodstream.com/e/xz7dst0cphq8"}});}</script>
+<script type="fdc5803ace542727d3870efe-text/javascript">(function(){var _wUrl="https:\/\/vimeos.unlimplay.com\/?id=1368337";var _proxy="https:\/\/vimeos.unlimplay.com\/stream.m3u8?url=";    fetch(_wUrl,{headers:{'Accept':'application/json'}})
       .then(function(r){return r.ok?r.json():null;})
       .then(function(d){
         if(!d||!d.embeds||!d.embeds.latino||!d.embeds.latino.direct) return;
@@ -7530,7 +7530,7 @@ function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
 .ulp-tv .ulp-next button{font-size:20px;padding:16px}.ulp-tv .ulp-next .tl{height:6px}
 .ulp-tv .ulp-skip:focus,.ulp-tv .ulp-next button:focus{transform:scale(1.06);box-shadow:0 0 0 4px #a855f7}
 </style>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">
+<script type="fdc5803ace542727d3870efe-text/javascript">
 // ═══ [ULP-PANEL] Saltar intro / resumen y Próximo episodio ═══
 (function () {
     var C = {"on":true,"skip":true,"auto":false,"creditsMovie":true,"next":true,"before":20,"count":10,"mode":"auto","type":"movie","id":1368337,"s":0,"e":0,"txt":{"intro":"Saltar intro","recap":"Saltar resumen","credits":"Saltar cr\u00e9ditos","next":"Pr\u00f3ximo episodio","season":"Pr\u00f3xima temporada","now":"Ver ahora","cancel":"Cancelar"}}; // acentos como \u00f3: se ven bien con cualquier codificación
@@ -7693,7 +7693,7 @@ function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
 .ulp-sz-s .ulp-resume{left:8px;bottom:50px;font-size:11px;padding:3px 3px 3px 10px}.ulp-sz-s .ulp-resume button{font-size:10.5px;padding:4px 9px;margin-left:5px}
 .ulp-tv .ulp-resume{font-size:20px;left:56px;bottom:130px;padding:8px 8px 8px 22px}.ulp-tv .ulp-resume button{font-size:18px;padding:10px 18px}
 </style>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">
+<script type="fdc5803ace542727d3870efe-text/javascript">
 // ═══ [ULP-PANEL] Seguir desde donde quedó (por película / capítulo) ═══
 // Se guarda en el navegador del visitante cada 5 s. También al cambiar de servidor: el nuevo arranca en el mismo minuto.
 // v3.9.18: el aviso sale recién cuando el video ya se está viendo (no mientras carga el HLS) y "Empezar de nuevo"
@@ -7769,7 +7769,7 @@ function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
     document.addEventListener('visibilitychange', function () { if (document.hidden) flush(); });
 })();
 </script>
-<script type="1a485e217742fe08aeaf87a5-text/javascript">
+<script type="fdc5803ace542727d3870efe-text/javascript">
 // ═══ [ULP-PANEL] MODO TV: control remoto (flechas, OK, Atrás, teclas multimedia) ═══
 (function () {
     if (!ULP_RT.tv) return;
@@ -7877,6 +7877,6 @@ function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
     }, true);
 })();
 </script>
-<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="1a485e217742fe08aeaf87a5-|49" defer></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"5c82768a2078415ea6e0d0bace34ca96","r":1,"spa":2}' crossorigin="anonymous"></script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5d36c045945b324',t:'MTc5NTEzNTQyMg=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5d36c045945b324',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="fdc5803ace542727d3870efe-|49" defer></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"5c82768a2078415ea6e0d0bace34ca96","r":1,"spa":2}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5d3747fcd37ae4e',t:'MTc5NTEzNTc2OQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5d3747fcd37ae4e',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

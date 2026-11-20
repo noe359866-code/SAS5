@@ -1,32 +1,9 @@
 {
   "byse": {
-    "status": 200,
-    "keys": [
-      "id",
-      "code",
-      "title",
-      "description",
-      "duration_seconds",
-      "views",
-      "downloads",
-      "created_at",
-      "owner_id",
-      "owner_login",
-      "poster_url",
-      "allowed_countries",
-      "banned_countries",
-      "banned_ips",
-      "embed_domain_allowed",
-      "premium_only",
-      "download_allowed",
-      "tracks",
-      "playback",
-      "cache_status"
-    ],
-    "urls": [
-      "https://img-place.com/intdacsm8cvn.jpg"
-    ],
-    "sample": "{\"id\":62645976,\"code\":\"intdacsm8cvn\",\"title\":\"Tess 1979 sub esp\",\"description\":\"\",\"duration_seconds\":10298,\"views\":10,\"downloads\":0,\"created_at\":\"2026-11-15T22:48:20Z\",\"owner_id\":28288,\"owner_login\":\"kiss5544\",\"poster_url\":\"https://img-place.com/intdacsm8cvn.jpg\",\"allowed_countries\":\"All\",\"banned_countries\":\"All\",\"banned_ips\":\"\",\"embed_domain_allowed\":\"\",\"premium_only\":false,\"download_allowed\":true,\"tracks\":[],\"playback\":{\"algorithm\":\"AES-256-GCM\",\"iv\":\"X2KmP15UKnlfXmwb\",\"payload\":\"Ig4kHXmoNmpYOxRrp6QPL6lDNi7fyDtPlW_goaFRyGDKbmhy5AVdssWs08iZxvGaLO4mEctrbO6fKhJ7nBx0-S6ZzwHCbe2MqnA18mxOEBWCo6q0Wqgx-HUihdfyAHONSOUMLba2WkWxkX8oioWPVCUkW2FDAgs622Okwh1mawc3YylSumYZ1ZbKEPhOII_y8Kvrtu5VLxAujJs33SFT74uRVSNy6Zoer5ab1q64nuBqlWk3jbXXfP2x65LRhb0b2S4rIbXqkHp4wuarYCrdMXECANHyglcjuvbBR1KUxljK69rXo6JaSmIsLMf7KhdkOj8ZcUggrr9oSZyTcUkRMisW6Zi7Chfl5mGkCmwrjvlItfKWxfDt0ERyH3VHOchtLhzOzLI68FxRbnkHdTixkbpsefuB1"
+    "status": 0,
+    "keys": [],
+    "urls": [],
+    "sample": ""
   },
   "mainJs": [
     {

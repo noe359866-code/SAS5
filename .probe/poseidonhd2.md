@@ -4,7 +4,7 @@
 | search «policias de chicago» | 200 | text/html | 83686 | movies=24 topMoviesDay=5 topMoviesWeek=5 · primero: TMDbId=590401 slug=movies/590401/de-de-pyaar-de |
 | search «visionquest» | 200 | text/html | 31727 | movies=1 topMoviesDay=5 topMoviesWeek=5 · primero: TMDbId=213375 slug=series/213375/visionquest |
 | pelicula slug=la-odisea | 200 | text/html | 99344 | sirve la ficha con cualquier slug |
-| pelicula slug=slug-inventado | 200 | text/html | 99395 | sirve la ficha con cualquier slug |
+| pelicula slug=slug-inventado | 200 | text/html | 98932 | sirve la ficha con cualquier slug |
 | pelicula NEXT_DATA | 200 | text/html | 99344 | thisMovie=sí · videos latino=5 spanish=0 english=5 |
 | player voesx | 200 | text/html | 10810 | manual=200 · iframes=0 · medios=0 |
 | player doodstream | 200 | text/html | 10823 | manual=200 · iframes=0 · medios=0 |

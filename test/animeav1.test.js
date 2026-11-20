@@ -123,6 +123,24 @@ test('animeav1: buscador → ficha → episodio → manifiesto, con latino y sub
   } finally { stubbed.restore(); }
 });
 
+test('animeav1: con SUB y DUB propios no se abren los visores de terceros', async () => {
+  // El visor propio sirve las dos pistas; abrir después Byse/Voe solo gasta el
+  // tiempo del turno (en vivo, Naruto acabó en `probe-timeout`).
+  const stubbed = stub([
+    ['/catalogo?search=', html(CATALOGO)],
+    [`${BASE}/media/ore-dake-level-up-na-ken/1`, html(EPISODIO)],
+    ['/media/ore-dake-level-up-na-ken', html(FICHA)],
+    ['player.zilla-networks.com/m3u8/', () => new Response('#EXTM3U\n#EXT-X-VERSION:3\n', { status: 200, headers: { 'content-type': 'application/x-mpegURL' } })],
+  ]);
+  try {
+    const out = await anime.searchAnimeAv1('Ore dake Level Up na Ken', SERIE, SERIE.title, 6000);
+    assert.deepEqual([...new Set(out.hits.map((hit) => hit.audioLabel))].sort(), ['Latino', 'Subtitulado']);
+    assert.ok(out.hits.every((hit) => /zilla-networks/.test(hit.url)), out.hits.map((hit) => hit.url).join(','));
+    const embedded = stubbed.calls.filter((url) => /byselapuix|voe\.sx|mp4upload|streamtape|yourupload/i.test(url));
+    assert.deepEqual(embedded, []);
+  } finally { stubbed.restore(); }
+});
+
 test('animeav1: el manifiesto real (~14 KB) cabe en el tope de lectura', async () => {
   // El visor propio sirve una lista maestra de unos 14 KB. Con un tope de 2 KB
   // la lectura fallaba con «Respuesta demasiado grande» y el visor se

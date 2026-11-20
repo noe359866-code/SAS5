@@ -198,27 +198,31 @@ async function main() {
   const fs = await import('node:fs');
   fs.mkdirSync('.probe', { recursive: true });
 
-  await jsonApi('allcalidad.re', 'https://allcalidad.re', [
+  const seccion = async (name, fn) => {
+    try { await fn(); } catch (err) { rows.push({ site: name, step: 'error', status: '—', bytes: '—', note: String(err?.message || err).slice(0, 120) }); }
+  };
+
+  await seccion('allcalidad.re', () => jsonApi('allcalidad.re', 'https://allcalidad.re', [
     { label: 'API /search', url: 'https://allcalidad.re/api/rest/search?post_type=movies%2Ctvshows&query=odisea&posts_per_page=4' },
     { label: 'API /player', url: 'https://allcalidad.re/api/rest/player?post_id=1&_any=1' },
-  ]);
-  await jsonApi('hackstore2.com', 'https://hackstore2.com', [
+  ]));
+  await seccion('hackstore2.com', () => jsonApi('hackstore2.com', 'https://hackstore2.com', [
     { label: 'API /single', url: 'https://hackstore2.com/api/rest/single?post_name=la-odisea&post_type=movies' },
     { label: 'API /player', url: 'https://hackstore2.com/api/rest/player?post_id=1' },
-  ]);
-  await jsonApi('hackstore.mx', 'https://hackstore.mx', [
+  ]));
+  await seccion('hackstore.mx', () => jsonApi('hackstore.mx', 'https://hackstore.mx', [
     { label: 'API /single', url: 'https://hackstore.mx/wp-api/v1/single/movies?slug=la-odisea&postType=movies' },
     { label: 'API /player', url: 'https://hackstore.mx/wp-api/v1/player?postId=1' },
-  ]);
-  await wpApi('lamovie.org', 'https://lamovie.org');
-  await wpApi('lamovie.cc', 'https://lamovie.cc');
-  await jsonApi('pelisgo.online', 'https://pelisgo.online', [
+  ]));
+  await seccion('lamovie.org', () => wpApi('lamovie.org', 'https://lamovie.org'));
+  await seccion('lamovie.cc', () => wpApi('lamovie.cc', 'https://lamovie.cc'));
+  await seccion('pelisgo.online', () => jsonApi('pelisgo.online', 'https://pelisgo.online', [
     { label: 'API /search', url: 'https://pelisgo.online/api/search?q=odisea&limit=4' },
-  ]);
+  ]));
 
-  await embed69();
-  await vimeus();
-  await wordpress();
+  await seccion('embed69.org', embed69);
+  await seccion('vimeus.com', vimeus);
+  await seccion('WordPress', wordpress);
 
   const md = ['| Sitio | Paso | HTTP | Bytes | Nota |', '|---|---|---|---:|---|'];
   for (const r of rows) md.push(`| ${r.site} | ${r.step} | ${r.status} | ${r.bytes} | ${r.note} |`);

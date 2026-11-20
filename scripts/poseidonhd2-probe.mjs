@@ -147,7 +147,43 @@ async function main() {
       note: `iframes=${iframesOf(followed.body).length} medios=${mediaOf(followed.body).length}` });
   }
 
-  // 5) Resumen en markdown para poder leerlo desde la rama.
+  // 5) Muestreo de repuestos: ¿alguna ficha usa un visor que sí se pueda
+  //    extraer, o publica un medio directo? Se recorren las listas de la
+  //    portada y se cuentan los `cyberlocker` distintos.
+  const home = await get(BASE);
+  const homeData = nextData(home.body);
+  const slugs = [];
+  const walk = (node) => {
+    if (!node || typeof node !== 'object') return;
+    if (node.url?.slug) slugs.push(node.url.slug);
+    for (const value of Object.values(node)) walk(value);
+  };
+  walk(homeData?.props?.pageProps || {});
+  const unique = [...new Set(slugs)];
+  const lockers = new Map();
+  const directMedia = [];
+  for (const slug of unique.slice(0, 10)) {
+    const page = await get(`${BASE}/${slug}`);
+    const data = nextData(page.body);
+    const node = data?.props?.pageProps?.thisMovie || data?.props?.pageProps?.episode
+      || data?.props?.pageProps?.serie || null;
+    const groups = node?.videos || {};
+    for (const [language, list] of Object.entries(groups)) {
+      for (const item of Array.isArray(list) ? list : []) {
+        if (!item?.cyberlocker) continue;
+        const entry = lockers.get(item.cyberlocker) || { count: 0, languages: new Set(), host: '' };
+        entry.count += 1;
+        entry.languages.add(language);
+        if (!entry.host) { try { entry.host = new URL(item.result).hostname; } catch { entry.host = '?'; } }
+        lockers.set(item.cyberlocker, entry);
+        if (/\/(?:[^/]*\.)?(?:m3u8|mp4)(?:$|[?#])/.test(String(item.result))) directMedia.push(`${slug} ${item.cyberlocker}`);
+      }
+    }
+  }
+  log({ step: 'muestreo de repuestos', url: `${BASE}/`, status: home.status, type: home.type, bytes: home.body.length,
+    note: `${unique.length} fichas en portada, 10 recorridas · visores: ${[...lockers.entries()].map(([k, v]) => `${k}(${v.count}${v.host && v.host !== 'player.poseidonhd2.co' ? `→${v.host}` : ''})`).join(', ') || 'ninguno'} · medios directos: ${directMedia.length}` });
+
+  // Resumen en markdown para poder leerlo desde la rama.
   const md = ['| Paso | HTTP | Tipo | Bytes | Nota |', '|---|---|---|---:|---|'];
   for (const row of rows) md.push(`| ${row.step} | ${row.status} | ${row.type || '-'} | ${row.bytes ?? '-'} | ${row.note} |`);
   md.push('', 'Sonda de poseidonhd2: solo HTML y JSON del sitio; sin segmentos de vídeo.');

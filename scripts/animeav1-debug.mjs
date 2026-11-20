@@ -52,7 +52,7 @@ async function steps() {
       row(`  ${server.group} play→m3u8`, manifest || 'sin reescritura');
       if (!manifest) continue;
       try {
-        const body = await http.text(manifest, { headers: { Referer: episodeUrl, Accept: '*/*' }, maxBytes: 4096 });
+        const body = await http.text(manifest, { headers: { Referer: episodeUrl, Accept: '*/*' }, maxBytes: 256 * 1024 });
         row(`  ${server.group} manifiesto`, `ok ${body.length}B hls=${/^\s*#EXTM3U/.test(body)} cabeza=«${body.slice(0, 40).replace(/\s+/g, ' ')}»`);
       } catch (err) { row(`  ${server.group} manifiesto`, `error ${short(err)}`); }
     }

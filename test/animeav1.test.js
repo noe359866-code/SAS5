@@ -123,6 +123,27 @@ test('animeav1: buscador → ficha → episodio → manifiesto, con latino y sub
   } finally { stubbed.restore(); }
 });
 
+test('animeav1: el manifiesto real (~14 KB) cabe en el tope de lectura', async () => {
+  // El visor propio sirve una lista maestra de unos 14 KB. Con un tope de 2 KB
+  // la lectura fallaba con «Respuesta demasiado grande» y el visor se
+  // descartaba en vivo aunque la ruta `/m3u8/<hex>` fuese la correcta.
+  const manifest = `#EXTM3U\n${'#EXT-X-STREAM-INF:BANDWIDTH=800000\nhttps://cdn.example/x.m3u8\n'.repeat(240)}`;
+  assert.ok(manifest.length > 14 * 1024, `manifiesto de ${manifest.length}B`);
+  const stubbed = stub([
+    ['/catalogo?search=', html(CATALOGO)],
+    [`${BASE}/media/ore-dake-level-up-na-ken/1`, html(EPISODIO)],
+    ['/media/ore-dake-level-up-na-ken', html(FICHA)],
+    ['player.zilla-networks.com/m3u8/', () => new Response(manifest, {
+      status: 200,
+      headers: { 'content-type': 'application/x-mpegURL', 'content-length': String(Buffer.byteLength(manifest)) },
+    })],
+  ]);
+  try {
+    const out = await anime.searchAnimeAv1('Ore dake Level Up na Ken', SERIE, SERIE.title, 6000);
+    assert.ok(out.hits.some((hit) => /zilla-networks/.test(hit.url)), `hits=${JSON.stringify(out.hits.map((h) => h.url))} ${out.reason}`);
+  } finally { stubbed.restore(); }
+});
+
 test('animeav1: la temporada del slug manda cuando el h1 no la menciona', () => {
   assert.equal(anime.seasonOfSlug('https://animeav1.com/media/ore-dake-level-up-na-ken-season-2'), 2);
   assert.equal(anime.seasonOfSlug('https://animeav1.com/media/ore-dake-level-up-na-ken'), null);

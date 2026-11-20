@@ -38,7 +38,10 @@ Medición: `.probe/anime-candidates.md`, `.probe/anime-players.md` y
 El visor propio se anuncia como `/play/<hex>`, una SPA de 1006 bytes que **no**
 trae el manifiesto en el HTML. El mismo host sirve el medio en `/m3u8/<hex>`, así
 que el adaptador reescribe la ruta y **comprueba** que responda `#EXTM3U` antes
-de anunciarla; si no, pasa al siguiente visor.
+de anunciarla; si no, pasa al siguiente visor. La comprobación lee el manifiesto
+entero (hasta 256 KB): con un tope de 2 KB la lectura moría en «Respuesta
+demasiado grande» y el visor propio se descartaba en vivo aunque la ruta fuese
+la buena (medido el 20-11-2026; lo detectó `scripts/animeav1-debug.mjs`).
 
 Reparto de visores en el episodio 1 medido: propio (HLS), UPNShare, Voe, Byse,
 YourUpload, MP4Upload, VidHide y StreamTape, cada uno en SUB y en DUB. Se
@@ -62,7 +65,8 @@ como `lat` y la subtitulada como `sub`, no como doblaje.
 
 ## Estado
 
-- Pruebas: `test/animeav1.test.js`, 12 casos con HTML real capturado
-  (`test/fixtures/sites/animeav1-*.html`).
+- Pruebas: `test/animeav1.test.js`, 13 casos con HTML real capturado
+  (`test/fixtures/sites/animeav1-*.html`); uno de ellos reproduce el fallo del
+  tope de lectura con un manifiesto de ~14 KB.
 - Medición del adaptador en vivo con los 12 controles:
   `.probe/sites-live.md` (fuente `animeav1`).

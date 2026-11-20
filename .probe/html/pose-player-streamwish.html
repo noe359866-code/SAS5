@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>PLAYER</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="never" />
+    <meta name="referrer" content="no-referrer" />
+    <style>
+        html,
+        body,
+        #container {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        #container {
+            position: absolute;
+            text-align: center;
+        }
+
+        .ribbon-1 {
+            position: fixed;
+            background: #edb709;
+            box-shadow: 0 0 0 999px #edb709;
+            clip-path: inset(0 -100%);
+            font-size: 20px;
+        }
+
+        .left {
+            inset: 0 auto auto 0;
+            transform-origin: 100% 0;
+            transform: translate(-29.3%) rotate(-45deg);
+        }
+
+        .right {
+            inset: 0 0 auto auto;
+            transform-origin: 0 0;
+            transform: translate(29.3%) rotate(45deg);
+        }
+    </style>
+    <style>
+        #videoContainer {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #videoPlayer {
+            display: block;
+            z-index: 1001;
+            width: 100%;
+            height: 100%;
+        }
+
+        #skipCountdown {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            display: none;
+            z-index: 1003;
+            cursor: pointer;
+        }
+
+        #goToAdLink {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            display: none;
+            z-index: 1002;
+            cursor: pointer;
+        }
+
+        #modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        #modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            height: 80%;
+            padding: 20px;
+        }
+
+        .floating-banner {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%) translateY(20px);
+            width: min(95%, 900px);
+            background: linear-gradient(135deg, #111, #2b2b2b);
+            color: #fff;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.35s ease;
+        }
+
+        .floating-banner.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .banner-image {
+            width: 90px;
+            height: 90px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .banner-content {
+            flex: 1;
+        }
+
+        .banner-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 6px;
+        }
+
+        .banner-text {
+            font-size: 14px;
+            color: #d8d8d8;
+            margin: 0;
+        }
+
+        .banner-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .banner-btn {
+            background: #ffcc00;
+            color: #111;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .banner-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .banner-close {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
+
+        .banner-close:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @media (max-width: 640px) {
+            .floating-banner {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .banner-image {
+                width: 100%;
+                height: 140px;
+            }
+
+            .banner-actions {
+                justify-content: space-between;
+            }
+
+            .banner-btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <ins class="604c7625" data-key="3e459bd0-12be-4023-813a-b58a5e7f86b8" data-cp-host="5cc39f9589994bfe93fb6b9e15e5a14c|wn5v.cuevana.biz" data-cp-domain="wn5v.cuevana.biz"></ins>
+    <div id="container" class="playerContainer">
+        <div style="position: relative; top: 50%; margin-top: -7px;" id="message">
+            <img src="play.png" alt="Reproducir" style="cursor: pointer; margin-top: -64px;" id="start" />
+        </div>
+        <div id="player"></div>
+        <div class="floating-banner show" id="floatingBanner">
+
+            <div class="banner-content">
+                <ins class="604c7625" data-key="13f66f3b-27de-46da-8e3a-432dd5146afe"
+                    data-cp-host="c066f6cc764148d5b32d21ff95723dba|doo.lat" data-cp-domain="doo.lat"></ins>
+            </div>
+
+            <div class="banner-actions">
+                <button class="banner-close" id="closeBanner">&times;</button>
+            </div>
+        </div>
+    </div>
+    <div id="ribbon" class="ribbon-1 right">streamwish</div>
+    <script type="1fa7fe3a47285f98b6699a22-text/javascript">
+        var message = document.getElementById('message');
+        var url = 'https://streamwish.to/e/oyr2nl0uuxar';
+
+        const loadRedirect = () => {
+            let countdown = 10; // Duración de la cuenta regresiva en segundos
+            message.innerHTML = `Creando sistemas y consultando datos... Redireccionando en ${countdown} segundos.`;
+
+            const intervalId = setInterval(() => {
+                countdown--;
+                if (countdown >= 0) {
+                    message.innerHTML = `Creando sistemas y consultando datos... Redireccionando en ${countdown} segundos.`;
+                }
+
+                if (countdown === 2) {
+                    window.location.href = url;
+                }
+            }, 1000);
+        };
+
+        start.onclick = e => {
+            loadRedirect();
+        };
+    </script>
+    <script type="1fa7fe3a47285f98b6699a22-text/javascript">
+        const banner = document.getElementById("floatingBanner");
+        const closeBtn = document.getElementById("closeBanner");
+
+        window.addEventListener("load", () => {
+            // Cerrar automáticamente después de 10 segundos
+            setTimeout(() => {
+                banner.classList.remove("show");
+            }, 10000);
+        });
+
+        closeBtn.addEventListener("click", () => {
+            banner.classList.remove("show");
+        });
+    </script>
+    <script type="1fa7fe3a47285f98b6699a22-text/javascript" src="https://doo.lat/public/overroll_gasparin.js?v=26"></script>
+    <!-- Yandex.Metrika counter -->
+    <script type="1fa7fe3a47285f98b6699a22-text/javascript">
+        (function(m, e, t, r, i, k, a) {
+            m[i] = m[i] || function() {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) {
+                if (document.scripts[j].src === r) {
+                    return;
+                }
+            }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=106507523', 'ym');
+
+        ym(106507523, 'init', {
+            ssr: true,
+            clickmap: true,
+            ecommerce: "dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce: true,
+            trackLinks: true
+        });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/106507523" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+    <script src="https://adme2.click/autorun.js?v=3" data-cfasync="false"></script>
+    <script data-cfasync="false">
+        // Ejecutar automáticamente al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.autorunHiddenIframe) {
+                window.autorunHiddenIframe()
+                    .catch(e => console.warn('autorun failed', e));
+            }
+        });
+    </script>
+
+    <ins class="604c7625" data-key="3e459bd0-12be-4023-813a-b58a5e7f86b8" data-cp-host="c066f6cc764148d5b32d21ff95723dba|doo.lat" data-cp-domain="doo.lat"></ins>
+    <script src="https://cvt-s1.adangle.online/o?vst=_jMvMjk5MDQ4ZTUtO-EzNSWWYzYxL-EyZDUtNGNmM2IWNmE1NTBl&lang=en&container=.playerContainer&cp=%7B%22domain%22%3A%22doo.lat%22%2C%22host%22%3A%22c066f6cc764148d5b32d21ff95723dba%7Cdoo.lat%22%7D" type="1fa7fe3a47285f98b6699a22-text/javascript"></script>
+    <script async src="https://cvt-s2.agl003.com/o/s/a941312e99999aac85c8d55346033a2f.js" type="1fa7fe3a47285f98b6699a22-text/javascript"></script>
+<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="1fa7fe3a47285f98b6699a22-|49" defer></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"d17a7ec6161d4f79b97b1c0da624b6b5","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+
+</html>

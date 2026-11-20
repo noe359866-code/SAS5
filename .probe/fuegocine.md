@@ -2,11 +2,11 @@
 |---|---|---|---|---|---|
 | película | 200 | - | text/html | 42371 | 3 iframes: videro.my,player.abyssplayer.com,unlimplay.com |
 |   película·videro.my | 403 | challenge | text/html | 5739 | 0 medios |
-|   película·player.abyssplayer.com | 200 | - | text/html | 10782 | 0 medios |
-|   película·unlimplay.com | 200 | - | text/html | 440190 | 8 medios |
+|   película·player.abyssplayer.com | 200 | - | text/html | 10770 | 0 medios |
+|   película·unlimplay.com | 200 | - | text/html | 439884 | 8 medios |
 | episodio | 200 | - | text/html | 39655 | 3 iframes: embedorigin.cc,fcplayer2.blogspot.com,unlimplay.com |
 |   episodio·embedorigin.cc | 200 | - | text/html | 12722 | 0 medios |
-|   episodio·fcplayer2.blogspot.com | 429 | - | text/html | 3950 | 0 medios |
-|   episodio·unlimplay.com | 200 | - | text/html | 440325 | 8 medios |
+|   episodio·fcplayer2.blogspot.com | 429 | - | text/html | 3952 | 0 medios |
+|   episodio·unlimplay.com | 200 | - | text/html | 439474 | 7 medios |
 
 Sonda de fuegocine: solo HTML de la página de reproducción y del visor; sin segmentos ni URLs firmadas.

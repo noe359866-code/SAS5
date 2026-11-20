@@ -64,7 +64,7 @@
     "status": 200,
     "mitigated": "",
     "finalUrl": "https://mxdrop.click/e/mkkkzkqla6x18g",
-    "bytes": 78403,
+    "bytes": 78404,
     "title": "",
     "packed": true,
     "m3u8Literal": [],
@@ -76,7 +76,7 @@
     "scripts": [
       {
         "inline": true,
-        "bytes": 66708,
+        "bytes": 66709,
         "packed": false,
         "m3u8": false,
         "base64": true,
@@ -99,7 +99,7 @@
         "m3u8": false,
         "base64": true,
         "sources": true,
-        "snippet": " /*<![CDATA[/* */ (function(){var m=window,p=\"c2069f112f2e28a564dac8e686f1db36\",r=[[\"siteId\",853+864-834*435+3726786],[\""
+        "snippet": " /*<![CDATA[/* */ (function(){var b=window,u=\"c2069f112f2e28a564dac8e686f1db36\",a=[[\"siteId\",858*924-803*439+2925438],[\""
       },
       {
         "inline": true,
@@ -185,7 +185,7 @@
     "status": 200,
     "mitigated": "",
     "finalUrl": "https://vpge.link/e/SXMyN3Q4K0g1Y2wwZVd0MXh2MDBVQT09",
-    "bytes": 228188,
+    "bytes": 228619,
     "title": "Video player ",
     "packed": false,
     "m3u8Literal": [
@@ -208,7 +208,7 @@
     "scripts": [
       {
         "inline": true,
-        "bytes": 49122,
+        "bytes": 49154,
         "packed": false,
         "m3u8": true,
         "base64": false,
@@ -226,7 +226,7 @@
       },
       {
         "inline": true,
-        "bytes": 25890,
+        "bytes": 26294,
         "packed": false,
         "m3u8": false,
         "base64": true,
@@ -235,7 +235,7 @@
       },
       {
         "inline": true,
-        "bytes": 8138,
+        "bytes": 8139,
         "packed": false,
         "m3u8": false,
         "base64": false,

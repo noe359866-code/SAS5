@@ -26,6 +26,7 @@ on:
       - 'scripts/calidad-chain-probe.mjs'
       - 'scripts/fixtures-capture.mjs'
       - 'scripts/anime-candidates-probe.mjs'
+      - 'scripts/anime-players-probe.mjs'
       - 'scripts/pelisjuanita-probe.mjs'
       - 'scripts/pelisjuanita-probe2.mjs'
       - 'scripts/pelisjuanita-probe3.mjs'
@@ -68,6 +69,8 @@ jobs:
         run: node scripts/fixtures-capture.mjs || true
       - name: candidatas de anime
         run: node scripts/anime-candidates-probe.mjs || true
+      - name: visores de anime (videos, data-player, embeds SUB/DUB)
+        run: node scripts/anime-players-probe.mjs || true
       - name: adaptadores nuevos contra los sitios reales
         run: node scripts/sites-live.js allpeliculas lamovie || true
       - name: pelisjuanita (API REST y reproducción)

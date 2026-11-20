@@ -66,10 +66,11 @@ como `lat` y la subtitulada como `sub`, no como doblaje.
 
 ## Estado
 
-- Pruebas: `test/animeav1.test.js`, 16 casos con HTML real capturado
+- Pruebas: `test/animeav1.test.js`, 17 casos con HTML real capturado
   (`test/fixtures/sites/animeav1-*.html`); dos de ellos reproducen fallos
   medidos en vivo: el tope de lectura del manifiesto y el gasto inútil en
-  visores de terceros cuando el propio ya sirve SUB y DUB.
+  visores de terceros cuando el propio ya sirve SUB y DUB, o cuando el episodio
+  solo publica un grupo.
 - Medición del adaptador en vivo (`.probe/sites-live.md`, 20-11-2026, 12
   controles): **Naruto → 2 pistas HLS** («Latino» y «Subtitulado») en 2,1 s;
   **Ao Ashi Season 2 → «Subtitulado»** en 10,6 s; los controles que no son

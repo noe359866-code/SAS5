@@ -141,6 +141,25 @@ test('animeav1: con SUB y DUB propios no se abren los visores de terceros', asyn
   } finally { stubbed.restore(); }
 });
 
+test('animeav1: si el episodio solo trae un grupo, el primer acierto cierra la búsqueda', async () => {
+  // Fichas como las de Ao Ashi S2 o Black Clover 2 publican solo `SUB`: no hay
+  // DUB que buscar, así que seguir abriendo visores opacos solo cuesta tiempo.
+  const soloSub = EPISODIO.replace(/DUB\s*:\s*\[[\s\S]*?\]\s*,?/, '');
+  assert.ok(soloSub.length < EPISODIO.length);
+  const stubbed = stub([
+    ['/catalogo?search=', () => html(CATALOGO)],
+    [`${BASE}/media/ore-dake-level-up-na-ken/1`, () => html(soloSub)],
+    ['/media/ore-dake-level-up-na-ken', () => html(FICHA)],
+    ['player.zilla-networks.com/m3u8/', () => new Response('#EXTM3U\n', { status: 200, headers: { 'content-type': 'application/x-mpegURL' } })],
+  ]);
+  try {
+    const out = await anime.searchAnimeAv1('Ore dake Level Up na Ken', SERIE, SERIE.title, 6000);
+    assert.equal(out.hits.length, 1, `hits=${out.hits.length} ${out.reason}`);
+    assert.equal(out.hits[0].audioLabel, 'Subtitulado');
+    assert.ok(!stubbed.calls.some((url) => /byselapuix|voe\.sx|mp4upload|streamtape|yourupload/i.test(url)), 'no se abrió ningún visor de terceros');
+  } finally { stubbed.restore(); }
+});
+
 test('animeav1: el manifiesto real (~14 KB) cabe en el tope de lectura', async () => {
   // El visor propio sirve una lista maestra de unos 14 KB. Con un tope de 2 KB
   // la lectura fallaba con «Respuesta demasiado grande» y el visor se

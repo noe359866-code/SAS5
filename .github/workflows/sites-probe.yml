@@ -20,6 +20,7 @@ on:
       - 'scripts/fuegocine-probe.mjs'
       - 'scripts/poseidonhd2-probe.mjs'
       - 'scripts/candidates-probe.mjs'
+      - 'scripts/candidates2-probe.mjs'
       - 'scripts/pelisjuanita-probe.mjs'
       - 'scripts/pelisjuanita-probe2.mjs'
       - 'scripts/pelisjuanita-probe3.mjs'
@@ -50,6 +51,8 @@ jobs:
         run: node scripts/poseidonhd2-probe.mjs || true
       - name: candidatas (seriesretro, seriesflix, documaniatv)
         run: node scripts/candidates-probe.mjs || true
+      - name: candidatas 2 (APIs latinas, embed69 y WordPress)
+        run: node scripts/candidates2-probe.mjs || true
       - name: pelisjuanita (API REST y reproducción)
         run: node scripts/pelisjuanita-probe.mjs || true
       - name: pelisjuanita (episodios y reproductor externo)

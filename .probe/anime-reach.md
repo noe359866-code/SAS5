@@ -17,8 +17,18 @@
 | av1 verifica /1180 | menciona el número · sin enlace propio · h1=«Episodio 1180» · visores=5 |
 | av1 verifica /1000 | menciona el número · sin enlace propio · h1=«Episodio 1000» · visores=5 |
 | av1 imposible /9999 | error HTTP 404 HTTP 404 al consultar https://animeav1.com/media/one-piece/9999 (lo esperado) |
-| av1 adaptador E1180 | 1368ms · hits=1 · ok |
+| av1 adaptador E1180 | 1429ms · hits=1 · ok |
 |   hit | HLS Subtitulado · One Piece S1E1180 AnimeAV1 · https://player.zilla-networks.com/m3u8/«hex» |
+| — películas de anime — | · |
+| busca «One Piece Film Red» | /media/one-piece-film-red |
+|   película /media/one-piece-film-red | 21155B · embeds=no · visores=0 · episodios=1 |
+|   visores | ninguno |
+| busca «Jujutsu Kaisen 0» | /media/jujutsu-kaisen-0-movie |
+|   película /media/jujutsu-kaisen-0-movie | 21288B · embeds=no · visores=0 · episodios=1 |
+|   visores | ninguno |
+| busca «Suzume» | /media/suzume-no-tojimari |
+|   película /media/suzume-no-tojimari | 19087B · embeds=no · visores=0 · episodios=1 |
+|   visores | ninguno |
 | — AnimeFLV — | · |
 | flv ficha | 60110B · 14 episodios · min=1167 max=1180 |
 | flv paginación | sin enlaces de página |

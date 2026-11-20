@@ -11,5 +11,6 @@
 | player streamwish | 200 | text/html | 10822 | manual=200 · iframes=0 · medios=0 |
 | episodio NEXT_DATA | 200 | text/html | 142266 | episode=sí · videos latino=5 spanish=0 english=0 |
 | player episodio voesx | 200 | text/html | 10810 | iframes=0 medios=0 |
+| muestreo de repuestos | 200 | text/html | 204205 | 59 fichas en portada, 10 recorridas · visores: ninguno · medios directos: 0 |
 
 Sonda de poseidonhd2: solo HTML y JSON del sitio; sin segmentos de vídeo.

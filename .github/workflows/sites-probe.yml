@@ -65,6 +65,8 @@ jobs:
         run: node scripts/calidad-chain-probe.mjs || true
       - name: captura de fixtures (allpeliculas y lamovie)
         run: node scripts/fixtures-capture.mjs || true
+      - name: adaptadores nuevos contra los sitios reales
+        run: node scripts/sites-live.js allpeliculas lamovie || true
       - name: pelisjuanita (API REST y reproducción)
         run: node scripts/pelisjuanita-probe.mjs || true
       - name: pelisjuanita (episodios y reproductor externo)

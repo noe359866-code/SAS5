@@ -43,4 +43,8 @@ jobs:
           # explícita para que funcione también con el checkout en HEAD separado.
           git add -f .probe/sites-live.md 2>/dev/null || true
           git diff --cached --quiet || git commit -m "sonda: adaptadores de sitios $(date -u +%FT%TZ) [skip ci]"
+          # La sonda de descubrimiento empuja cada pocos minutos: sin rebasar,
+          # el push de este job se rechazaba en silencio y el resumen se perdía.
+          git fetch origin || true
+          git rebase origin/${{ github.ref_name }} || git rebase --abort || true
           git push origin HEAD:refs/heads/${{ github.ref_name }} || true

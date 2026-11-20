@@ -72,16 +72,18 @@ como `lat` y la subtitulada como `sub`, no como doblaje.
   visores de terceros cuando el propio ya sirve SUB y DUB, o cuando el episodio
   solo publica un grupo.
 - Medición del adaptador en vivo (`.probe/sites-live.md`, 20-11-2026, 12
-  controles): **Naruto → 2 pistas HLS** («Latino» y «Subtitulado») en 2,1 s;
-  **Ao Ashi Season 2 → «Subtitulado»** en 10,6 s; los controles que no son
-  anime → `no-match`. La única que se le escapa entre los títulos de anime es
-  *Black Clover 2nd Season* (`no-match`), ya corregido: su ficha se llama
-  `/media/black-clover-2nd-season` y solo se reconocía la forma `-season-2`.
+  controles): **Naruto → 2 pistas HLS** («Latino» y «Subtitulado») en 2,7 s,
+  **Ao Ashi Season 2 → «Subtitulado»** en 1,8 s y **Black Clover 2nd Season →
+  «Subtitulado»** en 1,6 s. Los controles que no son anime → `no-match`, que es
+  lo correcto: la fuente solo tiene anime.
 - Depuración paso a paso (`.probe/animeav1-debug.md`): el manifiesto propio
   llega en 378 ms (14 352 B, `#EXTM3U`, `#EXT-X-VERSION:7`), y el recorrido
   completo del adaptador tarda 1,5 s con 2 hits.
-- Las dos correcciones salieron de esa depuración: (a) la comprobación del
-  manifiesto se hacía con un tope de 2 KB y moría en «Respuesta demasiado
+- Las correcciones salieron de esa depuración, una por una: (a) la comprobación
+  del manifiesto se hacía con un tope de 2 KB y moría en «Respuesta demasiado
   grande», así que el visor propio se descartaba y la fuente daba 0 aciertos;
   (b) el presupuesto era por petición, no global, y se seguía abriendo visores
-  opacos después de tener SUB y DUB: Naruto acababa en `probe-timeout`.
+  opacos después de tener SUB y DUB (Naruto acababa en `probe-timeout`); (c) los
+  episodios que solo publican `SUB` gastaban 9 s de más tras el primer acierto;
+  (d) la ficha de una temporada puede llamarse `…-2nd-season`, no solo
+  `…-season-2` (Black Clover 2 quedaba en `no-match`).

@@ -100,11 +100,9 @@
   },
   "tube": {
     "status": 200,
-    "size": 60408,
+    "size": 60381,
     "players": [],
-    "seasons": [
-      "https://www.tubeonline.net/serie/kill-jackie-temporada-1-castellano/"
-    ],
+    "seasons": [],
     "episodes": []
   }
 }

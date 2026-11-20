@@ -1,0 +1,608 @@
+[
+  {
+    "control": "tt33033798",
+    "title": "Spider-Man: Un nuevo día",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt33033798.json",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=57625",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2135,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt33033798",
+    "title": "Spider-Man: Un nuevo día",
+    "provider": "lamovie",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=57625",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=90147",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 1535,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt1375666",
+    "title": "Inception",
+    "provider": "allpeliculas",
+    "hits": 0,
+    "trace": [
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=90147",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
+    ],
+    "media": [],
+    "ms": 552,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt1375666",
+    "title": "Inception",
+    "provider": "lamovie",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=90147",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
+    ],
+    "media": [],
+    "ms": 415,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt0903747:1:1",
+    "title": "Breaking Bad",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
+      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/single/episodes/list?_id=68&season=1&page=1&postsPerPage=50",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=70",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2807,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://p2.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://p2.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt0903747:1:1",
+    "title": "Breaking Bad",
+    "provider": "lamovie",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=70",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=37038&season=1&page=1&postsPerPage=50",
+      "200 https://lamovie.org/wp-api/v1/player?postId=37040",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2534,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt18412256",
+    "title": "Alien: Romulus",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/player?postId=37040",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html",
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt18412256.json",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=29363",
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2022,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt18412256",
+    "title": "Alien: Romulus",
+    "provider": "lamovie",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=29363",
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=20879",
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2140,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt6263850",
+    "title": "Deadpool & Wolverine",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt6263850.json",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Deadpool+%26+Wolverine&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Deadpool+Wolverine&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Deadpool&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=27576",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2537,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt6263850",
+    "title": "Deadpool & Wolverine",
+    "provider": "lamovie",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Deadpool&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=27576",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=Deadpool+%26+Wolverine&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=19173",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 1552,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt22022452",
+    "title": "Inside Out 2",
+    "provider": "allpeliculas",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/search?q=Deadpool+%26+Wolverine&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=19173",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt22022452.json",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
+    ],
+    "media": [],
+    "ms": 995,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt22022452",
+    "title": "Inside Out 2",
+    "provider": "lamovie",
+    "hits": 0,
+    "trace": [
+      "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt22022452.json",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
+    ],
+    "media": [],
+    "ms": 687,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "El reino prohibido",
+    "title": "El reino prohibido",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=55973",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2280,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "El reino prohibido",
+    "title": "El reino prohibido",
+    "provider": "lamovie",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=55973",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=80207",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 1355,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt0409591:1:1",
+    "title": "Naruto",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
+      "200 https://api.tvmaze.com/lookup/shows?imdb=tt0409591",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/single/episodes/list?_id=11267&season=1&page=1&postsPerPage=50",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=11279",
+      "200 https://vimeos.net/embed-wa2r4s768i9k.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2755,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+  },
+  {
+    "control": "tt0409591:1:1",
+    "title": "Naruto",
+    "provider": "lamovie",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=11279",
+      "200 https://vimeos.net/embed-wa2r4s768i9k.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=7606&season=1&page=1&postsPerPage=50",
+      "200 https://lamovie.org/wp-api/v1/player?postId=7609",
+      "200 https://vimeos.net/embed-wa2r4s768i9k.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2443,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+  },
+  {
+    "control": "Ao Ashi Season 2",
+    "title": "Ao Ashi Season 2",
+    "provider": "allpeliculas",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=7606&season=1&page=1&postsPerPage=50",
+      "200 https://lamovie.org/wp-api/v1/player?postId=7609",
+      "200 https://vimeos.net/embed-wa2r4s768i9k.html",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
+    ],
+    "media": [],
+    "ms": 783,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "Ao Ashi Season 2",
+    "title": "Ao Ashi Season 2",
+    "provider": "lamovie",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/player?postId=7609",
+      "200 https://vimeos.net/embed-wa2r4s768i9k.html",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
+    ],
+    "media": [],
+    "ms": 756,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "Black Clover 2nd Season",
+    "title": "Black Clover 2nd Season",
+    "provider": "allpeliculas",
+    "hits": 0,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
+    ],
+    "media": [],
+    "ms": 763,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "Black Clover 2nd Season",
+    "title": "Black Clover 2nd Season",
+    "provider": "lamovie",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
+    ],
+    "media": [],
+    "ms": 807,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "La Odisea",
+    "title": "La Odisea",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=La+Odisea&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=52912",
+      "200 https://vimeos.net/embed-m62pdrnlvwpw.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 1864,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://p7.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://p7.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "La Odisea",
+    "title": "La Odisea",
+    "provider": "lamovie",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=La+Odisea&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=52912",
+      "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=La+Odisea&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=98727",
+      "200 https://vimeos.net/embed-m62pdrnlvwpw.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 1789,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "VisionQuest",
+    "title": "VisionQuest",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/player?postId=98727",
+      "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=VisionQuest&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/single/episodes/list?_id=64072&season=1&page=1&postsPerPage=50",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=64074",
+      "200 https://vimeos.net/embed-hc7i1n95d4vx.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2844,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "VisionQuest",
+    "title": "VisionQuest",
+    "provider": "lamovie",
+    "hits": 1,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=64074",
+      "200 https://vimeos.net/embed-hc7i1n95d4vx.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=VisionQuest&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=92804&season=1&page=1&postsPerPage=50",
+      "200 https://lamovie.org/wp-api/v1/player?postId=92806",
+      "200 https://vimeos.net/embed-hc7i1n95d4vx.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2091,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+  }
+]

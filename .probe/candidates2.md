@@ -28,15 +28,15 @@
 | gnula.life | buscar (/?s=) | 200 | 80965 | resultados=45 · fichas=3 · https://gnula.life/archives/series/top/day |
 | gnula.life | · ficha | 200 | 59038 | iframes=1 · www.googletagmanager.com=— · medios=0 |
 | homecine.to | wp-api /search | 404 | 43677 | text/html · sin posts |
-| homecine.to | buscar (/search) | 200 | 75406 | resultados=0 · fichas=3 · https://www3.homecine.to/series/search-party/feed |
+| homecine.to | buscar (/search) | 200 | 74963 | resultados=0 · fichas=3 · https://www3.homecine.to/series/search-party/feed |
 | homecine.to | · ficha | 200 | 697 | iframes=0 · medios=0 |
 | pelispedia.mov | wp-api /search | 404 | 155 | text/html · sin posts |
 | pelispedia.mov | buscar (/?s=) | 200 | 391971 | resultados=0 · fichas=3 · https://pelispedia.mov/series/populares |
 | pelispedia.mov | · ficha | 200 | 190222 | iframes=0 · medios=0 |
 | seriesmetro.net | wp-api /search | 404 | 32162 | text/html · sin posts |
 | seriesmetro.net | buscar (/?s=) | 200 | 40786 | resultados=7 · fichas=3 · https://www3.seriesmetro.net/serie/the-pitt/ |
-| seriesmetro.net | · ficha | 200 | 60416 | iframes=1 · www.youtube.com=— · medios=0 |
-| sololatino.net | wp-api /search | 403 | 5903 | text/html · sin posts |
+| seriesmetro.net | · ficha | 200 | 60275 | iframes=1 · www.youtube.com=— · medios=0 |
+| sololatino.net | wp-api /search | 403 | 5924 | text/html · sin posts |
 | sololatino.net | buscar (/?s=) | 403 | 5677 | resultados=0 · fichas=0 |
 | tioplus.app | wp-api /search | 521 | 948 | application/json · sin posts |
 | tioplus.app | buscar (/?s=) | 521 | 6969 | resultados=0 · fichas=0 |

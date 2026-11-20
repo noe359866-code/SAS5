@@ -119,7 +119,7 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
   seen.add(url);
   const res = await get(url, { headers: referer ? { Referer: referer } : {} });
   const scan = res.status === 200 ? scanHtml(res.body, url) : null;
-  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt|fuegocine|pelisjuanita|poseidonhd2/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
+  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt|fuegocine|pelisjuanita|poseidonhd2|seriesretro|seriesflix|documaniatv/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
     try {
       const fs = await import('node:fs');
       fs.mkdirSync('.probe/html', { recursive: true });
@@ -164,6 +164,35 @@ const SITES = {
   // Solo la portada: el resto de estos sitios se sondearon con scripts
   // dedicados (scripts/cuevanas3-api-probe.mjs y scripts/anime-sites-probe.mjs)
   // y su estructura ya está descrita en los adaptadores.
+  seriesretro: {
+    name: 'seriesretro.com',
+    base: 'https://seriesretro.com',
+    pages: [
+      { label: 'portada', url: 'https://seriesretro.com/' },
+      { label: 'pelicula', url: 'https://seriesretro.com/peliculas/la-odisea' },
+      { label: 'serie', url: 'https://seriesretro.com/series/dexter-resurrection' },
+      { label: 'buscar', url: 'https://seriesretro.com/?s=odisea' },
+    ],
+  },
+  seriesflix: {
+    name: 'seriesflix.life',
+    base: 'https://seriesflix.life',
+    pages: [
+      { label: 'portada', url: 'https://seriesflix.life/' },
+      { label: 'peliculas', url: 'https://seriesflix.life/peliculas' },
+      { label: 'buscar', url: 'https://seriesflix.life/search?q=odisea' },
+      { label: 'api', url: 'https://seriesflix.life/api' },
+    ],
+  },
+  documaniatv: {
+    name: 'documaniatv.com',
+    base: 'https://www.documaniatv.com',
+    pages: [
+      { label: 'portada', url: 'https://www.documaniatv.com/' },
+      { label: 'documental', url: 'https://www.documaniatv.com/social/sicarios-video_fd2ea8244.html' },
+      { label: 'serie-documental', url: 'https://www.documaniatv.com/historia/monstruos-la-verdad-tras-el-mito-1-demonios-video_abee2e29e.html' },
+    ],
+  },
   poseidonhd2: {
     name: 'poseidonhd2.co',
     base: 'https://www.poseidonhd2.co',

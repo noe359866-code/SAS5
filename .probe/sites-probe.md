@@ -12,9 +12,9 @@
 | seriesflix.life | peliculas | `https://seriesflix.life/peliculas` | 404 | — | — | — |  |
 | seriesflix.life | buscar | `https://seriesflix.life/search?…` | 200 | 1 | 0 | www.youtube.com |  |
 | seriesflix.life | api | `https://seriesflix.life/api` | 404 | — | — | — |  |
-| documaniatv.com | portada | `https://www.documaniatv.com/` | 403 cf | — | — | — |  |
-| documaniatv.com | documental | `https://www.documaniatv.com/social/sicarios-video_fd2ea8244.html` | 403 cf | — | — | — |  |
-| documaniatv.com | serie-documental | `https://www.documaniatv.com/historia/monstruos-la-verdad-tras-el-mito-1-demonios-video_abee2e29e.html` | 403 cf | — | — | — |  |
+| documaniatv.com | portada | `https://www.documaniatv.com/` | 403 | — | — | — |  |
+| documaniatv.com | documental | `https://www.documaniatv.com/social/sicarios-video_fd2ea8244.html` | 403 | — | — | — |  |
+| documaniatv.com | serie-documental | `https://www.documaniatv.com/historia/monstruos-la-verdad-tras-el-mito-1-demonios-video_abee2e29e.html` | 403 | — | — | — |  |
 | poseidonhd2.co | portada | `https://www.poseidonhd2.co/` | 200 | 0 | 0 | — |  |
 | poseidonhd2.co | pelicula | `https://www.poseidonhd2.co/pelicula/1368337/la-odisea` | 200 | 0 | 0 | — |  |
 | poseidonhd2.co | episodio | `https://www.poseidonhd2.co/serie/58841/policias-de-chicago/temporada/13/episodio/21` | 200 | 0 | 0 | — |  |

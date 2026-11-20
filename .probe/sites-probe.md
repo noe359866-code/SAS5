@@ -8,7 +8,7 @@
 | poseidonhd2.co | buscar-q | `https://www.poseidonhd2.co/buscar?…` | 404 | — | — | — |  |
 | poseidonhd2.co | buscar-slash | `https://www.poseidonhd2.co/search?…` | 200 | 0 | 0 | — |  |
 | poseidonhd2.co | api-search | `https://www.poseidonhd2.co/api/search?…` | 404 | — | — | — |  |
-| cuevanas3.pro | portada | `https://cuevanas3.pro/` | 200 | 0 | 0 | — |  |
+| cuevanas3.pro | portada | `https://cuevanas3.pro/` | 0 | — | — | — | AbortError |
 | animed23.com | portada | `https://animed23.com/` | 403 cf | — | — | — |  |
 | animejara.com | portada | `http://animejara.com/` | 403 cf | — | — | — |  |
 | animeflv.or.at | portada | `https://animeflv.or.at/` | 200 | 0 | 0 | — |  |

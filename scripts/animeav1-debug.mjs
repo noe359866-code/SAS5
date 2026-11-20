@@ -28,6 +28,11 @@ const WORKS = [
     label: 'Naruto',
     resolved: { title: 'Naruto', year: 2002, mediaType: 'series', season: 1, episode: 1 },
   },
+  {
+    // El único título de anime que la medición en vivo deja en `no-match`.
+    label: 'Black Clover',
+    resolved: { title: 'Black Clover', year: 2017, mediaType: 'series', season: 2, episode: 1 },
+  },
 ];
 
 async function inspect(http, work) {
@@ -36,9 +41,9 @@ async function inspect(http, work) {
   let page = '';
   try {
     const listing = await http.text(`${anime.BASE}/catalogo?search=${encodeURIComponent(work.label)}`, { maxBytes: 1024 * 1024 });
-    const candidates = anime.listingMatches(listing, resolved, 2);
+    const candidates = anime.listingMatches(listing, resolved, 3);
     page = candidates[0] || '';
-    row('/catalogo?search=', `ok ${listing.length}B · articles=${(listing.match(/<article/gi) || []).length} · fichas=${candidates.length}${page ? ` · ${clean(page)}` : ''}`);
+    row('/catalogo?search=', `ok ${listing.length}B · articles=${(listing.match(/<article/gi) || []).length} · fichas=${candidates.length} ${candidates.map(clean).join(' ')}`);
   } catch (err) { row('/catalogo?search=', `error ${short(err)}`); return; }
   if (!page) return;
 

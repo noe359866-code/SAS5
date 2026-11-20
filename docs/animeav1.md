@@ -65,8 +65,20 @@ como `lat` y la subtitulada como `sub`, no como doblaje.
 
 ## Estado
 
-- Pruebas: `test/animeav1.test.js`, 13 casos con HTML real capturado
-  (`test/fixtures/sites/animeav1-*.html`); uno de ellos reproduce el fallo del
-  tope de lectura con un manifiesto de ~14 KB.
-- Medición del adaptador en vivo con los 12 controles:
-  `.probe/sites-live.md` (fuente `animeav1`).
+- Pruebas: `test/animeav1.test.js`, 14 casos con HTML real capturado
+  (`test/fixtures/sites/animeav1-*.html`); dos de ellos reproducen fallos
+  medidos en vivo: el tope de lectura del manifiesto y el gasto inútil en
+  visores de terceros cuando el propio ya sirve SUB y DUB.
+- Medición del adaptador en vivo (`.probe/sites-live.md`, 20-11-2026, 12
+  controles): **Naruto → 2 pistas HLS** («Latino» y «Subtitulado») en 2,1 s;
+  **Ao Ashi Season 2 → «Subtitulado»** en 10,6 s; los controles que no son
+  anime → `no-match`. La única que se le escapa entre los títulos de anime es
+  *Black Clover 2nd Season* (`no-match`).
+- Depuración paso a paso (`.probe/animeav1-debug.md`): el manifiesto propio
+  llega en 378 ms (14 352 B, `#EXTM3U`, `#EXT-X-VERSION:7`), y el recorrido
+  completo del adaptador tarda 1,5 s con 2 hits.
+- Las dos correcciones salieron de esa depuración: (a) la comprobación del
+  manifiesto se hacía con un tope de 2 KB y moría en «Respuesta demasiado
+  grande», así que el visor propio se descartaba y la fuente daba 0 aciertos;
+  (b) el presupuesto era por petición, no global, y se seguía abriendo visores
+  opacos después de tener SUB y DUB: Naruto acababa en `probe-timeout`.

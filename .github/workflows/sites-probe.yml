@@ -30,6 +30,7 @@ on:
       - 'scripts/anime-players2-probe.mjs'
       - 'scripts/anime-players3-probe.mjs'
       - 'scripts/anime-players4-probe.mjs'
+      - 'scripts/animeav1-probe.mjs'
       - 'scripts/pelisjuanita-probe.mjs'
       - 'scripts/pelisjuanita-probe2.mjs'
       - 'scripts/pelisjuanita-probe3.mjs'
@@ -80,6 +81,8 @@ jobs:
         run: node scripts/anime-players3-probe.mjs || true
       - name: anime, quinta vuelta (anatomía del player propio)
         run: node scripts/anime-players4-probe.mjs || true
+      - name: animeav1 (marcado de buscador, ficha y episodio)
+        run: node scripts/animeav1-probe.mjs || true
       - name: adaptadores nuevos contra los sitios reales
         run: node scripts/sites-live.js allpeliculas lamovie || true
       - name: pelisjuanita (API REST y reproducción)

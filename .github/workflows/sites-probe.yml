@@ -18,6 +18,7 @@ on:
       - 'scripts/cuevanas3-api-probe.mjs'
       - 'scripts/anime-sites-probe.mjs'
       - 'scripts/fuegocine-probe.mjs'
+      - 'scripts/poseidonhd2-probe.mjs'
       - 'scripts/pelisjuanita-probe.mjs'
       - 'scripts/pelisjuanita-probe2.mjs'
       - 'scripts/pelisjuanita-probe3.mjs'
@@ -44,6 +45,8 @@ jobs:
         run: node scripts/sites-probe.mjs ${{ inputs.sites }}
       - name: fuegocine (página de reproducción y visores)
         run: node scripts/fuegocine-probe.mjs || true
+      - name: poseidonhd2 (NEXT_DATA, player.php y buscador)
+        run: node scripts/poseidonhd2-probe.mjs || true
       - name: pelisjuanita (API REST y reproducción)
         run: node scripts/pelisjuanita-probe.mjs || true
       - name: pelisjuanita (episodios y reproductor externo)

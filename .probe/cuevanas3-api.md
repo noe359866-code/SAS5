@@ -16,7 +16,7 @@
 | player:movies | 200 | application/json | 12589 | 1 | cuevana3.gs |
 | embed | 200 | text/html | 7162 | 0 | cuevana3.gs |
 | cand:/wp-json/wpf/v1/episodes | 200 | application/json | 52 | 1 | - |
-| cand:/wp-json/wpf/v1/episodes | 200 | application/json | 62 | 1 | - |
+| cand:/wp-json/wpf/v1/episodes | 0 | undefined | undefined | 0 | - |
 | cand:/wp-json/wpf/v1/episodes | 200 | application/json | 52 | 1 | - |
 | cand:/wp-api/v1/players | 404 | application/json | 8596 | 0 | - |
 | cand:/wp-api/v1/servers | 404 | application/json | 8596 | 0 | - |
@@ -26,7 +26,7 @@
 | cand:/wp-api/v1/player | 200 | application/json | 37 | 0 | - |
 | cand:/wp-api/v1/player | 200 | application/json | 37 | 0 | - |
 | cand:/wp-api/v1/player | 200 | application/json | 37 | 0 | - |
-| cand:/wp-json/wpf/v1/episodes | 0 | undefined | undefined | 0 | - |
+| cand:/wp-json/wpf/v1/episodes | 200 | application/json | 62 | 1 | - |
 | cand:/wp-json/wpf/v1/episodes | 200 | application/json | 62 | 1 | - |
 | cand:/wp-api/v1/single/players | 404 | application/json | 8603 | 0 | - |
 | cand:/peliculas/spider-man-un-nuevo-dia-2026 | 0 | undefined | undefined | 0 | - |

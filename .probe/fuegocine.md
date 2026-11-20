@@ -2,8 +2,8 @@
 |---|---|---|---|---|---|
 | película | 200 | - | text/html | 42371 | 3 iframes: videro.my,player.abyssplayer.com,unlimplay.com |
 |   película·videro.my | 403 | challenge | text/html | 5739 | 0 medios |
-|   película·player.abyssplayer.com | 200 | - | text/html | 10773 | 0 medios |
-|   película·unlimplay.com | 200 | - | text/html | 439617 | 8 medios |
+|   película·player.abyssplayer.com | 200 | - | text/html | 10689 | 0 medios |
+|   película·unlimplay.com | 200 | - | text/html | 439918 | 8 medios |
 | episodio | 200 | - | text/html | 39655 | 3 iframes: embedorigin.cc,fcplayer2.blogspot.com,unlimplay.com |
 |   episodio·embedorigin.cc | 200 | - | text/html | 12722 | 0 medios |
 |   episodio·fcplayer2.blogspot.com | 200 | - | text/html | 205222 | 0 medios |

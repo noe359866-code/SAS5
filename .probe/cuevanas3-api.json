@@ -1923,12 +1923,9 @@
     }
   },
   "cand:/wp-json/wpf/v1/episodes?post_id=57851": {
-    "status": 200,
-    "json": {
-      "error": true,
-      "message": "invalid post type: movies",
-      "data": []
-    }
+    "status": 0,
+    "json": null,
+    "head": ""
   },
   "cand:/wp-json/wpf/v1/episodes?id=57851": {
     "status": 200,
@@ -2832,9 +2829,12 @@
     }
   },
   "cand:/wp-json/wpf/v1/episodes?post_id=57851&type=movies": {
-    "status": 0,
-    "json": null,
-    "head": ""
+    "status": 200,
+    "json": {
+      "error": true,
+      "message": "invalid post type: movies",
+      "data": []
+    }
   },
   "cand:/wp-json/wpf/v1/episodes?post_id=57851&post_type=movies": {
     "status": 200,

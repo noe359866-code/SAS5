@@ -22,6 +22,7 @@ const { UA } = require('../lib/extractors');
 const sites = {
   cuevanas3: require('../lib/sites/cuevanas3'),
   animeflv: require('../lib/sites/animeflv'),
+  animeav1: require('../lib/sites/animeav1'),
   fuegocine: require('../lib/sites/fuegocine'),
   pelisjuanita: require('../lib/sites/pelisjuanita'),
   allpeliculas: require('../lib/sites/allpeliculas'),
@@ -69,7 +70,7 @@ globalThis.fetch = async (url, options = {}) => {
   // incluidos los POST de los buscadores del sitio.
   if (/html|text/i.test(type) && html.length) {
     const host = (() => { try { return new URL(String(url)).hostname; } catch { return ''; } })();
-    if (/(?:cuevanas3|allpeliculas|lamovie|animeflv|fuegocine|pelisjuanita|unlimplay|vimeos)/.test(host)) {
+    if (/(?:cuevanas3|allpeliculas|lamovie|animeflv|animeav1|fuegocine|pelisjuanita|unlimplay|vimeos)/.test(host)) {
       const name = (String(options.method || 'GET') === 'GET' ? '' : 'post-')
         + String(url).replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 80);
       try { fs.mkdirSync('.probe/html', { recursive: true }); fs.writeFileSync(`.probe/html/live-${name}.html`, html); } catch (_) {}
@@ -120,6 +121,7 @@ const redact = (raw) => {
 const SEARCHERS = {
   cuevanas3: (resolved) => sites.cuevanas3.searchCuevanas3(null, resolved, resolved.title, 9000),
   animeflv: (resolved) => sites.animeflv.searchAnimeFlv(null, resolved, resolved.title, 9000),
+  animeav1: (resolved) => sites.animeav1.searchAnimeAv1(null, resolved, resolved.title, 9000),
   fuegocine: (resolved) => sites.fuegocine.searchFuegoCine(null, resolved, resolved.title, 9000),
   pelisjuanita: (resolved) => sites.pelisjuanita.searchPelisJuanita(null, resolved, resolved.title, 9000),
   allpeliculas: (resolved) => sites.allpeliculas.searchAllpeliculas(null, resolved, resolved.title, 9000),

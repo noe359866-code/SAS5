@@ -84,7 +84,7 @@ jobs:
       - name: animeav1 (marcado de buscador, ficha y episodio)
         run: node scripts/animeav1-probe.mjs || true
       - name: adaptadores nuevos contra los sitios reales
-        run: node scripts/sites-live.js allpeliculas lamovie || true
+        run: node scripts/sites-live.js allpeliculas lamovie animeav1 || true
       - name: pelisjuanita (API REST y reproducción)
         run: node scripts/pelisjuanita-probe.mjs || true
       - name: pelisjuanita (episodios y reproductor externo)

@@ -13,7 +13,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1762,
+    "ms": 2044,
     "quality": [
       "HLS"
     ],
@@ -21,9 +21,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt33033798",
@@ -41,7 +41,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1790,
+    "ms": 1395,
     "quality": [
       "HLS"
     ],
@@ -49,9 +49,29 @@
       "Latino"
     ],
     "hosts": [
-      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt33033798",
+    "title": "Spider-Man: Un nuevo día",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/player?postId=90147",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
+      "200 https://animeav1.com/catalogo?search=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/spider-man-un-nuevo-dia h1=\"Titulo no encontrado\"",
+      "200 https://animeav1.com/catalogo?search=Spider-Man h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/spider-man h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 2587,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
   },
   {
     "control": "tt1375666",
@@ -59,15 +79,15 @@
     "provider": "allpeliculas",
     "hits": 0,
     "trace": [
-      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
-      "200 https://lamovie.org/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/player?postId=90147",
-      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
+      "200 https://animeav1.com/catalogo?search=Spider-Man%3A%20Un%20nuevo%20d%C3%ADa h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/spider-man-un-nuevo-dia h1=\"Titulo no encontrado\"",
+      "200 https://animeav1.com/catalogo?search=Spider-Man h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/spider-man h1=\"Titulo no encontrado\"",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 524,
+    "ms": 540,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -79,15 +99,35 @@
     "provider": "lamovie",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/player?postId=90147",
-      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
+      "404 https://animeav1.com/media/spider-man-un-nuevo-dia h1=\"Titulo no encontrado\"",
+      "200 https://animeav1.com/catalogo?search=Spider-Man h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/spider-man h1=\"Titulo no encontrado\"",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 408,
+    "ms": 337,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt1375666",
+    "title": "Inception",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "404 https://animeav1.com/media/spider-man h1=\"Titulo no encontrado\"",
+      "200 https://v3-cinemeta.strem.io/meta/movie/tt1375666.json",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
+      "200 https://animeav1.com/catalogo?search=Inception h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/inception h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 1248,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -99,7 +139,7 @@
     "provider": "allpeliculas",
     "hits": 1,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/search?q=Inception&page=1&postType=any&postsPerPage=18",
+      "404 https://animeav1.com/media/inception h1=\"Titulo no encontrado\"",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0903747",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/single/episodes/list?_id=68&season=1&page=1&postsPerPage=50",
@@ -109,7 +149,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2337,
+    "ms": 2496,
     "quality": [
       "HLS"
     ],
@@ -117,9 +157,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p2.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p2.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt0903747:1:1",
@@ -137,7 +177,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2007,
+    "ms": 2936,
     "quality": [
       "HLS"
     ],
@@ -150,13 +190,33 @@
     "verdict": "HLS/Latino https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
+    "control": "tt0903747:1:1",
+    "title": "Breaking Bad",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=37038&season=1&page=1&postsPerPage=50",
+      "200 https://lamovie.org/wp-api/v1/player?postId=37040",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html",
+      "200 https://animeav1.com/catalogo?search=Breaking%20Bad h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/breaking-bad h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 706,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
     "control": "tt18412256",
     "title": "Alien: Romulus",
     "provider": "allpeliculas",
     "hits": 1,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/player?postId=37040",
-      "200 https://vimeos.net/embed-ccjygcfxujhd.html",
+      "200 https://animeav1.com/catalogo?search=Breaking%20Bad h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/breaking-bad h1=\"Titulo no encontrado\"",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt18412256.json",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/player?postId=29363",
@@ -165,7 +225,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1838,
+    "ms": 2201,
     "quality": [
       "HLS"
     ],
@@ -193,7 +253,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1716,
+    "ms": 1368,
     "quality": [
       "HLS"
     ],
@@ -201,9 +261,29 @@
       "Latino"
     ],
     "hosts": [
-      "https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt18412256",
+    "title": "Alien: Romulus",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/player?postId=20879",
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html",
+      "200 https://animeav1.com/catalogo?search=Alien%3A%20Romulus h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/alien-romulus h1=\"Titulo no encontrado\"",
+      "200 https://animeav1.com/catalogo?search=Alien h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/alien h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 1020,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
   },
   {
     "control": "tt6263850",
@@ -221,7 +301,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 3650,
+    "ms": 2268,
     "quality": [
       "HLS"
     ],
@@ -229,9 +309,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt6263850",
@@ -249,7 +329,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1897,
+    "ms": 3217,
     "quality": [
       "HLS"
     ],
@@ -262,20 +342,40 @@
     "verdict": "HLS/Latino https://s8.vimeos.net/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
   },
   {
+    "control": "tt6263850",
+    "title": "Deadpool & Wolverine",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=Deadpool+%26+Wolverine&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=19173",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "200 https://animeav1.com/catalogo?search=Deadpool%20%26%20Wolverine h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/deadpool-wolverine h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 892,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
     "control": "tt22022452",
     "title": "Inside Out 2",
     "provider": "allpeliculas",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/search?q=Deadpool+%26+Wolverine&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/player?postId=19173",
       "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "200 https://animeav1.com/catalogo?search=Deadpool%20%26%20Wolverine h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/deadpool-wolverine h1=\"Titulo no encontrado\"",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt22022452.json",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 680,
+    "ms": 864,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -287,7 +387,7 @@
     "provider": "lamovie",
     "hits": 0,
     "trace": [
-      "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "404 https://animeav1.com/media/deadpool-wolverine h1=\"Titulo no encontrado\"",
       "200 https://v3-cinemeta.strem.io/meta/movie/tt22022452.json",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18",
@@ -295,7 +395,27 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 728,
+    "ms": 725,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "tt22022452",
+    "title": "Inside Out 2",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18",
+      "200 https://animeav1.com/catalogo?search=Inside%20Out%202 h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/inside-out-2 h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 530,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -307,9 +427,9 @@
     "provider": "allpeliculas",
     "hits": 1,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/search?q=Inside+Out+2&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/search?q=Inside&page=1&postType=any&postsPerPage=18",
+      "200 https://animeav1.com/catalogo?search=Inside%20Out%202 h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/inside-out-2 h1=\"Titulo no encontrado\"",
       "200 https://allpeliculas.la/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/player?postId=55973",
       "200 https://vimeos.net/embed-o0unqe46z0g7.html"
@@ -317,7 +437,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1541,
+    "ms": 2353,
     "quality": [
       "HLS"
     ],
@@ -325,9 +445,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+      "https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "El reino prohibido",
@@ -345,7 +465,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1656,
+    "ms": 1956,
     "quality": [
       "HLS"
     ],
@@ -358,12 +478,32 @@
     "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
   },
   {
+    "control": "El reino prohibido",
+    "title": "El reino prohibido",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/player?postId=80207",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
+      "200 https://animeav1.com/catalogo?search=El%20reino%20prohibido h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/el-reino-prohibido h1=\"Titulo no encontrado\"",
+      "200 https://animeav1.com/catalogo?search=reino%20prohibido h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/reino-prohibido h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 1264,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
     "control": "tt0409591:1:1",
     "title": "Naruto",
     "provider": "allpeliculas",
     "hits": 1,
     "trace": [
-      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
+      "404 https://animeav1.com/media/reino-prohibido h1=\"Titulo no encontrado\"",
       "200 https://api.tvmaze.com/lookup/shows?imdb=tt0409591",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/single/episodes/list?_id=11267&season=1&page=1&postsPerPage=50",
@@ -373,7 +513,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 3010,
+    "ms": 3131,
     "quality": [
       "HLS"
     ],
@@ -401,7 +541,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2362,
+    "ms": 3852,
     "quality": [
       "HLS"
     ],
@@ -409,9 +549,29 @@
       "Latino"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+      "https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+  },
+  {
+    "control": "tt0409591:1:1",
+    "title": "Naruto",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://animeav1.com/catalogo?search=Naruto h1=\"Catalogo de Animes\"",
+      "200 https://animeav1.com/media/naruto h1=\"Naruto\"",
+      "200 https://animeav1.com/media/naruto/1 h1=\"Episodio 1\"",
+      "200 https://player.zilla-networks.com/m3u8/ae8dbf546d9c503ffba750add380655e",
+      "200 https://player.zilla-networks.com/m3u8/a9a7e3818626d6bff13779e158d7733c",
+      "404 https://streamtape.com/e/vgb4w2964qtYLw/ h1=\"Video not found!\""
+    ],
+    "media": [],
+    "ms": 14002,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "probe-timeout"
   },
   {
     "control": "Ao Ashi Season 2",
@@ -419,15 +579,15 @@
     "provider": "allpeliculas",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=7606&season=1&page=1&postsPerPage=50",
-      "200 https://lamovie.org/wp-api/v1/player?postId=7609",
-      "200 https://vimeos.net/embed-wa2r4s768i9k.html",
+      "200 https://animeav1.com/media/naruto/1 h1=\"Episodio 1\"",
+      "200 https://player.zilla-networks.com/m3u8/ae8dbf546d9c503ffba750add380655e",
+      "200 https://player.zilla-networks.com/m3u8/a9a7e3818626d6bff13779e158d7733c",
+      "404 https://streamtape.com/e/vgb4w2964qtYLw/ h1=\"Video not found!\"",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 856,
+    "ms": 889,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -439,19 +599,39 @@
     "provider": "lamovie",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/player?postId=7609",
-      "200 https://vimeos.net/embed-wa2r4s768i9k.html",
+      "200 https://player.zilla-networks.com/m3u8/a9a7e3818626d6bff13779e158d7733c",
+      "404 https://streamtape.com/e/vgb4w2964qtYLw/ h1=\"Video not found!\"",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 855,
+    "ms": 775,
     "quality": [],
     "audio": [],
     "hosts": [],
     "verdict": "no-match"
+  },
+  {
+    "control": "Ao Ashi Season 2",
+    "title": "Ao Ashi Season 2",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18",
+      "200 https://animeav1.com/catalogo?search=Ao%20Ashi%20Season%202 h1=\"Catalogo de Animes\"",
+      "200 https://animeav1.com/media/ao-ashi-season-2 h1=\"Ao Ashi Season 2\"",
+      "200 https://animeav1.com/media/ao-ashi-season-2/7 h1=\"Episodio 7\"",
+      "200 https://player.zilla-networks.com/m3u8/a9e935bf402b045e09b23c724b2fb35f"
+    ],
+    "media": [],
+    "ms": 10417,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-extractable-embed {\"opaque\":2,\"extracted\":0,\"unsupported\":2}"
   },
   {
     "control": "Black Clover 2nd Season",
@@ -459,15 +639,15 @@
     "provider": "allpeliculas",
     "hits": 0,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
-      "200 https://allpeliculas.la/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18",
+      "200 https://animeav1.com/catalogo?search=Ao%20Ashi%20Season%202 h1=\"Catalogo de Animes\"",
+      "200 https://animeav1.com/media/ao-ashi-season-2 h1=\"Ao Ashi Season 2\"",
+      "200 https://animeav1.com/media/ao-ashi-season-2/7 h1=\"Episodio 7\"",
+      "200 https://player.zilla-networks.com/m3u8/a9e935bf402b045e09b23c724b2fb35f",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 711,
+    "ms": 917,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -479,15 +659,35 @@
     "provider": "lamovie",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/search?q=Ao+Ashi+Season+2&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/search?q=Ashi&page=1&postType=any&postsPerPage=18",
+      "200 https://animeav1.com/media/ao-ashi-season-2/7 h1=\"Episodio 7\"",
+      "200 https://player.zilla-networks.com/m3u8/a9e935bf402b045e09b23c724b2fb35f",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 714,
+    "ms": 922,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "Black Clover 2nd Season",
+    "title": "Black Clover 2nd Season",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18",
+      "200 https://animeav1.com/catalogo?search=Black%20Clover%202nd%20Season h1=\"Catalogo de Animes\"",
+      "200 https://animeav1.com/media/black-clover-2nd-season h1=\"Black Clover 2nd Season\""
+    ],
+    "media": [],
+    "ms": 751,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -499,9 +699,9 @@
     "provider": "allpeliculas",
     "hits": 1,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/search?q=Black+Clover+2nd+Season&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/search?q=Black&page=1&postType=any&postsPerPage=18",
+      "200 https://animeav1.com/catalogo?search=Black%20Clover%202nd%20Season h1=\"Catalogo de Animes\"",
+      "200 https://animeav1.com/media/black-clover-2nd-season h1=\"Black Clover 2nd Season\"",
       "200 https://allpeliculas.la/wp-api/v1/search?q=La+Odisea&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/player?postId=52912",
       "200 https://vimeos.net/embed-m62pdrnlvwpw.html"
@@ -509,7 +709,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1603,
+    "ms": 1813,
     "quality": [
       "HLS"
     ],
@@ -537,7 +737,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1470,
+    "ms": 1858,
     "quality": [
       "HLS"
     ],
@@ -545,9 +745,29 @@
       "Latino"
     ],
     "hosts": [
-      "https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+      "https://p7.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p7.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "La Odisea",
+    "title": "La Odisea",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/player?postId=98727",
+      "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
+      "200 https://animeav1.com/catalogo?search=La%20Odisea h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/la-odisea h1=\"Titulo no encontrado\"",
+      "200 https://animeav1.com/catalogo?search=Odisea h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/odisea h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 1186,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
   },
   {
     "control": "VisionQuest",
@@ -555,8 +775,8 @@
     "provider": "allpeliculas",
     "hits": 1,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/player?postId=98727",
-      "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
+      "200 https://animeav1.com/catalogo?search=Odisea h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/odisea h1=\"Titulo no encontrado\"",
       "200 https://allpeliculas.la/wp-api/v1/search?q=VisionQuest&page=1&postType=any&postsPerPage=18",
       "200 https://allpeliculas.la/wp-api/v1/single/episodes/list?_id=64072&season=1&page=1&postsPerPage=50",
       "200 https://allpeliculas.la/wp-api/v1/player?postId=64074",
@@ -565,7 +785,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 4063,
+    "ms": 2429,
     "quality": [
       "HLS"
     ],
@@ -573,9 +793,9 @@
       "Latino"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+      "https://p6.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p6.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "VisionQuest",
@@ -593,7 +813,7 @@
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1803,
+    "ms": 1974,
     "quality": [
       "HLS"
     ],
@@ -604,5 +824,25 @@
       "https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
     ],
     "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "VisionQuest",
+    "title": "VisionQuest",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/search?q=VisionQuest&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=92804&season=1&page=1&postsPerPage=50",
+      "200 https://lamovie.org/wp-api/v1/player?postId=92806",
+      "200 https://vimeos.net/embed-hc7i1n95d4vx.html",
+      "200 https://animeav1.com/catalogo?search=VisionQuest h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/visionquest h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 503,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
   }
 ]

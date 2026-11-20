@@ -31,7 +31,7 @@ Medición: `.probe/anime-candidates.md`, `.probe/anime-players.md` y
 | Paso | Petición | Qué devuelve |
 |---|---|---|
 | buscador | `GET /catalogo?search=<término>` | `<article>` con `<h3>` (nombre), portada con `alt`, enlace `/media/<slug>`. **Filtra** de verdad (5 fichas para «solo leveling») |
-| ficha | `GET /media/<slug>` | `<h1>` con el nombre y los episodios como `/media/<slug>/<n>` (12 en la ficha medida) |
+| ficha | `GET /media/<slug>` | `<h1>` con el nombre y los episodios como `/media/<slug>/<n>` (12 en la ficha medida; 50 en One Piece, y no pagina) |
 | episodio | `GET /media/<slug>/<n>` | JS con `embeds:{SUB:[…],DUB:[…]}` y, aparte, `downloads` |
 | visor | `GET player.zilla-networks.com/m3u8/<hex>` | manifiesto HLS (`application/x-mpegURL`, ~14 KB) |
 
@@ -48,6 +48,18 @@ YourUpload, MP4Upload, VidHide y StreamTape, cada uno en SUB y en DUB. Se
 ordenan por lo que el addon puede reproducir: primero el propio, después los
 extraíbles (Byse, StreamTape) y al final los opacos, que se cuentan y no se
 abren. Los `downloads` (Mega, 1Fichier, TransferIt) no cuentan como visores.
+
+### Episodios que la ficha no pinta
+
+La ficha publica como mucho **50 episodios y no pagina**: One Piece muestra
+1–50 aunque el sitio tenga 1180. Pero el patrón de URL es estable, así que el
+adaptador **construye** la del episodio pedido (`/media/one-piece/1180`) cuando
+no está en el listado, y la petición hace de comprobación: si no existe, el 404
+lo descarta como `no-episode`.
+
+Medido el 20-11-2026 (`.probe/anime-reach.md`): `/media/one-piece/1180`
+responde con `h1` «Episodio 1180» y 5 visores; `/media/one-piece/9999` da 404,
+así que construir la URL **no** produce falsos positivos.
 
 ### Identidad y temporadas
 
@@ -66,7 +78,7 @@ como `lat` y la subtitulada como `sub`, no como doblaje.
 
 ## Estado
 
-- Pruebas: `test/animeav1.test.js`, 17 casos con HTML real capturado
+- Pruebas: `test/animeav1.test.js`, 19 casos con HTML real capturado
   (`test/fixtures/sites/animeav1-*.html`); dos de ellos reproducen fallos
   medidos en vivo: el tope de lectura del manifiesto y el gasto inútil en
   visores de terceros cuando el propio ya sirve SUB y DUB, o cuando el episodio

@@ -87,6 +87,15 @@ async function steps() {
   await probeDirect(http, 'av1', (n) => `${av1.BASE}/media/one-piece/${n}`, NUMBERS, av1.serversOf);
   await verifyBuilt(http, 'av1', (n) => `${av1.BASE}/media/one-piece/${n}`, [1000, 1180], av1.serversOf, 9999);
 
+  // La prueba de extremo a extremo: el adaptador pidiendo el último episodio.
+  const resolved = { title: 'One Piece', year: 1999, mediaType: 'series', season: 1, episode: 1180 };
+  const started = Date.now();
+  try {
+    const out = await av1.searchAnimeAv1(null, resolved, resolved.title, 9000);
+    row('av1 adaptador E1180', `${Date.now() - started}ms · hits=${out.hits?.length || 0} · ${out.reason || 'ok'}${out.notes ? ` ${JSON.stringify(out.notes)}` : ''}`);
+    for (const hit of (out.hits || []).slice(0, 3)) row('  hit', `${hit.quality} ${hit.audioLabel} · ${hit.title} · ${hit.url.replace(/[a-f0-9]{16,}/g, '«hex»')}`);
+  } catch (err) { row('av1 adaptador E1180', `error ${short(err)}`); }
+
   row('— AnimeFLV —', '·');
   await ficha(http, 'flv', `${flv.BASE}/anime/one-piece/`, (html) => flv.episodesOf(html));
   let flvPrefix = '';

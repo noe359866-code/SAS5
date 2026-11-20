@@ -120,6 +120,45 @@ test('allpeliculas película: búsqueda → player → Vimeos → HLS', async ()
   } finally { stubbed.restore(); }
 });
 
+test('allpeliculas: la ficha con el título pegado («IntensaMente 2») se acepta', () => {
+  // Payload real del buscador medido el 20-11-2026 con la consulta
+  // «Intensamente 2»; el addon pide «Intensa-Mente 2», el título de TMDB.
+  const posts = [{ _id: 99001, title: 'IntensaMente 2 (2024)', type: 'movies', release_date: '2024-06-13' }];
+  const pedida = { title: 'Intensa-Mente 2', altTitle: 'Inside Out 2', year: '2024', mediaType: 'movie' };
+  assert.equal(allpeliculas.pickPost(posts, pedida)._id, 99001);
+  // Y la variante pegada es la que se consulta, no el título con guion.
+  const { titleQueries } = require('../lib/providerTitles');
+  assert.ok(titleQueries([pedida.title, pedida.altTitle]).includes('IntensaMente 2'));
+});
+
+test('allpeliculas: la consulta con el guion quitado llega al buscador', async () => {
+  const stubbed = stub([['/wp-api/v1/search', json({ data: { posts: [] } })]]);
+  try {
+    await allpeliculas.searchAllpeliculas('Intensa-Mente 2',
+      { title: 'Intensa-Mente 2', year: '2024', mediaType: 'movie' }, 'Intensa-Mente 2', 5000);
+    assert.ok(stubbed.calls.some((url) => /q=IntensaMente\+2|q=IntensaMente%202/.test(url)), stubbed.calls.join('\n'));
+  } finally { stubbed.restore(); }
+});
+
+test('allpeliculas: una película que cae en la segunda página del buscador también aparece', async () => {
+  // «El Origen» llena la primera página con otros títulos que también lo
+  // llevan; la película de 2010 está en la siguiente.
+  const primera = { data: { posts: [{ _id: 700, title: 'El Origen de los vampiros (2025)', type: 'movies', release_date: '2025-02-01' }] } };
+  const segunda = { data: { posts: [{ _id: 701, title: 'Origen (2010)', type: 'movies', release_date: '2010-07-16' }] } };
+  const stubbed = stub([
+    ['page=2', json(segunda)],
+    ['/wp-api/v1/search', json(primera)],
+    ['/wp-api/v1/player?postId=701', json(PLAYER_PELICULA)],
+    ['vimeos.net/embed-', html(packedEmbed(MASTER))],
+  ]);
+  try {
+    const pedida = { title: 'El Origen', altTitle: 'Inception', year: '2010', mediaType: 'movie' };
+    const out = await allpeliculas.searchAllpeliculas('El Origen', pedida, pedida.title, 5000);
+    assert.equal(out.hits.length, 1, `hits=${out.hits.length} ${out.reason}`);
+    assert.ok(stubbed.calls.some((url) => url.includes('page=2')));
+  } finally { stubbed.restore(); }
+});
+
 test('allpeliculas serie: lista de episodios y player del 1x1', async () => {
   const stubbed = stub([
     ['/wp-api/v1/search', json(SEARCH_SERIE)],

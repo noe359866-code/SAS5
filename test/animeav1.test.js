@@ -186,6 +186,37 @@ test('animeav1: la temporada del slug manda cuando el h1 no la menciona', () => 
   assert.equal(anime.seasonOfSlug('https://animeav1.com/media/ore-dake-level-up-na-ken'), null);
 });
 
+test('animeav1: un episodio que la ficha no lista se construye y se resuelve', async () => {
+  // La ficha solo pinta 50 episodios (One Piece: 1–50) y no pagina, pero
+  // `/media/<slug>/<n>` responde con visores hasta el último emitido.
+  const stubbed = stub([
+    ['/catalogo?search=', () => html(CATALOGO)],
+    [`${BASE}/media/ore-dake-level-up-na-ken/900`, () => html(EPISODIO)],
+    ['/media/ore-dake-level-up-na-ken', () => html(FICHA)],
+    ['player.zilla-networks.com/m3u8/', () => new Response('#EXTM3U\n', { status: 200, headers: { 'content-type': 'application/x-mpegURL' } })],
+  ]);
+  try {
+    const out = await anime.searchAnimeAv1('Ore dake Level Up na Ken', { ...SERIE, episode: 900 }, SERIE.title, 6000);
+    assert.ok(out.hits.length >= 1, `hits=${out.hits.length} ${out.reason}`);
+    assert.ok(out.hits.every((hit) => /S1E900/.test(hit.title)), out.hits.map((hit) => hit.title).join(','));
+  } finally { stubbed.restore(); }
+});
+
+test('animeav1: si el episodio construido no existe, no se publica nada', async () => {
+  const stubbed = stub([
+    ['/catalogo?search=', () => html(CATALOGO)],
+    // La ruta del episodio construido va antes que la de la ficha: el stub
+    // compara por «contiene».
+    ['/media/ore-dake-level-up-na-ken/9999', () => json({ message: 'not found' }, 404)],
+    ['/media/ore-dake-level-up-na-ken', () => html(FICHA)],
+  ]);
+  try {
+    const out = await anime.searchAnimeAv1('Ore dake Level Up na Ken', { ...SERIE, episode: 9999 }, SERIE.title, 6000);
+    assert.deepEqual(out.hits, []);
+    assert.equal(out.reason, 'no-episode');
+  } finally { stubbed.restore(); }
+});
+
 test('animeav1: la temporada también se reconoce en la forma «2nd-season»', () => {
   // `/media/black-clover-2nd-season` es la ficha de la temporada 2 medida en
   // vivo; sin reconocerla, la serie quedaba en `no-match`.

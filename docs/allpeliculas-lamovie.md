@@ -54,6 +54,28 @@ Cadena medida con *The Pitt* 1x1 el 20-11-2026 (`.probe/vimeos-chain.md`):
 | player | 1 embed · `vimeos.net` · Latino · Full HD | 1 embed · `vimeos.net` · latino · Full HD |
 | Vimeos resuelto | HLS ✓ · 503 ms | HLS ✓ · 449 ms |
 
+## Títulos que «no estaban» (medido el 20-11-2026)
+
+La queja era concreta: películas que sí están en los sitios y el addon no
+encontraba. El buscador crudo lo explicó (`.probe/movies-reach.md`):
+
+| Consulta | Cuevana 3 | Allpelículas | LaMovie |
+|---|---|---|---|
+| `Intensa-Mente 2` (título de TMDB) | 0 resultados | 0 resultados | 0 resultados |
+| `Intensamente 2` (sin guion) | `IntensaMente 2 (2024)` | idem | idem |
+
+El buscador es un `LIKE` sobre el título **guardado**, y el guardado une las
+palabras. Se corrigió en el camino común (`lib/providerTitles.js`), así que vale
+para todas las fuentes que lo usan:
+
+- la comparación de títulos ignora también los espacios («Intensa-Mente 2» ≡
+  «IntensaMente 2», «Spider-Man» ≡ «Spiderman»);
+- las consultas incluyen la forma pegada y la de signos en blanco, y las
+  variantes del título pedido se prueban **antes** del título original;
+- si la ficha no aparece en la primera página del buscador (18 resultados), se
+  mira una página más: «El Origen» llena la primera con otros títulos que
+  también lo llevan.
+
 ## Validación en vivo (20-11-2026)
 
 `scripts/sites-live.js allpeliculas lamovie`, los 12 controles del addon

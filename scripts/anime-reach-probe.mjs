@@ -96,6 +96,25 @@ async function steps() {
     for (const hit of (out.hits || []).slice(0, 3)) row('  hit', `${hit.quality} ${hit.audioLabel} · ${hit.title} · ${hit.url.replace(/[a-f0-9]{16,}/g, '«hex»')}`);
   } catch (err) { row('av1 adaptador E1180', `error ${short(err)}`); }
 
+  // Películas de anime: ¿la ficha de una película sirve visores por sí misma?
+  row('— películas de anime —', '·');
+  for (const titulo of ['One Piece Film Red', 'Jujutsu Kaisen 0', 'Suzume']) {
+    let page = '';
+    try {
+      const listing = await http.text(`${av1.BASE}/catalogo?search=${encodeURIComponent(titulo)}`, { maxBytes: 1024 * 1024 });
+      page = [...new Set((listing.match(/href="(\/media\/[^"]+)"/g) || []).map((h) => h.replace(/^href="|"$/g, '')))][0] || '';
+      row(`busca «${titulo}»`, page || 'sin fichas');
+    } catch (err) { row(`busca «${titulo}»`, `error ${short(err)}`); continue; }
+    if (!page) continue;
+    try {
+      const html = await http.text(`${av1.BASE}${page}`, { maxBytes: 1024 * 1024 });
+      const servers = av1.serversOf(html);
+      const eps = av1.episodesOf(html, `${av1.BASE}${page}`);
+      row(`  película ${page}`, `${html.length}B · embeds=${/embeds\s*:/.test(html) ? 'sí' : 'no'} · visores=${servers.length} · episodios=${eps.length}`);
+      row('  visores', servers.slice(0, 5).map((x) => `${x.server}/${x.group}`).join(' ') || 'ninguno');
+    } catch (err) { row(`  película ${page}`, `error ${short(err)}`); }
+  }
+
   row('— AnimeFLV —', '·');
   await ficha(http, 'flv', `${flv.BASE}/anime/one-piece/`, (html) => flv.episodesOf(html));
   let flvPrefix = '';

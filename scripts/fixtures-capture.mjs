@@ -74,6 +74,22 @@ async function main() {
     }
   }
 
+  // AnimeAV1: buscador, ficha y episodio (HTML real, con los embeds SUB/DUB).
+  const animeBase = 'https://animeav1.com';
+  const catalog = await fetchText(`${animeBase}/catalogo?search=${encodeURIComponent('ore dake level up na ken')}`, `${animeBase}/`);
+  if (catalog.status === 200) fs.writeFileSync(`${dir}/animeav1-catalogo.html`, catalog.body);
+  report.push(`animeav1 catálogo: ${catalog.status} ${catalog.body.length}B`);
+  const media = (catalog.body.match(/href="([^"]*\/media\/[^"/]+)"/) || [])[1] || '';
+  if (media) {
+    const mediaUrl = new URL(media, animeBase).href;
+    const detail = await fetchText(mediaUrl, `${animeBase}/`);
+    if (detail.status === 200) fs.writeFileSync(`${dir}/animeav1-ficha.html`, detail.body);
+    report.push(`animeav1 ficha: ${detail.status} ${detail.body.length}B`);
+    const episode = await fetchText(`${mediaUrl.replace(/\/+$/, '')}/1`, mediaUrl);
+    if (episode.status === 200) fs.writeFileSync(`${dir}/animeav1-episodio.html`, episode.body);
+    report.push(`animeav1 episodio: ${episode.status} ${episode.body.length}B`);
+  }
+
   fs.writeFileSync('.probe/fixtures.md', ['| Paso | Respuesta |', '|---|---|', ...report.map((line) => `| ${line.split(': ')[0]} | ${line.split(': ')[1]} |`), ''].join('\n'));
   console.log(report.join('\n'));
 }

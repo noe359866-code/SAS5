@@ -17,7 +17,7 @@
 | av1 verifica /1180 | menciona el número · sin enlace propio · h1=«Episodio 1180» · visores=5 |
 | av1 verifica /1000 | menciona el número · sin enlace propio · h1=«Episodio 1000» · visores=5 |
 | av1 imposible /9999 | error HTTP 404 HTTP 404 al consultar https://animeav1.com/media/one-piece/9999 (lo esperado) |
-| av1 adaptador E1180 | 1768ms · hits=1 · ok |
+| av1 adaptador E1180 | 1670ms · hits=1 · ok |
 |   hit | HLS Subtitulado · One Piece S1E1180 AnimeAV1 · https://player.zilla-networks.com/m3u8/«hex» |
 | — AnimeFLV — | · |
 | flv ficha | 60110B · 14 episodios · min=1167 max=1180 |

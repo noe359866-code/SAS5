@@ -1,14 +1,16 @@
 | Paso | Resultado |
 |---|---|
 | — Intensa-Mente 2 (2024) — | · |
-| cuevanas3 «Intensa-Mente 2» | 363ms · 0 resultados · ninguno |
-| cuevanas3 «Intensamente 2» | 344ms · 1 resultados · IntensaMente 2 (2024) [movies/2024] |
-| allpeliculas «Intensa-Mente 2» | 508ms · 0 resultados · ninguno |
-| allpeliculas «Intensamente 2» | 334ms · 1 resultados · IntensaMente 2 (2024) [movies/2024] |
-| lamovie «Intensa-Mente 2» | 338ms · 0 resultados · ninguno |
-| lamovie «Intensamente 2» | 365ms · 1 resultados · IntensaMente 2 (2024) [movies/2024] |
+| cuevanas3 «Intensa-Mente 2» | 1040ms · 0 resultados · ninguno |
+| cuevanas3 «Intensamente 2» | 368ms · 1 resultados · IntensaMente 2 (2024) [movies/2024] |
+| allpeliculas «Intensa-Mente 2» | 558ms · 0 resultados · ninguno |
+| allpeliculas «Intensamente 2» | 356ms · 1 resultados · IntensaMente 2 (2024) [movies/2024] |
+| lamovie «Intensa-Mente 2» | 1016ms · 0 resultados · ninguno |
+| lamovie «Intensamente 2» | 455ms · 1 resultados · IntensaMente 2 (2024) [movies/2024] |
 | — El Origen (2010) — | · |
-| cuevanas3 «El Origen» | 1001ms · 18 resultados · El cartel de los sapos: El origen (2022) [tvshows/2022] · Z-O-M-B-I-E-S 4: El origen de los vampir [movies/2025] · Cementerio de Mascotas: El Origen (2023) [movies/2023] · La Leyenda de la Bruja de Navidad: El Or [movies/2021] · La huérfana: El origen (2022) [movies/2022] |
+| cuevanas3 «El Origen» | error Timeout de 12000 ms al consultar https://cuevanas3.pro/wp-api/v1/searc |
+| cuevanas3 «Inception» | error Timeout de 12000 ms al consultar https://cuevanas3.pro/wp-api/v1/searc |
+| cuevanas3 «Inception» | error Timeout de 12000 ms al consultar https://cuevanas3.pro/wp-api/v1/searc |
 | allpeliculas «El Origen» | error Timeout de 12000 ms al consultar https://allpeliculas.la/wp-api/v1/sea |
 | allpeliculas «Inception» | error Timeout de 12000 ms al consultar https://allpeliculas.la/wp-api/v1/sea |
 | allpeliculas «Inception» | error Timeout de 12000 ms al consultar https://allpeliculas.la/wp-api/v1/sea |

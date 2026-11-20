@@ -3048,9 +3048,9 @@
     }
   },
   "cand:/peliculas/spider-man-un-nuevo-dia-2026": {
-    "status": 0,
+    "status": 200,
     "json": null,
-    "head": ""
+    "head": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html lang=\"es\" prefix=\"og: http://ogp.me/ns#\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Spider-Man: Un nuevo día (2026) Película Completa Online – Cuevana</title>\n\n\t\t<!-- All in One SEO 5.0.4 - aioseo.com -->\n\t<meta name=\"description\" content=\"A medida qué Spider-Man está en la cima de su carrera protegiendo la ciudad de Nueva York, una serie de crímenes inusuales lo arrastran a una red de misterios más grande de lo que jamás haya enfrentado.\" />\n\t<meta name=\"robots\" content=\"max-image-preview:large\" />\n\t<link rel=\"canonical\" href=\"https://cuevanas3.pro/peliculas/spider-man-un-nuevo-dia-2026/\" />\n\t\t<meta "
   },
   "cand:/wp-api/v1/episodes?postId=57851": {
     "status": 404,

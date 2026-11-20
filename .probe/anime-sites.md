@@ -28,7 +28,7 @@
 | animeyt.cc | `/wp-json/` | bot | 403 | challenge | cloudflare | text/html | 5542 | <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><m |
 | animeyt.cc | `/wp-json/wp/v2/types` | bot | 403 | challenge | cloudflare | text/html | 5596 | <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><m |
 | animeyt.cc | `/sitemap.xml` | bot | 403 | challenge | cloudflare | text/html | 5551 | <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><m |
-| animeyt.cc | `/feed/` | bot | 200 | - | cloudflare | application/rss+xml | 23671 | <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellform |
+| animeyt.cc | `/feed/` | bot | 200 | - | cloudflare | application/rss+xml | 20646 | <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellform |
 | animeyt.cc | `/?s=naruto` | bot | 403 | challenge | cloudflare | text/html | 5560 | <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><m |
 | animeyt.cc | `/robots.txt` | bot | 200 | - | cloudflare | text/plain | 2847 | # As a condition of accessing this website, you agree to abide by the following # content signals: # (a) If a Content-Signal = yes, you may  |
 

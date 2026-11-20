@@ -32,6 +32,8 @@ on:
       - 'scripts/anime-players4-probe.mjs'
       - 'scripts/animeav1-probe.mjs'
       - 'scripts/animeav1-debug.mjs'
+      - 'scripts/anime-reach-probe.mjs'
+      - 'scripts/movies-reach-probe.mjs'
       - 'scripts/pelisjuanita-probe.mjs'
       - 'scripts/pelisjuanita-probe2.mjs'
       - 'scripts/pelisjuanita-probe3.mjs'
@@ -86,6 +88,10 @@ jobs:
         run: node scripts/animeav1-probe.mjs || true
       - name: animeav1 (depuración con el cliente del adaptador)
         run: node scripts/animeav1-debug.mjs || true
+      - name: alcance de episodios (One Piece) en los sitios de anime
+        run: node scripts/anime-reach-probe.mjs || true
+      - name: buscador crudo de películas (títulos que no aparecen)
+        run: node scripts/movies-reach-probe.mjs || true
       - name: adaptadores nuevos contra los sitios reales
         run: node scripts/sites-live.js allpeliculas lamovie animeav1 || true
       - name: pelisjuanita (API REST y reproducción)

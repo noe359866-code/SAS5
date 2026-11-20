@@ -218,11 +218,20 @@ async function main() {
     let verdict = `${kind || 'desconocido'}`;
     if (!embed) verdict = 'el player.php no publica el destino';
     else if (kind && kind !== 'opaque') {
+      // El visor puede exigir un Referer concreto: se prueban los tres que
+      // tienen sentido (ninguno, el del salto propio y el de la ficha).
       const { extractEmbed } = require('../lib/extractors');
-      try {
-        const out = await extractEmbed(embed, { timeoutMs: 9000, referer: `${BASE}/` });
-        verdict = `${kind} → ok=${out.ok} fuentes=${out.sources?.length || 0}${out.reason ? ` (${out.reason})` : ''}`;
-      } catch (err) { verdict = `${kind} → error ${String(err?.message || err).slice(0, 40)}`; }
+      const referers = [null, 'https://player.poseidonhd2.co/', `${BASE}/`];
+      const results = [];
+      for (const referer of referers) {
+        try {
+          const out = await extractEmbed(embed, { timeoutMs: 9000, ...(referer ? { referer } : {}) });
+          results.push(`${referer ? new URL(referer).hostname : 'sin-referer'}=${out.ok ? `ok(${out.sources.length})` : (out.reason || 'no')}`);
+        } catch (err) {
+          results.push(`${referer ? new URL(referer).hostname : 'sin-referer'}=error:${String(err?.message || err).slice(0, 30)}`);
+        }
+      }
+      verdict = `${kind} → ${results.join(' ')}`;
     } else if (kind === 'opaque') verdict = 'opaque (JS / Cloudflare)';
     else if (/(?:^|\.)doodstream\./.test(hostOf(embed))) {
       const pass = /\/pass_md5\/[^"'\\ ]+/i.exec(jump.body);

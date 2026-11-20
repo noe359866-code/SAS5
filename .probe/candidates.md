@@ -8,7 +8,7 @@
 | seriesflix script www.googletagmanager.com | 200 | 13577 | fetch()=0 · rutas absolutas: — · relativas: — |
 | seriesflix script motorsnag.com | 200 | 19012 | fetch()=0 · rutas absolutas: — · relativas: — |
 | seriesflix buscador | 403 | 5988 | iframes=0 |
-| documaniatv (UA) | 403 | 5762 | cf=challenge tipo=text/html |
-| documaniatv (navegador) | 403 | 5997 | cf=challenge tipo=text/html video=0 mp4=2 m3u8=0 iframe=0 |
+| documaniatv (UA) | 403 | 8259 | cf=- tipo=text/html |
+| documaniatv (navegador) | 403 | 8259 | cf=- tipo=text/html video=0 mp4=0 m3u8=0 iframe=0 |
 
 Sonda de candidatas: solo HTML/JS público; sin segmentos de vídeo.

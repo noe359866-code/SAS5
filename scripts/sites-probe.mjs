@@ -119,7 +119,7 @@ async function crawl(label, url, referer, depth, rows, site, seen) {
   seen.add(url);
   const res = await get(url, { headers: referer ? { Referer: referer } : {} });
   const scan = res.status === 200 ? scanHtml(res.body, url) : null;
-  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt|fuegocine|pelisjuanita/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
+  if (res.status === 200 && res.body && /cuevanas3|animed23|animejara|animeflv|animeyt|fuegocine|pelisjuanita|poseidonhd2/.test(site) && (/json|html|text|javascript/.test(res.type) || !res.type)) {
     try {
       const fs = await import('node:fs');
       fs.mkdirSync('.probe/html', { recursive: true });

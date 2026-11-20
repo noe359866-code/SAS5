@@ -162,8 +162,16 @@ async function main() {
   const unique = [...new Set(slugs)];
   const lockers = new Map();
   const directMedia = [];
+  // Los slugs vienen como `movies/<id>/<nombre>` o `series/<id>/<nombre>`; la
+  // ruta real es `/pelicula/…` o `/serie/…`.
+  const pageUrl = (slug) => {
+    const parts = String(slug).split('/');
+    if (parts.length < 3) return '';
+    const kind = parts[0] === 'movies' ? 'pelicula' : parts[0] === 'series' ? 'serie' : null;
+    return kind ? `${BASE}/${kind}/${parts[1]}/${parts.slice(2).join('/')}` : '';
+  };
   for (const slug of unique.slice(0, 10)) {
-    const page = await get(`${BASE}/${slug}`);
+    const page = await get(pageUrl(slug));
     const data = nextData(page.body);
     const node = data?.props?.pageProps?.thisMovie || data?.props?.pageProps?.episode
       || data?.props?.pageProps?.serie || null;

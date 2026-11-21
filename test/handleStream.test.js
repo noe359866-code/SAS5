@@ -75,18 +75,17 @@ test('un stream subtitulado se anuncia con lápiz, no con auriculares', () => {
   assert.doesNotMatch(stream.title, /🎧/);
 });
 
-test('el HLS que declara su origen pide el proxy de Stremio; el MP4 no', () => {
+test('HLS y MP4 piden el proxy; solo el origen declarado añade cabeceras', () => {
   const origin = 'https://player.example';
   for (const quality of ['HLS', 'MP4']) {
-    // Cualquier fuente que declare `playbackOrigin` recibe las cabeceras; las
-    // que no lo declaran nunca lo hacen.
+    // Sin origen conocido se solicita el proxy sin inventar cabeceras.
     for (const declares of [true, false]) {
       const hit = { provider: 'cuevanas3', quality, ...(declares ? { playbackOrigin: origin } : {}),
         url: `https://cdn.example/movie.${quality === 'HLS' ? 'm3u8' : 'mp4'}` };
       const stream = streams.toDirectStream(hit);
       assert.equal(stream.url, hit.url);
-      assert.deepEqual(stream.behaviorHints.proxyHeaders, declares && quality === 'HLS'
-        ? { request: { Origin: origin, Referer: `${origin}/` } } : undefined);
+      assert.deepEqual(stream.behaviorHints.proxyHeaders, { request: declares
+        ? { Origin: origin, Referer: `${origin}/` } : {} });
     }
   }
 });

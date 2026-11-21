@@ -165,6 +165,7 @@ test('fuegocine película: buscador → watch → visor → HLS latino y subtitu
     const out = await fuego.searchFuegoCine('Spider-Man Un Nuevo Día', MOVIE, MOVIE.title, 5000);
     assert.equal(out.hits.length, 2);
     assert.deepEqual(out.hits.map((hit) => hit.audioLabel), ['Latino', 'Subtitulado']);
+    assert.ok(out.hits.every((hit) => hit.playbackOrigin === 'https://unlimplay.com'));
     assert.ok(out.hits.every((hit) => hit.provider === 'fuegocine' && hit.quality === 'HLS'));
     assert.ok(out.hits.every((hit) => /^https:\/\/unlimplay\.com\/cps\.php/.test(hit.url)));
     assert.ok(out.hits.every((hit) => hit.expiresAt === 4102444800000));

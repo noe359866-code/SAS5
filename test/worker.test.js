@@ -277,8 +277,8 @@ test('Worker: /stream publica el HLS original de Fanpelis sin retransmitir ni re
   const embed = 'https://vimeos.net/embed-direct-test.html';
   const id = 'tt9006134%3A1%3A2';
   const cachePath = `/series/${id}?p=fanpelis&b=all`;
-  const previous = `${base}/__edge/stream-v3${cachePath}`;
-  const current = `${base}/__edge/stream-v4${cachePath}`;
+  const previous = `${base}/__edge/stream-v4${cachePath}`;
+  const current = `${base}/__edge/stream-v5${cachePath}`;
   const entries = new Map([[previous, Response.json({ streams: [{ url: `${base}/hls?via=spinflix&u=${encodeURIComponent(master)}` }] })]]);
   const matches = [];
   const originalCaches = globalThis.caches;
@@ -322,7 +322,7 @@ test('Worker: /stream publica el HLS original de Fanpelis sin retransmitir ni re
   assert.equal(stream.name, 'Serie del fixture');
   assert.match(stream.title, /T1E2.*Fanpelis.*Latino/);
   assert.equal(stream.behaviorHints.notWebReady, true);
-  assert.equal(stream.behaviorHints.proxyHeaders, undefined);
+  assert.deepEqual(stream.behaviorHints.proxyHeaders, { request: { Origin: 'https://vimeos.net', Referer: 'https://vimeos.net/' } });
   assert.equal(stream.url, master);
   assert.deepEqual(matches, [current]);
   assert.equal((await entries.get(current).json()).streams[0].url, master);

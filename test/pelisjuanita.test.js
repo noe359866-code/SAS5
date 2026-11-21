@@ -211,6 +211,12 @@ test('pelisjuanita película: búsqueda → reproductor → Vimeos → HLS subti
     const hit = out.hits[0];
     assert.equal(hit.provider, 'pelisjuanita');
     assert.equal(hit.quality, 'HLS');
+    assert.equal(hit.playbackOrigin, 'https://vimeos.net');
+    const stream = require('../lib/streams').toStream(hit);
+    assert.equal(stream.url, hit.url);
+    assert.deepEqual(stream.behaviorHints.proxyHeaders, {
+      request: { Origin: 'https://vimeos.net', Referer: 'https://vimeos.net/' },
+    });
     assert.equal(hit.audioLabel, 'Subtitulado');
     assert.match(hit.url, /master\.m3u8/);
     assert.equal(hit.expiresAt, 4102531200000);

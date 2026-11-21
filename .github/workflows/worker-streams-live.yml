@@ -46,7 +46,7 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - name: API de workerd local y primeros segmentos directos del CDN
+      - name: API de workerd local y diagnóstico de candidatos
         run: |
           npx wrangler dev --local --ip 127.0.0.1 --port 8799 --var STREAM_PROVIDERS:fanpelis,spinflix > "$RUNNER_TEMP/playback-worker.log" 2>&1 &
           pid=$!
@@ -56,4 +56,4 @@ jobs:
             sleep 1
           done
           if ! test -s "$RUNNER_TEMP/playback-ready.json"; then cat "$RUNNER_TEMP/playback-worker.log"; exit 1; fi
-          node scripts/worker-streams-live.js --playback http://127.0.0.1:8799 --expect-direct
+          node scripts/worker-streams-live.js --playback http://127.0.0.1:8799

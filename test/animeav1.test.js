@@ -113,6 +113,7 @@ test('animeav1: buscador → ficha → episodio → manifiesto, con latino y sub
     assert.ok(audios.includes('Latino'), audios.join(','));
     assert.ok(audios.includes('Subtitulado'), audios.join(','));
     for (const hit of out.hits) {
+      assert.equal(hit.playbackOrigin, 'https://player.zilla-networks.com');
       assert.equal(hit.provider, 'animeav1');
       assert.equal(hit.quality, 'HLS');
       assert.match(hit.url, /^https:\/\/player\.zilla-networks\.com\/m3u8\/[a-f0-9]+$/);

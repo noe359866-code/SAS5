@@ -42,7 +42,7 @@ Habilitada no significa **disponible**: una fuente puede responder con error, no
 
 **Sin comprobar el medio:** el addon ya no descarga manifiestos HLS ni MP4 ni sondea segmentos. Solo valida la forma de la URL (host conocido, extensión, sin credenciales y con firma viva) antes de publicarla, así que una búsqueda gasta menos peticiones y no toca el CDN del proveedor. La contrapartida es que un enlace caído se descubre al abrirlo, no al pedir la lista; los scripts de `scripts/` siguen pudiendo sondear el CDN desde el runner si hace falta revisar algo.
 
-**Proxy de reproducción:** cualquier HLS cuyo origen declare el reproductor —hoy PelisJuanita vía `vimeos.net`— solicita el proxy del servicio de streaming de Stremio (`behaviorHints.proxyHeaders`) con ese origen, porque el CDN rechaza peticiones sin `Referer`. Requiere un cliente que admita ese proxy. Los MP4 y los HLS que no declaran origen siguen directos. El addon no retransmite vídeo ni expone un proxy público.
+**Proxy de reproducción:** todos los streams HLS y MP4 solicitan el proxy del servicio de streaming de Stremio mediante `behaviorHints.proxyHeaders`. Cuando se conoce el visor, se envían su `Origin` y `Referer`; sin origen conocido se solicita el proxy sin cabeceras adicionales. Requiere un cliente y servidor de streaming compatibles y no garantiza evitar 403. El addon no retransmite vídeo ni expone un proxy público.
 
 **Republicación:** tras desplegar, comprueba que `/manifest.json` devuelve `net.ramdonlatam.catalogos` como `id` y envía esa URL HTTPS a stremioaddons.net. Para mantener también el addon anterior, usa una URL de despliegue distinta.
 

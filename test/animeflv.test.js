@@ -143,6 +143,7 @@ test('animeflv: una película se sirve con la única entrada de su ficha', async
     assert.equal(out.hits.length, 1, `hits=${out.hits.length} ${out.reason}`);
     assert.equal(out.hits[0].provider, 'animeflv');
     assert.equal(out.hits[0].url, HLS);
+    assert.equal(out.hits[0].playbackOrigin, 'https://player.zilla-networks.com');
     assert.match(out.hits[0].title, /One Piece Film: Red AnimeFLV/);
   } finally { stubbed.restore(); }
 });

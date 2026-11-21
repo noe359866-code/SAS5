@@ -111,6 +111,7 @@ test('allpeliculas película: búsqueda → player → Vimeos → HLS', async ()
     const out = await allpeliculas.searchAllpeliculas('La Odisea', PELICULA, PELICULA.title, 5000);
     assert.equal(out.hits.length, 1);
     const hit = out.hits[0];
+    assert.equal(hit.playbackOrigin, 'https://vimeos.net');
     assert.equal(hit.provider, 'allpeliculas');
     assert.equal(hit.url, MASTER);
     assert.equal(hit.quality, 'HLS');

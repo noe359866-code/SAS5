@@ -239,7 +239,7 @@ function canonicalStreamCacheUrl(requestUrl, type, id, cfg) {
   const active = streams.activeProviders(cfg).slice().sort().join(',');
   const badges = Array.isArray(cfg && cfg.badges) ? cfg.badges.slice().sort().join(',') : 'all';
   // No reutilizar JSON del transporte retirado, incluso para una config ya instalada.
-  return `${u.origin}/__edge/stream-v4/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
+  return `${u.origin}/__edge/stream-v5/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
 }
 
 function safeDecode(value) {

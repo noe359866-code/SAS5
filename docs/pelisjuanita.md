@@ -37,7 +37,10 @@ Decisiones del adaptador:
   visor se adjuntan como subtítulos, con `es`/`en` según su etiqueta.
 - **`Referer`**: `videoapp.mov` solo monta el `<iframe>` si la petición viene de
   `pelisjuanita.org`. Sin esa cabecera la página llega sin reproductor y todo se
-  degradaba a `no-players`; está fijado con una prueba.
+  degradaba a `no-players`; está fijado con una prueba. Para reproducir el HLS,
+  el addon indica el origen del iframe de Vimeos mediante
+  `behaviorHints.proxyHeaders`, para clientes compatibles con el proxy de
+  Stremio. El Worker no retransmite el vídeo; la reproducción no está garantizada.
 
 Presupuesto por búsqueda: 3 peticiones en películas (búsqueda, reproductor y
 visor) y 5 en series (más temporadas y episodios). El API corta en 24 resultados

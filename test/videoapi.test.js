@@ -51,6 +51,7 @@ test('videoapi película: player → Vimeos → HLS y subtítulos', async () => 
     assert.equal(res.hits.length, 1);
     assert.equal(res.hits[0].provider, 'videoapi');
     assert.equal(res.hits[0].quality, 'HLS');
+    assert.equal(res.hits[0].playbackOrigin, 'https://vimeos.net');
     assert.equal(res.hits[0].audioLabel, 'Subtitulado');
     assert.match(res.hits[0].url, /master\.m3u8/);
     assert.ok(res.hits[0].subtitles.length >= 1);

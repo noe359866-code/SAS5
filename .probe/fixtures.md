@@ -1,6 +1,6 @@
 | Paso | Respuesta |
 |---|---|
-| allpeliculas search-serie | 200 1426B |
+| allpeliculas search-serie | 200 1425B |
 | allpeliculas search-pelicula | 200 4371B |
 | allpeliculas episodios | 200 8087B |
 | allpeliculas player episodio | 200 2655B |

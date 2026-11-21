@@ -47,7 +47,7 @@ test('configuración: solo las fuentes directas y sin selectores de tipo/idioma'
   assert.equal('streamTypes' in cfg, false);
   assert.equal('streamLanguages' in cfg, false);
   assert.deepEqual(streams.PROVIDER_KEYS, ['fanpelis', 'spinflix',
-    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita']);
+    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita', 'videoapi', 'supabase']);
   assert.deepEqual(Object.keys(streams.SEARCHERS).sort(), [...streams.PROVIDER_KEYS].sort());
   assert.deepEqual(Object.keys(choice.PROVIDER_LANGUAGES), streams.PROVIDER_KEYS);
   for (const key of streams.PROVIDER_KEYS) assert.equal(choice.providerType(key), 'direct');
@@ -57,13 +57,14 @@ test('configuración: solo las fuentes directas y sin selectores de tipo/idioma'
 test('las fuentes vigentes siguen activas por defecto; se respetan las listas explícitas y off', (t) => {
   t.after(() => config.reload());
   config.reload({});
+  // `supabase` solo se activa con credenciales (SUPABASE_URL + clave).
   assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'spinflix',
-    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita']);
+    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita', 'videoapi']);
   assert.deepEqual(streams.activeProviders({ streams: [] }), []);
   assert.deepEqual(streams.activeProviders({ streams: ['pelisjuanita'] }), ['pelisjuanita']);
   config.reload({ STREAM_PROVIDERS: 'all', FANPELIS: 'off' });
   assert.deepEqual(streams.activeProviders(null), ['spinflix',
-    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita']);
+    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita', 'videoapi']);
   assert.deepEqual(streams.activeProviders({ streams: ['fanpelis'] }), []);
   config.reload({ STREAM_PROVIDERS: 'fanpelis,spinflix' });
   assert.deepEqual(streams.activeProviders(null), ['fanpelis', 'spinflix']);
@@ -102,7 +103,7 @@ test('los enlaces antiguos conservan su selección válida y nunca reactivan una
   assert.deepEqual(streams.activeProviders(decode(retired)), ['spinflix']);
   config.reload({ STREAM_PROVIDERS: retired.join(',') });
   assert.deepEqual(streams.activeProviders(decode(retired)), ['fanpelis', 'spinflix',
-    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita']);
+    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita', 'videoapi']);
   assert.deepEqual(decode([]).streams, []);
   assert.deepEqual(streams.activeProviders(decode([])), []);
   config.reload({ STREAM_PROVIDERS: 'off' });

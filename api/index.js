@@ -114,6 +114,9 @@ app.get('/healthz', (req, res) => {
       ...Object.fromEntries(STREAM_KEYS.map((key) => [key, activeProviders(null).includes(key)])),
     },
     streamProviders: activeProviders(null),
+    // Enlaces propios: solo booleanos (nunca la URL ni la clave). `writable`
+    // indica si hay `service_role` para marcar enlaces roto automáticamente.
+    videoHostLinks: require('../lib/supabase').status(),
     // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
     donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
     cache: cache.stats(),

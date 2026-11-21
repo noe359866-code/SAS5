@@ -70,7 +70,11 @@ test('API Express: healthz solo anuncia las fuentes vigentes', async (t) => {
   assert.equal(response.status, 200);
   const body = response.json();
   assert.deepEqual(body.streamProviders, ['spinflix']);
-  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: false, spinflix: true, cuevanas3: false, allpeliculas: false, lamovie: false, animeflv: false, animeav1: false, fuegocine: false, pelisjuanita: false });
+  // `videoapi` y `supabase` forman parte del registro, pero no están activas
+  // aquí: la primera no pasa el filtro de STREAM_PROVIDERS y la segunda no
+  // tiene SUPABASE_URL/SUPABASE_ANON_KEY (ver lib/supabase.js).
+  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: false, spinflix: true, cuevanas3: false, allpeliculas: false, lamovie: false, animeflv: false, animeav1: false, fuegocine: false, pelisjuanita: false, videoapi: false, supabase: false });
+  assert.deepEqual(body.videoHostLinks, { configured: false, writable: false });
 });
 
 test('API Express entrega extras de paginación para catálogos personales', async () => {

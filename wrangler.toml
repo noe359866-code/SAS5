@@ -3,6 +3,9 @@
 #  Las claves de API NO van aquí. Se añaden como secrets:
 #    npx wrangler secret put TMDB_API_KEY
 #    npx wrangler secret put OMDB_API_KEY
+#    npx wrangler secret put SUPABASE_URL          (enlaces propios)
+#    npx wrangler secret put SUPABASE_ANON_KEY     (lectura, respeta RLS)
+#    npx wrangler secret put SUPABASE_SERVICE_ROLE_KEY  (opcional: marcar roto)
 #  (TMDB_ACCESS_TOKEN en lugar de TMDB_API_KEY también vale.)
 # ─────────────────────────────────────────────────────────────
 name = "catalogos-plus"

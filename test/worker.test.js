@@ -44,9 +44,11 @@ test('healthz: reporta runtime cloudflare-workers', async () => {
   const body = await res.json();
   assert.equal(body.ok, true);
   assert.equal(body.runtime, 'cloudflare-workers');
+  // `supabase` no se anuncia sin credenciales; `videoapi` sí es una fuente más.
   assert.deepEqual(body.streamProviders, ['fanpelis', 'spinflix',
-    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita']);
-  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, cuevanas3: true, allpeliculas: true, lamovie: true, animeflv: true, animeav1: true, fuegocine: true, pelisjuanita: true });
+    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita', 'videoapi']);
+  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, cuevanas3: true, allpeliculas: true, lamovie: true, animeflv: true, animeav1: true, fuegocine: true, pelisjuanita: true, videoapi: true, supabase: false });
+  assert.deepEqual(body.videoHostLinks, { configured: false, writable: false });
 });
 
 test('catalog: sin TMDB key devuelve metas=[] con 200', async () => {

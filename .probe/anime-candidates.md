@@ -22,11 +22,11 @@
 | katanime | buscar / | 403 | 5827 |  fichas=0 |
 | katanime | buscar /buscar | 403 | 5845 |  fichas=0 |
 | katanime | ficha | — | — | sin enlace que abrir |
-| animeav1 | portada | 200 | 129729 |  motor=— fichas=3 · animeav1.com/media/one-piece |
+| animeav1 | portada | 200 | 129547 |  motor=— fichas=3 · animeav1.com/media/one-piece |
 | animeav1 | buscar /catalogo | 200 | 76753 |  fichas=20 · animeav1.com/media/battle-spirits-re-zekkai-no-kuu |
 | animeav1 | ficha | 200 | — | iframes=0 data=0 video=0 medios=0 · motor=— |
 | animejl | portada | 403 | 5609 |  motor=— fichas=0 |
-| animejl | buscar /anime | 403 | 5772 |  fichas=0 |
+| animejl | buscar /anime | 403 | 5793 |  fichas=0 |
 | animejl | buscar /buscar | 403 | 5760 |  fichas=0 |
 | animejl | ficha | — | — | sin enlace que abrir |
 | henaojara | portada | 0 | 0 | TypeError motor=— fichas=0 |

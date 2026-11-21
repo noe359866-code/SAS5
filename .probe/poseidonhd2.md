@@ -3,9 +3,9 @@
 | search «odisea» | 200 | text/html | 54223 | movies=11 topMoviesDay=5 topMoviesWeek=5 · primero: TMDbId=62 slug=movies/62/2001-odisea-del-espacio |
 | search «policias de chicago» | 200 | text/html | 84083 | movies=24 topMoviesDay=5 topMoviesWeek=5 · primero: TMDbId=590401 slug=movies/590401/de-de-pyaar-de |
 | search «visionquest» | 200 | text/html | 31666 | movies=1 topMoviesDay=5 topMoviesWeek=5 · primero: TMDbId=213375 slug=series/213375/visionquest |
-| pelicula slug=la-odisea | 200 | text/html | 99106 | sirve la ficha con cualquier slug |
+| pelicula slug=la-odisea | 200 | text/html | 99088 | sirve la ficha con cualquier slug |
 | pelicula slug=slug-inventado | 200 | text/html | 98932 | sirve la ficha con cualquier slug |
-| pelicula NEXT_DATA | 200 | text/html | 99106 | thisMovie=sí · videos latino=5 spanish=0 english=5 |
+| pelicula NEXT_DATA | 200 | text/html | 99088 | thisMovie=sí · videos latino=5 spanish=0 english=5 |
 | player voesx | 200 | text/html | 10810 | manual=200 · iframes=0 · medios=0 |
 | player doodstream | 200 | text/html | 10823 | manual=200 · iframes=0 · medios=0 |
 | player streamwish | 200 | text/html | 10822 | manual=200 · iframes=0 · medios=0 |

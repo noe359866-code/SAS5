@@ -28,6 +28,25 @@ STREAM_STALE_SECONDS = "0"
 KOFI_USERNAME = "off"
 
 # ─────────────────────────────────────────────────────────────
+#  Proxy de medios opcional (/p/...) con caché de borde.
+#  APAGADO por defecto: sin Media Proxy, los streams salen directos.
+#  Antes de activarlo lee docs/proxy-cache-cloudflare.md (cuotas, ToS,
+#  Cache Rules y coste por invocaciones).
+#    npx wrangler secret put PROXY_SECRET   # obligatorio
+#  Solo se retransmiten los hosts de PROXY_ALLOWED_HOSTS (sin comodines).
+# MEDIA_PROXY = "on"
+# PROXY_ALLOWED_HOSTS = "vimeos.net"
+# PROXY_MANIFEST_TTL = "60"
+# PROXY_SEGMENT_TTL = "86400"
+# PROXY_TIMEOUT_MS = "20000"
+
+# Para que un acierto de caché NO invoque el Worker hace falta dominio propio
+# y una Cache Rule sobre /p/*; en *.workers.dev la caché de borde no actúa.
+# routes = [
+#   { pattern = "addon.tudominio.com/*", zone_name = "tudominio.com" }
+# ]
+
+# ─────────────────────────────────────────────────────────────
 #  Static assets: peticiones GRATIS e ILIMITADAS
 #  Un archivo que existe en ./public se sirve sin ejecutar worker.mjs, así que
 #  no gasta la cuota de 100.000 peticiones/día del plan free. Aquí viven el

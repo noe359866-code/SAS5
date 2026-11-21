@@ -33,6 +33,7 @@ import cache from './lib/cache.js';
 import rateLimit from './lib/rateLimit.js';
 import logoData from './lib/logoData.js';
 import configRegistry from './lib/configRegistry.js';
+import mediaProxy from './lib/mediaProxy.js';
 
 const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
 
@@ -213,9 +214,12 @@ async function runAndCache(key, createResponse, ctx, edge) {
   return entry;
 }
 
-function workerRuntime(ctx) {
+function workerRuntime(ctx, origin) {
   return {
     waitUntil: ctx && typeof ctx.waitUntil === 'function' ? (promise) => ctx.waitUntil(promise) : undefined,
+    // Origen público de la petición: lo necesita el proxy de medios para
+    // emitir URLs absolutas (Stremio no acepta rutas relativas).
+    origin: origin || '',
   };
 }
 
@@ -278,7 +282,7 @@ async function serveStream(type, id, cfg, request, ctx) {
   const decodedId = safeDecode(id);
   if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
   const create = async () => {
-    const result = await core.handleStream(type, decodedId, cfg, workerRuntime(ctx));
+    const result = await core.handleStream(type, decodedId, cfg, workerRuntime(ctx, new URL(request.url).origin));
     return jsonResponse(result, 200, 0, core.streamCacheControl(result.cacheMaxAge));
   };
   const cacheUrl = canonicalStreamCacheUrl(request.url, type, decodedId, cfg);
@@ -323,6 +327,15 @@ async function handleRequest(request, env, ctx) {
 
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
+    }
+
+    // ── Proxy de medios con caché de borde (opcional) ─────────
+    // Apagado por defecto. Solo responde si MEDIA_PROXY=on, hay PROXY_SECRET y
+    // el host está en PROXY_ALLOWED_HOSTS; si no, 404 como una ruta que no
+    // existe. Los aciertos de caché se sirven en el borde ANTES de llegar
+    // aquí (Cache Rule sobre /p/*), que es lo que permite escalar.
+    if (path === '/p' || path.startsWith('/p/')) {
+      return mediaProxy.handleProxy(request);
     }
 
     const origin = url.origin;
@@ -438,6 +451,8 @@ async function handleRequest(request, env, ctx) {
           // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
           donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
           cache: cache.stats(),
+          // Proxy de medios: sin secreto ni allowlist se informa apagado.
+          mediaProxy: mediaProxy.status(),
           // Caché de respuestas del isolate: la única que funciona en
           // *.workers.dev, donde la Cache API de Cloudflare no hace nada.
           responseCache: responseCache.stats(),

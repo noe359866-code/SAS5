@@ -42,7 +42,9 @@ Habilitada no significa **disponible**: una fuente puede responder con error, no
 
 **Sin comprobar el medio:** el addon ya no descarga manifiestos HLS ni MP4 ni sondea segmentos. Solo valida la forma de la URL (host conocido, extensión, sin credenciales y con firma viva) antes de publicarla, así que una búsqueda gasta menos peticiones y no toca el CDN del proveedor. La contrapartida es que un enlace caído se descubre al abrirlo, no al pedir la lista; los scripts de `scripts/` siguen pudiendo sondear el CDN desde el runner si hace falta revisar algo.
 
-**Proxy de reproducción:** cualquier HLS cuyo origen declare el reproductor —hoy PelisJuanita vía `vimeos.net`— solicita el proxy del servicio de streaming de Stremio (`behaviorHints.proxyHeaders`) con ese origen, porque el CDN rechaza peticiones sin `Referer`. Requiere un cliente que admita ese proxy. Los MP4 y los HLS que no declaran origen siguen directos. El addon no retransmite vídeo ni expone un proxy público.
+**Proxy de reproducción:** cualquier HLS cuyo origen declare el reproductor —hoy PelisJuanita vía `vimeos.net`— solicita el proxy del servicio de streaming de Stremio (`behaviorHints.proxyHeaders`) con ese origen, porque el CDN rechaza peticiones sin `Referer`. Requiere un cliente que admita ese proxy. Los MP4 y los HLS que no declaran origen siguen directos.
+
+**Proxy de medios opcional (`/p/...`):** además, el Worker puede retransmitir manifiestos y segmentos con caché de borde. Está **apagado por defecto** y solo se activa con `MEDIA_PROXY=on`, `PROXY_SECRET` y `PROXY_ALLOWED_HOSTS`; sin los tres, `/p/` responde 404 y los streams salen directos, como siempre. La firma HMAC es determinista para que dos personas que ven el mismo capítulo compartan la entrada de caché. Se implementa en `lib/mediaProxy.js` y su puesta en marcha —dominio propio, Cache Rules, coste por invocaciones y límites de Cloudflare— está en [proxy con caché para miles de usuarios](docs/proxy-cache-cloudflare.md). Por defecto el addon no retransmite vídeo.
 
 **Republicación:** tras desplegar, comprueba que `/manifest.json` devuelve `net.ramdonlatam.catalogos` como `id` y envía esa URL HTTPS a stremioaddons.net. Para mantener también el addon anterior, usa una URL de despliegue distinta.
 
@@ -85,6 +87,8 @@ npm run deploy
 
 `npm run deploy` compila la web, pregenera catálogos configurados y despliega el Worker.
 
+El proxy de medios se activa con `MEDIA_PROXY=on`, un `PROXY_SECRET` (`npx wrangler secret put PROXY_SECRET`) y `PROXY_ALLOWED_HOSTS`. Sin los tres sigue apagado. Los cálculos de cuota, las Cache Rules y los límites de Cloudflare están en [docs/proxy-cache-cloudflare.md](docs/proxy-cache-cloudflare.md).
+
 ## Rutas
 
 - `/manifest.json` y `/<config>/manifest.json`: manifests de Stremio.
@@ -92,7 +96,8 @@ npm run deploy
 - `/meta/:type/:id.json`: metadatos.
 - `/stream/:type/:id.json`: resultados de reproducción directa con audio latino o castellano.
 - `/configure`: selección de región, plataformas, estudios y fuentes directas.
-- `/healthz`: estado del servicio y fuentes habilitadas; no comprueba que haya vídeo.
+- `/p/<destino firmado>`: proxy de medios opcional y con caché de borde; 404 salvo que `MEDIA_PROXY` esté activo con secreto y allowlist.
+- `/healthz`: estado del servicio y fuentes habilitadas; `mediaProxy.ready` indica si el proxy puede emitir URLs. No comprueba que haya vídeo.
 
 ### Si Stremio no muestra streams
 

@@ -8,3 +8,7 @@ ADDON_NAME=RamdonLatam
 # STREAM_PROVIDERS=all
 STREAM_MAX_RESULTS=30
 KOFI_USERNAME=off
+# Proxy de medios opcional (/p/...): apagado salvo las tres variables.
+MEDIA_PROXY=off
+PROXY_SECRET=
+PROXY_ALLOWED_HOSTS=

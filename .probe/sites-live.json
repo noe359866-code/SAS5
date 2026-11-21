@@ -15,7 +15,7 @@
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 3176,
+    "ms": 1744,
     "quality": [
       "HLS"
     ],
@@ -23,39 +23,42 @@
       "Latino"
     ],
     "hosts": [
-      "https://p2.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p2.vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt33033798",
     "title": "Spider-Man: Un nuevo día",
     "provider": "lamovie",
-    "hits": 1,
+    "hits": 2,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=57625",
       "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
       "200 https://lamovie.org/wp-api/v1/search?q=Spider-Man%3A+Un+nuevo+d%C3%ADa&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/player?postId=90147",
-      "200 https://vimeos.net/embed-2nulhg4mnuz7.html"
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html",
+      "200 https://videoapp.zip/e/movie/969681",
+      "200 https://vimeos.net/embed-2nulhg4mnuz7.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2152,
+    "ms": 1882,
     "quality": [
+      "HLS",
       "HLS"
     ],
     "audio": [
+      "Latino",
       "Latino"
     ],
     "hosts": [
+      "https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8",
       "https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8 · HLS/Latino https://vimeos.zip/hls2/02/00013/2nulhg4mnuz7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt33033798",
@@ -71,7 +74,7 @@
       "404 https://animeav1.com/media/spider-man-un-nuevo-dia h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1497,
+    "ms": 1192,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -91,7 +94,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inception&page=2&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 847,
+    "ms": 619,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -111,7 +114,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Inception&page=2&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 779,
+    "ms": 706,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -131,7 +134,7 @@
       "404 https://animeav1.com/media/inception h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 502,
+    "ms": 393,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -155,7 +158,7 @@
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 3006,
+    "ms": 2467,
     "quality": [
       "HLS"
     ],
@@ -163,39 +166,42 @@
       "Latino"
     ],
     "hosts": [
-      "https://p2.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+      "https://p3.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p2.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt0903747:1:1",
     "title": "Breaking Bad",
     "provider": "lamovie",
-    "hits": 1,
+    "hits": 2,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=70",
-      "200 https://vimeos.net/embed-ccjygcfxujhd.html",
       "200 https://lamovie.org/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=37038&season=1&page=1&postsPerPage=50",
       "200 https://lamovie.org/wp-api/v1/player?postId=37040",
-      "200 https://vimeos.net/embed-ccjygcfxujhd.html"
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html",
+      "200 https://videoapp.zip/e/tv/1396/1/1",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 3801,
+    "ms": 2402,
     "quality": [
+      "HLS",
       "HLS"
     ],
     "audio": [
+      "Latino",
       "Latino"
     ],
     "hosts": [
+      "https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8",
       "https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8 · HLS/Latino https://s9.vimeos.net/hls2/02/00005/ccjygcfxujhd_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt0903747:1:1",
@@ -203,15 +209,15 @@
     "provider": "animeav1",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/search?q=Breaking+Bad&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=37038&season=1&page=1&postsPerPage=50",
       "200 https://lamovie.org/wp-api/v1/player?postId=37040",
       "200 https://vimeos.net/embed-ccjygcfxujhd.html",
+      "200 https://videoapp.zip/e/tv/1396/1/1",
+      "200 https://vimeos.net/embed-ccjygcfxujhd.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://animeav1.com/catalogo?search=Breaking%20Bad h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/breaking-bad h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 521,
+    "ms": 383,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -235,7 +241,7 @@
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2239,
+    "ms": 1869,
     "quality": [
       "HLS"
     ],
@@ -243,39 +249,42 @@
       "Latino"
     ],
     "hosts": [
-      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://p3.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
     "title": "Alien: Romulus",
     "provider": "lamovie",
-    "hits": 1,
+    "hits": 2,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18",
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=29363",
       "200 https://vimeos.net/embed-uhuu5myzvdub.html",
       "200 https://lamovie.org/wp-api/v1/search?q=Alien%3A+Romulus&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/player?postId=20879",
-      "200 https://vimeos.net/embed-uhuu5myzvdub.html"
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html",
+      "200 https://videoapp.zip/e/movie/945961",
+      "200 https://vimeos.net/embed-uhuu5myzvdub.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2060,
+    "ms": 3554,
     "quality": [
+      "HLS",
       "HLS"
     ],
     "audio": [
+      "Latino",
       "Latino"
     ],
     "hosts": [
-      "https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+      "https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8",
+      "https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p4.vimeos.zip/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8 · HLS/Latino https://s10.vimeos.net/hls2/02/00000/0jql18qqpr05_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "tt18412256",
@@ -291,7 +300,7 @@
       "404 https://animeav1.com/media/alien h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1514,
+    "ms": 1213,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -315,37 +324,7 @@
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2966,
-    "quality": [
-      "HLS"
-    ],
-    "audio": [
-      "Latino"
-    ],
-    "hosts": [
-      "https://p3.vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
-    ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
-  },
-  {
-    "control": "tt6263850",
-    "title": "Deadpool & Wolverine",
-    "provider": "lamovie",
-    "hits": 1,
-    "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/search?q=Deadpool&page=1&postType=any&postsPerPage=18",
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=27576",
-      "200 https://vimeos.net/embed-tmbjqufb955w.html",
-      "200 https://lamovie.org/wp-api/v1/search?q=Deadpool+%26+Wolverine&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/player?postId=19173",
-      "200 https://vimeos.net/embed-tmbjqufb955w.html"
-    ],
-    "media": [
-      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
-      "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
-      "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
-    ],
-    "ms": 3231,
+    "ms": 2202,
     "quality": [
       "HLS"
     ],
@@ -360,18 +339,51 @@
   {
     "control": "tt6263850",
     "title": "Deadpool & Wolverine",
+    "provider": "lamovie",
+    "hits": 2,
+    "trace": [
+      "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=Deadpool+%26+Wolverine&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=19173",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "200 https://videoapp.zip/e/movie/533535",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 2681,
+    "quality": [
+      "HLS",
+      "HLS"
+    ],
+    "audio": [
+      "Latino",
+      "Latino"
+    ],
+    "hosts": [
+      "https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8",
+      "https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8 · HLS/Latino https://vimeos.zip/hls2/02/00008/tmbjqufb955w_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "tt6263850",
+    "title": "Deadpool & Wolverine",
     "provider": "animeav1",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/player?postId=19173",
-      "200 https://vimeos.net/embed-tmbjqufb955w.html",
+      "200 https://videoapp.zip/e/movie/533535",
+      "200 https://vimeos.net/embed-tmbjqufb955w.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://animeav1.com/catalogo?search=Deadpool%20%26%20Wolverine h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/deadpool-wolverine h1=\"Titulo no encontrado\"",
       "200 https://animeav1.com/catalogo?search=Deadpool%20Wolverine h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/deadpool-wolverine h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1024,
+    "ms": 751,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -391,7 +403,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Inside+Out+2&page=2&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 1241,
+    "ms": 1016,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -411,7 +423,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Inside+Out+2&page=2&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 1071,
+    "ms": 1147,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -431,7 +443,7 @@
       "404 https://animeav1.com/media/inside-out-2 h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 495,
+    "ms": 402,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -455,7 +467,7 @@
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2035,
+    "ms": 1892,
     "quality": [
       "HLS"
     ],
@@ -463,39 +475,42 @@
       "Latino"
     ],
     "hosts": [
-      "https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+      "https://p6.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p6.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "El reino prohibido",
     "title": "El reino prohibido",
     "provider": "lamovie",
-    "hits": 1,
+    "hits": 2,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=55973",
       "200 https://vimeos.net/embed-o0unqe46z0g7.html",
       "200 https://lamovie.org/wp-api/v1/search?q=El+reino+prohibido&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/player?postId=80207",
-      "200 https://vimeos.net/embed-o0unqe46z0g7.html"
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
+      "200 https://videoapp.zip/e/movie/1729",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 1751,
+    "ms": 2171,
     "quality": [
+      "HLS",
       "HLS"
     ],
     "audio": [
+      "Latino",
       "Latino"
     ],
     "hosts": [
+      "https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8",
       "https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://p5.vimeos.zip/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8 · HLS/Latino https://s11.vimeos.net/hls2/02/00012/o0unqe46z0g7_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "El reino prohibido",
@@ -503,15 +518,15 @@
     "provider": "animeav1",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/player?postId=80207",
-      "200 https://vimeos.net/embed-o0unqe46z0g7.html",
+      "200 https://videoapp.zip/e/movie/1729",
+      "200 https://vimeos.net/embed-o0unqe46z0g7.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://animeav1.com/catalogo?search=El%20reino%20prohibido h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/el-reino-prohibido h1=\"Titulo no encontrado\"",
       "200 https://animeav1.com/catalogo?search=reino%20prohibido h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/reino-prohibido h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1222,
+    "ms": 901,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -535,7 +550,7 @@
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2782,
+    "ms": 2850,
     "quality": [
       "HLS"
     ],
@@ -551,31 +566,34 @@
     "control": "tt0409591:1:1",
     "title": "Naruto",
     "provider": "lamovie",
-    "hits": 1,
+    "hits": 2,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=11279",
-      "200 https://vimeos.net/embed-wa2r4s768i9k.html",
       "200 https://lamovie.org/wp-api/v1/search?q=Naruto&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=7606&season=1&page=1&postsPerPage=50",
       "200 https://lamovie.org/wp-api/v1/player?postId=7609",
-      "200 https://vimeos.net/embed-wa2r4s768i9k.html"
+      "200 https://vimeos.net/embed-wa2r4s768i9k.html",
+      "200 https://videoapp.zip/e/anime/46260/1/1",
+      "200 https://vimeos.net/embed-wa2r4s768i9k.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2375,
+    "ms": 2408,
     "quality": [
+      "HLS",
       "HLS"
     ],
     "audio": [
+      "Latino",
       "Latino"
     ],
     "hosts": [
-      "https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+      "https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8",
+      "https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
+    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8 · HLS/Latino https://s11.vimeos.net/hls2/03/00002/wa2r4s768i9k_h/master.m3u8"
   },
   {
     "control": "tt0409591:1:1",
@@ -583,7 +601,7 @@
     "provider": "animeav1",
     "hits": 2,
     "trace": [
-      "200 https://vimeos.net/embed-wa2r4s768i9k.html",
+      "200 https://vimeos.net/embed-wa2r4s768i9k.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://animeav1.com/catalogo?search=Naruto h1=\"Catalogo de Animes\"",
       "200 https://animeav1.com/media/naruto h1=\"Naruto\"",
       "200 https://animeav1.com/media/naruto/1 h1=\"Episodio 1\"",
@@ -593,7 +611,7 @@
     "media": [
       "UA: HTTP 200 application/x-mpegURL tipo=HLS → "
     ],
-    "ms": 2449,
+    "ms": 1872,
     "quality": [
       "HLS",
       "HLS"
@@ -622,7 +640,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Ao+Ashi+Season+2&page=2&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 1166,
+    "ms": 969,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -642,7 +660,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Ao+Ashi+Season+2&page=2&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 1632,
+    "ms": 897,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -664,7 +682,7 @@
     "media": [
       "UA: HTTP 200 application/x-mpegURL tipo=HLS → "
     ],
-    "ms": 1938,
+    "ms": 1392,
     "quality": [
       "HLS"
     ],
@@ -690,7 +708,7 @@
       "200 https://allpeliculas.la/wp-api/v1/search?q=Black+Clover+2nd+Season&page=2&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 1204,
+    "ms": 996,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -710,7 +728,7 @@
       "200 https://lamovie.org/wp-api/v1/search?q=Black+Clover+2nd+Season&page=2&postType=any&postsPerPage=18"
     ],
     "media": [],
-    "ms": 1085,
+    "ms": 940,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -732,7 +750,7 @@
     "media": [
       "UA: HTTP 200 application/x-mpegURL tipo=HLS → "
     ],
-    "ms": 1816,
+    "ms": 1334,
     "quality": [
       "HLS"
     ],
@@ -762,7 +780,7 @@
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2081,
+    "ms": 1611,
     "quality": [
       "HLS"
     ],
@@ -778,31 +796,34 @@
     "control": "La Odisea",
     "title": "La Odisea",
     "provider": "lamovie",
-    "hits": 1,
+    "hits": 2,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/search?q=La+Odisea&page=1&postType=any&postsPerPage=18",
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=52912",
       "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
       "200 https://lamovie.org/wp-api/v1/search?q=La+Odisea&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/player?postId=98727",
-      "200 https://vimeos.net/embed-m62pdrnlvwpw.html"
+      "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
+      "200 https://videoapp.zip/e/movie/1368337",
+      "200 https://vimeos.net/embed-m62pdrnlvwpw.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2196,
+    "ms": 1877,
     "quality": [
+      "HLS",
       "HLS"
     ],
     "audio": [
+      "Latino",
       "Latino"
     ],
     "hosts": [
+      "https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8",
       "https://p7.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p7.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://s1.vimeos.net/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8 · HLS/Latino https://p7.vimeos.zip/hls2/02/00015/m62pdrnlvwpw_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "La Odisea",
@@ -810,15 +831,15 @@
     "provider": "animeav1",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/player?postId=98727",
-      "200 https://vimeos.net/embed-m62pdrnlvwpw.html",
+      "200 https://videoapp.zip/e/movie/1368337",
+      "200 https://vimeos.net/embed-m62pdrnlvwpw.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://animeav1.com/catalogo?search=La%20Odisea h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/la-odisea h1=\"Titulo no encontrado\"",
       "200 https://animeav1.com/catalogo?search=Odisea h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/odisea h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1147,
+    "ms": 874,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -842,7 +863,7 @@
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 3106,
+    "ms": 2103,
     "quality": [
       "HLS"
     ],
@@ -858,31 +879,34 @@
     "control": "VisionQuest",
     "title": "VisionQuest",
     "provider": "lamovie",
-    "hits": 1,
+    "hits": 2,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=64074",
-      "200 https://vimeos.net/embed-hc7i1n95d4vx.html",
       "200 https://lamovie.org/wp-api/v1/search?q=VisionQuest&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=92804&season=1&page=1&postsPerPage=50",
       "200 https://lamovie.org/wp-api/v1/player?postId=92806",
-      "200 https://vimeos.net/embed-hc7i1n95d4vx.html"
+      "200 https://vimeos.net/embed-hc7i1n95d4vx.html",
+      "200 https://videoapp.zip/e/tv/213375/1/1",
+      "200 https://vimeos.net/embed-hc7i1n95d4vx.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
     "media": [
       "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2771,
+    "ms": 2728,
     "quality": [
+      "HLS",
       "HLS"
     ],
     "audio": [
+      "Latino",
       "Latino"
     ],
     "hosts": [
-      "https://p3.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+      "https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8",
+      "https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://p3.vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8 · HLS/Latino https://s11.vimeos.net/hls2/03/00014/hc7i1n95d4vx_,n,h,.urlset/master.m3u8"
   },
   {
     "control": "VisionQuest",
@@ -890,15 +914,15 @@
     "provider": "animeav1",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/search?q=VisionQuest&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/single/episodes/list?_id=92804&season=1&page=1&postsPerPage=50",
       "200 https://lamovie.org/wp-api/v1/player?postId=92806",
       "200 https://vimeos.net/embed-hc7i1n95d4vx.html",
+      "200 https://videoapp.zip/e/tv/213375/1/1",
+      "200 https://vimeos.net/embed-hc7i1n95d4vx.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://animeav1.com/catalogo?search=VisionQuest h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/visionquest h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 494,
+    "ms": 386,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -922,7 +946,7 @@
       "UA+Referer: HTTP 404 text/html tipo=otro → Not Found",
       "UA+Origin: HTTP 404 text/html tipo=otro → Not Found"
     ],
-    "ms": 2895,
+    "ms": 2603,
     "quality": [
       "HLS"
     ],
@@ -938,31 +962,34 @@
     "control": "Intensa-Mente 2",
     "title": "Intensa-Mente 2",
     "provider": "lamovie",
-    "hits": 1,
+    "hits": 2,
     "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=29722",
-      "200 https://vimeos.net/embed-q61bcyylnprb.html",
       "200 https://lamovie.org/wp-api/v1/search?q=Intensa-Mente+2&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/search?q=IntensaMente+2&page=1&postType=any&postsPerPage=18",
       "200 https://lamovie.org/wp-api/v1/player?postId=21195",
-      "200 https://vimeos.net/embed-q61bcyylnprb.html"
+      "200 https://vimeos.net/embed-q61bcyylnprb.html",
+      "200 https://videoapp.zip/e/movie/1022789",
+      "200 https://vimeos.net/embed-q61bcyylnprb.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
     ],
     "media": [
       "UA: HTTP 404 text/html tipo=otro → Not Found",
       "UA+Referer: HTTP 404 text/html tipo=otro → Not Found",
       "UA+Origin: HTTP 404 text/html tipo=otro → Not Found"
     ],
-    "ms": 2036,
+    "ms": 2490,
     "quality": [
+      "HLS",
       "HLS"
     ],
     "audio": [
+      "Latino",
       "Latino"
     ],
     "hosts": [
+      "https://s12.vimeos.net/hls2/03/00000/yh723kv19oal_h/master.m3u8",
       "https://s12.vimeos.net/hls2/03/00000/yh723kv19oal_h/master.m3u8"
     ],
-    "verdict": "HLS/Latino https://s12.vimeos.net/hls2/03/00000/yh723kv19oal_h/master.m3u8"
+    "verdict": "HLS/Latino https://s12.vimeos.net/hls2/03/00000/yh723kv19oal_h/master.m3u8 · HLS/Latino https://s12.vimeos.net/hls2/03/00000/yh723kv19oal_h/master.m3u8"
   },
   {
     "control": "Intensa-Mente 2",
@@ -978,7 +1005,7 @@
       "404 https://animeav1.com/media/intensa-mente-2 h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1461,
+    "ms": 1085,
     "quality": [],
     "audio": [],
     "hosts": [],
@@ -1002,37 +1029,7 @@
       "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
       "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
     ],
-    "ms": 2236,
-    "quality": [
-      "HLS"
-    ],
-    "audio": [
-      "Latino"
-    ],
-    "hosts": [
-      "https://p2.vimeos.zip/hls2/02/00003/uog0l1cy08dd_,n,h,.urlset/master.m3u8"
-    ],
-    "verdict": "HLS/Latino https://p2.vimeos.zip/hls2/02/00003/uog0l1cy08dd_,n,h,.urlset/master.m3u8"
-  },
-  {
-    "control": "El Origen",
-    "title": "El Origen",
-    "provider": "lamovie",
-    "hits": 1,
-    "trace": [
-      "200 https://allpeliculas.la/wp-api/v1/search?q=El+Origen&page=1&postType=any&postsPerPage=18",
-      "200 https://allpeliculas.la/wp-api/v1/player?postId=17456",
-      "200 https://vimeos.net/embed-uog0l1cy08dd.html",
-      "200 https://lamovie.org/wp-api/v1/search?q=El+Origen&page=1&postType=any&postsPerPage=18",
-      "200 https://lamovie.org/wp-api/v1/player?postId=28089",
-      "200 https://vimeos.net/embed-uog0l1cy08dd.html"
-    ],
-    "media": [
-      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
-      "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
-      "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
-    ],
-    "ms": 4331,
+    "ms": 1778,
     "quality": [
       "HLS"
     ],
@@ -1047,18 +1044,228 @@
   {
     "control": "El Origen",
     "title": "El Origen",
+    "provider": "lamovie",
+    "hits": 2,
+    "trace": [
+      "200 https://vimeos.net/embed-uog0l1cy08dd.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=El+Origen&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=28089",
+      "200 https://vimeos.net/embed-uog0l1cy08dd.html",
+      "200 https://videoapp.zip/e/movie/27205",
+      "200 https://vimeos.net/embed-uog0l1cy08dd.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 3077,
+    "quality": [
+      "HLS",
+      "HLS"
+    ],
+    "audio": [
+      "Latino",
+      "Latino"
+    ],
+    "hosts": [
+      "https://vimeos.zip/hls2/02/00003/uog0l1cy08dd_,n,h,.urlset/master.m3u8",
+      "https://p3.vimeos.zip/hls2/02/00003/uog0l1cy08dd_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://vimeos.zip/hls2/02/00003/uog0l1cy08dd_,n,h,.urlset/master.m3u8 · HLS/Latino https://p3.vimeos.zip/hls2/02/00003/uog0l1cy08dd_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "El Origen",
+    "title": "El Origen",
     "provider": "animeav1",
     "hits": 0,
     "trace": [
-      "200 https://lamovie.org/wp-api/v1/player?postId=28089",
-      "200 https://vimeos.net/embed-uog0l1cy08dd.html",
+      "200 https://videoapp.zip/e/movie/27205",
+      "200 https://vimeos.net/embed-uog0l1cy08dd.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
       "200 https://animeav1.com/catalogo?search=El%20Origen h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/el-origen h1=\"Titulo no encontrado\"",
       "200 https://animeav1.com/catalogo?search=Origen h1=\"Catalogo de Animes\"",
       "404 https://animeav1.com/media/origen h1=\"Titulo no encontrado\""
     ],
     "media": [],
-    "ms": 1245,
+    "ms": 980,
+    "quality": [],
+    "audio": [],
+    "hosts": [],
+    "verdict": "no-match"
+  },
+  {
+    "control": "One Piece Film: Red",
+    "title": "One Piece Film: Red",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "404 https://animeav1.com/media/el-origen h1=\"Titulo no encontrado\"",
+      "200 https://animeav1.com/catalogo?search=Origen h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/origen h1=\"Titulo no encontrado\"",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=One+Piece+Film%3A+Red&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=29182",
+      "200 https://vimeos.net/embed-b3asymr8ta7u.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 1946,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s11.vimeos.net/hls2/03/00000/b3asymr8ta7u_h/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00000/b3asymr8ta7u_h/master.m3u8"
+  },
+  {
+    "control": "One Piece Film: Red",
+    "title": "One Piece Film: Red",
+    "provider": "lamovie",
+    "hits": 2,
+    "trace": [
+      "200 https://vimeos.net/embed-b3asymr8ta7u.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=One+Piece+Film%3A+Red&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=20709",
+      "200 https://vimeos.net/embed-b3asymr8ta7u.html",
+      "200 https://videoapp.zip/e/movie/900667",
+      "200 https://vimeos.net/embed-b3asymr8ta7u.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 1696,
+    "quality": [
+      "HLS",
+      "HLS"
+    ],
+    "audio": [
+      "Latino",
+      "Latino"
+    ],
+    "hosts": [
+      "https://s11.vimeos.net/hls2/03/00000/b3asymr8ta7u_h/master.m3u8",
+      "https://vimeos.zip/hls2/03/00000/b3asymr8ta7u_h/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s11.vimeos.net/hls2/03/00000/b3asymr8ta7u_h/master.m3u8 · HLS/Latino https://vimeos.zip/hls2/03/00000/b3asymr8ta7u_h/master.m3u8"
+  },
+  {
+    "control": "One Piece Film: Red",
+    "title": "One Piece Film: Red",
+    "provider": "animeav1",
+    "hits": 2,
+    "trace": [
+      "200 https://vimeos.net/embed-b3asymr8ta7u.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
+      "200 https://animeav1.com/catalogo?search=One%20Piece%20Film%3A%20Red h1=\"Catalogo de Animes\"",
+      "200 https://animeav1.com/media/one-piece-film-red h1=\"One Piece Film: Red\"",
+      "200 https://animeav1.com/media/one-piece-film-red/1 h1=\"Episodio 1\"",
+      "200 https://player.zilla-networks.com/m3u8/af55d109fef74ba6bab613610abe34ef",
+      "200 https://player.zilla-networks.com/m3u8/ae52e96ee7626372aee07fbee82240b4"
+    ],
+    "media": [
+      "UA: HTTP 200 application/x-mpegURL tipo=HLS → "
+    ],
+    "ms": 2000,
+    "quality": [
+      "HLS",
+      "HLS"
+    ],
+    "audio": [
+      "Latino",
+      "Subtitulado"
+    ],
+    "hosts": [
+      "https://player.zilla-networks.com/m3u8/af55d109fef74ba6bab613610abe34ef",
+      "https://player.zilla-networks.com/m3u8/ae52e96ee7626372aee07fbee82240b4"
+    ],
+    "verdict": "HLS/Latino https://player.zilla-networks.com/m3u8/af55d109fef74ba6bab613610abe34ef · HLS/Subtitulado https://player.zilla-networks.com/m3u8/ae52e96ee7626372aee07fbee82240b4"
+  },
+  {
+    "control": "Jujutsu Kaisen 0",
+    "title": "Jujutsu Kaisen 0",
+    "provider": "allpeliculas",
+    "hits": 1,
+    "trace": [
+      "200 https://animeav1.com/media/one-piece-film-red/1 h1=\"Episodio 1\"",
+      "200 https://player.zilla-networks.com/m3u8/af55d109fef74ba6bab613610abe34ef",
+      "200 https://player.zilla-networks.com/m3u8/ae52e96ee7626372aee07fbee82240b4",
+      "200 https://allpeliculas.la/wp-api/v1/search?q=Jujutsu+Kaisen+0&page=1&postType=any&postsPerPage=18",
+      "200 https://allpeliculas.la/wp-api/v1/player?postId=28676",
+      "200 https://vimeos.net/embed-33i37yyx29fp.html"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 1699,
+    "quality": [
+      "HLS"
+    ],
+    "audio": [
+      "Latino"
+    ],
+    "hosts": [
+      "https://s12.vimeos.net/hls2/02/00000/33i37yyx29fp_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s12.vimeos.net/hls2/02/00000/33i37yyx29fp_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "Jujutsu Kaisen 0",
+    "title": "Jujutsu Kaisen 0",
+    "provider": "lamovie",
+    "hits": 2,
+    "trace": [
+      "200 https://vimeos.net/embed-33i37yyx29fp.html",
+      "200 https://lamovie.org/wp-api/v1/search?q=Jujutsu+Kaisen+0&page=1&postType=any&postsPerPage=18",
+      "200 https://lamovie.org/wp-api/v1/player?postId=20225",
+      "200 https://vimeos.net/embed-33i37yyx29fp.html",
+      "200 https://videoapp.zip/e/movie/810693",
+      "200 https://vimeos.net/embed-33i37yyx29fp.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc"
+    ],
+    "media": [
+      "UA: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Referer: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → ",
+      "UA+Origin: HTTP 200 application/vnd.apple.mpegurl tipo=HLS → "
+    ],
+    "ms": 1843,
+    "quality": [
+      "HLS",
+      "HLS"
+    ],
+    "audio": [
+      "Latino",
+      "Latino"
+    ],
+    "hosts": [
+      "https://s12.vimeos.net/hls2/02/00000/33i37yyx29fp_,n,h,.urlset/master.m3u8",
+      "https://s12.vimeos.net/hls2/02/00000/33i37yyx29fp_,n,h,.urlset/master.m3u8"
+    ],
+    "verdict": "HLS/Latino https://s12.vimeos.net/hls2/02/00000/33i37yyx29fp_,n,h,.urlset/master.m3u8 · HLS/Latino https://s12.vimeos.net/hls2/02/00000/33i37yyx29fp_,n,h,.urlset/master.m3u8"
+  },
+  {
+    "control": "Jujutsu Kaisen 0",
+    "title": "Jujutsu Kaisen 0",
+    "provider": "animeav1",
+    "hits": 0,
+    "trace": [
+      "200 https://lamovie.org/wp-api/v1/player?postId=20225",
+      "200 https://vimeos.net/embed-33i37yyx29fp.html",
+      "200 https://videoapp.zip/e/movie/810693",
+      "200 https://vimeos.net/embed-33i37yyx29fp.html?cf=eyJhbGciOiJIUzI1NiIsImtpZCI6Im1haW4iLCJ0eXAiOiJWSURBUEktQ0YifQ.eyJhZHMiOjAsImFvIjpbImh0dHBzOi8vdmlkZW9hc",
+      "200 https://animeav1.com/catalogo?search=Jujutsu%20Kaisen%200 h1=\"Catalogo de Animes\"",
+      "404 https://animeav1.com/media/jujutsu-kaisen-0 h1=\"Titulo no encontrado\""
+    ],
+    "media": [],
+    "ms": 418,
     "quality": [],
     "audio": [],
     "hosts": [],

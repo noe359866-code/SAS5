@@ -15,11 +15,11 @@
 | animejara.com | `/feed/` | bot | 0 | - | - | - | 0 | ERR fetch failed |
 | animejara.com | `/?s=naruto` | bot | 0 | - | - | - | 0 | ERR fetch failed |
 | animejara.com | `/robots.txt` | bot | 0 | - | - | - | 0 | ERR fetch failed |
-| animeflv.or.at | `/` | browser | 200 | - | cloudflare | text/html | 141069 | <!DOCTYPE html> <html lang="en-US"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta |
+| animeflv.or.at | `/` | browser | 200 | - | cloudflare | text/html | 140533 | <!DOCTYPE html> <html lang="en-US"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta |
 | animeflv.or.at | `/wp-json/` | bot | 200 | - | cloudflare | application/json | 228835 | {"name":"AnimeFLV","description":"","url":"https:\/\/animeflv.or.at","home":"https:\/\/animeflv.or.at","gmt_offset":"0","timezone_string":"" |
 | animeflv.or.at | `/wp-json/wp/v2/types` | bot | 200 | - | cloudflare | application/json | 13067 | {"post":{"description":"","hierarchical":false,"has_archive":false,"name":"Posts","slug":"post","icon":"dashicons-admin-post","taxonomies":[ |
 | animeflv.or.at | `/sitemap.xml` | bot | 200 | - | cloudflare | text/xml | 910 | <?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> <sitemap> <loc>https://animeflv.or. |
-| animeflv.or.at | `/feed/` | bot | 200 | - | cloudflare | application/rss+xml | 14544 | <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellform |
+| animeflv.or.at | `/feed/` | bot | 200 | - | cloudflare | application/rss+xml | 13940 | <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellform |
 | animeflv.or.at | `/?s=naruto` | bot | 200 | - | cloudflare | text/html | 63097 | <!DOCTYPE html> <html lang="en-US"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta |
 | animeflv.or.at | `/robots.txt` | bot | 200 | - | cloudflare | text/plain | 172 | # START YOAST BLOCK # --------------------------- User-agent: * Disallow: Sitemap: https://animeflv.or.at/sitemap_index.xml # -------------- |
 | animeyt.cc | `/` | browser | 403 | challenge | cloudflare | text/html | 5603 | <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><m |
@@ -27,7 +27,7 @@
 | animeyt.cc | `/wp-json/` | bot | 403 | challenge | cloudflare | text/html | 5542 | <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><m |
 | animeyt.cc | `/wp-json/wp/v2/types` | bot | 403 | challenge | cloudflare | text/html | 5596 | <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><m |
 | animeyt.cc | `/sitemap.xml` | bot | 403 | challenge | cloudflare | text/html | 5551 | <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><m |
-| animeyt.cc | `/feed/` | bot | 200 | - | cloudflare | application/rss+xml | 24675 | <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellform |
+| animeyt.cc | `/feed/` | bot | 200 | - | cloudflare | application/rss+xml | 19679 | <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellform |
 | animeyt.cc | `/?s=naruto` | bot | 403 | challenge | cloudflare | text/html | 5560 | <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><m |
 | animeyt.cc | `/robots.txt` | bot | 200 | - | cloudflare | text/plain | 2847 | # As a condition of accessing this website, you agree to abide by the following # content signals: # (a) If a Content-Signal = yes, you may  |
 

@@ -43,6 +43,7 @@ on:
       - 'scripts/players-probe5.mjs'
       - 'scripts/players-probe6.mjs'
       - 'scripts/players-probe7.mjs'
+      - 'scripts/videoapi-probe.mjs'
 permissions:
   contents: write
 jobs:
@@ -56,6 +57,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - name: videoapi.la (sonda de descubrimiento)
+        run: node scripts/videoapi-probe.mjs || true
       - name: Descubrimiento en los sitios (informativo, no despliega)
         run: node scripts/sites-probe.mjs ${{ inputs.sites }}
       - name: fuegocine (página de reproducción y visores)

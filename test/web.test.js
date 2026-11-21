@@ -18,6 +18,10 @@ const { renderConfigure } = require('../lib/configurePage');
 const userConfig = require('../lib/userConfig');
 const filters = require('../lib/streamFilters');
 const { PROVIDER_KEYS } = require('../lib/streams');
+
+// La fuente de enlaces propios depende de SUPABASE_URL/SUPABASE_ANON_KEY: los
+// tests corren sin esas variables, así que no aparece en /configure.
+const WITHOUT_SUPABASE = PROVIDER_KEYS.filter((key) => key !== 'supabase');
 const { PLATFORMS, STUDIOS, PLATFORM_KEYS, STUDIO_KEYS, buildDefs } = require('../lib/catalogs');
 const { icon, iconMask, ICON_NAMES } = require('../lib/icons');
 const { posterThumb } = require('../lib/rails');
@@ -675,8 +679,9 @@ test('/configure: solo ofrece fuentes que el despliegue realmente consulta', () 
   const defaults = withEnv({}, () => configure());
   const offered = (html) => [...html.matchAll(/data-group="streams" data-key="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(offered(defaults), ['fanpelis', 'spinflix',
-    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita']);
-  for (const key of PROVIDER_KEYS) assert.ok(defaults.includes(`checked data-group="streams" data-key="${key}"`), key);
+    'cuevanas3', 'allpeliculas', 'lamovie', 'animeflv', 'animeav1', 'fuegocine', 'pelisjuanita', 'videoapi'],
+  'se anuncia también VideoAPI y no la fuente de enlaces propios (sin credenciales)');
+  for (const key of WITHOUT_SUPABASE) assert.ok(defaults.includes(`checked data-group="streams" data-key="${key}"`), key);
 
   assert.equal(runConfigure().url, `${ORIGIN}/manifest.json`);
 
@@ -692,7 +697,9 @@ test('/configure: solo ofrece fuentes que el despliegue realmente consulta', () 
 test('/configure: un borrador anterior al retiro no amplía la selección guardada', () => {
   const knownStreams = ['fanpelis', 'flixlatam', 'playlatin', 'spinflix', 'fuegocine', 'animeonlineninja', 'cuevana3', 'gnulahd'];
   const oldDraft = runConfigure({ draft: { knownStreams, streams: ['flixlatam', 'spinflix'] } });
-  assert.deepEqual(oldDraft.saved.knownStreams, PROVIDER_KEYS);
+  // `knownStreams` es lo que el despliegue ofrece: sin credenciales de
+  // Supabase, su fuente no se anuncia (PROVIDER_KEYS es el registro entero).
+  assert.deepEqual(oldDraft.saved.knownStreams, WITHOUT_SUPABASE);
   assert.deepEqual(decode(oldDraft.segment).streams, ['spinflix']);
   const disabledDraft = runConfigure({ draft: { knownStreams, streams: [] } });
   assert.deepEqual(decode(disabledDraft.segment).streams, []);

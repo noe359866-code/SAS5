@@ -8,3 +8,9 @@ ADDON_NAME=RamdonLatam
 # STREAM_PROVIDERS=all
 STREAM_MAX_RESULTS=30
 KOFI_USERNAME=off
+
+# Enlaces propios (public.video_host_links). En producción, `wrangler secret put`.
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+# SUPABASE_SERVICE_ROLE_KEY=  # secreta: solo servidor/Worker
+# SUPABASE_ENABLED=off

@@ -16,7 +16,7 @@ La marca es una baraja de tres fichas abanicadas con un botón de reproducción 
 
 ## Fuentes de reproducción
 
-**Nueve fuentes están habilitadas por defecto**: Fanpelis, SpinFlix, Cuevana 3, Allpelículas, LaMovie, AnimeFLV, AnimeAV1, FuegoCine y PelisJuanita. `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha, un iframe o una descarga no son un stream.
+**Diez fuentes están habilitadas por defecto**: Fanpelis, SpinFlix, Cuevana 3, Allpelículas, LaMovie, AnimeFLV, AnimeAV1, FuegoCine, PelisJuanita y VideoAPI. A ellas se suma `supabase` (enlaces propios) en cuanto se configuran `SUPABASE_URL` y su clave. `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha, un iframe o una descarga no son un stream.
 
 | Clave | Web consultada | Identificación y medios compatibles |
 |---|---|---|
@@ -29,6 +29,19 @@ La marca es una baraja de tres fichas abanicadas con un botón de reproducción 
 | `animeav1` | `animeav1.com` | Anime **con doblaje latino y subtitulado**: el buscador `/catalogo?search=` filtra de verdad, la ficha abre una página por temporada y el episodio declara el audio por grupo (`embeds: {SUB, DUB}`). El visor propio (`player.zilla-networks.com`) publica un HLS por idioma en `/m3u8/<token>`. [Detalles](docs/animeav1.md). |
 | `fuegocine` | `fuegocine.com` | Busca en `/search_elastic?s=`, confirma título y tipo, abre `/movies/watch/…` (o temporada y episodio en series) y solo lee el visor de UnLimPlay, que declara el audio por grupo (`latino`, `castellano`, `subtitulado`) y publica un HLS firmado por idioma. Videro, abyssplayer y embedorigin se cuentan como opacos sin abrirlos. [Detalles](docs/fuegocine.md). |
 | `pelisjuanita` | `pelisjuanita.org` | SPA con API propia: busca en `/api/rest/v1/search`, confirma tipo y año, y en series pide temporada y episodio a la API antes de abrir `videoapp.mov`. El visor de Vimeos declara la versión (`sub`/`lat`) y entrega un HLS firmado con sus subtítulos. [Detalles](docs/pelisjuanita.md). |
+| `videoapi` | `videoapi.la` | API de embeds por TMDb ID (`/e/movie/<id>`, `/e/tv/<id>/<S>/<E>`): el embed de Vimeos declara la versión en `subDub` y entrega el HLS firmado con sus subtítulos. |
+| `supabase` | Tu proyecto Supabase | Enlaces propios de Mixdrop, Filemoon, Vihidrive y otros anfitriones guardados en `public.video_host_links`. Se consulta por IMDb/TMDb ID + temporada/episodio y el `embed_url` se extrae en la petición. [Detalles](docs/supabase-enlaces-propios.md). |
+
+La fuente `supabase` no se anuncia si faltan sus credenciales: no aparece en `/configure` ni en `/healthz` (`videoHostLinks: { configured, writable }`). Se activa y desactiva sin tocar el código:
+
+```bash
+SUPABASE_URL=https://<ref>.supabase.co
+SUPABASE_ANON_KEY=...        # clave pública; respeta RLS (solo lectura)
+# SUPABASE_SERVICE_ROLE_KEY=...  # opcional: permite marcar enlaces roto
+# SUPABASE_ENABLED=off           # apaga la fuente sin quitar las claves
+```
+
+En Cloudflare se cargan como secretos (`wrangler secret put SUPABASE_URL`, …) porque la `service_role` **nunca** debe ir en `wrangler.toml`. Con `anon` el addon solo lee; con `service_role` además pone `is_working = false` en el enlace que el anfitrión ya no sirve.
 
 Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro por defecto. Una lista como `fanpelis,spinflix` limita las fuentes; `STREAM_PROVIDERS=off` apaga todas y `FANPELIS=off` desactiva solo Fanpelis. Para pregenerar la web con `npm run build:web`, usa la misma configuración de fuentes que en el Worker. `STREAM_MAX_RESULTS` limita el número de resultados.
 
@@ -39,6 +52,8 @@ Se retiraron FlixLatam, PlayLatinSRC, AnimeOnlineNinja y Cuevana 3 porque no die
 Habilitada no significa **disponible**: una fuente puede responder con error, no tener la obra, o entregar solo un reproductor HTML o enlaces no compatibles. Fanpelis y SpinFlix filtran los visores por idioma y origen antes de usarlos y mantienen un límite de tiempo y peticiones por búsqueda. Si la API o un visor rechaza el acceso, no se intenta resolver el desafío ni se ejecuta JavaScript externo. Los enlaces con vencimiento conocido se retiran con margen. Cuando dos fuentes entregan la misma URL, se publica una sola vez.
 
 **Nombre del stream:** Stremio muestra el nombre de la obra («Interestelar», «Breaking Bad») en la fila de fuentes; la descripción queda para lo que se elige —capítulo, servidor y audio— y, debajo, los distintivos de calidad (`1080p · WEB-DL · LAT`). La calidad ya no es el nombre de la entrada.
+
+**Enlaces propios (`supabase`):** la fila de `video_host_links` guarda el **embed** (estable durante meses), no el `.m3u8` firmado que caduca en horas. En cada búsqueda se extrae el medio —Mixdrop desempaqueta `MDCore.wurl`; Filemoon y Vihidrive publican `sources`/`file` en su HTML— con caché de 10 minutos por embed. Un anfitrión sin extractor se descarta salvo que el `embed_url` ya sea un medio directo. La etiqueta de audio sale de la columna `language`; si está vacía se publica «Latino (sin verificar)» en vez de inventar un doblaje.
 
 **Sin comprobar el medio:** el addon ya no descarga manifiestos HLS ni MP4 ni sondea segmentos. Solo valida la forma de la URL (host conocido, extensión, sin credenciales y con firma viva) antes de publicarla, así que una búsqueda gasta menos peticiones y no toca el CDN del proveedor. La contrapartida es que un enlace caído se descubre al abrirlo, no al pedir la lista; los scripts de `scripts/` siguen pudiendo sondear el CDN desde el runner si hace falta revisar algo.
 

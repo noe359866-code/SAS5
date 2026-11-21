@@ -31,6 +31,7 @@ import catalogs from './lib/catalogs.js';
 import streams from './lib/streams.js';
 import cache from './lib/cache.js';
 import rateLimit from './lib/rateLimit.js';
+import supabase from './lib/supabase.js';
 import logoData from './lib/logoData.js';
 import configRegistry from './lib/configRegistry.js';
 
@@ -435,6 +436,9 @@ async function handleRequest(request, env, ctx) {
             ),
           },
           streamProviders: streams.activeProviders(null),
+          // Enlaces propios (public.video_host_links): solo booleanos, nunca
+          // la URL del proyecto ni la clave.
+          videoHostLinks: supabase.status(),
           // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
           donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
           cache: cache.stats(),

@@ -203,7 +203,7 @@ test('escala: sin Cache API (como en *.workers.dev) la memoria del isolate evita
   }
 });
 
-test('escala: 20 peticiones simultáneas del mismo recurso frío ejecutan el fan-out una sola vez', async () => {
+test('escala: las cargas frías se aíslan por solicitud y las siguientes usan memoria', async () => {
   const worker = await loadWorker();
   const responseCache = require('../lib/responseCache');
   const core = require('../lib/core');
@@ -232,11 +232,10 @@ test('escala: 20 peticiones simultáneas del mismo recurso frío ejecutan el fan
       Array.from({ length: 20 }, () => worker.fetch(new Request('https://scale.example/catalog/movie/cine_tendencias.json'), {}, {}))
     );
     assert.deepEqual([...new Set(responses.map((r) => r.status))], [200]);
-    // Single-flight: 20 llegadas simultáneas sobre el mismo recurso frío
-    // ejecutan UNA sola carga (las demás esperan el mismo resultado).
-    assert.equal(handlerCalls, 1);
+    // Workers no pueden esperar promesas de I/O pertenecientes a otra solicitud.
+    assert.equal(handlerCalls, 20);
     await worker.fetch(new Request('https://scale.example/catalog/movie/cine_tendencias.json'), {}, {});
-    assert.equal(handlerCalls, 1, 'la 21ª ya sale de memoria');
+    assert.equal(handlerCalls, 20, 'la 21ª ya sale de memoria');
   } finally {
     core.handleCatalog = originalHandler;
     config.reload({ RESPONSE_CACHE_MB: '24' });

@@ -83,7 +83,7 @@ globalThis.out = JSON.stringify({
 test('la portada y el configurador comparten la identidad de RamdonLatam y el diseño responsive', () => {
   const homeHtml = withEnv({}, () => home());
   const configureHtml = withEnv({}, () => configure());
-  assert.match(homeHtml, /<h1>Stremio, <em>a tu manera\.<\/em><\/h1>/);
+  assert.match(homeHtml, /<h1>Tu próxima historia\.<em>A tu manera\.<\/em><\/h1>/);
   assert.match(homeHtml, /class="stats hero-stats"/);
   assert.match(homeHtml, /@media \(max-width: 700px\)/);
   assert.match(configureHtml, /<h1>Tu Stremio, <em>a tu gusto\.<\/em><\/h1>/);
@@ -113,10 +113,10 @@ test('la portada y el configurador comparten la identidad de RamdonLatam y el di
     // Los estantes llevan su marco (.rail-view), donde el script cuelga las flechas.
     assert.match(html, /<div class="rail-view"><div class="rail-scroll" data-autoscroll="1">/, label);
   }
-  // El hero monta la baraja de la marca (tres fichas) además del arte de fondo.
-  assert.match(homeHtml, /class="hero-backdrop" aria-hidden="true">\s*<img src="\/assets\/pacific-dusk.jpg" alt="" fetchpriority="high"/);
-  assert.match(homeHtml, /class="hero-deck" aria-hidden="true">/);
-  assert.equal((homeHtml.match(/class="deck-card/g) || []).length, 3);
+  // La portada presenta una selección editorial de tres pósters.
+  assert.match(homeHtml, /class="editorial-art"/);
+  assert.match(homeHtml, /class="editorial-posters"/);
+  assert.match(homeHtml, /id="catalogSearch"/);
   assert.match(homeHtml, /<meta property="og:image" content="https:\/\/addon\.example\/assets\/og-cover\.png" \/>/);
 });
 
@@ -345,7 +345,7 @@ test('/configure: el contador de catálogos cuenta lo mismo que el manifest', ()
   const landing = withEnv({}, () => home());
   assert.match(landing, new RegExp(`<b>${buildDefs(null).length}</b><span>catálogos</span>`));
   assert.match(landing, new RegExp(`<b>${PLATFORMS.length}</b><span>plataformas</span>`));
-  assert.match(landing, new RegExp(`<b>${STUDIOS.length}</b><span>estudios</span>`));
+  assert.equal(landing.includes('<span>estudios</span>'), false);
   assert.match(landing, new RegExp(`<b>${filters.FILTER_KEYS.length}</b><span>filtros</span>`));
   assert.match(landing, /<b>es-MX<\/b><span>español latino<\/span>/);
 });
@@ -666,7 +666,7 @@ test('/configure: dos selecciones iguales producen exactamente la misma URL', ()
   const segment = a.split('/')[3];
   const cfg = decode(segment);
   assert.deepEqual(cfg.platforms, ['netflix', 'disney']);
-  assert.deepEqual(cfg.studios, ['marvel', 'pixar']);
+  assert.deepEqual(cfg.studios, []);
   assert.equal(cfg.lang, 'es-MX');
   assert.equal(cfg.region, 'NI');
 });

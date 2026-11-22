@@ -91,7 +91,7 @@ npm run deploy
 - `/catalog/:type/:id.json`: catálogos.
 - `/meta/:type/:id.json`: metadatos.
 - `/stream/:type/:id.json`: resultados de reproducción directa con audio latino o castellano.
-- `/configure`: selección de región, plataformas, estudios y fuentes directas.
+- `/configure`: selección de región, plataformas y fuentes directas.
 - `/healthz`: estado del servicio y fuentes habilitadas; no comprueba que haya vídeo.
 
 ### Si Stremio no muestra streams
@@ -121,3 +121,26 @@ node scripts/worker-streams-live.js --playback     # API publicada, HLS y primer
 ```
 
 La sonda general de Fanpelis y SpinFlix separa los enlaces extraídos de los aceptados y, en los CDN conocidos, comprueba desde el runner el manifiesto HLS y el acceso HTTP a un segmento (el addon en producción ya no hace esa comprobación). La [sonda de enlaces directos](docs/worker-streams.md#cómo-probarlo) toma la URL que el Worker devuelve a Stremio y consulta solo el CDN para el medio, con una lectura acotada de los primeros segmentos. Los informes no guardan URLs firmadas ni comprueban reproducción completa en el cliente. RamdonLatam solo presenta metadatos y enlaces externos.
+
+
+### Catálogos y carga progresiva en Stremio
+
+El manifest declara 79 filas: 78 catálogos TMDB con `skip` y la programación
+«En TV hoy» de TVMaze (lista diaria, sin páginas). Se retiraron las filas por
+estudio para mantener el manifest por debajo de los 8 KB del SDK. Películas,
+series, anime, plataformas, géneros, miniseries, cines y próximos estrenos
+solicitan páginas de hasta 20 títulos conforme el cliente pide más resultados.
+El máximo accesible por colección es 500 páginas / 10.000 posiciones (límite
+TMDB), no una garantía de que todas tengan esa cantidad de títulos.
+
+Las plataformas seleccionan una única región: la primera de la cadena configurada
+que tenga una página completa, o la de mayor cobertura si ninguna llega a 20.
+Esa selección se guarda en caché y se usa también en páginas posteriores; no se
+concatenan listas de países que causarían repeticiones y saltos. La lista de una
+región de respaldo no garantiza disponibilidad en el país del usuario.
+
+Los enlaces de configuración antiguos siguen decodificándose, pero su selección
+de estudios ya no crea filas. Después de desplegar, actualiza o reinstala el addon
+en Stremio con la misma configuración para renovar el manifest. Regenera los
+estáticos (`npm run deploy` con PUBLIC_ORIGIN configurado) para no servir manifests
+o páginas pregeneradas del comportamiento anterior.

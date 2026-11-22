@@ -20,6 +20,7 @@
  */
 
 import config from './lib/config.js';
+import requestScope from './lib/requestScope.js';
 import responseCache from './lib/responseCache.js';
 import core from './lib/core.js';
 import { renderHome } from './lib/homePage.js';
@@ -224,7 +225,7 @@ function canonicalCatalogCacheUrl(requestUrl, type, id, cfg, extra) {
   const lang = (cfg && cfg.lang) || config.tmdbLanguage || 'es';
   const region = (cfg && cfg.region) || config.watchRegion || 'NI';
   const skip = Number(extra && extra.skip ? extra.skip : 0) || 0;
-  return `${u.origin}/__edge/catalog/${type}/${encodeURIComponent(id)}?lang=${encodeURIComponent(lang)}&region=${encodeURIComponent(region)}&skip=${skip}`;
+  return `${u.origin}/__edge/catalog-v2/${type}/${encodeURIComponent(id)}?lang=${encodeURIComponent(lang)}&region=${encodeURIComponent(region)}&skip=${skip}`;
 }
 
 function canonicalMetaCacheUrl(requestUrl, type, id, cfg) {
@@ -425,7 +426,7 @@ async function handleRequest(request, env, ctx) {
           configurable: true,
           catalogs: core.CATALOGS.length,
           platforms: catalogs.PLATFORMS.length,
-          studios: catalogs.STUDIOS.length,
+          studios: 0,
           sources: {
             tmdb: config.tmdbConfigured,
             tvmaze: true,
@@ -544,7 +545,7 @@ async function handleRequest(request, env, ctx) {
 
 export default {
   async fetch(request, env, ctx) {
-    const response = await handleRequest(request, env, ctx);
+    const response = await requestScope.run(() => handleRequest(request, env, ctx));
     try {
       response.headers.set('X-Catalogos-Runtime', 'worker');
     } catch (_) { /* cabeceras inmutables: no pasa nada, es solo instrumentación */ }

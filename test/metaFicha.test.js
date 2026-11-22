@@ -32,7 +32,7 @@ function withTmdb(t, overrides) {
     // Las fichas y catálogos quedan cacheados por clave: al soltar TMDB el
     // resto de pruebas no debe ver respuestas de este archivo.
     cache.deletePrefix('meta:v1:');
-    cache.deletePrefix('cat:v1:');
+    cache.deletePrefix('cat:v2:');
   });
 }
 
@@ -148,28 +148,28 @@ test('una sinopsis gigante de TMDB no infla la ficha', async (t) => {
   assert.match(meta.description, /…$/);
 });
 
-test('plataforma sin cobertura local: se completa con las regiones de reserva sin duplicar', async (t) => {
+test('plataforma: usa una sola región y conserva páginas de 20 títulos', async (t) => {
   const catalogs = require('../lib/catalogs');
   const tmdb = require('../lib/tmdb');
   const original = tmdb.catalogItems;
   const regions = [];
   config.reload({ TMDB_API_KEY: 'platform-fallback', WATCH_REGION: 'NI', WATCH_REGION_FALLBACK: 'MX,US' });
-  cache.deletePrefix('cat:v1:cine_netflix');
+  cache.deletePrefix('cat:v2:cine_netflix');
   // Nicaragua apenas tiene catálogo JustWatch: pocos títulos, uno repetido en
   // México. Antes la fila se quedaba con esos dos y parecía rota.
   const byRegion = {
     NI: [{ id: 1 }, { id: 2 }],
-    MX: [{ id: 2 }, { id: 3 }],
+    MX: [{ id: 2 }, { id: 3 }, { id: 4 }],
     US: [{ id: 3 }, { id: 4 }],
   };
   tmdb.catalogItems = async (def, { region }) => {
     regions.push(region);
     return byRegion[region] || [];
   };
-  t.after(() => { tmdb.catalogItems = original; config.reload(null); cache.deletePrefix('cat:v1:'); });
+  t.after(() => { tmdb.catalogItems = original; config.reload(null); cache.deletePrefix('cat:v2:'); });
 
   const items = await catalogs.resolveCatalog('movie', 'cine_netflix', null, {});
-  assert.deepEqual(items.map((item) => item.id), [1, 2, 3, 4]);
+  assert.deepEqual(items.map((item) => item.id), [2, 3, 4]);
   assert.deepEqual(regions, ['NI', 'MX', 'US']);
 
   // La lista resuelta se guarda: la segunda visita no vuelve a preguntar.
@@ -178,13 +178,13 @@ test('plataforma sin cobertura local: se completa con las regiones de reserva si
 
   // Si la región del usuario ya llena la página, no se molesta a las demás.
   regions.length = 0;
-  cache.deletePrefix('cat:v1:cine_disney');
+  cache.deletePrefix('cat:v2:cine_disney');
   tmdb.catalogItems = async (def, { region }) => {
     regions.push(region);
     return Array.from({ length: 40 }, (_, i) => ({ id: 100 + i }));
   };
   const full = await catalogs.resolveCatalog('movie', 'cine_disney', null, {});
-  assert.equal(full.length, 40);
+  assert.equal(full.length, 20);
   assert.deepEqual(regions, ['NI']);
 });
 
@@ -194,12 +194,12 @@ test('una página vacía se cachea unos minutos en vez de repetir la consulta', 
   const original = tmdb.catalogItems;
   let calls = 0;
   config.reload({ TMDB_API_KEY: 'empty-page' });
-  cache.deletePrefix('cat:v1:cine_estudio_mappa');
+  cache.deletePrefix('cat:v2:cine_anime');
   tmdb.catalogItems = async () => { calls += 1; return []; };
-  t.after(() => { tmdb.catalogItems = original; config.reload(null); cache.deletePrefix('cat:v1:'); });
+  t.after(() => { tmdb.catalogItems = original; config.reload(null); cache.deletePrefix('cat:v2:'); });
 
-  assert.deepEqual(await catalogs.resolveCatalog('movie', 'cine_estudio_mappa', null, {}), []);
-  assert.deepEqual(await catalogs.resolveCatalog('movie', 'cine_estudio_mappa', null, {}), []);
+  assert.deepEqual(await catalogs.resolveCatalog('movie', 'cine_anime', null, {}), []);
+  assert.deepEqual(await catalogs.resolveCatalog('movie', 'cine_anime', null, {}), []);
   assert.equal(calls, 1, 'la segunda petición sale de la caché, no de TMDB');
 });
 

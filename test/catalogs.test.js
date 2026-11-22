@@ -20,7 +20,7 @@ test('existen los catálogos de series por género y miniseries', () => {
   for (const g of SERIES_GENRES) assert.ok(ids.includes(`tv_genero_${g.key}`), g.key);
   assert.ok(ids.includes('tv_miniseries'));
   assert.ok(ids.includes('tv_peacock'), 'plataformas actuales incluidas');
-  assert.ok(ids.includes('cine_estudio_a24'), 'estudios actuales incluidos');
+  assert.equal(ids.some(id => id.includes('_estudio_')), false, 'estudios retirados');
 });
 
 test('los catálogos de género son de series y llevan genre id', () => {
@@ -63,18 +63,10 @@ test('plataformas nuevas están en el manifest con fila de películas y de serie
   }
 });
 
-test('cada estudio genera fila de películas Y de series', () => {
-  const defs = buildDefs(null);
-  for (const s of STUDIOS) {
-    const movie = defs.find((d) => d.id === `cine_estudio_${s.key}`);
-    const series = defs.find((d) => d.id === `tv_estudio_${s.key}`);
-    assert.ok(movie, `falta cine_estudio_${s.key}`);
-    assert.ok(series, `falta tv_estudio_${s.key}`);
-    assert.equal(movie.company, s.company);
-    assert.equal(movie.type, 'movie');
-    assert.equal(series.type, 'series');
-    assert.equal(series.mediaType, 'series');
-  }
+test('los estudios antiguos no reaparecen ni con configuración explícita', () => {
+  const defs = buildDefs({ studios: ['marvel'], platforms: [], base: [] });
+  assert.deepEqual(defs, []);
+  assert.equal(buildDefs(null).some(d => d.kind === 'studio'), false);
 });
 
 test('Prime Video usa el id de LatAm (119), no solo el de EE. UU. (9)', () => {
@@ -114,7 +106,7 @@ test('la config con TODO seleccionado cabe en la URL del manifest', () => {
 
 test('el manifest deja margen bajo los 8 KB de la addonCollection API, incluso con URL larga', () => {
   // El SDK rechaza manifests de más de 8192 caracteres. Reservamos ~190 chars
-  // para hosts personalizados/flags futuros; las 121 filas no deben consumirlo.
+  // para hosts personalizados/flags futuros; las 79 filas no deben consumirlo.
   const core = require('../lib/core');
   const logos = [
     ['normal', 'https://catalogo.example/assets/logo.png'],
@@ -135,7 +127,7 @@ test('el manifest deja margen bajo los 8 KB de la addonCollection API, incluso c
       builder.defineStreamHandler(async () => ({ streams: [] }));
       assert.ok(builder.getInterface().manifest, `SDK rechazó el manifest ${host}/${label}`);
     }
-    assert.ok(def.catalogs.length >= 110, `solo ${def.catalogs.length} catálogos en el manifest`);
+    assert.ok(def.catalogs.length === 79, `solo ${def.catalogs.length} catálogos en el manifest`);
   }
 });
 
@@ -157,4 +149,61 @@ test('paginación: catálogos principales anuncian skip y respetan el límite de
     for (const skip of ['-1', 'NaN', '1.5', '10000']) assert.deepEqual(await catalogs.resolveCatalog('series', 'tv_anime', null, { skip }), []);
     assert.deepEqual(await catalogs.resolveCatalog('series', 'tvmaze_hoy', null, { skip: 20 }), []);
   } finally { tmdb.catalogItems = original; config.reload(process.env); }
+});
+
+test('todos los catálogos TMDB anuncian paginación, incluido el manifest personal', () => {
+  const { manifestCatalogs } = require('../lib/catalogs');
+  for (const cfg of [null, { platforms: ['netflix'], studios: ['marvel'], base: ['anime', 'top', 'generos_series', 'tvmaze_hoy'] }]) {
+    for (const def of manifestCatalogs(cfg)) {
+      if (def.id === 'tvmaze_hoy') assert.equal(def.extraSupported, undefined);
+      else assert.deepEqual(def.extraSupported, ['skip'], def.id);
+      assert.equal(def.id.includes('_estudio_'), false);
+    }
+  }
+});
+
+test('plataformas: páginas consecutivas y final vacío usan la misma región sin mezclar países', async (t) => {
+  const catalogs = require('../lib/catalogs');
+  const tmdb = require('../lib/tmdb');
+  const cache = require('../lib/cache');
+  const config = require('../lib/config');
+  const original = tmdb.catalogItems;
+  config.reload({ TMDB_API_KEY: 'platform-pages', WATCH_REGION: 'NI', WATCH_REGION_FALLBACK: 'MX,US' });
+  cache.deletePrefix('cat:v2:'); cache.deletePrefix('platform-region:v2:');
+  t.after(() => { tmdb.catalogItems = original; config.reload(null); cache.deletePrefix('cat:v2:'); cache.deletePrefix('platform-region:v2:'); });
+  const calls = [];
+  tmdb.catalogItems = async (def, { region, page }) => {
+    calls.push([region, page]);
+    if (region === 'NI') return [{ id: 'local-only' }];
+    if (region !== 'MX') assert.fail('no debe consultar una tercera región si MX llena la página');
+    if (page > 2) return [];
+    return Array.from({ length: 20 }, (_, i) => ({ id: `title-${(page - 1) * 20 + i}` }));
+  };
+  const a = await catalogs.resolveCatalog('series', 'tv_netflix', null);
+  const b = await catalogs.resolveCatalog('series', 'tv_netflix', null, { skip: '20' });
+  assert.equal(a.length, 20); assert.equal(b.length, 20);
+  assert.equal(new Set([...a, ...b].map(item => item.id)).size, 40);
+  assert.deepEqual(await catalogs.resolveCatalog('series', 'tv_netflix', null, { skip: '40' }), []);
+  assert.deepEqual(calls, [['NI', 1], ['MX', 1], ['MX', 2], ['MX', 3]]);
+});
+
+test('series, películas y anime permiten páginas profundas y paran en el límite de TMDB', async (t) => {
+  const catalogs = require('../lib/catalogs');
+  const tmdb = require('../lib/tmdb');
+  const cache = require('../lib/cache');
+  const config = require('../lib/config');
+  const original = tmdb.catalogItems;
+  config.reload({ TMDB_API_KEY: 'deep-pages' });
+  cache.deletePrefix('cat:v2:');
+  t.after(() => { tmdb.catalogItems = original; config.reload(null); cache.deletePrefix('cat:v2:'); });
+  tmdb.catalogItems = async (def, { page }) => {
+    assert.equal(page, 500);
+    return Array.from({ length: 20 }, (_, i) => ({ id: `${def.id}:${9980 + i}` }));
+  };
+  for (const [type, id] of [['movie', 'cine_popular'], ['series', 'tv_anime'], ['series', 'tv_genero_drama'], ['movie', 'cine_proximos']]) {
+    const items = await catalogs.resolveCatalog(type, id, null, { skip: '9980' });
+    assert.equal(items.length, 20);
+    assert.equal(items[19].id, `${id}:9999`);
+    assert.deepEqual(await catalogs.resolveCatalog(type, id, null, { skip: '10000' }), []);
+  }
 });

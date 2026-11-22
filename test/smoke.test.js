@@ -48,7 +48,7 @@ test('manifest: contrato Stremio válido', async () => {
   }
   assert.ok(ids.includes('cine_top') && ids.includes('tv_top'));
   assert.ok(ids.includes('cine_netflix') && ids.includes('tv_netflix'));
-  assert.ok(ids.includes('cine_estudio_marvel'));
+  assert.equal(ids.includes('cine_estudio_marvel'), false);
   assert.ok(ids.includes('tvmaze_hoy'));
 });
 

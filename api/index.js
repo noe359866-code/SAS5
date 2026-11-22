@@ -105,7 +105,7 @@ app.get('/healthz', (req, res) => {
     version: addonInterface.manifest.version,
     catalogs: addonInterface.manifest.catalogs.length,
     platforms: PLATFORMS.length,
-    studios: STUDIOS.length,
+    studios: 0,
     configurable: true,
     sources: {
       tmdb: config.tmdbConfigured,

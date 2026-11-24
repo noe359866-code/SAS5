@@ -97,11 +97,20 @@ async function main() {
       row(`  medio`, res.status, `${/^\s*#EXTM3U/.test(res.body) ? 'HLS' : 'otro'} · ${source.kind}`, redact(source.url));
     }
   }
+  report();
+}
+
+function report() {
   const md = ['| Paso | HTTP | Resultado | Detalle |', '|---|---|---|---|'];
   for (const r of rows) md.push(`| ${r.step} | ${r.http} | ${r.state} | ${r.detail} |`);
   md.push('', 'GraphQL de seriesapi.co con el código de extracción del addon; sin URLs firmadas en claro.', '');
+  fs.mkdirSync('.probe', { recursive: true });
   fs.writeFileSync('.probe/doramasflix.md', `${md.join('\n')}\n`);
   console.log(`\n${md.join('\n')}`);
 }
 
-main().catch((err) => { console.error(err); process.exit(1); });
+main().catch((err) => {
+  rows.push({ step: 'error', http: '—', state: 'error', detail: String(err?.stack || err).slice(0, 300) });
+  report();
+  process.exitCode = 1;
+});

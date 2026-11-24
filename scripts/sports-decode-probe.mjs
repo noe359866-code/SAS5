@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Tercera sonda de canales de deportes (24-11-2026): decodificar la
- * ofuscación de streamtp.site (atob + XOR con clave) y volcar el HTML crudo
- * del reproductor la14hd.com y del fetch() de futbollibretvapp.com.
- * Salida redactada: las URLs firmadas se truncan.
+ * Cuarta sonda de deportes (24-11-2026):
+ *  1. streamtp.site: decodificar `k=[char codes]` + `e=base64` (XOR) → URL.
+ *  2. la14hd.com/vivo/canal.php: volcar el cuerpo completo (925 B).
+ * Salida redactada.
  */
 
 import { createRequire } from 'node:module';
@@ -16,7 +16,7 @@ const TIMEOUT = 15_000;
 
 const out = [];
 const say = (line) => { out.push(line); console.log(line); };
-const redact = (raw) => String(raw || '').replace(/[?&](?:token|auth|sig|key|expires|e|s|hash)=[^"'&\s)]+/gi, '$1…').slice(0, 220);
+const redact = (raw) => String(raw || '').replace(/[?&](?:token|auth|sig|expires|hash)=[^"'&\s)]+/gi, '$1…').slice(0, 400);
 
 async function get(url, extraHeaders = {}) {
   const controller = new AbortController();
@@ -29,87 +29,47 @@ async function get(url, extraHeaders = {}) {
   } finally { clearTimeout(timer); }
 }
 
-function tryDecodeStreamtp(html) {
-  const results = [];
-  // Patrón: var _k='3c8fa0813749f0a4';var _b=atob('....')
-  const pairs = html.matchAll(/var _k='([0-9a-fA-F]+)';\s*var _b=atob\('([^']+)'\)/g);
-  for (const m of pairs) {
-    const key = Buffer.from(m[1], 'utf8');
-    let data;
-    try { data = Buffer.from(m[2], 'base64'); } catch { continue; }
-    const variants = {
-      xor: Buffer.from(data.map((b, i) => b ^ key[i % key.length])),
-      plain: data,
-    };
-    for (const [how, buf] of Object.entries(variants)) {
-      const text = buf.toString('utf8');
-      if (/https?:|m3u8|file|source/.test(text)) {
-        results.push({ how, key: m[1], text: redact(text) });
-        break;
-      }
-    }
-  }
-  return results;
-}
-
 (async () => {
-  say('# Sonda: decodificar reproductores de deportes');
+  say('# Sonda 2: decodificar streamtp y volcar la14hd');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
   say('');
 
-  // ── 1) streamtp.site: ofuscación atob+XOR ────────────────────────────────
-  for (const stream of ['dsports', 'tycsports', 'foxsports1usa', 'daznlaliga']) {
+  // ── 1) streamtp.site: k=[…] (char codes) + e=base64, XOR ────────────────
+  for (const stream of ['dsports', 'tycsports', 'foxsports1usa', 'daznlaliga', 'dsports2', 'dsportsplus']) {
     const url = `https://streamtp.site/global1.php?stream=${stream}`;
     const res = await get(url);
     say(`## streamtp ${stream} — HTTP ${res.status}${res.error ? ` (${res.error})` : ''}`);
     if (res.status !== 200) continue;
-    const decoded = tryDecodeStreamtp(res.body);
-    if (!decoded.length) {
-      say('sin pares _k/_b decodificables');
-      const m = res.body.match(/<script>\(function\(\)\{[\s\S]{0,600}/);
-      if (m) say(`\`\`\`\n${redact(m[0])}\n\`\`\``);
-      continue;
-    }
-    for (const d of decoded) {
-      say(`- decode=${d.how} key=${d.key}`);
-      say(`\`\`\`\n${d.text}\n\`\`\``);
-    }
-  }
-
-  // ── 2) pirlotvhd.com.co → iframe la14hd.com (HTML crudo) ─────────────────
-  const pirlo = await get('https://pirlotvhd.com.co/es/tnt-sports4/');
-  say(`## pirlotvhd tnt-sports4 — HTTP ${pirlo.status}`);
-  if (pirlo.status === 200) {
-    const ifr = [...pirlo.body.matchAll(/<iframe[^>]+src\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
-    for (const src of ifr.slice(0, 2)) {
-      say(`- iframe: ${redact(src)}`);
-      const inner = await get(src, { Referer: pirlo.url });
-      say(`  HTTP ${inner.status}${inner.error ? ` (${inner.error})` : ''} · ${inner.body.length} B`);
-      if (inner.status === 200) {
-        // Volcar scripts inline relevantes (mencionan http, token, canal, player)
-        const inline = [...inner.body.matchAll(/<script(?![^>]+src)[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
-        for (const script of inline) {
-          if (!/https?:|m3u8|atob|eval|token|canal|player|fetch\(/i.test(script)) continue;
-          say(`\`\`\`\n${redact(script.trim()).slice(0, 900)}\n\`\`\``);
-        }
-        const srcs = [...inner.body.matchAll(/<script[^>]+src\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
-        if (srcs.length) say(`scripts: ${srcs.slice(0, 8).map(redact).join(' , ')}`);
-      }
+    const m = /var k=\[([\d,\s]+)\],\s*e='([^']+)'/.exec(res.body);
+    if (!m) { say('sin patrón k/e'); continue; }
+    const key = m[1].split(',').map((n) => String.fromCharCode(Number(n.trim()))).join('');
+    let data;
+    try { data = Buffer.from(m[2], 'base64'); } catch { say('base64 inválido'); continue; }
+    const decoded = Buffer.from(data.map((b, i) => b ^ key.charCodeAt(i % key.length))).toString('utf8');
+    say(`- clave: ${key} · decodificado ${decoded.length} B`);
+    const urls = [...decoded.matchAll(/https?:\/\/[^\s"'<>\\]+/g)].map((u) => redact(u[0])).slice(0, 6);
+    for (const u of urls) say(`  url: ${u}`);
+    if (!urls.length) say(`\`\`\`\n${redact(decoded)}\n\`\`\``);
+    // Si hay m3u8, verificarlo
+    const m3 = urls.find((u) => u.includes('.m3u8'));
+    if (m3) {
+      // URL real sin redactar para la verificación
+      const real = [...decoded.matchAll(/https?:\/\/[^\s"'<>\\]+/g)].map((u) => u[0]).find((u) => u.includes('.m3u8'));
+      const check = await get(real, { Referer: res.url, Range: 'bytes=0-400' });
+      const ok = checkHls(checkHlsBody(check));
+      say(`  hls: HTTP ${check.status} · ${ok ? 'HLS VÁLIDO' : redact((check.body || '').slice(0, 80)) || check.error || ''}`);
+      function checkHlsBody(r) { return (r.body || '').slice(0, 400); }
+      function checkHls(head) { return check.status === 200 && /#EXTM3U/.test(head); }
     }
   }
 
-  // ── 3) futbollibretvapp.com: fetch() del canal ───────────────────────────
-  const fl = await get('https://futbollibretvapp.com/canales-en-vivo/espn1/');
-  say(`## futbollibretvapp espn1 — HTTP ${fl.status}`);
-  if (fl.status === 200) {
-    const calls = [...fl.body.matchAll(/fetch\(\s*[`'"]([^`'"]{6,200})[`'"]([^)]{0,120})\)/gi)];
-    for (const m of calls.slice(0, 4)) say(`- fetch: ${redact(m[1])} · args: ${redact(m[2])}`);
-    const inline = [...fl.body.matchAll(/<script(?![^>]+src)[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
-    for (const script of inline) {
-      if (!/fetch\(|m3u8|canal|stream|signal|api/i.test(script)) continue;
-      say(`\`\`\`\n${redact(script.trim()).slice(0, 900)}\n\`\`\``);
-    }
+  // ── 2) la14hd.com/vivo/canal.php — cuerpo completo ──────────────────────
+  for (const stream of ['tntsports', 'espn', 'dsports', 'foxsports']) {
+    const url = `https://la14hd.com/vivo/canal.php?stream=${stream}`;
+    const res = await get(url, { Referer: 'https://pirlotvhd.com.co/' });
+    say(`## la14hd ${stream} — HTTP ${res.status}${res.error ? ` (${res.error})` : ''} · ${res.body.length} B`);
+    if (res.status === 200) say(`\`\`\`\n${redact(res.body.slice(0, 2000))}\n\`\`\``);
   }
 
   fs.mkdirSync('.probe', { recursive: true });

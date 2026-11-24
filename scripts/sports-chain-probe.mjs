@@ -43,6 +43,7 @@ function decodeGlobal(body) {
 }
 
 (async () => {
+ try {
   say('# Sonda 5: hls.php de streamtp, canal por canal');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
@@ -54,6 +55,7 @@ function decodeGlobal(body) {
   say('');
   say('| Canal | hls.php | Tipo | Contenido | m3u8 | HLS | ms |');
   say('|---|---|---|---|---|---|---|');
+  let m3col = '—';
 
   for (const slug of active) {
     const g = await get(`https://streamtp.site/global2.php?stream=${slug}`);
@@ -75,26 +77,24 @@ function decodeGlobal(body) {
     const urlIn = (h.body.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/) || [])[0]
       || (/#EXTM3U/.test(head) ? h.url : null);
     let estado;
-    let m3col = '—';
+    m3col = '—';
     if (urlIn) {
-      m3 = urlIn;
-      m3u8Cell(urlIn);
+      m3col = redact(urlIn);
       const man = /#EXTM3U/.test(head) ? h : await get(urlIn, { Referer: h.url });
       const ok = man.status === 200 && /#EXTM3U/.test((man.body || '').slice(0, 400));
       const variants = ((man.body || '').match(/#EXT-X-STREAM-INF/g) || []).length;
       estado = ok ? `VÁLIDO${variants ? ` ${variants}v` : ''}` : `HTTP ${man.status} no-HLS`;
-      m3u8CellDone();
     } else {
       estado = redact(head) || h.error || `HTTP ${h.status}`;
     }
     say(`| ${slug} | ${h.status} | ${h.contentType.split(';')[0] || '—'} | ${estado} | ${m3col} | ${urlIn ? 'verificado' : '—'} | ${ms} |`);
   }
-  // helpers para no liar la tabla
-  let m3 = null;
-  function m3u8Cell(u) { m3 = redact(u); }
-  function m3u8CellDone() { m3col = m3; }
 
+ } catch (err) {
+   say(`\nERROR de sonda: ${err && err.message}`);
+ } finally {
   fs.mkdirSync('.probe', { recursive: true });
   fs.writeFileSync('.probe/sports-chain.md', out.join('\n') + '\n');
   console.log('\n.probe/sports-chain.md');
+ }
 })();

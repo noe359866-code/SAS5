@@ -72,9 +72,17 @@ const slugOf = (name) => String(name || '')
   .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
 
 const cleanName = (name) => String(name || '')
-  .replace(/^(?:[🇦-🇿]{2}|[☀-➿]|[🌀-🫿]|\u200D|️|\s)+/u, '')
+  .replace(/^(?:[🇦-🇿]{2}|[☀-➿]|[🌀-🫿]|\u200D|️|\s)+/u, '') // banderas y emoji
+  .replace(/^\|?[A-Z]{2,6}\|\s*/u, '')           // etiqueta de grupo «|LAM| »
+  .replace(/[\u1D00-\u1DBF]+/gu, '')               // calidad en superíndice «ᵁᴴᴰ»
   .replace(/\s+/g, ' ')
   .trim();
+
+/** Filas decorativas del panel («===|||-Puerto Rico-|||===»): no son canales. */
+const isDecoration = (name) => {
+  const letters = (String(name || '').match(/[a-záéíóúñ]/gi) || []).length;
+  return letters < 2;
+};
 
 async function api(action = '') {
   const controller = new AbortController();
@@ -126,7 +134,7 @@ async function api(action = '') {
     for (const [re, ours] of OUR_CATEGORY) if (re.test(cat) || re.test(ch.name)) { category = ours; break; }
     if (!category) continue;
     const name = cleanName(ch.name);
-    if (!name) continue;
+    if (!name || isDecoration(name)) continue;
     const key = `${category}:${slugOf(name)}`;
     if (seen.has(key)) continue; // un canal por nombre y categoría
     seen.add(key);

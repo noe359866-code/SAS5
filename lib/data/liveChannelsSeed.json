@@ -712,14 +712,6 @@
   "ua": ""
  },
  {
-  "name": "Disney Channel",
-  "slug": "disney-channel",
-  "category": "infantil",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
-  "ua": ""
- },
- {
   "name": "Disney Junior",
   "slug": "disney-junior",
   "category": "infantil",
@@ -1141,14 +1133,6 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/254.m3u8",
-  "ua": ""
- },
- {
-  "name": "Discovery SCI",
-  "slug": "discovery-sci",
-  "category": "documentales",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/267.m3u8",
   "ua": ""
  },
  {

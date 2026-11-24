@@ -9,15 +9,17 @@ const BASE = 'https://otakustv2.com';
 const out = [];
 
 async function get(path) {
-  const res = await fetch(`${BASE}${path}`, { headers: { 'User-Agent': UA, 'Accept-Language': 'es-MX,es;q=0.9' }, signal: AbortSignal.timeout(15_000) });
-  return { status: res.status, body: await res.text() };
+  try {
+    const res = await fetch(`${BASE}${path}`, { headers: { 'User-Agent': UA, 'Accept-Language': 'es-MX,es;q=0.9' }, signal: AbortSignal.timeout(15_000) });
+    return { status: res.status, body: await res.text() };
+  } catch (err) { return { status: 0, body: '', error: String(err?.message || err) }; }
 }
 
 async function main() {
   for (const path of ['/anime/one-piece', '/ver/one-piece-1180', '/animes?genero=espanol-latino&tipo=serie&orden=desc&pag=1']) {
     const res = await get(path);
+    out.push(`=== ${path} HTTP ${res.status} (${res.body.length} B) ${res.error || ''}`);
     const $ = load(res.body);
-    out.push(`=== ${path} HTTP ${res.status} (${res.body.length} B)`);
     out.push(`TITLE ${$('title').first().text().trim()}`);
     for (const selector of ['h1', 'h2', '.ep-ti', '#epdata', '.opt', '.dat', '.info', '.anime-info', '.btn', '.ep-btn', 'article', '.serie']) {
       const node = $(selector).first();

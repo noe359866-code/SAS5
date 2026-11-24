@@ -9,6 +9,11 @@ const catalogs = require('../lib/catalogs');
 const streams = require('../lib/streams');
 const seed = require('../lib/data/liveChannelsSeed.json');
 
+// Hermético: la resolución consulta las listas vivas cuando hay red; se
+// bloquea fetch para fijar el camino «semilla pura» en cualquier entorno.
+const realFetch = globalThis.fetch;
+globalThis.fetch = async () => { throw new Error('sin red en tests'); };
+
 describe('canales en vivo por categorías: semilla', () => {
   test('la semilla trae canales verificados con las categorías esperadas', () => {
     assert.ok(seed.length > 500, `semilla pobre: ${seed.length}`);
@@ -114,3 +119,5 @@ describe('canales en vivo por categorías: streams', () => {
     assert.deepEqual(await streams.searchStreams('tv', 'rlch:lv:cine:noexiste', {}), []);
   });
 });
+
+test('restaurar fetch global', () => { globalThis.fetch = realFetch; });

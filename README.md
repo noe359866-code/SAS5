@@ -16,7 +16,7 @@ La marca es una baraja de tres fichas abanicadas con un botón de reproducción 
 
 ## Fuentes de reproducción
 
-**Doce fuentes están habilitadas por defecto**: Fanpelis, SpinFlix, Cuevana 3, Allpelículas, LaMovie, HackStore, AllCalidad, AnimeFLV, AnimeAV1, FuegoCine, PelisJuanita y VideoAPI. `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino o castellano identificado; una ficha, un iframe o una descarga no son un stream.
+**Trece fuentes están habilitadas por defecto**: Fanpelis, SpinFlix, Cuevana 3, Allpelículas, LaMovie, HackStore, AllCalidad, AnimeFLV, AnimeAV1, OtakusTV, FuegoCine, PelisJuanita y VideoAPI. `/configure` permite desmarcarlas una por una. Solo se incluyen medios directos con audio latino, castellano o subtitulado identificado; una ficha, un iframe o una descarga no son un stream.
 
 | Clave | Web consultada | Identificación y medios compatibles |
 |---|---|---|
@@ -29,6 +29,7 @@ La marca es una baraja de tres fichas abanicadas con un botón de reproducción 
 | `allcalidad` | `allcalidad.re` | Variante `/api/rest` de la misma familia: buscador por tipo de obra, episodios en un array y reproductor con `post_id`; el visor vuelve a ser Vimeos. [Detalles](docs/proveedores-2026-11-24.md). |
 | `animeflv` | `animeflv.or.at` | Anime subtitulado al español: episodios desde el JSON de la ficha y embeds en base64. Publica HLS del player propio y Byse con la etiqueta «Subtitulado». El sitio cataloga sobre todo lo que está en emisión y nombra cada temporada como una obra aparte (`… Season 2`), así que fuera de su catálogo el resultado es `no-match`. |
 | `animeav1` | `animeav1.com` | Anime **con doblaje latino y subtitulado**: el buscador `/catalogo?search=` filtra de verdad, la ficha abre una página por temporada y el episodio declara el audio por grupo (`embeds: {SUB, DUB}`). El visor propio (`player.zilla-networks.com`) publica un HLS por idioma en `/m3u8/<token>`. [Detalles](docs/animeav1.md). |
+| `otakustv` | `otakustv2.com` | Anime subtitulado: la ficha publica año, audio y episodios con numeración absoluta; el episodio expone sus visores en `data-dwn` y Byse entrega un HLS directo. Solo se acepta la temporada 1 salvo declaración explícita. [Detalles](docs/otakustv.md). |
 | `fuegocine` | `fuegocine.com` | Busca en `/search_elastic?s=`, confirma título y tipo, abre `/movies/watch/…` (o temporada y episodio en series) y solo lee el visor de UnLimPlay, que declara el audio por grupo (`latino`, `castellano`, `subtitulado`) y publica un HLS firmado por idioma. Videro, abyssplayer y embedorigin se cuentan como opacos sin abrirlos. [Detalles](docs/fuegocine.md). |
 | `pelisjuanita` | `pelisjuanita.org` | SPA con API propia: busca en `/api/rest/v1/search`, confirma tipo y año, y en series pide temporada y episodio a la API antes de abrir `videoapp.mov`. El visor de Vimeos declara la versión (`sub`/`lat`) y entrega un HLS firmado con sus subtítulos. [Detalles](docs/pelisjuanita.md). |
 | `videoapi` | `videoapi.la` | Embeds directos por ID de TMDB (`/e/movie/<id>` y `/e/tv/<id>/<S>/<E>`) con el mismo visor Vimeos y subtítulos opcionales. |

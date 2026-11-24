@@ -11,7 +11,7 @@
 | player streamwish | 200 | text/html | 10822 | manual=200 · iframes=0 · medios=0 |
 | episodio NEXT_DATA | 200 | text/html | 142499 | episode=sí · videos latino=5 spanish=0 english=0 |
 | player episodio voesx | 200 | text/html | 10810 | iframes=0 medios=0 |
-| muestreo de repuestos | 200 | text/html | 189142 | 62 fichas en portada, 10 recorridas · visores: voesx(14), doodstream(13), streamwish(14), vidhide(13), vidara(4), filemoon(1), netu(1) · medios directos: 0 |
+| muestreo de repuestos | 200 | text/html | 189292 | 63 fichas en portada, 10 recorridas · visores: voesx(14), doodstream(13), streamwish(14), vidhide(13), vidara(4), filemoon(1), netu(1) · medios directos: 0 |
 | extracción voesx | 200 | text/html | 10810 | https://voe.sx/e/nlxuec3rrl5q · opaque (JS / Cloudflare) |
 | extracción doodstream | 200 | text/html | 10823 | https://doodstream.com/e/juzchh1zb8zq · doodstream sin extractor · embed 403 text/html 5796B · sin pass_md5 en el embed |
 | extracción streamwish | 200 | text/html | 10822 | https://streamwish.to/e/o4x0nt10xa3f · opaque (JS / Cloudflare) |

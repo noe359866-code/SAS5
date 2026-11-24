@@ -1,9 +1,9 @@
 | Sitio | Paso | HTTP | Resultado | Detalle |
 |---|---|---|---|---|
-| hackstore.mx | película La Odisea | — | OK | hits=2 · audio=Latino · s1.vimeos.net |
+| hackstore.mx | película La Odisea | — | OK | hits=2 · audio=Latino · s1.vimeos.net,p3.vimeos.zip |
 | hackstore.mx | serie The Pitt 1x01 | — | OK | hits=2 · audio=Latino · s9.vimeos.net |
-| hackstore.mx | serie Breaking Bad 1x01 | — | OK | hits=2 · audio=Latino · vimeos.zip,p3.vimeos.zip |
-| allcalidad.re | película La Odisea | — | OK | hits=2 · audio=Latino · p7.vimeos.zip |
+| hackstore.mx | serie Breaking Bad 1x01 | — | OK | hits=2 · audio=Latino · s9.vimeos.net,vimeos.zip |
+| allcalidad.re | película La Odisea | — | OK | hits=2 · audio=Latino · p7.vimeos.zip,s1.vimeos.net |
 | allcalidad.re | serie The Pitt 1x01 | — | OK | hits=2 · audio=Latino · s9.vimeos.net |
 | allcalidad.re | serie Breaking Bad 1x01 | — | OK | hits=2 · audio=Latino · p3.vimeos.zip |
 | allcalidad.cc | API /search | 200 | OK | items=17 · La odisea de los giles:31609 La Odisea:47911 La Odisea: El Regreso:10546986 |

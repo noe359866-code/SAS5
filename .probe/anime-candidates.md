@@ -12,7 +12,7 @@
 | monoschinos | ficha | — | — | sin enlace que abrir |
 | tioanime | portada | 200 | 118920 |  motor=— fichas=3 · tioanime.com/ver/tensei-goblin-dakedo-shitsumon-aru-8 |
 | tioanime | buscar /directorio | 200 | 87402 |  fichas=0 |
-| tioanime | buscar /buscar | 404 | 79451 |  fichas=0 |
+| tioanime | buscar /buscar | 404 | 79939 |  fichas=0 |
 | tioanime | ficha | 200 | — | iframes=0 data=0 video=0 medios=0 · motor=— |
 | latanime | portada | 200 | 110081 |  motor=— fichas=3 · latanime.org/anime/one-piece-latino |
 | latanime | buscar / | 200 | 110081 |  fichas=65 · latanime.org/anime/one-piece-latino |
@@ -22,7 +22,7 @@
 | katanime | buscar / | 403 | 5806 |  fichas=0 |
 | katanime | buscar /buscar | 403 | 5845 |  fichas=0 |
 | katanime | ficha | — | — | sin enlace que abrir |
-| animeav1 | portada | 200 | 131122 |  motor=— fichas=3 · animeav1.com/media/one-piece |
+| animeav1 | portada | 200 | 131355 |  motor=— fichas=3 · animeav1.com/media/one-piece |
 | animeav1 | buscar /catalogo | 200 | 76753 |  fichas=20 · animeav1.com/media/battle-spirits-re-zekkai-no-kuu |
 | animeav1 | ficha | 200 | — | iframes=0 data=0 video=0 medios=0 · motor=— |
 | animejl | portada | 403 | 5609 |  motor=— fichas=0 |
@@ -36,7 +36,7 @@
 | donghualife | buscar / | 200 | 194357 |  fichas=0 |
 | donghualife | buscar /buscar | 404 | 39126 |  fichas=0 |
 | donghualife | ficha | — | — | sin enlace que abrir |
-| danimados | portada | 200 | 256160 |  motor=wordpress,dooplay fichas=0 |
+| danimados | portada | 200 | 254835 |  motor=wordpress,dooplay fichas=0 |
 | danimados | buscar / | 200 | 111415 |  fichas=0 |
 | danimados | ficha | — | — | sin enlace que abrir |
 

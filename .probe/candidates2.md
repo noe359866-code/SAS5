@@ -10,8 +10,8 @@
 | lamovie.org | wp-api /player | 400 | 56 | embeds=0 |
 | lamovie.cc | wp-api /search | 0 | 0 | AbortError |
 | pelisgo.online | API /search | 403 | 5868 | text/html |
-| embed69.org | /f/tt0111161 | 200 | 8407 | captcha=1 challenge=4 playback=0 /embed/=0 iframe=1 · medios=0 · hosts=en.wikipedia.org,github.com,techaro.lol,bsky.app |
-| embed69.org | /f/tt0903747-1x01 | 200 | 8407 | captcha=1 challenge=4 playback=0 /embed/=0 iframe=1 · medios=0 · hosts=en.wikipedia.org,github.com,techaro.lol,bsky.app |
+| embed69.org | /f/tt0111161 | 403 | 8235 | captcha=0 challenge=1 playback=0 /embed/=0 iframe=1 · medios=0 · hosts=— |
+| embed69.org | /f/tt0903747-1x01 | 403 | 8235 | captcha=0 challenge=1 playback=0 /embed/=0 iframe=1 · medios=0 · hosts=— |
 | vimeus.com | película tmdb=13 | 200 | 208 | text/html |
 | vimeus.com | serie tmdb=1396 | 200 | 220 | text/html |
 | allpeliculas.la | wp-api /search | 200 | 1426 | posts=1 · tvshows «The Pitt (2025)» id=25427 |
@@ -23,23 +23,23 @@
 | cinecalidad.vg | buscar (/?s=) | 200 | 96622 | resultados=12 · fichas=3 · https://www.cinecalidad.vg/serie/the-pitt/ |
 | cinecalidad.vg | · ficha | 200 | 80696 | iframes=1 · www.youtube.com=— · medios=0 |
 | entrepeliculasyseries.nz | wp-api /search | 404 | 155 | text/html · sin posts |
-| entrepeliculasyseries.nz | buscar (/?s=) | 403 | 4557 | resultados=0 · fichas=0 |
+| entrepeliculasyseries.nz | buscar (/?s=) | 403 | 4558 | resultados=0 · fichas=0 |
 | gnula.life | wp-api /search | 404 | 16306 | text/html · sin posts |
 | gnula.life | buscar (/?s=) | 200 | 81661 | resultados=45 · fichas=3 · https://gnula.life/archives/series/top/day |
 | gnula.life | · ficha | 200 | 59216 | iframes=1 · www.googletagmanager.com=— · medios=0 |
 | homecine.to | wp-api /search | 404 | 43677 | text/html · sin posts |
-| homecine.to | buscar (/search) | 200 | 74639 | resultados=0 · fichas=3 · https://www3.homecine.to/series/search-party/feed |
+| homecine.to | buscar (/search) | 200 | 74667 | resultados=0 · fichas=3 · https://www3.homecine.to/series/search-party/feed |
 | homecine.to | · ficha | 200 | 697 | iframes=0 · medios=0 |
 | pelispedia.mov | wp-api /search | 404 | 155 | text/html · sin posts |
 | pelispedia.mov | buscar (/?s=) | 200 | 394989 | resultados=0 · fichas=3 · https://pelispedia.mov/series/populares |
 | pelispedia.mov | · ficha | 200 | 190222 | iframes=0 · medios=0 |
 | seriesmetro.net | wp-api /search | 404 | 32162 | text/html · sin posts |
 | seriesmetro.net | buscar (/?s=) | 200 | 40786 | resultados=7 · fichas=3 · https://www3.seriesmetro.net/serie/the-pitt/ |
-| seriesmetro.net | · ficha | 200 | 60152 | iframes=1 · www.youtube.com=— · medios=0 |
-| sololatino.net | wp-api /search | 403 | 5903 | text/html · sin posts |
+| seriesmetro.net | · ficha | 200 | 60200 | iframes=1 · www.youtube.com=— · medios=0 |
+| sololatino.net | wp-api /search | 403 | 5924 | text/html · sin posts |
 | sololatino.net | buscar (/?s=) | 403 | 5677 | resultados=0 · fichas=0 |
 | tioplus.app | wp-api /search | 521 | 948 | application/json · sin posts |
-| tioplus.app | buscar (/?s=) | 521 | 6965 | resultados=0 · fichas=0 |
+| tioplus.app | buscar (/?s=) | 521 | 6966 | resultados=0 · fichas=0 |
 | vimeus.com | wp-api /search | 200 | 186 | text/html · sin posts |
 | vimeus.com | buscar (/search) | 200 | 125 | resultados=0 · fichas=0 |
 | vitaminagg.vip | wp-api /search | 403 | 5924 | text/html · sin posts |

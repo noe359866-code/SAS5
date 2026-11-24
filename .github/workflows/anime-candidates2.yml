@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/anime-candidates2.yml'
       - 'scripts/anime-candidates2-probe.mjs'
+      - 'scripts/anime-players5-probe.mjs'
 
 permissions:
   contents: write
@@ -22,13 +23,15 @@ jobs:
           node-version: '22'
       - name: Medir candidatas de anime
         run: node scripts/anime-candidates2-probe.mjs
+      - name: Cadena Dooplay y visores de anime
+        run: node scripts/anime-players5-probe.mjs
       - name: Devolver el resultado a la rama
         if: always()
         run: |
           test -s .probe/anime-candidates2.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          git add -f .probe/anime-candidates2.md
+          git add -f .probe/anime-candidates2.md .probe/anime-players5.md
           git diff --cached --quiet || git commit -m "sonda: candidatas de anime 2 $(date -u +%FT%TZ) [skip ci]"
           git fetch origin || true
           git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true

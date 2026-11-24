@@ -61,13 +61,22 @@ function decodeGlobal(body) {
   // 2) Para cada slug: global1.php → hls.php → m3u8 → validar manifiesto
   say('| Canal | Activo | hls.php | URL final | Manifiesto | Estado |');
   say('|---|---|---|---|---|---|');
-  for (const slug of [...new Set(slugs)]) {
-    const g = await get(`https://streamtp.site/global1.php?stream=${slug}`);
+  const all = [...new Set([...slugs, ...active])];
+  for (const slug of all) {
+    const pageUrl = active.has(slug) ? `https://streamtp.site/channel/${slug}.html` : `https://streamtp.site/global1.php?stream=${slug}`;
+    const g = await get(pageUrl);
     if (g.status !== 200) { say(`| ${slug} | ${active.has(slug) ? 'sí' : 'no'} | ${g.status} | — | — | global1 falló |`); continue; }
-    const decoded = decodeGlobal(g.body);
-    if (!decoded) { say(`| ${slug} | ${active.has(slug) ? 'sí' : 'no'} | — | — | — | sin patrón k/e |`); continue; }
-    const hlsPhp = (decoded.match(/https?:\/\/[^\s"'<>\\]+hls\.php[^\s"'<>\\]*/) || [])[0];
-    if (!hlsPhp) { say(`| ${slug} | ${active.has(slug) ? 'sí' : 'no'} | — | — | — | sin hls.php |`); continue; }
+    // En channel/*.html el m3u8 puede venir ya en claro; si no, decodificar.
+    const direct = (g.body.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/) || [])[0];
+    const decoded = direct ? null : decodeGlobal(g.body);
+    if (!direct && !decoded) { say(`| ${slug} | ${active.has(slug) ? 'sí' : 'no'} | — | — | — | sin patrón k/e |`); continue; }
+    const hlsPhp = direct || (decoded.match(/https?:\/\/[^\s"'<>\\]+hls\.php[^\s"'<>\\]*/) || [])[0]
+      || (decoded.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/) || [])[0];
+    if (!hlsPhp) {
+      say(`| ${slug} | ${active.has(slug) ? 'sí' : 'no'} | — | — | — | sin hls.php/m3u8 |`);
+      if (decoded) say(`\n\`\`\`\n${redact(decoded)}\n\`\`\`\n`);
+      continue;
+    }
     const t0 = Date.now();
     const h = await get(hlsPhp, { Referer: g.url });
     const ms = Date.now() - t0;

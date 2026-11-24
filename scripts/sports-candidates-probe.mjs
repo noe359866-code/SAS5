@@ -14,17 +14,15 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const HEADERS = { 'User-Agent': UA, Accept: 'text/html,application/json;q=0.9,*/*;q=0.8', 'Accept-Language': 'es-MX,es;q=0.9' };
 const TIMEOUT = 15_000;
 
+// Segunda tanda (la primera dejó: la14hd/la18hd incautados, televisionlibre
+// secuestrado con otro contenido, pelotalibretv puerta legal, noveopartidos 403).
 const SITES = [
-  { name: 'noveopartidos.xyz', base: 'https://noveopartidos.xyz' },
-  { name: 'streamtp.site', base: 'https://streamtp.site' },
-  { name: 'futbollibretvapp.com', base: 'https://futbollibretvapp.com' },
-  { name: 'pirlo-tv.club', base: 'https://pirlo-tv.club' },
-  { name: 'pirlotve.org', base: 'https://pirlotve.org' },
-  { name: 'pirlo.club', base: 'https://pirlo.club' },
-  { name: 'librefutbolhd.store', base: 'https://librefutbolhd.store' },
-  { name: 'pirlotvhd.com.co', base: 'https://pirlotvhd.com.co' },
-  { name: 'televisionlibre.net', base: 'https://televisionlibre.net' },
-  { name: 'pelotalibretv.pl', base: 'https://pelotalibretv.pl' },
+  { name: 'tarjetarojatv.app', base: 'https://tarjetarojatv.app' },
+  { name: 'pirlotv.bz', base: 'https://pirlotv.bz' },
+  { name: 'futboltv.mx', base: 'https://www.futboltv.mx' },
+  { name: 'tvlibrehd.com', base: 'https://www.tvlibrehd.com' },
+  { name: 'rojadirectaya.com', base: 'https://rojadirectaya.com' },
+  { name: 'thetvapp.to', base: 'https://thetvapp.to' },
 ];
 
 const CHANNEL_WORD = /espn|fox|dsports?|dazn|tnt|tyc|tudn|deporte|sport|win|directv|bein|movistar|liga ?1|telemundo|canal/i;

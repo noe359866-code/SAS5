@@ -3,11 +3,9 @@
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const fs = require('node:fs');
-const { searchDoramasYt } = require('../lib/sites/doramasyt');
 const { searchSeriesBl } = require('../lib/sites/seriesbl');
 
 const CONTROLS = [
-  { provider: 'doramasyt', search: searchDoramasYt, resolved: { title: 'Qué le ocurre a la secretaria Kim', altTitle: "What's Wrong with Secretary Kim?", year: '2018', mediaType: 'series', season: 1, episode: 16 } },
   { provider: 'seriesbl', search: searchSeriesBl, resolved: { title: 'ABO Desire', altTitle: null, year: '2025', mediaType: 'series', season: 1, episode: 1 } },
 ];
 

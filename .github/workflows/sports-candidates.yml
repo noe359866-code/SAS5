@@ -11,6 +11,7 @@ on:
       - 'scripts/sports-decode-probe.mjs'
       - 'scripts/sports-chain-probe.mjs'
       - 'scripts/sports-lists-probe.mjs'
+      - 'scripts/live-lists-probe.mjs'
 
 permissions:
   contents: write
@@ -40,13 +41,15 @@ jobs:
       - name: Listas públicas de canales deportivos
         if: always()
         run: test -f scripts/sports-lists-probe.mjs && node scripts/sports-lists-probe.mjs || echo "sin sonda de listas todavía"
+      - name: Listas de canales por categorías (Magma TV + IPTVSV)
+        run: test -f scripts/live-lists-probe.mjs && node scripts/live-lists-probe.mjs || echo "sin sonda de categorías todavía"
       - name: Devolver el resultado a la rama
         if: always()
         run: |
           test -s .probe/sports-candidates.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv; do
+          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv .probe/live-lists.md .probe/live-channels.json; do
             test -s "$f" && git add -f "$f"
           done
           git diff --cached --quiet || git commit -m "sonda: candidatas de canales deportivos $(date -u +%FT%TZ) [skip ci]"

@@ -104,6 +104,13 @@ npm run deploy
 
 `npm run deploy` compila la web, pregenera catálogos configurados y despliega el Worker.
 
+**Orden estricto del Worker (plan gratuito de Cloudflare):**
+
+- **Un solo trabajador: `ramdonlatam`.** Workers Builds lo despliega solo al fusionar en `main`; `npm run deploy` es la vía manual equivalente. No cambies `name` en `wrangler.toml`: otro nombre crea un segundo worker y parte el addon.
+- **Techos del plan free fijados en `wrangler.toml`**: 10 ms de CPU y ~1 s por petición; las fuentes corren en tandas de 4 dentro de un presupuesto de 9 s y lo que no cabe se omite. No subir sin cambiar de plan.
+- **Assets gratis e ilimitados**: lo que vive en `public/` (logo, catálogos pregenerados) se sirve sin gastar la cuota de 100.000 peticiones/día.
+- **Sin bindings de pago**: nada de KV, Durable Objects, Queues, D1, R2, Vectorize, AI o Hyperdrive; la coordinación usa memoria por isolate + Cache API. `test/deploy.test.js` hace cumplir estas reglas en CI.
+
 ## Rutas
 
 - `/manifest.json` y `/<config>/manifest.json`: manifests de Stremio.

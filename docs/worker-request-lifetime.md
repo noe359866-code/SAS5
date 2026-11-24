@@ -23,7 +23,8 @@ proveedores; `npx wrangler deploy --dry-run`. Tras desplegar, repetir las rutas 
 stream reportadas y comprobar CPU en Workers Observability: no se puede asegurar
 el presupuesto de producción con las páginas reales solo mediante fixtures.
 
-Atención al despliegue: wrangler.toml declara `catalogos-plus`, mientras el servicio
-reportado es `ramdonlatam`. Confirmar el nombre correcto y desplegar explícitamente
-con `npx wrangler deploy --name ramdonlatam` si ese es el destino. Este cambio no
-incluye despliegue ni modificaciones de credenciales.
+Despliegue (resuelto el 24-11-2026): el servicio real es `ramdonlatam` y
+wrangler.toml ya declara ese mismo nombre — un solo trabajador, sin duplicados.
+test/deploy.test.js guarda la regla: nombre único, sin bindings de pago y techos
+del plan gratuito. Si un despliegue manual creara otro worker, bórralo y vuelve a
+`npx wrangler deploy` con la configuración del repo.

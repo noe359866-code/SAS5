@@ -11,6 +11,7 @@ on:
       - 'scripts/anime-players6-probe.mjs'
       - 'scripts/anime-players7-probe.mjs'
       - 'scripts/anime-players8-probe.mjs'
+      - 'scripts/anime-players9-probe.mjs'
 
 permissions:
   contents: write
@@ -34,6 +35,8 @@ jobs:
         run: node scripts/anime-players7-probe.mjs
       - name: Visores Byse de anime
         run: node scripts/anime-players8-probe.mjs
+      - name: Contexto HTML de OtakusTV
+        run: node scripts/anime-players9-probe.mjs
       - name: Devolver el resultado a la rama
         if: always()
         run: |

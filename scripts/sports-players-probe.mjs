@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Sonda 7 de deportes (24-11-2026): capo8play.com/capo.js (bootstrap del
- * reproductor capo), playcapo.st completo y el reproductor inyectado por JS
- * de tvlibrehd.com. Volcados completos redactados (archivos pequeños).
+ * Sonda 8 de deportes (24-11-2026): capo8play.com/capo.php?live=<fid> — la
+ * última capa del reproductor capo. Se prueban varios fid de canales y se
+ * sigue cualquier m3u8/iframe/token. Salida redactada.
  */
 
 import { createRequire } from 'node:module';
@@ -13,57 +13,65 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const HEADERS = { 'User-Agent': UA, Accept: '*/*', 'Accept-Language': 'es-MX,es;q=0.9' };
 const TIMEOUT = 15_000;
 
+const FIDS = ['capof1', 'espn', 'espn1', 'espn2', 'espn3', 'foxsports', 'foxsports1', 'dsports', 'dsports2', 'dazn', 'dazn1', 'tntsports', 'tycsports', 'tudn', 'winsports'];
+
 const out = [];
 const say = (line) => { out.push(line); console.log(line); };
-const redact = (raw) => String(raw || '').replace(/[?&](?:token|auth|sig|expires|hash|key)=[^"'&\s)]+/gi, '$1…');
+const redact = (raw) => String(raw || '').replace(/[?&](?:token|auth|sig|expires|hash|key|s|e)=[^"'&\s)]+/gi, '$1…');
 
 async function get(url, extraHeaders = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT);
   try {
     const res = await fetch(url, { redirect: 'follow', signal: controller.signal, headers: { ...HEADERS, ...extraHeaders } });
-    return { status: res.status, url: res.url, body: (await res.text()).slice(0, 1_500_000), ct: res.headers.get('content-type') || '' };
+    const cookies = res.headers.getSetCookie ? res.headers.getSetCookie() : [];
+    return { status: res.status, url: res.url, body: (await res.text()).slice(0, 1_500_000), cookies, cf: res.headers.get('cf-mitigated') || '', ct: res.headers.get('content-type') || '' };
   } catch (err) {
-    return { status: 0, url, body: '', error: err?.name || String(err).slice(0, 60), ct: '' };
+    return { status: 0, url, body: '', error: err?.name || String(err).slice(0, 60), cookies: [], cf: '', ct: '' };
   } finally { clearTimeout(timer); }
 }
 
 (async () => {
- try {
-  say('# Sonda 7: capo8play.js, playcapo.st completo y player de tvlibrehd');
+  say('# Sonda 8: capo8play.com/capo.php?live=<fid>');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
   say('');
 
-  // ── 1) playcapo.st/update/capof1.php COMPLETO ────────────────────────────
-  const capo = await get('https://playcapo.st/update/capof1.php', { Referer: 'https://pirlotv.fyi/' });
-  say(`## playcapo.st/update/capof1.php — HTTP ${capo.status} · ${capo.body.length} B`);
-  if (capo.status === 200) say(`\`\`\`html\n${redact(capo.body).slice(0, 3000)}\n\`\`\``);
-
-  // ── 2) capo8play.com/capo.js COMPLETO ────────────────────────────────────
-  const js = await get('https://capo8play.com/capo.js', { Referer: 'https://playcapo.st/' });
-  say(`## capo8play.com/capo.js — HTTP ${js.status} · ${js.body.length} B · ${js.ct}`);
-  if (js.status === 200) say(`\`\`\`js\n${redact(js.body).slice(0, 4000)}\n\`\`\``);
-
-  // ── 3) tvlibrehd.com: ¿cómo se inyecta el reproductor? ───────────────────
-  const tv = await get('https://www.tvlibrehd.com/en-vivo/espn/');
-  say(`## tvlibrehd espn — HTTP ${tv.status} · ${tv.body.length} B`);
-  if (tv.status === 200) {
-    // Fragmentos alrededor de «player», «embed», «iframe», «canal»
-    for (const m of [...tv.body.matchAll(/.{0,140}(?:id=["']player|class=["'][^"']*player|<embed|data-iframe|var canal|iframesrc|playerarea|videojs|jwplayer)[\s\S]{0,400}/gi)].slice(0, 6)) {
-      say(`\`\`\`\n${redact(m[0]).slice(0, 700)}\n\`\`\``);
+  for (const fid of FIDS) {
+    const url = `https://capo8play.com/capo.php?player=desktop&live=${fid}`;
+    const res = await get(url, { Referer: 'https://playcapo.st/' });
+    say(`## ${fid} — HTTP ${res.status}${res.error ? ` (${res.error})` : ''} · ${res.body.length} B · cf=${res.cf || 'no'}`);
+    if (res.status !== 200) continue;
+    const m3u8 = [...new Set([...res.body.matchAll(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/gi)].map((m) => m[0]))];
+    for (const u of m3u8.slice(0, 3)) say(`- m3u8: ${redact(u)}`);
+    const iframes = [...new Set([...res.body.matchAll(/<iframe[^>]+src\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]))];
+    for (const u of iframes.slice(0, 3)) say(`- iframe: ${redact(u)}`);
+    const fetches = [...new Set([...res.body.matchAll(/(?:fetch|\.ajax|getJSON|load)\(\s*[`'"]([^`'"]{6,180})[`'"]/gi)].map((m) => m[1]))];
+    for (const u of fetches.slice(0, 4)) say(`- fetch: ${redact(u)}`);
+    // Fragmentos con pistas (solo para capof1, para no inundar)
+    if (fid === 'capof1') {
+      const inline = [...res.body.matchAll(/<script(?![^>]+src)[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1].trim()).filter((t) => t.length > 30);
+      for (const script of inline.slice(0, 4)) say(`\`\`\`\n${redact(script).slice(0, 1000)}\n\`\`\``);
     }
-    // El JS raro de la página
-    const odd = await get('https://www.tvlibrehd.com/54c4624ecf_44.js', { Referer: tv.url });
-    say(`## tvlibrehd 54c4624ecf_44.js — HTTP ${odd.status} · ${odd.body.length} B`);
-    if (odd.status === 200) say(`\`\`\`js\n${redact(odd.body).slice(0, 2500)}\n\`\`\``);
+    // Verificar el primer m3u8 con cookies del paso
+    if (m3u8.length) {
+      const cookie = res.cookies.map((c) => c.split(';')[0]).join('; ');
+      const man = await get(m3u8[0], { Referer: res.url, ...(cookie ? { Cookie: cookie } : {}) });
+      const ok = man.status === 200 && /#EXTM3U/.test((man.body || '').slice(0, 400));
+      say(`  → HLS ${ok ? 'VÁLIDO' : 'no'} (HTTP ${man.status})`);
+      if (ok) {
+        const lines = (man.body || '').split('\n').map((l) => l.trim()).filter(Boolean);
+        const v = lines.find((l) => !l.startsWith('#'));
+        if (v) {
+          const abs = new URL(v, man.url).href;
+          const bare = await get(abs, { Range: 'bytes=0-300' });
+          say(`  → variante sin cookie: HTTP ${bare.status} ${/#EXTM3U/.test((bare.body || '').slice(0, 300)) ? '· REPRODUCIBLE DIRECTA' : '· protegida'} ${redact(abs)}`);
+        }
+      }
+    }
   }
 
- } catch (err) {
-   say(`\nERROR de sonda: ${err && err.message}`);
- } finally {
   fs.mkdirSync('.probe', { recursive: true });
   fs.writeFileSync('.probe/sports-players.md', out.join('\n') + '\n');
   console.log('\n.probe/sports-players.md');
- }
 })();

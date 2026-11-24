@@ -42,8 +42,33 @@ async function get(url, extraHeaders = {}) {
     const res = await get(url, { Referer: 'https://playcapo.st/' });
     say(`## ${fid} — HTTP ${res.status}${res.error ? ` (${res.error})` : ''} · ${res.body.length} B · cf=${res.cf || 'no'}`);
     if (res.status !== 200) continue;
+    // atob() → rutas tipo /hls/stream.m3u8?ch=xxx
+    const b64 = [...new Set([...res.body.matchAll(/atob\('([^']{8,200})'\)/gi)].map((m) => m[1]))];
+    const hlsPaths = [];
+    for (const b of b64) {
+      let text = '';
+      try { text = Buffer.from(b, 'base64').toString('utf8'); } catch { continue; }
+      if (/m3u8|hls|\.php|http/.test(text)) { say(`- atob: ${redact(text)}`); if (/m3u8/.test(text)) hlsPaths.push(text); }
+    }
     const m3u8 = [...new Set([...res.body.matchAll(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/gi)].map((m) => m[0]))];
     for (const u of m3u8.slice(0, 3)) say(`- m3u8: ${redact(u)}`);
+    for (const p2 of hlsPaths.slice(0, 2)) {
+      const abs = new URL(p2, res.url).href;
+      const cookie = res.cookies.map((c) => c.split(';')[0]).join('; ');
+      const man = await get(abs, { Referer: res.url, ...(cookie ? { Cookie: cookie } : {}) });
+      const ok = man.status === 200 && /#EXTM3U/.test((man.body || '').slice(0, 400));
+      say(`  → HLS ${ok ? 'VÁLIDO' : 'no'} (HTTP ${man.status}${man.error ? ` ${man.error}` : ''}) ${redact(abs)}`);
+      if (ok) {
+        const lines = (man.body || '').split('\n').map((l) => l.trim()).filter(Boolean);
+        const v = lines.find((l) => !l.startsWith('#'));
+        say(`    manifiesto: ${lines.slice(0, 5).map((l) => redact(l)).join(' ⏎ ')}`.slice(0, 300));
+        if (v) {
+          const vabs = new URL(v, man.url).href;
+          const bare = await get(vabs, { Range: 'bytes=0-300' });
+          say(`    variante sin cookie: HTTP ${bare.status} ${/#EXTM3U/.test((bare.body || '').slice(0, 300)) ? '· REPRODUCIBLE DIRECTA' : '· protegida'} ${redact(vabs)}`);
+        }
+      }
+    }
     const iframes = [...new Set([...res.body.matchAll(/<iframe[^>]+src\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]))];
     for (const u of iframes.slice(0, 3)) say(`- iframe: ${redact(u)}`);
     const fetches = [...new Set([...res.body.matchAll(/(?:fetch|\.ajax|getJSON|load)\(\s*[`'"]([^`'"]{6,180})[`'"]/gi)].map((m) => m[1]))];
@@ -68,6 +93,23 @@ async function get(url, extraHeaders = {}) {
           say(`  → variante sin cookie: HTTP ${bare.status} ${/#EXTM3U/.test((bare.body || '').slice(0, 300)) ? '· REPRODUCIBLE DIRECTA' : '· protegida'} ${redact(abs)}`);
         }
       }
+    }
+  }
+
+  // ── Mapa fid: pirlotv.fyi/canales → iframe playcapo.st/update/<fid>.php ──
+  say('## mapa pirlotv.fyi → fid');
+  const hub = await get('https://pirlotv.fyi/canales/');
+  say(`pirlotv.fyi/canales — HTTP ${hub.status} · ${hub.body.length} B`);
+  if (hub.status === 200) {
+    const chans = [...new Set([...hub.body.matchAll(/href=["']([^"']*\/canales\/[a-z0-9-]+\/?)["']/gi)].map((m) => m[1]))].slice(0, 30);
+    say(`canales: ${chans.join(', ')}`);
+    for (const c of chans.slice(0, 14)) {
+      const page = await get(new URL(c, hub.url).href);
+      const fid = /<script>fid="([^"]+)"/.exec(page.body)?.[1]
+        || (page.body.match(/playcapo\.[a-z]+\/update\/([a-z0-9]+)\.php/i) || [])[1]
+        || '';
+      const ifr = (page.body.match(/<iframe[^>]+src\s*=\s*["']([^"']+)["']/i) || [])[1] || '';
+      say(`- ${c} → fid=${fid || '—'} iframe=${ifr ? redact(ifr) : '—'} (HTTP ${page.status})`);
     }
   }
 

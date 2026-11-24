@@ -1,6 +1,6 @@
 # Sonda 5: hls.php de streamtp, canal por canal
 
-Fecha: 2026-11-24T15:20:37.079Z
+Fecha: 2026-11-24T15:23:22.803Z
 
 canales activos: dsports, la1, fox, itv1, dsports2, dsportsplus, canal5mx, cbssports, foxdeportes, foxplus, foxsports1usa, foxsports2usa, daznlaliga
 
@@ -15,17 +15,17 @@ if(hst!=='streamtp.site'&&hst!=='www.streamtp.site'){
 docume
 ```
 
-Cookies de global2: shtk=deleted; expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0; path=/; domain=wp.streamtp.site; secure; HttpOnly; SameSite=None ; shtk=317824a618f14f7151051109; expires=Tue, 24 Nov 2026 16:20:37 GMT; Max-Age=3600; path=/; domain=.streamtp.site; secure; HttpOnly; SameSite=None · cf-mitigated: no
+Cookies de global2: shtk=deleted; expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0; path=/; domain=wp.streamtp.site; secure; HttpOnly; SameSite=None ; shtk=d8a5542634a39d0eb35882b2; expires=Tue, 24 Nov 2026 16:23:23 GMT; Max-Age=3600; path=/; domain=.streamtp.site; secure; HttpOnly; SameSite=None · cf-mitigated: no
 
 hls.php con cookie → HTTP 200 · cf: no · 
 
-| dsports | 200 | application/vnd.apple.mpegurl | HTTP 200 | — | — | 24 |
-| la1 | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(7 B) | verificado | 23 |
-| fox | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(7 B) | verificado | 23 |
-| itv1 | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(8 B) | verificado | 23 |
-| dsports2 | 200 | application/vnd.apple.mpegurl | HTTP 200 | — | — | 22 |
+| dsports | 200 | application/vnd.apple.mpegurl | HTTP 200 | — | — | 66 |
+| la1 | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(7 B) | verificado | 130 |
+| fox | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(7 B) | verificado | 163 |
+| itv1 | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(8 B) | verificado | 66 |
+| dsports2 | 200 | application/vnd.apple.mpegurl | HTTP 200 | — | — | 309 |
 
-variante de dsportsplus: streamtp.site/live/dsportsplus/seg000645.ts?(39 B)
+variante de dsportsplus: streamtp.site/live/dsportsplus/seg000673.ts?(39 B)
 sin cookie/referer → HTTP 403 <html>
 <head><title>403 Forbidden</title></head>
 <body>
@@ -35,17 +35,17 @@ manifiesto de dsportsplus (primeras líneas):
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-TARGETDURATION:6
-#EXT-X-MEDIA-SEQUENCE:645
+#EXT-X-MEDIA-SEQUENCE:673
 #EXT-X-KEY:METHOD=AES-128,URI="https://streamtp.site/key.php?ch=dsportsplus",IV=0x000000000000000000
 #EXTINF:6.000000,
-/live/dsportsplus/seg000645.ts?st=fSrQoh6IMXh-rVFP9Za-WA&e=1795539600
+/live/dsportsplus/seg000673.ts?st=yMagc66TzkFUw5q2NkSYSA&e=1795539600
 #EXTINF:6.000000,
 ```
-| dsportsplus | 200 | application/vnd.apple.mpegurl | VÁLIDO | streamtp.site/hls.php?(15 B) | verificado | 23 |
-| canal5mx | 200 | application/vnd.apple.mpegurl | HTTP 200 | — | — | 23 |
-| cbssports | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(13 B) | verificado | 22 |
-| foxdeportes | 200 | application/vnd.apple.mpegurl | HTTP 200 | — | — | 22 |
-| foxplus | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(11 B) | verificado | 22 |
-| foxsports1usa | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(17 B) | verificado | 22 |
-| foxsports2usa | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(17 B) | verificado | 22 |
-| daznlaliga | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(14 B) | verificado | 22 |
+| dsportsplus | 200 | application/vnd.apple.mpegurl | VÁLIDO | streamtp.site/hls.php?(15 B) | verificado | 381 |
+| canal5mx | 200 | application/vnd.apple.mpegurl | HTTP 200 | — | — | 64 |
+| cbssports | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(13 B) | verificado | 64 |
+| foxdeportes | 200 | application/vnd.apple.mpegurl | HTTP 200 | — | — | 64 |
+| foxplus | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(11 B) | verificado | 66 |
+| foxsports1usa | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(17 B) | verificado | 64 |
+| foxsports2usa | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(17 B) | verificado | 67 |
+| daznlaliga | 404 | application/vnd.apple.mpegurl | HTTP 404 no-HLS | streamtp.site/hls.php?(14 B) | verificado | 65 |

@@ -15,6 +15,7 @@ on:
       - 'scripts/sports-lists-probe.mjs'
       - 'scripts/live-lists-probe.mjs'
       - 'scripts/tvclub-source-probe.mjs'
+      - 'scripts/iptvgo-source-probe.mjs'
 
 permissions:
   contents: write
@@ -48,6 +49,8 @@ jobs:
         run: test -f scripts/live-lists-probe.mjs && node scripts/live-lists-probe.mjs || echo "sin sonda de categorías todavía"
       - name: Fuente tvcluboficial a fondo
         run: test -f scripts/tvclub-source-probe.mjs && node scripts/tvclub-source-probe.mjs || echo "sin sonda tvclub todavía"
+      - name: Fuente iptvgo a fondo
+        run: test -f scripts/iptvgo-source-probe.mjs && node scripts/iptvgo-source-probe.mjs || echo "sin sonda iptvgo todavía"
       - name: Actualizar la semilla de canales del addon (con guarda)
         if: always()
         run: |
@@ -79,7 +82,7 @@ jobs:
           test -s .probe/sports-candidates.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv .probe/live-lists.md .probe/live-channels.json .probe/tvclub-source.md lib/data/liveChannelsSeed.json; do
+          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv .probe/live-lists.md .probe/live-channels.json .probe/tvclub-source.md .probe/iptvgo-source.md lib/data/liveChannelsSeed.json; do
             test -s "$f" && git add -f "$f"
           done
           git diff --cached --quiet || git commit -m "sonda: candidatas de canales deportivos $(date -u +%FT%TZ) [skip ci]"

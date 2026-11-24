@@ -338,7 +338,11 @@ test('/configure: el contador de catálogos cuenta lo mismo que el manifest', ()
   assert.equal(total(everything), buildDefs(everything).length);
   const countryKeys = userConfig.BASE_KEYS.filter((k) => /^live_(espana|mexico|argentina|colombia|chile|peru)$/.test(k));
   assert.ok(countryKeys.length > 0, 'catálogos de países presentes');
-  assert.equal(total(everything) - countryKeys.length, buildDefs(null).length);
+  // Un país sin señales del proveedor pesa 0 (su catálogo se oculta solo):
+  // se resta el peso real de cada clave, no el número de claves.
+  const countryWeight = countryKeys.reduce((n, k) => n + weights.base[k], 0);
+  assert.ok(countryWeight > 0, 'al menos un país con catálogo activo');
+  assert.equal(total(everything) - countryWeight, buildDefs(null).length);
   for (const cfg of [
     { platforms: ['netflix', 'hulu'], studios: ['marvel'], base: ['tendencias', 'generos_series'] },
     { platforms: [], studios: [], base: ['tvmaze_hoy'] },

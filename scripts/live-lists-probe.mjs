@@ -2,15 +2,14 @@
 /**
  * Sonda 12 (24-11-2026): listas de canales en vivo por categorías.
  *
- * Fuentes:
- *  - Magma TV (repo JMigue85/IPTV-SV): 220 canales con User-Agent propio.
- *  - IPTVSV.m3u (mismo repo): 1900 canales; se verifican los grupos temáticos
- *    (Deportes, Entretenimiento, Cine, Infantiles, Anime, Música,
- *    Informativos, Documentales) y los países latinos + España.
+ * Proveedor ÚNICO: m3u.tvcluboficial.com, vía la lista Magma TV
+ * (repo JMigue85/IPTV-SV). La sonda 13 demostró que ese host no exige
+ * User-Agent y sirve CORS abierto; IPTVSV (IP:puerto rotativos) y
+ * m3uts.xyz (tokens caducos) quedaron descartados como fuentes.
  *
  * Cada canal se verifica con el User-Agent que declara la lista
  * (#EXTVLCOPT:http-user-agent) y, si falla, con el UA genérico de la sonda.
- * Se considera VÁLIDO solo HTTP 200 + #EXTM3U. No se imprimen credenciales;
+ * Se considera VÁLIDO solo si la cadena completa reproduce: maestra (200 + #EXTM3U) → variante → primer segmento con bytes MPEG-TS/fMP4 (HTTP 200/206). No se imprimen credenciales;
  * las URLs se redactan. Además del informe, se escribe .probe/live-channels.json
  * con la ficha completa de los canales válidos (semilla para el addon).
  */
@@ -18,6 +17,7 @@
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const fs = require('node:fs');
+const { enrichSeedWithLogos } = require('./live-logos.cjs');
 
 const GENERIC_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 const TIMEOUT = 10_000;
@@ -25,8 +25,10 @@ const CONCURRENCY = 12;
 
 const SOURCES = [
   { id: 'magma', url: 'https://raw.githubusercontent.com/JMigue85/IPTV-SV/main/Magma%20TV%20-Titan2022_XD.m3u' },
-  { id: 'iptvsv', url: 'https://raw.githubusercontent.com/JMigue85/IPTV-SV/main/IPTVSV.m3u' },
 ];
+
+/** Proveedor único de señales: solo se verifican URLs de este host. */
+const PROVIDER_HOST = /(^|\.)m3u\.tvcluboficial\.com$/;
 
 /** group-title → categoría del addon (null = no entra en catálogo propio). */
 const CATEGORY_BY_GROUP = [
@@ -102,23 +104,55 @@ function parseM3U(text, source) {
   return entries;
 }
 
-/** Verifica un canal: primero con su UA declarado; si falla, con el genérico. */
+/**
+ * Verifica un canal: primero con su UA declarado; si falla, con el genérico.
+ * La sonda 13 mostró playlists vivas con segmentos muertos (canal fantasma),
+ * así que «válido» exige la cadena completa: maestra → variante → segmento
+ * con bytes de vídeo (MPEG-TS o fMP4).
+ */
 async function verify(entry) {
   const tries = entry.ua && entry.ua !== GENERIC_UA
     ? [{ 'User-Agent': entry.ua }, { 'User-Agent': GENERIC_UA }]
     : [{ 'User-Agent': GENERIC_UA }];
+  let last = 'sin respuesta';
   for (const headers of tries) {
     const t0 = Date.now();
-    const res = await get(entry.url, { Range: 'bytes=0-400' });
+    const res = await get(entry.url, { Range: 'bytes=0-3000', ...headers });
     const ms = Date.now() - t0;
-    const head = (res.body || '').slice(0, 400);
-    if (res.status === 200 && /#EXTM3U/.test(head)) {
-      const variants = (head.match(/#EXT-X-STREAM-INF/g) || []).length;
-      return { ok: true, ua: headers['User-Agent'] === entry.ua ? entry.ua : '', state: `HLS VÁLIDO${variants ? ` ${variants}v` : ''} · ${ms} ms` };
+    const head = (res.body || '').slice(0, 3000);
+    if (res.status !== 200 || !/#EXTM3U/.test(head)) {
+      last = `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${ms} ms`;
+      continue;
     }
-    var last = `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${ms} ms`;
+    // Maestra con variantes → bajar a la primera variante
+    let mediaUrl = entry.url, body = head;
+    const variants = (head.match(/#EXT-X-STREAM-INF/g) || []).length;
+    if (variants) {
+      const lines = head.split('\n');
+      const idx = lines.findIndex((l) => /#EXT-X-STREAM-INF/.test(l));
+      const rel = (lines[idx + 1] || '').trim();
+      if (!rel) { last = 'maestra sin variante legible'; continue; }
+      try { mediaUrl = new URL(rel, entry.url).toString(); } catch { last = 'variante malformada'; continue; }
+      const media = await get(mediaUrl, { Range: 'bytes=0-3000', ...headers });
+      if (media.status !== 200 || !/#EXTM3U/.test(media.body)) { last = `variante HTTP ${media.status}`; continue; }
+      body = media.body;
+    }
+    // Primer segmento con bytes de vídeo
+    const segLine = body.split('\n').map((l) => l.trim()).find((l) => l && !l.startsWith('#'));
+    if (!segLine) { last = 'playlist sin segmentos'; continue; }
+    let segUrl;
+    try { segUrl = new URL(segLine, mediaUrl).toString(); } catch { last = 'segmento malformado'; continue; }
+    const seg = await get(segUrl, { Range: 'bytes=0-188', ...headers });
+    const bh = seg.body || '';
+    const looksTs = bh.charCodeAt(0) === 0x47;
+    const looksFmp4 = bh.slice(4, 8) === 'ftyp' || bh.slice(0, 12).includes('ftyp');
+    if ((seg.status === 200 || seg.status === 206) && (looksTs || looksFmp4)) {
+      return { ok: true, ua: headers['User-Agent'] === entry.ua ? entry.ua : '',
+        state: `HLS VÁLIDO${variants ? ` ${variants}v` : ''} · ${looksTs ? 'TS' : 'fMP4'} · ${ms} ms` };
+    }
+    last = `segmento HTTP ${seg.status} (fantasma)`;
   }
-  return { ok: false, ua: '', state: last || 'sin respuesta' };
+  return { ok: false, ua: '', state: last };
 }
 
 async function mapLimit(items, limit, fn) {
@@ -135,7 +169,7 @@ async function mapLimit(items, limit, fn) {
 
 (async () => {
  try {
-  say('# Sonda 12: canales en vivo por categorías (Magma TV + IPTVSV)');
+  say('# Sonda 12: canales en vivo por categorías (proveedor único: m3u.tvcluboficial.com)');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
   say('');
@@ -153,6 +187,9 @@ async function mapLimit(items, limit, fn) {
   for (const e of all) {
     const category = categoryOf(e.group);
     if (!category) continue;
+    let host = '';
+    try { host = new URL(e.url).hostname; } catch { continue; }
+    if (!PROVIDER_HOST.test(host)) continue; // solo el proveedor elegido
     const key = e.url.split('?')[0];
     if (seen.has(key)) continue;
     seen.add(key);
@@ -173,7 +210,8 @@ async function mapLimit(items, limit, fn) {
     const { ok, ua, state } = checks[i].r;
     const line = `| ${name} | ${category} | ${group || '—'} | ${source} | ${redact(wanted[i].url)} | ${state}${ua ? ' · UA propio' : ''} |`;
     (ok ? rows.ok : rows.bad).push(line);
-    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: ua || '' });
+    // tvcluboficial no exige UA (sonda 13): la semilla nunca arrastra UA
+    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: '' });
   }
 
   say(`## Válidos (${rows.ok.length})`);
@@ -205,6 +243,25 @@ async function mapLimit(items, limit, fn) {
     seedSeen.add(k);
     return true;
   });
+
+  // Logos de iptv-org/database (best effort): la lista Magma no trae tvg-logo.
+  // Se conservan los logos de la semilla previa cuando el casado nuevo falla.
+  try {
+    let prev = [];
+    try { prev = JSON.parse(fs.readFileSync('lib/data/liveChannelsSeed.json', 'utf8')); } catch { /* primera vez */ }
+    const withLogo = await enrichSeedWithLogos(seed, prev);
+    say('');
+    say(`logos iptv-org: ${withLogo}/${seed.length} canales con logo`);
+  } catch (err) {
+    say('');
+    say(`logos iptv-org: no disponibles (${err && err.message})`);
+  }
+
+  // Orden estable del catálogo: por categoría y nombre alfabético.
+  const CAT_ORDER = ['deportes', 'entretenimiento', 'cine', 'infantil', 'anime', 'musica', 'noticias', 'documentales', 'espana', 'mexico', 'argentina', 'colombia', 'chile', 'peru'];
+  seed.sort((a, b) => CAT_ORDER.indexOf(a.category) - CAT_ORDER.indexOf(b.category)
+    || String(a.name).localeCompare(String(b.name), 'es'));
+
   fs.writeFileSync('.probe/live-channels.json', JSON.stringify(seed, null, 1) + '\n');
   console.log(`\\n.probe/live-channels.json (${seed.length} canales válidos)`);
  } catch (err) {

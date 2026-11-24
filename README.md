@@ -43,13 +43,13 @@ Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro po
 
 Canales de TV en vivo (tipo `tv` de Stremio), todos con HLS verificado por sonda el 24-11-2026:
 
-- **«⚽ Deportes en vivo»** (`tv_deportes`): los 20 canales curados (ESPN, ESPN 2/3/Premium/Deportes, Fox Sports/1/2/Deportes, DSports/DSports 2/DSports+ (DGO), DAZN y DAZN Combat, TNT Sports, TyC Sports, Win Sports, Claro Sports, beIN XTRA ES y Pluto TV Deportes) **más ~75 canales vivos adicionales** (ESPN 4-7, Claro Sports 2, Azteca Deportes, CombaTV…). Los curados se resuelven contra iptv-org y además ganan las señales «Opc. 2/3» de Magma TV/IPTVSV.
-- **Catálogos por categoría** (activados por defecto): 📺 Entretenimiento, 🎬 Cine, 🧸 Infantil, 🎌 Anime, 🎵 Música, 📰 Noticias y 🌍 Documentales en vivo.
-- **Catálogos por país** (se marcan en `/configure`): 🇪🇸 España, 🇲🇽 México, 🇦🇷 Argentina, 🇨🇴 Colombia, 🇨🇱 Chile y 🇵🇪 Perú. No entran en el manifest por defecto para no superar los 8 KB de la addonCollection API.
+- **«⚽ Deportes en vivo»** (`tv_deportes`): los 20 canales curados (ESPN, ESPN 2/3/Premium/Deportes, Fox Sports/1/2/Deportes, DSports/DSports 2/DSports+ (DGO), DAZN y DAZN Combat, TNT Sports, TyC Sports, Win Sports, Claro Sports, beIN XTRA ES y Pluto TV Deportes) **más ~26 canales vivos adicionales** (ESPN 4-7, Claro Sports 2, Azteca Deportes, CombaTV…). Los curados se resuelven contra iptv-org y además ganan las señales «Opc. 2/3» del proveedor único.
+- **Catálogos por categoría** (activados por defecto): 🎬 Cine, 🧸 Infantil, 🎌 Anime y 🌍 Documentales en vivo. Las que el proveedor no cubre (música, noticias, entretenimiento) se ocultan solas.
+- **Catálogos por país** (se marcan en `/configure`): 🇪🇸 España, 🇲🇽 México, 🇦🇷 Argentina y 🇨🇱 Chile hoy tienen señales del proveedor; 🇨🇴 Colombia y 🇵🇪 Perú reaparecerán si la fuente las revive. No entran en el manifest por defecto para no superar los 8 KB de la addonCollection API.
 
-**Fuentes**: las listas públicas de [iptv-org](https://iptv-org.github.io/iptv) y del repo [JMigue85/IPTV-SV](https://github.com/JMigue85/IPTV-SV) (Magma TV + IPTVSV), cacheadas 12 h por isolate. `lib/data/liveChannelsSeed.json` es la semilla con las 805 señales que la sonda verificó (`.probe/live-lists.md`): el catálogo se renderiza siempre desde la semilla y la resolución refresca la URL desde la lista viva.
+**Fuentes**: la lista pública de [iptv-org](https://iptv-org.github.io/iptv) para los curados y, como **proveedor único de las categorías en vivo**, `m3u.tvcluboficial.com` vía la lista Magma TV del repo [JMigue85/IPTV-SV](https://github.com/JMigue85/IPTV-SV) (cacheada 12 h por isolate). La sonda 13 verificó que ese host no exige User-Agent y sirve CORS abierto; IPTVSV (IP:puerto rotativos) y m3uts.xyz (tokens caducos) quedaron descartados. `lib/data/liveChannelsSeed.json` es la semilla con las 166 señales que la sonda verificó reproduciendo la cadena completa (maestra → variante → segmento MPEG-TS/fMP4; `.probe/live-lists.md`): el catálogo se renderiza siempre desde la semilla y la resolución refresca la URL desde la lista viva.
 
-**Barra de calidad**: solo señales con verificación HLS real (HTTP 200 + `#EXTM3U`), sin marca `[Geo-blocked]`/`[Not 24/7]`. Las variantes «[Opc. N]» del mismo canal se colapsan en una tarjeta con varios streams. Los canales que declaran `#EXTVLCOPT:http-user-agent` lo reciben vía `behaviorHints.proxyHeaders`. Streams: HLS directo (`notWebReady`), cacheado 4 minutos porque las señales rotan. La señal principal de DAZN, ESPN Deportes y DSports no tiene URL pública estable hoy: su tarjeta entra vacía y se rellena sola cuando la lista la revive.
+**Barra de calidad**: solo señales cuya cadena completa reproduce de verdad (playlist 200 + `#EXTM3U` **y** primer segmento con bytes de vídeo, HTTP 200/206), sin marca `[Geo-blocked]`/`[Not 24/7]`. Las «listas vivas con segmentos muertos» (canales fantasma) no entran. La sonda corre también cada lunes y actualiza la semilla sola, con guarda: si un día la red va mal y la sonda trae menos del 80 % de la semilla actual, no se toca nada. Las variantes «[Opc. N]» del mismo canal se colapsan en una tarjeta con varios streams. El proveedor único no exige User-Agent (sonda 13), así que los streams van sin cabeceras especiales: HLS directo (`notWebReady`), cacheado 4 minutos porque las señales rotan. **Metadatos**: la lista no trae `tvg-logo`, así que los logos se casan contra la base pública [iptv-org/database](https://github.com/iptv-org/database) en cada sonda (81 de 165 canales; el resto usa el póster del addon), conservando el logo anterior si el casado falla un lunes. Cada fila va en orden alfabético, con género y descripción por categoría; las variantes de calidad («Telefe HD») se funden en la tarjeta base («Telefe») como una señal más. La señal principal de DAZN, ESPN Deportes y DSports no tiene URL pública estable hoy: su tarjeta entra vacía y se rellena sola cuando la lista la revive.
 
 El 24-11-2026 se sumaron HackStore (`hackstore.mx`) y AllCalidad (`allcalidad.re`) tras medir su cadena completa con el propio código del addon: dos instancias más del CMS JSON con visor Vimeos, con catálogos distintos. El informe de candidatas, incluidas las descartadas, está en [proveedores-2026-11-24.md](docs/proveedores-2026-11-24.md).
 
@@ -103,6 +103,13 @@ npm run deploy
 ```
 
 `npm run deploy` compila la web, pregenera catálogos configurados y despliega el Worker.
+
+**Orden estricto del Worker (plan gratuito de Cloudflare):**
+
+- **Un solo trabajador: `ramdonlatam`.** Workers Builds lo despliega solo al fusionar en `main`; `npm run deploy` es la vía manual equivalente. No cambies `name` en `wrangler.toml`: otro nombre crea un segundo worker y parte el addon.
+- **Techos del plan free fijados en `wrangler.toml`**: 10 ms de CPU y ~1 s por petición; las fuentes corren en tandas de 4 dentro de un presupuesto de 9 s y lo que no cabe se omite. No subir sin cambiar de plan.
+- **Assets gratis e ilimitados**: lo que vive en `public/` (logo, catálogos pregenerados) se sirve sin gastar la cuota de 100.000 peticiones/día.
+- **Sin bindings de pago**: nada de KV, Durable Objects, Queues, D1, R2, Vectorize, AI o Hyperdrive; la coordinación usa memoria por isolate + Cache API. `test/deploy.test.js` hace cumplir estas reglas en CI.
 
 ## Rutas
 

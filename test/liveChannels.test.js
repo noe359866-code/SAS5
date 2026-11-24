@@ -8,6 +8,7 @@ const core = require('../lib/core');
 const catalogs = require('../lib/catalogs');
 const streams = require('../lib/streams');
 const seed = require('../lib/data/liveChannelsSeed.json');
+const unverifiedSeed = require('../lib/data/liveChannelsUnverifiedSeed.json');
 
 // Hermético: la resolución consulta las listas vivas cuando hay red; se
 // bloquea fetch para fijar el camino «semilla pura» en cualquier entorno.
@@ -169,6 +170,36 @@ describe('canales en vivo por categorías: streams', () => {
 
   test('canal inexistente devuelve lista vacía sin lanzar', async () => {
     assert.deepEqual(await streams.searchStreams('tv', 'rlch:lv:cine:noexiste', {}), []);
+  });
+});
+
+describe('canales sin verificar (iptvgo.cc)', () => {
+  test('la semilla sin verificar tiene la forma esperada', () => {
+    assert.ok(Array.isArray(unverifiedSeed));
+    const cats = new Set(live.LIVE_CATEGORIES.map((c) => c.key));
+    for (const ch of unverifiedSeed) {
+      assert.equal(ch.unverified, true, ch.name);
+      assert.match(ch.url, /^http:\/\/iptvgo\.cc\/live\/[^/]+\/[^/]+\/\d+\.m3u8$/, ch.name);
+      assert.ok(cats.has(ch.category), `categoría desconocida: ${ch.category}`);
+      assert.ok(ch.slug && ch.name, JSON.stringify(ch));
+    }
+  });
+
+  test('la tarjeta sin verificar avisa en la descripción', () => {
+    const meta = live.liveMeta({ name: 'Prueba', slug: 'prueba', category: 'cine', logo: '', urls: [{ url: 'http://iptvgo.cc/live/u/p/1.m3u8' }], unverified: true });
+    assert.match(meta.description, /⚠️ Señal sin verificar/);
+    const okMeta = live.liveMeta({ name: 'Prueba', slug: 'prueba', category: 'cine', logo: '', urls: [] });
+    assert.doesNotMatch(okMeta.description, /sin verificar/);
+  });
+
+  test('un canal sin verificar resuelve solo sus URLs de semilla', async () => {
+    if (!unverifiedSeed.length) return; // la sonda semanal aún no la ha llenado
+    const ch0 = unverifiedSeed[0];
+    const ch = live.liveChannelById(`rlch:lv:${ch.category}:${live.baseSlugOf(ch.slug)}`);
+    assert.ok(ch, `${ch0.category}:${ch0.slug}`);
+    const hits = await live.resolveLiveChannel(ch);
+    assert.ok(hits.length >= 1);
+    for (const h of hits) assert.match(h.url, /^http:\/\/iptvgo\.cc\//);
   });
 });
 

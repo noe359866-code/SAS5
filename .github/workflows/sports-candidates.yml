@@ -16,6 +16,7 @@ on:
       - 'scripts/live-lists-probe.mjs'
       - 'scripts/tvclub-source-probe.mjs'
       - 'scripts/iptvgo-source-probe.mjs'
+      - 'scripts/iptvgo-seed-build.mjs'
 
 permissions:
   contents: write
@@ -51,6 +52,8 @@ jobs:
         run: test -f scripts/tvclub-source-probe.mjs && node scripts/tvclub-source-probe.mjs || echo "sin sonda tvclub todavía"
       - name: Fuente iptvgo a fondo
         run: test -f scripts/iptvgo-source-probe.mjs && node scripts/iptvgo-source-probe.mjs || echo "sin sonda iptvgo todavía"
+      - name: Semilla iptvgo (sin verificar)
+        run: test -f scripts/iptvgo-seed-build.mjs && node scripts/iptvgo-seed-build.mjs || echo "sin constructor iptvgo todavía"
       - name: Actualizar la semilla de canales del addon (con guarda)
         if: always()
         run: |
@@ -76,13 +79,29 @@ jobs:
       # estos commits, el asunto y el cuerpo del merge NO pueden contener la
       # marca literal (ni siquiera mencionada): gh pr merge N --squash --subject "…"
       # Confirmado dos veces el 24-11-2026 (builds de main saltados en #48 y #49).
+      - name: Actualizar la semilla iptvgo (sin verificar, con guarda)
+        if: always()
+        run: |
+          node -e "
+          const fs = require('fs');
+          const fresh = JSON.parse(fs.readFileSync('.probe/iptvgo-channels.json', 'utf8'));
+          let current = [];
+          try { current = JSON.parse(fs.readFileSync('lib/data/liveChannelsUnverifiedSeed.json', 'utf8')); } catch {}
+          const floor = Math.floor(current.length * 0.8);
+          if (fresh.length >= floor) {
+            fs.writeFileSync('lib/data/liveChannelsUnverifiedSeed.json', JSON.stringify(fresh, null, 1) + '\n');
+            console.log('semilla iptvgo actualizada:', current.length, '->', fresh.length);
+          } else {
+            console.log('semilla iptvgo NO actualizada:', fresh.length, '< 80% de', current.length);
+          }
+          "
       - name: Devolver el resultado a la rama
         if: always()
         run: |
           test -s .probe/sports-candidates.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv .probe/live-lists.md .probe/live-channels.json .probe/tvclub-source.md .probe/iptvgo-source.md lib/data/liveChannelsSeed.json; do
+          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv .probe/live-lists.md .probe/live-channels.json .probe/tvclub-source.md .probe/iptvgo-source.md .probe/iptvgo-seed.md .probe/iptvgo-categories.md .probe/iptvgo-channels.json lib/data/liveChannelsSeed.json lib/data/liveChannelsUnverifiedSeed.json; do
             test -s "$f" && git add -f "$f"
           done
           git diff --cached --quiet || git commit -m "sonda: candidatas de canales deportivos $(date -u +%FT%TZ) [skip ci]"

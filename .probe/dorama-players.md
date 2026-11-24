@@ -5,14 +5,15 @@
 | doramedplay.net | buscador | 403 | HTML | 5693 B |
 | kdramasplay.com | buscador | 0 | TypeError | 0 B |
 | yandispoiler.net | buscador | 503 | corto | 1209 B |
-| seriesbl.net | buscador | 200 | HTML | 141113 B |
+| seriesbl.net | buscador | 200 | HTML | 141125 B |
 | seriesbl.net | ficha | — | seleccionada | seriesbl.net/series/abo-desire/ |
-| seriesbl.net | ficha HTTP | 200 | 165412 B | título=Ver ABO Desire Online Sub Español | Series BL |
+| seriesbl.net | ficha HTTP | 200 | 165396 B | título=Ver ABO Desire Online Sub Español | Series BL |
 | seriesbl.net | episodios | — | 3 | seriesbl.net/episode/abo-desire-1x1/ seriesbl.net/episode/abo-desire-1x2/ seriesbl.net/episode/abo-desire-1x3/ |
 | seriesbl.net | episodio | 200 | dooplay=1 | seriesbl.net/episode/abo-desire-1x1/ |
 | seriesbl.net | ajax | 200 | embed | pkaa.top/embed.php?(8 B) |
 | seriesbl.net | visor | 200 | 5 urls | — · bysebuho.com/e/ljg7ayq0i9ij video.sibnet.ru/shell.php?(16 B) |
-| doramasub.com | buscador | 429 | HTML | 3398 B |
+| doramasub.com | buscador | 200 | HTML | 917298 B |
+| doramasub.com | ficha | — | sin-ficha | — |
 | tudorama.com | buscador | 200 | HTML | 31915 B |
 | tudorama.com | ficha | — | sin-ficha | — |
 | pandrama.tv | buscador | 0 | TypeError | 0 B |

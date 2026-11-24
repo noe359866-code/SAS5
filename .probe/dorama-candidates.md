@@ -16,9 +16,9 @@
 | doramasmp4.io | fichas | — | 1 | doramasmp4.io/doramas/the-blue-road |
 | doramasmp4.io | episodios | — | 2 | doramasmp4.io/capitulos/extraordinary-attorney-minami-1x6 doramasmp4.io/capitulos/tamed-1x6 |
 | doramasmp4.io | episodio | 200 | 8 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData | doramasmp4.io/capitulos/extraordinary-attorney-minami-1x6 |
+| doramasmp4.io | · visor | — | señal | doramasmp4.io/ |
 | doramasmp4.io | · visor | — | señal | assets.seriesapi.co/brands/doramasmp4/logo/logo-1782339627025.png |
-| doramasmp4.io | · visor | — | señal | assets.seriesapi.co/brands/doramasmp4/favicon/favicon-1783955342939.png |
-| doramasmp4.io | · visor | — | señal | assets.seriesapi.co/brands/doramasmp4/og_image/og_image-1783955344469.png |
+| doramasmp4.io | · visor | — | señal | doramasmp4.io/ |
 | pandrama.io | portada | 0 | TypeError | 0 urls, 0 iframes, 0 data-*, señales=— |
 | pandrama.com | portada | 0 | TypeError | 0 urls, 0 iframes, 0 data-*, señales=— |
 | doramasflix.co | portada | 403 | sin-portada | 0 urls, 0 iframes, 0 data-*, señales=— |
@@ -28,8 +28,8 @@
 | doramasflix.io | episodios | — | 2 | doramasflix.io/capitulos/extraordinary-attorney-minami-1x6 doramasflix.io/capitulos/tamed-1x6 |
 | doramasflix.io | episodio | 200 | 3 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData | doramasflix.io/capitulos/extraordinary-attorney-minami-1x6 |
 | doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTl3Y21sdFpXeHZZ |
-| doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTkyYjJVdWMzZ3Za |
-| doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTlpZVhObFpuVnFa |
+| doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTlrYnpkbmJ5NWpi |
+| doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTl0TVhoa2NtOXdM |
 | doramastv.to | portada | 0 | TypeError | 0 urls, 0 iframes, 0 data-*, señales=— |
 | doramasqueen.com | portada | 200 | OK | 0 urls, 0 iframes, 0 data-*, señales=— |
 | doramasqueen.com | buscador | 200 | corto | 0 urls, 0 iframes, 0 data-*, señales=— |

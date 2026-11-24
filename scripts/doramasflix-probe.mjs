@@ -67,7 +67,7 @@ async function main() {
   const items = search.data?.searchFullDoramas?.items || [];
   row('buscar', search.status, `${items.length} fichas`, `${search.error} ${items.slice(0, 3).map((item) => `${item.slug} (${item.name_es || item.name})`).join(' · ')}`);
   const item = items.find((entry) => /blue-road/i.test(entry.slug)) || items[0];
-  if (!item) return;
+  if (!item) { report(); return; }
 
   const detail = await gql(Q_DETAIL, { slug: item.slug });
   const d = detail.data?.detailDorama;
@@ -80,7 +80,7 @@ async function main() {
   const episode = await gql(Q_EPISODE, { slug: epSlug });
   const ep = episode.data?.detailEpisode;
   row('episodio', episode.status, ep ? `T${ep.season_number}E${ep.episode_number}` : (episode.error || 'sin-episodio'), `${epSlug} · id=${ep?._id || '—'}`);
-  if (!ep) return;
+  if (!ep) { report(); return; }
 
   const links = await gql(Q_LINKS, { id: ep._id });
   const raw = links.data?.getEpisodeLinks?.links_online || [];

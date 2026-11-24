@@ -2,10 +2,12 @@
 /**
  * Sonda 12 (24-11-2026): listas de canales en vivo por categorías.
  *
- * Proveedor ÚNICO: m3u.tvcluboficial.com, vía la lista Magma TV
- * (repo JMigue85/IPTV-SV). La sonda 13 demostró que ese host no exige
- * User-Agent y sirve CORS abierto; IPTVSV (IP:puerto rotativos) y
- * m3uts.xyz (tokens caducos) quedaron descartados como fuentes.
+ * Fuentes elegidas (petición del usuario, 24-11-2026):
+ *  - Magma TV (repo JMigue85/IPTV-SV): nombra los canales del host
+ *    m3u.tvcluboficial.com (sonda 13: no exige UA, CORS abierto).
+ *  - Cinecity (repo CINECITY2023/cinecity, principal.m3u): 513 canales,
+ *    todos con logo propio, grupos temáticos y 17 países (incl. Nicaragua).
+ *  m3uts.xyz (tokens caducos) sigue fuera: sus URLs mueren en horas.
  *
  * Cada canal se verifica con el User-Agent que declara la lista
  * (#EXTVLCOPT:http-user-agent) y, si falla, con el UA genérico de la sonda.
@@ -25,28 +27,41 @@ const CONCURRENCY = 12;
 
 const SOURCES = [
   { id: 'magma', url: 'https://raw.githubusercontent.com/JMigue85/IPTV-SV/main/Magma%20TV%20-Titan2022_XD.m3u' },
+  { id: 'cinecity', url: 'https://raw.githubusercontent.com/CINECITY2023/cinecity/cinecity.net/principal.m3u' },
 ];
 
-/** Proveedor único de señales: solo se verifican URLs de este host. */
-const PROVIDER_HOST = /(^|\.)m3u\.tvcluboficial\.com$/;
+/** Host bloqueado: sus URLs llevan token que caduca en horas (sonda 13). */
+const BLOCKED_HOST = /(^|\.)m3uts\.xyz$/;
 
 /** group-title → categoría del addon (null = no entra en catálogo propio). */
 const CATEGORY_BY_GROUP = [
   [/^(ESPN|FOX Sports|DSports|Deportes)$/i, 'deportes'],
   [/deport/i, 'deportes'],
   [/infantil|kids|niñ/i, 'infantil'],
-  [/anime/i, 'anime'],
-  [/m[uú]sica|music/i, 'musica'],
+  [/anime|animaci/i, 'anime'],
+  [/m[uú]sica|music|radio/i, 'musica'],
   [/informativ|noticias|news/i, 'noticias'],
   [/documental|cultura/i, 'documentales'],
-  [/cine|pel[ií]cula|movie/i, 'cine'],
-  [/entretenimiento|entreten|series|general|variedades/i, 'entretenimiento'],
-  [/^(España|Spain)/i, 'espana'],
-  [/^(México|Mexico)/i, 'mexico'],
-  [/^(Argentina)/i, 'argentina'],
-  [/^(Colombia)/i, 'colombia'],
-  [/^(Chile)/i, 'chile'],
-  [/^(Per[uú])/i, 'peru'],
+  [/religi/i, 'religion'],
+  [/cine|pel[ií]cula|movies?/i, 'cine'],
+  [/novela|reality|comedia|entretenimiento|entreten|series|general|variedades/i, 'entretenimiento'],
+  [/españa|spain/i, 'espana'],
+  [/méxico|mexico/i, 'mexico'],
+  [/argentina|buenos aires|provincia/i, 'argentina'],
+  [/colombia/i, 'colombia'],
+  [/chile/i, 'chile'],
+  [/per[uú]/i, 'peru'],
+  [/bolivia/i, 'bolivia'],
+  [/costa rica/i, 'costarica'],
+  [/dominicana/i, 'dominicana'],
+  [/ecuador/i, 'ecuador'],
+  [/el salvador/i, 'elsalvador'],
+  [/guatemala/i, 'guatemala'],
+  [/honduras/i, 'honduras'],
+  [/nicaragua/i, 'nicaragua'],
+  [/paraguay/i, 'paraguay'],
+  [/puerto rico/i, 'puertorico'],
+  [/venezuela/i, 'venezuela'],
 ];
 
 const categoryOf = (group) => {
@@ -78,6 +93,12 @@ async function get(url, headers = {}) {
   } finally { clearTimeout(timer); }
 }
 
+/** Quita marcas de la lista («✔️», banderas, «🎬») del nombre visible. */
+const cleanName = (name) => String(name || '')
+  .replace(/^(?:[\u{1F1E6}-\u{1F1FF}]{2}|[\u{2600}-\u{27BF}]|[\u{1F300}-\u{1FAFF}]|\u200D|\uFE0F|\s)+/u, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
 function parseM3U(text, source) {
   const entries = [];
   const lines = text.split('\n');
@@ -99,7 +120,7 @@ function parseM3U(text, source) {
       break;
     }
     pendingUa = '';
-    if (name && /^https?:\/\//i.test(url)) entries.push({ name, logo, group, url, ua, source });
+    if (name && /^https?:\/\//i.test(url)) entries.push({ name: cleanName(name), logo, group, url, ua, source });
   }
   return entries;
 }
@@ -169,7 +190,7 @@ async function mapLimit(items, limit, fn) {
 
 (async () => {
  try {
-  say('# Sonda 12: canales en vivo por categorías (proveedor único: m3u.tvcluboficial.com)');
+  say('# Sonda 12: canales en vivo por categorías (Magma TV · tvcluboficial + Cinecity)');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
   say('');
@@ -189,7 +210,7 @@ async function mapLimit(items, limit, fn) {
     if (!category) continue;
     let host = '';
     try { host = new URL(e.url).hostname; } catch { continue; }
-    if (!PROVIDER_HOST.test(host)) continue; // solo el proveedor elegido
+    if (BLOCKED_HOST.test(host)) continue; // tokens que caducan en horas
     const key = e.url.split('?')[0];
     if (seen.has(key)) continue;
     seen.add(key);
@@ -210,8 +231,9 @@ async function mapLimit(items, limit, fn) {
     const { ok, ua, state } = checks[i].r;
     const line = `| ${name} | ${category} | ${group || '—'} | ${source} | ${redact(wanted[i].url)} | ${state}${ua ? ' · UA propio' : ''} |`;
     (ok ? rows.ok : rows.bad).push(line);
-    // tvcluboficial no exige UA (sonda 13): la semilla nunca arrastra UA
-    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: '' });
+    // tvcluboficial no exige UA (sonda 13): no arrastrarlo; el resto, sí
+    const isTvclub = /(^|\.)m3u\.tvcluboficial\.com$/.test(new URL(wanted[i].url).hostname);
+    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: isTvclub ? '' : (ua || '') });
   }
 
   say(`## Válidos (${rows.ok.length})`);
@@ -234,11 +256,12 @@ async function mapLimit(items, limit, fn) {
   say('');
   for (const [cat, n] of Object.entries(sumCat).sort((a, b) => b[1] - a[1])) say(`- ${cat}: ${n}`);
 
-  // Semilla para el addon: solo válidos, sin duplicar slug por categoría.
+  // Semilla para el addon: solo válidos. Se conservan las distintas URL del
+  // mismo canal (la UI las fusiona en una tarjeta con varias señales).
   fs.mkdirSync('.probe', { recursive: true });
   const seedSeen = new Set();
   const seed = valid.filter((v) => {
-    const k = `${v.category}:${v.slug}`;
+    const k = `${v.category}:${v.slug}:${v.url.split('?')[0]}`;
     if (seedSeen.has(k)) return false;
     seedSeen.add(k);
     return true;
@@ -258,7 +281,9 @@ async function mapLimit(items, limit, fn) {
   }
 
   // Orden estable del catálogo: por categoría y nombre alfabético.
-  const CAT_ORDER = ['deportes', 'entretenimiento', 'cine', 'infantil', 'anime', 'musica', 'noticias', 'documentales', 'espana', 'mexico', 'argentina', 'colombia', 'chile', 'peru'];
+  const CAT_ORDER = ['deportes', 'entretenimiento', 'cine', 'infantil', 'anime', 'musica', 'noticias', 'documentales', 'religion',
+    'espana', 'mexico', 'argentina', 'bolivia', 'chile', 'colombia', 'costarica', 'dominicana', 'ecuador',
+    'elsalvador', 'guatemala', 'honduras', 'nicaragua', 'paraguay', 'peru', 'puertorico', 'venezuela'];
   seed.sort((a, b) => CAT_ORDER.indexOf(a.category) - CAT_ORDER.indexOf(b.category)
     || String(a.name).localeCompare(String(b.name), 'es'));
 

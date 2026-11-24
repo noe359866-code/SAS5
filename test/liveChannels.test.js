@@ -23,9 +23,12 @@ describe('canales en vivo por categorías: semilla', () => {
     }
     for (const ch of seed) {
       assert.match(ch.url, /^https?:\/\//, ch.name);
-      // Proveedor único: m3u.tvcluboficial.com (sonda 13: sin UA, CORS abierto)
-      assert.match(new URL(ch.url).hostname, /(^|\.)m3u\.tvcluboficial\.com$/, ch.name);
-      assert.equal(ch.ua || '', '', `${ch.name}: el proveedor no exige UA, no debe guardarse`);
+      // Los hosts de tokens caducos (m3uts.xyz) nunca entran a la semilla
+      assert.doesNotMatch(new URL(ch.url).hostname, /(^|\.)m3uts\.xyz$/, ch.name);
+      // tvcluboficial no exige UA (sonda 13): nunca debe guardarlo
+      if (/m3u\.tvcluboficial\.com$/.test(new URL(ch.url).hostname)) {
+        assert.equal(ch.ua || '', '', `${ch.name}: tvcluboficial no exige UA`);
+      }
       assert.ok(ch.slug && ch.name, JSON.stringify(ch));
     }
   });
@@ -38,13 +41,15 @@ describe('canales en vivo por categorías: semilla', () => {
     // Y la lógica de colapso recorta bien el sufijo (unitario, sin semilla)
     assert.equal(live.baseSlugOf('claro-sports-2-hd-mexico-opc-2'), 'claro-sports-2-hd-mexico');
     assert.equal(live.baseSlugOf('distrito-comedia'), 'distrito-comedia');
-    // «Telefe HD» no es otra tarjeta: es otra señal dentro de «Telefe»
-    const argentina = live.liveMetas('argentina').map((m) => m.name);
-    assert.ok(!argentina.includes('Telefe HD'), 'queda tarjeta de calidad suelta');
-    const telefe = live.liveChannelById('rlch:lv:argentina:telefe');
-    assert.ok(telefe.urls.length >= 2, 'Telefe debe juntar sus señales HD');
-    // Sin tarjeta base («La 1 HD» en España), la variante se queda como está
-    assert.ok(live.liveMetas('espana').some((m) => m.name === 'La 1 HD'));
+    // Invariante de la fusión HD: ninguna categoría muestra a la vez un canal
+    // y su variante de calidad (o están fusionadas, o la base no existe)
+    for (const cat of live.activeCategories()) {
+      const names = live.liveMetas(cat.key).map((m) => m.name);
+      for (const n of names) {
+        const m = /\s+(?:F?HD|SD|4K|UHD)$/i.exec(n);
+        if (m) assert.ok(!names.includes(n.slice(0, m.index)), `${n} sin fusionar en ${cat.key}`);
+      }
+    }
   });
 
   test('los metadatos vienen ordenados y con logo cuando hay', () => {
@@ -90,15 +95,16 @@ describe('canales en vivo por categorías: catálogos y manifest', () => {
   test('el manifest por defecto trae las temáticas y no los países (margen 8 KB)', () => {
     const manifest = core.buildManifest();
     const tvIds = manifest.catalogs.filter((c) => c.type === 'tv').map((c) => c.id);
-    // Con el proveedor único quedan las temáticas que él cubre; las demás
-    // (música, noticias, entretenimiento) se ocultan solas al quedar vacías.
-    for (const id of ['tv_deportes', 'tv_live_cine', 'tv_live_infantil', 'tv_live_anime', 'tv_live_documentales']) {
-      assert.ok(tvIds.includes(id), `falta ${id}`);
+    assert.ok(tvIds.includes('tv_deportes'), 'falta tv_deportes');
+    // Las temáticas activas entran por defecto; los países siempre son opt-in
+    for (const cat of live.activeCategories()) {
+      const id = `tv_live_${cat.key}`;
+      if (/^(espana|mexico|argentina|bolivia|chile|colombia|costarica|dominicana|ecuador|elsalvador|guatemala|honduras|nicaragua|paraguay|peru|puertorico|venezuela)$/.test(cat.key)) {
+        assert.ok(!tvIds.includes(id), `${id} debería ser opt-in`);
+      } else {
+        assert.ok(tvIds.includes(id), `falta ${id}`);
+      }
     }
-    for (const id of ['tv_live_entretenimiento', 'tv_live_musica', 'tv_live_noticias']) {
-      assert.ok(!tvIds.includes(id), `${id} debería estar oculta (sin señales del proveedor)`);
-    }
-    assert.ok(!tvIds.includes('tv_live_mexico'), 'los países son opt-in');
     assert.ok(JSON.stringify(manifest).length <= 8000, 'manifest por encima del margen');
   });
 
@@ -132,9 +138,17 @@ describe('canales en vivo por categorías: catálogos y manifest', () => {
     assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_live_infantil', null, { skip: 20 }), []);
   });
 
-  test('una categoría sin señales del proveedor no aparece en el manifest', async () => {
-    assert.equal(live.liveMetas('noticias').length, 0);
-    assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_live_noticias', null, {}), []);
+  test('una categoría sin señales verificadas no aparece en el manifest', async () => {
+    // Mecanismo, no dato: toda categoría activa tiene canales en la semilla y
+    // toda categoría sin canales queda inactiva (independiente de la sonda)
+    const withChannels = new Set(seed.map((c) => c.category));
+    for (const cat of live.LIVE_CATEGORIES) {
+      const activa = live.activeCategories().some((a) => a.key === cat.key);
+      assert.equal(activa, withChannels.has(cat.key), `estado de ${cat.key}`);
+      if (!activa) {
+        assert.deepEqual(await catalogs.resolveCatalog('tv', `tv_live_${cat.key}`, null, {}), []);
+      }
+    }
   });
 });
 

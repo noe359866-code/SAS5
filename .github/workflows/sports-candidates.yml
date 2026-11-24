@@ -2,6 +2,8 @@ name: Candidatas de canales deportivos
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 1'
   push:
     branches: ['arena/**']
     paths:
@@ -20,7 +22,7 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -46,13 +48,28 @@ jobs:
         run: test -f scripts/live-lists-probe.mjs && node scripts/live-lists-probe.mjs || echo "sin sonda de categorías todavía"
       - name: Fuente tvcluboficial a fondo
         run: test -f scripts/tvclub-source-probe.mjs && node scripts/tvclub-source-probe.mjs || echo "sin sonda tvclub todavía"
+      - name: Actualizar la semilla de canales del addon (con guarda)
+        if: always()
+        run: |
+          node -e "
+          const fs = require('fs');
+          const fresh = JSON.parse(fs.readFileSync('.probe/live-channels.json', 'utf8'));
+          const current = JSON.parse(fs.readFileSync('lib/data/liveChannelsSeed.json', 'utf8'));
+          const floor = Math.floor(current.length * 0.8);
+          if (fresh.length >= floor) {
+            fs.writeFileSync('lib/data/liveChannelsSeed.json', JSON.stringify(fresh, null, 1) + '\n');
+            console.log('semilla actualizada:', current.length, '->', fresh.length);
+          } else {
+            console.log('semilla NO actualizada: la sonda trajo', fresh.length, '< 80% de', current.length, '(posible mal día de red)');
+          }
+          "
       - name: Devolver el resultado a la rama
         if: always()
         run: |
           test -s .probe/sports-candidates.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv .probe/live-lists.md .probe/live-channels.json .probe/tvclub-source.md; do
+          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv .probe/live-lists.md .probe/live-channels.json .probe/tvclub-source.md lib/data/liveChannelsSeed.json; do
             test -s "$f" && git add -f "$f"
           done
           git diff --cached --quiet || git commit -m "sonda: candidatas de canales deportivos $(date -u +%FT%TZ) [skip ci]"

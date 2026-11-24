@@ -701,7 +701,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/169.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Infantil HD",
@@ -1373,7 +1373,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/252.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Discovery H&H",
@@ -1429,7 +1429,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/558.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Investigation Discovery",
@@ -1981,14 +1981,6 @@
   "category": "peru",
   "logo": "https://i.imgur.com/q0dAWyj.png",
   "url": "https://redirector.rudo.video/hls-video/plus226/latina2/latina2.smil/playlist.m3u8",
-  "ua": ""
- },
- {
-  "name": "Nativa TV HD (Santiago)",
-  "slug": "nativa-tv-hd-santiago",
-  "category": "peru",
-  "logo": "https://i.imgur.com/Y9k9XSO.png",
-  "url": "https://live-evg5.tv360.bitel.com.pe/bitel/nativa/playlist.m3u8",
   "ua": ""
  },
  {
@@ -2664,14 +2656,6 @@
   "ua": ""
  },
  {
-  "name": "Canal 7 TeleValencia (Valencia)",
-  "slug": "canal-7-televalencia-valencia",
-  "category": "espana",
-  "logo": "https://i.imgur.com/ILfXDRs.png",
-  "url": "https://play.cdn.enetres.net/9E9557EFCEBB43A89CEC8FBD3C500247022/028/playlist.m3u8",
-  "ua": ""
- },
- {
   "name": "Ribera TV",
   "slug": "ribera-tv",
   "category": "espana",
@@ -2693,14 +2677,6 @@
   "category": "espana",
   "logo": "https://graph.facebook.com/m95tvmarbella/picture?width=200&height=200",
   "url": "https://limited2.todostreaming.es/live/m95-livestream.m3u8",
-  "ua": ""
- },
- {
-  "name": "Diez TV Las Villas (Villacarrillo - Jaén)",
-  "slug": "diez-tv-las-villas-villacarrillo-jaen",
-  "category": "espana",
-  "logo": "https://i.imgur.com/QTA40lP.png",
-  "url": "https://streaming.cloud.innovasur.es/mmj2/index.m3u8",
   "ua": ""
  },
  {
@@ -2781,6 +2757,14 @@
   "category": "espana",
   "logo": "https://graph.facebook.com/AlcarriaTV/picture?width=200&height=200",
   "url": "http://217.182.77.27/live/alcarriatv-livestream.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "TV Almassora (C. Valenciana)",
+  "slug": "tv-almassora-c-valenciana",
+  "category": "espana",
+  "logo": "https://graph.facebook.com/tvalmassora/picture?width=200&height=200",
+  "url": "https://play.turesportmedia.com/hls/abr_tvalmassora/index.m3u8",
   "ua": ""
  },
  {
@@ -2917,22 +2901,6 @@
   "category": "cine",
   "logo": "https://img-evg3.tv360.bitel.com.pe/peru-image/2026/01/06/03/1767644988528/aceceab14c39_480_270.png",
   "url": "https://live-evg5.tv360.bitel.com.pe/bitel/CreoLatinoSRT/playlist.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cine en Español",
-  "slug": "cine-en-espanol",
-  "category": "cine",
-  "logo": "https://i.ibb.co/7xdSqFSk/CINE-EN-ESPANOL.png",
-  "url": "https://epg.provider.plex.tv/library/parts/608049aefa2b8ae93c2c3b76-64e6e46f27a915f9b5184e9a.m3u8?X-Plex-Token=aodMBFfiWQ9a_wrQtBsJ",
-  "ua": ""
- },
- {
-  "name": "Cine de Horror",
-  "slug": "cine-de-horror",
-  "category": "cine",
-  "logo": "https://i.ibb.co/kV2YQv6r/Logo-cine-de-horror-Mayo5.png",
-  "url": "https://epg.provider.plex.tv/library/parts/608049aefa2b8ae93c2c3b76-64e6e2f04a5e9b4cedc6d52b.m3u8?x-plex-token=aodMBFfiWQ9a_wrQtBsJ",
   "ua": ""
  },
  {
@@ -3117,6 +3085,14 @@
   "category": "cine",
   "logo": "https://i.imgur.com/avBL8pQ.png",
   "url": "http://192.141.98.91:8000/play/a209/index.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Universal Comedy HD [Opc.3]",
+  "slug": "universal-comedy-hd-opc-3",
+  "category": "cine",
+  "logo": "https://i.imgur.com/avBL8pQ.png",
+  "url": "http://187.245.231.227:8000/play/a0ou/index.m3u8",
   "ua": ""
  },
  {
@@ -4085,14 +4061,6 @@
   "category": "entretenimiento",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/960px-Comedy_Central_2018.svg.png",
   "url": "http://181.224.255.210:8001/play/a0ew/index.m3u8?hls",
-  "ua": ""
- },
- {
-  "name": "Comedy Central HD (Opc.4)",
-  "slug": "comedy-central-hd-opc-4",
-  "category": "entretenimiento",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/960px-Comedy_Central_2018.svg.png",
-  "url": "http://190.108.83.69:8000/play/a02z/index.m3u8",
   "ua": ""
  },
  {
@@ -5488,14 +5456,6 @@
   "ua": ""
  },
  {
-  "name": "Pitufo TV (ES)",
-  "slug": "pitufo-tv-es",
-  "category": "infantil",
-  "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ESBD130000205_20241022T050609SQUARE.png",
-  "url": "https://jmp2.uk/stvp-ESBD130000205",
-  "ua": ""
- },
- {
   "name": "Mr. Bean Animated (ES)",
   "slug": "mr-bean-animated-es",
   "category": "infantil",
@@ -5566,6 +5526,14 @@
   "logo": "https://telechancho.github.io/tvlogos/TierramiaTV.jpg",
   "url": "http://stream-gtlc.telecentro.net.ar/hls/tierramiahls/main.m3u8",
   "ua": ""
+ },
+ {
+  "name": "Vorterix (Mendoza)",
+  "slug": "vorterix-mendoza",
+  "category": "musica",
+  "logo": "https://telechancho.github.io/tvlogos/Vorterix.jpg",
+  "url": "https://vivo.solumedia.com:19360/vorterixmza/vorterixmza.m3u8",
+  "ua": "Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36"
  },
  {
   "name": "Urban TV",
@@ -6104,14 +6072,6 @@
   "ua": ""
  },
  {
-  "name": "Fierro a Fondo (Internacional)",
-  "slug": "fierro-a-fondo-internacional",
-  "category": "deportes",
-  "logo": "https://img-evg3.tv360.bitel.com.pe/peru-image/2026/01/06/03/1767645593708/be4c102c0389_480_270.jpg",
-  "url": "https://live-evg5.tv360.bitel.com.pe/bitel/fierroSRT/playlist.m3u8",
-  "ua": ""
- },
- {
   "name": "World Poker Tour (Internacional)",
   "slug": "world-poker-tour-internacional",
   "category": "deportes",
@@ -6181,6 +6141,14 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
   "url": "http://181.224.255.210:8001/play/a0s8/index.m3u8?hls",
+  "ua": ""
+ },
+ {
+  "name": "DSports  [Opc. 4]",
+  "slug": "dsports-opc-4",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
+  "url": "http://45.186.254.75:8000/play/a0en/index.m3u8",
   "ua": ""
  },
  {

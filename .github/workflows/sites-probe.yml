@@ -22,6 +22,7 @@ on:
       - 'scripts/candidates-probe.mjs'
       - 'scripts/candidates2-probe.mjs'
       - 'scripts/candidates3-probe.mjs'
+      - 'scripts/candidates4-probe.mjs'
       - 'scripts/vimeos-chain-probe.mjs'
       - 'scripts/calidad-chain-probe.mjs'
       - 'scripts/fixtures-capture.mjs'
@@ -71,6 +72,8 @@ jobs:
         run: node scripts/candidates2-probe.mjs || true
       - name: candidatas 3 (cadena buscar → player → embed)
         run: node scripts/candidates3-probe.mjs || true
+      - name: candidatas 4 (proveedores nuevos con el código del addon)
+        run: node scripts/candidates4-probe.mjs || true
       - name: cadena Vimeos (resolución con el código del addon)
         run: node scripts/vimeos-chain-probe.mjs || true
       - name: cuarta sonda (series en allcalidad y películas wp-api)

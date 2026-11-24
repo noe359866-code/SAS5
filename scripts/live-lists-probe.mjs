@@ -126,24 +126,25 @@ function parseM3U(text, source) {
 }
 
 /**
- * Verifica un canal: primero con su UA declarado; si falla, con el genérico.
- * La sonda 13 mostró playlists vivas con segmentos muertos (canal fantasma),
- * así que «válido» exige la cadena completa: maestra → variante → segmento
- * con bytes de vídeo (MPEG-TS o fMP4).
+ * Verifica un canal: UA declarado → genérico → genérico + Referer del origen
+ * (los servidores que responden 403 suelen pedirlo). La sonda 13 mostró
+ * playlists vivas con segmentos muertos (canal fantasma), así que «válido»
+ * exige la cadena completa: maestra → variante → segmento con bytes de vídeo
+ * (MPEG-TS o fMP4).
  */
 async function verify(entry) {
   const tries = entry.ua && entry.ua !== GENERIC_UA
     ? [{ 'User-Agent': entry.ua }, { 'User-Agent': GENERIC_UA }]
     : [{ 'User-Agent': GENERIC_UA }];
   let last = 'sin respuesta';
-  for (const headers of tries) {
+
+  const attempt = async (headers) => {
     const t0 = Date.now();
     const res = await get(entry.url, { Range: 'bytes=0-8192', ...headers });
     const ms = Date.now() - t0;
     const head = (res.body || '').slice(0, 8192);
     if ((res.status !== 200 && res.status !== 206) || !/#EXTM3U/.test(head)) {
-      last = `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${ms} ms`;
-      continue;
+      return { fail: `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${ms} ms` };
     }
     // Maestra con variantes → bajar a la primera variante
     let mediaUrl = entry.url, body = head;
@@ -152,28 +153,43 @@ async function verify(entry) {
       const lines = head.split('\n');
       const idx = lines.findIndex((l) => /#EXT-X-STREAM-INF/.test(l));
       const rel = (lines[idx + 1] || '').trim();
-      if (!rel) { last = 'maestra sin variante legible'; continue; }
-      try { mediaUrl = new URL(rel, entry.url).toString(); } catch { last = 'variante malformada'; continue; }
+      if (!rel) return { fail: 'maestra sin variante legible' };
+      try { mediaUrl = new URL(rel, entry.url).toString(); } catch { return { fail: 'variante malformada' }; }
       const media = await get(mediaUrl, { Range: 'bytes=0-8192', ...headers });
-      if ((media.status !== 200 && media.status !== 206) || !/#EXTM3U/.test(media.body)) { last = `variante HTTP ${media.status}`; continue; }
+      if ((media.status !== 200 && media.status !== 206) || !/#EXTM3U/.test(media.body)) return { fail: `variante HTTP ${media.status}` };
       body = media.body;
     }
     // Primer segmento con bytes de vídeo
     const segLine = body.split('\n').map((l) => l.trim()).find((l) => l && !l.startsWith('#'));
-    if (!segLine) { last = 'playlist sin segmentos'; continue; }
+    if (!segLine) return { fail: 'playlist sin segmentos' };
     let segUrl;
-    try { segUrl = new URL(segLine, mediaUrl).toString(); } catch { last = 'segmento malformado'; continue; }
+    try { segUrl = new URL(segLine, mediaUrl).toString(); } catch { return { fail: 'segmento malformado' }; }
     const seg = await get(segUrl, { Range: 'bytes=0-188', ...headers });
     const bh = seg.body || '';
     const looksTs = bh.charCodeAt(0) === 0x47;
     const looksFmp4 = bh.slice(4, 8) === 'ftyp' || bh.slice(0, 12).includes('ftyp');
     if ((seg.status === 200 || seg.status === 206) && (looksTs || looksFmp4)) {
-      return { ok: true, ua: headers['User-Agent'] === entry.ua ? entry.ua : '',
-        state: `HLS VÁLIDO${variants ? ` ${variants}v` : ''} · ${looksTs ? 'TS' : 'fMP4'} · ${ms} ms` };
+      return { ok: true, state: `HLS VÁLIDO${variants ? ` ${variants}v` : ''} · ${looksTs ? 'TS' : 'fMP4'} · ${ms} ms` };
     }
-    last = `segmento HTTP ${seg.status} (fantasma)`;
+    return { fail: `segmento HTTP ${seg.status} (fantasma)` };
+  };
+
+  for (let i = 0; i < tries.length; i++) {
+    const headers = tries[i];
+    const r = await attempt(headers);
+    if (r.ok) {
+      return { ok: true,
+        ua: headers['User-Agent'] === entry.ua ? entry.ua : '',
+        ref: headers.Referer || '',
+        state: r.state };
+    }
+    last = r.fail;
+    // Un 403 suele pedir Referer: un intento extra con el origen del propio stream
+    if (/^HTTP 403/.test(last) && !tries.some((t) => t.Referer)) {
+      try { tries.push({ 'User-Agent': headers['User-Agent'], Referer: `${new URL(entry.url).origin}/` }); } catch { /* URL rara */ }
+    }
   }
-  return { ok: false, ua: '', state: last };
+  return { ok: false, ua: '', ref: '', state: last };
 }
 
 async function mapLimit(items, limit, fn) {
@@ -228,12 +244,12 @@ async function mapLimit(items, limit, fn) {
   const rows = { ok: [], bad: [] };
   for (let i = 0; i < wanted.length; i++) {
     const { category, name, logo, group, source } = wanted[i];
-    const { ok, ua, state } = checks[i].r;
-    const line = `| ${name} | ${category} | ${group || '—'} | ${source} | ${redact(wanted[i].url)} | ${state}${ua ? ' · UA propio' : ''} |`;
+    const { ok, ua, ref, state } = checks[i].r;
+    const line = `| ${name} | ${category} | ${group || '—'} | ${source} | ${redact(wanted[i].url)} | ${state}${ua ? ' · UA propio' : ''}${ref ? ' · +Referer' : ''} |`;
     (ok ? rows.ok : rows.bad).push(line);
     // tvcluboficial no exige UA (sonda 13): no arrastrarlo; el resto, sí
     const isTvclub = /(^|\.)m3u\.tvcluboficial\.com$/.test(new URL(wanted[i].url).hostname);
-    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: isTvclub ? '' : (ua || '') });
+    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: isTvclub ? '' : (ua || ''), ref: ref || '' });
   }
 
   say(`## Válidos (${rows.ok.length})`);

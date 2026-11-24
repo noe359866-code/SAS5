@@ -342,6 +342,15 @@
   "ref": ""
  },
  {
+  "name": "FOX Sports 2 HD",
+  "slug": "fox-sports-2-hd",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "FOX Sports 3 (México)",
   "slug": "fox-sports-3-mexico",
   "category": "deportes",
@@ -1499,15 +1508,6 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/357.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "EnerGeek Fan",
-  "slug": "energeek-fan",
-  "category": "anime",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHenergeekfan.png",
-  "url": "https://cdn.energeek.cl/hls/energeekfan.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2939,15 +2939,6 @@
   "category": "ecuador",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHaustraltvecuador.png",
   "url": "https://stmv3.voxtvhd.com.br/australtv/australtv/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Ecuavisa",
-  "slug": "ecuavisa",
-  "category": "ecuador",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png",
-  "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e",
   "ua": "",
   "ref": ""
  },

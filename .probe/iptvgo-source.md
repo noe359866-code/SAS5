@@ -1,6 +1,6 @@
 # Sonda 14: iptvgo.cc a fondo (patrón Xtream /live/<u>/<p>/<id>.m3u8)
 
-Fecha: 2026-11-24T21:30:06.483Z
+Fecha: 2026-11-24T21:43:33.581Z
 
 ## 1. Acceso al canal de ejemplo (id 1455)
 
@@ -15,19 +15,22 @@ Fecha: 2026-11-24T21:30:06.483Z
 
 | ID | Resultado | Detalle |
 |---|---|---|
-| 1455 | falla | segmento HTTP 403 · 0 B · — variantes |
+| 1455 | falla | con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC sin Range: 403 |
 | 1 | falla | playlist HTTP 405 |
 | 100 | falla | playlist HTTP 405 |
-| 500 | falla | segmento HTTP 403 · 0 B · — variantes |
+| 500 | falla | con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC sin Range: 403 |
 | 1000 | falla | playlist HTTP 405 |
-| 1500 | falla | segmento HTTP 403 · 0 B · — variantes |
-| 2000 | falla | segmento HTTP 403 · 0 B · — variantes |
+| 1500 | falla | con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC sin Range: 403 |
+| 2000 | falla | con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC sin Range: 403 |
 
 ## 3. Xtream player_api (nombres, logos, categorías)
 
 login: HTTP 200 · status Active · expira 1802231850 · max conexiones 4
 categorías en vivo: 355
-get_live_streams: HTTP 200 · no-JSON (2000000 B)
+canales en vivo anunciados: 33020
+con logo: 29341 · muestra de nombres: Grums IK vs Karlskrona HK @ Nov 22 1:45 PM :Hockeyettan  01 · Kalix HC vs IF Sundsvall Hockey @ Nov 22 1:50 PM :Hockeyettan  02 · Kiruna IF vs Hudiksvalls HC @ Nov 22 1:50 PM :Hockeyettan  03 · Kungälvs IK vs Hanvikens SK @ Nov 22 1:50 PM :Hockeyettan  04 · Lindlövens IF vs Piteå HC @ Nov 22 1:50 PM :Hockeyettan  05 · Surahammars IF vs Örnsköldsvik HF @ Nov 22 1:50 PM :Hockeyettan  06 · Grästorps IK vs Nyköpings SK @ Nov 22 3:45 PM :Hockeyettan  07 · Halmstad Hammers HC vs HC Vita Hästen @ Nov 22 3:45 PM :Hockeyettan  08 · Borlänge HF vs Vallentuna Hockey @ Nov 22 3:50 PM :Hockeyettan  09 · BoroVetlanda HC vs Tranås AIF @ Nov 22 3:50 PM :Hockeyettan  10 · Huddinge IK vs HC Dalen @ Nov 22 3:50 PM :Hockeyettan  11 · Järfälla HC vs Norrtälje IK @ Nov 22 3:50 PM :Hockeyettan  12
+categorías con canales: 356 · ids máx: 868568
+top categorías: Ex-YU: 1112 · 24/7 | SHOWS: 740 · CARIBBEAN: 649 · Hungary: 592 · INDIA: 519 · 24/7 | COMEDY: 511 · Brazil: 510 · UK-Restream: 506 · 24/7 | DRAMA: 475 · Turkey: 458 · USA | ESPN+: 399 · 24/7 | Arabic: 399 · IT | SPORT: 372 · DE | SPORT: 305 · USA | PLEX: 304 · Albania: 302 · USA | Flo Hockey: 300 · Africa | Locals: 300 · USA | Disney+ Sports: 300 · FR | SPORT: 299 · DE | Kinowelt: 290 · Canada | SAMSUNG TV+: 281 · USA | SAMSUNG TV+: 280 · Thailand: 279
 
 ## 4. Enumeración de IDs (/live/<cred>/<n>.m3u8)
 

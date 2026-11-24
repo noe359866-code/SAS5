@@ -32,14 +32,14 @@ const out = [];
 const say = (line) => { out.push(line); console.log(line); };
 const redact = (raw) => String(raw).replace(AUTH, '<cred>').replace(qs, 'username=…&password=…');
 
-async function get(url, headers = {}, range = 'bytes=0-2048') {
+async function get(url, headers = {}, range = 'bytes=0-2048', maxBody = 2_000_000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT);
   try {
     const h = { ...headers };
     if (range) h.Range = range;
     const res = await fetch(url, { redirect: 'follow', signal: controller.signal, headers: h });
-    const body = (await res.text()).slice(0, 2_000_000);
+    const body = (await res.text()).slice(0, maxBody);
     return {
       status: res.status,
       body,
@@ -74,12 +74,27 @@ async function fullChain(url, headers) {
   }
   const segLine = body.split('\n').map((l) => l.trim()).find((l) => l && !l.startsWith('#'));
   if (!segLine) return { ok: false, detail: 'playlist sin segmentos' };
-  const seg = await get(new URL(segLine, mediaUrl).toString(), headers, 'bytes=0-188');
-  const bh = seg.body || '';
-  const looksTs = bh.charCodeAt(0) === 0x47;
-  const looksFmp4 = bh.slice(4, 8) === 'ftyp' || bh.slice(0, 12).includes('ftyp');
-  const ok = (seg.status === 200 || seg.status === 206) && (looksTs || looksFmp4);
-  return { ok, detail: `segmento HTTP ${seg.status} · ${looksTs ? 'MPEG-TS' : looksFmp4 ? 'fMP4' : `${bh.length} B`} · ${variants || '—'} variantes` };
+  const segUrl = new URL(segLine, mediaUrl).toString();
+  // La playlist contesta a todos; el segmento es lo protegido. Se prueba la
+  // batería: con Range, sin Range, con Referer, con UA de reproductor.
+  const attempts = [
+    ['con Range', { ...headers, Range: 'bytes=0-188' }],
+    ['sin Range', { ...headers }],
+    ['con Referer', { ...headers, Referer: `${BASE}/` }],
+    ['UA VLC sin Range', { 'User-Agent': 'VLC/3.0.20 LibVLC/3.0.20' }],
+  ];
+  const tried = [];
+  for (const [label, h] of attempts) {
+    const seg = await get(segUrl, h, h.Range ? h.Range : null, 4_000);
+    const bh = seg.body || '';
+    const looksTs = bh.charCodeAt(0) === 0x47;
+    const looksFmp4 = bh.slice(4, 8) === 'ftyp' || bh.slice(0, 12).includes('ftyp');
+    tried.push(`${label}: ${seg.status}${looksTs ? ' TS' : looksFmp4 ? ' fMP4' : ''}${seg.error ? ' ' + seg.error : ''}`);
+    if ((seg.status === 200 || seg.status === 206) && (looksTs || looksFmp4)) {
+      return { ok: true, detail: `${tried.join(' → ')} · ${variants || '—'} variantes` };
+    }
+  }
+  return { ok: false, detail: tried.join(' → ') };
 }
 
 async function mapLimit(items, limit, fn) {
@@ -133,7 +148,7 @@ async function mapLimit(items, limit, fn) {
   // 3) Xtream player_api: ¿nombres y categorías?
   say('## 3. Xtream player_api (nombres, logos, categorías)');
   say('');
-  const login = await get(`${BASE}/player_api.php?${qs}`, { 'User-Agent': GENERIC_UA }, null);
+  const login = await get(`${BASE}/player_api.php?${qs}`, { 'User-Agent': GENERIC_UA }, null, 1_000_000);
   let loginOk = false;
   try {
     const j = JSON.parse(login.body);
@@ -143,11 +158,11 @@ async function mapLimit(items, limit, fn) {
     say(`login: HTTP ${login.status} · respuesta no-JSON (${login.body.length} B)${login.error ? ' · ' + login.error : ''}`);
   }
   if (loginOk) {
-    const cats = await get(`${BASE}/player_api.php?${qs}&action=get_live_categories`, { 'User-Agent': GENERIC_UA }, null);
+    const cats = await get(`${BASE}/player_api.php?${qs}&action=get_live_categories`, { 'User-Agent': GENERIC_UA }, null, 5_000_000);
     let catCount = 0;
     try { const c = JSON.parse(cats.body); catCount = Array.isArray(c) ? c.length : 0; } catch { /* abajo */ }
     say(`categorías en vivo: ${catCount}`);
-    const streams = await get(`${BASE}/player_api.php?${qs}&action=get_live_streams`, { 'User-Agent': GENERIC_UA }, null);
+    const streams = await get(`${BASE}/player_api.php?${qs}&action=get_live_streams`, { 'User-Agent': GENERIC_UA }, null, 60_000_000);
     try {
       const arr = JSON.parse(streams.body);
       say(`canales en vivo anunciados: ${Array.isArray(arr) ? arr.length : '?'}`);
@@ -157,6 +172,13 @@ async function mapLimit(items, limit, fn) {
         const byCat = {};
         for (const c of arr) byCat[c.category_id] = (byCat[c.category_id] || 0) + 1;
         say(`categorías con canales: ${Object.keys(byCat).length} · ids máx: ${Math.max(...arr.map((c) => +c.stream_id || 0))}`);
+        try {
+          const catArr = JSON.parse(cats.body);
+          const catName = new Map(catCount ? catArr.map((c) => [String(c.category_id), c.category_name]) : []);
+          const top = Object.entries(byCat).sort((a, b) => b[1] - a[1]).slice(0, 24)
+            .map(([id, n]) => `${catName.get(id) || id}: ${n}`);
+          say(`top categorías: ${top.join(' · ')}`);
+        } catch { /* sin nombres de categoría */ }
       }
     } catch {
       say(`get_live_streams: HTTP ${streams.status} · no-JSON (${streams.body.length} B)`);

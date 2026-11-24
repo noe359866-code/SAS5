@@ -140,9 +140,9 @@ describe('canales en vivo por categorías: catálogos y manifest', () => {
   });
 
   test('una categoría sin señales verificadas no aparece en el manifest', async () => {
-    // Mecanismo, no dato: toda categoría activa tiene canales en la semilla y
-    // toda categoría sin canales queda inactiva (independiente de la sonda)
-    const withChannels = new Set(seed.map((c) => c.category));
+    // Mecanismo, no dato: toda categoría activa tiene canales en alguna semilla
+    // (verificada o sin verificar) y toda categoría sin canales queda inactiva
+    const withChannels = new Set([...seed, ...unverifiedSeed].map((c) => c.category));
     for (const cat of live.LIVE_CATEGORIES) {
       const activa = live.activeCategories().some((a) => a.key === cat.key);
       assert.equal(activa, withChannels.has(cat.key), `estado de ${cat.key}`);
@@ -176,7 +176,7 @@ describe('canales en vivo por categorías: streams', () => {
 describe('canales sin verificar (iptvgo.cc)', () => {
   test('la semilla sin verificar tiene la forma esperada', () => {
     assert.ok(Array.isArray(unverifiedSeed));
-    const cats = new Set(live.LIVE_CATEGORIES.map((c) => c.key));
+    const cats = new Set([...live.LIVE_CATEGORIES.map((c) => c.key), 'deportes']);
     for (const ch of unverifiedSeed) {
       assert.equal(ch.unverified, true, ch.name);
       assert.match(ch.url, /^http:\/\/iptvgo\.cc\/live\/[^/]+\/[^/]+\/\d+\.m3u8$/, ch.name);
@@ -195,7 +195,7 @@ describe('canales sin verificar (iptvgo.cc)', () => {
   test('un canal sin verificar resuelve solo sus URLs de semilla', async () => {
     if (!unverifiedSeed.length) return; // la sonda semanal aún no la ha llenado
     const ch0 = unverifiedSeed[0];
-    const ch = live.liveChannelById(`rlch:lv:${ch.category}:${live.baseSlugOf(ch.slug)}`);
+    const ch = live.liveChannelById(`rlch:lv:${ch0.category}:${live.baseSlugOf(ch0.slug)}`);
     assert.ok(ch, `${ch0.category}:${ch0.slug}`);
     const hits = await live.resolveLiveChannel(ch);
     assert.ok(hits.length >= 1);

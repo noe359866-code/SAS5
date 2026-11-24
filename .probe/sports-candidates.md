@@ -1,6 +1,6 @@
 # Sonda: candidatas de canales de deportes
 
-Fecha: 2026-11-24T15:02:12.863Z
+Fecha: 2026-11-24T15:04:10.234Z
 
 | Sitio | Paso | HTTP | Estado | Detalle |
 |---|---|---|---|---|---|
@@ -46,7 +46,7 @@ Fecha: 2026-11-24T15:02:12.863Z
 | pirlotvhd.com.co | iframe | 200 | vacío | la14hd.com/vivo/canal.php?(19 B) · m3u8=0 iframes=0 cfg=0 |
 | televisionlibre.net | portada | 200 | ok | 249276 B |
 | televisionlibre.net | canales | 200 | vacío | sin enlaces deportivos |
-| pelotalibretv.pl | portada | 200 | ok | 58448 B |
+| pelotalibretv.pl | portada | 200 | ok | 58449 B |
 | pelotalibretv.pl | canales | 200 | ok | 6 enlaces deportivos |
 | pelotalibretv.pl | canal | 200 | señal | www.alliance4creativity.com/watch-it-legally/?(29 B) · iframes=1 |
 | pelotalibretv.pl | iframe | 200 | vacío | www.googletagmanager.com/ns.html?(15 B) · m3u8=0 iframes=0 cfg=0 |

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
- * Quinta sonda de deportes (24-11-2026): verificar la cadena completa de
- * streamtp.site (global1.php → hls.php → m3u8 real) en TODOS los canales que
- * anuncia su portada, y medir la latencia. Salida redactada.
+ * Sexta sonda de deportes (24-11-2026): volcar el HTML crudo de
+ * streamtp.site/channel/dsports.html y probar global2.php?stream=…, la
+ * variante de «reproducción automática» que anuncia la portada.
+ * Salida redactada.
  */
 
 import { createRequire } from 'node:module';
@@ -15,25 +16,19 @@ const TIMEOUT = 15_000;
 
 const out = [];
 const say = (line) => { out.push(line); console.log(line); };
-const redact = (raw) => {
-  try {
-    const url = new URL(String(raw));
-    return `${url.hostname}${url.pathname.slice(0, 60)}${url.search ? `?(${url.search.length} B)` : ''}`;
-  } catch { return String(raw || '').slice(0, 90); }
-};
+const redact = (raw) => String(raw || '').replace(/[?&](?:token|auth|sig|expires|hash)=[^"'&\s)]+/gi, '$1…').slice(0, 400);
 
 async function get(url, extraHeaders = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT);
   try {
     const res = await fetch(url, { redirect: 'follow', signal: controller.signal, headers: { ...HEADERS, ...extraHeaders } });
-    return { status: res.status, url: res.url, body: (await res.text()).slice(0, 800_000), contentType: res.headers.get('content-type') };
+    return { status: res.status, url: res.url, body: (await res.text()).slice(0, 1_500_000) };
   } catch (err) {
     return { status: 0, url, body: '', error: err?.name || String(err).slice(0, 40) };
   } finally { clearTimeout(timer); }
 }
 
-/** Decodifica `var k=[charcodes], e='base64'` de global1.php → texto plano. */
 function decodeGlobal(body) {
   const m = /var k=\[([\d,\s]+)\],\s*e='([^']+)'/.exec(body);
   if (!m) return null;
@@ -43,60 +38,29 @@ function decodeGlobal(body) {
 }
 
 (async () => {
-  say('# Sonda 3: cadena completa de streamtp.site');
+  say('# Sonda 4: HTML crudo de canal activo en streamtp');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
   say('');
 
-  // 1) Portada → todos los slugs de canal anunciados
-  const home = await get('https://streamtp.site/');
-  say(`## portada — HTTP ${home.status}`);
-  if (home.status !== 200) process.exit(0);
-  const slugs = [...home.body.matchAll(/global1\.php\?stream=([a-z0-9]+)/gi)].map((m) => m[1]);
-  const active = new Set([...home.body.matchAll(/channel\/([a-z0-9]+)\.html/gi)].map((m) => m[1]));
-  say(`slugs: ${[...new Set(slugs)].join(', ')}`);
-  say(`activos (channel/*.html): ${[...active].join(', ')}`);
-  say('');
+  // 1) channel/dsports.html crudo (completo, redactado)
+  const ch = await get('https://streamtp.site/channel/dsports.html');
+  say(`## channel/dsports.html — HTTP ${ch.status} · ${ch.body.length} B`);
+  if (ch.status === 200) say(`\`\`\`html\n${redact(ch.body.slice(0, 6000))}\n\`\`\``);
 
-  // 2) Para cada slug: global1.php → hls.php → m3u8 → validar manifiesto
-  say('| Canal | Activo | hls.php | URL final | Manifiesto | Estado |');
-  say('|---|---|---|---|---|---|');
-  const all = [...new Set([...slugs, ...active])];
-  for (const slug of all) {
-    const pageUrl = active.has(slug) ? `https://streamtp.site/channel/${slug}.html` : `https://streamtp.site/global1.php?stream=${slug}`;
-    const g = await get(pageUrl);
-    if (g.status !== 200) { say(`| ${slug} | ${active.has(slug) ? 'sí' : 'no'} | ${g.status} | — | — | global1 falló |`); continue; }
-    // En channel/*.html el m3u8 puede venir ya en claro; si no, decodificar.
-    const direct = (g.body.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/) || [])[0];
-    const decoded = direct ? null : decodeGlobal(g.body);
-    if (!direct && !decoded) { say(`| ${slug} | ${active.has(slug) ? 'sí' : 'no'} | — | — | — | sin patrón k/e |`); continue; }
-    const hlsPhp = direct || (decoded.match(/https?:\/\/[^\s"'<>\\]+hls\.php[^\s"'<>\\]*/) || [])[0]
-      || (decoded.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/) || [])[0];
-    if (!hlsPhp) {
-      say(`| ${slug} | ${active.has(slug) ? 'sí' : 'no'} | — | — | — | sin hls.php/m3u8 |`);
-      if (decoded) say(`\n\`\`\`\n${redact(decoded)}\n\`\`\`\n`);
-      continue;
+  // 2) global2.php (reproducción automática)
+  for (const slug of ['dsports', 'foxsports1usa', 'daznlaliga']) {
+    const g2 = await get(`https://streamtp.site/global2.php?stream=${slug}`);
+    say(`## global2 ${slug} — HTTP ${g2.status}${g2.error ? ` (${g2.error})` : ''} · ${g2.body.length} B`);
+    if (g2.status !== 200) continue;
+    const m3 = (g2.body.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/) || [])[0];
+    const decoded = decodeGlobal(g2.body);
+    if (m3) say(`- m3u8 directo: ${redact(m3)}`);
+    if (decoded) {
+      const urls = [...decoded.matchAll(/https?:\/\/[^\s"'<>\\]+/g)].map((u) => redact(u[0])).slice(0, 6);
+      say(`- decodificado ${decoded.length} B: ${urls.join(' | ') || redact(decoded).slice(0, 200)}`);
     }
-    const t0 = Date.now();
-    const h = await get(hlsPhp, { Referer: g.url });
-    const ms = Date.now() - t0;
-    // hls.php puede devolver el manifiesto, una URL JSON o un redirect
-    const bodyHead = (h.body || '').slice(0, 300);
-    const m3u8Url = (bodyHead.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/) || [])[0]
-      || (/#EXTM3U/.test(bodyHead) ? h.url : null)
-      || (h.url !== hlsPhp && /\.m3u8/.test(h.url) ? h.url : null);
-    let finalState = 'sin m3u8';
-    let finalUrl = '—';
-    if (m3u8Url) {
-      const man = /#EXTM3U/.test(bodyHead) ? { status: h.status, body: h.body } : await get(m3u8Url, { Referer: h.url, Range: 'bytes=0-400' });
-      const ok = man.status === 200 && /#EXTM3U/.test((man.body || '').slice(0, 400));
-      const variants = ((man.body || '').match(/#EXT-X-STREAM-INF/g) || []).length;
-      finalState = ok ? `HLS VÁLIDO${variants ? ` (${variants} variantes)` : ''} (${ms} ms)` : `HTTP ${man.status} no-HLS (${ms} ms)`;
-      finalUrl = redact(m3u8Url);
-    } else {
-      finalState = `hls.php: ${h.status} · ${redact(bodyHead) || h.error || 'vacío'}`.slice(0, 90);
-    }
-    say(`| ${slug} | ${active.has(slug) ? 'sí' : 'no'} | ${h.status} | ${finalUrl} | ${redact(hlsPhp).split('/').pop()} | ${finalState} |`);
+    if (!m3 && !decoded) say(`\`\`\`html\n${redact(g2.body.slice(0, 2500))}\n\`\`\``);
   }
 
   fs.mkdirSync('.probe', { recursive: true });

@@ -45,7 +45,7 @@ const API = 'https://ww4.animeonline.ninja/wp-admin/admin-ajax.php';
 
 async function main() {
   const fs = await import('node:fs');
-  fs.mkdirSync('.probe', { recursive: true });
+  fs.mkdirSync('.probe/html', { recursive: true });
 
   const page = await get(PAGE);
   const players = [...page.body.matchAll(/<(?:li|a|button)\b[^>]*data-post\s*=\s*["'](\d+)["'][^>]*>/gi)];

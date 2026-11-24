@@ -1,35 +1,102 @@
-# Sonda: decodificar reproductores de deportes
+# Sonda 2: decodificar streamtp y volcar la14hd
 
-Fecha: 2026-11-24T14:57:10.247Z
+Fecha: 2026-11-24T14:59:09.664Z
 
 ## streamtp dsports — HTTP 200
-sin pares _k/_b decodificables
-```
-<script>(function(){var k=[98,51,51,99,48,50,99,100],e='SlVGDVNGCgsMGxoYOkQCFkJbQBcNXgwHA0daDF4cCwsRR10CXVdYbgtVGwtDRkJZXxRAF0JXAgkWQx0QWUYGQ0QVWxBEE15ZRUREFB5BFxYHUl4XQBwQDRZWFEpLOAcLAUZeBl5GTQYNV0pNWVwNARB7Zy58D0RYBlpF
-```
+- clave: b33c02cd · decodificado 1410 B
+  url: https://streamtp.site/hls.php?ch=dsports
 ## streamtp tycsports — HTTP 200
-sin pares _k/_b decodificables
-```
-<script>(function(){var k=[97,98,56,51,55,100,54,55],e='SQRNXVQQX1gPShFIPRJXRUEKS0cKCFlUABZRXFlKXlgSFlZSWgENPQgEEFtEEBcKXEVLR0UBV1oVEhZAXhBTEEdEUEBDRQsKRhVPRBkXQkUEA1VHR0pFXhUHHxpMblJYAhdVVlkQGFUOBkEdXgpYUhMqbH57WRELBQtO
-```
+- clave: ab837d67 · decodificado 1412 B
+  url: https://streamtp.site/hls.php?ch=tycsports
 ## streamtp foxsports1usa — HTTP 200
-sin pares _k/_b decodificables
-```
-<script>(function(){var k=[51,99,54,56,50,97,98,48],e='GwVDVlEVC19dSx9DOBcDQhMLRUwPDQ1TUhdfV1xPCl9AF1hZXwRZOloFHlBBFUMNDkRFTEAEA11HExhLWxUHFxVFXktGQF8NFBRBTxwSFkJWAltMQk8RWUcGERFJawZfUBZbXVwVTFJcB08WWw8MVUErYnV+XEUMVwpAG
-```
+- clave: 3c682ab0 · decodificado 1416 B
+  url: https://streamtp.site/hls.php?ch=foxsports1usa
 ## streamtp daznlaliga — HTTP 200
-sin pares _k/_b decodificables
+- clave: 964dceda · decodificado 1413 B
+  url: https://streamtp.site/hls.php?ch=daznlaliga
+## streamtp dsports2 — HTTP 200
+- clave: b18d2f8a · decodificado 1411 B
+  url: https://streamtp.site/hls.php?ch=dsports2
+## streamtp dsportsplus — HTTP 200
+- clave: ab6366db · decodificado 1414 B
+  url: https://streamtp.site/hls.php?ch=dsportsplus
+## la14hd tntsports — HTTP 200 · 925 B
 ```
-<script>(function(){var k=[57,54,52,100,99,101,100,97],e='EVBBCgARDQ5XHh0faRMFExleRxBeCQsCWEJdCw1LDA5KQloFDgBfa1BQHAwQEUVcBBFHEBEABQxNRhoXChEBRh8QXBcXRFlcHkFDE00WEBNcV1kQE0sXCE1TE00YbwAOWkNZAQ0RSgNWUk1KCgsKBEt+YCkvWENdXV
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <title>THIS DOMAIN HAS BEEN SEIZED</title>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: 
 ```
-## pirlotvhd tnt-sports4 — HTTP 200
-- iframe: https://la14hd.com/vivo/canal.php?stream=tntsports
-  HTTP 200 · 925 B
-## futbollibretvapp espn1 — HTTP 200
-- fetch: /wp-content/plugins/litespeed-cache/guest.vary.php · args: ,{method:"POST",cache:"no-cache",redirect:"follow"}
+## la14hd espn — HTTP 200 · 925 B
 ```
-{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://futbollibretvapp.com/#person","name":"Futbol Libre"},{"@type":"WebSite","@id":"https://futbollibretvapp.com/#website","url":"ht
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <title>THIS DOMAIN HAS BEEN SEIZED</title>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: 
 ```
+## la14hd dsports — HTTP 200 · 925 B
 ```
-var litespeed_vary=document.cookie.replace(/(?:(?:^|.*;\s*)_lscache_vary\s*\=\s*([^;]*).*$)|^.*$/,"$1");litespeed_vary||(sessionStorage.getItem("litespeed_reloaded")?console.log("LiteSpeed: skipping guest vary reload (al
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <title>THIS DOMAIN HAS BEEN SEIZED</title>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: 
+```
+## la14hd foxsports — HTTP 200 · 925 B
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <title>THIS DOMAIN HAS BEEN SEIZED</title>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: 
 ```

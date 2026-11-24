@@ -1,4 +1,5 @@
 name: Candidatas de doramas
+# La sonda GraphQL se ejecuta después de la cadena DooPlay.
 
 on:
   workflow_dispatch:

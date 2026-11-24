@@ -1,0 +1,35 @@
+name: Candidatas 4
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/candidates4.yml'
+      - 'scripts/candidates4-probe.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Medir proveedores nuevos con el código del addon
+        run: node scripts/candidates4-probe.mjs
+      - name: Devolver el resultado a la rama
+        if: always()
+        run: |
+          test -s .probe/candidates4.md || exit 0
+          git config user.name "sonda"
+          git config user.email "sonda@users.noreply.github.com"
+          git add -f .probe/candidates4.md
+          git diff --cached --quiet || git commit -m "sonda: candidatas 4 $(date -u +%FT%TZ) [skip ci]"
+          git fetch origin || true
+          git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true
+          git push origin HEAD:refs/heads/${{ github.ref_name }} || true

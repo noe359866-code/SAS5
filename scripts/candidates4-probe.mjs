@@ -27,7 +27,7 @@ const HEADERS = { 'User-Agent': UA, Accept: 'application/json,text/html;q=0.9,*/
 const TIMEOUT = 12_000;
 
 const CASES = [
-  { label: 'película La Odisea', resolved: { mediaType: 'movie', title: 'La Odisea', altTitle: 'The Odyssey', year: '2025' } },
+  { label: 'película La Odisea', resolved: { mediaType: 'movie', title: 'La Odisea', altTitle: 'The Odyssey', year: '2026' } },
   { label: 'serie The Pitt 1x01', resolved: { mediaType: 'series', title: 'The Pitt', altTitle: null, year: '2025', season: 1, episode: 1 } },
   { label: 'serie Breaking Bad 1x01', resolved: { mediaType: 'series', title: 'Breaking Bad', altTitle: null, year: '2008', season: 1, episode: 1 } },
 ];
@@ -80,7 +80,7 @@ async function probeAllcalidadCc() {
   });
   const item = results[0];
   if (!item) return;
-  const content = await get(`${api}/content/${encodeURIComponent(item.type || 'movies')}/${encodeURIComponent(item.slug || '')}`, { Accept: 'application/json', Referer: `${base}/` });
+  const content = await get(`${api}/content/${encodeURIComponent(item.kind || item.type || 'movie')}/${encodeURIComponent(item.slug || '')}`, { Accept: 'application/json', Referer: `${base}/` });
   const playerUrl = json(content)?.item?.player_url || item.player_url || '';
   row('allcalidad.cc', 'API /content', {
     http: content.status,

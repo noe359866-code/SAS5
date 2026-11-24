@@ -35,7 +35,9 @@ async function gql(query, variables) {
   const timer = setTimeout(() => controller.abort(), TIMEOUT);
   try {
     const res = await fetch(ENDPOINT, { method: 'POST', headers: HEADERS, body: JSON.stringify({ query, variables }), signal: controller.signal });
-    const json = await res.json();
+    const text = await res.text();
+    let json = null;
+    try { json = JSON.parse(text); } catch { return { status: res.status, data: null, error: `no-JSON ${res.headers.get('content-type') || ''} ${text.slice(0, 100).replace(/\s+/g, ' ')}` }; }
     return { status: res.status, data: json?.data || null, error: json?.errors?.[0]?.message || '' };
   } catch (err) { return { status: 0, data: null, error: err?.name || String(err).slice(0, 40) }; }
   finally { clearTimeout(timer); }

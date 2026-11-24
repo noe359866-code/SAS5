@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 /**
- * Sexta sonda de deportes (24-11-2026): volcar el HTML crudo de
- * streamtp.site/channel/dsports.html y probar global2.php?stream=…, la
- * variante de «reproducción automática» que anuncia la portada.
- * Salida redactada.
+ * Séptima sonda de deportes (24-11-2026): cadena completa por canal activo de
+ * streamtp.site: global2.php → hls.php → respuesta (JSON/redirect/manifiesto)
+ * → verificación del HLS con su Referer. Salida redactada.
  */
 
 import { createRequire } from 'node:module';
@@ -11,21 +10,26 @@ const require = createRequire(import.meta.url);
 const fs = require('node:fs');
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
-const HEADERS = { 'User-Agent': UA, Accept: 'text/html,*/*;q=0.8', 'Accept-Language': 'es-MX,es;q=0.9' };
+const HEADERS = { 'User-Agent': UA, Accept: '*/*', 'Accept-Language': 'es-MX,es;q=0.9' };
 const TIMEOUT = 15_000;
 
 const out = [];
 const say = (line) => { out.push(line); console.log(line); };
-const redact = (raw) => String(raw || '').replace(/[?&](?:token|auth|sig|expires|hash)=[^"'&\s)]+/gi, '$1…').slice(0, 400);
+const redact = (raw) => {
+  try {
+    const url = new URL(String(raw));
+    return `${url.hostname}${url.pathname.slice(0, 60)}${url.search ? `?(${url.search.length} B)` : ''}`;
+  } catch { return String(raw || '').slice(0, 100); }
+};
 
 async function get(url, extraHeaders = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT);
   try {
     const res = await fetch(url, { redirect: 'follow', signal: controller.signal, headers: { ...HEADERS, ...extraHeaders } });
-    return { status: res.status, url: res.url, body: (await res.text()).slice(0, 1_500_000) };
+    return { status: res.status, url: res.url, body: (await res.text()).slice(0, 800_000), contentType: res.headers.get('content-type') || '' };
   } catch (err) {
-    return { status: 0, url, body: '', error: err?.name || String(err).slice(0, 40) };
+    return { status: 0, url, body: '', error: err?.name || String(err).slice(0, 40), contentType: '' };
   } finally { clearTimeout(timer); }
 }
 
@@ -38,30 +42,50 @@ function decodeGlobal(body) {
 }
 
 (async () => {
-  say('# Sonda 4: HTML crudo de canal activo en streamtp');
+  say('# Sonda 5: hls.php de streamtp, canal por canal');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
   say('');
 
-  // 1) channel/dsports.html crudo (completo, redactado)
-  const ch = await get('https://streamtp.site/channel/dsports.html');
-  say(`## channel/dsports.html — HTTP ${ch.status} · ${ch.body.length} B`);
-  if (ch.status === 200) say(`\`\`\`html\n${redact(ch.body.slice(0, 6000))}\n\`\`\``);
+  const home = await get('https://streamtp.site/');
+  const active = [...new Set([...home.body.matchAll(/channel\/([a-z0-9]+)\.html/gi)].map((m) => m[1]))];
+  say(`canales activos: ${active.join(', ')}`);
+  say('');
+  say('| Canal | hls.php | Tipo | Contenido | m3u8 | HLS | ms |');
+  say('|---|---|---|---|---|---|---|');
 
-  // 2) global2.php (reproducción automática)
-  for (const slug of ['dsports', 'foxsports1usa', 'daznlaliga']) {
-    const g2 = await get(`https://streamtp.site/global2.php?stream=${slug}`);
-    say(`## global2 ${slug} — HTTP ${g2.status}${g2.error ? ` (${g2.error})` : ''} · ${g2.body.length} B`);
-    if (g2.status !== 200) continue;
-    const m3 = (g2.body.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/) || [])[0];
-    const decoded = decodeGlobal(g2.body);
-    if (m3) say(`- m3u8 directo: ${redact(m3)}`);
-    if (decoded) {
-      const urls = [...decoded.matchAll(/https?:\/\/[^\s"'<>\\]+/g)].map((u) => redact(u[0])).slice(0, 6);
-      say(`- decodificado ${decoded.length} B: ${urls.join(' | ') || redact(decoded).slice(0, 200)}`);
+  for (const slug of active) {
+    const g = await get(`https://streamtp.site/global2.php?stream=${slug}`);
+    if (g.status !== 200) { say(`| ${slug} | ${g.status} | — | — | — | global2 falló | — |`); continue; }
+    const decoded = decodeGlobal(g.body) || '';
+    const hlsPhp = (decoded.match(/https?:\/\/[^\s"'<>\\]+hls\.php[^\s"'<>\\]*/) || [])[0];
+    if (!hlsPhp) { say(`| ${slug} | — | — | ${redact(decoded).slice(0, 60)} | — | sin hls.php | — |`); continue; }
+    const t0 = Date.now();
+    const h = await get(hlsPhp, { Referer: g.url });
+    const ms = Date.now() - t0;
+    const head = (h.body || '').slice(0, 200);
+    // ¿Qué devolvió hls.php?
+    const urlIn = (h.body.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/) || [])[0]
+      || (/#EXTM3U/.test(head) ? h.url : null);
+    let estado;
+    let m3col = '—';
+    if (urlIn) {
+      m3 = urlIn;
+      m3u8Cell(urlIn);
+      const man = /#EXTM3U/.test(head) ? h : await get(urlIn, { Referer: h.url });
+      const ok = man.status === 200 && /#EXTM3U/.test((man.body || '').slice(0, 400));
+      const variants = ((man.body || '').match(/#EXT-X-STREAM-INF/g) || []).length;
+      estado = ok ? `VÁLIDO${variants ? ` ${variants}v` : ''}` : `HTTP ${man.status} no-HLS`;
+      m3u8CellDone();
+    } else {
+      estado = redact(head) || h.error || `HTTP ${h.status}`;
     }
-    if (!m3 && !decoded) say(`\`\`\`html\n${redact(g2.body.slice(0, 2500))}\n\`\`\``);
+    say(`| ${slug} | ${h.status} | ${h.contentType.split(';')[0] || '—'} | ${estado} | ${m3col} | ${urlIn ? 'verificado' : '—'} | ${ms} |`);
   }
+  // helpers para no liar la tabla
+  let m3 = null;
+  function m3u8Cell(u) { m3 = redact(u); }
+  function m3u8CellDone() { m3col = m3; }
 
   fs.mkdirSync('.probe', { recursive: true });
   fs.writeFileSync('.probe/sports-chain.md', out.join('\n') + '\n');

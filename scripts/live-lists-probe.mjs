@@ -11,7 +11,7 @@
  *
  * Cada canal se verifica con el User-Agent que declara la lista
  * (#EXTVLCOPT:http-user-agent) y, si falla, con el UA genérico de la sonda.
- * Se considera VÁLIDO solo si la cadena completa reproduce: maestra (200 + #EXTM3U) → variante → primer segmento con bytes MPEG-TS/fMP4 (HTTP 200/206). No se imprimen credenciales;
+ * Se considera VÁLIDO solo si la cadena completa reproduce: maestra (200 o 206 + #EXTM3U) → variante → primer segmento con bytes MPEG-TS/fMP4 (HTTP 200/206). No se imprimen credenciales;
  * las URLs se redactan. Además del informe, se escribe .probe/live-channels.json
  * con la ficha completa de los canales válidos (semilla para el addon).
  */
@@ -22,7 +22,7 @@ const fs = require('node:fs');
 const { enrichSeedWithLogos } = require('./live-logos.cjs');
 
 const GENERIC_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
-const TIMEOUT = 10_000;
+const TIMEOUT = 20_000; // los Xtream IP:puerto tardan >10 s en generar la playlist
 const CONCURRENCY = 12;
 
 const SOURCES = [
@@ -138,10 +138,10 @@ async function verify(entry) {
   let last = 'sin respuesta';
   for (const headers of tries) {
     const t0 = Date.now();
-    const res = await get(entry.url, { Range: 'bytes=0-3000', ...headers });
+    const res = await get(entry.url, { Range: 'bytes=0-8192', ...headers });
     const ms = Date.now() - t0;
-    const head = (res.body || '').slice(0, 3000);
-    if (res.status !== 200 || !/#EXTM3U/.test(head)) {
+    const head = (res.body || '').slice(0, 8192);
+    if ((res.status !== 200 && res.status !== 206) || !/#EXTM3U/.test(head)) {
       last = `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${ms} ms`;
       continue;
     }
@@ -154,8 +154,8 @@ async function verify(entry) {
       const rel = (lines[idx + 1] || '').trim();
       if (!rel) { last = 'maestra sin variante legible'; continue; }
       try { mediaUrl = new URL(rel, entry.url).toString(); } catch { last = 'variante malformada'; continue; }
-      const media = await get(mediaUrl, { Range: 'bytes=0-3000', ...headers });
-      if (media.status !== 200 || !/#EXTM3U/.test(media.body)) { last = `variante HTTP ${media.status}`; continue; }
+      const media = await get(mediaUrl, { Range: 'bytes=0-8192', ...headers });
+      if ((media.status !== 200 && media.status !== 206) || !/#EXTM3U/.test(media.body)) { last = `variante HTTP ${media.status}`; continue; }
       body = media.body;
     }
     // Primer segmento con bytes de vídeo

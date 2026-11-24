@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /**
- * Sonda 9 de deportes (24-11-2026): capo.php?live=capo<canal> — volcar TODO
- * el JS inline y TODOS los base64 (cualquier tamaño) para hallar el ch= real
- * por canal, y verificar /hls/stream.m3u8?ch=<code> con Referer.
+ * Sonda 10 de deportes (24-11-2026):
+ *  1. capo.php: buscar wss:// y probar ch= derivados del fid.
+ *  2. thetvapp.to: portada, página de canal y API.
+ *  3. Dominio actual de DaddyLive y sus canales 24/7.
+ * Salida redactada.
  */
 
 import { createRequire } from 'node:module';
@@ -12,8 +14,6 @@ const fs = require('node:fs');
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 const HEADERS = { 'User-Agent': UA, Accept: '*/*', 'Accept-Language': 'es-MX,es;q=0.9' };
 const TIMEOUT = 15_000;
-
-const FIDS = ['capoespn', 'capodsports', 'capodsports2', 'capotntar', 'capof1'];
 
 const out = [];
 const say = (line) => { out.push(line); console.log(line); };
@@ -27,64 +27,75 @@ async function get(url, extraHeaders = {}) {
     const cookies = res.headers.getSetCookie ? res.headers.getSetCookie() : [];
     return { status: res.status, url: res.url, body: (await res.text()).slice(0, 1_500_000), cookies };
   } catch (err) {
-    return { status: 0, url, body: '', error: err?.name || String(err).slice(0, 60), cookies: [] };
+    return { status: 0, url, body: '', error: `${err?.name || 'err'}:${err?.cause?.code || ''}` || String(err).slice(0, 60), cookies: [] };
   } finally { clearTimeout(timer); }
 }
 
 (async () => {
-  say('# Sonda 9: ch= real por canal en capo8play');
+ try {
+  say('# Sonda 10: wss de capo, thetvapp y daddylive');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
   say('');
 
-  for (const fid of FIDS) {
-    const url = `https://capo8play.com/capo.php?player=desktop&live=${fid}`;
-    const res = await get(url, { Referer: `https://playcapo.st/update/${fid}.php` });
-    say(`## ${fid} — HTTP ${res.status}${res.error ? ` (${res.error})` : ''} · ${res.body.length} B`);
-    if (res.status !== 200) continue;
-
-    // Todos los base64 de cualquier longitud
-    const codes = new Set();
-    for (const m of res.body.matchAll(/(?:atob\(['"])?([A-Za-z0-9+/=]{12,2000})['"]?\)?/g)) {
-      let text = '';
-      try { text = Buffer.from(m[1], 'base64').toString('utf8'); } catch { continue; }
-      // buscar ch=, m3u8, /hls/
-      for (const mm of text.matchAll(/(?:ch=([a-z0-9_-]+)|(\/hls\/[^\s"'<>\\]+)|https?:\/\/[^\s"'<>\\]+)/gi)) {
-        codes.add(mm[0].slice(0, 120));
-      }
-    }
-    for (const c of [...codes].slice(0, 10)) say(`- decodificado: ${redact(c)}`);
-
-    // También ch= en claro en el HTML
-    for (const m of res.body.matchAll(/ch=([a-z0-9_-]+)/gi)) say(`- ch= en claro: ${m[1]}`);
-
-    // Scripts inline completos del primero (capoespn) para estudiar el flujo
-    if (fid === 'capoespn') {
-      const inline = [...res.body.matchAll(/<script(?![^>]+src)[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1].trim()).filter((t) => t.length > 30 && !/aclib|_Hasync|histats/i.test(t));
-      for (const script of inline.slice(0, 5)) say(`\`\`\`\n${redact(script).slice(0, 1500)}\n\`\`\``);
-    }
-
-    // Verificar /hls/stream.m3u8?ch=<code> para los códigos hallados
-    for (const c of [...codes].filter((x) => x.startsWith('ch=')).slice(0, 2)) {
-      const m3 = `https://capo8play.com/hls/stream.m3u8?${c}`;
-      const cookie = res.cookies.map((ck) => ck.split(';')[0]).join('; ');
-      const man = await get(m3, { Referer: res.url, ...(cookie ? { Cookie: cookie } : {}) });
-      const ok = man.status === 200 && /#EXTM3U/.test((man.body || '').slice(0, 400));
-      say(`  → ${c}: HTTP ${man.status} ${ok ? 'HLS VÁLIDO' : redact((man.body || '').slice(0, 80)) || man.error || ''}`);
-      if (ok) {
-        const lines = (man.body || '').split('\n').map((l) => l.trim()).filter(Boolean);
-        say(`    ${lines.slice(0, 6).map((l) => redact(l)).join(' ⏎ ')}`.slice(0, 320));
-        const v = lines.find((l) => !l.startsWith('#'));
-        if (v) {
-          const vabs = new URL(v, man.url).href;
-          const bare = await get(vabs, { Range: 'bytes=0-300' });
-          say(`    variante sin cookie: HTTP ${bare.status} ${/#EXTM3U|#EXTINF/.test((bare.body || '').slice(0, 300)) || bare.status === 206 ? '· DIRECTA' : '· protegida'} ${redact(vabs)}`);
-        }
-      }
-    }
+  // ── 1) capo.php: wss y ch= por fid ──────────────────────────────────────
+  const capo = await get('https://capo8play.com/capo.php?player=desktop&live=capoespn', { Referer: 'https://playcapo.st/update/capoespn.php' });
+  say(`## capoespn — HTTP ${capo.status} · ${capo.body.length} B`);
+  if (capo.status === 200) {
+    const wss = [...new Set([...capo.body.matchAll(/wss?:\/\/[^\s"'<>\\]+/gi)].map((m) => m[0]))];
+    for (const w of wss.slice(0, 5)) say(`- wss: ${redact(w)}`);
+    const sock = [...new Set([...capo.body.matchAll(/(?:WebSocket|io\(|socket|ws[_-]?url|server[_-]?url)[^\n]{0,140}/gi)].map((m) => m[0]))];
+    for (const w of sock.slice(0, 8)) say(`- sock: ${redact(w)}`);
+  }
+  for (const ch of ['capoespn', 'espn1', 'espnhd', 'espnla', 'espnlatin']) {
+    const m3 = `https://capo8play.com/hls/stream.m3u8?ch=${ch}`;
+    const man = await get(m3, { Referer: 'https://capo8play.com/capo.php?player=desktop&live=capoespn' });
+    const ok = man.status === 200 && /#EXTM3U/.test((man.body || '').slice(0, 400));
+    say(`- ch=${ch}: HTTP ${man.status} ${ok ? 'HLS VÁLIDO' : redact((man.body || '').slice(0, 60)) || man.error || ''}`);
   }
 
+  // ── 2) thetvapp.to ───────────────────────────────────────────────────────
+  for (const host of ['https://thetvapp.to', 'https://thetvapp.link', 'https://thetvapp.to/tv']) {
+    const res = await get(host);
+    say(`## ${host} — HTTP ${res.status}${res.error ? ` (${res.error})` : ''} · ${res.body.length} B`);
+    if (res.status !== 200) continue;
+    const links = [...new Set([...res.body.matchAll(/href=["']([^"']*(?:channel|tv|watch|live)[^"']*)["']/gi)].map((m) => m[1]))].slice(0, 10);
+    if (links.length) say(`- enlaces: ${links.map(redact).join(' | ')}`);
+    const m3u8 = [...new Set([...res.body.matchAll(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/gi)].map((m) => m[0]))];
+    for (const u of m3u8.slice(0, 3)) say(`- m3u8: ${redact(u)}`);
+    break;
+  }
+
+  // ── 3) DaddyLive: dominio actual ─────────────────────────────────────────
+  const DL_HOSTS = ['https://daddylive.dad', 'https://daddylivehd.com', 'https://dlhd.dad', 'https://daddyhd.com', 'https://daddylive.sx'];
+  for (const host of DL_HOSTS) {
+    const res = await get(`${host}/24-7-channels.php`);
+    say(`## ${host}/24-7-channels.php — HTTP ${res.status}${res.error ? ` (${res.error})` : ''} · ${res.body.length} B`);
+    if (res.status !== 200) continue;
+    const chans = [...new Set([...res.body.matchAll(/href=["']([^"']*stream[^"']*)["'][^>]*>([^<]{2,60})/gi)].map((m) => `${m[2].trim()} → ${m[1]}`))].slice(0, 14);
+    for (const c of chans) say(`- ${redact(c)}`);
+    // seguir un canal
+    const first = (res.body.match(/href=["']([^"']*stream\/stream-\d+\.php)["']/i) || [])[1];
+    if (first) {
+      const page = await get(new URL(first, res.url).href);
+      const ifr = (page.body.match(/<iframe[^>]+src\s*=\s*["']([^"']+)["']/i) || [])[1] || '';
+      say(`  canal: ${redact(first)} → iframe ${redact(ifr)} (HTTP ${page.status})`);
+      if (ifr) {
+        const inner = await get(new URL(ifr, page.url).href, { Referer: page.url });
+        const m3 = (inner.body.match(/https?:\/\/[^\s"'<>\\]+\.m3u8[^\s"'<>\\]*/i) || [])[0];
+        const fetchLike = [...new Set([...inner.body.matchAll(/(?:fetch|XMLHttpRequest|\.get|channelKey|streamUrl)[^\n]{0,120}/gi)].map((m) => m[0]))].slice(0, 6);
+        say(`  iframe HTTP ${inner.status}${inner.error ? ` (${inner.error})` : ''} · m3u8=${m3 ? redact(m3) : 'no'}`);
+        for (const f of fetchLike) say(`  · ${redact(f)}`);
+      }
+    }
+    break;
+  }
+
+ } catch (err) {
+  say(`\nERROR de sonda: ${err && err.message}`);
+ } finally {
   fs.mkdirSync('.probe', { recursive: true });
   fs.writeFileSync('.probe/sports-players.md', out.join('\n') + '\n');
   console.log('\n.probe/sports-players.md');
+ }
 })();

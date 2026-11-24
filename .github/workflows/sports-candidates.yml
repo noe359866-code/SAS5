@@ -1,0 +1,55 @@
+name: Candidatas de canales deportivos
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/sports-candidates.yml'
+      - 'scripts/sports-candidates-probe.mjs'
+      - 'scripts/sports-players-probe.mjs'
+      - 'scripts/sports-decode-probe.mjs'
+      - 'scripts/sports-chain-probe.mjs'
+      - 'scripts/sports-lists-probe.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Medir webs de canales deportivos
+        run: node scripts/sports-candidates-probe.mjs
+      - name: Cadena del reproductor de canales
+        if: always()
+        run: test -f scripts/sports-players-probe.mjs && node scripts/sports-players-probe.mjs || echo "sin sonda de reproductores todavía"
+      - name: Decodificar reproductores
+        if: always()
+        run: test -f scripts/sports-decode-probe.mjs && node scripts/sports-decode-probe.mjs || echo "sin sonda de decodificación todavía"
+      - name: Cadena completa de streamtp
+        if: always()
+        run: test -f scripts/sports-chain-probe.mjs && node scripts/sports-chain-probe.mjs || echo "sin sonda de cadena todavía"
+      - name: Listas públicas de canales deportivos
+        if: always()
+        run: test -f scripts/sports-lists-probe.mjs && node scripts/sports-lists-probe.mjs || echo "sin sonda de listas todavía"
+      - name: Devolver el resultado a la rama
+        if: always()
+        run: |
+          test -s .probe/sports-candidates.md || exit 0
+          git config user.name "sonda"
+          git config user.email "sonda@users.noreply.github.com"
+          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv; do
+            test -s "$f" && git add -f "$f"
+          done
+          git diff --cached --quiet || git commit -m "sonda: candidatas de canales deportivos $(date -u +%FT%TZ) [skip ci]"
+          git fetch origin || true
+          git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true
+          git push origin HEAD:refs/heads/${{ github.ref_name }} || true

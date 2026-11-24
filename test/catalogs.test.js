@@ -127,7 +127,7 @@ test('el manifest deja margen bajo los 8 KB de la addonCollection API, incluso c
       builder.defineStreamHandler(async () => ({ streams: [] }));
       assert.ok(builder.getInterface().manifest, `SDK rechazó el manifest ${host}/${label}`);
     }
-    assert.ok(def.catalogs.length === 79, `solo ${def.catalogs.length} catálogos en el manifest`);
+    assert.ok(def.catalogs.length === 80, `solo ${def.catalogs.length} catálogos en el manifest`);
   }
 });
 
@@ -155,7 +155,7 @@ test('todos los catálogos TMDB anuncian paginación, incluido el manifest perso
   const { manifestCatalogs } = require('../lib/catalogs');
   for (const cfg of [null, { platforms: ['netflix'], studios: ['marvel'], base: ['anime', 'top', 'generos_series', 'tvmaze_hoy'] }]) {
     for (const def of manifestCatalogs(cfg)) {
-      if (def.id === 'tvmaze_hoy') assert.equal(def.extraSupported, undefined);
+      if (def.id === 'tvmaze_hoy' || def.id === 'tv_deportes') assert.equal(def.extraSupported, undefined);
       else assert.deepEqual(def.extraSupported, ['skip'], def.id);
       assert.equal(def.id.includes('_estudio_'), false);
     }

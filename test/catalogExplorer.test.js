@@ -36,7 +36,8 @@ test('manifest catalog order groups movies before series without losing IDs', ()
   const defs = buildDefs(null);
   const firstSeries = defs.findIndex((d) => d.type === 'series');
   assert.ok(firstSeries > 0);
-  assert.ok(defs.slice(firstSeries).every((d) => d.type === 'series'));
+  // Orden: películas, luego series, y los canales en vivo (tv) al final.
+  assert.ok(defs.slice(firstSeries).every((d) => d.type !== 'movie'));
   assert.equal(new Set(defs.map((d) => d.id)).size, defs.length);
   assert.deepEqual(buildDefs({ base: ['top'], platforms: [], studios: [] }).map((d) => d.id), ['cine_top', 'tv_top']);
 });

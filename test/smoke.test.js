@@ -44,7 +44,7 @@ test('manifest: contrato Stremio válido', async () => {
   assert.equal(new Set(ids).size, ids.length, 'no debe haber catálogos duplicados');
   for (const catalog of manifest.catalogs) {
     assert.ok(catalog.name && catalog.type && catalog.id, 'cada catálogo lleva id, type y name');
-    assert.ok(['movie', 'series'].includes(catalog.type));
+    assert.ok(['movie', 'series', 'tv'].includes(catalog.type));
   }
   assert.ok(ids.includes('cine_top') && ids.includes('tv_top'));
   assert.ok(ids.includes('cine_netflix') && ids.includes('tv_netflix'));

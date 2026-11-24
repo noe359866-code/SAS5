@@ -29,6 +29,7 @@ async function get(url, extraHeaders = {}) {
 }
 
 (async () => {
+ try {
   say('# Sonda 7: capo8play.js, playcapo.st completo y player de tvlibrehd');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
@@ -49,7 +50,7 @@ async function get(url, extraHeaders = {}) {
   say(`## tvlibrehd espn — HTTP ${tv.status} · ${tv.body.length} B`);
   if (tv.status === 200) {
     // Fragmentos alrededor de «player», «embed», «iframe», «canal»
-    for (const m of tv.body.matchAll(/.{0,140}(?:id=["']player|class=["'][^"']*player|<embed|data-iframe|var canal|iframesrc|playerarea|videojs|jwplayer)[\s\S]{0,400}/gi).slice(0, 6)) {
+    for (const m of [...tv.body.matchAll(/.{0,140}(?:id=["']player|class=["'][^"']*player|<embed|data-iframe|var canal|iframesrc|playerarea|videojs|jwplayer)[\s\S]{0,400}/gi)].slice(0, 6)) {
       say(`\`\`\`\n${redact(m[0]).slice(0, 700)}\n\`\`\``);
     }
     // El JS raro de la página
@@ -58,7 +59,11 @@ async function get(url, extraHeaders = {}) {
     if (odd.status === 200) say(`\`\`\`js\n${redact(odd.body).slice(0, 2500)}\n\`\`\``);
   }
 
+ } catch (err) {
+   say(`\nERROR de sonda: ${err && err.message}`);
+ } finally {
   fs.mkdirSync('.probe', { recursive: true });
   fs.writeFileSync('.probe/sports-players.md', out.join('\n') + '\n');
   console.log('\n.probe/sports-players.md');
+ }
 })();

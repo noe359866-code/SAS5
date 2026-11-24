@@ -1,24 +1,21 @@
-# Sonda 4: HTML crudo de canal activo en streamtp
+# Sonda 5: hls.php de streamtp, canal por canal
 
-Fecha: 2026-11-24T15:06:33.151Z
+Fecha: 2026-11-24T15:08:33.304Z
 
-## channel/dsports.html — HTTP 200 · 3189 B
-```html
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="pragma" content="no-cache">
-<meta name="robots" content="noindex">
-<meta name="referrer" content="none">
-<title>Eventos</title>
-<script src="//cdn.bitmovin.com/player/web/8/bitmovinplayer.js"></scri
-```
-## global2 dsports — HTTP 200 · 4797 B
-- decodificado 1420 B: https://streamtp.site/hls.php?ch=dsports
-## global2 foxsports1usa — HTTP 200 · 4810 B
-- decodificado 1426 B: https://streamtp.site/hls.php?ch=foxsports1usa
-## global2 daznlaliga — HTTP 200 · 4807 B
-- decodificado 1423 B: https://streamtp.site/hls.php?ch=daznlaliga
+canales activos: dsports, la1, fox, itv1, dsports2, dsportsplus, canal5mx, cbssports, foxdeportes, foxplus, foxsports1usa, foxsports2usa, daznlaliga
+
+| Canal | hls.php | Tipo | Contenido | m3u8 | HLS | ms |
+|---|---|---|---|---|---|---|
+| dsports | 403 | text/html | HTTP 403 | — | — | 23 |
+| la1 | 403 | text/html | HTTP 403 | — | — | 23 |
+| fox | 403 | text/html | HTTP 403 | — | — | 23 |
+| itv1 | 403 | text/html | HTTP 403 | — | — | 24 |
+| dsports2 | 403 | text/html | HTTP 403 | — | — | 22 |
+| dsportsplus | 403 | text/html | HTTP 403 | — | — | 21 |
+| canal5mx | 403 | text/html | HTTP 403 | — | — | 22 |
+| cbssports | 403 | text/html | HTTP 403 | — | — | 22 |
+| foxdeportes | 403 | text/html | HTTP 403 | — | — | 109 |
+| foxplus | 403 | text/html | HTTP 403 | — | — | 51 |
+| foxsports1usa | 403 | text/html | HTTP 403 | — | — | 115 |
+| foxsports2usa | 403 | text/html | HTTP 403 | — | — | 401 |
+| daznlaliga | 403 | text/html | HTTP 403 | — | — | 446 |

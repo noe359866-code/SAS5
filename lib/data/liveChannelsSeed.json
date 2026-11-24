@@ -1318,13 +1318,5 @@
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/709.m3u8",
   "ua": ""
- },
- {
-  "name": "Telefe SD [Opc.2]",
-  "slug": "telefe-sd-opc-2",
-  "category": "argentina",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png",
-  "url": "https://m3u.tvcluboficial.com/free/ReachBot/Kip/874.m3u8",
-  "ua": ""
  }
 ]

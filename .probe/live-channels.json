@@ -5,7 +5,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHaymsports.png",
   "url": "https://aym-as.otteravision.com/aym/as/as_1080p.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Bein Sports Xtra ñ",
@@ -13,7 +14,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHbeinsportsxtrañ.png",
   "url": "https://amg01334-beinsportsllc-beinxtraesp-localnow-aekzc.amagi.tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Bein Sports Xtra ñ",
@@ -21,7 +23,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHbeinsportsxtrañ.png",
   "url": "https://bein-esp-xumo.amagi.tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Dsports",
@@ -29,7 +32,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHdsports.png",
   "url": "http://190.117.20.37:8000/play/a08d/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "DSports",
@@ -37,7 +41,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/312.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "DSports +",
@@ -45,7 +50,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/DirecTV_Sports%2B_Latin_America_%282018%29.png/960px-DirecTV_Sports%2B_Latin_America_%282018%29.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/314.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "DSports 2",
@@ -53,7 +59,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/DIRECTV_Sports_2_Latin_America_%282018%29.svg/960px-DIRECTV_Sports_2_Latin_America_%282018%29.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/315.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "DSports 2 HD",
@@ -61,7 +68,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/DIRECTV_Sports_2_Latin_America_%282018%29.svg/960px-DIRECTV_Sports_2_Latin_America_%282018%29.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/317.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "DSports HD",
@@ -69,7 +77,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/324.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "DSports HD [Opc.2]",
@@ -77,7 +86,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1144.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 1 (Argentina)",
@@ -85,7 +95,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1111.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 1 (Chile)",
@@ -93,7 +104,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1132.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 1 (Colombia)",
@@ -101,7 +113,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1107.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 1 (México)",
@@ -109,7 +122,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/401.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 1 (Sur)",
@@ -117,7 +131,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/368.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 2 (México)",
@@ -125,7 +140,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/378.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 2 (Sur)",
@@ -133,7 +149,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/372.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 2 HD",
@@ -141,7 +158,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/375.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 3 (México)",
@@ -149,7 +167,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1110.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 3 (Sur)",
@@ -157,7 +176,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1127.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 3 HD",
@@ -165,7 +185,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/386.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 4 (Sur)",
@@ -173,7 +194,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1069.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 5 HD",
@@ -181,7 +203,8 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1104.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 6 HD",
@@ -189,7 +212,8 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1105.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 7 HD",
@@ -197,7 +221,8 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1106.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN 8",
@@ -205,7 +230,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHespn8.png",
   "url": "https://d3pnbvng3bx2nj.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-rds8g35qfqrnv/TSN_The_Ocho.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN Deportes",
@@ -213,7 +239,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/ESPN_Deportes.svg/960px-ESPN_Deportes.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1165.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN HD",
@@ -221,7 +248,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/400.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN HD (Colombia)",
@@ -229,7 +257,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1161.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN Plus",
@@ -237,7 +266,8 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/404.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ESPN Plus HD",
@@ -245,7 +275,8 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/405.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Eventos Deportivos",
@@ -253,7 +284,8 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1131.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FIFA TV",
@@ -261,7 +293,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHfifatv.png",
   "url": "https://6c849fb3.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctbXhfRklGQVBsdXNTcGFuaXNoLTFfSExT/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports 1 (México)",
@@ -269,7 +302,8 @@
   "category": "deportes",
   "logo": "https://i.imgur.com/O9BapV9.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/456.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports 1 (Sur)",
@@ -277,7 +311,8 @@
   "category": "deportes",
   "logo": "https://i.imgur.com/O9BapV9.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/435.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports 1 HD (Sur)",
@@ -285,7 +320,8 @@
   "category": "deportes",
   "logo": "https://i.imgur.com/O9BapV9.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/452.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports 2 (México)",
@@ -293,7 +329,8 @@
   "category": "deportes",
   "logo": "https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports 2 (Sur)",
@@ -301,7 +338,8 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/436.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports 2 HD",
@@ -309,7 +347,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports 3 (México)",
@@ -317,7 +356,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports 3 (Sur)",
@@ -325,7 +365,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/468.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports 3 HD",
@@ -333,7 +374,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/446.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports HD",
@@ -341,7 +383,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/FOX_Sports_logo.svg/960px-FOX_Sports_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/454.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports Premium",
@@ -349,7 +392,8 @@
   "category": "deportes",
   "logo": "https://i.imgur.com/3lOZWeD.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/461.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports Premium HD",
@@ -357,7 +401,8 @@
   "category": "deportes",
   "logo": "https://i.imgur.com/3lOZWeD.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/463.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FOX Sports Sur",
@@ -365,7 +410,8 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/465.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Garage TV",
@@ -373,7 +419,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHgaragetv.png",
   "url": "https://stream1.sersat.com/hls/garagetv.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Movil TV Turf",
@@ -381,7 +428,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHmoviltvturf.png",
   "url": "https://tvturf4.janus.cl/playlist/stream.m3u8?d=w&id=",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Real Madrid TV",
@@ -389,7 +437,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHrealmadridtv.png",
   "url": "https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/master.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Red Bull TV",
@@ -397,7 +446,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHredbulltv.png",
   "url": "https://e115ca7eea9f45628f59ee2d3b8cbba4.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-957-WORBLATAMESFAST-LG_AR/957/hls/master/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Red Bull TV",
@@ -405,7 +455,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHredbulltv.png",
   "url": "http://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master_3360.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Tennis Channel",
@@ -413,7 +464,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHtennischannel.png",
   "url": "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01444-tennischannelth-tennischannelnl-samsungnl/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TNT Sports (Argentina)",
@@ -421,7 +473,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/934.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TyC Sports",
@@ -429,7 +482,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/974.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TyC Sports HD",
@@ -437,7 +491,8 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1143.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Win Sports",
@@ -445,7 +500,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHwinsports.png",
   "url": "http://45.70.168.162:12316/play/a013/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Xtrema TV Cna Deportes 2",
@@ -453,7 +509,8 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHxtremadeportes.png",
   "url": "https://stmv6.voxtvhd.com.br/cnardeportes/cnardeportes/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "K Drama +",
@@ -461,7 +518,8 @@
   "category": "entretenimiento",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/novelas/CHkdrama+.png",
   "url": "https://jmp2.uk/stvp-ESBD4100001DU",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Kanal D",
@@ -469,7 +527,8 @@
   "category": "entretenimiento",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/novelas/CHkanald.png",
   "url": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01602-themahqfrance-vivekanald-samsungspain/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "MTV",
@@ -477,7 +536,8 @@
   "category": "entretenimiento",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/reality/CHmtv.png",
   "url": "http://45.70.168.162:12316/play/a01p/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Novelas Turcas",
@@ -485,7 +545,8 @@
   "category": "entretenimiento",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/novelas/CHnovelasturcas.png",
   "url": "https://amg00658-amg00658c102-canelatv-international-7231.playouts.now.amagi.tv/playlist/amg00658-canelamediafast-novelasturcas-canelatvinternational/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Novelisima",
@@ -493,7 +554,8 @@
   "category": "entretenimiento",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/novelas/CHnovelisima.png",
   "url": "https://pubads.g.doubleclick.net/ssai/event/8QpjAnHCQQqBxFVRdDQXCA/master.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TLNovelas",
@@ -501,7 +563,8 @@
   "category": "entretenimiento",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/novelas/CHtllnovelas.png",
   "url": "http://televisa-televisa-1-it.samsung.wurl.tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TNT Novelas",
@@ -509,7 +572,8 @@
   "category": "entretenimiento",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/novelas/CHtntnovelas.png",
   "url": "http://45.70.168.162:12316/play/a00l/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "AMC",
@@ -517,7 +581,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHamc.png",
   "url": "https://amc-amcespanol-1-us.plex.wurl.tv/1200.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cantinflas",
@@ -525,7 +590,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/123.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Caso Cerrado",
@@ -533,7 +599,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/138.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Chapulín Colorado",
@@ -541,7 +608,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/152.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Chespirito",
@@ -549,7 +617,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/153.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine 2025",
@@ -557,7 +626,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1159.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Acción",
@@ -565,7 +635,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/157.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Acción Sagas HD",
@@ -573,7 +644,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/160.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Comedia",
@@ -581,7 +653,8 @@
   "category": "cine",
   "logo": "https://images.pluto.tv/channels/5f12101f0b12f00007844c7c/colorLogoPNG_1732662798298.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/161.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Comedia 1 HD",
@@ -589,7 +662,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/162.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Comedia 2",
@@ -597,7 +671,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/163.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Comedia 2 HD",
@@ -605,7 +680,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/164.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Ficción/Fantasía 2",
@@ -613,7 +689,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/166.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Ficción/Fantasía HD",
@@ -621,7 +698,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/168.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Infantil",
@@ -629,7 +707,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/169.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Infantil HD",
@@ -637,7 +716,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/170.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Marvel",
@@ -645,7 +725,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/176.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Marvel HD",
@@ -653,7 +734,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/177.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Romance",
@@ -661,7 +743,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/178.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Romance HD",
@@ -669,7 +752,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/179.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cine Zombis HD",
@@ -677,7 +761,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/184.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Distrito Comedia",
@@ -685,7 +770,8 @@
   "category": "cine",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/DistritoComediaLOGO2018.png/960px-DistritoComediaLOGO2018.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/293.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Chavo del 8",
@@ -693,7 +779,8 @@
   "category": "cine",
   "logo": "",
   "url": "https://m3u.tvcluboficial.com/free/ReachBot/Kip/344.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Chavo del 8 HD",
@@ -701,7 +788,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1173.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Elementary",
@@ -709,7 +797,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/363.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Family Guy (Padre de Familia)",
@@ -717,7 +806,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/747.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FreeTV Accion",
@@ -725,7 +815,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHfreetvaccion.png",
   "url": "https://stream.ads.ottera.tv/playlist.m3u8?content_livestream=1&network_id=16200",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Friends",
@@ -733,7 +824,8 @@
   "category": "cine",
   "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Friends_TV.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/470.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "FX",
@@ -741,7 +833,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHfx.png",
   "url": "http://45.70.168.162:12316/play/a011/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Game of Thrones",
@@ -749,7 +842,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/484.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Grjngo",
@@ -757,7 +851,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHgrjngo.png",
   "url": "https://amogonetworx-grjngo-2-eu.plex.wurl.tv/2000.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Imagen Universal TV",
@@ -765,7 +860,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHimagenuniversaltv.png",
   "url": "https://imagenuniversaltv.net/p/3771/hybrid/play.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Los 3 Chiflados",
@@ -773,7 +869,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/619.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Los Chicos del Barrio",
@@ -781,7 +878,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/622.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Los Expedientes Secretos X",
@@ -789,7 +887,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/623.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Los Simpson",
@@ -797,7 +896,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/635.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Malcolm",
@@ -805,7 +905,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/640.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Malcolm HD",
@@ -813,7 +914,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/641.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Mr. Bean",
@@ -821,7 +923,8 @@
   "category": "cine",
   "logo": "https://static.wikia.nocookie.net/logopedia/images/2/25/Mr._Bean_Animated_Series_stacked_logo.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/670.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "MyTime Movie Network",
@@ -829,7 +932,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHmytimemovienetwork.png",
   "url": "https://appletree-mytime-samsungmexico.amagi.tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "MyTime Movie Network",
@@ -837,7 +941,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHmytimemovienetwork.png",
   "url": "https://appletree-mytimespain-rakuten.amagi.tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Nosotros Los Guapos",
@@ -845,7 +950,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/739.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Smallville",
@@ -853,7 +959,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/812.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Sony Cine",
@@ -861,7 +968,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHsonycine.png",
   "url": "https://a-cdn.klowdtv.com/live1/cine_720p/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "The Big Bang Theory",
@@ -869,7 +977,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/899.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Two and a Half Men",
@@ -877,7 +986,8 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/973.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Universal TV",
@@ -885,7 +995,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHuniversaltv.png",
   "url": "http://45.70.168.162:12316/play/a005/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Xtrema TV Cine Accion",
@@ -893,7 +1004,8 @@
   "category": "cine",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHextremacinedeaccion.png",
   "url": "https://stmv6.voxtvhd.com.br/cineaccion/cineaccion/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Alf",
@@ -901,7 +1013,8 @@
   "category": "infantil",
   "logo": "https://i.imgur.com/fWRs1gX.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/28.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Baby First",
@@ -909,7 +1022,8 @@
   "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHbabyfirst.png",
   "url": "http://45.70.168.162:12316/play/a01i/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Baby TV",
@@ -917,7 +1031,8 @@
   "category": "infantil",
   "logo": "https://upload.wikimedia.org/wikipedia/he/b/b8/LogoBabyIsrael.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/79.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Bob Esponja",
@@ -925,7 +1040,8 @@
   "category": "infantil",
   "logo": "https://images.pluto.tv/channels/5f1aca0b4e448e00075e7c5e/colorLogoPNG.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/96.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Calabozos y Dragones",
@@ -933,7 +1049,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/103.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cartoon Network",
@@ -941,7 +1058,8 @@
   "category": "infantil",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Cartoon_Network_2010_logo.svg/960px-Cartoon_Network_2010_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/128.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cartoonito",
@@ -949,7 +1067,8 @@
   "category": "infantil",
   "logo": "https://i.imgur.com/6vYWCD0.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/134.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Coraje el Perro Cobarde",
@@ -957,7 +1076,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/223.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Dinosaurios",
@@ -965,7 +1085,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/244.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Discovery Kids",
@@ -973,7 +1094,17 @@
   "category": "infantil",
   "logo": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Discovery%20Kids.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/264.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Disney Channel",
+  "slug": "disney-channel",
+  "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Disney Channel",
@@ -981,7 +1112,8 @@
   "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png",
   "url": "http://45.70.168.162:12316/play/a009/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Disney Junior",
@@ -989,7 +1121,8 @@
   "category": "infantil",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e3/2024_Disney_Jr._Logo.svg",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/284.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Doug",
@@ -997,7 +1130,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/298.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Edd y Eddy",
@@ -1005,7 +1139,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/339.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Gallo Claudio",
@@ -1013,15 +1148,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/347.m3u8",
-  "ua": ""
- },
- {
-  "name": "El Pájaro Loco",
-  "slug": "el-pajaro-loco",
-  "category": "infantil",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/355.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Pato Darkwing",
@@ -1029,7 +1157,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/356.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Garfield",
@@ -1037,7 +1166,8 @@
   "category": "infantil",
   "logo": "https://i.imgur.com/9AMWllZ.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/486.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Hércules",
@@ -1045,7 +1175,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/550.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Hey Arnold",
@@ -1053,7 +1184,8 @@
   "category": "infantil",
   "logo": "https://images.pluto.tv/channels/66c79221b1a34600087e264d/colorLogoPNG.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/551.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Johnny Bravo",
@@ -1061,7 +1193,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/584.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "La Casa de los Dibujos",
@@ -1069,7 +1202,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/590.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "La Pantera Rosa",
@@ -1077,7 +1211,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/597.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Las Aventuras de Tom Sawyer",
@@ -1085,7 +1220,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/607.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Las Chicas Superpoderosas",
@@ -1093,7 +1229,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/608.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Looney Tunes",
@@ -1101,7 +1238,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/618.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Los Picapiedras",
@@ -1109,7 +1247,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/625.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Los Pingüinos de Madagascar",
@@ -1117,7 +1256,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/626.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Los Pitufos",
@@ -1125,7 +1265,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/627.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Nick JR",
@@ -1133,7 +1274,8 @@
   "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHnickjr.png",
   "url": "http://45.70.168.162:12316/play/a015/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Nick Jr.",
@@ -1141,7 +1283,8 @@
   "category": "infantil",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nick_Jr._logo_2023_(outline).svg/960px-Nick_Jr._logo_2023_(outline).svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/729.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Nickelodeon",
@@ -1149,7 +1292,8 @@
   "category": "infantil",
   "logo": "https://i.imgur.com/08ZUI9k.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/736.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Nickelodeon",
@@ -1157,7 +1301,8 @@
   "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHnickelodeon.png",
   "url": "http://45.70.168.162:12316/play/a001/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Nicktoons",
@@ -1165,7 +1310,8 @@
   "category": "infantil",
   "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Nicktoons_Logo_2023.svg/1920px-Nicktoons_Logo_2023.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/735.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Pakapaka",
@@ -1173,7 +1319,8 @@
   "category": "infantil",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Paka-Paka-2025.svg/1920px-Paka-Paka-2025.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/748.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Patoaventuras",
@@ -1181,7 +1328,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/758.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Peppa Pig",
@@ -1189,7 +1337,8 @@
   "category": "infantil",
   "logo": "https://images.pluto.tv/channels/5d14fb6c84dd37df3b4290c5/colorLogoPNG_1730733871298.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/760.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Pinky y Cerebro",
@@ -1197,7 +1346,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/771.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Plim Plim TV",
@@ -1205,7 +1355,8 @@
   "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHplimplim.png",
   "url": "http://45.70.168.162:12316/play/a02a/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Rugrats",
@@ -1213,7 +1364,8 @@
   "category": "infantil",
   "logo": "https://images.pluto.tv/channels/5ea7215005d66d0007e8128a/colorLogoPNG.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/797.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Rugrats Crecidos",
@@ -1221,7 +1373,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/798.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Scooby-Doo",
@@ -1229,7 +1382,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/804.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Tom y Jerry",
@@ -1237,7 +1391,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/940.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Tooncast",
@@ -1245,7 +1400,8 @@
   "category": "infantil",
   "logo": "https://i.imgur.com/3yXRbQy.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/941.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Trollhunters",
@@ -1253,7 +1409,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/945.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Xtrema Cartoons",
@@ -1261,7 +1418,8 @@
   "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHxtremacartoons.png",
   "url": "https://stmv6.voxtvhd.com.br/xtremacartoons/xtremacartoons/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Yogui",
@@ -1269,7 +1427,8 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1051.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Beyblade",
@@ -1277,7 +1436,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/85.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Caballeros del Zodiaco",
@@ -1285,7 +1445,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/100.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Doraemon",
@@ -1293,7 +1454,8 @@
   "category": "anime",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/0/01/Doraemon_Merch_EN_Logo.svg",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/297.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Dragon Ball",
@@ -1301,7 +1463,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/301.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Dragon Ball GT",
@@ -1309,7 +1472,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/303.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Dragon Ball Super",
@@ -1317,7 +1481,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/305.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Dragon Ball Z",
@@ -1325,7 +1490,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/307.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Dreiko TV",
@@ -1333,7 +1499,8 @@
   "category": "anime",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHdreikotv.png",
   "url": "https://cloudvideo.servers10.com:8081/8020/tracks-v1a1/mono.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Duelo Xiaolin",
@@ -1341,7 +1508,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/330.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Príncipe del Rap",
@@ -1349,7 +1517,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/357.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "EnerGeek Fan",
@@ -1357,7 +1526,8 @@
   "category": "anime",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHenergeekfan.png",
   "url": "https://cdn.energeek.cl/hls/energeekfan.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "EnerGeek Retro",
@@ -1365,7 +1535,8 @@
   "category": "anime",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHenergeek.png",
   "url": "https://cdn.energeek.cl/hls/energeekretro.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Max Anime",
@@ -1373,7 +1544,8 @@
   "category": "anime",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHmaxanime.png",
   "url": "https://cdnlive.klicgo.net/maxanime/live/playlist_dvr.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Naruto",
@@ -1381,7 +1553,8 @@
   "category": "anime",
   "logo": "https://i.imgur.com/M8X3Kvc.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/702.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "One Punch Man",
@@ -1389,7 +1562,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/744.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Pokémon",
@@ -1397,7 +1571,8 @@
   "category": "anime",
   "logo": "https://i.imgur.com/GEbRABE.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/773.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Ranma 1/2",
@@ -1405,7 +1580,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/782.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Sakura Card Captor",
@@ -1413,7 +1589,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/800.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Samurai X",
@@ -1421,7 +1598,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/802.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Super Campeones",
@@ -1429,7 +1607,8 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/850.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Yu-Gi-Oh!",
@@ -1437,7 +1616,8 @@
   "category": "anime",
   "logo": "https://provider-static.plex.tv/epg/cms/production/e10f9ed3-8112-4287-8355-cc00be4413a8/Wurl_Yu-Gi-Oh_Channel_Logo_light_Astridrdx.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1052.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "70-80 TV",
@@ -1445,7 +1625,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CH7080tv.png",
   "url": "https://585b674743bbb.streamlock.net/9050/9050/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Azahares Radiovisual Multimedia",
@@ -1453,7 +1634,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/radio-en-vivo/CHazaharesradiovisualmultimedia.png",
   "url": "https://streamyes.alsolnet.com/azaharesfm/live/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Beats Radio",
@@ -1461,7 +1643,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHbeatsradio.png",
   "url": "https://videostream.shockmedia.com.ar:19360/beatsradio/beatsradio.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal VM Latino",
@@ -1469,7 +1652,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHcanalvmlatino.png",
   "url": "https://59ef525c24caa.streamlock.net/vmtv/vmlatino/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "CM",
@@ -1477,7 +1661,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHcm.png",
   "url": "https://g5.vxral-hor.transport.edge-access.net/b08/ngrp:CM_CanaldelaMusica-100044_all/Playlist.m3u8?sense=true",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "Conecta TV",
@@ -1485,7 +1670,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHconectatv.png",
   "url": "https://stream8.mexiserver.com:19360/conectatvx/conectatvx.m3u8?PlaylistM3UCL",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "GikTVMx",
@@ -1493,7 +1679,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHgiktv.png",
   "url": "https://pistream.ddns.net/hls/stream.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Latina",
@@ -1501,7 +1688,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/radio-en-vivo/CHlatina.png",
   "url": "http://stream-gtlc.telecentro.net.ar/hls/latinatvhls/main.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "MusicTop",
@@ -1509,7 +1697,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHmusictop.png",
   "url": "http://stream-gtlc.telecentro.net.ar/hls/musictophls/main.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Quantica TV",
@@ -1517,7 +1706,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHquantica.png",
   "url": "https://videostream.shockmedia.com.ar:19360/quanticatv/quanticatv.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Retro TV",
@@ -1525,7 +1715,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHretrotv.png",
   "url": "http://stream.mediawork.cz/retrotv/smil:retrotv2.smil/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "RNE para todos",
@@ -1533,7 +1724,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/radio-en-vivo/CHrneparatodos.png",
   "url": "https://ztnr.rtve.es/ztnr/6688753.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telpin TV Pinamar",
@@ -1541,7 +1733,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtelpintvpinamar.png",
   "url": "https://mistserver.telpin.com.ar:8443/hls/telpinlive/main_stream.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Tierramia TV",
@@ -1549,7 +1742,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtierramiatv.png",
   "url": "http://stream-gtlc.telecentro.net.ar/hls/tierramiahls/main.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Total Music Dance",
@@ -1557,7 +1751,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtotalmusicdance.png",
   "url": "https://cdn.global.elektamedia.com/live/c7eds/Totalmusic_Dance/SA_LIVE_hls_enc/master.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Vorterix",
@@ -1565,7 +1760,8 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/radio-en-vivo/CHvorterix.png",
   "url": "https://prepublish.f.qaotic.net:443/a08/ngrp:vorterix_video1-20057_all/vorterix_video1-20057_720p.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "24/7 Canal de Noticias",
@@ -1573,7 +1769,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias/CH247.png",
   "url": "https://panel.host-live.com:19360/cn247tv/Source.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "A24",
@@ -1581,7 +1778,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias/CHa24.png",
   "url": "https://g3.mc-hor.transport.edge-access.net/a15/ngrp:a24-100056_all/Playlist.m3u8?sense=true",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "AMX Noticias",
@@ -1589,7 +1787,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHamxnoticias.png",
   "url": "https://5e50264bd6766.streamlock.net/mexiquense2/videomexiquense2/playlist.m3u8?PlaylistM3UCL",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 24 Horas",
@@ -1597,7 +1796,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHcanal24horas.png",
   "url": "https://ztnr.rtve.es/ztnr/1694255.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 26",
@@ -1605,7 +1805,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias/CHcanal26.png",
   "url": "http://stream-gtlc.telecentro.net.ar/hls/canal26hls/main.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "Canal 44",
@@ -1613,7 +1814,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHcanal44.png",
   "url": "https://5e50264bd6766.streamlock.net/canal442/videocanal442/chunklist_w541086724.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal E",
@@ -1621,7 +1823,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias/CHcanale.png",
   "url": "https://unlimited1-saopaulo.dps.live/perfiltv/perfiltv.smil/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "CNN en Español",
@@ -1629,7 +1832,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHcnnenespa%C3%B1ol.png",
   "url": "https://amg00803-cnnfast-amg00803c3-lg-es-5477.playouts.now.amagi.tv/playlist1080p.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cronica TV",
@@ -1637,7 +1841,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias/CHcronicatv.png",
   "url": "https://g2.mc-slo.transport.edge-access.net/a14/ngrp:cronicatv_video1-100044_all/cronicatv_video1-100044_360p.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "DW En Español",
@@ -1645,7 +1850,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHdw.png",
   "url": "https://dwamdstream104.akamaized.net/hls/live/2015530/dwstream104/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Estrella News",
@@ -1653,7 +1859,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHestrellanews.png",
   "url": "https://estrellanews-roku.amagi.tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Latina Noticias",
@@ -1661,7 +1868,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHlatinanoticias.png",
   "url": "https://jireh-1-hls-video-ar-isp.dps.live/hls-video/567ffde3fa319fadf3419efda25619456231dfea/latinanoticias/latinanoticias.smil/latinanoticias/livestream2/chunks.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Pura Noticia",
@@ -1669,7 +1877,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHpuranoticiachile.png",
   "url": "https://pnt.janusmedia.tv/hls/pnt.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "RT en Español",
@@ -1677,7 +1886,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHrtenespañol.png",
   "url": "https://rt-esp.rttv.com/live/rtesp/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TeleFormula",
@@ -1685,7 +1895,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHteleformula.png",
   "url": "https://mdstrm.com/live-stream-playlist/62f2c855f7981b5a5a2d8763.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telesur",
@@ -1693,7 +1904,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHtelesur.png",
   "url": "https://mblesmain01.telesur.ultrabase.net/mbliveMain/480p/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TN",
@@ -1701,7 +1913,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias/CHtn.png",
   "url": "https://dai.google.com/linear/hls/event/5OEEtA9FR-yrvhNE5K8PQQ/master.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "TV BRICS",
@@ -1709,7 +1922,8 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHtvbrics.png",
   "url": "https://espbrics.mediacdn.ru/cdn/brics/spanish/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Animal Planet",
@@ -1717,7 +1931,8 @@
   "category": "documentales",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/2018_Animal_Planet_logo.svg/960px-2018_Animal_Planet_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/41.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Discovery Channel",
@@ -1725,7 +1940,8 @@
   "category": "documentales",
   "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Discovery_Channel_-_Logo_2019.svg/960px-Discovery_Channel_-_Logo_2019.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/247.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Discovery Civilization",
@@ -1733,7 +1949,8 @@
   "category": "documentales",
   "logo": "https://i.imgur.com/41eTvi8.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/252.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Discovery H&H",
@@ -1741,7 +1958,8 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/254.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Discovery SCI",
@@ -1749,7 +1967,8 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/267.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Discovery Theater HD",
@@ -1757,7 +1976,8 @@
   "category": "documentales",
   "logo": "https://i.imgur.com/T07gvEb.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/271.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Discovery Turbo",
@@ -1765,7 +1985,8 @@
   "category": "documentales",
   "logo": "https://i.imgur.com/osCVMop.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/274.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Discovery World",
@@ -1773,7 +1994,8 @@
   "category": "documentales",
   "logo": "https://i.imgur.com/yNFmUkE.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/276.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Gourmet",
@@ -1781,7 +2003,8 @@
   "category": "documentales",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cultura/CHelgourmet.png",
   "url": "http://45.70.168.162:12316/play/a024/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "H2",
@@ -1789,7 +2012,8 @@
   "category": "documentales",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/History2_logo_%282022%29.svg/500px-History2_logo_%282022%29.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/509.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "History Channel",
@@ -1797,7 +2021,8 @@
   "category": "documentales",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/History_Logo.svg/500px-History_Logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/558.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Investigation Discovery",
@@ -1805,7 +2030,8 @@
   "category": "documentales",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/InvestigationDiscoveryLogo2020.svg/960px-InvestigationDiscoveryLogo2020.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/579.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Love Nature",
@@ -1813,7 +2039,8 @@
   "category": "documentales",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cultura/CHlovenature.png",
   "url": "http://45.70.168.162:12316/play/a02c/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Love The Planet",
@@ -1821,7 +2048,8 @@
   "category": "documentales",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cultura/CHlovetheplanet.png",
   "url": "https://amg01821-lovetvchannels-lovetheplanetsp-tivify-tivify-vycsr.amagi.tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Nat Geo",
@@ -1829,7 +2057,8 @@
   "category": "documentales",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Natgeologo.svg/960px-Natgeologo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/703.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Nat Geo Wild",
@@ -1837,7 +2066,8 @@
   "category": "documentales",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/National_Geographic_Wild_logo.svg/960px-National_Geographic_Wild_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/709.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Tastemade Es",
@@ -1845,7 +2075,8 @@
   "category": "documentales",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cultura/CHtastemade.png",
   "url": "https://cdn-uw2-prod.tsv2.amagi.tv:443/linear/amg00047-tastemade-es16intl-canelatv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Todo Crimen",
@@ -1853,7 +2084,8 @@
   "category": "documentales",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cultura/CHrakutentvtodocrimen.png",
   "url": "https://d39g1vxj2ef6in.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod-rakuten-stitched/master.m3u8?ads._fw_app_bundle=com.rakuten.tv&ads._fw_app_store_url=rakuten.tv&ads._fw_content_category=IAB1-7&ads._fw_content_genre=television&ads._fw_content_language=es&ads._fw_content_rating=tv-14&ads._fw_deviceMake=&ads._fw_device_model=&ads._fw_devicetype=3-connected_tv&ads._fw_gdpr=1&ads._fw_gdpr_consent=&ads._fw_is_lat=1&ads._ifa_type=ppid&ads.amznbrmid=&ads.amznregion=&ads.amznslots=&ads.appName=RakutenTV&ads.app_version=&ads.brand_name=&ads.caid=IndigeniusCrimenSpanish&ads.csid=zeus_es_indigeniuscrimenspanish_ssai&ads.gam_correlator=&ads.os_language=&ads.rakuten_content_type=live_channels&ads.rakuten_device_type=web&ads.rakuten_device_year=&ads.rakuten_env=prod&ads.rakuten_market=es&ads.rakuten_pod_type=playerpage_midroll&ads.rakuten_rtv_content_id=3687&ads.rakuten_streaming_id=004a7a3f-6d34-4cd6-802e-3e45cb604307&ads.rakuten_user_type=visitor&ads.tivo_devcountry=&ads.tivo_devmakedate=&ads.tivo_mvpd=&ads.tivo_platform=&ads.tivo_usid=&ads.tivo_uxloc=&ads.xumo_channelId=88883018&ads.xumo_contentId=2192&ads.xumo_contentName=IndigeniusCrimenSpanish&ads.xumo_ifa=&ads.xumo_ifaType=ppid&ads.xumo_providerId=2192&ads.xumo_providerName=IndigeniusCrimenSpanish&ads.xumo_streamId=88883018",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Turistik TV",
@@ -1861,7 +2093,8 @@
   "category": "documentales",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cultura/CHturistiktv.png",
   "url": "https://cdn1.cef-technology.com/stream_web/turistik/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ABN",
@@ -1869,7 +2102,8 @@
   "category": "religion",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/religion/CHabn.png",
   "url": "https://s2.abntelevision.com/avivamientoabr/stream/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Maria Vision",
@@ -1877,7 +2111,8 @@
   "category": "religion",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/religion/CHmariavision.png",
   "url": "https://1601580044.rsc.cdn77.org/live/_jcn_/amlst:Mariavision/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Tu Universo TV",
@@ -1885,7 +2120,8 @@
   "category": "religion",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/religion/CHtuuniversotv.png",
   "url": "https://5bf8041cb3fed.streamlock.net/TUUNIVERSOTV/TUUNIVERSOTV/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Unife TV",
@@ -1893,7 +2129,8 @@
   "category": "religion",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cultura/CHunife.png",
   "url": "https://cdn.mycloudstream.io/hls/live/broadcast/pgv5kerk/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "A3 Series",
@@ -1901,7 +2138,8 @@
   "category": "espana",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/17.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Andalucía Television",
@@ -1909,7 +2147,8 @@
   "category": "espana",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHandaluciatelevisionespaña.png",
   "url": "https://stream-us-east-1.getpublica.com/playlist.m3u8?cb=[CACHEBUSTER]&network_id=12685&live=1&avod=1&hls_marker=1&pod_duration=[POD_DURATION]&min_ad_duration=6&max_ad_duration=120&site_page=[SITE_PAGE]&site_name=",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Toro TV",
@@ -1917,7 +2156,8 @@
   "category": "espana",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHeltorotvespaña.png",
   "url": "https://edge-nodo-001.streaming.hitcloser.net/eltorotv-streaming-web/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "La 1 HD",
@@ -1925,7 +2165,8 @@
   "category": "espana",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/La_1_2026.svg/500px-La_1_2026.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "La 2 HD",
@@ -1933,7 +2174,8 @@
   "category": "espana",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/La_2_2026.svg/500px-La_2_2026.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/589.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Star TVE",
@@ -1941,7 +2183,8 @@
   "category": "espana",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHstartvespaña.png",
   "url": "https://rtvelivestream-rtveplayplus.rtve.es/rtvesec/int/star_main_720.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "StarTVE",
@@ -1949,7 +2192,8 @@
   "category": "espana",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/838.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TeleSafor",
@@ -1957,7 +2201,8 @@
   "category": "espana",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHteleSaforespa%C3%B1a.png",
   "url": "http://video.telesafor.com/hls/video_low.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ADN40",
@@ -1965,7 +2210,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHadn40mexico.png",
   "url": "https://mdstrm.com/live-stream-playlist/60b578b060947317de7b57ac.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Azteca Internacional",
@@ -1973,7 +2219,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHaztecalnternacionalmexico.png",
   "url": "https://azt-mun.otteravision.com/azt/mun/mun_360p.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal Once",
@@ -1981,7 +2228,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanaloncemexico.png",
   "url": "https://vivo.canaloncelive.tv/oncedos/ngrp:pruebachunks_all/.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Estrella TV",
@@ -1989,7 +2237,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHestrellatvmexico.png",
   "url": "https://estrellatv-oando.amagi.tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Imagen TV",
@@ -1997,7 +2246,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHimagentvmexico.png",
   "url": "https://igd-it-runtime.otteravision.com/igd/it/it_360.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Las Estrellas",
@@ -2005,7 +2255,8 @@
   "category": "mexico",
   "logo": "https://i.imgur.com/g5ShxZ7.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/118.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Mexiquense",
@@ -2013,7 +2264,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHmexiquensemexico.png",
   "url": "https://5fe2654d6127d.streamlock.net/mexiquense/videomexiquense/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9My8yMS8yMDI1IDg6MTg6MjcgQU0maGFzaF92YWx1ZT1CRVNhbDJmY1N4SSsxbDBDcEpaNWtnPT0mdmFsaWRtaW51dGVzPTUmaWQ9",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "PluralTV",
@@ -2021,7 +2273,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHpluraltvmexico.png",
   "url": "https://live-scjn.ovp-vivaro.digital/ovp-origin/638a22b47746d/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "RCG Media",
@@ -2029,7 +2282,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHrcgmediamexico.png",
   "url": "https://video1.getstreamhosting.com:1936/8172/8172/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Teleplay",
@@ -2037,7 +2291,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHteleplaymexico.png",
   "url": "https://player.tvstream.mx/livestream/teleplay/livesd/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TV Migrante",
@@ -2045,7 +2300,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvmigrantemexico.png",
   "url": "https://s5.mexside.net:1936/tvmigrante/tvmigrante/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TV Unam",
@@ -2053,7 +2309,8 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvunammexico.png",
   "url": "https://5e50264bd6766.streamlock.net/tvunam/videotvunam/chunklist_w1404092117_DVR.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "5TV (Corrientes)",
@@ -2061,7 +2318,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CH5tvcorrientes.png",
   "url": "http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "A24",
@@ -2069,7 +2327,8 @@
   "category": "argentina",
   "logo": "https://i.imgur.com/LnXQkIU.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1163.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "America TV",
@@ -2077,7 +2336,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHamericatv.png",
   "url": "https://dai.google.com/linear/hls/event/OY2i_lL4SMyXE5Zaj4ULEg/master.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "America TV",
@@ -2085,7 +2345,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHamericatv.png",
   "url": "https://prepublish.f.qaotic.net/a07/americahls-100056/playlist_720p.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "Argentinisima Satelital",
@@ -2093,7 +2354,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHargentinisimasatelital.png",
   "url": "https://stream1.sersat.com/hls/argentinisima.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36"
+  "ua": "Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36",
+  "ref": ""
  },
  {
   "name": "C5N",
@@ -2101,7 +2363,8 @@
   "category": "argentina",
   "logo": "https://i.imgur.com/5ZNZYjO.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1162.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cable Imagen Armstrong (Santa Fe)",
@@ -2109,7 +2372,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcableimagenarmstrongsantafe.png",
   "url": "https://stream.arcast.com.ar/casse/casse/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 10 (Junín)",
@@ -2117,7 +2381,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal10dejunin.png",
   "url": "https://g4.mc-slo.transport.edge-access.net/a10/ngrp:canal10junin-100056_all/Playlist.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "Canal 10 (Mar del Plata)",
@@ -2125,7 +2390,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal10mardelplata.png",
   "url": "https://g5.mc-slo.transport.edge-access.net/a12/ngrp:canal10mdq-100044_all/Playlist.m3u8?sense=true",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "Canal 11 de la Costa",
@@ -2133,7 +2399,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal11delacosta.png",
   "url": "https://vivo.solumedia.com:19360/dadaproductora/dadaproductora.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "Canal 12 Metro TV (Tucumán)",
@@ -2141,7 +2408,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal12metrotvtucuman.png",
   "url": "https://streamtv12.ddns.net:5443/LiveApp/streams/193945633734205616732920.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 13 (La Rioja)",
@@ -2149,7 +2417,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal13larioja.png",
   "url": "http://arcast.net:1935/mp/mp/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 2 (Mar del Plata)",
@@ -2157,7 +2426,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal2mardelplata.png",
   "url": "https://tv.streamcasthd.com:3641/live/canal2mdplive.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 2 (Misiones)",
@@ -2165,7 +2435,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal2misiones.png",
   "url": "https://nd106.republicaservers.com:4433/hls/canal2misioness/index.m3u8?PlaylistM3UCL",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 21 (Misiones)",
@@ -2173,7 +2444,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal21misiones.png",
   "url": "https://iptv.ixfo.com.ar:30443/c21tv/hd/c21tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 22",
@@ -2181,7 +2453,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal22.png",
   "url": "https://media.cdnvid.com/public/7c3g8h159tip.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 3 (La Pampa)",
@@ -2189,7 +2462,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal3lapampa.png",
   "url": "https://stream.arcast.com.ar/c3lapampa/ngrp:c3lapampa_all/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 3 (Pinamar)",
@@ -2197,7 +2471,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal3pinamar.png",
   "url": "https://intelincloud01.com.ar/hls/cn3/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 3 (Santa Cruz)",
@@ -2205,7 +2480,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal3santacruz.png",
   "url": "https://stream.arcast.com.ar/canal3/canal3/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 34 (San Juan)",
@@ -2213,7 +2489,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal34sanjuan.png",
   "url": "https://streamyes.alsolnet.com/canal34hd/live/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 4 (Chubut)",
@@ -2221,7 +2498,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal4chubut.png",
   "url": "https://stream.arcast.com.ar/canal4esquel/canal4esquel/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 4 (Cordoba)",
@@ -2229,7 +2507,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal4cordoba.png",
   "url": "http://204.199.3.2/.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 4 (Misiones)",
@@ -2237,7 +2516,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal4misiones.png",
   "url": "https://iptv.ixfo.com.ar:30443/live/C4POS/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 5 (Santa Fe)",
@@ -2245,7 +2525,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal5santafe.png",
   "url": "https://stream.arcast.com.ar/c5sf/c5sf/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 6 (Misiones)",
@@ -2253,7 +2534,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal6misiones.png",
   "url": "https://iptv.ixfo.com.ar:30443/live/c6digital/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 7 (Jujuy)",
@@ -2261,7 +2543,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7jujuy.png",
   "url": "https://stream.arcast.live/canal7jujuy/ngrp:canal7jujuy_all/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 7 (Neuquén)",
@@ -2269,7 +2552,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7neuquen.png",
   "url": "https://stream.arcast.com.ar/c7nq/ngrp:c7nq_all/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 7 (Salta)",
@@ -2277,7 +2561,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7salta.png",
   "url": "https://vivo.solumedia.com:19360/cooperativa/cooperativa.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 7 (Santiago del Estero)",
@@ -2285,7 +2570,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7santiagodelestero.png",
   "url": "https://stream.arcast.com.ar/envivo/castv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 9 (Chaco)",
@@ -2293,7 +2579,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal9chaco.png",
   "url": "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal de la Ciudad",
@@ -2301,7 +2588,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHelcanaldelaciudad.png",
   "url": "https://g3.proy-slo.transport.edge-access.net/a06/ngrp:gcba_video4-100042_all/Playlist.m3u8?sense=true",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "Canal Provincial (San Miguel)",
@@ -2309,7 +2597,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanalprovincialdesanmiguel.png",
   "url": "https://streaming.telered.com.ar/provincial/streaming/mystream.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "Catamarca TV",
@@ -2317,7 +2606,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcatamarcatv.png",
   "url": "https://stream.arcast.com.ar/canal7catamarca/ngrp:canal7catamarca_all/playlist.m3u8?DVR=",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Celt TV",
@@ -2325,7 +2615,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcelttv.png",
   "url": "http://190.103.192.6:8080/hls/mystreamkey.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Celta TV",
@@ -2333,7 +2624,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHceltatv.png",
   "url": "https://vivo.solumedia.com:19360/celta/celta.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Nueve (9)",
@@ -2341,7 +2633,8 @@
   "category": "argentina",
   "logo": "https://i.imgur.com/cJHP7bU.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/353.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Trece",
@@ -2349,7 +2642,8 @@
   "category": "argentina",
   "logo": "https://i.imgur.com/TrgBAdA.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/362.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Trece",
@@ -2357,7 +2651,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHeltrece.png",
   "url": "https://livetrx01.vodgc.net/eltrecetv/index.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36"
+  "ua": "Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36",
+  "ref": ""
  },
  {
   "name": "Neo TV (Florencio Varela)",
@@ -2365,7 +2660,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHneotv.png",
   "url": "https://videostream.shockmedia.com.ar:19360/neotvdigital/neotvdigital.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Net TV",
@@ -2373,7 +2669,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHnettv.png",
   "url": "https://unlimited1-saopaulo.dps.live/nettv/nettv.smil/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Net TV",
@@ -2381,7 +2678,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHnettv.png",
   "url": "https://unlimited1-us.dps.live/nettv/nettv.smil/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "RTN (Neuquen)",
@@ -2389,7 +2687,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHrtnneuquen.png",
   "url": "http://media.neuquen.gov.ar/rtn/television/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Sicardi TV (La pLata)",
@@ -2397,7 +2696,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHsicarditv.png",
   "url": "https://vivo.solumedia.com:19360/sicarditv/sicarditv.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telecreativa (Lanus)",
@@ -2405,7 +2705,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHtelecreativa.png",
   "url": "https://panel.host-live.com:19360/8012/8012.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telefe",
@@ -2413,7 +2714,8 @@
   "category": "argentina",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/874.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telefe",
@@ -2421,7 +2723,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHtelefe.png",
   "url": "http://45.134.141.161:2200/ARG/TELEFE_HD/index.m3u8",
-  "ua": "Android 8.0.0"
+  "ua": "Android 8.0.0",
+  "ref": ""
  },
  {
   "name": "Telefe HD",
@@ -2429,7 +2732,8 @@
   "category": "argentina",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1172.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telefe Internacional",
@@ -2437,7 +2741,8 @@
   "category": "argentina",
   "logo": "https://i.imgur.com/HNcCX3h.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1166.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TeleJunin",
@@ -2445,7 +2750,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHtelejunin.png",
   "url": "https://videostream.shockmedia.com.ar:19360/telejunin/telejunin.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telemax",
@@ -2453,7 +2759,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHtelemax.png",
   "url": "http://stream-gtlc.telecentro.net.ar/hls/telemaxhls/main.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Uniteve (Cordoba)",
@@ -2461,7 +2768,8 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHunitevecordoba.png",
   "url": "https://vivo.solumedia.com:19360/uniteve/uniteve.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ADN",
@@ -2469,7 +2777,8 @@
   "category": "chile",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHadnchile.png",
   "url": "https://redirector.rudo.video/hls-video/931b584451fa6dd1313ee66efbfd5802e3f3bcea/adntv/adntv.smil/.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 1 Ñuble",
@@ -2477,7 +2786,8 @@
   "category": "chile",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanal1ñublechile.png",
   "url": "https://tls-cl.cdnz.cl/canal21tv/live/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 2 Quellón",
@@ -2485,7 +2795,8 @@
   "category": "chile",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanal2quellon.png",
   "url": "https://unlimited1-us.dps.live/tvquellon/tvquellon.smil/tvquellon/livestream1/chunks.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 9 Bio Bio Television",
@@ -2493,7 +2804,8 @@
   "category": "chile",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanal9biobiotelevisionchile.png",
   "url": "https://unlimited6-cl.dps.live/c9/c9.smil/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "El Trece (13)",
@@ -2501,7 +2813,8 @@
   "category": "chile",
   "logo": "https://i.imgur.com/TrgBAdA.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/360.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TVN 3",
@@ -2509,7 +2822,8 @@
   "category": "chile",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvn3chile.png",
   "url": "https://mdstrm.com/live-stream-playlist/5653641561b4eba30a7e4929.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Alpavisión Neiva",
@@ -2517,7 +2831,8 @@
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHalpavisiónneivacolombia.png",
   "url": "https://stmv1.voxtvhd.com.br/alpavision/alpavision/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Bum Televisión",
@@ -2525,7 +2840,8 @@
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHbumtelevisioncolombia.png",
   "url": "https://movil.ejeserver.com/live/visiondorada.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Cali TV",
@@ -2533,7 +2849,8 @@
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcalitvcolombia.png",
   "url": "http://vbox.cehis.net/live-calitv/calitv1/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal 8 TV+",
@@ -2541,7 +2858,8 @@
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanal8tv+colombia.png",
   "url": "https://movil.ejeserver.com/live/canal8tv.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "RCN",
@@ -2549,7 +2867,8 @@
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHrcncolombia.png",
   "url": "http://45.70.168.162:12316/play/a00p/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "RCN Mas",
@@ -2557,7 +2876,8 @@
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHrcnmascolombia.png",
   "url": "https://rcntv-rcnmas-1-us.plex.wurl.tv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Señal Colombia",
@@ -2565,7 +2885,8 @@
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHseñalcolombia.png",
   "url": "http://45.70.168.162:12316/play/a00s/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Señal Colombia",
@@ -2573,7 +2894,8 @@
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHseñalcolombia.png",
   "url": "https://streaming.rtvc.gov.co/TV_Senal_Colombia_live/smil:live.smil/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telepacifico",
@@ -2581,7 +2903,8 @@
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/telepacificocolombia.png",
   "url": "http://45.70.168.162:12316/play/a014/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Tele Uno",
@@ -2589,7 +2912,8 @@
   "category": "costarica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHteleunocostarica.png",
   "url": "https://5eac7b031d945.streamlock.net/TVUNO/TVUNO/chunklist_w1246775036.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "10 Microvision",
@@ -2597,7 +2921,8 @@
   "category": "dominicana",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CH10microvisionrepdominicana.png",
   "url": "https://streaming.telecablecentral.com.do/live/MicroHD/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Canal Catorce",
@@ -2605,7 +2930,8 @@
   "category": "dominicana",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanal14repdominicana.png",
   "url": "https://stream.haislin.com/14tv/index.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Faro Vision",
@@ -2613,7 +2939,8 @@
   "category": "dominicana",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHfarovisionrepdominicana.png",
   "url": "https://streamtv.intervenhosting.net:3754/hybrid/play.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "ReadyHD",
@@ -2621,7 +2948,8 @@
   "category": "dominicana",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHreadyhdrepdominicana.png",
   "url": "https://streaming.telecablecentral.com.do/ReadyTV/ReadyHD/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Teleunion",
@@ -2629,7 +2957,8 @@
   "category": "dominicana",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHteleunionrepdominicana.png",
   "url": "http://server3.prostudionetwork.com:1945/teleunion/TU/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Austral TV",
@@ -2637,7 +2966,17 @@
   "category": "ecuador",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHaustraltvecuador.png",
   "url": "https://stmv3.voxtvhd.com.br/australtv/australtv/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Ecuavisa",
+  "slug": "ecuavisa",
+  "category": "ecuador",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png",
+  "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e",
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Wuan+",
@@ -2645,7 +2984,8 @@
   "category": "ecuador",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHwuan+ecuador.png",
   "url": "https://7.innovatestream.pe:19360/ecuadortest/ecuadortest.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Sas TV",
@@ -2653,7 +2993,8 @@
   "category": "guatemala",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHsastvguatemala.png",
   "url": "https://cdn.streamhispanatv.net:3390/live/sastvgtlive.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Vision TV",
@@ -2661,7 +3002,8 @@
   "category": "guatemala",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHvisiontvguatemala.png",
   "url": "https://cdn.streamhispanatv.net:3076/live/visiontvlive.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Next",
@@ -2669,7 +3011,8 @@
   "category": "paraguay",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHnextparaguay.png",
   "url": "https://live.enhdtv.com:19360/nexthd/nexthd.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Latina",
@@ -2677,7 +3020,8 @@
   "category": "peru",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHlatinatvPeru.png",
   "url": "https://redirector.rudo.video/hls-video/567ffde3fa319fadf3419efda25619456231dfea/latina/latina.smil/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Latina Clasicos",
@@ -2685,7 +3029,8 @@
   "category": "peru",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHlatinaclasicosperu.png",
   "url": "https://jireh-1-hls-video-ar-isp.dps.live/hls-video/plus226/latina2/latina2.smil/latina2/livestream1/chunks.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telemundo",
@@ -2693,7 +3038,8 @@
   "category": "puertorico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtelemundopuertorico.png",
   "url": "https://nbculocallive.akamaized.net/hls/live/2037499/puertorico/stream1/master.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Alcance TV",
@@ -2701,7 +3047,8 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHalcancetvvenezuela.png",
   "url": "https://5bf8041cb3fed.streamlock.net:443/AlcanceTV/AlcanceTV/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Promar TV",
@@ -2709,7 +3056,8 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHpromartvvenezuela.png",
   "url": "https://vcp.myplaytv.com/promar/promar/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Reforma TV",
@@ -2717,7 +3065,8 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHreformatvvenezuela.png",
   "url": "https://5bf8041cb3fed.streamlock.net:443/ReformaTV/ReformaTV/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "Telearagua",
@@ -2725,7 +3074,8 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtelearaguavenezuela.png",
   "url": "http://45.173.198.59:8080/hls/nginx3.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TRT",
@@ -2733,7 +3083,8 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrtvenezuela.png",
   "url": "https://vcp12.myplaytv.com/trt/trt/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TRV",
@@ -2741,7 +3092,8 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrvvenezuela.png",
   "url": "https://streaming5.globalhostla.com/rtplive/trvnetve/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  },
  {
   "name": "TVS Maracay",
@@ -2749,6 +3101,7 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvsmaracayvenezuela.png",
   "url": "https://vcp10.myplaytv.com/tvs/tvs/playlist.m3u8",
-  "ua": ""
+  "ua": "",
+  "ref": ""
  }
 ]

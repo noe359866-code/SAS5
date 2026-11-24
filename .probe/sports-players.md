@@ -1,8 +1,8 @@
 # Sonda 10: wss de capo, thetvapp y daddylive
 
-Fecha: 2026-11-24T15:41:54.342Z
+Fecha: 2026-11-24T15:46:09.409Z
 
-## capoespn — HTTP 200 · 11097 B
+## capoespn — HTTP 200 · 10467 B
 - ch=capoespn: HTTP 200 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional/

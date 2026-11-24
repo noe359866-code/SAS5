@@ -39,7 +39,7 @@
 | fuegocine.com | ver-watch | `https://fuegocine.com/movies/watch/la-odisea/227` | 200 | 3 | 0 | videro.my, player.abyssplayer.com, unlimplay.com |  |
 | fuegocine.com | ·videro.my | `https://videro.my/e/ueuf2z2cltcp6sw` | 403 cf | — | — | — |  |
 | fuegocine.com | ·player.abyssplayer.com | `https://player.abyssplayer.com/KxBGoCWcV` | 200 | 0 | 0 | — |  |
-| fuegocine.com | ·unlimplay.com | `https://unlimplay.com/f/embed/movie/1368337` | 200 | 0 | 8 | — |  |
+| fuegocine.com | ·unlimplay.com | `https://unlimplay.com/f/embed/movie/1368337` | 200 | 0 | 9 | — |  |
 | fuegocine.com | ··manifiesto | `https://unlimplay.com/cps.php?…` | 200 | — | HLS ✓ | unlimplay.com | 852x480 1280x720 audio=Español/English seg=0 |
 | fuegocine.com | ··manifiesto | `https://unlimplay.com/cps.php?…` | 200 | — | HLS ✓ | unlimplay.com | 1280x720 audio=— seg=0 |
 | fuegocine.com | ver-play | `https://fuegocine.com/movies/play/la-odisea/227` | 404 | — | — | — |  |

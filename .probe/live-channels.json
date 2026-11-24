@@ -1,145 +1,49 @@
 [
  {
-  "name": "Distrito Comedia",
-  "slug": "distrito-comedia",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/293.m3u8",
+  "name": "DSports",
+  "slug": "dsports",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/312.m3u8",
   "ua": ""
  },
  {
-  "name": "El Chavo del 8",
-  "slug": "el-chavo-del-8",
-  "category": "cine",
-  "logo": "",
-  "url": "https://m3u.tvcluboficial.com/free/ReachBot/Kip/344.m3u8",
+  "name": "DSports 2",
+  "slug": "dsports-2",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/DIRECTV_Sports_2_Latin_America_%282018%29.svg/960px-DIRECTV_Sports_2_Latin_America_%282018%29.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/315.m3u8",
   "ua": ""
  },
  {
-  "name": "El Chavo del 8 HD",
-  "slug": "el-chavo-del-8-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1173.m3u8",
+  "name": "DSports 2 HD",
+  "slug": "dsports-2-hd",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/DIRECTV_Sports_2_Latin_America_%282018%29.svg/960px-DIRECTV_Sports_2_Latin_America_%282018%29.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/317.m3u8",
   "ua": ""
  },
  {
-  "name": "Los Simpson",
-  "slug": "los-simpson",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/635.m3u8",
+  "name": "DSports HD",
+  "slug": "dsports-hd",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/324.m3u8",
   "ua": ""
  },
  {
-  "name": "El Nueve (9)",
-  "slug": "el-nueve-9",
-  "category": "argentina",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/353.m3u8",
-  "ua": ""
- },
- {
-  "name": "El Trece",
-  "slug": "el-trece",
-  "category": "argentina",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/362.m3u8",
-  "ua": ""
- },
- {
-  "name": "Telefe",
-  "slug": "telefe",
-  "category": "argentina",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/874.m3u8",
-  "ua": ""
- },
- {
-  "name": "Telefe HD",
-  "slug": "telefe-hd",
-  "category": "argentina",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1172.m3u8",
-  "ua": ""
- },
- {
-  "name": "Telefe Internacional",
-  "slug": "telefe-internacional",
-  "category": "argentina",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1166.m3u8",
-  "ua": ""
- },
- {
-  "name": "El Trece (13)",
-  "slug": "el-trece-13",
-  "category": "chile",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/360.m3u8",
-  "ua": ""
- },
- {
-  "name": "Las Estrellas",
-  "slug": "las-estrellas",
-  "category": "mexico",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/118.m3u8",
-  "ua": ""
- },
- {
-  "name": "A24",
-  "slug": "a24",
-  "category": "argentina",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1163.m3u8",
-  "ua": ""
- },
- {
-  "name": "C5N",
-  "slug": "c5n",
-  "category": "argentina",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1162.m3u8",
-  "ua": ""
- },
- {
-  "name": "A3 Series",
-  "slug": "a3-series",
-  "category": "espana",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/17.m3u8",
-  "ua": ""
- },
- {
-  "name": "La 1 HD",
-  "slug": "la-1-hd",
-  "category": "espana",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8",
-  "ua": ""
- },
- {
-  "name": "La 2 HD",
-  "slug": "la-2-hd",
-  "category": "espana",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/589.m3u8",
-  "ua": ""
- },
- {
-  "name": "StarTVE",
-  "slug": "startve",
-  "category": "espana",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/838.m3u8",
+  "name": "DSports HD [Opc.2]",
+  "slug": "dsports-hd-opc-2",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1144.m3u8",
   "ua": ""
  },
  {
   "name": "ESPN 1 (Argentina)",
   "slug": "espn-1-argentina",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1111.m3u8",
   "ua": ""
  },
@@ -147,7 +51,7 @@
   "name": "ESPN 1 (Chile)",
   "slug": "espn-1-chile",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1132.m3u8",
   "ua": ""
  },
@@ -155,7 +59,7 @@
   "name": "ESPN 1 (Colombia)",
   "slug": "espn-1-colombia",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1107.m3u8",
   "ua": ""
  },
@@ -163,7 +67,7 @@
   "name": "ESPN 1 (México)",
   "slug": "espn-1-mexico",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/401.m3u8",
   "ua": ""
  },
@@ -171,23 +75,15 @@
   "name": "ESPN 1 (Sur)",
   "slug": "espn-1-sur",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/368.m3u8",
-  "ua": ""
- },
- {
-  "name": "ESPN 2 HD",
-  "slug": "espn-2-hd",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/375.m3u8",
   "ua": ""
  },
  {
   "name": "ESPN 2 (México)",
   "slug": "espn-2-mexico",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/378.m3u8",
   "ua": ""
  },
@@ -195,23 +91,23 @@
   "name": "ESPN 2 (Sur)",
   "slug": "espn-2-sur",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/372.m3u8",
   "ua": ""
  },
  {
-  "name": "ESPN 3 HD",
-  "slug": "espn-3-hd",
+  "name": "ESPN 2 HD",
+  "slug": "espn-2-hd",
   "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/386.m3u8",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/375.m3u8",
   "ua": ""
  },
  {
   "name": "ESPN 3 (México)",
   "slug": "espn-3-mexico",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1110.m3u8",
   "ua": ""
  },
@@ -219,15 +115,23 @@
   "name": "ESPN 3 (Sur)",
   "slug": "espn-3-sur",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1127.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "ESPN 3 HD",
+  "slug": "espn-3-hd",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/386.m3u8",
   "ua": ""
  },
  {
   "name": "ESPN 4 (Sur)",
   "slug": "espn-4-sur",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1069.m3u8",
   "ua": ""
  },
@@ -259,7 +163,7 @@
   "name": "ESPN Deportes",
   "slug": "espn-deportes",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/ESPN_Deportes.svg/960px-ESPN_Deportes.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1165.m3u8",
   "ua": ""
  },
@@ -267,7 +171,7 @@
   "name": "ESPN HD",
   "slug": "espn-hd",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/400.m3u8",
   "ua": ""
  },
@@ -275,7 +179,7 @@
   "name": "ESPN HD (Colombia)",
   "slug": "espn-hd-colombia",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1161.m3u8",
   "ua": ""
  },
@@ -296,58 +200,18 @@
   "ua": ""
  },
  {
-  "name": "DSports",
-  "slug": "dsports",
+  "name": "Eventos Deportivos",
+  "slug": "eventos-deportivos",
   "category": "deportes",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/312.m3u8",
-  "ua": ""
- },
- {
-  "name": "DSports 2",
-  "slug": "dsports-2",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/315.m3u8",
-  "ua": ""
- },
- {
-  "name": "DSports 2 HD",
-  "slug": "dsports-2-hd",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/317.m3u8",
-  "ua": ""
- },
- {
-  "name": "DSports HD",
-  "slug": "dsports-hd",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/324.m3u8",
-  "ua": ""
- },
- {
-  "name": "DSports HD [Opc.2]",
-  "slug": "dsports-hd-opc-2",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1144.m3u8",
-  "ua": ""
- },
- {
-  "name": "FOX Sports 1 HD (Sur)",
-  "slug": "fox-sports-1-hd-sur",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/452.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1131.m3u8",
   "ua": ""
  },
  {
   "name": "FOX Sports 1 (México)",
   "slug": "fox-sports-1-mexico",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://i.imgur.com/O9BapV9.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/456.m3u8",
   "ua": ""
  },
@@ -355,23 +219,23 @@
   "name": "FOX Sports 1 (Sur)",
   "slug": "fox-sports-1-sur",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://i.imgur.com/O9BapV9.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/435.m3u8",
   "ua": ""
  },
  {
-  "name": "FOX Sports 2 HD",
-  "slug": "fox-sports-2-hd",
+  "name": "FOX Sports 1 HD (Sur)",
+  "slug": "fox-sports-1-hd-sur",
   "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8",
+  "logo": "https://i.imgur.com/O9BapV9.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/452.m3u8",
   "ua": ""
  },
  {
   "name": "FOX Sports 2 (México)",
   "slug": "fox-sports-2-mexico",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8",
   "ua": ""
  },
@@ -384,18 +248,18 @@
   "ua": ""
  },
  {
-  "name": "FOX Sports 3 HD",
-  "slug": "fox-sports-3-hd",
+  "name": "FOX Sports 2 HD",
+  "slug": "fox-sports-2-hd",
   "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/446.m3u8",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8",
   "ua": ""
  },
  {
   "name": "FOX Sports 3 (México)",
   "slug": "fox-sports-3-mexico",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8",
   "ua": ""
  },
@@ -403,15 +267,23 @@
   "name": "FOX Sports 3 (Sur)",
   "slug": "fox-sports-3-sur",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/468.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "FOX Sports 3 HD",
+  "slug": "fox-sports-3-hd",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/446.m3u8",
   "ua": ""
  },
  {
   "name": "FOX Sports HD",
   "slug": "fox-sports-hd",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/FOX_Sports_logo.svg/960px-FOX_Sports_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/454.m3u8",
   "ua": ""
  },
@@ -419,7 +291,7 @@
   "name": "FOX Sports Premium",
   "slug": "fox-sports-premium",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://i.imgur.com/3lOZWeD.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/461.m3u8",
   "ua": ""
  },
@@ -427,7 +299,7 @@
   "name": "FOX Sports Premium HD",
   "slug": "fox-sports-premium-hd",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://i.imgur.com/3lOZWeD.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/463.m3u8",
   "ua": ""
  },
@@ -443,7 +315,7 @@
   "name": "TNT Sports (Argentina)",
   "slug": "tnt-sports-argentina",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/934.m3u8",
   "ua": ""
  },
@@ -451,7 +323,7 @@
   "name": "TyC Sports",
   "slug": "tyc-sports",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/974.m3u8",
   "ua": ""
  },
@@ -459,16 +331,40 @@
   "name": "TyC Sports HD",
   "slug": "tyc-sports-hd",
   "category": "deportes",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1143.m3u8",
   "ua": ""
  },
  {
-  "name": "Eventos Deportivos",
-  "slug": "eventos-deportivos",
-  "category": "deportes",
+  "name": "Cantinflas",
+  "slug": "cantinflas",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1131.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/123.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Caso Cerrado",
+  "slug": "caso-cerrado",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/138.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Chapulín Colorado",
+  "slug": "chapulin-colorado",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/152.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Chespirito",
+  "slug": "chespirito",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/153.m3u8",
   "ua": ""
  },
  {
@@ -499,7 +395,7 @@
   "name": "Cine Comedia",
   "slug": "cine-comedia",
   "category": "cine",
-  "logo": "",
+  "logo": "https://images.pluto.tv/channels/5f12101f0b12f00007844c7c/colorLogoPNG_1732662798298.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/161.m3u8",
   "ua": ""
  },
@@ -528,14 +424,6 @@
   "ua": ""
  },
  {
-  "name": "Cine Zombis HD",
-  "slug": "cine-zombis-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/184.m3u8",
-  "ua": ""
- },
- {
   "name": "Cine Ficción/Fantasía 2",
   "slug": "cine-ficcion-fantasia-2",
   "category": "cine",
@@ -549,38 +437,6 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/168.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cine Romance",
-  "slug": "cine-romance",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/178.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cine Romance HD",
-  "slug": "cine-romance-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/179.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cine Marvel",
-  "slug": "cine-marvel",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/176.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cine Marvel HD",
-  "slug": "cine-marvel-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/177.m3u8",
   "ua": ""
  },
  {
@@ -600,106 +456,210 @@
   "ua": ""
  },
  {
-  "name": "Baby TV",
-  "slug": "baby-tv",
-  "category": "infantil",
+  "name": "Cine Marvel",
+  "slug": "cine-marvel",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/79.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/176.m3u8",
   "ua": ""
  },
  {
-  "name": "Cartoon Network",
-  "slug": "cartoon-network",
-  "category": "infantil",
+  "name": "Cine Marvel HD",
+  "slug": "cine-marvel-hd",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/128.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/177.m3u8",
   "ua": ""
  },
  {
-  "name": "Cartoonito",
-  "slug": "cartoonito",
-  "category": "infantil",
+  "name": "Cine Romance",
+  "slug": "cine-romance",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/134.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/178.m3u8",
   "ua": ""
  },
  {
-  "name": "Discovery Kids",
-  "slug": "discovery-kids",
-  "category": "infantil",
+  "name": "Cine Romance HD",
+  "slug": "cine-romance-hd",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/264.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/179.m3u8",
   "ua": ""
  },
  {
-  "name": "Disney Channel",
-  "slug": "disney-channel",
-  "category": "infantil",
+  "name": "Cine Zombis HD",
+  "slug": "cine-zombis-hd",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/184.m3u8",
   "ua": ""
  },
  {
-  "name": "Disney Junior",
-  "slug": "disney-junior",
-  "category": "infantil",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/284.m3u8",
+  "name": "Distrito Comedia",
+  "slug": "distrito-comedia",
+  "category": "cine",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/DistritoComediaLOGO2018.png/960px-DistritoComediaLOGO2018.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/293.m3u8",
   "ua": ""
  },
  {
-  "name": "Nick Jr.",
-  "slug": "nick-jr",
-  "category": "infantil",
+  "name": "El Chavo del 8",
+  "slug": "el-chavo-del-8",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/729.m3u8",
+  "url": "https://m3u.tvcluboficial.com/free/ReachBot/Kip/344.m3u8",
   "ua": ""
  },
  {
-  "name": "Nicktoons",
-  "slug": "nicktoons",
-  "category": "infantil",
+  "name": "El Chavo del 8 HD",
+  "slug": "el-chavo-del-8-hd",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/735.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1173.m3u8",
   "ua": ""
  },
  {
-  "name": "Nickelodeon",
-  "slug": "nickelodeon",
-  "category": "infantil",
+  "name": "Elementary",
+  "slug": "elementary",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/736.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/363.m3u8",
   "ua": ""
  },
  {
-  "name": "Pakapaka",
-  "slug": "pakapaka",
-  "category": "infantil",
+  "name": "Family Guy (Padre de Familia)",
+  "slug": "family-guy-padre-de-familia",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/748.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/747.m3u8",
   "ua": ""
  },
  {
-  "name": "Tooncast",
-  "slug": "tooncast",
-  "category": "infantil",
+  "name": "Friends",
+  "slug": "friends",
+  "category": "cine",
+  "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Friends_TV.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/470.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Game of Thrones",
+  "slug": "game-of-thrones",
+  "category": "cine",
   "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/941.m3u8",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/484.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Los 3 Chiflados",
+  "slug": "los-3-chiflados",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/619.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Los Chicos del Barrio",
+  "slug": "los-chicos-del-barrio",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/622.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Los Expedientes Secretos X",
+  "slug": "los-expedientes-secretos-x",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/623.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Los Simpson",
+  "slug": "los-simpson",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/635.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Malcolm",
+  "slug": "malcolm",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/640.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Malcolm HD",
+  "slug": "malcolm-hd",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/641.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Mr. Bean",
+  "slug": "mr-bean",
+  "category": "cine",
+  "logo": "https://static.wikia.nocookie.net/logopedia/images/2/25/Mr._Bean_Animated_Series_stacked_logo.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/670.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Nosotros Los Guapos",
+  "slug": "nosotros-los-guapos",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/739.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Smallville",
+  "slug": "smallville",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/812.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "The Big Bang Theory",
+  "slug": "the-big-bang-theory",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/899.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Two and a Half Men",
+  "slug": "two-and-a-half-men",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/973.m3u8",
   "ua": ""
  },
  {
   "name": "Alf",
   "slug": "alf",
   "category": "infantil",
-  "logo": "",
+  "logo": "https://i.imgur.com/fWRs1gX.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/28.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Baby TV",
+  "slug": "baby-tv",
+  "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/he/b/b8/LogoBabyIsrael.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/79.m3u8",
   "ua": ""
  },
  {
   "name": "Bob Esponja",
   "slug": "bob-esponja",
   "category": "infantil",
-  "logo": "",
+  "logo": "https://images.pluto.tv/channels/5f1aca0b4e448e00075e7c5e/colorLogoPNG.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/96.m3u8",
   "ua": ""
  },
@@ -709,6 +669,22 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/103.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Cartoon Network",
+  "slug": "cartoon-network",
+  "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Cartoon_Network_2010_logo.svg/960px-Cartoon_Network_2010_logo.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/128.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Cartoonito",
+  "slug": "cartoonito",
+  "category": "infantil",
+  "logo": "https://i.imgur.com/6vYWCD0.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/134.m3u8",
   "ua": ""
  },
  {
@@ -725,6 +701,30 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/244.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Discovery Kids",
+  "slug": "discovery-kids",
+  "category": "infantil",
+  "logo": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Discovery%20Kids.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/264.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Disney Channel",
+  "slug": "disney-channel",
+  "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Disney Junior",
+  "slug": "disney-junior",
+  "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e3/2024_Disney_Jr._Logo.svg",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/284.m3u8",
   "ua": ""
  },
  {
@@ -771,7 +771,7 @@
   "name": "Garfield",
   "slug": "garfield",
   "category": "infantil",
-  "logo": "",
+  "logo": "https://i.imgur.com/9AMWllZ.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/486.m3u8",
   "ua": ""
  },
@@ -787,7 +787,7 @@
   "name": "Hey Arnold",
   "slug": "hey-arnold",
   "category": "infantil",
-  "logo": "",
+  "logo": "https://images.pluto.tv/channels/66c79221b1a34600087e264d/colorLogoPNG.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/551.m3u8",
   "ua": ""
  },
@@ -864,6 +864,38 @@
   "ua": ""
  },
  {
+  "name": "Nick Jr.",
+  "slug": "nick-jr",
+  "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nick_Jr._logo_2023_(outline).svg/960px-Nick_Jr._logo_2023_(outline).svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/729.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Nickelodeon",
+  "slug": "nickelodeon",
+  "category": "infantil",
+  "logo": "https://i.imgur.com/08ZUI9k.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/736.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Nicktoons",
+  "slug": "nicktoons",
+  "category": "infantil",
+  "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Nicktoons_Logo_2023.svg/1920px-Nicktoons_Logo_2023.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/735.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Pakapaka",
+  "slug": "pakapaka",
+  "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Paka-Paka-2025.svg/1920px-Paka-Paka-2025.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/748.m3u8",
+  "ua": ""
+ },
+ {
   "name": "Patoaventuras",
   "slug": "patoaventuras",
   "category": "infantil",
@@ -875,7 +907,7 @@
   "name": "Peppa Pig",
   "slug": "peppa-pig",
   "category": "infantil",
-  "logo": "",
+  "logo": "https://images.pluto.tv/channels/5d14fb6c84dd37df3b4290c5/colorLogoPNG_1730733871298.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/760.m3u8",
   "ua": ""
  },
@@ -891,7 +923,7 @@
   "name": "Rugrats",
   "slug": "rugrats",
   "category": "infantil",
-  "logo": "",
+  "logo": "https://images.pluto.tv/channels/5ea7215005d66d0007e8128a/colorLogoPNG.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/797.m3u8",
   "ua": ""
  },
@@ -917,6 +949,14 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/940.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Tooncast",
+  "slug": "tooncast",
+  "category": "infantil",
+  "logo": "https://i.imgur.com/3yXRbQy.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/941.m3u8",
   "ua": ""
  },
  {
@@ -955,7 +995,7 @@
   "name": "Doraemon",
   "slug": "doraemon",
   "category": "anime",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/0/01/Doraemon_Merch_EN_Logo.svg",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/297.m3u8",
   "ua": ""
  },
@@ -1011,7 +1051,7 @@
   "name": "Naruto",
   "slug": "naruto",
   "category": "anime",
-  "logo": "",
+  "logo": "https://i.imgur.com/M8X3Kvc.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/702.m3u8",
   "ua": ""
  },
@@ -1027,7 +1067,7 @@
   "name": "Pokémon",
   "slug": "pokemon",
   "category": "anime",
-  "logo": "",
+  "logo": "https://i.imgur.com/GEbRABE.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/773.m3u8",
   "ua": ""
  },
@@ -1067,159 +1107,15 @@
   "name": "Yu-Gi-Oh!",
   "slug": "yu-gi-oh",
   "category": "anime",
-  "logo": "",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/e10f9ed3-8112-4287-8355-cc00be4413a8/Wurl_Yu-Gi-Oh_Channel_Logo_light_Astridrdx.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1052.m3u8",
-  "ua": ""
- },
- {
-  "name": "Friends",
-  "slug": "friends",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/470.m3u8",
-  "ua": ""
- },
- {
-  "name": "Los 3 Chiflados",
-  "slug": "los-3-chiflados",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/619.m3u8",
-  "ua": ""
- },
- {
-  "name": "Malcolm",
-  "slug": "malcolm",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/640.m3u8",
-  "ua": ""
- },
- {
-  "name": "Malcolm HD",
-  "slug": "malcolm-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/641.m3u8",
-  "ua": ""
- },
- {
-  "name": "Mr. Bean",
-  "slug": "mr-bean",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/670.m3u8",
-  "ua": ""
- },
- {
-  "name": "Nosotros Los Guapos",
-  "slug": "nosotros-los-guapos",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/739.m3u8",
-  "ua": ""
- },
- {
-  "name": "The Big Bang Theory",
-  "slug": "the-big-bang-theory",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/899.m3u8",
-  "ua": ""
- },
- {
-  "name": "Two and a Half Men",
-  "slug": "two-and-a-half-men",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/973.m3u8",
-  "ua": ""
- },
- {
-  "name": "Caso Cerrado",
-  "slug": "caso-cerrado",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/138.m3u8",
-  "ua": ""
- },
- {
-  "name": "Elementary",
-  "slug": "elementary",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/363.m3u8",
-  "ua": ""
- },
- {
-  "name": "Game of Thrones",
-  "slug": "game-of-thrones",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/484.m3u8",
-  "ua": ""
- },
- {
-  "name": "Los Expedientes Secretos X",
-  "slug": "los-expedientes-secretos-x",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/623.m3u8",
-  "ua": ""
- },
- {
-  "name": "Smallville",
-  "slug": "smallville",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/812.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cantinflas",
-  "slug": "cantinflas",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/123.m3u8",
-  "ua": ""
- },
- {
-  "name": "Chapulín Colorado",
-  "slug": "chapulin-colorado",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/152.m3u8",
-  "ua": ""
- },
- {
-  "name": "Chespirito",
-  "slug": "chespirito",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/153.m3u8",
-  "ua": ""
- },
- {
-  "name": "Los Chicos del Barrio",
-  "slug": "los-chicos-del-barrio",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/622.m3u8",
-  "ua": ""
- },
- {
-  "name": "Family Guy (Padre de Familia)",
-  "slug": "family-guy-padre-de-familia",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/747.m3u8",
   "ua": ""
  },
  {
   "name": "Animal Planet",
   "slug": "animal-planet",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/2018_Animal_Planet_logo.svg/960px-2018_Animal_Planet_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/41.m3u8",
   "ua": ""
  },
@@ -1227,7 +1123,7 @@
   "name": "Discovery Channel",
   "slug": "discovery-channel",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Discovery_Channel_-_Logo_2019.svg/960px-Discovery_Channel_-_Logo_2019.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/247.m3u8",
   "ua": ""
  },
@@ -1235,7 +1131,7 @@
   "name": "Discovery Civilization",
   "slug": "discovery-civilization",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://i.imgur.com/41eTvi8.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/252.m3u8",
   "ua": ""
  },
@@ -1259,7 +1155,7 @@
   "name": "Discovery Theater HD",
   "slug": "discovery-theater-hd",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://i.imgur.com/T07gvEb.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/271.m3u8",
   "ua": ""
  },
@@ -1267,7 +1163,7 @@
   "name": "Discovery Turbo",
   "slug": "discovery-turbo",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://i.imgur.com/osCVMop.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/274.m3u8",
   "ua": ""
  },
@@ -1275,7 +1171,7 @@
   "name": "Discovery World",
   "slug": "discovery-world",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://i.imgur.com/yNFmUkE.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/276.m3u8",
   "ua": ""
  },
@@ -1283,7 +1179,7 @@
   "name": "H2",
   "slug": "h2",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/History2_logo_%282022%29.svg/500px-History2_logo_%282022%29.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/509.m3u8",
   "ua": ""
  },
@@ -1291,7 +1187,7 @@
   "name": "History Channel",
   "slug": "history-channel",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/History_Logo.svg/500px-History_Logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/558.m3u8",
   "ua": ""
  },
@@ -1299,7 +1195,7 @@
   "name": "Investigation Discovery",
   "slug": "investigation-discovery",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/InvestigationDiscoveryLogo2020.svg/960px-InvestigationDiscoveryLogo2020.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/579.m3u8",
   "ua": ""
  },
@@ -1307,7 +1203,7 @@
   "name": "Nat Geo",
   "slug": "nat-geo",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Natgeologo.svg/960px-Natgeologo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/703.m3u8",
   "ua": ""
  },
@@ -1315,8 +1211,112 @@
   "name": "Nat Geo Wild",
   "slug": "nat-geo-wild",
   "category": "documentales",
-  "logo": "",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/National_Geographic_Wild_logo.svg/960px-National_Geographic_Wild_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/709.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "A3 Series",
+  "slug": "a3-series",
+  "category": "espana",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/17.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "La 1 HD",
+  "slug": "la-1-hd",
+  "category": "espana",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/La_1_2026.svg/500px-La_1_2026.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "La 2 HD",
+  "slug": "la-2-hd",
+  "category": "espana",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/La_2_2026.svg/500px-La_2_2026.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/589.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "StarTVE",
+  "slug": "startve",
+  "category": "espana",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/838.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Las Estrellas",
+  "slug": "las-estrellas",
+  "category": "mexico",
+  "logo": "https://i.imgur.com/g5ShxZ7.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/118.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "A24",
+  "slug": "a24",
+  "category": "argentina",
+  "logo": "https://i.imgur.com/LnXQkIU.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1163.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "C5N",
+  "slug": "c5n",
+  "category": "argentina",
+  "logo": "https://i.imgur.com/5ZNZYjO.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1162.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "El Nueve (9)",
+  "slug": "el-nueve-9",
+  "category": "argentina",
+  "logo": "https://i.imgur.com/cJHP7bU.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/353.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "El Trece",
+  "slug": "el-trece",
+  "category": "argentina",
+  "logo": "https://i.imgur.com/TrgBAdA.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/362.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Telefe",
+  "slug": "telefe",
+  "category": "argentina",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/874.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Telefe HD",
+  "slug": "telefe-hd",
+  "category": "argentina",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1172.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Telefe Internacional",
+  "slug": "telefe-internacional",
+  "category": "argentina",
+  "logo": "https://i.imgur.com/HNcCX3h.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1166.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "El Trece (13)",
+  "slug": "el-trece-13",
+  "category": "chile",
+  "logo": "https://i.imgur.com/TrgBAdA.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/360.m3u8",
   "ua": ""
  }
 ]

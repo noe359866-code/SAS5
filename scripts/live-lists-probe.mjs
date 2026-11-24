@@ -17,6 +17,7 @@
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const fs = require('node:fs');
+const { enrichSeedWithLogos } = require('./live-logos.cjs');
 
 const GENERIC_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 const TIMEOUT = 10_000;
@@ -242,6 +243,25 @@ async function mapLimit(items, limit, fn) {
     seedSeen.add(k);
     return true;
   });
+
+  // Logos de iptv-org/database (best effort): la lista Magma no trae tvg-logo.
+  // Se conservan los logos de la semilla previa cuando el casado nuevo falla.
+  try {
+    let prev = [];
+    try { prev = JSON.parse(fs.readFileSync('lib/data/liveChannelsSeed.json', 'utf8')); } catch { /* primera vez */ }
+    const withLogo = await enrichSeedWithLogos(seed, prev);
+    say('');
+    say(`logos iptv-org: ${withLogo}/${seed.length} canales con logo`);
+  } catch (err) {
+    say('');
+    say(`logos iptv-org: no disponibles (${err && err.message})`);
+  }
+
+  // Orden estable del catálogo: por categoría y nombre alfabético.
+  const CAT_ORDER = ['deportes', 'entretenimiento', 'cine', 'infantil', 'anime', 'musica', 'noticias', 'documentales', 'espana', 'mexico', 'argentina', 'colombia', 'chile', 'peru'];
+  seed.sort((a, b) => CAT_ORDER.indexOf(a.category) - CAT_ORDER.indexOf(b.category)
+    || String(a.name).localeCompare(String(b.name), 'es'));
+
   fs.writeFileSync('.probe/live-channels.json', JSON.stringify(seed, null, 1) + '\n');
   console.log(`\\n.probe/live-channels.json (${seed.length} canales válidos)`);
  } catch (err) {

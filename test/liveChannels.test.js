@@ -30,7 +30,7 @@ describe('canales en vivo por categorías: semilla', () => {
     }
   });
 
-  test('las variantes [Opc.N] se colapsan en una sola tarjeta', () => {
+  test('las variantes [Opc.N] y de calidad se colapsan en una sola tarjeta', () => {
     // Nunca se muestra una tarjeta con el sufijo de variante
     for (const cat of live.activeCategories()) {
       assert.ok(!live.liveMetas(cat.key).some((m) => /\[Opc/i.test(m.name)), `Opc.N sin colapsar en ${cat.key}`);
@@ -38,6 +38,30 @@ describe('canales en vivo por categorías: semilla', () => {
     // Y la lógica de colapso recorta bien el sufijo (unitario, sin semilla)
     assert.equal(live.baseSlugOf('claro-sports-2-hd-mexico-opc-2'), 'claro-sports-2-hd-mexico');
     assert.equal(live.baseSlugOf('distrito-comedia'), 'distrito-comedia');
+    // «Telefe HD» no es otra tarjeta: es otra señal dentro de «Telefe»
+    const argentina = live.liveMetas('argentina').map((m) => m.name);
+    assert.ok(!argentina.includes('Telefe HD'), 'queda tarjeta de calidad suelta');
+    const telefe = live.liveChannelById('rlch:lv:argentina:telefe');
+    assert.ok(telefe.urls.length >= 2, 'Telefe debe juntar sus señales HD');
+    // Sin tarjeta base («La 1 HD» en España), la variante se queda como está
+    assert.ok(live.liveMetas('espana').some((m) => m.name === 'La 1 HD'));
+  });
+
+  test('los metadatos vienen ordenados y con logo cuando hay', () => {
+    // Orden alfabético dentro de cada categoría
+    for (const cat of live.activeCategories()) {
+      const names = live.liveMetas(cat.key).map((m) => m.name);
+      assert.deepEqual(names, [...names].sort((a, b) => a.localeCompare(b, 'es')), `orden en ${cat.key}`);
+    }
+    // Logos de iptv-org: una parte sólida de la semilla los trae (los canales
+    // de franquicia propios del proveedor usan el póster de respaldo)
+    const withLogo = seed.filter((c) => c.logo);
+    assert.ok(withLogo.length >= seed.length * 0.4, `pocos logos: ${withLogo.length}/${seed.length}`);
+    for (const c of withLogo) assert.match(c.logo, /^https:\/\//, c.name);
+    // Género y descripción llevan la etiqueta de la categoría
+    const meta = live.liveMetas('anime')[0];
+    assert.deepEqual(meta.genres, ['TV en vivo', 'Anime']);
+    assert.match(meta.description, /· Anime\./);
   });
 
   test('cada meta tiene id rlch:lv:, póster y tipo tv', () => {

@@ -170,10 +170,10 @@ async function mapLimit(items, limit, fn) {
   const rows = { ok: [], bad: [] };
   for (let i = 0; i < wanted.length; i++) {
     const { category, name, logo, group, source } = wanted[i];
-    const { ok, ua, state } = checks[i];
+    const { ok, ua, state } = checks[i].r;
     const line = `| ${name} | ${category} | ${group || '—'} | ${source} | ${redact(wanted[i].url)} | ${state}${ua ? ' · UA propio' : ''} |`;
-    (checks[i].ok ? rows.ok : rows.bad).push(line);
-    if (checks[i].ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: ua || '' });
+    (ok ? rows.ok : rows.bad).push(line);
+    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: ua || '' });
   }
 
   say(`## Válidos (${rows.ok.length})`);

@@ -108,15 +108,6 @@
   "ref": ""
  },
  {
-  "name": "ESPN 1 (Colombia)",
-  "slug": "espn-1-colombia",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1107.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "ESPN 1 (México)",
   "slug": "espn-1-mexico",
   "category": "deportes",
@@ -243,15 +234,6 @@
   "ref": ""
  },
  {
-  "name": "ESPN HD (Colombia)",
-  "slug": "espn-hd-colombia",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1161.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "ESPN Plus",
   "slug": "espn-plus",
   "category": "deportes",
@@ -329,15 +311,6 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/436.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "FOX Sports 2 HD",
-  "slug": "fox-sports-2-hd",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1092,15 +1065,6 @@
   "name": "Disney Channel",
   "slug": "disney-channel",
   "category": "infantil",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Disney Channel",
-  "slug": "disney-channel",
-  "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png",
   "url": "http://45.70.168.162:12316/play/a009/index.m3u8",
   "ua": "",
@@ -1728,15 +1692,6 @@
   "ref": ""
  },
  {
-  "name": "Telpin TV Pinamar",
-  "slug": "telpin-tv-pinamar",
-  "category": "musica",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtelpintvpinamar.png",
-  "url": "https://mistserver.telpin.com.ar:8443/hls/telpinlive/main_stream.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Tierramia TV",
   "slug": "tierramia-tv",
   "category": "musica",
@@ -2160,24 +2115,6 @@
   "ref": ""
  },
  {
-  "name": "La 1 HD",
-  "slug": "la-1-hd",
-  "category": "espana",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/La_1_2026.svg/500px-La_1_2026.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "La 2 HD",
-  "slug": "la-2-hd",
-  "category": "espana",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/La_2_2026.svg/500px-La_2_2026.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/589.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Star TVE",
   "slug": "star-tve",
   "category": "espana",
@@ -2309,6 +2246,15 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvunammexico.png",
   "url": "https://5e50264bd6766.streamlock.net/tvunam/videotvunam/chunklist_w1404092117_DVR.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "5TV (Corrientes)",
+  "slug": "5tv-corrientes",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CH5tvcorrientes.png",
+  "url": "http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2475,6 +2421,15 @@
   "ref": ""
  },
  {
+  "name": "Canal 34 (San Juan)",
+  "slug": "canal-34-san-juan",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal34sanjuan.png",
+  "url": "https://streamyes.alsolnet.com/canal34hd/live/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Canal 4 (Chubut)",
   "slug": "canal-4-chubut",
   "category": "argentina",
@@ -2552,6 +2507,15 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7santiagodelestero.png",
   "url": "https://stream.arcast.com.ar/envivo/castv/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Canal 9 (Chaco)",
+  "slug": "canal-9-chaco",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal9chaco.png",
+  "url": "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2943,6 +2907,15 @@
   "ref": ""
  },
  {
+  "name": "Ecuavisa",
+  "slug": "ecuavisa",
+  "category": "ecuador",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png",
+  "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Wuan+",
   "slug": "wuan",
   "category": "ecuador",
@@ -2966,6 +2939,15 @@
   "category": "guatemala",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHvisiontvguatemala.png",
   "url": "https://cdn.streamhispanatv.net:3076/live/visiontvlive.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "GEN TV",
+  "slug": "gen-tv",
+  "category": "paraguay",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHgenparaguay.png",
+  "url": "http://45.170.130.224:8000/play/a04j/index.m3u8",
   "ua": "",
   "ref": ""
  },

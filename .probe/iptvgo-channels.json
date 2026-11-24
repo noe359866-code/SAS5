@@ -10,56 +10,6 @@
   "unverified": true
  },
  {
-  "name": "===|||-Puerto Rico-|||===",
-  "slug": "puerto-rico",
-  "category": "puertorico",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Flag_of_Puerto_Rico.svg/1280px-Flag_of_Puerto_Rico.svg.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688584.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "▂ ▄ ▅ ▆☆ COSTA RICA ☆▆ ▅ ▄ ▂",
-  "slug": "costa-rica",
-  "category": "costarica",
-  "logo": "https://w7.pngwing.com/pngs/868/312/png-transparent-flag-of-costa-rica-flag-of-costa-rica-state-flag-flag-of-uganda-costa-rica-thumbnail.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688561.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "▂ ▄ ▅ ▆☆ NICARAGUA ☆▆ ▅ ▄ ▂",
-  "slug": "nicaragua",
-  "category": "nicaragua",
-  "logo": "https://logo.m3uassets.com/flagnicaragua.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688767.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "▂ ▄ ▅ ▆☆ VENEZUELA ☆▆ ▅ ▄ ▂",
-  "slug": "venezuela",
-  "category": "venezuela",
-  "logo": "https://cdn.freebiesupply.com/logos/large/2x/venezue-logo-png-transparent.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688492.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "14 | CHILEVISION HD",
-  "slug": "14-chilevision-hd",
-  "category": "chile",
-  "logo": "https://logo.m3uassets.com/chilevision.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688046.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "24 HORAS",
   "slug": "24-horas",
   "category": "chile",
@@ -70,7 +20,7 @@
   "unverified": true
  },
  {
-  "name": "24 Horas (HD) *",
+  "name": "24 Horas (HD)",
   "slug": "24-horas-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/24horas.png",
@@ -220,7 +170,7 @@
   "unverified": true
  },
  {
-  "name": "Alternativa TV (Huasco) (HD) *",
+  "name": "Alternativa TV (Huasco) (HD)",
   "slug": "alternativa-tv-huasco-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/alternativatv.png",
@@ -230,7 +180,7 @@
   "unverified": true
  },
  {
-  "name": "Alternativa TV (SDT) *",
+  "name": "Alternativa TV (SDT)",
   "slug": "alternativa-tv-sdt",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/alternativatv.png",
@@ -250,7 +200,7 @@
   "unverified": true
  },
  {
-  "name": "Amazonas) HD *",
+  "name": "Amazonas) HD",
   "slug": "amazonas-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/amazonastv.png",
@@ -300,7 +250,7 @@
   "unverified": true
  },
  {
-  "name": "Andes Televisión (Sicusani) HD *",
+  "name": "Andes Televisión (Sicusani) HD",
   "slug": "andes-television-sicusani-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/andestelevision.png",
@@ -330,7 +280,7 @@
   "unverified": true
  },
  {
-  "name": "Antofagasta .TV (HD) *",
+  "name": "Antofagasta .TV (HD)",
   "slug": "antofagasta-tv-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/antofagastatv.png",
@@ -1440,7 +1390,7 @@
   "unverified": true
  },
  {
-  "name": "ARG: LN+",
+  "name": "ARG: LN",
   "slug": "arg-ln",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/ln.png",
@@ -1730,7 +1680,7 @@
   "unverified": true
  },
  {
-  "name": "AsiriTV (Lima) HD *",
+  "name": "AsiriTV (Lima) HD",
   "slug": "asiritv-lima-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/asiritv.png",
@@ -1740,7 +1690,7 @@
   "unverified": true
  },
  {
-  "name": "ATACAMA (TV) (HD) *",
+  "name": "ATACAMA (TV) (HD)",
   "slug": "atacama-tv-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/atacamatv.png",
@@ -1750,7 +1700,7 @@
   "unverified": true
  },
  {
-  "name": "Atacama TV (Copiapó) (HD) *",
+  "name": "Atacama TV (Copiapó) (HD)",
   "slug": "atacama-tv-copiapo-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/atacamatv.png",
@@ -1820,7 +1770,7 @@
   "unverified": true
  },
  {
-  "name": "ATV +",
+  "name": "ATV",
   "slug": "atv",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/atv.png",
@@ -1850,7 +1800,7 @@
   "unverified": true
  },
  {
-  "name": "ATV SDT *",
+  "name": "ATV SDT",
   "slug": "atv-sdt",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/atv.png",
@@ -1860,7 +1810,7 @@
   "unverified": true
  },
  {
-  "name": "ATV SUR (Perú) HD *",
+  "name": "ATV SUR (Perú) HD",
   "slug": "atv-sur-peru-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/atvsur.png",
@@ -1900,7 +1850,7 @@
   "unverified": true
  },
  {
-  "name": "Aysén TV (HD) *",
+  "name": "Aysén TV (HD)",
   "slug": "aysen-tv-hd",
   "category": "chile",
   "logo": "",
@@ -1940,7 +1890,7 @@
   "unverified": true
  },
  {
-  "name": "Bella Asunción TV HD *",
+  "name": "Bella Asunción TV HD",
   "slug": "bella-asuncion-tv-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/tvbellaasuncion.png",
@@ -1960,7 +1910,7 @@
   "unverified": true
  },
  {
-  "name": "BEST CABLE (HatunTV) SDT *",
+  "name": "BEST CABLE (HatunTV) SDT",
   "slug": "best-cable-hatuntv-sdt",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/bestcableperu.png",
@@ -1970,7 +1920,7 @@
   "unverified": true
  },
  {
-  "name": "Best Cable Más Cumbia HD *",
+  "name": "Best Cable Más Cumbia HD",
   "slug": "best-cable-mas-cumbia-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/bestcablemascumbia.png",
@@ -1980,7 +1930,7 @@
   "unverified": true
  },
  {
-  "name": "Best Cable Music HD *",
+  "name": "Best Cable Music HD",
   "slug": "best-cable-music-hd",
   "category": "musica",
   "logo": "https://logo.m3uassets.com/bestcablemusic.png",
@@ -1990,7 +1940,7 @@
   "unverified": true
  },
  {
-  "name": "Best Cable Perú HD *",
+  "name": "Best Cable Perú HD",
   "slug": "best-cable-peru-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/bestcableperu.png",
@@ -2000,7 +1950,7 @@
   "unverified": true
  },
  {
-  "name": "Best Cable Sports Perú HD *",
+  "name": "Best Cable Sports Perú HD",
   "slug": "best-cable-sports-peru-hd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/bestcablesportsperu.png",
@@ -2020,7 +1970,7 @@
   "unverified": true
  },
  {
-  "name": "BHTV HD *",
+  "name": "BHTV HD",
   "slug": "bhtv-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/bht1.png",
@@ -2140,7 +2090,7 @@
   "unverified": true
  },
  {
-  "name": "Cable Netword TV SDT *",
+  "name": "Cable Netword TV SDT",
   "slug": "cable-netword-tv-sdt",
   "category": "peru",
   "logo": "",
@@ -2180,7 +2130,7 @@
   "unverified": true
  },
  {
-  "name": "Cajamarca TV SDT *",
+  "name": "Cajamarca TV SDT",
   "slug": "cajamarca-tv-sdt",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/cajamarcatv.png",
@@ -2190,7 +2140,7 @@
   "unverified": true
  },
  {
-  "name": "Campus TV (HD) *",
+  "name": "Campus TV (HD)",
   "slug": "campus-tv-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/campustv.png",
@@ -2200,7 +2150,7 @@
   "unverified": true
  },
  {
-  "name": "Campus TV (Talca) (HD) *",
+  "name": "Campus TV (Talca) (HD)",
   "slug": "campus-tv-talca-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/campustv.png",
@@ -2360,7 +2310,7 @@
   "unverified": true
  },
  {
-  "name": "Canal 13 C (UHD) *",
+  "name": "Canal 13 C (UHD)",
   "slug": "canal-13-c-uhd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/canal13.png",
@@ -2480,7 +2430,7 @@
   "unverified": true
  },
  {
-  "name": "Canal 2 (San Antonio) (HD) *",
+  "name": "Canal 2 (San Antonio) (HD)",
   "slug": "canal-2-san-antonio-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/canal2.png",
@@ -2730,7 +2680,7 @@
   "unverified": true
  },
  {
-  "name": "Canal 74 San Antonio (FHD) *",
+  "name": "Canal 74 San Antonio (FHD)",
   "slug": "canal-74-san-antonio-fhd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/canal74sanantonio.png",
@@ -2740,7 +2690,7 @@
   "unverified": true
  },
  {
-  "name": "CANAL 74 San Antonio (HD) *",
+  "name": "CANAL 74 San Antonio (HD)",
   "slug": "canal-74-san-antonio-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/canal74sanantonio.png",
@@ -2760,7 +2710,7 @@
   "unverified": true
  },
  {
-  "name": "Canal 8 (Catacaos) SD *",
+  "name": "Canal 8 (Catacaos) SD",
   "slug": "canal-8-catacaos-sd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/canal8.png",
@@ -2810,7 +2760,7 @@
   "unverified": true
  },
  {
-  "name": "Canal 9 Bío Bío Televisión (UHD) *",
+  "name": "Canal 9 Bío Bío Televisión (UHD)",
   "slug": "canal-9-bio-bio-television-uhd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/canal9biobiotelevision.png",
@@ -2970,7 +2920,7 @@
   "unverified": true
  },
  {
-  "name": "Canal Cultura Venezuela (FHD)*",
+  "name": "Canal Cultura Venezuela (FHD)",
   "slug": "canal-cultura-venezuela-fhd",
   "category": "documentales",
   "logo": "https://logo.m3uassets.com/canalculturavenezuela.png",
@@ -3000,7 +2950,7 @@
   "unverified": true
  },
  {
-  "name": "Canal Deportes 13D Chile (HD) *",
+  "name": "Canal Deportes 13D Chile (HD)",
   "slug": "canal-deportes-13d-chile-hd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/canal+deportes.png",
@@ -3080,7 +3030,7 @@
   "unverified": true
  },
  {
-  "name": "Canal i (HD)+",
+  "name": "Canal i (HD)",
   "slug": "canal-i-hd",
   "category": "venezuela",
   "logo": "https://logo.m3uassets.com/canali.png",
@@ -3090,7 +3040,7 @@
   "unverified": true
  },
  {
-  "name": "Canal Identidad Peruana HD *",
+  "name": "Canal Identidad Peruana HD",
   "slug": "canal-identidad-peruana-hd",
   "category": "peru",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Logo_Canal_iPe.png/880px-Logo_Canal_iPe.png",
@@ -3140,7 +3090,7 @@
   "unverified": true
  },
  {
-  "name": "Canal KENADE Anime (HD) *",
+  "name": "Canal KENADE Anime (HD)",
   "slug": "canal-kenade-anime-hd",
   "category": "anime",
   "logo": "https://cdn.m3u.cl/logo/1466_Kanade_TV.png",
@@ -3170,7 +3120,7 @@
   "unverified": true
  },
  {
-  "name": "Canal LOCAL (FHD) Quillota*",
+  "name": "Canal LOCAL (FHD) Quillota",
   "slug": "canal-local-fhd-quillota",
   "category": "chile",
   "logo": "",
@@ -3240,7 +3190,7 @@
   "unverified": true
  },
  {
-  "name": "Canal PERUANISIMA TV *",
+  "name": "Canal PERUANISIMA TV",
   "slug": "canal-peruanisima-tv",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/tvperuanisima.png",
@@ -3250,7 +3200,7 @@
   "unverified": true
  },
  {
-  "name": "Canal Pura NOTICIAS HD *",
+  "name": "Canal Pura NOTICIAS HD",
   "slug": "canal-pura-noticias-hd",
   "category": "noticias",
   "logo": "https://logo.m3uassets.com/puranoticiatv.png",
@@ -4380,6 +4330,16 @@
   "unverified": true
  },
  {
+  "name": "CAR: CVM",
+  "slug": "car-cvm",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cvmtv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303657.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "CAR: Depelicula",
   "slug": "car-depelicula",
   "category": "cine",
@@ -5010,7 +4970,7 @@
   "unverified": true
  },
  {
-  "name": "Caracola TV (Peñalolén) (HD) *",
+  "name": "Caracola TV (Peñalolén) (HD)",
   "slug": "caracola-tv-penalolen-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/caracolatv.png",
@@ -5700,7 +5660,7 @@
   "unverified": true
  },
  {
-  "name": "CDTV (FHD) *",
+  "name": "CDTV (FHD)",
   "slug": "cdtv-fhd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/cdtv.png",
@@ -5730,7 +5690,7 @@
   "unverified": true
  },
  {
-  "name": "CharapaTV (Pucallpa) *",
+  "name": "CharapaTV (Pucallpa)",
   "slug": "charapatv-pucallpa",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/charapatv.png",
@@ -5740,7 +5700,7 @@
   "unverified": true
  },
  {
-  "name": "Chicos IPe FHD *",
+  "name": "Chicos IPe FHD",
   "slug": "chicos-ipe-fhd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/chicosipe.png",
@@ -5750,7 +5710,7 @@
   "unverified": true
  },
  {
-  "name": "Chile Channel TV (HD) *",
+  "name": "Chile Channel TV (HD)",
   "slug": "chile-channel-tv-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/channelt1.png",
@@ -5785,6 +5745,16 @@
   "category": "chile",
   "logo": "https://www.canal19.do/wp-content/uploads/2018/06/Icono-pagina-cinevision-canal-19-e1530198146775-250x250.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688654.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CHILEVISION HD",
+  "slug": "chilevision-hd",
+  "category": "chile",
+  "logo": "https://logo.m3uassets.com/chilevision.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688046.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5930,7 +5900,7 @@
   "unverified": true
  },
  {
-  "name": "CMD Televisión HD *",
+  "name": "CMD Televisión HD",
   "slug": "cmd-television-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/cmbtelevision.png",
@@ -5950,7 +5920,7 @@
   "unverified": true
  },
  {
-  "name": "CNC Digital (Iquitos) SDT *",
+  "name": "CNC Digital (Iquitos) SDT",
   "slug": "cnc-digital-iquitos-sdt",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/cncdigital.png",
@@ -6010,7 +5980,7 @@
   "unverified": true
  },
  {
-  "name": "CNTV INFANTIL (HD) *",
+  "name": "CNTV INFANTIL (HD)",
   "slug": "cntv-infantil-hd",
   "category": "infantil",
   "logo": "",
@@ -6050,7 +6020,7 @@
   "unverified": true
  },
  {
-  "name": "Conecta2TV (Lima) HD *",
+  "name": "Conecta2TV (Lima) HD",
   "slug": "conecta2tv-lima-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/conecta2tv.png",
@@ -6070,7 +6040,7 @@
   "unverified": true
  },
  {
-  "name": "Controversia TV (Moyobamba) HD *",
+  "name": "Controversia TV (Moyobamba) HD",
   "slug": "controversia-tv-moyobamba-hd",
   "category": "peru",
   "logo": "",
@@ -6130,7 +6100,7 @@
   "unverified": true
  },
  {
-  "name": "CreoTV (Cajamarca) HD *",
+  "name": "CreoTV (Cajamarca) HD",
   "slug": "creotv-cajamarca-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/creotv.png",
@@ -6140,7 +6110,7 @@
   "unverified": true
  },
  {
-  "name": "CreoTV (Ica) SD *",
+  "name": "CreoTV (Ica) SD",
   "slug": "creotv-ica-sd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/creotv.png",
@@ -6190,7 +6160,7 @@
   "unverified": true
  },
  {
-  "name": "Cultura 24 SD *",
+  "name": "Cultura 24 SD",
   "slug": "cultura-24-sd",
   "category": "documentales",
   "logo": "https://logo.m3uassets.com/cultura24.png",
@@ -6200,7 +6170,7 @@
   "unverified": true
  },
  {
-  "name": "Cultura 24 TV HD *",
+  "name": "Cultura 24 TV HD",
   "slug": "cultura-24-tv-hd",
   "category": "documentales",
   "logo": "https://logo.m3uassets.com/cultura24.png",
@@ -6210,7 +6180,7 @@
   "unverified": true
  },
  {
-  "name": "Cultura Online (HD) *",
+  "name": "Cultura Online (HD)",
   "slug": "cultura-online-hd",
   "category": "documentales",
   "logo": "https://logo.m3uassets.com/culturaonline.png",
@@ -6250,7 +6220,7 @@
   "unverified": true
  },
  {
-  "name": "DECIMA TV (HD) *",
+  "name": "DECIMA TV (HD)",
   "slug": "decima-tv-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/decimatv.png",
@@ -6260,7 +6230,7 @@
   "unverified": true
  },
  {
-  "name": "Diario Hechicera (Tumbes) HD *",
+  "name": "Diario Hechicera (Tumbes) HD",
   "slug": "diario-hechicera-tumbes-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/diariohechicera.png",
@@ -6300,7 +6270,7 @@
   "unverified": true
  },
  {
-  "name": "DMJ (Cuzco) HD *",
+  "name": "DMJ (Cuzco) HD",
   "slug": "dmj-cuzco-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/dmj.png",
@@ -6310,7 +6280,7 @@
   "unverified": true
  },
  {
-  "name": "DMJ Cuzco TV (C) HD *",
+  "name": "DMJ Cuzco TV (C) HD",
   "slug": "dmj-cuzco-tv-c-hd",
   "category": "peru",
   "logo": "https://www.shutterstock.com/image-vector/cusco-peru-america-skyline-silhouette-260nw-782690923.jpg",
@@ -6840,7 +6810,7 @@
   "unverified": true
  },
  {
-  "name": "EVA VISION TV (HD) *",
+  "name": "EVA VISION TV (HD)",
   "slug": "eva-vision-tv-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/cavisiontv.png",
@@ -6920,7 +6890,7 @@
   "unverified": true
  },
  {
-  "name": "Expresión (Tacna) HD *",
+  "name": "Expresión (Tacna) HD",
   "slug": "expresion-tacna-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/expresion.png",
@@ -6930,7 +6900,7 @@
   "unverified": true
  },
  {
-  "name": "FAN Pop TV (HD) *",
+  "name": "FAN Pop TV (HD)",
   "slug": "fan-pop-tv-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/fanpoptv.png",
@@ -6980,7 +6950,7 @@
   "unverified": true
  },
  {
-  "name": "Genios TV (Moyobamba) HD *",
+  "name": "Genios TV (Moyobamba) HD",
   "slug": "genios-tv-moyobamba-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/geniostv.png",
@@ -7110,7 +7080,7 @@
   "unverified": true
  },
  {
-  "name": "Hatun TV HD *",
+  "name": "Hatun TV HD",
   "slug": "hatun-tv-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/hatuntv.png",
@@ -7160,7 +7130,7 @@
   "unverified": true
  },
  {
-  "name": "HIPERCONECTADOS TV (HD) *",
+  "name": "HIPERCONECTADOS TV (HD)",
   "slug": "hiperconectados-tv-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/hiperconectadostv.png",
@@ -7290,7 +7260,7 @@
   "unverified": true
  },
  {
-  "name": "Hoynet SDT *",
+  "name": "Hoynet SDT",
   "slug": "hoynet-sdt",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/hoynet.png",
@@ -7300,7 +7270,7 @@
   "unverified": true
  },
  {
-  "name": "Huacho Perú TV HD *",
+  "name": "Huacho Perú TV HD",
   "slug": "huacho-peru-tv-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/huachoperutv.png",
@@ -7310,7 +7280,7 @@
   "unverified": true
  },
  {
-  "name": "IDENTIDAD TV (Chanchamayo) HD *",
+  "name": "IDENTIDAD TV (Chanchamayo) HD",
   "slug": "identidad-tv-chanchamayo-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/identidadtv.png",
@@ -7320,7 +7290,7 @@
   "unverified": true
  },
  {
-  "name": "Identidad TV HD *",
+  "name": "Identidad TV HD",
   "slug": "identidad-tv-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/identidadtv.png",
@@ -7330,7 +7300,7 @@
   "unverified": true
  },
  {
-  "name": "IDENTIDAD TV SD *",
+  "name": "IDENTIDAD TV SD",
   "slug": "identidad-tv-sd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/identidadtv.png",
@@ -7350,7 +7320,7 @@
   "unverified": true
  },
  {
-  "name": "Imperial Televisión (Huancayo) HD *",
+  "name": "Imperial Televisión (Huancayo) HD",
   "slug": "imperial-television-huancayo-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/imperialtelevision.png",
@@ -7370,7 +7340,7 @@
   "unverified": true
  },
  {
-  "name": "Innova FM (Bagua Grande) SDT *",
+  "name": "Innova FM (Bagua Grande) SDT",
   "slug": "innova-fm-bagua-grande-sdt",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/innovafmtv.png",
@@ -7380,7 +7350,7 @@
   "unverified": true
  },
  {
-  "name": "Intuitiva TV HD *",
+  "name": "Intuitiva TV HD",
   "slug": "intuitiva-tv-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/intuitivatv.png",
@@ -7400,7 +7370,7 @@
   "unverified": true
  },
  {
-  "name": "JNE TV HD *",
+  "name": "JNE TV HD",
   "slug": "jne-tv-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/jnetv.png",
@@ -7530,7 +7500,7 @@
   "unverified": true
  },
  {
-  "name": "KORA TV (Pucallpa) HD *",
+  "name": "KORA TV (Pucallpa) HD",
   "slug": "kora-tv-pucallpa-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/koratv.png",
@@ -7540,7 +7510,7 @@
   "unverified": true
  },
  {
-  "name": "La Abeja HD *",
+  "name": "La Abeja HD",
   "slug": "la-abeja-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/laabeja.png",
@@ -7560,7 +7530,7 @@
   "unverified": true
  },
  {
-  "name": "La Luz TV HD *",
+  "name": "La Luz TV HD",
   "slug": "la-luz-tv-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/laluztv.png",
@@ -7610,7 +7580,7 @@
   "unverified": true
  },
  {
-  "name": "La Selva Televisión (Rioja) HD *",
+  "name": "La Selva Televisión (Rioja) HD",
   "slug": "la-selva-television-rioja-hd",
   "category": "peru",
   "logo": "",
@@ -7680,7 +7650,7 @@
   "unverified": true
  },
  {
-  "name": "Latina Noticias HD*",
+  "name": "Latina Noticias HD",
   "slug": "latina-noticias-hd",
   "category": "noticias",
   "logo": "",
@@ -7740,7 +7710,7 @@
   "unverified": true
  },
  {
-  "name": "LIMA LIVE TV HD *",
+  "name": "LIMA LIVE TV HD",
   "slug": "lima-live-tv-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/limalive.png",
@@ -7750,7 +7720,7 @@
   "unverified": true
  },
  {
-  "name": "LimaLive SDT *",
+  "name": "LimaLive SDT",
   "slug": "limalive-sdt",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/limalive.png",
@@ -7770,7 +7740,7 @@
   "unverified": true
  },
  {
-  "name": "LOTPLUS TV (PIURA) HD *",
+  "name": "LOTPLUS TV (PIURA) HD",
   "slug": "lotplus-tv-piura-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/lotplustv.png",
@@ -7810,7 +7780,7 @@
   "unverified": true
  },
  {
-  "name": "MÁS + TV Chile (HD) *",
+  "name": "MÁS + TV Chile (HD)",
   "slug": "mas-tv-chile-hd",
   "category": "chile",
   "logo": "http://xplatinmedia.com:8080/images/863df0580c0e5ccb787563db3a7f5895.png",
@@ -7820,7 +7790,7 @@
   "unverified": true
  },
  {
-  "name": "MASTER TV Moyobamba HD *",
+  "name": "MASTER TV Moyobamba HD",
   "slug": "master-tv-moyobamba-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/mastertv.png",
@@ -7830,7 +7800,7 @@
   "unverified": true
  },
  {
-  "name": "MaticesTV (Cañete) HD *",
+  "name": "MaticesTV (Cañete) HD",
   "slug": "maticestv-canete-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/maticestv.png",
@@ -7890,7 +7860,7 @@
   "unverified": true
  },
  {
-  "name": "Mega TV (Arequipa) SD *",
+  "name": "Mega TV (Arequipa) SD",
   "slug": "mega-tv-arequipa-sd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/megatv.png",
@@ -7900,7 +7870,7 @@
   "unverified": true
  },
  {
-  "name": "Mega TV (Tarapoto) SDT *",
+  "name": "Mega TV (Tarapoto) SDT",
   "slug": "mega-tv-tarapoto-sdt",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/megatv.png",
@@ -7910,7 +7880,7 @@
   "unverified": true
  },
  {
-  "name": "Meganoticias (FHD) *",
+  "name": "Meganoticias (FHD)",
   "slug": "meganoticias-fhd",
   "category": "noticias",
   "logo": "https://logo.m3uassets.com/meganoticias.png",
@@ -7960,7 +7930,7 @@
   "unverified": true
  },
  {
-  "name": "Metropolitana del Cuzco (CCTVRadio) HD *",
+  "name": "Metropolitana del Cuzco (CCTVRadio) HD",
   "slug": "metropolitana-del-cuzco-cctvradio-hd",
   "category": "musica",
   "logo": "https://logo.m3uassets.com/metropolitanadelcuzco.png",
@@ -7980,7 +7950,7 @@
   "unverified": true
  },
  {
-  "name": "Millenium 109 FM (Lamas) HD *",
+  "name": "Millenium 109 FM (Lamas) HD",
   "slug": "millenium-109-fm-lamas-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/millenium109fm.png",
@@ -7990,7 +7960,7 @@
   "unverified": true
  },
  {
-  "name": "Millenium 49 TV (Pucallpa) HD *",
+  "name": "Millenium 49 TV (Pucallpa) HD",
   "slug": "millenium-49-tv-pucallpa-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/milleniumtv.png",
@@ -8010,7 +7980,7 @@
   "unverified": true
  },
  {
-  "name": "Monterrico Hipódromo FHD *",
+  "name": "Monterrico Hipódromo FHD",
   "slug": "monterrico-hipodromo-fhd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/hipodromomonterrico1.png",
@@ -8030,7 +8000,7 @@
   "unverified": true
  },
  {
-  "name": "Monterrico TV FHD *",
+  "name": "Monterrico TV FHD",
   "slug": "monterrico-tv-fhd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/monterricotv.png",
@@ -8110,7 +8080,7 @@
   "unverified": true
  },
  {
-  "name": "MTV Más (Ancash) HD *",
+  "name": "MTV Más (Ancash) HD",
   "slug": "mtv-mas-ancash-hd",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/mtv.png",
@@ -8160,7 +8130,7 @@
   "unverified": true
  },
  {
-  "name": "MX @prende +",
+  "name": "MX @prende",
   "slug": "mx-prende",
   "category": "mexico",
   "logo": "https://logo.m3uassets.com/aprendetv.png",
@@ -9320,7 +9290,7 @@
   "unverified": true
  },
  {
-  "name": "Opinión SUR Niños (SDT) *",
+  "name": "Opinión SUR Niños (SDT)",
   "slug": "opinion-sur-ninos-sdt",
   "category": "infantil",
   "logo": "https://logo.m3uassets.com/opinionsur.png",
@@ -9390,7 +9360,7 @@
   "unverified": true
  },
  {
-  "name": "PeruvianRadio TV SD *",
+  "name": "PeruvianRadio TV SD",
   "slug": "peruvianradio-tv-sd",
   "category": "musica",
   "logo": "https://logo.m3uassets.com/peruvianradiotv.png",
@@ -9400,7 +9370,7 @@
   "unverified": true
  },
  {
-  "name": "Pichilemu TV (HD) *",
+  "name": "Pichilemu TV (HD)",
   "slug": "pichilemu-tv-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/pichilemutv.png",
@@ -9420,7 +9390,7 @@
   "unverified": true
  },
  {
-  "name": "POP TV (FHD) *",
+  "name": "POP TV (FHD)",
   "slug": "pop-tv-fhd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/poptv.png",
@@ -9430,7 +9400,7 @@
   "unverified": true
  },
  {
-  "name": "Primavera 15 Radiotelevisión (Moquegua) HD *",
+  "name": "Primavera 15 Radiotelevisión (Moquegua) HD",
   "slug": "primavera-15-radiotelevision-moquegua-hd",
   "category": "musica",
   "logo": "https://logo.m3uassets.com/primavera15.png",
@@ -9460,7 +9430,7 @@
   "unverified": true
  },
  {
-  "name": "Puncón TV (UHD) *",
+  "name": "Puncón TV (UHD)",
   "slug": "puncon-tv-uhd",
   "category": "chile",
   "logo": "",
@@ -9470,7 +9440,7 @@
   "unverified": true
  },
  {
-  "name": "Pura Noticias (UHD) *",
+  "name": "Pura Noticias (UHD)",
   "slug": "pura-noticias-uhd",
   "category": "noticias",
   "logo": "https://logo.m3uassets.com/puranoticiatv.png",
@@ -9480,7 +9450,7 @@
   "unverified": true
  },
  {
-  "name": "Que Hubo TV+",
+  "name": "Que Hubo TV",
   "slug": "que-hubo-tv",
   "category": "honduras",
   "logo": "https://logo.m3uassets.com/qhubotv.png",
@@ -9490,7 +9460,7 @@
   "unverified": true
  },
  {
-  "name": "Radio San Borja TV HD *",
+  "name": "Radio San Borja TV HD",
   "slug": "radio-san-borja-tv-hd",
   "category": "musica",
   "logo": "https://logo.m3uassets.com/radiosanborjatv.png",
@@ -9500,7 +9470,7 @@
   "unverified": true
  },
  {
-  "name": "Radio Tendencias FHD *",
+  "name": "Radio Tendencias FHD",
   "slug": "radio-tendencias-fhd",
   "category": "musica",
   "logo": "https://logo.m3uassets.com/radiotvtendencias.png",
@@ -9520,7 +9490,7 @@
   "unverified": true
  },
  {
-  "name": "Radio TV Juanjui SDT *",
+  "name": "Radio TV Juanjui SDT",
   "slug": "radio-tv-juanjui-sdt",
   "category": "musica",
   "logo": "https://logo.m3uassets.com/radiotvjuanjui.png",
@@ -9530,7 +9500,7 @@
   "unverified": true
  },
  {
-  "name": "RadioInka (Abancay) FHD *",
+  "name": "RadioInka (Abancay) FHD",
   "slug": "radioinka-abancay-fhd",
   "category": "musica",
   "logo": "https://logo.m3uassets.com/radioinkatv.png",
@@ -9540,7 +9510,7 @@
   "unverified": true
  },
  {
-  "name": "RadioTV Turbo MIX (Yurimaguas) FHD *",
+  "name": "RadioTV Turbo MIX (Yurimaguas) FHD",
   "slug": "radiotv-turbo-mix-yurimaguas-fhd",
   "category": "musica",
   "logo": "",
@@ -9780,7 +9750,7 @@
   "unverified": true
  },
  {
-  "name": "REFORMA TV HD+",
+  "name": "REFORMA TV HD",
   "slug": "reforma-tv-hd",
   "category": "venezuela",
   "logo": "https://logo.m3uassets.com/reformatv.png",
@@ -9930,7 +9900,7 @@
   "unverified": true
  },
  {
-  "name": "San Carlos TV (Ñuble) (HD) *",
+  "name": "San Carlos TV (Ñuble) (HD)",
   "slug": "san-carlos-tv-nuble-hd",
   "category": "chile",
   "logo": "",
@@ -10070,7 +10040,7 @@
   "unverified": true
  },
  {
-  "name": "T13 (HD) *",
+  "name": "T13 (HD)",
   "slug": "t13-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/t13.png",
@@ -10080,7 +10050,7 @@
   "unverified": true
  },
  {
-  "name": "T13 (SD) *",
+  "name": "T13 (SD)",
   "slug": "t13-sd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/t13.png",
@@ -10690,7 +10660,7 @@
   "unverified": true
  },
  {
-  "name": "Tendencias (UHD) *",
+  "name": "Tendencias (UHD)",
   "slug": "tendencias-uhd",
   "category": "chile",
   "logo": "",
@@ -10710,7 +10680,7 @@
   "unverified": true
  },
  {
-  "name": "Tevex (HD) *",
+  "name": "Tevex (HD)",
   "slug": "tevex-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/tevex.png",
@@ -10720,7 +10690,7 @@
   "unverified": true
  },
  {
-  "name": "Thema (HD) *",
+  "name": "Thema (HD)",
   "slug": "thema-hd",
   "category": "chile",
   "logo": "",
@@ -10730,7 +10700,7 @@
   "unverified": true
  },
  {
-  "name": "Thema Televisión (La Serena) (HD) *",
+  "name": "Thema Televisión (La Serena) (HD)",
   "slug": "thema-television-la-serena-hd",
   "category": "chile",
   "logo": "",
@@ -10790,7 +10760,7 @@
   "unverified": true
  },
  {
-  "name": "TNE (HD) *",
+  "name": "TNE (HD)",
   "slug": "tne-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/tne.png",
@@ -10880,7 +10850,7 @@
   "unverified": true
  },
  {
-  "name": "TV 8 Concepcion (HD) *",
+  "name": "TV 8 Concepcion (HD)",
   "slug": "tv-8-concepcion-hd",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/tv8concepcion.png",
@@ -11010,7 +10980,7 @@
   "unverified": true
  },
  {
-  "name": "TV Quellón (UHD) *",
+  "name": "TV Quellón (UHD)",
   "slug": "tv-quellon-uhd",
   "category": "chile",
   "logo": "",
@@ -11970,7 +11940,7 @@
   "unverified": true
  },
  {
-  "name": "Ve Plus (SDT)*",
+  "name": "Ve Plus (SDT)",
   "slug": "ve-plus-sdt",
   "category": "venezuela",
   "logo": "",
@@ -12100,7 +12070,7 @@
   "unverified": true
  },
  {
-  "name": "Visión Noticias Perú (VNP) HD *",
+  "name": "Visión Noticias Perú (VNP) HD",
   "slug": "vision-noticias-peru-vnp-hd",
   "category": "noticias",
   "logo": "https://logo.m3uassets.com/univisionnoticias.png",
@@ -12110,7 +12080,7 @@
   "unverified": true
  },
  {
-  "name": "Visión Noticias VNP FHD *",
+  "name": "Visión Noticias VNP FHD",
   "slug": "vision-noticias-vnp-fhd",
   "category": "noticias",
   "logo": "https://logo.m3uassets.com/univisionnoticias.png",
@@ -12140,7 +12110,7 @@
   "unverified": true
  },
  {
-  "name": "VNP TV (Noticias) SDT *",
+  "name": "VNP TV (Noticias) SDT",
   "slug": "vnp-tv-noticias-sdt",
   "category": "noticias",
   "logo": "https://pbs.twimg.com/profile_images/1422217356932222981/7x6h0HiY_400x400.jpg",

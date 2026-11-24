@@ -56,9 +56,9 @@ const SITE_MANIFEST = JSON.stringify({
     { src: '/assets/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
   ],
 });
-const CATALOG_RE = /^\/catalog\/(movie|series|anime)\/([^/]+?)(?:\/([^/]+))?\.json$/;
-const META_RE = /^\/meta\/(movie|series)\/(.+)\.json$/;
-const STREAM_RE = /^\/stream\/(movie|series)\/(.+)\.json$/;
+const CATALOG_RE = /^\/catalog\/(movie|series|anime|tv)\/([^/]+?)(?:\/([^/]+))?\.json$/;
+const META_RE = /^\/meta\/(movie|series|tv)\/(.+)\.json$/;
+const STREAM_RE = /^\/stream\/(movie|series|tv)\/(.+)\.json$/;
 // Mismo límite que lib/userConfig.js: una config "completa" generada por
 // /configure ocupa ~600 caracteres, así que un tope de 512 la rechazaba
 // (404 invalid_config → Stremio sin manifest ni streams).

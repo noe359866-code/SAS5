@@ -39,6 +39,15 @@ Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro po
 
 **Instalaciones existentes:** las claves se guardan por nombre. Se descartan las fuentes retiradas sin añadir otras a una selección que aún contenga claves vigentes. Las claves `gnulahd`, `videoapp`, `pelisplus`, `gnulaone`, `ultra`, `tubeonline` y `mirandogratis` se retiraron el 19-11-2026: una configuración antigua que las incluya las descarta sin tocar las vigentes. Si una lista antigua solo contiene fuentes retiradas, se aplica el valor por defecto, como antes: las fuentes que permite el despliegue para un enlace personal y el registro actual para `STREAM_PROVIDERS`. Una selección personal vacía (`streams: []`) y `STREAM_PROVIDERS=off` siguen apagando todas las fuentes.
 
+## Canales de deportes en vivo
+
+El 24-11-2026 se sumó el catálogo **«⚽ Deportes en vivo»** (tipo `tv` de Stremio, ids `rlch:<canal>`) con 20 canales: ESPN, ESPN 2/3/Premium/Deportes, Fox Sports/1/2/Deportes, DSports/DSports 2/DSports+ (DGO), DAZN y DAZN Combat, TNT Sports, TyC Sports, Win Sports, Claro Sports, beIN Sports XTRA en Español y Pluto TV Deportes.
+
+- **Proveedor**: las listas públicas de [iptv-org](https://iptv-org.github.io/iptv) (`categories/sports` + países latinos), cacheadas 12 h por isolate. Cada canal tiene un `match` por nombre y un `fallback` con la última URL verificada por la sonda (`.probe/sports-lists.md`), por si la lista viva no lo trae en ese momento.
+- **Barra de calidad**: solo señales sin marca `[Geo-blocked]`/`[Not 24/7]` y con verificación HLS real en la sonda; la señal principal de DAZN, ESPN Deportes y DSports no tiene URL pública estable y entra solo si la lista la revive.
+- **Streams**: HLS directo (`notWebReady`, sin cabeceras especiales), cacheado 4 minutos porque las señales rotan.
+- La casilla **«TV · Canales de deportes en vivo»** de `/configure` activa o quita el catálogo (activado por defecto).
+
 El 24-11-2026 se sumaron HackStore (`hackstore.mx`) y AllCalidad (`allcalidad.re`) tras medir su cadena completa con el propio código del addon: dos instancias más del CMS JSON con visor Vimeos, con catálogos distintos. El informe de candidatas, incluidas las descartadas, está en [proveedores-2026-11-24.md](docs/proveedores-2026-11-24.md).
 
 Se retiraron FlixLatam, PlayLatinSRC, AnimeOnlineNinja y Cuevana 3 porque no dieron una ruta de reproducción fiable en los controles. El 19-11-2026 se retiraron también GnulaHD, VideoApp, PelisPlus, GnulaOne, Ultra, TubeOnLine y MirandoGratis: en las validaciones en vivo no publicaban un medio utilizable de forma consistente (ver [fuentes retiradas](docs/fuentes-retiradas.md)). FuegoCine volvió el 19-11-2026 con otro camino: el fallo de entonces era el sitemap, y la ruta que sí publica el medio es la página `/movies/watch/…` con el visor de UnLimPlay. Se conservan los informes históricos de [FlixLatam y Cuevana 3](docs/flixlatam-cuevana.md), [FuegoCine](docs/fuegocine.md) y [PlayLatinSRC](docs/playlatinsrc-2026-11-17.md). Las variables `PLAYLATIN` y `PLAYLATIN_URL` ya no tienen efecto.

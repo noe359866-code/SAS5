@@ -12,6 +12,7 @@ on:
       - 'scripts/anime-players7-probe.mjs'
       - 'scripts/anime-players8-probe.mjs'
       - 'scripts/anime-players9-probe.mjs'
+      - 'scripts/anime-otakustv-probe.mjs'
 
 permissions:
   contents: write
@@ -37,13 +38,15 @@ jobs:
         run: node scripts/anime-players8-probe.mjs
       - name: Contexto HTML de OtakusTV
         run: node scripts/anime-players9-probe.mjs
+      - name: Estructura de OtakusTV
+        run: node scripts/anime-otakustv-probe.mjs
       - name: Devolver el resultado a la rama
         if: always()
         run: |
           test -s .probe/anime-candidates2.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          git add -f .probe/anime-candidates2.md .probe/anime-players5.md .probe/anime-players6.md .probe/anime-players7.md .probe/anime-players8.md .probe/anime-players9.md
+          git add -f .probe/anime-candidates2.md .probe/anime-players5.md .probe/anime-players6.md .probe/anime-players7.md .probe/anime-players8.md .probe/anime-players9.md .probe/otakustv-structure.md
           git diff --cached --quiet || git commit -m "sonda: candidatas de anime 2 $(date -u +%FT%TZ) [skip ci]"
           git fetch origin || true
           git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true

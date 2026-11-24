@@ -333,7 +333,12 @@ test('/configure: el contador de catálogos cuenta lo mismo que el manifest', ()
     + cfg.platforms.length * weights.platform
     + cfg.studios.length * weights.studio;
   const everything = { platforms: PLATFORM_KEYS, studios: STUDIO_KEYS, base: userConfig.BASE_KEYS };
-  assert.equal(total(everything), buildDefs(null).length);
+  // El contador se mide contra la config explícita: el manifest por defecto
+  // (cfg null) omite los catálogos de países para no pasarse de los 8 KB.
+  assert.equal(total(everything), buildDefs(everything).length);
+  const countryKeys = userConfig.BASE_KEYS.filter((k) => /^live_(espana|mexico|argentina|colombia|chile|peru)$/.test(k));
+  assert.ok(countryKeys.length > 0, 'catálogos de países presentes');
+  assert.equal(total(everything) - countryKeys.length, buildDefs(null).length);
   for (const cfg of [
     { platforms: ['netflix', 'hulu'], studios: ['marvel'], base: ['tendencias', 'generos_series'] },
     { platforms: [], studios: [], base: ['tvmaze_hoy'] },

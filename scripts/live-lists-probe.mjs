@@ -82,7 +82,7 @@ function parseM3U(text, source) {
   let pendingUa = '';
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
-    if (line.startsWith('#EXTVLCOPT:http-user-agent=')) { pendingUa = line.slice(28).trim(); continue; }
+    if (line.startsWith('#EXTVLCOPT:http-user-agent=')) { pendingUa = line.slice(27).trim(); continue; }
     if (!line.startsWith('#EXTINF')) continue;
     const name = (line.split(',').pop() || '').trim();
     const logo = (/tvg-logo="([^"]+)"/.exec(line) || [])[1] || '';
@@ -91,7 +91,7 @@ function parseM3U(text, source) {
     for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
       const l = lines[j].trim();
       if (!l) continue;
-      if (l.startsWith('#EXTVLCOPT:http-user-agent=')) { ua = l.slice(28).trim(); continue; }
+      if (l.startsWith('#EXTVLCOPT:http-user-agent=')) { ua = l.slice(27).trim(); continue; }
       if (l.startsWith('#')) continue;
       url = l;
       break;

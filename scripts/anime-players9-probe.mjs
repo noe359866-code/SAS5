@@ -16,6 +16,6 @@ for (const m of decoded.matchAll(/\bdata-[a-z-]+\s*=\s*["'](https?:\/\/[^"']+)["
     attrs.push(`${m[0].split('=')[0]}=${u.hostname}${u.pathname}`);
   } catch { /* descartar */ }
 }
-console.log('HTTP', res.status, 'bytes', html.length);
-console.log('ATTRS', [...new Set(attrs)].slice(0, 12).join(' | '));
-for (const row of rows) console.log('CONTEXT', row.slice(0, 800));
+const out = [`HTTP ${res.status} · bytes ${html.length}`, '', `ATTRS ${[...new Set(attrs)].slice(0, 12).join(' | ')}`, '', ...rows.map((row) => `CONTEXT ${row.slice(0, 800)}`)].join('\n');
+await import('node:fs').then((fs) => { fs.mkdirSync('.probe', { recursive: true }); fs.writeFileSync('.probe/anime-players9.md', `${out}\n`); });
+console.log(out);

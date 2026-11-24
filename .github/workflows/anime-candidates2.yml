@@ -43,7 +43,7 @@ jobs:
           test -s .probe/anime-candidates2.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          git add -f .probe/anime-candidates2.md .probe/anime-players5.md .probe/anime-players6.md .probe/anime-players7.md .probe/anime-players8.md
+          git add -f .probe/anime-candidates2.md .probe/anime-players5.md .probe/anime-players6.md .probe/anime-players7.md .probe/anime-players8.md .probe/anime-players9.md
           git diff --cached --quiet || git commit -m "sonda: candidatas de anime 2 $(date -u +%FT%TZ) [skip ci]"
           git fetch origin || true
           git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true

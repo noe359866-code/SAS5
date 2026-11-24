@@ -10,7 +10,7 @@ const HLS = 'https://edge1-waw-sprintcdn.r66nv9ed.com/hls2/10/12047/abc_x/master
 const DYT = { title: 'Qué le ocurre a la secretaria Kim', altTitle: "What's Wrong with Secretary Kim?", year: '2018', mediaType: 'series', season: 1, episode: 16 };
 const SBL = { title: 'ABO Desire', altTitle: null, year: '2025', mediaType: 'series', season: 1, episode: 1 };
 
-const DYT_LIST = `<html><body><a href="/dorama/whats-wrong-with-secretary-kim-latino-sub-espanol" title="Qué le ocurre a la secretaria Kim Latino">Qué le ocurre a la secretaria Kim Latino</a></body></html>`;
+const DYT_LIST = `<html><body><a href="/dorama/whats-wrong-with-secretary-kim-latino-sub-espanol" title="Ver Qué le ocurre a la secretaria Kim Latino online - Dorama en español HD">Qué le ocurre a la secretaria Kim Latino</a></body></html>`;
 const DYT_DETAIL = `<html><body><h1>Qué le ocurre a la secretaria Kim Latino</h1>
 <p>Fecha de emisión: 06 de Junio de 2018</p>
 <p>Nombre alternativo: What's Wrong with Secretary Kim? Audio Latino</p>

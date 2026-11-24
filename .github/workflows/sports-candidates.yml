@@ -63,6 +63,10 @@ jobs:
             console.log('semilla NO actualizada: la sonda trajo', fresh.length, '< 80% de', current.length, '(posible mal día de red)');
           }
           "
+      # OJO: el `[skip ci]` protege este workflow de re-dispararse, pero GitHub
+      # lo arrastra al cuerpo de los squash-merge y Cloudflare Workers Builds
+      # saltaría el despliegue de producción. Al fusionar un PR que incluya
+      # estos commits, pasa un asunto limpio: gh pr merge N --squash --subject "…"
       # OJO: la marca skip-ci protege este workflow de re-dispararse, pero GitHub
       # la arrastra al cuerpo de los squash-merge y Cloudflare Workers Builds
       # saltaría el despliegue de producción. Al fusionar un PR que incluya

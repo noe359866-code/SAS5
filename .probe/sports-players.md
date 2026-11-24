@@ -1,6 +1,6 @@
 # Sonda: reproductores de canales de deportes
 
-Fecha: 2026-11-24T15:10:27.442Z
+Fecha: 2026-11-24T15:15:00.915Z
 
 | Sitio | Paso | HTTP | Estado | Detalle |
 |---|---|---|---|---|---|

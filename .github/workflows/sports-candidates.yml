@@ -67,6 +67,12 @@ jobs:
       # lo arrastra al cuerpo de los squash-merge y Cloudflare Workers Builds
       # saltaría el despliegue de producción. Al fusionar un PR que incluya
       # estos commits, pasa un asunto limpio: gh pr merge N --squash --subject "…"
+      # OJO: la marca skip-ci protege este workflow de re-dispararse, pero GitHub
+      # la arrastra al cuerpo de los squash-merge y Cloudflare Workers Builds
+      # saltaría el despliegue de producción. Al fusionar un PR que incluya
+      # estos commits, el asunto y el cuerpo del merge NO pueden contener la
+      # marca literal (ni siquiera mencionada): gh pr merge N --squash --subject "…"
+      # Confirmado dos veces el 24-11-2026 (builds de main saltados en #48 y #49).
       - name: Devolver el resultado a la rama
         if: always()
         run: |

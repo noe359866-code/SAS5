@@ -74,17 +74,26 @@ async function main() {
       embed = iframe.replace(/\\\//g, '/').replace(/^\/\//, 'https:');
       const kind = extractorFor(embed);
       row(cfg.site, `opción ${opt.nume}`, ajax.status, kind || 'sin-extractor', `etiqueta="${opt.label}" · ${redact(embed)}`);
-      if (!kind || kind === 'opaque') continue;
-      const extracted = await extractEmbed(embed, { timeoutMs: 12_000, referer: ep.url }).catch((err) => ({ ok: false, sources: [], reason: String(err?.message || err).slice(0, 40) }));
-      if (!extracted.ok) { row(cfg.site, `· visor`, '—', extracted.reason || 'sin-medio', kind); continue; }
-      for (const source of extracted.sources.slice(0, 2)) {
+      let targets = [{ url: embed, kind, referer: ep.url }];
+      if (!kind || kind === 'opaque') {
+        const shell = await get(embed, { headers: { Referer: ep.url } });
+        const found = [...new Set([...shell.body.matchAll(/https?:\/\/[^\s"'<>\\]+/gi)].map((m) => m[0].replace(/[),;]+$/, '')))]
+          .filter((url) => ['byse', 'mixdrop', 'streamtape', 'videohel'].includes(extractorFor(url)));
+        targets = found.slice(0, 2).map((url) => ({ url, kind: extractorFor(url), referer: embed }));
+        row(cfg.site, `· capa`, shell.status, `${targets.length} extraíbles`, targets.map((t) => redact(t.url)).join(' '));
+      }
+      for (const target of targets) {
+        const extracted = target.kind ? await extractEmbed(target.url, { timeoutMs: 12_000, referer: target.referer }).catch((err) => ({ ok: false, sources: [], reason: String(err?.message || err).slice(0, 40) })) : { ok: false, sources: [], reason: 'sin-extractor' };
+        if (!extracted.ok) { row(cfg.site, `· visor`, '—', extracted.reason || 'sin-medio', target.kind || '—'); continue; }
+        for (const source of extracted.sources.slice(0, 2)) {
         const direct = isDirectMedia(source.url);
         let manifest = 'sin-sondeo';
         if (direct) {
-          const res = await get(source.url, { headers: { Accept: 'application/vnd.apple.mpegurl', Referer: embed } });
+          const res = await get(source.url, { headers: { Accept: 'application/vnd.apple.mpegurl', Referer: target.url } });
           manifest = `HTTP ${res.status} ${/^\s*#EXTM3U/.test(res.body) ? 'HLS' : 'otro'}`;
         }
-        row(cfg.site, `· medio`, '—', `${kind} ${manifest}`, `${source.kind} · ${direct ? 'directo' : 'no-directo'} · ${redact(source.url)}`);
+        row(cfg.site, `· medio`, '—', `${target.kind} ${manifest}`, `${source.kind} · ${direct ? 'directo' : 'no-directo'} · ${redact(source.url)}`);
+        }
       }
     }
   }

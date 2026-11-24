@@ -127,7 +127,7 @@ test('el manifest deja margen bajo los 8 KB de la addonCollection API, incluso c
       builder.defineStreamHandler(async () => ({ streams: [] }));
       assert.ok(builder.getInterface().manifest, `SDK rechazó el manifest ${host}/${label}`);
     }
-    assert.ok(def.catalogs.length === 80, `solo ${def.catalogs.length} catálogos en el manifest`);
+    assert.ok(def.catalogs.length === 87, `solo ${def.catalogs.length} catálogos en el manifest`);
   }
 });
 

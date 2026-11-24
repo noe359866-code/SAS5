@@ -39,14 +39,17 @@ Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro po
 
 **Instalaciones existentes:** las claves se guardan por nombre. Se descartan las fuentes retiradas sin añadir otras a una selección que aún contenga claves vigentes. Las claves `gnulahd`, `videoapp`, `pelisplus`, `gnulaone`, `ultra`, `tubeonline` y `mirandogratis` se retiraron el 19-11-2026: una configuración antigua que las incluya las descarta sin tocar las vigentes. Si una lista antigua solo contiene fuentes retiradas, se aplica el valor por defecto, como antes: las fuentes que permite el despliegue para un enlace personal y el registro actual para `STREAM_PROVIDERS`. Una selección personal vacía (`streams: []`) y `STREAM_PROVIDERS=off` siguen apagando todas las fuentes.
 
-## Canales de deportes en vivo
+## TV en vivo: deportes, entretenimiento y más
 
-El 24-11-2026 se sumó el catálogo **«⚽ Deportes en vivo»** (tipo `tv` de Stremio, ids `rlch:<canal>`) con 20 canales: ESPN, ESPN 2/3/Premium/Deportes, Fox Sports/1/2/Deportes, DSports/DSports 2/DSports+ (DGO), DAZN y DAZN Combat, TNT Sports, TyC Sports, Win Sports, Claro Sports, beIN Sports XTRA en Español y Pluto TV Deportes.
+Canales de TV en vivo (tipo `tv` de Stremio), todos con HLS verificado por sonda el 24-11-2026:
 
-- **Proveedor**: las listas públicas de [iptv-org](https://iptv-org.github.io/iptv) (`categories/sports` + países latinos), cacheadas 12 h por isolate. Cada canal tiene un `match` por nombre y un `fallback` con la última URL verificada por la sonda (`.probe/sports-lists.md`), por si la lista viva no lo trae en ese momento.
-- **Barra de calidad**: solo señales sin marca `[Geo-blocked]`/`[Not 24/7]` y con verificación HLS real en la sonda; la señal principal de DAZN, ESPN Deportes y DSports no tiene URL pública estable y entra solo si la lista la revive.
-- **Streams**: HLS directo (`notWebReady`, sin cabeceras especiales), cacheado 4 minutos porque las señales rotan.
-- La casilla **«TV · Canales de deportes en vivo»** de `/configure` activa o quita el catálogo (activado por defecto).
+- **«⚽ Deportes en vivo»** (`tv_deportes`): los 20 canales curados (ESPN, ESPN 2/3/Premium/Deportes, Fox Sports/1/2/Deportes, DSports/DSports 2/DSports+ (DGO), DAZN y DAZN Combat, TNT Sports, TyC Sports, Win Sports, Claro Sports, beIN XTRA ES y Pluto TV Deportes) **más ~75 canales vivos adicionales** (ESPN 4-7, Claro Sports 2, Azteca Deportes, CombaTV…). Los curados se resuelven contra iptv-org y además ganan las señales «Opc. 2/3» de Magma TV/IPTVSV.
+- **Catálogos por categoría** (activados por defecto): 📺 Entretenimiento, 🎬 Cine, 🧸 Infantil, 🎌 Anime, 🎵 Música, 📰 Noticias y 🌍 Documentales en vivo.
+- **Catálogos por país** (se marcan en `/configure`): 🇪🇸 España, 🇲🇽 México, 🇦🇷 Argentina, 🇨🇴 Colombia, 🇨🇱 Chile y 🇵🇪 Perú. No entran en el manifest por defecto para no superar los 8 KB de la addonCollection API.
+
+**Fuentes**: las listas públicas de [iptv-org](https://iptv-org.github.io/iptv) y del repo [JMigue85/IPTV-SV](https://github.com/JMigue85/IPTV-SV) (Magma TV + IPTVSV), cacheadas 12 h por isolate. `lib/data/liveChannelsSeed.json` es la semilla con las 805 señales que la sonda verificó (`.probe/live-lists.md`): el catálogo se renderiza siempre desde la semilla y la resolución refresca la URL desde la lista viva.
+
+**Barra de calidad**: solo señales con verificación HLS real (HTTP 200 + `#EXTM3U`), sin marca `[Geo-blocked]`/`[Not 24/7]`. Las variantes «[Opc. N]» del mismo canal se colapsan en una tarjeta con varios streams. Los canales que declaran `#EXTVLCOPT:http-user-agent` lo reciben vía `behaviorHints.proxyHeaders`. Streams: HLS directo (`notWebReady`), cacheado 4 minutos porque las señales rotan. La señal principal de DAZN, ESPN Deportes y DSports no tiene URL pública estable hoy: su tarjeta entra vacía y se rellena sola cuando la lista la revive.
 
 El 24-11-2026 se sumaron HackStore (`hackstore.mx`) y AllCalidad (`allcalidad.re`) tras medir su cadena completa con el propio código del addon: dos instancias más del CMS JSON con visor Vimeos, con catálogos distintos. El informe de candidatas, incluidas las descartadas, está en [proveedores-2026-11-24.md](docs/proveedores-2026-11-24.md).
 

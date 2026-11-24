@@ -8,6 +8,11 @@ const iptvOrg = require('../lib/iptvOrg');
 const core = require('../lib/core');
 const streams = require('../lib/streams');
 
+// Hermético: los canales se resuelven contra listas públicas; en CI hay red y
+// el resultado variaría. Se bloquea fetch para fijar el camino «sin lista».
+const realFetch = globalThis.fetch;
+globalThis.fetch = async () => { throw new Error('sin red en tests'); };
+
 describe('canales de deportes: definiciones', () => {
   test('los canales tienen id rlch:, nombre, regex y fallback https válidos', () => {
     assert.ok(SPORTS_CHANNELS.length >= 15, `solo ${SPORTS_CHANNELS.length} canales definidos`);
@@ -159,3 +164,5 @@ describe('canales de deportes: streams en vivo', () => {
     assert.deepEqual(await streams.searchStreams('tv', 'rlch:zzz', {}), []);
   });
 });
+
+test('restaurar fetch global', () => { globalThis.fetch = realFetch; });

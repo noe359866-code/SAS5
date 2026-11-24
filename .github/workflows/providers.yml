@@ -19,7 +19,13 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npm test
+      - run: npm test 2>&1 | tee test-output.log
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-output
+          path: test-output.log
+          retention-days: 7
   live:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/arena/') || github.event_name == 'workflow_dispatch'
     needs: test

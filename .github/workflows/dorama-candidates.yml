@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/dorama-candidates.yml'
       - 'scripts/dorama-candidates-probe.mjs'
+      - 'scripts/dorama-players-probe.mjs'
 
 permissions:
   contents: write
@@ -22,13 +23,15 @@ jobs:
           node-version: '22'
       - name: Medir webs de doramas
         run: node scripts/dorama-candidates-probe.mjs
+      - name: Reproductores de doramas
+        run: node scripts/dorama-players-probe.mjs
       - name: Devolver el resultado a la rama
         if: always()
         run: |
           test -s .probe/dorama-candidates.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          git add -f .probe/dorama-candidates.md
+          git add -f .probe/dorama-candidates.md .probe/dorama-players.md
           git diff --cached --quiet || git commit -m "sonda: candidatas de doramas $(date -u +%FT%TZ) [skip ci]"
           git fetch origin || true
           git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true

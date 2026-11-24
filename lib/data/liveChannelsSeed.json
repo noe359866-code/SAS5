@@ -639,6 +639,15 @@
   "ref": ""
  },
  {
+  "name": "Cine Comedia",
+  "slug": "cine-comedia",
+  "category": "cine",
+  "logo": "https://images.pluto.tv/channels/5f12101f0b12f00007844c7c/colorLogoPNG_1732662798298.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/161.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Cine Comedia 1 HD",
   "slug": "cine-comedia-1-hd",
   "category": "cine",
@@ -2304,15 +2313,6 @@
   "ref": ""
  },
  {
-  "name": "5TV (Corrientes)",
-  "slug": "5tv-corrientes",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CH5tvcorrientes.png",
-  "url": "http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "A24",
   "slug": "a24",
   "category": "argentina",
@@ -2372,6 +2372,15 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal10dejunin.png",
   "url": "https://g4.mc-slo.transport.edge-access.net/a10/ngrp:canal10junin-100056_all/Playlist.m3u8",
+  "ua": "Android 8.0.0",
+  "ref": ""
+ },
+ {
+  "name": "Canal 10 (Mar del Plata)",
+  "slug": "canal-10-mar-del-plata",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal10mardelplata.png",
+  "url": "https://g5.mc-slo.transport.edge-access.net/a12/ngrp:canal10mdq-100044_all/Playlist.m3u8?sense=true",
   "ua": "Android 8.0.0",
   "ref": ""
  },
@@ -2466,15 +2475,6 @@
   "ref": ""
  },
  {
-  "name": "Canal 34 (San Juan)",
-  "slug": "canal-34-san-juan",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal34sanjuan.png",
-  "url": "https://streamyes.alsolnet.com/canal34hd/live/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Canal 4 (Chubut)",
   "slug": "canal-4-chubut",
   "category": "argentina",
@@ -2552,15 +2552,6 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7santiagodelestero.png",
   "url": "https://stream.arcast.com.ar/envivo/castv/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Canal 9 (Chaco)",
-  "slug": "canal-9-chaco",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal9chaco.png",
-  "url": "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2948,15 +2939,6 @@
   "category": "ecuador",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHaustraltvecuador.png",
   "url": "https://stmv3.voxtvhd.com.br/australtv/australtv/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Ecuavisa",
-  "slug": "ecuavisa",
-  "category": "ecuador",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png",
-  "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e",
   "ua": "",
   "ref": ""
  },

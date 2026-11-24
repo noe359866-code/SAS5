@@ -1494,6 +1494,15 @@
   "ref": ""
  },
  {
+  "name": "Dreiko TV",
+  "slug": "dreiko-tv",
+  "category": "anime",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHdreikotv.png",
+  "url": "https://cloudvideo.servers10.com:8081/8020/tracks-v1a1/mono.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Duelo Xiaolin",
   "slug": "duelo-xiaolin",
   "category": "anime",
@@ -2525,6 +2534,15 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7jujuy.png",
   "url": "https://stream.arcast.live/canal7jujuy/ngrp:canal7jujuy_all/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Canal 7 (Neuquén)",
+  "slug": "canal-7-neuquen",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7neuquen.png",
+  "url": "https://stream.arcast.com.ar/c7nq/ngrp:c7nq_all/playlist.m3u8",
   "ua": "",
   "ref": ""
  },

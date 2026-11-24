@@ -1,6 +1,6 @@
 # Sonda 14: iptvgo.cc a fondo (patrón Xtream /live/<u>/<p>/<id>.m3u8)
 
-Fecha: 2026-11-24T21:43:33.581Z
+Fecha: 2026-11-24T21:57:14.277Z
 
 ## 1. Acceso al canal de ejemplo (id 1455)
 
@@ -15,13 +15,10 @@ Fecha: 2026-11-24T21:43:33.581Z
 
 | ID | Resultado | Detalle |
 |---|---|---|
-| 1455 | falla | con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC sin Range: 403 |
-| 1 | falla | playlist HTTP 405 |
-| 100 | falla | playlist HTTP 405 |
-| 500 | falla | con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC sin Range: 403 |
-| 1000 | falla | playlist HTTP 405 |
-| 1500 | falla | con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC sin Range: 403 |
-| 2000 | falla | con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC sin Range: 403 |
+| 1455 | falla | host () => { try { return new URL(segUrl).host; } catch { return '?'; } } → con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC: 403 → auth por query: 403 → TS directo: 0 |
+| 500 | falla | host () => { try { return new URL(segUrl).host; } catch { return '?'; } } → con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC: 403 → auth por query: 403 → TS directo: 0 |
+| 1500 | falla | host () => { try { return new URL(segUrl).host; } catch { return '?'; } } → con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC: 403 → auth por query: 403 → TS directo: 0 |
+| 2000 | falla | host () => { try { return new URL(segUrl).host; } catch { return '?'; } } → con Range: 403 → sin Range: 403 → con Referer: 403 → UA VLC: 403 → auth por query: 403 → TS directo: 0 |
 
 ## 3. Xtream player_api (nombres, logos, categorías)
 

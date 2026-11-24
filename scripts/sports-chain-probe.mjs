@@ -84,6 +84,18 @@ function decodeGlobal(body) {
       const ok = man.status === 200 && /#EXTM3U/.test((man.body || '').slice(0, 400));
       const variants = ((man.body || '').match(/#EXT-X-STREAM-INF/g) || []).length;
       estado = ok ? `VÁLIDO${variants ? ` ${variants}v` : ''}` : `HTTP ${man.status} no-HLS`;
+      if (ok) {
+        // ¿Las variantes/segmentos son URLs absolutas y reproducibles sin cookie?
+        const lines = (man.body || '').split('\n').map((l) => l.trim()).filter(Boolean);
+        const variant = lines.find((l) => !l.startsWith('#'));
+        if (variant) {
+          const abs = new URL(variant, man.url || urlIn).href;
+          say(`\nvariante de ${slug}: ${redact(abs)}`);
+          const bare = await get(abs, { Range: 'bytes=0-400' });
+          say(`sin cookie/referer → HTTP ${bare.status} ${/#EXTM3U/.test((bare.body || '').slice(0, 400)) ? '· HLS VÁLIDO DIRECTO' : redact((bare.body || '').slice(0, 60)) || bare.error || ''}`);
+        }
+        say(`manifiesto de ${slug} (primeras líneas):\n\`\`\`\n${lines.slice(0, 8).map(redact).join('\n')}\n\`\`\``);
+      }
     } else {
       estado = redact(head) || h.error || `HTTP ${h.status}`;
     }

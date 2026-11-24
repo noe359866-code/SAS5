@@ -1,6 +1,6 @@
 # Sonda 14: iptvgo.cc a fondo (patrón Xtream /live/<u>/<p>/<id>.m3u8)
 
-Fecha: 2026-11-24T21:57:14.277Z
+Fecha: 2026-11-24T23:16:20.669Z
 
 ## 1. Acceso al canal de ejemplo (id 1455)
 

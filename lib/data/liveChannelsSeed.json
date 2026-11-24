@@ -171,15 +171,6 @@
   "ref": ""
  },
  {
-  "name": "ESPN 3 (Sur)",
-  "slug": "espn-3-sur",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1127.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "ESPN 3 HD",
   "slug": "espn-3-hd",
   "category": "deportes",
@@ -648,15 +639,6 @@
   "ref": ""
  },
  {
-  "name": "Cine Comedia",
-  "slug": "cine-comedia",
-  "category": "cine",
-  "logo": "https://images.pluto.tv/channels/5f12101f0b12f00007844c7c/colorLogoPNG_1732662798298.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/161.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Cine Comedia 1 HD",
   "slug": "cine-comedia-1-hd",
   "category": "cine",
@@ -1101,6 +1083,15 @@
   "name": "Disney Channel",
   "slug": "disney-channel",
   "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Disney Channel",
+  "slug": "disney-channel",
+  "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png",
   "url": "http://45.70.168.162:12316/play/a009/index.m3u8",
   "ua": "",
@@ -1517,6 +1508,15 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/357.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "EnerGeek Fan",
+  "slug": "energeek-fan",
+  "category": "anime",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHenergeekfan.png",
+  "url": "https://cdn.energeek.cl/hls/energeekfan.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2376,15 +2376,6 @@
   "ref": ""
  },
  {
-  "name": "Canal 10 (Mar del Plata)",
-  "slug": "canal-10-mar-del-plata",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal10mardelplata.png",
-  "url": "https://g5.mc-slo.transport.edge-access.net/a12/ngrp:canal10mdq-100044_all/Playlist.m3u8?sense=true",
-  "ua": "Android 8.0.0",
-  "ref": ""
- },
- {
   "name": "Canal 11 de la Costa",
   "slug": "canal-11-de-la-costa",
   "category": "argentina",
@@ -2961,6 +2952,15 @@
   "ref": ""
  },
  {
+  "name": "Ecuavisa",
+  "slug": "ecuavisa",
+  "category": "ecuador",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png",
+  "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Wuan+",
   "slug": "wuan",
   "category": "ecuador",
@@ -3065,15 +3065,6 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrtvenezuela.png",
   "url": "https://vcp12.myplaytv.com/trt/trt/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "TRV",
-  "slug": "trv",
-  "category": "venezuela",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrvvenezuela.png",
-  "url": "https://streaming5.globalhostla.com/rtplive/trvnetve/playlist.m3u8",
   "ua": "",
   "ref": ""
  },

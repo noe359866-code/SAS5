@@ -10,7 +10,7 @@
  *
  * Cada canal se verifica con el User-Agent que declara la lista
  * (#EXTVLCOPT:http-user-agent) y, si falla, con el UA genérico de la sonda.
- * Se considera VÁLIDO solo HTTP 200 + #EXTM3U. No se imprimen credenciales;
+ * Se considera VÁLIDO solo si la cadena completa reproduce: maestra (200 + #EXTM3U) → variante → primer segmento con bytes MPEG-TS/fMP4 (HTTP 200/206). No se imprimen credenciales;
  * las URLs se redactan. Además del informe, se escribe .probe/live-channels.json
  * con la ficha completa de los canales válidos (semilla para el addon).
  */
@@ -102,23 +102,55 @@ function parseM3U(text, source) {
   return entries;
 }
 
-/** Verifica un canal: primero con su UA declarado; si falla, con el genérico. */
+/**
+ * Verifica un canal: primero con su UA declarado; si falla, con el genérico.
+ * La sonda 13 mostró playlists vivas con segmentos muertos (canal fantasma),
+ * así que «válido» exige la cadena completa: maestra → variante → segmento
+ * con bytes de vídeo (MPEG-TS o fMP4).
+ */
 async function verify(entry) {
   const tries = entry.ua && entry.ua !== GENERIC_UA
     ? [{ 'User-Agent': entry.ua }, { 'User-Agent': GENERIC_UA }]
     : [{ 'User-Agent': GENERIC_UA }];
+  let last = 'sin respuesta';
   for (const headers of tries) {
     const t0 = Date.now();
-    const res = await get(entry.url, { Range: 'bytes=0-400' });
+    const res = await get(entry.url, { Range: 'bytes=0-3000', ...headers });
     const ms = Date.now() - t0;
-    const head = (res.body || '').slice(0, 400);
-    if (res.status === 200 && /#EXTM3U/.test(head)) {
-      const variants = (head.match(/#EXT-X-STREAM-INF/g) || []).length;
-      return { ok: true, ua: headers['User-Agent'] === entry.ua ? entry.ua : '', state: `HLS VÁLIDO${variants ? ` ${variants}v` : ''} · ${ms} ms` };
+    const head = (res.body || '').slice(0, 3000);
+    if (res.status !== 200 || !/#EXTM3U/.test(head)) {
+      last = `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${ms} ms`;
+      continue;
     }
-    var last = `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${ms} ms`;
+    // Maestra con variantes → bajar a la primera variante
+    let mediaUrl = entry.url, body = head;
+    const variants = (head.match(/#EXT-X-STREAM-INF/g) || []).length;
+    if (variants) {
+      const lines = head.split('\n');
+      const idx = lines.findIndex((l) => /#EXT-X-STREAM-INF/.test(l));
+      const rel = (lines[idx + 1] || '').trim();
+      if (!rel) { last = 'maestra sin variante legible'; continue; }
+      try { mediaUrl = new URL(rel, entry.url).toString(); } catch { last = 'variante malformada'; continue; }
+      const media = await get(mediaUrl, { Range: 'bytes=0-3000', ...headers });
+      if (media.status !== 200 || !/#EXTM3U/.test(media.body)) { last = `variante HTTP ${media.status}`; continue; }
+      body = media.body;
+    }
+    // Primer segmento con bytes de vídeo
+    const segLine = body.split('\n').map((l) => l.trim()).find((l) => l && !l.startsWith('#'));
+    if (!segLine) { last = 'playlist sin segmentos'; continue; }
+    let segUrl;
+    try { segUrl = new URL(segLine, mediaUrl).toString(); } catch { last = 'segmento malformado'; continue; }
+    const seg = await get(segUrl, { Range: 'bytes=0-188', ...headers });
+    const bh = seg.body || '';
+    const looksTs = bh.charCodeAt(0) === 0x47;
+    const looksFmp4 = bh.slice(4, 8) === 'ftyp' || bh.slice(0, 12).includes('ftyp');
+    if ((seg.status === 200 || seg.status === 206) && (looksTs || looksFmp4)) {
+      return { ok: true, ua: headers['User-Agent'] === entry.ua ? entry.ua : '',
+        state: `HLS VÁLIDO${variants ? ` ${variants}v` : ''} · ${looksTs ? 'TS' : 'fMP4'} · ${ms} ms` };
+    }
+    last = `segmento HTTP ${seg.status} (fantasma)`;
   }
-  return { ok: false, ua: '', state: last || 'sin respuesta' };
+  return { ok: false, ua: '', state: last };
 }
 
 async function mapLimit(items, limit, fn) {
@@ -173,7 +205,9 @@ async function mapLimit(items, limit, fn) {
     const { ok, ua, state } = checks[i].r;
     const line = `| ${name} | ${category} | ${group || '—'} | ${source} | ${redact(wanted[i].url)} | ${state}${ua ? ' · UA propio' : ''} |`;
     (ok ? rows.ok : rows.bad).push(line);
-    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: ua || '' });
+    // tvcluboficial no exige UA (sonda 13): no arrastrarlo a la semilla
+    const isTvclub = /(^|\.)m3u\.tvcluboficial\.com$/.test(new URL(wanted[i].url).hostname);
+    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: isTvclub ? '' : (ua || '') });
   }
 
   say(`## Válidos (${rows.ok.length})`);

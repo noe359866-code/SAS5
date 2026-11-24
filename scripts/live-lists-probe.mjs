@@ -2,11 +2,10 @@
 /**
  * Sonda 12 (24-11-2026): listas de canales en vivo por categorías.
  *
- * Fuentes:
- *  - Magma TV (repo JMigue85/IPTV-SV): 220 canales con User-Agent propio.
- *  - IPTVSV.m3u (mismo repo): 1900 canales; se verifican los grupos temáticos
- *    (Deportes, Entretenimiento, Cine, Infantiles, Anime, Música,
- *    Informativos, Documentales) y los países latinos + España.
+ * Proveedor ÚNICO: m3u.tvcluboficial.com, vía la lista Magma TV
+ * (repo JMigue85/IPTV-SV). La sonda 13 demostró que ese host no exige
+ * User-Agent y sirve CORS abierto; IPTVSV (IP:puerto rotativos) y
+ * m3uts.xyz (tokens caducos) quedaron descartados como fuentes.
  *
  * Cada canal se verifica con el User-Agent que declara la lista
  * (#EXTVLCOPT:http-user-agent) y, si falla, con el UA genérico de la sonda.
@@ -25,8 +24,10 @@ const CONCURRENCY = 12;
 
 const SOURCES = [
   { id: 'magma', url: 'https://raw.githubusercontent.com/JMigue85/IPTV-SV/main/Magma%20TV%20-Titan2022_XD.m3u' },
-  { id: 'iptvsv', url: 'https://raw.githubusercontent.com/JMigue85/IPTV-SV/main/IPTVSV.m3u' },
 ];
+
+/** Proveedor único de señales: solo se verifican URLs de este host. */
+const PROVIDER_HOST = /(^|\.)m3u\.tvcluboficial\.com$/;
 
 /** group-title → categoría del addon (null = no entra en catálogo propio). */
 const CATEGORY_BY_GROUP = [
@@ -167,7 +168,7 @@ async function mapLimit(items, limit, fn) {
 
 (async () => {
  try {
-  say('# Sonda 12: canales en vivo por categorías (Magma TV + IPTVSV)');
+  say('# Sonda 12: canales en vivo por categorías (proveedor único: m3u.tvcluboficial.com)');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
   say('');
@@ -185,6 +186,9 @@ async function mapLimit(items, limit, fn) {
   for (const e of all) {
     const category = categoryOf(e.group);
     if (!category) continue;
+    let host = '';
+    try { host = new URL(e.url).hostname; } catch { continue; }
+    if (!PROVIDER_HOST.test(host)) continue; // solo el proveedor elegido
     const key = e.url.split('?')[0];
     if (seen.has(key)) continue;
     seen.add(key);
@@ -205,9 +209,8 @@ async function mapLimit(items, limit, fn) {
     const { ok, ua, state } = checks[i].r;
     const line = `| ${name} | ${category} | ${group || '—'} | ${source} | ${redact(wanted[i].url)} | ${state}${ua ? ' · UA propio' : ''} |`;
     (ok ? rows.ok : rows.bad).push(line);
-    // tvcluboficial no exige UA (sonda 13): no arrastrarlo a la semilla
-    const isTvclub = /(^|\.)m3u\.tvcluboficial\.com$/.test(new URL(wanted[i].url).hostname);
-    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: isTvclub ? '' : (ua || '') });
+    // tvcluboficial no exige UA (sonda 13): la semilla nunca arrastra UA
+    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: '' });
   }
 
   say(`## Válidos (${rows.ok.length})`);

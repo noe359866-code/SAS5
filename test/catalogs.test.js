@@ -106,7 +106,7 @@ test('la config con TODO seleccionado cabe en la URL del manifest', () => {
 
 test('el manifest deja margen bajo los 8 KB de la addonCollection API, incluso con URL larga', () => {
   // El SDK rechaza manifests de más de 8192 caracteres. Reservamos ~190 chars
-  // para hosts personalizados/flags futuros; las 79 filas no deben consumirlo.
+  // para hosts personalizados/flags futuros; las filas no deben consumirlo.
   const core = require('../lib/core');
   const logos = [
     ['normal', 'https://catalogo.example/assets/logo.png'],
@@ -127,7 +127,7 @@ test('el manifest deja margen bajo los 8 KB de la addonCollection API, incluso c
       builder.defineStreamHandler(async () => ({ streams: [] }));
       assert.ok(builder.getInterface().manifest, `SDK rechazó el manifest ${host}/${label}`);
     }
-    assert.ok(def.catalogs.length === 87, `solo ${def.catalogs.length} catálogos en el manifest`);
+    assert.ok(def.catalogs.length === 84, `solo ${def.catalogs.length} catálogos en el manifest`);
   }
 });
 

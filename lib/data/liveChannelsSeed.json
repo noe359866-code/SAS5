@@ -5,7 +5,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/293.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "El Chavo del 8",
@@ -13,7 +13,7 @@
   "category": "cine",
   "logo": "",
   "url": "https://m3u.tvcluboficial.com/free/ReachBot/Kip/344.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "El Chavo del 8 HD",
@@ -21,7 +21,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1173.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Los Simpson",
@@ -29,15 +29,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/635.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "América",
-  "slug": "america",
-  "category": "argentina",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1068.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "El Nueve (9)",
@@ -45,7 +37,7 @@
   "category": "argentina",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/353.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "El Trece",
@@ -53,7 +45,7 @@
   "category": "argentina",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/362.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Telefe",
@@ -61,7 +53,7 @@
   "category": "argentina",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/874.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Telefe HD",
@@ -69,7 +61,7 @@
   "category": "argentina",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1172.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Telefe Internacional",
@@ -77,15 +69,7 @@
   "category": "argentina",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1166.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Chilevisión (CHV)",
-  "slug": "chilevision-chv",
-  "category": "chile",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/155.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "El Trece (13)",
@@ -93,7 +77,7 @@
   "category": "chile",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/360.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Las Estrellas",
@@ -101,7 +85,7 @@
   "category": "mexico",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/118.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "A24",
@@ -109,7 +93,7 @@
   "category": "argentina",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1163.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "C5N",
@@ -117,15 +101,7 @@
   "category": "argentina",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1162.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Todo Noticias (TN)",
-  "slug": "todo-noticias-tn",
-  "category": "argentina",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1164.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "A3 Series",
@@ -133,15 +109,7 @@
   "category": "espana",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/17.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Antena 3",
-  "slug": "antena-3",
-  "category": "espana",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/45.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "La 1 HD",
@@ -149,7 +117,7 @@
   "category": "espana",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "La 2 HD",
@@ -157,15 +125,7 @@
   "category": "espana",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/589.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Mega ES HD",
-  "slug": "mega-es-hd",
-  "category": "espana",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/653.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "StarTVE",
@@ -173,7 +133,7 @@
   "category": "espana",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/838.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 1 (Argentina)",
@@ -181,7 +141,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1111.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 1 (Chile)",
@@ -189,7 +149,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1132.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 1 (Colombia)",
@@ -197,7 +157,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1107.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 1 (México)",
@@ -205,7 +165,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/401.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 1 (Sur)",
@@ -213,7 +173,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/368.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 2 HD",
@@ -221,7 +181,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/375.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 2 (México)",
@@ -229,7 +189,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/378.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 2 (Sur)",
@@ -237,7 +197,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/372.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 3 HD",
@@ -245,7 +205,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/386.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 3 (México)",
@@ -253,7 +213,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1110.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 3 (Sur)",
@@ -261,7 +221,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1127.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 4 (Sur)",
@@ -269,7 +229,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1069.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 5 HD",
@@ -277,7 +237,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1104.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 6 HD",
@@ -285,7 +245,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1105.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN 7 HD",
@@ -293,7 +253,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1106.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN Deportes",
@@ -301,7 +261,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1165.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN HD",
@@ -309,7 +269,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/400.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN HD (Colombia)",
@@ -317,7 +277,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1161.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN Plus",
@@ -325,7 +285,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/404.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "ESPN Plus HD",
@@ -333,15 +293,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/405.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "ESPN Premium HD",
-  "slug": "espn-premium-hd",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/408.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "DSports",
@@ -349,7 +301,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/312.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "DSports 2",
@@ -357,7 +309,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/315.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "DSports 2 HD",
@@ -365,7 +317,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/317.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "DSports HD",
@@ -373,7 +325,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/324.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "DSports HD [Opc.2]",
@@ -381,7 +333,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1144.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports 1 HD (Sur)",
@@ -389,7 +341,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/452.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports 1 (México)",
@@ -397,7 +349,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/456.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports 1 (Sur)",
@@ -405,15 +357,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/435.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "FOX Sports 2 (Chile)",
-  "slug": "fox-sports-2-chile",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1123.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports 2 HD",
@@ -421,7 +365,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports 2 (México)",
@@ -429,7 +373,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports 2 (Sur)",
@@ -437,7 +381,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/436.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports 3 HD",
@@ -445,7 +389,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/446.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports 3 (México)",
@@ -453,7 +397,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports 3 (Sur)",
@@ -461,7 +405,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/468.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports HD",
@@ -469,7 +413,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/454.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports Premium",
@@ -477,7 +421,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/461.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports Premium HD",
@@ -485,7 +429,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/463.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "FOX Sports Sur",
@@ -493,7 +437,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/465.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "TNT Sports (Argentina)",
@@ -501,15 +445,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/934.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "TNT Sports (Chile)",
-  "slug": "tnt-sports-chile",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/938.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "TyC Sports",
@@ -517,7 +453,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/974.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "TyC Sports HD",
@@ -525,7 +461,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1143.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Eventos Deportivos",
@@ -533,15 +469,7 @@
   "category": "deportes",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1131.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Cine 2024",
-  "slug": "cine-2024",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1099.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine 2025",
@@ -549,15 +477,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1159.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Cine 2026",
-  "slug": "cine-2026",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1180.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Acción",
@@ -565,15 +485,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/157.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Cine Acción HD",
-  "slug": "cine-accion-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/158.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Acción Sagas HD",
@@ -581,7 +493,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/160.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Comedia",
@@ -589,7 +501,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/161.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Comedia 1 HD",
@@ -597,7 +509,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/162.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Comedia 2",
@@ -605,7 +517,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/163.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Comedia 2 HD",
@@ -613,23 +525,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/164.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Cine Terror HD",
-  "slug": "cine-terror-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/181.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Cine Zombis",
-  "slug": "cine-zombis",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/183.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Zombis HD",
@@ -637,7 +533,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/184.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Ficción/Fantasía 2",
@@ -645,15 +541,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/166.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Cine Ficción/Fantasía 2 HD",
-  "slug": "cine-ficcion-fantasia-2-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/167.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Ficción/Fantasía HD",
@@ -661,7 +549,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/168.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Romance",
@@ -669,7 +557,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/178.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Romance HD",
@@ -677,7 +565,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/179.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Marvel",
@@ -685,7 +573,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/176.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Marvel HD",
@@ -693,7 +581,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/177.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Infantil",
@@ -701,7 +589,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/169.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cine Infantil HD",
@@ -709,15 +597,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/170.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Cine Infantil Sagas",
-  "slug": "cine-infantil-sagas",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/171.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Baby TV",
@@ -725,7 +605,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/79.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cartoon Network",
@@ -733,7 +613,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/128.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cartoonito",
@@ -741,7 +621,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/134.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Discovery Kids",
@@ -749,7 +629,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/264.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Disney Channel",
@@ -757,7 +637,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Disney Junior",
@@ -765,7 +645,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/284.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Nick Jr.",
@@ -773,7 +653,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/729.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Nicktoons",
@@ -781,7 +661,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/735.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Nickelodeon",
@@ -789,7 +669,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/736.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Pakapaka",
@@ -797,7 +677,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/748.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Tooncast",
@@ -805,7 +685,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/941.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Alf",
@@ -813,15 +693,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/28.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "Animaniacs",
-  "slug": "animaniacs",
-  "category": "infantil",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/43.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Bob Esponja",
@@ -829,7 +701,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/96.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Calabozos y Dragones",
@@ -837,7 +709,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/103.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Coraje el Perro Cobarde",
@@ -845,7 +717,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/223.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Dinosaurios",
@@ -853,7 +725,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/244.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Doug",
@@ -861,7 +733,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/298.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Edd y Eddy",
@@ -869,15 +741,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/339.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
- },
- {
-  "name": "El Coyote y el Correcaminos",
-  "slug": "el-coyote-y-el-correcaminos",
-  "category": "infantil",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/346.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "El Gallo Claudio",
@@ -885,7 +749,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/347.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "El Pájaro Loco",
@@ -893,7 +757,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/355.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "El Pato Darkwing",
@@ -901,7 +765,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/356.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Garfield",
@@ -909,7 +773,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/486.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Hércules",
@@ -917,7 +781,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/550.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Hey Arnold",
@@ -925,7 +789,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/551.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Johnny Bravo",
@@ -933,7 +797,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/584.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "La Casa de los Dibujos",
@@ -941,7 +805,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/590.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "La Pantera Rosa",
@@ -949,7 +813,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/597.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Las Aventuras de Tom Sawyer",
@@ -957,7 +821,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/607.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Las Chicas Superpoderosas",
@@ -965,7 +829,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/608.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Looney Tunes",
@@ -973,7 +837,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/618.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Los Picapiedras",
@@ -981,7 +845,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/625.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Los Pingüinos de Madagascar",
@@ -989,7 +853,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/626.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Los Pitufos",
@@ -997,7 +861,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/627.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Patoaventuras",
@@ -1005,7 +869,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/758.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Peppa Pig",
@@ -1013,7 +877,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/760.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Pinky y Cerebro",
@@ -1021,7 +885,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/771.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Rugrats",
@@ -1029,7 +893,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/797.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Rugrats Crecidos",
@@ -1037,7 +901,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/798.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Scooby-Doo",
@@ -1045,7 +909,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/804.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Tom y Jerry",
@@ -1053,7 +917,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/940.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Trollhunters",
@@ -1061,7 +925,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/945.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Yogui",
@@ -1069,7 +933,7 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1051.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Beyblade",
@@ -1077,7 +941,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/85.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Caballeros del Zodiaco",
@@ -1085,7 +949,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/100.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Doraemon",
@@ -1093,7 +957,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/297.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Dragon Ball",
@@ -1101,7 +965,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/301.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Dragon Ball GT",
@@ -1109,7 +973,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/303.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Dragon Ball Super",
@@ -1117,7 +981,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/305.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Dragon Ball Z",
@@ -1125,7 +989,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/307.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Duelo Xiaolin",
@@ -1133,7 +997,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/330.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "El Príncipe del Rap",
@@ -1141,7 +1005,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/357.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Naruto",
@@ -1149,7 +1013,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/702.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "One Punch Man",
@@ -1157,7 +1021,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/744.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Pokémon",
@@ -1165,7 +1029,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/773.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Ranma 1/2",
@@ -1173,7 +1037,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/782.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Sakura Card Captor",
@@ -1181,7 +1045,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/800.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Samurai X",
@@ -1189,7 +1053,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/802.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Super Campeones",
@@ -1197,7 +1061,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/850.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Yu-Gi-Oh!",
@@ -1205,7 +1069,7 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1052.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Friends",
@@ -1213,7 +1077,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/470.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Los 3 Chiflados",
@@ -1221,7 +1085,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/619.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Malcolm",
@@ -1229,7 +1093,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/640.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Malcolm HD",
@@ -1237,7 +1101,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/641.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Mr. Bean",
@@ -1245,7 +1109,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/670.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Nosotros Los Guapos",
@@ -1253,7 +1117,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/739.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "The Big Bang Theory",
@@ -1261,7 +1125,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/899.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Two and a Half Men",
@@ -1269,7 +1133,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/973.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Caso Cerrado",
@@ -1277,7 +1141,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/138.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Elementary",
@@ -1285,7 +1149,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/363.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Game of Thrones",
@@ -1293,7 +1157,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/484.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Los Expedientes Secretos X",
@@ -1301,7 +1165,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/623.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Smallville",
@@ -1309,7 +1173,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/812.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Cantinflas",
@@ -1317,7 +1181,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/123.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Chapulín Colorado",
@@ -1325,7 +1189,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/152.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Chespirito",
@@ -1333,7 +1197,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/153.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Los Chicos del Barrio",
@@ -1341,7 +1205,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/622.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Family Guy (Padre de Familia)",
@@ -1349,7 +1213,7 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/747.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Animal Planet",
@@ -1357,7 +1221,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/41.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Discovery Channel",
@@ -1365,7 +1229,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/247.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Discovery Civilization",
@@ -1373,7 +1237,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/252.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Discovery H&H",
@@ -1381,7 +1245,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/254.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Discovery SCI",
@@ -1389,7 +1253,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/267.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Discovery Theater HD",
@@ -1397,7 +1261,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/271.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Discovery Turbo",
@@ -1405,7 +1269,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/274.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Discovery World",
@@ -1413,7 +1277,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/276.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "H2",
@@ -1421,7 +1285,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/509.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "History Channel",
@@ -1429,7 +1293,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/558.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Investigation Discovery",
@@ -1437,7 +1301,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/579.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Nat Geo",
@@ -1445,7 +1309,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/703.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Nat Geo Wild",
@@ -1453,7 +1317,7 @@
   "category": "documentales",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/709.m3u8",
-  "ua": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36"
+  "ua": ""
  },
  {
   "name": "Las Estrellas HD (Nacional)[v1](Opc.2)",
@@ -1768,14 +1632,6 @@
   "ua": ""
  },
  {
-  "name": "Vive TV Colombia HD [No 24/7](Nacional)",
-  "slug": "vive-tv-colombia-hd-no-24-7-nacional",
-  "category": "colombia",
-  "logo": "https://i.imgur.com/25CFHpB.png",
-  "url": "https://stream.vivetvcolombia.com/vivetv/index.m3u8",
-  "ua": ""
- },
- {
   "name": "Blu Radio HD [No 24/7] (Nacional)",
   "slug": "blu-radio-hd-no-24-7-nacional",
   "category": "colombia",
@@ -1830,14 +1686,6 @@
   "logo": "https://i.imgur.com/MOsWriY.png",
   "url": "http://205.235.6.29:8000/play/a0uw/index.m3u8?hls",
   "ua": ""
- },
- {
-  "name": "ATV  (Nacional)",
-  "slug": "atv-nacional",
-  "category": "peru",
-  "logo": "https://i.imgur.com/eUzYZfg.png",
-  "url": "http://181.224.255.210:8001/play/a0s6/index.m3u8?hls",
-  "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0"
  },
  {
   "name": "ATV SD (Nacional)[Opc.2]",
@@ -2096,14 +1944,6 @@
   "ua": ""
  },
  {
-  "name": "ChileVisión HD (Geo-Blocked)",
-  "slug": "chilevision-hd-geo-blocked",
-  "category": "chile",
-  "logo": "https://i.imgur.com/PRijvR0.png",
-  "url": "http://origin.dpsgo.com/ssai/event/R6cwOFyHQXaW6-kMcfWYKA/master.m3u8",
-  "ua": ""
- },
- {
   "name": "ChileVisión HD [Opc.4]",
   "slug": "chilevision-hd-opc-4",
   "category": "chile",
@@ -2120,14 +1960,6 @@
   "ua": ""
  },
  {
-  "name": "Canal 13 HD (Nacional)(Geo-Blocked)",
-  "slug": "canal-13-hd-nacional-geo-blocked",
-  "category": "chile",
-  "logo": "https://i.ibb.co/JWbkFrrC/Canal-13-2018.png",
-  "url": "https://redirector.dps.live/hls/13cl/playlist.m3u8?ChileTv",
-  "ua": ""
- },
- {
   "name": "Canal 13 HD (Nacional)(Opc.2)",
   "slug": "canal-13-hd-nacional-opc-2",
   "category": "chile",
@@ -2141,14 +1973,6 @@
   "category": "chile",
   "logo": "https://play-lh.googleusercontent.com/IQV0g8fKimSFNmcRBOrvnOUKGt8LN27CxAekNEOpLUw2SOyoQ22ucYKkx7lCfCJRS-Y",
   "url": "https://origin.dpsgo.com/ssai/event/LhHrVtyeQkKZ-Ye_xEU75g/master.m3u8",
-  "ua": ""
- },
- {
-  "name": "13 Internacional HD (Nacional)",
-  "slug": "13-internacional-hd-nacional",
-  "category": "chile",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/13i_2018.png/500px-13i_2018.png",
-  "url": "https://redirector.dps.live/hls/13intav/playlist.m3u8",
   "ua": ""
  },
  {
@@ -2272,14 +2096,6 @@
   "ua": ""
  },
  {
-  "name": "Pucón TV HD [No 24/7](Pucón - Araucanía)",
-  "slug": "pucon-tv-hd-no-24-7-pucon-araucania",
-  "category": "chile",
-  "logo": "https://i.imgur.com/nO4cV3E.png",
-  "url": "https://redirector.dps.live/hls/pucontv/playlist.m3u8",
-  "ua": ""
- },
- {
   "name": "Décima TV Chiloé HD (Ancud - Los Lagos)",
   "slug": "decima-tv-chiloe-hd-ancud-los-lagos",
   "category": "chile",
@@ -2384,14 +2200,6 @@
   "ua": ""
  },
  {
-  "name": "LAMIL35",
-  "slug": "lamil35",
-  "category": "argentina",
-  "logo": "",
-  "url": "https://vtm2.msinteractiva.com/lamil35/lamil35/playlist.m3u8",
-  "ua": ""
- },
- {
   "name": "Telecreativa Lanus [No 24/7]",
   "slug": "telecreativa-lanus-no-24-7",
   "category": "argentina",
@@ -2408,43 +2216,11 @@
   "ua": ""
  },
  {
-  "name": "Lapacho Canal 11 Formosa (Formosa) [No 24/7]",
-  "slug": "lapacho-canal-11-formosa-formosa-no-24-7",
-  "category": "argentina",
-  "logo": "https://i.imgur.com/PmFBL7x.png",
-  "url": "https://stmvideo6.livecastv.com/oncestream/oncestream/playlist.m3u8",
-  "ua": ""
- },
- {
   "name": "Canal 11 de la Costa [No 24/7](Mar de Ajó - Buenos Aires)",
   "slug": "canal-11-de-la-costa-no-24-7-mar-de-ajo-buenos-aires",
   "category": "argentina",
   "logo": "https://i.imgur.com/yYExcq1.jpg",
   "url": "https://vivo.solumedia.com:19360/dadaproductora/dadaproductora.m3u8",
-  "ua": ""
- },
- {
-  "name": "La 1 de TVE (Nacional)",
-  "slug": "la-1-de-tve-nacional",
-  "category": "espana",
-  "logo": "https://i.ibb.co/MxJNPHsn/La-1.png",
-  "url": "https://rtvelivestream.rtve.es/rtvesec/la1/la1_main.m3u8",
-  "ua": ""
- },
- {
-  "name": "La 1 Canarias (Canarias)",
-  "slug": "la-1-canarias-canarias",
-  "category": "espana",
-  "logo": "https://i.ibb.co/MxJNPHsn/La-1.png",
-  "url": "https://rtvelivestream.rtve.es/rtvesec/can/la1_can_main.m3u8",
-  "ua": ""
- },
- {
-  "name": "La 1 Cataluya (Cataluña)",
-  "slug": "la-1-cataluya-cataluna",
-  "category": "espana",
-  "logo": "https://i.ibb.co/MxJNPHsn/La-1.png",
-  "url": "https://rtvelivestream.rtve.es/rtvesec/cat/la1_cat_main.m3u8",
   "ua": ""
  },
  {
@@ -2469,6 +2245,14 @@
   "category": "espana",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/8/8d/La_2_Catalunya_2026.svg",
   "url": "https://rtvelivestream.rtve.es/rtvesec/cat/la2_cat_main.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Antena 3",
+  "slug": "antena-3",
+  "category": "espana",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Logo_Antena_3_2025_%28Naranja%29.svg",
+  "url": "http://179.60.224.196:8000/play/a0f2/index.m3u8",
   "ua": ""
  },
  {
@@ -2528,14 +2312,6 @@
   "ua": ""
  },
  {
-  "name": "Teledeporte [Geo-Blocked]",
-  "slug": "teledeporte-geo-blocked",
-  "category": "espana",
-  "logo": "https://graph.facebook.com/teledeporteRTVE/picture?width=200&height=200",
-  "url": "https://rtvelivestream.rtve.es/rtvesec/tdp/tdp_main.m3u8",
-  "ua": ""
- },
- {
   "name": "+24",
   "slug": "24",
   "category": "espana",
@@ -2549,62 +2325,6 @@
   "category": "espana",
   "logo": "https://pbs.twimg.com/profile_images/1634293543987453954/mb1Rzmso_200x200.jpg",
   "url": "https://ztnr.rtve.es/ztnr/6108704.m3u8",
-  "ua": ""
- },
- {
-  "name": "Conciertos Radio 3 (RTVE)[Geo-Blocked]",
-  "slug": "conciertos-radio-3-rtve-geo-blocked",
-  "category": "espana",
-  "logo": "https://graph.facebook.com/rtveplay/picture?width=200&height=200",
-  "url": "https://ztnr.rtve.es/ztnr/6924117.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cuéntame (RTVE)[Geo-Blocked]",
-  "slug": "cuentame-rtve-geo-blocked",
-  "category": "espana",
-  "logo": "https://graph.facebook.com/rtveplay/picture?width=200&height=200",
-  "url": "https://ztnr.rtve.es/ztnr/6909843.m3u8",
-  "ua": ""
- },
- {
-  "name": "La promesa (RTVE)[Geo-Blocked]",
-  "slug": "la-promesa-rtve-geo-blocked",
-  "category": "espana",
-  "logo": "https://graph.facebook.com/rtveplay/picture?width=200&height=200",
-  "url": "https://ztnr.rtve.es/ztnr/2472039.m3u8",
-  "ua": ""
- },
- {
-  "name": "La Revuelta (RTVE)[Geo-Blocked]",
-  "slug": "la-revuelta-rtve-geo-blocked",
-  "category": "espana",
-  "logo": "https://graph.facebook.com/rtveplay/picture?width=200&height=200",
-  "url": "https://ztnr.rtve.es/ztnr/16464388.m3u8",
-  "ua": ""
- },
- {
-  "name": "Somos Cine (RTVE)[Geo-blocked]",
-  "slug": "somos-cine-rtve-geo-blocked",
-  "category": "espana",
-  "logo": "https://graph.facebook.com/rtveplay/picture?width=200&height=200",
-  "url": "https://ztnr.rtve.es/ztnr/6909845.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cocina (RTVE)[Geo-blocked]",
-  "slug": "cocina-rtve-geo-blocked",
-  "category": "espana",
-  "logo": "https://graph.facebook.com/rtveplay/picture?width=200&height=200",
-  "url": "https://ztnr.rtve.es/ztnr/16656232.m3u8",
-  "ua": ""
- },
- {
-  "name": "Al cielo con ella (RTVE)[Geo-blocked]",
-  "slug": "al-cielo-con-ella-rtve-geo-blocked",
-  "category": "espana",
-  "logo": "https://graph.facebook.com/rtveplay/picture?width=200&height=200",
-  "url": "https://ztnr.rtve.es/ztnr/16862827.m3u8",
   "ua": ""
  },
  {
@@ -2664,14 +2384,6 @@
   "ua": ""
  },
  {
-  "name": "Canal 7 TeleValencia (Valencia)",
-  "slug": "canal-7-televalencia-valencia",
-  "category": "espana",
-  "logo": "https://i.imgur.com/ILfXDRs.png",
-  "url": "https://play.cdn.enetres.net/9E9557EFCEBB43A89CEC8FBD3C500247022/028/playlist.m3u8",
-  "ua": ""
- },
- {
   "name": "Ribera TV",
   "slug": "ribera-tv",
   "category": "espana",
@@ -2693,14 +2405,6 @@
   "category": "espana",
   "logo": "https://graph.facebook.com/m95tvmarbella/picture?width=200&height=200",
   "url": "https://limited2.todostreaming.es/live/m95-livestream.m3u8",
-  "ua": ""
- },
- {
-  "name": "Diez TV Las Villas (Villacarrillo - Jaén)",
-  "slug": "diez-tv-las-villas-villacarrillo-jaen",
-  "category": "espana",
-  "logo": "https://i.imgur.com/QTA40lP.png",
-  "url": "https://streaming.cloud.innovasur.es/mmj2/index.m3u8",
   "ua": ""
  },
  {
@@ -2784,11 +2488,11 @@
   "ua": ""
  },
  {
-  "name": "TVE Int. Europa [Geo-Blocked][Opc.2]",
-  "slug": "tve-int-europa-geo-blocked-opc-2",
+  "name": "TV Almassora (C. Valenciana)",
+  "slug": "tv-almassora-c-valenciana",
   "category": "espana",
-  "logo": "https://graph.facebook.com/tveInternacional/picture?width=200&height=200",
-  "url": "https://rtvelivestream.rtve.es/rtvesec/int/tvei_eu_main_dvr.m3u8",
+  "logo": "https://graph.facebook.com/tvalmassora/picture?width=200&height=200",
+  "url": "https://play.turesportmedia.com/hls/abr_tvalmassora/index.m3u8",
   "ua": ""
  },
  {
@@ -2912,30 +2616,6 @@
   "ua": ""
  },
  {
-  "name": "Creo Latino",
-  "slug": "creo-latino",
-  "category": "cine",
-  "logo": "https://img-evg3.tv360.bitel.com.pe/peru-image/2026/01/06/03/1767644988528/aceceab14c39_480_270.png",
-  "url": "https://live-evg5.tv360.bitel.com.pe/bitel/CreoLatinoSRT/playlist.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cine en Español",
-  "slug": "cine-en-espanol",
-  "category": "cine",
-  "logo": "https://i.ibb.co/7xdSqFSk/CINE-EN-ESPANOL.png",
-  "url": "https://epg.provider.plex.tv/library/parts/608049aefa2b8ae93c2c3b76-64e6e46f27a915f9b5184e9a.m3u8?X-Plex-Token=aodMBFfiWQ9a_wrQtBsJ",
-  "ua": ""
- },
- {
-  "name": "Cine de Horror",
-  "slug": "cine-de-horror",
-  "category": "cine",
-  "logo": "https://i.ibb.co/kV2YQv6r/Logo-cine-de-horror-Mayo5.png",
-  "url": "https://epg.provider.plex.tv/library/parts/608049aefa2b8ae93c2c3b76-64e6e2f04a5e9b4cedc6d52b.m3u8?x-plex-token=aodMBFfiWQ9a_wrQtBsJ",
-  "ua": ""
- },
- {
   "name": "MyTime Movie Network (RuntimeTV)(ES)",
   "slug": "mytime-movie-network-runtimetv-es",
   "category": "cine",
@@ -2957,14 +2637,6 @@
   "category": "cine",
   "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ESBC2700002LO_20260310T031628SQUARE.png",
   "url": "https://jmp2.uk/stvp-ESBC2700002LO",
-  "ua": ""
- },
- {
-  "name": "Cine Western",
-  "slug": "cine-western",
-  "category": "cine",
-  "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ES2300005G7_20260127T040149SQUARE.png",
-  "url": "https://jmp2.uk/stvp-ES2300005G7",
   "ua": ""
  },
  {
@@ -3021,14 +2693,6 @@
   "category": "cine",
   "logo": "https://i.imgur.com/ZDenyAE.png",
   "url": "https://stmvideo1.livecastv.com/tele5trelew/tele5trelew/playlist.m3u8",
-  "ua": ""
- },
- {
-  "name": "Action Movie Channel (SUB)",
-  "slug": "action-movie-channel-sub",
-  "category": "cine",
-  "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ESBC40000248_20250107T024921SQUARE.png",
-  "url": "https://jmp2.uk/stvp-ESBC40000248",
   "ua": ""
  },
  {
@@ -3117,6 +2781,14 @@
   "category": "cine",
   "logo": "https://i.imgur.com/avBL8pQ.png",
   "url": "http://192.141.98.91:8000/play/a209/index.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Universal Comedy HD [Opc.3]",
+  "slug": "universal-comedy-hd-opc-3",
+  "category": "cine",
+  "logo": "https://i.imgur.com/avBL8pQ.png",
+  "url": "http://187.245.231.227:8000/play/a0ou/index.m3u8",
   "ua": ""
  },
  {
@@ -3496,14 +3168,6 @@
   "ua": ""
  },
  {
-  "name": "Multipremier HD",
-  "slug": "multipremier-hd",
-  "category": "cine",
-  "logo": "https://i.ibb.co/jZsrJSzH/MP.png",
-  "url": "http://186.148.182.83:8000/play/a01h/index.m3u8",
-  "ua": ""
- },
- {
   "name": "Multipremier SD [Opc.2]",
   "slug": "multipremier-sd-opc-2",
   "category": "cine",
@@ -3696,14 +3360,6 @@
   "ua": ""
  },
  {
-  "name": "TCM SD (Opc.3)",
-  "slug": "tcm-sd-opc-3",
-  "category": "cine",
-  "logo": "https://i.imgur.com/QpDkrmT.png",
-  "url": "http://186.148.182.83:8000/play/a09e/index.m3u8",
-  "ua": ""
- },
- {
   "name": "A3Cine SD [Opc.2]",
   "slug": "a3cine-sd-opc-2",
   "category": "cine",
@@ -3837,14 +3493,6 @@
   "category": "entretenimiento",
   "logo": "https://i.imgur.com/DVASpQj.png",
   "url": "http://45.5.117.188:8000/play/a077/index.m3u8",
-  "ua": ""
- },
- {
-  "name": "Telemundo USA [Opc.3]",
-  "slug": "telemundo-usa-opc-3",
-  "category": "entretenimiento",
-  "logo": "https://i.imgur.com/DVASpQj.png",
-  "url": "http://45.5.117.187:8000/play/a077/index.m3u8",
   "ua": ""
  },
  {
@@ -4080,27 +3728,11 @@
   "ua": ""
  },
  {
-  "name": "Comedy Central HD (Opc.2)",
-  "slug": "comedy-central-hd-opc-2",
-  "category": "entretenimiento",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/960px-Comedy_Central_2018.svg.png",
-  "url": "http://181.224.255.210:8001/play/a0ew/index.m3u8?hls",
-  "ua": ""
- },
- {
   "name": "Comedy Central HD (Opc.4)",
   "slug": "comedy-central-hd-opc-4",
   "category": "entretenimiento",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/960px-Comedy_Central_2018.svg.png",
   "url": "http://190.108.83.69:8000/play/a02z/index.m3u8",
-  "ua": ""
- },
- {
-  "name": "TVE Star HD (Auto)",
-  "slug": "tve-star-hd-auto",
-  "category": "entretenimiento",
-  "logo": "https://i.ibb.co/j98NY8Mr/starcolor.png",
-  "url": "https://rtvelivestream.rtve.es/rtvesec/int/star_main_dvr.m3u8",
   "ua": ""
  },
  {
@@ -4181,14 +3813,6 @@
   "category": "entretenimiento",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/TNT_Logo_2016.svg/960px-TNT_Logo_2016.svg.png",
   "url": "http://181.224.255.210:8001/play/a0lv/index.m3u8?hls",
-  "ua": ""
- },
- {
-  "name": "TNT Novelas HD [Opc.2]",
-  "slug": "tnt-novelas-hd-opc-2",
-  "category": "entretenimiento",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/TNT_Logo_2016.svg/960px-TNT_Logo_2016.svg.png",
-  "url": "http://186.148.175.138:8000/playlist.m3u8",
   "ua": ""
  },
  {
@@ -4400,14 +4024,6 @@
   "ua": ""
  },
  {
-  "name": "Quántica TV (Argentina - San Vicente - Buenos Aires)",
-  "slug": "quantica-tv-argentina-san-vicente-buenos-aires",
-  "category": "cine",
-  "logo": "https://i.imgur.com/6f8EYC2.jpeg",
-  "url": "https://videostream.shockmedia.com.ar:19360/quanticatv/quanticatv.m3u8",
-  "ua": ""
- },
- {
   "name": "Miami TV DJ",
   "slug": "miami-tv-dj",
   "category": "cine",
@@ -4520,51 +4136,11 @@
   "ua": ""
  },
  {
-  "name": "Rebelde",
-  "slug": "rebelde",
-  "category": "cine",
-  "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ES3600001Y7_20260505T035729SQUARE.png",
-  "url": "https://jmp2.uk/stvp-ES3600001Y7",
-  "ua": ""
- },
- {
-  "name": "Todo Drama",
-  "slug": "todo-drama",
-  "category": "cine",
-  "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ES440000327_20260120T031340SQUARE.png",
-  "url": "https://jmp2.uk/stvp-ES440000327",
-  "ua": ""
- },
- {
   "name": "Canela Secretos",
   "slug": "canela-secretos",
   "category": "cine",
   "logo": "https://i.ibb.co/SwL4NQvW/0-16x9-5.png",
   "url": "https://amg00658-amg00658c117-canelatv-us-11650.playouts.now.amagi.tv/ts-us-e2-n1/playlist/amg00658-canelamediafast-channele-canelatvus/playlist.m3u8",
-  "ua": ""
- },
- {
-  "name": "Cheaters en Español",
-  "slug": "cheaters-en-espanol",
-  "category": "cine",
-  "logo": "https://canvas-lb.tubitv.com/opts/K_mJ4FVyjBezRg==/a903ad40-5f60-4adc-828f-54c0b403481c/CHgQeDoFMS4xLjlAAQ==",
-  "url": "https://live-manifest.production-public.tubi.io/live/eca7fc67-ab6a-4d29-a25f-d8d77b7467a4/playlist.m3u8",
-  "ua": ""
- },
- {
-  "name": "FilmRise Crímenes Verdaderos",
-  "slug": "filmrise-crimenes-verdaderos",
-  "category": "cine",
-  "logo": "https://canvas-lb.tubitv.com/opts/RpUdI1HHOi0oMA==/8605b3b6-3605-44ef-b0d0-89a85b409bf6/CHgQeDoFMS4xLjlAAQ==",
-  "url": "https://live-manifest.production-public.tubi.io/live/957d00c2-f581-4ec1-a49f-f571ad30faa8/playlist.m3u8",
-  "ua": ""
- },
- {
-  "name": "FilmRise Series Gratis",
-  "slug": "filmrise-series-gratis",
-  "category": "cine",
-  "logo": "https://canvas-lb.tubitv.com/opts/y4kaoqWciYmkng==/2d21c4c1-c88d-4869-b75a-712da0dfad67/CHgQeDoFMS4xLjlAAQ==",
-  "url": "https://live-manifest.production-public.tubi.io/live/5b66e78a-fc9e-4ffb-bbb0-00d4d2af2c53/playlist.m3u8",
   "ua": ""
  },
  {
@@ -4590,14 +4166,6 @@
   "logo": "https://i.postimg.cc/8CjY6k8p/Diseno-sin-titulo(10).png",
   "url": "https://video03.logicahost.com.br/maxivisiontv/maxivisiontv/playlist.m3u8",
   "ua": "Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36"
- },
- {
-  "name": "Tiva TV (Puerto Rico)",
-  "slug": "tiva-tv-puerto-rico",
-  "category": "cine",
-  "logo": "https://i.imgur.com/T9vWjeB.png",
-  "url": "https://link.frontlayer.com/services/hls2/fl496518/index.m3u8",
-  "ua": ""
  },
  {
   "name": "RN Televisión [No 24/7] (Perú - Yurimaguas - Loreto)",
@@ -4712,14 +4280,6 @@
   "ua": ""
  },
  {
-  "name": "Telemundo Live Stream Schedule",
-  "slug": "telemundo-live-stream-schedule",
-  "category": "noticias",
-  "logo": "https://i.imgur.com/DVASpQj.png",
-  "url": "https://content.uplynk.com/channel/b6a96ed39d694ae1b738faa98cf7dd3f.m3u8",
-  "ua": ""
- },
- {
   "name": "FMH Atlas",
   "slug": "fmh-atlas",
   "category": "documentales",
@@ -4757,14 +4317,6 @@
   "category": "documentales",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/A%26E_Network_logo.svg/960px-A%26E_Network_logo.svg.png",
   "url": "http://45.186.106.207:8000/play/a01n/index.m3u8",
-  "ua": ""
- },
- {
-  "name": "Discovery Channel SD",
-  "slug": "discovery-channel-sd",
-  "category": "documentales",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/2019_Discovery_logo.svg/960px-2019_Discovery_logo.svg.png",
-  "url": "http://181.78.211.244:8000/play/a08i/index.m3u8",
   "ua": ""
  },
  {
@@ -5032,14 +4584,6 @@
   "ua": ""
  },
  {
-  "name": "N+ (Nacional)",
-  "slug": "n-nacional",
-  "category": "noticias",
-  "logo": "https://i.imgur.com/TwBa344.png",
-  "url": "https://nomvauth.univision.com/api/v3/akamai-auth/token-auth?url=https://channel07secure.akamaized.net/hls/live/2036971-b/event01/index.m3u8&redirect=true",
-  "ua": ""
- },
- {
   "name": "ADN40 (Nacional)",
   "slug": "adn40-nacional",
   "category": "noticias",
@@ -5061,14 +4605,6 @@
   "category": "noticias",
   "logo": "https://venevision.vod.immergo.tv/venevision/uploaded/6b2f0053-d5f4-43ac-bd88-542b79fbfba6.png",
   "url": "https://dai.google.com/linear/hls/event/q2LqrJ2ZRP6UuyzA6X0VsA/master.m3u8",
-  "ua": ""
- },
- {
-  "name": "Exitosa TV (Perú - Nacional)[Opc.2]",
-  "slug": "exitosa-tv-peru-nacional-opc-2",
-  "category": "noticias",
-  "logo": "https://i.imgur.com/pu0BSB7.png",
-  "url": "http://181.224.255.210:8001/play/a0sm/index.m3u8?hls",
   "ua": ""
  },
  {
@@ -5253,30 +4789,6 @@
   "category": "infantil",
   "logo": "https://i.imgur.com/u3yujUd.png",
   "url": "http://190.61.101.11:7050/play/a08f/index.m3u8?hls",
-  "ua": ""
- },
- {
-  "name": "duckTV (ES)",
-  "slug": "ducktv-es",
-  "category": "infantil",
-  "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ESBC4700001GR_20241022T050629SQUARE.png",
-  "url": "https://jmp2.uk/stvp-ESBC4700001GR",
-  "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0"
- },
- {
-  "name": "BABY SHARK TV (ES)",
-  "slug": "baby-shark-tv-es",
-  "category": "infantil",
-  "logo": "https://www.cxtv.com.br/img/Tvs/Logo/webp-m/80445724b0084751d2edc41bb8eb6a9f.webp",
-  "url": "https://jmp2.uk/stvp-ES17000065P",
-  "ua": ""
- },
- {
-  "name": "LooLoo Kids (ES)",
-  "slug": "looloo-kids-es",
-  "category": "infantil",
-  "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ES5000001CS_20250218T035957SQUARE.png",
-  "url": "https://jmp2.uk/stvp-ES5000001CS",
   "ua": ""
  },
  {
@@ -5488,27 +5000,11 @@
   "ua": ""
  },
  {
-  "name": "Pitufo TV (ES)",
-  "slug": "pitufo-tv-es",
-  "category": "infantil",
-  "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ESBD130000205_20241022T050609SQUARE.png",
-  "url": "https://jmp2.uk/stvp-ESBD130000205",
-  "ua": ""
- },
- {
   "name": "Mr. Bean Animated (ES)",
   "slug": "mr-bean-animated-es",
   "category": "infantil",
   "logo": "https://static.wikia.nocookie.net/logopedia/images/2/25/Mr._Bean_Animated_Series_stacked_logo.png",
   "url": "https://amg00627-amg00627c30-rakuten-es-3990.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanescc-rakutenes/playlist.m3u8",
-  "ua": ""
- },
- {
-  "name": "Las 3 Mellizas (ES)",
-  "slug": "las-3-mellizas-es",
-  "category": "infantil",
-  "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ES4400001N3_20260120T031327SQUARE.png",
-  "url": "https://jmp2.uk/stvp-ES4400001N3",
   "ua": ""
  },
  {
@@ -5566,6 +5062,14 @@
   "logo": "https://telechancho.github.io/tvlogos/TierramiaTV.jpg",
   "url": "http://stream-gtlc.telecentro.net.ar/hls/tierramiahls/main.m3u8",
   "ua": ""
+ },
+ {
+  "name": "Vorterix (Mendoza)",
+  "slug": "vorterix-mendoza",
+  "category": "musica",
+  "logo": "https://telechancho.github.io/tvlogos/Vorterix.jpg",
+  "url": "https://vivo.solumedia.com:19360/vorterixmza/vorterixmza.m3u8",
+  "ua": "Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36"
  },
  {
   "name": "Urban TV",
@@ -5848,14 +5352,6 @@
   "ua": ""
  },
  {
-  "name": "Azteca Deportes Network 3 HD",
-  "slug": "azteca-deportes-network-3-hd",
-  "category": "deportes",
-  "logo": "https://canvas-lb.tubitv.com/opts/MPS2aN2-BeVSwg==/2af69a6e-29ec-4543-842a-50650368d973/CHgQeDoFMS4xLjlAAQ==",
-  "url": "https://live-manifest.production-public.tubi.io/live/6bf131c3-d664-424c-93c9-49188a788980/playlist.m3u8",
-  "ua": ""
- },
- {
   "name": "ITV Deportes (Internacional)",
   "slug": "itv-deportes-internacional",
   "category": "deportes",
@@ -5896,35 +5392,11 @@
   "ua": ""
  },
  {
-  "name": "UFC Action (EE.UU.) [EN]",
-  "slug": "ufc-action-ee-uu-en",
-  "category": "deportes",
-  "logo": "https://i.ibb.co/jkxk9Bxr/ufc-PNG64.png",
-  "url": "http://45.185.163.75:8000/play/a0hr/index.m3u8",
-  "ua": ""
- },
- {
-  "name": "Hard Knocks MMA (EE.UU.) [EN]",
-  "slug": "hard-knocks-mma-ee-uu-en",
-  "category": "deportes",
-  "logo": "https://images-1.rakuten.tv/storage/global-live-channel/translation/artwork/13b0a6c7-4307-4c8d-9fc4-df2a4f8e8b38-hard-knocks-fighting-1602077398.jpeg",
-  "url": "https://d39g1vxj2ef6in.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod-rakuten-stitched/master.m3u8?ads.xumo_channelId=88883037",
-  "ua": ""
- },
- {
   "name": "TUDN [Opc.1]",
   "slug": "tudn-opc-1",
   "category": "deportes",
   "logo": "https://i.imgur.com/oT5CAvd.png",
   "url": "http://181.119.177.253:8000/play/a0ds/index.m3u8",
-  "ua": ""
- },
- {
-  "name": "TUDN [Opc.2]",
-  "slug": "tudn-opc-2",
-  "category": "deportes",
-  "logo": "https://i.imgur.com/oT5CAvd.png",
-  "url": "http://179.60.224.196:8000/play/a0f4/index.m3u8",
   "ua": ""
  },
  {
@@ -6080,35 +5552,11 @@
   "ua": ""
  },
  {
-  "name": "Deportes13 (Chile)",
-  "slug": "deportes13-chile",
-  "category": "deportes",
-  "logo": "https://i.imgur.com/GRpxoPf.png",
-  "url": "https://origin.dpsgo.com/ssai/event/uFiYkh4CQPCPgbs7WPKhXw/master.m3u8",
-  "ua": ""
- },
- {
   "name": "Turf Móvil (Chile)",
   "slug": "turf-movil-chile",
   "category": "deportes",
   "logo": "https://i.imgur.com/TwIe4lK.png",
   "url": "https://tvturf4.janus.cl/playlist/stream.m3u8",
-  "ua": ""
- },
- {
-  "name": "PowerNation (Internacional)",
-  "slug": "powernation-internacional",
-  "category": "deportes",
-  "logo": "https://i.ibb.co/rGp2ynmR/0-16x9-4.png",
-  "url": "https://epg.provider.plex.tv/library/parts/608049aefa2b8ae93c2c3b76-69814bbff871095eafc65925.m3u8?x-plex-token=aodMBFfiWQ9a_wrQtBsJ",
-  "ua": ""
- },
- {
-  "name": "Fierro a Fondo (Internacional)",
-  "slug": "fierro-a-fondo-internacional",
-  "category": "deportes",
-  "logo": "https://img-evg3.tv360.bitel.com.pe/peru-image/2026/01/06/03/1767645593708/be4c102c0389_480_270.jpg",
-  "url": "https://live-evg5.tv360.bitel.com.pe/bitel/fierroSRT/playlist.m3u8",
   "ua": ""
  },
  {
@@ -6181,6 +5629,14 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
   "url": "http://181.224.255.210:8001/play/a0s8/index.m3u8?hls",
+  "ua": ""
+ },
+ {
+  "name": "DSports  [Opc. 4]",
+  "slug": "dsports-opc-4",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
+  "url": "http://45.186.254.75:8000/play/a0en/index.m3u8",
   "ua": ""
  },
  {

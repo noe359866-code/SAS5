@@ -632,6 +632,14 @@
   "ua": ""
  },
  {
+  "name": "Disney Channel",
+  "slug": "disney-channel",
+  "category": "infantil",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
+  "ua": ""
+ },
+ {
   "name": "Disney Junior",
   "slug": "disney-junior",
   "category": "infantil",
@@ -1680,14 +1688,6 @@
   "ua": ""
  },
  {
-  "name": "ATV  (Nacional)",
-  "slug": "atv-nacional",
-  "category": "peru",
-  "logo": "https://i.imgur.com/eUzYZfg.png",
-  "url": "http://181.224.255.210:8001/play/a0s6/index.m3u8?hls",
-  "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0"
- },
- {
   "name": "ATV SD (Nacional)[Opc.2]",
   "slug": "atv-sd-nacional-opc-2",
   "category": "peru",
@@ -1821,6 +1821,14 @@
   "category": "peru",
   "logo": "https://i.imgur.com/q0dAWyj.png",
   "url": "https://redirector.rudo.video/hls-video/plus226/latina2/latina2.smil/playlist.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "Nativa TV HD (Santiago)",
+  "slug": "nativa-tv-hd-santiago",
+  "category": "peru",
+  "logo": "https://i.imgur.com/Y9k9XSO.png",
+  "url": "https://live-evg5.tv360.bitel.com.pe/bitel/nativa/playlist.m3u8",
   "ua": ""
  },
  {
@@ -2184,14 +2192,6 @@
   "ua": ""
  },
  {
-  "name": "LAMIL35",
-  "slug": "lamil35",
-  "category": "argentina",
-  "logo": "",
-  "url": "https://vtm2.msinteractiva.com/lamil35/lamil35/playlist.m3u8",
-  "ua": ""
- },
- {
   "name": "Telecreativa Lanus [No 24/7]",
   "slug": "telecreativa-lanus-no-24-7",
   "category": "argentina",
@@ -2208,19 +2208,19 @@
   "ua": ""
  },
  {
-  "name": "Lapacho Canal 11 Formosa (Formosa) [No 24/7]",
-  "slug": "lapacho-canal-11-formosa-formosa-no-24-7",
-  "category": "argentina",
-  "logo": "https://i.imgur.com/PmFBL7x.png",
-  "url": "https://stmvideo6.livecastv.com/oncestream/oncestream/playlist.m3u8",
-  "ua": ""
- },
- {
   "name": "Canal 11 de la Costa [No 24/7](Mar de Ajó - Buenos Aires)",
   "slug": "canal-11-de-la-costa-no-24-7-mar-de-ajo-buenos-aires",
   "category": "argentina",
   "logo": "https://i.imgur.com/yYExcq1.jpg",
   "url": "https://vivo.solumedia.com:19360/dadaproductora/dadaproductora.m3u8",
+  "ua": ""
+ },
+ {
+  "name": "La 2 (Nacional)",
+  "slug": "la-2-nacional",
+  "category": "espana",
+  "logo": "https://i.ibb.co/rfsr9PSh/La-2.png",
+  "url": "https://rtvelivestream.rtve.es/rtvesec/la2/la2_main_dvr.m3u8",
   "ua": ""
  },
  {
@@ -3144,14 +3144,6 @@
   "ua": ""
  },
  {
-  "name": "Multipremier HD",
-  "slug": "multipremier-hd",
-  "category": "cine",
-  "logo": "https://i.ibb.co/jZsrJSzH/MP.png",
-  "url": "http://186.148.182.83:8000/play/a01h/index.m3u8",
-  "ua": ""
- },
- {
   "name": "Multipremier SD [Opc.2]",
   "slug": "multipremier-sd-opc-2",
   "category": "cine",
@@ -3344,14 +3336,6 @@
   "ua": ""
  },
  {
-  "name": "TCM SD (Opc.3)",
-  "slug": "tcm-sd-opc-3",
-  "category": "cine",
-  "logo": "https://i.imgur.com/QpDkrmT.png",
-  "url": "http://186.148.182.83:8000/play/a09e/index.m3u8",
-  "ua": ""
- },
- {
   "name": "A3Cine SD [Opc.2]",
   "slug": "a3cine-sd-opc-2",
   "category": "cine",
@@ -3480,11 +3464,11 @@
   "ua": ""
  },
  {
-  "name": "Telemundo USA [Opc.3]",
-  "slug": "telemundo-usa-opc-3",
+  "name": "Telemundo USA",
+  "slug": "telemundo-usa",
   "category": "entretenimiento",
   "logo": "https://i.imgur.com/DVASpQj.png",
-  "url": "http://45.5.117.187:8000/play/a077/index.m3u8",
+  "url": "http://45.5.117.188:8000/play/a077/index.m3u8",
   "ua": ""
  },
  {
@@ -3717,14 +3701,6 @@
   "category": "entretenimiento",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/960px-Comedy_Central_2018.svg.png",
   "url": "http://205.235.6.29:8000/play/a0y7/index.m3u8?hls",
-  "ua": ""
- },
- {
-  "name": "Comedy Central HD (Opc.2)",
-  "slug": "comedy-central-hd-opc-2",
-  "category": "entretenimiento",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/960px-Comedy_Central_2018.svg.png",
-  "url": "http://181.224.255.210:8001/play/a0ew/index.m3u8?hls",
   "ua": ""
  },
  {
@@ -4320,14 +4296,6 @@
   "ua": ""
  },
  {
-  "name": "Discovery Channel SD",
-  "slug": "discovery-channel-sd",
-  "category": "documentales",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/2019_Discovery_logo.svg/960px-2019_Discovery_logo.svg.png",
-  "url": "http://181.78.211.244:8000/play/a08i/index.m3u8",
-  "ua": ""
- },
- {
   "name": "Discovery Channel SD [Opc.2]",
   "slug": "discovery-channel-sd-opc-2",
   "category": "documentales",
@@ -4605,14 +4573,6 @@
   "category": "noticias",
   "logo": "https://venevision.vod.immergo.tv/venevision/uploaded/6b2f0053-d5f4-43ac-bd88-542b79fbfba6.png",
   "url": "https://dai.google.com/linear/hls/event/q2LqrJ2ZRP6UuyzA6X0VsA/master.m3u8",
-  "ua": ""
- },
- {
-  "name": "Exitosa TV (Perú - Nacional)[Opc.2]",
-  "slug": "exitosa-tv-peru-nacional-opc-2",
-  "category": "noticias",
-  "logo": "https://i.imgur.com/pu0BSB7.png",
-  "url": "http://181.224.255.210:8001/play/a0sm/index.m3u8?hls",
   "ua": ""
  },
  {
@@ -5389,14 +5349,6 @@
   "category": "deportes",
   "logo": "https://i.ibb.co/jkxk9Bxr/ufc-PNG64.png",
   "url": "http://45.185.163.75:8000/play/a0hs/index.m3u8",
-  "ua": ""
- },
- {
-  "name": "UFC Action (EE.UU.) [EN]",
-  "slug": "ufc-action-ee-uu-en",
-  "category": "deportes",
-  "logo": "https://i.ibb.co/jkxk9Bxr/ufc-PNG64.png",
-  "url": "http://45.185.163.75:8000/play/a0hr/index.m3u8",
   "ua": ""
  },
  {

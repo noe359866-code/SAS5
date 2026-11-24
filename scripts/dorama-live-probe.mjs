@@ -69,6 +69,9 @@ async function main() {
       let embed = '';
       try { embed = JSON.parse(ajax.body)?.embed_url || ''; } catch { /* no JSON */ }
       if (!embed) { row(cfg.site, `opción ${opt.nume}`, ajax.status, 'sin-embed', `etiqueta="${opt.label}"`); continue; }
+      // La respuesta puede traer el iframe completo, no solo la URL.
+      const iframe = /<iframe[^>]+src=["']([^"']+)["']/i.exec(embed)?.[1] || embed;
+      embed = iframe.replace(/\\\//g, '/').replace(/^\/\//, 'https:');
       const kind = extractorFor(embed);
       row(cfg.site, `opción ${opt.nume}`, ajax.status, kind || 'sin-extractor', `etiqueta="${opt.label}" · ${redact(embed)}`);
       if (!kind || kind === 'opaque') continue;

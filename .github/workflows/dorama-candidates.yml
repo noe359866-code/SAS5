@@ -12,6 +12,9 @@ on:
       - 'scripts/dorama-live-probe.mjs'
       - 'scripts/doramasflix-probe.mjs'
       - 'scripts/doramasyt-probe.mjs'
+      - 'lib/sites/doramasyt.js'
+      - 'lib/sites/seriesbl.js'
+      - 'scripts/dorama-adapters-live.mjs'
 
 permissions:
   contents: write
@@ -37,13 +40,15 @@ jobs:
         run: node scripts/doramasflix-probe.mjs
       - name: Reproductor de DoramasYT
         run: node scripts/doramasyt-probe.mjs
+      - name: Adaptadores de doramas en vivo
+        run: node scripts/dorama-adapters-live.mjs
       - name: Devolver el resultado a la rama
         if: always()
         run: |
           test -s .probe/dorama-candidates.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          git add -f .probe/dorama-candidates.md .probe/dorama-players.md .probe/dorama-live.md .probe/doramasflix.md .probe/doramasyt.md
+          git add -f .probe/dorama-candidates.md .probe/dorama-players.md .probe/dorama-live.md .probe/doramasflix.md .probe/doramasyt.md .probe/dorama-adapters-live.md
           git diff --cached --quiet || git commit -m "sonda: candidatas de doramas $(date -u +%FT%TZ) [skip ci]"
           git fetch origin || true
           git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true

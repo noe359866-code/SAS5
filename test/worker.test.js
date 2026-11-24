@@ -46,8 +46,8 @@ test('healthz: reporta runtime cloudflare-workers', async () => {
   assert.equal(body.runtime, 'cloudflare-workers');
   assert.deepEqual(body.streamProviders, ['fanpelis', 'spinflix',
     'cuevanas3', 'allpeliculas', 'lamovie', 'hackstore', 'allcalidad',
-    'animeflv', 'animeav1', 'otakustv', 'fuegocine', 'pelisjuanita', 'videoapi']);
-  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, cuevanas3: true, allpeliculas: true, lamovie: true, hackstore: true, allcalidad: true, videoapi: true, animeflv: true, animeav1: true, otakustv: true, fuegocine: true, pelisjuanita: true });
+    'animeflv', 'animeav1', 'otakustv', 'doramasyt', 'seriesbl', 'fuegocine', 'pelisjuanita', 'videoapi']);
+  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, cuevanas3: true, allpeliculas: true, lamovie: true, hackstore: true, allcalidad: true, videoapi: true, animeflv: true, animeav1: true, otakustv: true, doramasyt: true, seriesbl: true, fuegocine: true, pelisjuanita: true });
 });
 
 test('catalog: sin TMDB key devuelve metas=[] con 200', async () => {

@@ -34,7 +34,9 @@ jobs:
           test -s .probe/sports-candidates.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          git add -f .probe/sports-candidates.md .probe/sports-players.md
+          for f in .probe/sports-candidates.md .probe/sports-players.md; do
+            test -s "$f" && git add -f "$f"
+          done
           git diff --cached --quiet || git commit -m "sonda: candidatas de canales deportivos $(date -u +%FT%TZ) [skip ci]"
           git fetch origin || true
           git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true

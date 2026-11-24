@@ -1,6 +1,6 @@
 # Sonda 2: decodificar streamtp y volcar la14hd
 
-Fecha: 2026-11-24T15:27:49.592Z
+Fecha: 2026-11-24T15:30:24.822Z
 
 ## streamtp dsports — HTTP 200
 - clave: b33c02cd · decodificado 1410 B

@@ -22,6 +22,11 @@ const LISTS = [
   'https://iptv-org.github.io/iptv/countries/cl.m3u',
   'https://iptv-org.github.io/iptv/countries/pe.m3u',
   'https://iptv-org.github.io/iptv/countries/es.m3u',
+  'https://iptv-org.github.io/iptv/countries/uy.m3u',
+  'https://iptv-org.github.io/iptv/countries/ve.m3u',
+  'https://iptv-org.github.io/iptv/countries/do.m3u',
+  'https://iptv-org.github.io/iptv/countries/ec.m3u',
+  'https://iptv-org.github.io/iptv/countries/us.m3u',
 ];
 
 const WANT = /espn|fox ?sport|dsports?|directv|dazn|tnt ?sport|tyc|tudn|win ?sport|bein|liga ?1|movistar|gol ?tv|gol ?peru|claro ?sport|depor(tv)?|fox deportes|espn deportes/i;
@@ -90,11 +95,11 @@ function parseM3U(text, source) {
 
   const seen = new Set();
   let checked = 0;
+  const outRows = [];
   for (const e of wanted) {
     const key = `${e.name}→${e.url.split('?')[0]}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    if (checked >= 40) { say(`| ${e.name} | ${e.source} | ${e.group} | ${redact(e.url)} | sin verificar (tope) |`); continue; }
     checked++;
     const t0 = Date.now();
     const res = await get(e.url, { Range: 'bytes=0-400' });
@@ -104,8 +109,10 @@ function parseM3U(text, source) {
     const variants = (head.match(/#EXT-X-STREAM-INF/g) || []).length;
     const state = ok ? `HLS VÁLIDO${variants ? ` ${variants}v` : ''} · ${ms} ms`
       : `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${redact(head.slice(0, 40)) || '—'}`;
-    say(`| ${e.name} | ${e.source} | ${e.group || '—'} | ${redact(e.url)} | ${state} |`);
+    outRows.push({ ok, line: `| ${e.name} | ${e.source} | ${e.group || '—'} | ${redact(e.url)} | ${state} |` });
   }
+  for (const r of outRows.filter((r) => r.ok)) say(r.line);
+  for (const r of outRows.filter((r) => !r.ok)) say(r.line);
 
  } catch (err) {
   say(`\nERROR de sonda: ${err && err.message}`);

@@ -46,7 +46,7 @@ jobs:
           test -s .probe/sports-candidates.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md; do
+          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv; do
             test -s "$f" && git add -f "$f"
           done
           git diff --cached --quiet || git commit -m "sonda: candidatas de canales deportivos $(date -u +%FT%TZ) [skip ci]"

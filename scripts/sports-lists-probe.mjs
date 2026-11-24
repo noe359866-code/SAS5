@@ -113,6 +113,9 @@ function parseM3U(text, source) {
   }
   for (const r of outRows.filter((r) => r.ok)) say(r.line);
   for (const r of outRows.filter((r) => !r.ok)) say(r.line);
+  // TSV con logos para fijar los pósters del catálogo
+  const tsv = wanted.map((e) => `${e.name}\t${e.logo}\t${redact(e.url)}`);
+  fs.writeFileSync('.probe/sports-logos.tsv', tsv.join('\n') + '\n');
 
  } catch (err) {
   say(`\nERROR de sonda: ${err && err.message}`);

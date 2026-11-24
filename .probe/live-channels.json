@@ -1144,6 +1144,14 @@
   "ua": ""
  },
  {
+  "name": "Discovery Theater HD",
+  "slug": "discovery-theater-hd",
+  "category": "documentales",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/267.m3u8",
+  "ua": ""
+ },
+ {
   "name": "Discovery Turbo",
   "slug": "discovery-turbo",
   "category": "documentales",

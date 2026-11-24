@@ -46,6 +46,7 @@ async function get(url, headers = {}, range = 'bytes=0-2048', maxBody = 2_000_00
       contentType: res.headers.get('content-type') || '',
       cors: res.headers.get('access-control-allow-origin') || '',
       server: res.headers.get('server') || '',
+      setCookie: res.headers.get('set-cookie') || '',
     };
   } catch (err) {
     return { status: 0, body: '', error: `${err?.name || 'err'}:${err?.cause?.code || ''}` };
@@ -53,7 +54,7 @@ async function get(url, headers = {}, range = 'bytes=0-2048', maxBody = 2_000_00
 }
 
 /** playlist → variante → primer segmento con bytes de vídeo. */
-async function fullChain(url, headers) {
+async function fullChain(url, headers, directTs = null) {
   const master = await get(url, headers, 'bytes=0-8192');
   if ((master.status !== 200 && master.status !== 206) || !/#EXTM3U/.test(master.body)) {
     return { ok: false, detail: `playlist HTTP ${master.status}${master.error ? ' ' + master.error : ''}` };
@@ -77,21 +78,36 @@ async function fullChain(url, headers) {
   const segUrl = new URL(segLine, mediaUrl).toString();
   // La playlist contesta a todos; el segmento es lo protegido. Se prueba la
   // batería: con Range, sin Range, con Referer, con UA de reproductor.
+  const segHost = (() => { try { return new URL(segUrl).host; } catch { return '?'; } });
+  const cookie = (master.setCookie || '').split(';')[0];
   const attempts = [
     ['con Range', { ...headers, Range: 'bytes=0-188' }],
     ['sin Range', { ...headers }],
     ['con Referer', { ...headers, Referer: `${BASE}/` }],
-    ['UA VLC sin Range', { 'User-Agent': 'VLC/3.0.20 LibVLC/3.0.20' }],
+    ['UA VLC', { 'User-Agent': 'VLC/3.0.20 LibVLC/3.0.20' }],
+    ...(cookie ? [['con Cookie de sesión', { ...headers, Cookie: cookie }]] : []),
+    ['auth por query', { ...headers }],
   ];
-  const tried = [];
+  let segUrlFinal = segUrl;
+  const tried = [`host ${segHost}${cookie ? ' · hay cookie' : ''}`];
   for (const [label, h] of attempts) {
-    const seg = await get(segUrl, h, h.Range ? h.Range : null, 4_000);
+    const target = label === 'auth por query' ? `${segUrl}${segUrl.includes('?') ? '&' : '?'}${qs}` : segUrl;
+    const seg = await get(target, h, h.Range ? h.Range : null, 4_000);
     const bh = seg.body || '';
     const looksTs = bh.charCodeAt(0) === 0x47;
     const looksFmp4 = bh.slice(4, 8) === 'ftyp' || bh.slice(0, 12).includes('ftyp');
     tried.push(`${label}: ${seg.status}${looksTs ? ' TS' : looksFmp4 ? ' fMP4' : ''}${seg.error ? ' ' + seg.error : ''}`);
     if ((seg.status === 200 || seg.status === 206) && (looksTs || looksFmp4)) {
       return { ok: true, detail: `${tried.join(' → ')} · ${variants || '—'} variantes` };
+    }
+  }
+  // Plan B Xtream: stream TS directo sin playlist (/live/<u>/<p>/<id>.ts)
+  if (directTs) {
+    const ts = await get(directTs, headers, 'bytes=0-188', 4_000);
+    const bh = ts.body || '';
+    tried.push(`TS directo: ${ts.status}${bh.charCodeAt(0) === 0x47 ? ' MPEG-TS' : ''}`);
+    if ((ts.status === 200 || ts.status === 206) && bh.charCodeAt(0) === 0x47) {
+      return { ok: true, detail: tried.join(' → '), directTs: true };
     }
   }
   return { ok: false, detail: tried.join(' → ') };
@@ -139,8 +155,8 @@ async function mapLimit(items, limit, fn) {
   say('');
   say('| ID | Resultado | Detalle |');
   say('|---|---|---|');
-  for (const id of [1455, 1, 100, 500, 1000, 1500, 2000]) {
-    const r = await fullChain(`${BASE}/live/${AUTH}/${id}.m3u8`, { 'User-Agent': GENERIC_UA });
+  for (const id of [1455, 500, 1500, 2000]) {
+    const r = await fullChain(`${BASE}/live/${AUTH}/${id}.m3u8`, { 'User-Agent': GENERIC_UA }, `${BASE}/live/${AUTH}/${id}.ts`);
     say(`| ${id} | ${r.ok ? 'OK' : 'falla'} | ${r.detail} |`);
   }
   say('');

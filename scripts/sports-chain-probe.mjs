@@ -27,7 +27,8 @@ async function get(url, extraHeaders = {}) {
   const timer = setTimeout(() => controller.abort(), TIMEOUT);
   try {
     const res = await fetch(url, { redirect: 'follow', signal: controller.signal, headers: { ...HEADERS, ...extraHeaders } });
-    return { status: res.status, url: res.url, body: (await res.text()).slice(0, 800_000), contentType: res.headers.get('content-type') || '' };
+    const cookies = res.headers.getSetCookie ? res.headers.getSetCookie() : [];
+    return { status: res.status, url: res.url, body: (await res.text()).slice(0, 800_000), contentType: res.headers.get('content-type') || '', cookies, cf: res.headers.get('cf-mitigated') || '' };
   } catch (err) {
     return { status: 0, url, body: '', error: err?.name || String(err).slice(0, 40), contentType: '' };
   } finally { clearTimeout(timer); }
@@ -60,8 +61,14 @@ function decodeGlobal(body) {
     const decoded = decodeGlobal(g.body) || '';
     const hlsPhp = (decoded.match(/https?:\/\/[^\s"'<>\\]+hls\.php[^\s"'<>\\]*/) || [])[0];
     if (!hlsPhp) { say(`| ${slug} | — | — | ${redact(decoded).slice(0, 60)} | — | sin hls.php | — |`); continue; }
+    if (slug === 'dsports') {
+      say(`\nConfig decodificado de dsports (redactado):\n\`\`\`\n${redact(decoded)}\n\`\`\`\n`);
+      say(`Cookies de global2: ${g.cookies.join(' ; ') || 'ninguna'} · cf-mitigated: ${g.cf || 'no'}\n`);
+    }
     const t0 = Date.now();
-    const h = await get(hlsPhp, { Referer: g.url });
+    const cookie = g.cookies.map((c) => c.split(';')[0]).join('; ');
+    const h = await get(hlsPhp, { Referer: g.url, ...(cookie ? { Cookie: cookie } : {}) });
+    if (slug === 'dsports') say(`hls.php con cookie → HTTP ${h.status} · cf: ${h.cf || 'no'} · ${redact((h.body || '').slice(0, 200))}\n`);
     const ms = Date.now() - t0;
     const head = (h.body || '').slice(0, 200);
     // ¿Qué devolvió hls.php?

@@ -1,0 +1,59 @@
+name: Candidatas de anime 2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/anime-candidates2.yml'
+      - 'scripts/anime-candidates2-probe.mjs'
+      - 'scripts/anime-players5-probe.mjs'
+      - 'scripts/anime-players6-probe.mjs'
+      - 'scripts/anime-players7-probe.mjs'
+      - 'scripts/anime-players8-probe.mjs'
+      - 'scripts/anime-players9-probe.mjs'
+      - 'scripts/anime-otakustv-probe.mjs'
+      - 'lib/sites/otakustv.js'
+      - 'scripts/otakustv-live.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Medir candidatas de anime
+        run: node scripts/anime-candidates2-probe.mjs
+      - name: Cadena Dooplay y visores de anime
+        run: node scripts/anime-players5-probe.mjs
+      - name: Anatomía de saidochesto.top
+        run: node scripts/anime-players6-probe.mjs
+      - name: Reproductores propios de anime
+        run: node scripts/anime-players7-probe.mjs
+      - name: Visores Byse de anime
+        run: node scripts/anime-players8-probe.mjs
+      - name: Contexto HTML de OtakusTV
+        run: node scripts/anime-players9-probe.mjs
+      - name: Estructura de OtakusTV
+        run: node scripts/anime-otakustv-probe.mjs
+      - name: Cadena real de OtakusTV
+        run: node scripts/otakustv-live.mjs
+      - name: Devolver el resultado a la rama
+        if: always()
+        run: |
+          test -s .probe/anime-candidates2.md || exit 0
+          git config user.name "sonda"
+          git config user.email "sonda@users.noreply.github.com"
+          git add -f .probe/anime-candidates2.md .probe/anime-players5.md .probe/anime-players6.md .probe/anime-players7.md .probe/anime-players8.md .probe/anime-players9.md .probe/otakustv-structure.md .probe/otakustv-live.md
+          git diff --cached --quiet || git commit -m "sonda: candidatas de anime 2 $(date -u +%FT%TZ) [skip ci]"
+          git fetch origin || true
+          git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true
+          git push origin HEAD:refs/heads/${{ github.ref_name }} || true

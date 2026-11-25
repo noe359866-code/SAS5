@@ -127,7 +127,9 @@ test('el manifest deja margen bajo los 8 KB de la addonCollection API, incluso c
       builder.defineStreamHandler(async () => ({ streams: [] }));
       assert.ok(builder.getInterface().manifest, `SDK rechazó el manifest ${host}/${label}`);
     }
-    assert.ok(def.catalogs.length === 88, `solo ${def.catalogs.length} catálogos en el manifest`);
+    // 79 = 88 históricos − 9 de TV en vivo (tv_deportes + 8 tv_live_*), que
+    // salieron del addon el 25-11-2026: los canales viven en la lista M3U.
+    assert.ok(def.catalogs.length === 79, `solo ${def.catalogs.length} catálogos en el manifest`);
   }
 });
 

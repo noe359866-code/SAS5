@@ -93,63 +93,29 @@ describe('canales en vivo por categorías: semilla', () => {
   });
 });
 
-describe('canales en vivo por categorías: catálogos y manifest', () => {
-  test('el manifest por defecto trae los temas y ya no hay países (margen 8 KB)', () => {
+describe('canales en vivo: fuera del manifest (viven en la lista M3U)', () => {
+  // Decisión del usuario (25-11-2026): el addon no muestra canales; toda la
+  // TV en vivo está en listas/ramdonlatam-tv.m3u ordenada por país.
+  test('el manifest no trae ningún catálogo de TV en vivo', () => {
     const manifest = core.buildManifest();
     const tvIds = manifest.catalogs.filter((c) => c.type === 'tv').map((c) => c.id);
-    assert.ok(tvIds.includes('tv_deportes'), 'falta tv_deportes');
-    // «deportes» vive dentro de tv_deportes (curados + vivos), sin fila aparte
-    assert.ok(!tvIds.includes('tv_live_deportes'), 'tv_live_deportes no debería existir');
-    // Todos los temas activos entran por defecto; ningún país es catálogo
-    for (const cat of live.activeCategories()) {
-      const id = `tv_live_${cat.key}`;
-      if (cat.key === 'deportes') continue;
-      assert.ok(tvIds.includes(id), `falta ${id}`);
-    }
-    assert.ok(!tvIds.some((id) => /^tv_live_(espana|mexico|argentina|bolivia|chile|colombia|costarica|dominicana|ecuador|elsalvador|guatemala|honduras|nicaragua|paraguay|peru|puertorico|venezuela)$/.test(id)),
-      'queda un catálogo por país en el manifest');
+    assert.deepEqual(tvIds, [], `quedan catálogos tv: ${tvIds.join(', ')}`);
     assert.ok(JSON.stringify(manifest).length <= 8000, 'manifest por encima del margen');
   });
 
-  test('una config vieja con live_<país> no rompe ni crea catálogos de país', () => {
-    // Compatibilidad: las instalaciones previas guardaban live_mexico etc.;
-    // ahora esas claves son inertes y el usuario ve los temas que marcó
+  test('una config vieja con live_* / deportes no rompe ni crea catálogos tv', () => {
+    // Compatibilidad: las instalaciones previas guardaban live_mexico,
+    // live_cine, deportes…; esas claves son inertes y no generan filas.
     const manifest = core.buildManifest(null, {
       lang: 'es', region: 'MX', platforms: null, studios: null,
-      base: ['live_mexico', 'live_cine'], streams: null, isDefault: false,
+      base: ['live_mexico', 'live_cine', 'deportes'], streams: null, isDefault: false,
     });
     const tvIds = manifest.catalogs.filter((c) => c.type === 'tv').map((c) => c.id);
-    assert.deepEqual(tvIds, ['tv_live_cine']);
+    assert.deepEqual(tvIds, []);
   });
 
-  test('tv_deportes mezcla curados y canales vivos sin duplicar', async () => {
-    const metas = await catalogs.resolveCatalog('tv', 'tv_deportes', null, {});
-    const curated = metas.filter((m) => !m.id.startsWith('rlch:lv:'));
-    const extra = metas.filter((m) => m.id.startsWith('rlch:lv:deportes:'));
-    assert.equal(curated.length, 20, 'los 20 curados primero');
-    assert.ok(extra.length >= 15, `pocos canales vivos de deportes: ${extra.length}`);
-    // Ningún vivo debe replicar la regex de un curado
-    const { SPORTS_CHANNELS } = require('../lib/sportsChannels');
-    for (const m of extra) {
-      assert.ok(!SPORTS_CHANNELS.some((c) => c.match.test(m.name)), `duplicado: ${m.name}`);
-    }
-    assert.equal(new Set(metas.map((m) => m.id)).size, metas.length, 'ids duplicados');
-  });
-
-  test('resolveCatalog sirve una categoría viva y pagina a vacío', async () => {
-    const metas = await catalogs.resolveCatalog('tv', 'tv_live_infantil', null, {});
-    assert.ok(metas.length > 20);
-    assert.ok(metas.every((m) => m.type === 'tv'));
-    assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_live_infantil', null, { skip: 20 }), []);
-  });
-
-  test('una categoría sin canales reclasificados no aparece en el manifest', async () => {
-    // Mecanismo, no dato: activeCategories mira los temas YA reclasificados
-    // (la semilla guarda países; liveTopics los reparte). Todo tema activo
-    // tiene canales; un catálogo inexistente resuelve a vacío sin lanzar.
-    for (const cat of live.activeCategories()) {
-      assert.ok(live.liveMetas(cat.key).length > 0, `${cat.key} activa sin canales`);
-    }
+  test('los catálogos de canales antiguos resuelven a vacío sin lanzar', async () => {
+    assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_live_infantil', null, {}), []);
     assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_live_narnia', null, {}), []);
   });
 
@@ -219,11 +185,11 @@ describe('canales sin verificar (iptvgo.cc)', () => {
     }
   });
 
-  test('la tarjeta sin verificar avisa en la descripción', () => {
+  test('la descripción va limpia, sin avisos de verificación (petición del usuario)', () => {
     const meta = live.liveMeta({ name: 'Prueba', slug: 'prueba', category: 'cine', logo: '', urls: [{ url: 'http://iptvgo.cc/live/u/p/1.m3u8' }], unverified: true });
-    assert.match(meta.description, /⚠️ Señal sin verificar/);
+    assert.doesNotMatch(meta.description, /⚠️|sin verificar/i);
     const okMeta = live.liveMeta({ name: 'Prueba', slug: 'prueba', category: 'cine', logo: '', urls: [] });
-    assert.doesNotMatch(okMeta.description, /sin verificar/);
+    assert.doesNotMatch(okMeta.description, /⚠️|sin verificar/i);
   });
 
   test('un canal sin verificar resuelve solo sus URLs de semilla', async () => {

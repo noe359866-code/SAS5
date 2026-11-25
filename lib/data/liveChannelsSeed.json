@@ -711,15 +711,6 @@
   "ref": ""
  },
  {
-  "name": "Cine Infantil HD",
-  "slug": "cine-infantil-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/170.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Cine Marvel",
   "slug": "cine-marvel",
   "category": "cine",
@@ -2502,15 +2493,6 @@
   "ref": ""
  },
  {
-  "name": "Canal 5 (Santa Fe)",
-  "slug": "canal-5-santa-fe",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal5santafe.png",
-  "url": "https://stream.arcast.com.ar/c5sf/c5sf/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Canal 6 (Misiones)",
   "slug": "canal-6-misiones",
   "category": "argentina",
@@ -2952,15 +2934,6 @@
   "ref": ""
  },
  {
-  "name": "Ecuavisa",
-  "slug": "ecuavisa",
-  "category": "ecuador",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png",
-  "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Wuan+",
   "slug": "wuan",
   "category": "ecuador",
@@ -3002,6 +2975,15 @@
   "category": "paraguay",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHnextparaguay.png",
   "url": "https://live.enhdtv.com:19360/nexthd/nexthd.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Latina",
+  "slug": "latina",
+  "category": "peru",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHlatinatvPeru.png",
+  "url": "https://redirector.rudo.video/hls-video/567ffde3fa319fadf3419efda25619456231dfea/latina/latina.smil/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -3056,6 +3038,24 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtelearaguavenezuela.png",
   "url": "http://45.173.198.59:8080/hls/nginx3.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "TRT",
+  "slug": "trt",
+  "category": "venezuela",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrtvenezuela.png",
+  "url": "https://vcp12.myplaytv.com/trt/trt/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "TRV",
+  "slug": "trv",
+  "category": "venezuela",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrvvenezuela.png",
+  "url": "https://streaming5.globalhostla.com/rtplive/trvnetve/playlist.m3u8",
   "ua": "",
   "ref": ""
  },

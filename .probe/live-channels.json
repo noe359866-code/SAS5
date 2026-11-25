@@ -207,6 +207,15 @@
   "ref": ""
  },
  {
+  "name": "ESPN 7 HD",
+  "slug": "espn-7-hd",
+  "category": "deportes",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1106.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "ESPN 8",
   "slug": "espn-8",
   "category": "deportes",
@@ -333,6 +342,15 @@
   "ref": ""
  },
  {
+  "name": "FOX Sports 3 (México)",
+  "slug": "fox-sports-3-mexico",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "FOX Sports 3 (Sur)",
   "slug": "fox-sports-3-sur",
   "category": "deportes",
@@ -401,15 +419,6 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHmoviltvturf.png",
   "url": "https://tvturf4.janus.cl/playlist/stream.m3u8?d=w&id=",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Real Madrid TV",
-  "slug": "real-madrid-tv",
-  "category": "deportes",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHrealmadridtv.png",
-  "url": "https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/master.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1701,15 +1710,6 @@
   "ref": ""
  },
  {
-  "name": "Telpin TV Pinamar",
-  "slug": "telpin-tv-pinamar",
-  "category": "musica",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtelpintvpinamar.png",
-  "url": "https://mistserver.telpin.com.ar:8443/hls/telpinlive/main_stream.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Tierramia TV",
   "slug": "tierramia-tv",
   "category": "musica",
@@ -1859,6 +1859,15 @@
   "category": "noticias",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHteleformula.png",
   "url": "https://mdstrm.com/live-stream-playlist/62f2c855f7981b5a5a2d8763.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Telesur",
+  "slug": "telesur",
+  "category": "noticias",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias-internacionales/CHtelesur.png",
+  "url": "https://mblesmain01.telesur.ultrabase.net/mbliveMain/480p/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2142,6 +2151,15 @@
   "ref": ""
  },
  {
+  "name": "StarTVE",
+  "slug": "startve",
+  "category": "espana",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/838.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "TeleSafor",
   "slug": "telesafor",
   "category": "espana",
@@ -2259,15 +2277,6 @@
   "ref": ""
  },
  {
-  "name": "5TV (Corrientes)",
-  "slug": "5tv-corrientes",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CH5tvcorrientes.png",
-  "url": "http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "A24",
   "slug": "a24",
   "category": "argentina",
@@ -2345,7 +2354,7 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal11delacosta.png",
   "url": "https://vivo.solumedia.com:19360/dadaproductora/dadaproductora.m3u8",
-  "ua": "",
+  "ua": "Android 8.0.0",
   "ref": ""
  },
  {
@@ -2520,15 +2529,6 @@
   "ref": ""
  },
  {
-  "name": "Canal 9 (Chaco)",
-  "slug": "canal-9-chaco",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal9chaco.png",
-  "url": "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Canal de la Ciudad",
   "slug": "canal-de-la-ciudad",
   "category": "argentina",
@@ -2637,6 +2637,15 @@
   "ref": ""
  },
  {
+  "name": "Sicardi TV (La pLata)",
+  "slug": "sicardi-tv-la-plata",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHsicarditv.png",
+  "url": "https://vivo.solumedia.com:19360/sicarditv/sicarditv.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Telecreativa (Lanus)",
   "slug": "telecreativa-lanus",
   "category": "argentina",
@@ -2741,6 +2750,15 @@
   "category": "chile",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanal9biobiotelevisionchile.png",
   "url": "https://unlimited6-cl.dps.live/c9/c9.smil/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "El Trece (13)",
+  "slug": "el-trece-13",
+  "category": "chile",
+  "logo": "https://i.imgur.com/TrgBAdA.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/360.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2921,6 +2939,15 @@
   "category": "guatemala",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHvisiontvguatemala.png",
   "url": "https://cdn.streamhispanatv.net:3076/live/visiontvlive.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "GEN TV",
+  "slug": "gen-tv",
+  "category": "paraguay",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHgenparaguay.png",
+  "url": "http://45.170.130.224:8000/play/a04j/index.m3u8",
   "ua": "",
   "ref": ""
  },

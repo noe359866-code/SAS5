@@ -10,6 +10,26 @@
   "unverified": true
  },
  {
+  "name": "· FM",
+  "slug": "fm",
+  "category": "honduras",
+  "logo": "https://logo.m3uassets.com/fm.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688697.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "@prende",
+  "slug": "prende",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/aprendetv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/837275.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "10 TV Neuquén",
   "slug": "10-tv-neuquen",
   "category": "argentina",
@@ -35,16 +55,6 @@
   "category": "chile",
   "logo": "https://logo.m3uassets.com/24horas.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687929.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "24 Horas CL",
-  "slug": "24-horas-cl",
-  "category": "chile",
-  "logo": "https://logo.m3uassets.com/24horas.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688049.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -145,6 +155,16 @@
   "category": "puertorico",
   "logo": "https://logo.m3uassets.com/awealthofentertainment.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/303692.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "A&E",
+  "slug": "a-e",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/ae.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716728.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -300,6 +320,16 @@
   "unverified": true
  },
  {
+  "name": "Adrenalina Sports Network MX UHD",
+  "slug": "adrenalina-sports-network-mx-uhd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/adrenalinasportsnetwork.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716596.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "AETV",
   "slug": "aetv",
   "category": "puertorico",
@@ -420,6 +450,16 @@
   "unverified": true
  },
  {
+  "name": "ALL Sports (BR) SD",
+  "slug": "all-sports-br-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/allsports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725238.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Alternativa TV (Huasco) (HD)",
   "slug": "alternativa-tv-huasco-hd",
   "category": "chile",
@@ -480,6 +520,26 @@
   "unverified": true
  },
  {
+  "name": "AMC HD",
+  "slug": "amc-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/amc.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716725.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "AMC Series HD",
+  "slug": "amc-series-hd",
+  "category": "entretenimiento",
+  "logo": "https://logo.m3uassets.com/amc.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716726.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Ame 47",
   "slug": "ame-47",
   "category": "dominicana",
@@ -510,6 +570,16 @@
   "unverified": true
  },
  {
+  "name": "America TV",
+  "slug": "america-tv",
+  "category": "peru",
+  "logo": "https://logo.m3uassets.com/americatv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688424.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "America TV HD",
   "slug": "america-tv-hd",
   "category": "argentina",
@@ -530,11 +600,11 @@
   "unverified": true
  },
  {
-  "name": "America TV Peru",
-  "slug": "america-tv-peru",
-  "category": "peru",
-  "logo": "https://logo.m3uassets.com/americatv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688424.m3u8",
+  "name": "Americateve HD",
+  "slug": "americateve-hd",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/americateve.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688569.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -922,6 +992,16 @@
  {
   "name": "AXN",
   "slug": "axn",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/axn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716723.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "AXN",
+  "slug": "axn",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/axn.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671120.m3u8",
@@ -955,6 +1035,16 @@
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/aymsports.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716842.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "AYM Sports MX UHD",
+  "slug": "aym-sports-mx-uhd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/aymsports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716592.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -1180,6 +1270,16 @@
   "unverified": true
  },
  {
+  "name": "Bandamax",
+  "slug": "bandamax",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/bandamax.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716607.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Bandamax UHD",
   "slug": "bandamax-uhd",
   "category": "mexico",
@@ -1220,6 +1320,16 @@
   "unverified": true
  },
  {
+  "name": "BBC World News MX",
+  "slug": "bbc-world-news-mx",
+  "category": "noticias",
+  "logo": "https://logo.m3uassets.com/bbcworldnews.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716637.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "BBO",
   "slug": "bbo",
   "category": "puertorico",
@@ -1240,11 +1350,51 @@
   "unverified": true
  },
  {
+  "name": "Bein Sport Xtra 4K",
+  "slug": "bein-sport-xtra-4k",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/beinsportsxtra.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725319.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "beIN Sports N",
   "slug": "bein-sports-n",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/beinsportsn.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/725342.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Bein Sports Ñ UHD",
+  "slug": "bein-sports-n-uhd",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/0/04/BeIN_Sports_En_Espa%C3%B1ol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725317.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Bein Sports Xtra Ñ",
+  "slug": "bein-sports-xtra-n",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/beinsportsxtra.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725318.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Bein Sports Xtra Ñ MX",
+  "slug": "bein-sports-xtra-n-mx",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/beinsportsxtra.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716600.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -1400,8 +1550,8 @@
   "unverified": true
  },
  {
-  "name": "Bitme MX UHD",
-  "slug": "bitme-mx-uhd",
+  "name": "Bitme UHD",
+  "slug": "bitme-uhd",
   "category": "mexico",
   "logo": "https://logo.m3uassets.com/bitme.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716830.m3u8",
@@ -1445,36 +1595,6 @@
   "category": "musica",
   "logo": "https://i0.wp.com/univalletelevision.com/wp-content/uploads/2022/06/282564259_10158977843387405_6403480060241523290_n.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688203.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Bolivia TV #2 HD",
-  "slug": "bolivia-tv-2-hd",
-  "category": "bolivia",
-  "logo": "https://logo.m3uassets.com/tv2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688193.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Bolivia TV HD",
-  "slug": "bolivia-tv-hd",
-  "category": "bolivia",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/8/8a/BTV_logo_2026.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688179.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Bolivia TV HD #3",
-  "slug": "bolivia-tv-hd-3",
-  "category": "bolivia",
-  "logo": "https://logo.m3uassets.com/tv3.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688186.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -1525,6 +1645,26 @@
   "category": "puertorico",
   "logo": "https://logo.m3uassets.com/boomerang.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/303907.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Boricua TV HD",
+  "slug": "boricua-tv-hd",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/boricuatv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688568.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BOX Epic HD",
+  "slug": "box-epic-hd",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/en/c/c8/BoxNation2014Logo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725316.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -1655,6 +1795,26 @@
   "category": "noticias",
   "logo": "https://logo.m3uassets.com/cablenoticias.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687895.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Cable Onda Sports",
+  "slug": "cable-onda-sports",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/cableondasports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688500.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Cable Onda Sports FC",
+  "slug": "cable-onda-sports-fc",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/cableondasportsfc.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688501.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -1862,6 +2022,16 @@
  {
   "name": "Canal 11",
   "slug": "canal-11",
+  "category": "honduras",
+  "logo": "https://logo.m3uassets.com/canal11.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688740.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Canal 11",
+  "slug": "canal-11",
   "category": "guatemala",
   "logo": "https://logo.m3uassets.com/canal11.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688696.m3u8",
@@ -1890,11 +2060,11 @@
   "unverified": true
  },
  {
-  "name": "Canal 11 MX UHD",
-  "slug": "canal-11-mx-uhd",
-  "category": "mexico",
+  "name": "Canal 11 HD",
+  "slug": "canal-11-hd",
+  "category": "puertorico",
   "logo": "https://logo.m3uassets.com/canal11.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716826.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688572.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -1915,6 +2085,16 @@
   "category": "honduras",
   "logo": "https://logo.m3uassets.com/canal11.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688699.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Canal 11 UHD",
+  "slug": "canal-11-uhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/canal11.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716826.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -1954,7 +2134,7 @@
   "slug": "canal-13",
   "category": "chile",
   "logo": "https://logo.m3uassets.com/canal13.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688021.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688055.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -1965,16 +2145,6 @@
   "category": "chile",
   "logo": "https://logo.m3uassets.com/canal13.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688041.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Canal 13 Chile",
-  "slug": "canal-13-chile",
-  "category": "chile",
-  "logo": "https://logo.m3uassets.com/canal13.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688055.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -2200,6 +2370,16 @@
   "unverified": true
  },
  {
+  "name": "Canal 25 HD",
+  "slug": "canal-25-hd",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/canal25.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688567.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Canal 25 Santiago",
   "slug": "canal-25-santiago",
   "category": "dominicana",
@@ -2275,6 +2455,16 @@
   "category": "mexico",
   "logo": "https://logo.iptveditor.com/canal33tijuana.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716820.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Canal 34 HD",
+  "slug": "canal-34-hd",
+  "category": "puertorico",
+  "logo": "https://static.univision.com/fragments/noticias/home-locales-tudn-v2/images/radio-stations/puerto-rico/univision-puerto-rico.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688570.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -2364,7 +2554,7 @@
   "slug": "canal-5",
   "category": "honduras",
   "logo": "https://logo.m3uassets.com/canal5.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688732.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688741.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -2840,6 +3030,16 @@
   "unverified": true
  },
  {
+  "name": "Canal del Futbol (EC) FHD",
+  "slug": "canal-del-futbol-ec-fhd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/elcanaldelfutbol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725315.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Canal del Sol 65",
   "slug": "canal-del-sol-65",
   "category": "dominicana",
@@ -2880,21 +3080,21 @@
   "unverified": true
  },
  {
-  "name": "Canal Diplomático UHD",
-  "slug": "canal-diplomatico-uhd",
+  "name": "Canal Diplomatico FHD",
+  "slug": "canal-diplomatico-fhd",
   "category": "venezuela",
   "logo": "https://logo.m3uassets.com/canaldiplomatico.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688449.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688448.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
  },
  {
-  "name": "Canal Diplomatico VE FHD",
-  "slug": "canal-diplomatico-ve-fhd",
+  "name": "Canal Diplomático UHD",
+  "slug": "canal-diplomatico-uhd",
   "category": "venezuela",
   "logo": "https://logo.m3uassets.com/canaldiplomatico.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688448.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688449.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -2910,8 +3110,8 @@
   "unverified": true
  },
  {
-  "name": "Canal Extra CR HD",
-  "slug": "canal-extra-cr-hd",
+  "name": "Canal Extra HD",
+  "slug": "canal-extra-hd",
   "category": "costarica",
   "logo": "https://logo.m3uassets.com/canal+xtra.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688542.m3u8",
@@ -3035,6 +3235,16 @@
   "category": "nicaragua",
   "logo": "https://www.vostv.com.ni/static/images/logo-footer.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688759.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Canal la X HD",
+  "slug": "canal-la-x-hd",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/lax.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688566.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -3230,8 +3440,8 @@
   "unverified": true
  },
  {
-  "name": "Canal Señal Colombia FHD",
-  "slug": "canal-senal-colombia-fhd",
+  "name": "Canal Señal FHD",
+  "slug": "canal-senal-fhd",
   "category": "colombia",
   "logo": "https://w7.pngwing.com/pngs/1000/826/png-transparent-colombia-channel-1-logo-television-colombia-logo-purple-television-angle.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687868.m3u8",
@@ -3340,8 +3550,18 @@
   "unverified": true
  },
  {
-  "name": "CANAL TRC MExICO HD",
-  "slug": "canal-trc-mexico-hd",
+  "name": "Canal Tiva HD",
+  "slug": "canal-tiva-hd",
+  "category": "puertorico",
+  "logo": "https://image.roku.com/developer_channels/prod/adc5fba2bc25ece9774e98a87142f2fb81a86930889c78cb97a13255c7b31d8c.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688571.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Canal TRC HD",
+  "slug": "canal-trc-hd",
   "category": "mexico",
   "logo": "https://logo.m3uassets.com/canaltro.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716801.m3u8",
@@ -3640,8 +3860,8 @@
   "unverified": true
  },
  {
-  "name": "Caribe TV CR HD",
-  "slug": "caribe-tv-cr-hd",
+  "name": "Caribe TV HD",
+  "slug": "caribe-tv-hd",
   "category": "costarica",
   "logo": "https://logo.m3uassets.com/canalcaribe.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688551.m3u8",
@@ -3880,6 +4100,16 @@
   "unverified": true
  },
  {
+  "name": "CBS Sports GOLAZO Network SD",
+  "slug": "cbs-sports-golazo-network-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/cbssportsgolazonetwork.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725237.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "CCN TV6",
   "slug": "ccn-tv6",
   "category": "puertorico",
@@ -3895,6 +4125,26 @@
   "category": "puertorico",
   "logo": "https://logo.m3uassets.com/cctv4.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/304041.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CDF Premium SD",
+  "slug": "cdf-premium-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/cdfpremium.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725236.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CDM Internacional HD",
+  "slug": "cdm-internacional-hd",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cdminternacional.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688565.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4090,6 +4340,16 @@
   "unverified": true
  },
  {
+  "name": "Channel TV (HD)",
+  "slug": "channel-tv-hd",
+  "category": "chile",
+  "logo": "https://logo.m3uassets.com/channelt1.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688036.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "CharapaTV (Pucallpa)",
   "slug": "charapatv-pucallpa",
   "category": "peru",
@@ -4105,16 +4365,6 @@
   "category": "peru",
   "logo": "https://logo.m3uassets.com/chicosipe.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688364.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Chile Channel TV (HD)",
-  "slug": "chile-channel-tv-hd",
-  "category": "chile",
-  "logo": "https://logo.m3uassets.com/channelt1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688036.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4190,6 +4440,16 @@
   "unverified": true
  },
  {
+  "name": "Cine de Horror",
+  "slug": "cine-de-horror",
+  "category": "cine",
+  "logo": "https://worldscreen.com/wp-content/uploads/2025/10/Cine-De-Horror-1025.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707063.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Cine Estrella UHD",
   "slug": "cine-estrella-uhd",
   "category": "cine",
@@ -4220,11 +4480,11 @@
   "unverified": true
  },
  {
-  "name": "Cinecanal",
+  "name": "Cinecanal \\",
   "slug": "cinecanal",
   "category": "cine",
   "logo": "https://logo.m3uassets.com/cinecanal.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303897.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716719.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4243,8 +4503,18 @@
   "name": "Cinemax",
   "slug": "cinemax",
   "category": "cine",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Cinemax_%28Yellow%29.svg/500px-Cinemax_%28Yellow%29.svg.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/671092.m3u8",
+  "logo": "https://logo.m3uassets.com/cinemax.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716718.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Cinemax Latino",
+  "slug": "cinemax-latino",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/cinemax.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3160.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4315,6 +4585,26 @@
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/ciudadtvresistencia.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671082.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Claro SPORTS (La Liga) MX",
+  "slug": "claro-sports-la-liga-mx",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/clarosports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716591.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Claro Sports SD",
+  "slug": "claro-sports-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/clarosports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725235.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4422,19 +4712,19 @@
  {
   "name": "CNN",
   "slug": "cnn",
-  "category": "puertorico",
+  "category": "chile",
   "logo": "https://logo.m3uassets.com/cnn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304015.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688054.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
  },
  {
-  "name": "CNN Chile",
-  "slug": "cnn-chile",
-  "category": "chile",
+  "name": "CNN",
+  "slug": "cnn",
+  "category": "puertorico",
   "logo": "https://logo.m3uassets.com/cnn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688054.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304015.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4455,6 +4745,16 @@
   "category": "espana",
   "logo": "https://logo.m3uassets.com/cnnespanol.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671091.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CNN Español (ARGE)",
+  "slug": "cnn-espanol-arge",
+  "category": "espana",
+  "logo": "https://logo.m3uassets.com/cnnenespaol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/670962.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4535,6 +4835,26 @@
   "category": "costarica",
   "logo": "https://logo.m3uassets.com/colosaltv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688531.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CombaTV",
+  "slug": "combatv",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/combate.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/837269.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Comedy Central",
+  "slug": "comedy-central",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/comedycentral.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716717.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4700,6 +5020,16 @@
   "unverified": true
  },
  {
+  "name": "cPREMIUM HD",
+  "slug": "cpremium-hd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espnpremium.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725299.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "CreoTV (Cajamarca) HD",
   "slug": "creotv-cajamarca-hd",
   "category": "peru",
@@ -4735,6 +5065,16 @@
   "category": "peru",
   "logo": "https://logo.m3uassets.com/ctc.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688355.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Ctni Internacional HD",
+  "slug": "ctni-internacional-hd",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/ctni.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688582.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4800,56 +5140,6 @@
   "unverified": true
  },
  {
-  "name": "Cultura · Discovery Channel (ARG)",
-  "slug": "cultura-discovery-channel-arg",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoverychannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/670979.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Cultura · Garage TV MX UHD",
-  "slug": "cultura-garage-tv-mx-uhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/garagetv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716641.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Cultura · Hola TV MX UHD",
-  "slug": "cultura-hola-tv-mx-uhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/holatv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716640.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Cultura · Love Nature MX",
-  "slug": "cultura-love-nature-mx",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/lovenature.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716639.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Cultura · National Geographic (ARG)",
-  "slug": "cultura-national-geographic-arg",
-  "category": "argentina",
-  "logo": "https://logo.m3uassets.com/nationalgeographic.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/670978.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Cultura 24",
   "slug": "cultura-24",
   "category": "documentales",
@@ -4885,46 +5175,6 @@
   "category": "documentales",
   "logo": "https://logo.m3uassets.com/culturaonline.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687992.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Cultura STD · BBC World News MX",
-  "slug": "cultura-std-bbc-world-news-mx",
-  "category": "noticias",
-  "logo": "https://logo.m3uassets.com/bbcworldnews.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716637.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Cultura STD · History Channel MX",
-  "slug": "cultura-std-history-channel-mx",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/historychannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716631.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Cultura STD · HLN MX",
-  "slug": "cultura-std-hln-mx",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hln.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716630.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Cultura STD · Wobi MX",
-  "slug": "cultura-std-wobi-mx",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/wobi.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716628.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5160,6 +5410,16 @@
   "unverified": true
  },
  {
+  "name": "DE Pelicula",
+  "slug": "de-pelicula",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/pelicula.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716716.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Décima TV (Ancud) (HD)",
   "slug": "decima-tv-ancud-hd",
   "category": "chile",
@@ -5260,8 +5520,8 @@
   "unverified": true
  },
  {
-  "name": "Digital 15 RD SD (m)",
-  "slug": "digital-15-rd-sd-m",
+  "name": "Digital 15 SD (m)",
+  "slug": "digital-15-sd-m",
   "category": "dominicana",
   "logo": "https://3.bp.blogspot.com/-VKpSYNv0nJA/V2ZGBwjQOQI/AAAAAAAAARg/hJmaPik6HA4pcqMyG1WreoGk4Hl7Y_IeACLcB/s1600/digital15.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688617.m3u8",
@@ -5300,8 +5560,28 @@
   "unverified": true
  },
  {
-  "name": "DirectTV Sport 1 UHD",
-  "slug": "directtv-sport-1-uhd",
+  "name": "DirecTV AR UHD #1",
+  "slug": "directv-ar-uhd-1",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/directvsports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725313.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "DirecTV ECUADOR Liga HD",
+  "slug": "directv-ecuador-liga-hd",
+  "category": "ecuador",
+  "logo": "https://logo.m3uassets.com/tvdirect.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/683415.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "DirecTV Sport 1 UHD",
+  "slug": "directv-sport-1-uhd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/directvsports.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/725341.m3u8",
@@ -5310,8 +5590,8 @@
   "unverified": true
  },
  {
-  "name": "DirectTV Sport 2 UHD",
-  "slug": "directtv-sport-2-uhd",
+  "name": "DirecTV Sport 2 UHD",
+  "slug": "directv-sport-2-uhd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/directvsport2.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/725340.m3u8",
@@ -5320,41 +5600,11 @@
   "unverified": true
  },
  {
-  "name": "DirectTV Sport UHD",
-  "slug": "directtv-sport-uhd",
+  "name": "DirecTV Sport UHD",
+  "slug": "directv-sport-uhd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/directvsports.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/725339.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "DirectTV Sports 1",
-  "slug": "directtv-sports-1",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/directvsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/725338.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "DirectTV Sports 2",
-  "slug": "directtv-sports-2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/directtvsports2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/725337.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "DirecTV ECUADOR Liga Ecuador HD",
-  "slug": "directv-ecuador-liga-ecuador-hd",
-  "category": "ecuador",
-  "logo": "https://logo.m3uassets.com/tvdirect.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/683415.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5370,11 +5620,61 @@
   "unverified": true
  },
  {
-  "name": "DirecTV Sports (PERU) LᴵGA",
-  "slug": "directv-sports-peru-l-ga",
+  "name": "DirecTV Sports (Col) SD",
+  "slug": "directv-sports-col-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/directvsports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725234.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "DirecTV Sports (PERU) Liga",
+  "slug": "directv-sports-peru-liga",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/directvsports.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688442.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "DirecTV Sports + HD",
+  "slug": "directv-sports-hd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/directtvsports+.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725312.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "DirecTV Sports 1",
+  "slug": "directv-sports-1",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/directvsports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725338.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "DirecTV Sports 2",
+  "slug": "directv-sports-2",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/directtvsports2.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725337.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "DirecTV Sports 2 (Col) SD",
+  "slug": "directv-sports-2-col-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/directvsports2.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725233.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5384,24 +5684,24 @@
   "slug": "directv-sports-2-hd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/directvsports2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688062.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725311.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
  },
  {
-  "name": "DirecTV Sports HD",
-  "slug": "directv-sports-hd",
+  "name": "DirecTV Sports HD (COL)",
+  "slug": "directv-sports-hd-col",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/directvsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688063.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725310.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
  },
  {
-  "name": "DirecTV Sports PrᴵMera HD",
-  "slug": "directv-sports-pr-mera-hd",
+  "name": "DirecTV Sports Primera HD",
+  "slug": "directv-sports-primera-hd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/directvsports.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687921.m3u8",
@@ -5424,7 +5724,27 @@
   "slug": "discovery-channel",
   "category": "documentales",
   "logo": "https://logo.m3uassets.com/discoverychannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304047.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716646.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Discovery Channel (ARG)",
+  "slug": "discovery-channel-arg",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/discoverychannel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/670979.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Discovery Español",
+  "slug": "discovery-espanol",
+  "category": "documentales",
+  "logo": "https://d3hjzzsa8cr26l.cloudfront.net/2f509bab-1252-11e8-a56d-535a4e504290.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3262.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5440,11 +5760,31 @@
   "unverified": true
  },
  {
+  "name": "Discovery Home & Health FHD",
+  "slug": "discovery-home-health-fhd",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/discoveryhomehealth.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716647.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Discovery Kids",
   "slug": "discovery-kids",
   "category": "infantil",
   "logo": "https://logo.m3uassets.com/discoverykids.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/304049.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Discovery Kids FHD",
+  "slug": "discovery-kids-fhd",
+  "category": "infantil",
+  "logo": "https://logo.m3uassets.com/discoverykids.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716624.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5470,11 +5810,31 @@
   "unverified": true
  },
  {
+  "name": "Discovery Science FHD",
+  "slug": "discovery-science-fhd",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/discoveryscience.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716645.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Discovery Theater",
   "slug": "discovery-theater",
   "category": "documentales",
   "logo": "https://logo.m3uassets.com/discoverytheater.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671076.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Discovery Theater FHD",
+  "slug": "discovery-theater-fhd",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/discoverytheater.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716635.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5490,11 +5850,31 @@
   "unverified": true
  },
  {
+  "name": "Discovery Turbo FHD",
+  "slug": "discovery-turbo-fhd",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/discoveryturbo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716634.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Discovery World",
   "slug": "discovery-world",
   "category": "documentales",
   "logo": "https://logo.m3uassets.com/discoveryworld.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671070.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Discovery World FHD",
+  "slug": "discovery-world-fhd",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/discoveryworld.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716644.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5570,6 +5950,16 @@
   "unverified": true
  },
  {
+  "name": "Distrito Comedia",
+  "slug": "distrito-comedia",
+  "category": "entretenimiento",
+  "logo": "https://logo.m3uassets.com/distritocomedia.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716714.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "DIY",
   "slug": "diy",
   "category": "puertorico",
@@ -5620,6 +6010,16 @@
   "unverified": true
  },
  {
+  "name": "Dreamworks MX UHD",
+  "slug": "dreamworks-mx-uhd",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/dreamworks.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716713.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "DTV Play Deporte Total HD",
   "slug": "dtv-play-deporte-total-hd",
   "category": "deportes",
@@ -5660,6 +6060,16 @@
   "unverified": true
  },
  {
+  "name": "DW Noticias MX",
+  "slug": "dw-noticias-mx",
+  "category": "noticias",
+  "logo": "https://logo.m3uassets.com/c7noticias.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716593.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "E! Entertaiments",
   "slug": "e-entertaiments",
   "category": "argentina",
@@ -5670,8 +6080,8 @@
   "unverified": true
  },
  {
-  "name": "Eben Ezer Honduras",
-  "slug": "eben-ezer-honduras",
+  "name": "Eben Ezer",
+  "slug": "eben-ezer",
   "category": "honduras",
   "logo": "https://logo.m3uassets.com/ebenezer.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688747.m3u8",
@@ -5680,11 +6090,21 @@
   "unverified": true
  },
  {
-  "name": "ECDF (Liga Ecuador HD)",
-  "slug": "ecdf-liga-ecuador-hd",
+  "name": "ECDF (Liga HD)",
+  "slug": "ecdf-liga-hd",
   "category": "ecuador",
   "logo": "https://static.elcanaldelfutbol.com/static/logo.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/683411.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ECDF SD",
+  "slug": "ecdf-sd",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Logo_CDF-TURNER_2019.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725232.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5695,16 +6115,6 @@
   "category": "ecuador",
   "logo": "https://logo.m3uassets.com/ecoteltv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/683448.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Ecuador TV HD",
-  "slug": "ecuador-tv-hd",
-  "category": "ecuador",
-  "logo": "https://images.seeklogo.com/logo-png/32/2/ecuador-tv-2017-present-logo-png_seeklogo-320927.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/683450.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5740,8 +6150,8 @@
   "unverified": true
  },
  {
-  "name": "EDU TV Paraguay HD",
-  "slug": "edu-tv-paraguay-hd",
+  "name": "EDU TV HD",
+  "slug": "edu-tv-hd",
   "category": "paraguay",
   "logo": "https://logo.m3uassets.com/edutv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688134.m3u8",
@@ -5830,6 +6240,16 @@
   "unverified": true
  },
  {
+  "name": "EL Gourmet FHD",
+  "slug": "el-gourmet-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/elgourmet.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716643.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "El Roi TV Canal 50 (HD)",
   "slug": "el-roi-tv-canal-50-hd",
   "category": "guatemala",
@@ -5850,8 +6270,8 @@
   "unverified": true
  },
  {
-  "name": "EL Trece ArgentᴵNa FHD",
-  "slug": "el-trece-argent-na-fhd",
+  "name": "EL Trece FHD",
+  "slug": "el-trece-fhd",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/eltrece.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671067.m3u8",
@@ -5880,8 +6300,8 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Argentina",
-  "slug": "eliminatorias-2026-hd-argentina",
+  "name": "Eliminatorias 2026 HD ·",
+  "slug": "eliminatorias-2026-hd",
   "category": "argentina",
   "logo": "https://png.pngtree.com/png-clipart/20191121/original/pngtree-argentina-icon-circle-png-image_5144342.jpg",
   "url": "http://iptvgo.cc/live/Will1/Will1/670960.m3u8",
@@ -5890,7 +6310,7 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Bolivia (solo eventos)",
+  "name": "Eliminatorias 2026 HD · Bolivia (solo eventos)",
   "slug": "eliminatorias-2026-hd-bolivia-solo-eventos",
   "category": "deportes",
   "logo": "https://png.pngtree.com/png-clipart/20191121/original/pngtree-bolivia-icon-circle-png-image_5144440.jpg",
@@ -5900,7 +6320,7 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Brasil (solo eventos)",
+  "name": "Eliminatorias 2026 HD · Brasil (solo eventos)",
   "slug": "eliminatorias-2026-hd-brasil-solo-eventos",
   "category": "deportes",
   "logo": "https://png.pngtree.com/png-clipart/20220821/ourmid/pngtree-brazil-flag-png-image_6118899.png",
@@ -5910,7 +6330,7 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Chile (solo eventos)",
+  "name": "Eliminatorias 2026 HD · Chile (solo eventos)",
   "slug": "eliminatorias-2026-hd-chile-solo-eventos",
   "category": "deportes",
   "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-chile-flag-png-with-transparent-background-png-image_6731949.jpg",
@@ -5920,7 +6340,7 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Colombia (solo eventos)",
+  "name": "Eliminatorias 2026 HD · Colombia (solo eventos)",
   "slug": "eliminatorias-2026-hd-colombia-solo-eventos",
   "category": "deportes",
   "logo": "https://png.pngtree.com/png-clipart/20191121/original/pngtree-colombia-icon-circle-png-image_5144432.jpg",
@@ -5930,7 +6350,7 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Ecuador (solo eventos)",
+  "name": "Eliminatorias 2026 HD · Ecuador (solo eventos)",
   "slug": "eliminatorias-2026-hd-ecuador-solo-eventos",
   "category": "deportes",
   "logo": "https://png.pngtree.com/png-clipart/20210620/original/pngtree-d-soccer-ball-with-the-national-flag-of-ecuador-isolated-on-png-image_6431696.jpg",
@@ -5940,7 +6360,7 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Paraguay (solo eventos)",
+  "name": "Eliminatorias 2026 HD · Paraguay (solo eventos)",
   "slug": "eliminatorias-2026-hd-paraguay-solo-eventos",
   "category": "deportes",
   "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-paraguay-flag-png-with-transparent-background-png-image_6731971.jpg",
@@ -5950,7 +6370,7 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Peru (solo eventos)",
+  "name": "Eliminatorias 2026 HD · Peru (solo eventos)",
   "slug": "eliminatorias-2026-hd-peru-solo-eventos",
   "category": "deportes",
   "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-peru-flag-png-with-transparent-background-png-image_6732174.jpg",
@@ -5960,7 +6380,7 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Uruguay (solo eventos)",
+  "name": "Eliminatorias 2026 HD · Uruguay (solo eventos)",
   "slug": "eliminatorias-2026-hd-uruguay-solo-eventos",
   "category": "deportes",
   "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-uruguay-flag-png-with-transparent-background-png-image_6731957.jpg",
@@ -5970,7 +6390,7 @@
   "unverified": true
  },
  {
-  "name": "ELIMINATORIAs 2026 HD · Venezuela (solo eventos)",
+  "name": "Eliminatorias 2026 HD · Venezuela (solo eventos)",
   "slug": "eliminatorias-2026-hd-venezuela-solo-eventos",
   "category": "deportes",
   "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-venezuela-flag-png-with-transparent-background-png-image_6731977.jpg",
@@ -6090,11 +6510,31 @@
   "unverified": true
  },
  {
-  "name": "ESPN 2 PrᴵMera FHD",
-  "slug": "espn-2-pr-mera-fhd",
+  "name": "ESPN 2 HD Colombia",
+  "slug": "espn-2-hd-colombia",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn2.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725309.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 2 Primera FHD",
+  "slug": "espn-2-primera-fhd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/espn2.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687919.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 2 SUR SD",
+  "slug": "espn-2-sur-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn2sur.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725231.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6140,11 +6580,21 @@
   "unverified": true
  },
  {
-  "name": "ESPN 3 PrᴵMera HD",
-  "slug": "espn-3-pr-mera-hd",
+  "name": "ESPN 3 Primera HD",
+  "slug": "espn-3-primera-hd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/espn3.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687918.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 3 SUR SD",
+  "slug": "espn-3-sur-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn3sur.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725230.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6180,11 +6630,41 @@
   "unverified": true
  },
  {
-  "name": "ESPN 4 PrᴵMera FHD",
-  "slug": "espn-4-pr-mera-fhd",
+  "name": "ESPN 4 HD (LATAM)",
+  "slug": "espn-4-hd-latam",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn4.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725307.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 4 MX (solo eventos)",
+  "slug": "espn-4-mx-solo-eventos",
+  "category": "deportes",
+  "logo": "https://i.blogs.es/2ccaa3/vix-/1366_2000.jpeg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716599.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 4 Primera FHD",
+  "slug": "espn-4-primera-fhd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/espn4.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687917.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 5 HD",
+  "slug": "espn-5-hd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn5.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725306.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6195,6 +6675,26 @@
   "category": "deportes",
   "logo": "https://barrettmedia.com/wp-content/uploads/2022/10/BIG-12-ESPN-FOX-SPORTS.jpg",
   "url": "http://iptvgo.cc/live/Will1/Will1/688064.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 6 HD",
+  "slug": "espn-6-hd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn6.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725305.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 7 HD",
+  "slug": "espn-7-hd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn7.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725304.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6220,6 +6720,16 @@
   "unverified": true
  },
  {
+  "name": "ESPN Deportes",
+  "slug": "espn-deportes",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/sespndeportes.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725303.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "ESPN Deportes UHD",
   "slug": "espn-deportes-uhd",
   "category": "deportes",
@@ -6240,6 +6750,16 @@
   "unverified": true
  },
  {
+  "name": "ESPN Extra",
+  "slug": "espn-extra",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espnextra.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725302.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "ESPN Extra SUR",
   "slug": "espn-extra-sur",
   "category": "deportes",
@@ -6255,6 +6775,26 @@
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/01espn.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716746.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN HD Chile",
+  "slug": "espn-hd-chile",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725301.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN HD Colombia",
+  "slug": "espn-hd-colombia",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725300.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6290,8 +6830,8 @@
   "unverified": true
  },
  {
-  "name": "ESPN PrᴵMera FHD",
-  "slug": "espn-pr-mera-fhd",
+  "name": "ESPN Primera FHD",
+  "slug": "espn-primera-fhd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/espn.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687920.m3u8",
@@ -6300,11 +6840,31 @@
   "unverified": true
  },
  {
-  "name": "ESPN Star+ (SOLO Eventos) PrᴵMera",
-  "slug": "espn-star-solo-eventos-pr-mera",
+  "name": "ESPN Star+ (solo eventos) Primera",
+  "slug": "espn-star-solo-eventos-primera",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/espns.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687912.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN Star+ FHD (solo eventos)",
+  "slug": "espn-star-fhd-solo-eventos",
+  "category": "deportes",
+  "logo": "https://futbolete.com/wp-content/uploads/2021/07/Cuales-eventos-deportivos-ofrecera-Star-en-Colombia-scaled.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725298.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN SUR SD",
+  "slug": "espn-sur-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espnsur.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725229.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6410,11 +6970,31 @@
   "unverified": true
  },
  {
+  "name": "Estrella News",
+  "slug": "estrella-news",
+  "category": "noticias",
+  "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/misc/vod/estrella-news-vod.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/623307.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Estrella News UHD",
   "slug": "estrella-news-uhd",
   "category": "noticias",
   "logo": "https://logo.m3uassets.com/estrellanews.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716795.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESTRELLA TV Miami HD",
+  "slug": "estrella-tv-miami-hd",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/estrellatv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688573.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6500,6 +7080,16 @@
   "unverified": true
  },
  {
+  "name": "Eurosports UHD",
+  "slug": "eurosports-uhd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/eurosports1.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725297.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "EVA Vision TV (HD)",
   "slug": "eva-vision-tv-hd",
   "category": "chile",
@@ -6520,8 +7110,8 @@
   "unverified": true
  },
  {
-  "name": "Eventos Paraguay HD",
-  "slug": "eventos-paraguay-hd",
+  "name": "Eventos HD",
+  "slug": "eventos-hd",
   "category": "paraguay",
   "logo": "https://logo.m3uassets.com/anteleventos.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688137.m3u8",
@@ -6535,6 +7125,16 @@
   "category": "paraguay",
   "logo": "",
   "url": "http://iptvgo.cc/live/Will1/Will1/688136.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Eventos Star+ HD",
+  "slug": "eventos-star-hd",
+  "category": "deportes",
+  "logo": "https://i.blogs.es/2ec255/star-_logo.svg/original.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725296.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6575,6 +7175,16 @@
   "category": "puertorico",
   "logo": "https://www.kindpng.com/picc/m/130-1309971_unnamed-ewtn-global-catholic-network-hd-png-download.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/303629.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Excélsior TV",
+  "slug": "excelsior-tv",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/excelsiortv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/837273.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6740,6 +7350,16 @@
   "unverified": true
  },
  {
+  "name": "Film & Arts",
+  "slug": "film-arts",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/filmarts.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716711.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Film&Arts",
   "slug": "film-arts",
   "category": "argentina",
@@ -6850,6 +7470,16 @@
   "unverified": true
  },
  {
+  "name": "Food Network FHD",
+  "slug": "food-network-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/foodnetwork.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716642.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Food Network Latino",
   "slug": "food-network-latino",
   "category": "puertorico",
@@ -6860,8 +7490,18 @@
   "unverified": true
  },
  {
-  "name": "Foro TV MX UHD",
-  "slug": "foro-tv-mx-uhd",
+  "name": "Formula 1 FHD",
+  "slug": "formula-1-fhd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/formula1.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725295.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Foro TV UHD",
+  "slug": "foro-tv-uhd",
   "category": "mexico",
   "logo": "https://logo.m3uassets.com/forotv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716865.m3u8",
@@ -6910,6 +7550,16 @@
   "unverified": true
  },
  {
+  "name": "Fox Deportes",
+  "slug": "fox-deportes",
+  "category": "deportes",
+  "logo": "https://foxsports-wordpress-www-prsupports-prod.s3.amazonaws.com/uploads/sites/2/2016/12/FOX-Deportes-1040x585.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3164.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "FOX News",
   "slug": "fox-news",
   "category": "deportes",
@@ -6940,11 +7590,11 @@
   "unverified": true
  },
  {
-  "name": "FOX Sports 1",
+  "name": "Fox Sports 1",
   "slug": "fox-sports-1",
   "category": "deportes",
-  "logo": "https://logo.m3uassets.com/foxsports1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/671138.m3u8",
+  "logo": "https://logo.m3uassets.com/foxsports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716733.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6955,6 +7605,16 @@
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/foxsports1.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688066.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "FOX Sports 1 HD ARG",
+  "slug": "fox-sports-1-hd-arg",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/foxsport1.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/670968.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6974,7 +7634,7 @@
   "slug": "fox-sports-2",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/foxsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/7908.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716732.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6990,8 +7650,18 @@
   "unverified": true
  },
  {
-  "name": "FOX Sports 2 PrᴵMera HD",
-  "slug": "fox-sports-2-pr-mera-hd",
+  "name": "FOX Sports 2 HD ARG",
+  "slug": "fox-sports-2-hd-arg",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/foxsports2arg.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/670970.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "FOX Sports 2 Primera HD",
+  "slug": "fox-sports-2-primera-hd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/foxsports2.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687916.m3u8",
@@ -7013,8 +7683,18 @@
   "name": "Fox Sports 3",
   "slug": "fox-sports-3",
   "category": "deportes",
-  "logo": "https://logo.m3uassets.com/foxsports3.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/7907.m3u8",
+  "logo": "https://logo.m3uassets.com/foxsports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716731.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "FOX Sports 3 (COL)",
+  "slug": "fox-sports-3-col",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/sfoxsportsnorth.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725294.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7030,8 +7710,18 @@
   "unverified": true
  },
  {
-  "name": "FOX Sports 3 PrᴵMera HD",
-  "slug": "fox-sports-3-pr-mera-hd",
+  "name": "FOX Sports 3 HD ARG",
+  "slug": "fox-sports-3-hd-arg",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/foxsports3arg.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/670969.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "FOX Sports 3 Primera HD",
+  "slug": "fox-sports-3-primera-hd",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/foxsports3.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687915.m3u8",
@@ -7045,6 +7735,16 @@
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/foxsports3lam.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/725357.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "FOX Sports Deportes",
+  "slug": "fox-sports-deportes",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/foxsportsdeportes.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725293.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7080,11 +7780,41 @@
   "unverified": true
  },
  {
+  "name": "FOX Sports Premium SD",
+  "slug": "fox-sports-premium-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/foxsportspremium.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725228.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "FOX Sports SD",
+  "slug": "fox-sports-sd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/foxsports.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725227.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "FOX Sports Venezuela",
   "slug": "fox-sports-venezuela",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/foxsports.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688484.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "France 24 HD",
+  "slug": "france-24-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/24.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716787.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7110,21 +7840,21 @@
   "unverified": true
  },
  {
-  "name": "Fútbol para FANS HD",
-  "slug": "futbol-para-fans-hd",
-  "category": "deportes",
-  "logo": "https://www.kindpng.com/picc/m/359-3591273_logo-bolivia-tv-png-transparent-png.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688216.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Futv Gritalo HD",
   "slug": "futv-gritalo-hd",
   "category": "costarica",
   "logo": "https://1.bp.blogspot.com/-fuiNMHxxBa8/Xj9K4sAvkaI/AAAAAAAANKs/JK__aGQCmXoUM-NLaoTKQoi9rl95olQCwCLcBGAsYHQ/s640/futv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688533.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "FX",
+  "slug": "fx",
+  "category": "mexico",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/FXM_Logo.svg/1280px-FXM_Logo.svg.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716595.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7150,21 +7880,11 @@
   "unverified": true
  },
  {
-  "name": "FXM",
-  "slug": "fxm",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/fxm.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303861.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Fyi",
-  "slug": "fyi",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/fyi.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303860.m3u8",
+  "name": "FX FHD",
+  "slug": "fx-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/fx.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716710.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7210,31 +7930,11 @@
   "unverified": true
  },
  {
-  "name": "Gayel",
-  "slug": "gayel",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303611.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Gayelle",
-  "slug": "gayelle",
-  "category": "puertorico",
-  "logo": "https://logo.iptveditor.com/elle.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303978.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Gayelle The Caribbean (TG)",
-  "slug": "gayelle-the-caribbean-tg",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303924.m3u8",
+  "name": "Garage TV UHD",
+  "slug": "garage-tv-uhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/garagetv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716641.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7270,16 +7970,6 @@
   "unverified": true
  },
  {
-  "name": "GINX",
-  "slug": "ginx",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/ginx.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303751.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Girasol TV",
   "slug": "girasol-tv",
   "category": "honduras",
@@ -7310,26 +8000,6 @@
   "unverified": true
  },
  {
-  "name": "GIS ST Vincent",
-  "slug": "gis-st-vincent",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303610.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Glitz",
-  "slug": "glitz",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/glitz.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303761.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Globovision TV (UHD)",
   "slug": "globovision-tv-uhd",
   "category": "venezuela",
@@ -7350,18 +8020,8 @@
   "unverified": true
  },
  {
-  "name": "Goal RUSH",
-  "slug": "goal-rush",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/goalrush.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303704.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Gol Peru FHD LᴵGA",
-  "slug": "gol-peru-fhd-l-ga",
+  "name": "Gol FHD Liga",
+  "slug": "gol-fhd-liga",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/gol.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688437.m3u8",
@@ -7370,8 +8030,8 @@
   "unverified": true
  },
  {
-  "name": "Gol Peru HD LᴵGA",
-  "slug": "gol-peru-hd-l-ga",
+  "name": "Gol HD Liga",
+  "slug": "gol-hd-liga",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/gol.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688438.m3u8",
@@ -7400,6 +8060,36 @@
   "unverified": true
  },
  {
+  "name": "Golden Plus HD",
+  "slug": "golden-plus-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/goldenplus.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716673.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Golden Premier 1",
+  "slug": "golden-premier-1",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/goldenpremier.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716708.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Golden Premier 2",
+  "slug": "golden-premier-2",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/goldenpremier.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716707.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Golden Premier 2",
   "slug": "golden-premier-2",
   "category": "argentina",
@@ -7415,16 +8105,6 @@
   "category": "mexico",
   "logo": "https://logo.iptveditor.com/golden.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716790.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "GOLF",
-  "slug": "golf",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303609.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7450,8 +8130,8 @@
   "unverified": true
  },
  {
-  "name": "GolTV HD LᴵGA",
-  "slug": "goltv-hd-l-ga",
+  "name": "GolTV HD Liga",
+  "slug": "goltv-hd-liga",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/goltv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688441.m3u8",
@@ -7460,8 +8140,8 @@
   "unverified": true
  },
  {
-  "name": "GolTV Liga Ecuador HD",
-  "slug": "goltv-liga-ecuador-hd",
+  "name": "GolTV Liga HD",
+  "slug": "goltv-liga-hd",
   "category": "ecuador",
   "logo": "https://logo.m3uassets.com/goltv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/683419.m3u8",
@@ -7470,8 +8150,8 @@
   "unverified": true
  },
  {
-  "name": "GolTV Liga Ecuador HD #2",
-  "slug": "goltv-liga-ecuador-hd-2",
+  "name": "GolTV Liga HD #2",
+  "slug": "goltv-liga-hd-2",
   "category": "ecuador",
   "logo": "https://logo.m3uassets.com/goltv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/683418.m3u8",
@@ -7480,21 +8160,11 @@
   "unverified": true
  },
  {
-  "name": "GolTV PPV (EVENTOS Liga Ecuador HD)",
-  "slug": "goltv-ppv-eventos-liga-ecuador-hd",
+  "name": "GolTV PPV (EVENTOS Liga HD)",
+  "slug": "goltv-ppv-eventos-liga-hd",
   "category": "ecuador",
   "logo": "https://logo.m3uassets.com/goltv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/683417.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "GUA TV (UHD)",
-  "slug": "gua-tv-uhd",
-  "category": "guatemala",
-  "logo": "https://logo.m3uassets.com/guatv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688675.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7540,11 +8210,51 @@
   "unverified": true
  },
  {
+  "name": "HBO (West) FHD",
+  "slug": "hbo-west-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hbo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716703.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO (West) HD",
+  "slug": "hbo-west-hd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/150/6723150-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716687.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "HBO 2",
   "slug": "hbo-2",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/hbo2.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671050.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO 2 FHD",
+  "slug": "hbo-2-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hbo2.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716702.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO 2 HD",
+  "slug": "hbo-2-hd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/172/16975172-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716686.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7560,11 +8270,91 @@
   "unverified": true
  },
  {
+  "name": "HBO Family FHD",
+  "slug": "hbo-family-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hbofamily.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716701.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO Family HD",
+  "slug": "hbo-family-hd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/799/9939799-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716684.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO FHD",
+  "slug": "hbo-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hbo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716704.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO HD",
+  "slug": "hbo-hd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/151/6723151-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716689.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO Mosaico FHD",
+  "slug": "hbo-mosaico-fhd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/929/256929-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716690.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO Mosaico HD",
+  "slug": "hbo-mosaico-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hbo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716676.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "HBO Mundi",
   "slug": "hbo-mundi",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/hbomundi.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671048.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO Mundi FHD",
+  "slug": "hbo-mundi-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hbomundi.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716692.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO Mundi HD",
+  "slug": "hbo-mundi-hd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/737/9068737-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716678.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7580,11 +8370,51 @@
   "unverified": true
  },
  {
+  "name": "HBO Plus FHD",
+  "slug": "hbo-plus-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hboplus.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716693.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO Plus HD",
+  "slug": "hbo-plus-hd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/173/16975173-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716679.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "HBO POP",
   "slug": "hbo-pop",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/hbopop.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671046.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO POP FHD",
+  "slug": "hbo-pop-fhd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/176/16975176-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716691.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO POP HD",
+  "slug": "hbo-pop-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hbopop.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716677.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7600,11 +8430,51 @@
   "unverified": true
  },
  {
+  "name": "HBO Signature FHD",
+  "slug": "hbo-signature-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hbosignature.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716700.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO Signature HD",
+  "slug": "hbo-signature-hd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/148/6723148-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716682.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "HBO Xtreme",
   "slug": "hbo-xtreme",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/hboxtreme.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671043.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO Xtreme FHD",
+  "slug": "hbo-xtreme-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hboxtreme.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716697.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HBO Xtreme HD",
+  "slug": "hbo-xtreme-hd",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/742/9068742-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716680.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7620,11 +8490,31 @@
   "unverified": true
  },
  {
+  "name": "HCH",
+  "slug": "hch",
+  "category": "honduras",
+  "logo": "https://logo.m3uassets.com/hch.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688742.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "HCH TV",
   "slug": "hch-tv",
   "category": "honduras",
   "logo": "https://logo.m3uassets.com/hchtv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688707.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Heraldo TV",
+  "slug": "heraldo-tv",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/925/11674925-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/837274.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7710,6 +8600,26 @@
   "unverified": true
  },
  {
+  "name": "History Channel MX",
+  "slug": "history-channel-mx",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/historychannel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716631.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HLN",
+  "slug": "hln",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/hln.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716630.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "HM TV 33",
   "slug": "hm-tv-33",
   "category": "dominicana",
@@ -7720,61 +8630,11 @@
   "unverified": true
  },
  {
-  "name": "HON Canal 11",
-  "slug": "hon-canal-11",
-  "category": "honduras",
-  "logo": "https://logo.m3uassets.com/canal11.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688740.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "HON Canal 5",
-  "slug": "hon-canal-5",
-  "category": "honduras",
-  "logo": "https://logo.m3uassets.com/canal5.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688741.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "HON HCH",
-  "slug": "hon-hch",
-  "category": "honduras",
-  "logo": "https://logo.m3uassets.com/hch.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688742.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "HON Suyapa",
-  "slug": "hon-suyapa",
-  "category": "honduras",
-  "logo": "https://directostv.teleame.com/wp-content/uploads/2018/03/suyapa-tv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688743.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "HON Telecadena",
-  "slug": "hon-telecadena",
-  "category": "honduras",
-  "logo": "https://logo.m3uassets.com/telecadena.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688744.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "HON Telesistema",
-  "slug": "hon-telesistema",
-  "category": "honduras",
-  "logo": "https://logo.m3uassets.com/telesistema.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688745.m3u8",
+  "name": "Hola TV UHD",
+  "slug": "hola-tv-uhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/holatv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716640.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7815,16 +8675,6 @@
   "category": "honduras",
   "logo": "https://logo.m3uassets.com/teleceiba.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688752.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Honduras · FM",
-  "slug": "honduras-fm",
-  "category": "honduras",
-  "logo": "https://logo.m3uassets.com/fm.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688697.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7910,8 +8760,8 @@
   "unverified": true
  },
  {
-  "name": "Imagen TV MX UHD",
-  "slug": "imagen-tv-mx-uhd",
+  "name": "Imagen TV UHD",
+  "slug": "imagen-tv-uhd",
   "category": "mexico",
   "logo": "https://logo.m3uassets.com/imagentv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716864.m3u8",
@@ -8000,31 +8850,11 @@
   "unverified": true
  },
  {
-  "name": "ITV Deportes HD",
-  "slug": "itv-deportes-hd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/itvdeportes.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716789.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "IVC Venezuela HD",
-  "slug": "ivc-venezuela-hd",
+  "name": "IVC HD",
+  "slug": "ivc-hd",
   "category": "venezuela",
   "logo": "https://logo.m3uassets.com/ivc.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688466.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Jacksonville · Telemundo WFOX-DT4",
-  "slug": "jacksonville-telemundo-wfox-dt4",
-  "category": "deportes",
-  "logo": "https://banner2.cleanpng.com/20180623/crh/kisspng-telemundo-nbcuniversal-television-show-owned-and-o-5b2e0481288d93.4939886715297424651661.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/831561.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -8230,6 +9060,666 @@
   "unverified": true
  },
  {
+  "name": "Latin A3 Series",
+  "slug": "latin-a3-series",
+  "category": "entretenimiento",
+  "logo": "https://imagenes.atresplayer.com/atp/clipping/cmsimages01/2020/06/26/C374514E-C545-43D0-9482-E0BDF200DB0B//720x540.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3258.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin A3Cine",
+  "slug": "latin-a3cine",
+  "category": "cine",
+  "logo": "https://mma.prnewswire.com/media/629670/Atrescine_Logo.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3257.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin adn Noticias",
+  "slug": "latin-adn-noticias",
+  "category": "noticias",
+  "logo": "https://images.sr.roku.com/idType/roku-trc/context/trc/id/a7ef3da6761e5b768557b00ab1ab85e4/rokuFeed/assets/9b932cd789f35309a15d82fd85d87148.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830243.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin AMC en español",
+  "slug": "latin-amc-en-espanol",
+  "category": "espana",
+  "logo": "https://logo.m3uassets.com/amcenespanol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707033.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Anger Management en espanol",
+  "slug": "latin-anger-management-en-espanol",
+  "category": "espana",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/a663e04f-8322-45f6-a64d-bafe754d4e09/AngrMngmnt_logo_dark_1500x1000_-_Chris_Connors.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830175.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Atres series",
+  "slug": "latin-atres-series",
+  "category": "entretenimiento",
+  "logo": "https://logo.m3uassets.com/a3satreseries1.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3251.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin AZ Cinema",
+  "slug": "latin-az-cinema",
+  "category": "cine",
+  "logo": "https://americancable.ec/wp-content/uploads/2021/09/40-logo-azcinema.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3250.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin CBS en español",
+  "slug": "latin-cbs-en-espanol",
+  "category": "espana",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/f/fd/CBS_Corporation_logo.svg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707038.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin CG MMA En Español",
+  "slug": "latin-cg-mma-en-espanol",
+  "category": "espana",
+  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/US4600005ST_20260421T141742SQUARE.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830211.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cheaters en Espanol",
+  "slug": "latin-cheaters-en-espanol",
+  "category": "espana",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/b0328822-b149-4524-ad89-1c87c2543268/FilmRise_CheatersEnEspanol_Logo_ColorRDX.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830169.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Clásico",
+  "slug": "latin-cine-clasico",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/cinelat.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707067.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Club",
+  "slug": "latin-cine-club",
+  "category": "cine",
+  "logo": "http://p-img.movetv.com/cms/images/875441ad3df2f9d4a680e6db6b08b8e8ac8e7699.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830233.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine de Oro",
+  "slug": "latin-cine-de-oro",
+  "category": "cine",
+  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/USBD2700005KL_20260421T142142SQUARE.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830237.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Estelar",
+  "slug": "latin-cine-estelar",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/plutotvcineestelar.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707072.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine EstrellaTV",
+  "slug": "latin-cine-estrellatv",
+  "category": "cine",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/09f86900-5fce-4b68-944a-a52733ca2ec2/cine-logo_color_-_Erick_Ramirez1500x1000.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830228.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Mexicano",
+  "slug": "latin-cine-mexicano",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/tempcs1315cinemexicano.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707071.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Nostalgia",
+  "slug": "latin-cine-nostalgia",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/cinenostalgia.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707070.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Retro",
+  "slug": "latin-cine-retro",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/plutotvcineretro.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707069.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Romantico",
+  "slug": "latin-cine-romantico",
+  "category": "cine",
+  "logo": "https://mma.prnewswire.com/media/1321479/UP_Entertainment_Cine_Romantico_Logo.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707064.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Vault",
+  "slug": "latin-cine-vault",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/cinelatino.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707062.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Vault Classics",
+  "slug": "latin-cine-vault-classics",
+  "category": "cine",
+  "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLYfObIZurdmgdtQSeLWZGvB47XOC7RmbWwg&s",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707061.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cine Vault Westerns",
+  "slug": "latin-cine-vault-westerns",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/cinevaultwesterns.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707060.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cinema Dinamita",
+  "slug": "latin-cinema-dinamita",
+  "category": "cine",
+  "logo": "https://images.squarespace-cdn.com/content/v1/5ea862a8804f7204dfbb35fb/1588706493698-9FZI0PVBWD50JVE24B0K/network_cinemadinamita.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3237.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin CINEVAULT",
+  "slug": "latin-cinevault",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/cinelatino.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707066.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin CNN Noticias",
+  "slug": "latin-cnn-noticias",
+  "category": "noticias",
+  "logo": "https://images.pluto.tv/channels/673248f9030a2c0008033af8/featuredImage_1777908720377.jpg?fill=blur&fit=fill&fm=jpg&h=562&q=75&w=1000",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707008.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Comedy Central en español",
+  "slug": "latin-comedy-central-en-espanol",
+  "category": "espana",
+  "logo": "https://logo.m3uassets.com/comedycentralenespanol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707028.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Cops en Espanol",
+  "slug": "latin-cops-en-espanol",
+  "category": "espana",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/59b63843-4b98-42fd-bf78-c269ce56cdb5/COPS_en_espanol_-_channel_logo_colour_-_1500x1000.png_James_Roebuck.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830178.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin CSI en Español",
+  "slug": "latin-csi-en-espanol",
+  "category": "espana",
+  "logo": "https://logo.m3uassets.com/csienespanol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707037.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin CSI Miami en español",
+  "slug": "latin-csi-miami-en-espanol",
+  "category": "espana",
+  "logo": "https://logo.m3uassets.com/csienespanol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707036.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin CSI NY en español",
+  "slug": "latin-csi-ny-en-espanol",
+  "category": "espana",
+  "logo": "https://logo.m3uassets.com/csienespanol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707035.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Curiosity Animales",
+  "slug": "latin-curiosity-animales",
+  "category": "documentales",
+  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/US2200001IY_20240910T003736SQUARE.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830187.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Discovery",
+  "slug": "latin-discovery",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/discovery.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707016.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Discovery Familia",
+  "slug": "latin-discovery-familia",
+  "category": "documentales",
+  "logo": "https://www.dishpromotions.com/wp-content/uploads/DSFAM-logo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3231.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin DP De Pelicula",
+  "slug": "latin-dp-de-pelicula",
+  "category": "cine",
+  "logo": "https://www.dishpromotions.com/wp-content/uploads/PELIC-logo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3229.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin DP De Pelicula Clasico",
+  "slug": "latin-dp-de-pelicula-clasico",
+  "category": "cine",
+  "logo": "https://www.dishpromotions.com/wp-content/uploads/PCLAS-logo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3230.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin ElectricNOW en Espanol",
+  "slug": "latin-electricnow-en-espanol",
+  "category": "espana",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/2ba8f950-5d83-4adb-8fd5-e0bf4426de43/ENow_ES_Logo_-_Dark_Backgrounds_1500x1000RDX.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830166.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Estrella News",
+  "slug": "latin-estrella-news",
+  "category": "noticias",
+  "logo": "https://logo.m3uassets.com/estrellanews.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707026.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Grjngo vs Peliculas Del Oeste",
+  "slug": "latin-grjngo-vs-peliculas-del-oeste",
+  "category": "cine",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/76964e60-8756-4551-8748-dbd7852bd0bd/Grjngo-Westernfilme_logo_light_-_Toni_Newesil__1_.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830176.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Hallmark en español",
+  "slug": "latin-hallmark-en-espanol",
+  "category": "espana",
+  "logo": "https://logo.m3uassets.com/hallmark.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707045.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin History en ESPANOL",
+  "slug": "latin-history-en-espanol",
+  "category": "documentales",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/8/83/History_en_Espa%C3%B1ol_Logo.svg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/267603.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Iron Chef en espanol",
+  "slug": "latin-iron-chef-en-espanol",
+  "category": "espana",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/7e7e0544-7004-46ac-bea2-b21a2a7ab166/Plex_xumoTile_FilmRise_IronChefEnEspanol_logo_color_white_text.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830163.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Meganoticias",
+  "slug": "latin-meganoticias",
+  "category": "noticias",
+  "logo": "https://logowik.com/content/uploads/images/meganoticias7444.logowik.com.webp",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707053.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin MTV en español",
+  "slug": "latin-mtv-en-espanol",
+  "category": "espana",
+  "logo": "https://logo.m3uassets.com/mtvenespanol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707030.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Nat Geo Mundo",
+  "slug": "latin-nat-geo-mundo",
+  "category": "documentales",
+  "logo": "https://p1.hiclipart.com/preview/323/20/6/tv-channel-icons-pack-nat-geo-mundo-color-png-icon.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3207.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Noticias Telemundo AHORA",
+  "slug": "latin-noticias-telemundo-ahora",
+  "category": "noticias",
+  "logo": "https://provider-static.plex.tv/a/epg/channels/logos/gracenote/a88b95413ac88f1f1147ea1d00692653.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830265.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Novelas de Siempre",
+  "slug": "latin-novelas-de-siempre",
+  "category": "entretenimiento",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/4104a44f-21ec-4ee6-8eca-7d151cfbd85d/Novelas_de_Siempre_Channel-Icon_ColorRDX.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830197.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Novelas Turcas",
+  "slug": "latin-novelas-turcas",
+  "category": "entretenimiento",
+  "logo": "https://logo.m3uassets.com/tlnovelaslatinamerica.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707042.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Peru Magico",
+  "slug": "latin-peru-magico",
+  "category": "peru",
+  "logo": "https://cdn.tvpassport.com/image/station/240x135/v2/s50335_h15_ab.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/3198.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin RCN Noticias",
+  "slug": "latin-rcn-noticias",
+  "category": "noticias",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/9150537f-f9e4-4f21-b5e2-bc57b7a5ea35/RCN_NOTICIAS_WHITE_-_JuanMa_VelasquezRDX.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830250.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Runtime Espanol",
+  "slug": "latin-runtime-espanol",
+  "category": "espana",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/158f2ae8-032e-4f0e-8143-b9939c2fd5a2/Runtime_USH_Light_Logo_-_JP_Garcia.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830156.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Somos Novelas",
+  "slug": "latin-somos-novelas",
+  "category": "entretenimiento",
+  "logo": "https://logo.m3uassets.com/tringnovelas.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707051.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Sony Cine",
+  "slug": "latin-sony-cine",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/cinesony.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707050.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Spectrum Noticias",
+  "slug": "latin-spectrum-noticias",
+  "category": "noticias",
+  "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKzl-DLmv2YLRooqsDeWoE7UcDe9XXqjeUHQ&s",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707046.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin SUR Perú",
+  "slug": "latin-sur-peru",
+  "category": "peru",
+  "logo": "https://logo.m3uassets.com/surperu.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707056.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Telemundo Noticias California",
+  "slug": "latin-telemundo-noticias-california",
+  "category": "noticias",
+  "logo": "https://image.xumo.com/v1/channels/channel/99951225/168x168.webp?type=color_onBlack",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830255.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Telemundo Noticias Florida",
+  "slug": "latin-telemundo-noticias-florida",
+  "category": "noticias",
+  "logo": "https://image.xumo.com/v1/channels/channel/99951227/168x168.webp?type=color_onBlack",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830254.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Telemundo Noticias Noreste",
+  "slug": "latin-telemundo-noticias-noreste",
+  "category": "noticias",
+  "logo": "https://image.xumo.com/v1/channels/channel/99951228/168x168.webp?type=color_onBlack",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830249.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Telemundo Noticias Texas",
+  "slug": "latin-telemundo-noticias-texas",
+  "category": "noticias",
+  "logo": "https://image.xumo.com/v1/channels/channel/99951226/168x168.webp?type=color_onBlack",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830251.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin The Walking Dead en español",
+  "slug": "latin-the-walking-dead-en-espanol",
+  "category": "espana",
+  "logo": "https://logo.m3uassets.com/thewalkingdead.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707034.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Todo Cine",
+  "slug": "latin-todo-cine",
+  "category": "cine",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/afe5cd54-0d6d-4b60-a4df-91a8d7ac7960/TodoCine_-_White_Fernando_Fraderdx.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830236.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Todo Novelas, mas Pasiones",
+  "slug": "latin-todo-novelas-mas-pasiones",
+  "category": "entretenimiento",
+  "logo": "https://provider-static.plex.tv/epg/cms/production/f768af86-c0ca-40fa-b79a-bdfe22b54ab3/TN_MP_LOGO_TRANSP_1500x1000_Attribution_White.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830235.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin TV",
+  "slug": "latin-tv",
+  "category": "chile",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Logotipo_de_TV_Chile.svg/1280px-Logotipo_de_TV_Chile.svg.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707055.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Univision Tlnovelas",
+  "slug": "latin-univision-tlnovelas",
+  "category": "entretenimiento",
+  "logo": "https://logo.m3uassets.com/univisiontlnovelas.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707047.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin Vevo Regional Mexicano",
+  "slug": "latin-vevo-regional-mexicano",
+  "category": "mexico",
+  "logo": "https://e7.pngegg.com/pngimages/510/93/png-clipart-vevo-logo-music-video-youtube-logo-text-trademark.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/707007.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin ViX Novelas de romance",
+  "slug": "latin-vix-novelas-de-romance",
+  "category": "entretenimiento",
+  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/USBB44000099N_20260421T141646SQUARE.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830242.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Latin ViX Villanos de Novela",
+  "slug": "latin-vix-villanos-de-novela",
+  "category": "entretenimiento",
+  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/USBC2100011WI_20260421T142351SQUARE.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/830241.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Latina",
   "slug": "latina",
   "category": "peru",
@@ -8250,8 +9740,8 @@
   "unverified": true
  },
  {
-  "name": "Latina LᴵGA",
-  "slug": "latina-l-ga",
+  "name": "Latina Liga",
+  "slug": "latina-liga",
   "category": "peru",
   "logo": "https://logo.m3uassets.com/latina.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688436.m3u8",
@@ -8280,8 +9770,8 @@
   "unverified": true
  },
  {
-  "name": "Legislative Assembly Salvador",
-  "slug": "legislative-assembly-salvador",
+  "name": "Legislative Assembly",
+  "slug": "legislative-assembly",
   "category": "elsalvador",
   "logo": "https://logo.m3uassets.com/legislativeassemblyofelsalvador.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688769.m3u8",
@@ -8330,8 +9820,18 @@
   "unverified": true
  },
  {
-  "name": "Liga 1 HD LᴵGA",
-  "slug": "liga-1-hd-l-ga",
+  "name": "Liga 1 H",
+  "slug": "liga-1-h",
+  "category": "peru",
+  "logo": "https://logo.m3uassets.com/liga.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688432.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Liga 1 HD Liga",
+  "slug": "liga-1-hd-liga",
   "category": "peru",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/6/62/Liga_de_F%C3%BAtbol_Profesional_-_Liga_1_%28Per%C3%BA%29.jpg",
   "url": "http://iptvgo.cc/live/Will1/Will1/688433.m3u8",
@@ -8340,51 +9840,11 @@
   "unverified": true
  },
  {
-  "name": "Liga 1 MAX LᴵGA",
-  "slug": "liga-1-max-l-ga",
+  "name": "Liga 1 MAX Liga",
+  "slug": "liga-1-max-liga",
   "category": "peru",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/6/62/Liga_de_F%C3%BAtbol_Profesional_-_Liga_1_%28Per%C3%BA%29.jpg",
   "url": "http://iptvgo.cc/live/Will1/Will1/688434.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "LᴵGA Mx · AYM Sports MX UHD",
-  "slug": "l-ga-mx-aym-sports-mx-uhd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/aymsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716592.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "LᴵGA Mx · Claro SPORTS (La Liga) MX",
-  "slug": "l-ga-mx-claro-sports-la-liga-mx",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/clarosports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716591.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "LᴵGA Mx · TV en VIVO (La Liga) MX",
-  "slug": "l-ga-mx-tv-en-vivo-la-liga-mx",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/mtvenvivo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716588.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "LᴵGUE Centro · Tigo Sports (PANAMA)",
-  "slug": "l-gue-centro-tigo-sports-panama",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tigosports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688493.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -8440,11 +9900,51 @@
   "unverified": true
  },
  {
+  "name": "Love Nature",
+  "slug": "love-nature",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/lovenature.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716639.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "LTV HD",
   "slug": "ltv-hd",
   "category": "honduras",
   "logo": "https://logo.m3uassets.com/ltv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688721.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Magico",
+  "slug": "magico",
+  "category": "peru",
+  "logo": "https://logo.m3uassets.com/magico.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688415.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Magico HD",
+  "slug": "magico-hd",
+  "category": "peru",
+  "logo": "https://logo.m3uassets.com/magico.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688409.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Magico SDT",
+  "slug": "magico-sdt",
+  "category": "peru",
+  "logo": "https://logo.m3uassets.com/magico.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688314.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -8650,18 +10150,8 @@
   "unverified": true
  },
  {
-  "name": "Mexico FRANCE 24 HD",
-  "slug": "mexico-france-24-hd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/24.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716787.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Mexiquense MX HD",
-  "slug": "mexiquense-mx-hd",
+  "name": "Mexiquense HD",
+  "slug": "mexiquense-hd",
   "category": "mexico",
   "logo": "https://logo.m3uassets.com/mexiquense.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716786.m3u8",
@@ -8695,6 +10185,16 @@
   "category": "mexico",
   "logo": "https://milsaboresfood.com/wp-content/uploads/2023/10/LOGO-MIL-SABORES-FOOD-02.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716784.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Milenio Noticias MX",
+  "slug": "milenio-noticias-mx",
+  "category": "noticias",
+  "logo": "https://www.milenio.com/bundles/camusassets/images/milenio_monograma.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716582.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -8780,16 +10280,6 @@
   "unverified": true
  },
  {
-  "name": "Movistar Deportes LᴵGA",
-  "slug": "movistar-deportes-l-ga",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/movistardeportes.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688439.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Movistar Plus",
   "slug": "movistar-plus",
   "category": "peru",
@@ -8825,6 +10315,16 @@
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/mtv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671029.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "MTV HD",
+  "slug": "mtv-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/mtvlive.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716606.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -8900,8 +10400,8 @@
   "unverified": true
  },
  {
-  "name": "Multimedios Plus MX UHD",
-  "slug": "multimedios-plus-mx-uhd",
+  "name": "Multimedios Plus UHD",
+  "slug": "multimedios-plus-uhd",
   "category": "mexico",
   "logo": "https://logo.m3uassets.com/multimediosplus.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716858.m3u8",
@@ -8930,981 +10430,11 @@
   "unverified": true
  },
  {
-  "name": "Multivisión Sports",
-  "slug": "multivision-sports",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/multisports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688687.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Multivision Sports (HD)",
-  "slug": "multivision-sports-hd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/multisports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688670.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Mundo de la Música (Rock)",
   "slug": "mundo-de-la-musica-rock",
   "category": "musica",
   "logo": "https://logo.m3uassets.com/mundodelamusica.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687979.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MUsIC HD · Bandamax MX",
-  "slug": "music-hd-bandamax-mx",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/bandamax.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716607.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MUsIC HD · VH1 Classic MX",
-  "slug": "music-hd-vh1-classic-mx",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/vh1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716603.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MUsIC HD · VH1 MX #2",
-  "slug": "music-hd-vh1-mx-2",
-  "category": "mexico",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/VH1_logonew.svg/1200px-VH1_logonew.svg.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716602.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX @prende",
-  "slug": "mx-prende",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/aprendetv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837275.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX A&E",
-  "slug": "mx-a-e",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/ae.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716728.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX AMC HD",
-  "slug": "mx-amc-hd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/amc.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716725.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX AMC Series HD",
-  "slug": "mx-amc-series-hd",
-  "category": "entretenimiento",
-  "logo": "https://logo.m3uassets.com/amc.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716726.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX AXN",
-  "slug": "mx-axn",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/axn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716723.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX c",
-  "slug": "mx-c",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/combate.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837270.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Cine: Dreamworks MX UHD",
-  "slug": "mx-cine-dreamworks-mx-uhd",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/dreamworks.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716713.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Cinecanal \\",
-  "slug": "mx-cinecanal",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinecanal.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716719.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Cinemax",
-  "slug": "mx-cinemax",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinemax.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716718.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX CombaTV",
-  "slug": "mx-combatv",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/combate.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837269.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Comedy Central",
-  "slug": "mx-comedy-central",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/comedycentral.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716717.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX de Pelicula",
-  "slug": "mx-de-pelicula",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/pelicula.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716716.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Discovery Channel",
-  "slug": "mx-discovery-channel",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoverychannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716646.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Discovery Home & Health FHD",
-  "slug": "mx-discovery-home-health-fhd",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoveryhomehealth.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716647.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Discovery Kids FHD",
-  "slug": "mx-discovery-kids-fhd",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/discoverykids.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716624.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Discovery Science FHD",
-  "slug": "mx-discovery-science-fhd",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoveryscience.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716645.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Discovery Theater FHD",
-  "slug": "mx-discovery-theater-fhd",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoverytheater.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716635.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Discovery Turbo FHD",
-  "slug": "mx-discovery-turbo-fhd",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoveryturbo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716634.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Discovery World FHD",
-  "slug": "mx-discovery-world-fhd",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoveryworld.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716644.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Distrito Comedia",
-  "slug": "mx-distrito-comedia",
-  "category": "entretenimiento",
-  "logo": "https://logo.m3uassets.com/distritocomedia.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716714.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX el Gourmet FHD",
-  "slug": "mx-el-gourmet-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/elgourmet.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716643.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Excélsior TV",
-  "slug": "mx-excelsior-tv",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/excelsiortv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837273.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Film & Arts",
-  "slug": "mx-film-arts",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/filmarts.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716711.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Food Network FHD",
-  "slug": "mx-food-network-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/foodnetwork.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716642.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX FX FHD",
-  "slug": "mx-fx-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/fx.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716710.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Golden Plus HD",
-  "slug": "mx-golden-plus-hd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/goldenplus.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716673.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Golden Premier 1",
-  "slug": "mx-golden-premier-1",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/goldenpremier.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716708.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Golden Premier 2",
-  "slug": "mx-golden-premier-2",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/goldenpremier.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716707.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO (West) FHD",
-  "slug": "mx-hbo-west-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hbo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716703.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO (West) HD",
-  "slug": "mx-hbo-west-hd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/150/6723150-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716687.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO 2 FHD",
-  "slug": "mx-hbo-2-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hbo2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716702.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO 2 HD",
-  "slug": "mx-hbo-2-hd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/172/16975172-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716686.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Family FHD",
-  "slug": "mx-hbo-family-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hbofamily.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716701.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Family HD",
-  "slug": "mx-hbo-family-hd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/799/9939799-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716684.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO FHD",
-  "slug": "mx-hbo-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hbo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716704.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO HD",
-  "slug": "mx-hbo-hd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/151/6723151-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716689.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Mosaico FHD",
-  "slug": "mx-hbo-mosaico-fhd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/929/256929-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716690.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Mosaico HD",
-  "slug": "mx-hbo-mosaico-hd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hbo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716676.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Mundi FHD",
-  "slug": "mx-hbo-mundi-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hbomundi.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716692.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Mundi HD",
-  "slug": "mx-hbo-mundi-hd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/737/9068737-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716678.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Plus FHD",
-  "slug": "mx-hbo-plus-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hboplus.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716693.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Plus HD",
-  "slug": "mx-hbo-plus-hd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/173/16975173-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716679.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO POP FHD",
-  "slug": "mx-hbo-pop-fhd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/176/16975176-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716691.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO POP HD",
-  "slug": "mx-hbo-pop-hd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hbopop.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716677.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Signature FHD",
-  "slug": "mx-hbo-signature-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hbosignature.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716700.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Signature HD",
-  "slug": "mx-hbo-signature-hd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/148/6723148-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716682.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Xtreme FHD",
-  "slug": "mx-hbo-xtreme-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/hboxtreme.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716697.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX HBO Xtreme HD",
-  "slug": "mx-hbo-xtreme-hd",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/742/9068742-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716680.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Heraldo TV",
-  "slug": "mx-heraldo-tv",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/925/11674925-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837274.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Hi Sports",
-  "slug": "mx-hi-sports",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/sports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837277.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX LAS I Latin American Sports",
-  "slug": "mx-las-i-latin-american-sports",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/latinamericansportsusa.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837276.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX MTV HD",
-  "slug": "mx-mtv-hd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/mtvlive.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716606.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX National Geographic FHD",
-  "slug": "mx-national-geographic-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/nationalgeographic.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716638.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Nick Jr",
-  "slug": "mx-nick-jr",
-  "category": "infantil",
-  "logo": "https://www.izzigo.tv/images/repository/181/16975181-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716618.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Nickelodeon",
-  "slug": "mx-nickelodeon",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/nicktoons.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716617.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Pack Futbol HD · ESPN 4 MX (SOLO Eventos)",
-  "slug": "mx-pack-futbol-hd-espn-4-mx-solo-eventos",
-  "category": "deportes",
-  "logo": "https://i.blogs.es/2ccaa3/vix-/1366_2000.jpeg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716599.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Plural TV",
-  "slug": "mx-plural-tv",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/802/19279802-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837272.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX PX Sports",
-  "slug": "mx-px-sports",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/pxsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837278.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Quiero TV",
-  "slug": "mx-quiero-tv",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/quierotv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837271.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Sky one",
-  "slug": "mx-sky-one",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/skyone.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716590.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Sky Sports 1",
-  "slug": "mx-sky-sports-1",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/skysport1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716597.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Sony Channel FHD",
-  "slug": "mx-sony-channel-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/sonychannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716669.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Sony Movies FHD",
-  "slug": "mx-sony-movies-fhd",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/sonymovies.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716667.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Space FHD",
-  "slug": "mx-space-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/space.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716665.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX SPORTs · Fox Sports 1",
-  "slug": "mx-sports-fox-sports-1",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/foxsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716733.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX SPORTs · Fox Sports 2",
-  "slug": "mx-sports-fox-sports-2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/foxsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716732.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX SPORTs · Fox Sports 3",
-  "slug": "mx-sports-fox-sports-3",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/foxsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716731.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX STAR Channel FHD",
-  "slug": "mx-star-channel-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/starchannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716664.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Star Cinema FHD",
-  "slug": "mx-star-cinema-fhd",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/starcinema.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716663.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX TCM FHD",
-  "slug": "mx-tcm-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/tcm.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716660.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Telehit Música",
-  "slug": "mx-telehit-musica",
-  "category": "musica",
-  "logo": "https://logo.m3uassets.com/telehitmusica.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716604.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX TNT FHD",
-  "slug": "mx-tnt-fhd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tnt.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716658.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX TNT HD",
-  "slug": "mx-tnt-hd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tnt.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/7701.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX TNT Novelas FHD",
-  "slug": "mx-tnt-novelas-fhd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tnt.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716657.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX TNT Novelas HD",
-  "slug": "mx-tnt-novelas-hd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tntnovelas.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/7700.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX TNT Series FHD",
-  "slug": "mx-tnt-series-fhd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tntseries.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716655.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX TNT Series HD",
-  "slug": "mx-tnt-series-hd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tntseries.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716656.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Tv Migrante",
-  "slug": "mx-tv-migrante",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/tvmigrante.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837279.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Universal Channel FHD",
-  "slug": "mx-universal-channel-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/universalchannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716653.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Universal Comedy FHD",
-  "slug": "mx-universal-comedy-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/universalcomedy.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716649.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Universal Crime FHD",
-  "slug": "mx-universal-crime-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/universalcrime.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716652.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Universal Premier FHD",
-  "slug": "mx-universal-premier-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/universalpremiere.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716651.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX Universal Reality FHD",
-  "slug": "mx-universal-reality-fhd",
-  "category": "entretenimiento",
-  "logo": "https://logo.m3uassets.com/universalreality.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716650.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX ViX Premium Mundial 1",
-  "slug": "mx-vix-premium-mundial-1",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/069/19855069-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837285.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX ViX Premium Mundial 2",
-  "slug": "mx-vix-premium-mundial-2",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/069/19855069-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837284.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX ViX Premium Mundial 3",
-  "slug": "mx-vix-premium-mundial-3",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/069/19855069-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837283.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX ViX Premium Mundial 4",
-  "slug": "mx-vix-premium-mundial-4",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/069/19855069-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837282.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX ViX Premium Mundial 5",
-  "slug": "mx-vix-premium-mundial-5",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/069/19855069-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837281.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX ViX Premium Mundial 6",
-  "slug": "mx-vix-premium-mundial-6",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/069/19855069-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/837280.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX ViX Premium Mundial 90",
-  "slug": "mx-vix-premium-mundial-90",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/067/19855067-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716587.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX ViX Premium Mundial 91",
-  "slug": "mx-vix-premium-mundial-91",
-  "category": "mexico",
-  "logo": "https://www.izzigo.tv/images/repository/067/19855067-LOGO-m.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716586.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "MX WARNER Channel FHD",
-  "slug": "mx-warner-channel-fhd",
-  "category": "mexico",
-  "logo": "https://logo.m3uassets.com/warnerchannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716648.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -9980,11 +10510,21 @@
   "unverified": true
  },
  {
-  "name": "Nativa Deportes (Solo Eventos) (HD)",
-  "slug": "nativa-deportes-solo-eventos-hd",
-  "category": "deportes",
-  "logo": "https://contactodeportivo.pe/wp-content/uploads/2022/08/fondo.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688431.m3u8",
+  "name": "National Geographic",
+  "slug": "national-geographic",
+  "category": "argentina",
+  "logo": "https://logo.m3uassets.com/nationalgeographic.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/670978.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "National Geographic FHD",
+  "slug": "national-geographic-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/nationalgeographic.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716638.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10035,36 +10575,6 @@
   "category": "colombia",
   "logo": "https://logo.m3uassets.com/nevistelevision.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687877.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "NEWs · CNN Español (ARGE)",
-  "slug": "news-cnn-espanol-arge",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/cnnenespaol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/670962.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "NEWs · Milenio Noticias MX",
-  "slug": "news-milenio-noticias-mx",
-  "category": "noticias",
-  "logo": "https://www.milenio.com/bundles/camusassets/images/milenio_monograma.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716582.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "NEWs · Todo Noticias HD ARG",
-  "slug": "news-todo-noticias-hd-arg",
-  "category": "noticias",
-  "logo": "https://logo.m3uassets.com/todonoticias.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/670961.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10130,11 +10640,11 @@
   "unverified": true
  },
  {
-  "name": "Nick JR",
+  "name": "Nick Jr",
   "slug": "nick-jr",
   "category": "infantil",
-  "logo": "https://logo.m3uassets.com/nickjr.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/671024.m3u8",
+  "logo": "https://www.izzigo.tv/images/repository/181/16975181-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716618.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10143,8 +10653,8 @@
   "name": "Nickelodeon",
   "slug": "nickelodeon",
   "category": "infantil",
-  "logo": "https://logo.m3uassets.com/nickelodeon.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/671023.m3u8",
+  "logo": "https://logo.m3uassets.com/nicktoons.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716617.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10245,16 +10755,6 @@
   "category": "colombia",
   "logo": "https://logo.m3uassets.com/noticiero90minutos.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687863.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Novelas HD · Televisa Novelas MX HD",
-  "slug": "novelas-hd-televisa-novelas-mx-hd",
-  "category": "entretenimiento",
-  "logo": "https://logo.m3uassets.com/telenovelas.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716729.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10400,6 +10900,16 @@
   "unverified": true
  },
  {
+  "name": "ON DirecTV UHD",
+  "slug": "on-directv-uhd",
+  "category": "argentina",
+  "logo": "https://logo.m3uassets.com/ondirectv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/670975.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Opinión SUR Niños (SDT)",
   "slug": "opinion-sur-ninos-sdt",
   "category": "infantil",
@@ -10460,61 +10970,11 @@
   "unverified": true
  },
  {
-  "name": "Pack Futbol HD · Bein Sports Xtra Ñ MX",
-  "slug": "pack-futbol-hd-bein-sports-xtra-n-mx",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/beinsportsxtra.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716600.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Pack Futbol HD · ON DirecTV UHD (ARG)",
-  "slug": "pack-futbol-hd-on-directv-uhd-arg",
-  "category": "argentina",
-  "logo": "https://logo.m3uassets.com/ondirectv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/670975.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Pack Futbol HD · Tigo Sports el Salvador",
-  "slug": "pack-futbol-hd-tigo-sports-el-salvador",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tigosports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688784.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Paka Paka HD",
   "slug": "paka-paka-hd",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/pakapaka.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671020.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Panamá · Cable Onda Sports",
-  "slug": "panama-cable-onda-sports",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/cableondasports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688500.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Panamá · Cable Onda Sports FC",
-  "slug": "panama-cable-onda-sports-fc",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/cableondasportsfc.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688501.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10555,6 +11015,16 @@
   "category": "cine",
   "logo": "https://logo.m3uassets.com/paramountnetwork.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716705.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Paramount UHD",
+  "slug": "paramount-uhd",
+  "category": "mexico",
+  "logo": "https://logo.iptveditor.com/paramount.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716594.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10605,46 +11075,6 @@
   "category": "musica",
   "logo": "https://logo.m3uassets.com/penielmusical.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688676.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Peru Liga 1 H",
-  "slug": "peru-liga-1-h",
-  "category": "peru",
-  "logo": "https://logo.m3uassets.com/liga.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688432.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Peru Magico",
-  "slug": "peru-magico",
-  "category": "peru",
-  "logo": "https://logo.m3uassets.com/magico.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688415.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Peru Magico HD",
-  "slug": "peru-magico-hd",
-  "category": "peru",
-  "logo": "https://logo.m3uassets.com/magico.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688409.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Peru Magico SDT",
-  "slug": "peru-magico-sdt",
-  "category": "peru",
-  "logo": "https://logo.m3uassets.com/magico.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688314.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10710,21 +11140,41 @@
   "unverified": true
  },
  {
-  "name": "POP TV (FHD)",
-  "slug": "pop-tv-fhd",
-  "category": "chile",
-  "logo": "https://logo.m3uassets.com/poptv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/687988.m3u8",
+  "name": "Plural TV",
+  "slug": "plural-tv",
+  "category": "mexico",
+  "logo": "https://www.izzigo.tv/images/repository/802/19279802-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/837272.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
  },
  {
-  "name": "Portalfoxmix (UHD)",
-  "slug": "portalfoxmix-uhd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/portalfoxmix.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/687975.m3u8",
+  "name": "Plus (SDT)",
+  "slug": "plus-sdt",
+  "category": "venezuela",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688479.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Plus UHD",
+  "slug": "plus-uhd",
+  "category": "venezuela",
+  "logo": "https://static.wikia.nocookie.net/logopedia/images/0/07/Logo_de_Ve_Plus_TV_biselado.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688451.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "POP TV (FHD)",
+  "slug": "pop-tv-fhd",
+  "category": "chile",
+  "logo": "https://logo.m3uassets.com/poptv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/687988.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10740,21 +11190,11 @@
   "unverified": true
  },
  {
-  "name": "Prensa EC HD",
-  "slug": "prensa-ec-hd",
+  "name": "Prensa HD",
+  "slug": "prensa-hd",
   "category": "ecuador",
   "logo": "https://logo.m3uassets.com/prensaec.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/683420.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "PRI: Wapa DEPORTES HD",
-  "slug": "pri-wapa-deportes-hd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/wapa2deportes.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688580.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10830,16 +11270,6 @@
   "unverified": true
  },
  {
-  "name": "PX Sports HD",
-  "slug": "px-sports-hd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/pxsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/671134.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "QT Televisión (Cuzco) HD",
   "slug": "qt-television-cuzco-hd",
   "category": "peru",
@@ -10905,6 +11335,16 @@
   "category": "musica",
   "logo": "https://i.imgur.com/EpZgI8I.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671016.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Quiero TV",
+  "slug": "quiero-tv",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/quierotv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/837271.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -11640,8 +12080,8 @@
   "unverified": true
  },
  {
-  "name": "RSV Honduras FHD",
-  "slug": "rsv-honduras-fhd",
+  "name": "RSV FHD",
+  "slug": "rsv-fhd",
   "category": "honduras",
   "logo": "https://rsvhonduras.com/favImage.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688719.m3u8",
@@ -11690,8 +12130,8 @@
   "unverified": true
  },
  {
-  "name": "RTV VERACRUZ Mx UHD",
-  "slug": "rtv-veracruz-mx-uhd",
+  "name": "RTV Veracruz UHD",
+  "slug": "rtv-veracruz-uhd",
   "category": "mexico",
   "logo": "https://www.uv.mx/prensa/files/2021/06/240621-KARINAUV-y-RTV-1.jpg",
   "url": "http://iptvgo.cc/live/Will1/Will1/716774.m3u8",
@@ -11705,66 +12145,6 @@
   "category": "dominicana",
   "logo": "https://canal17rd.com/wp-content/uploads/2020/09/logo.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688588.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "RUSH Sports",
-  "slug": "rush-sports",
-  "category": "deportes",
-  "logo": "https://neulionsmbnyc-a.akamaihd.net/u/univisionnow2/thumbs/channels/73_es.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304094.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Rush Sports 2",
-  "slug": "rush-sports-2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/rushsportsepl1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303706.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Rush Sports 3",
-  "slug": "rush-sports-3",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/rushsportsepl1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303707.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Rush Sports 4",
-  "slug": "rush-sports-4",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/rushsportsepl1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303708.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Rush Sports 5",
-  "slug": "rush-sports-5",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/rushsportsepl1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303709.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Rush Sports 6",
-  "slug": "rush-sports-6",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/rushsportsepl1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303710.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -11900,16 +12280,6 @@
   "unverified": true
  },
  {
-  "name": "SEO TV Sports (Fútbol en VIVO) HD",
-  "slug": "seo-tv-sports-futbol-en-vivo-hd",
-  "category": "deportes",
-  "logo": "https://pbs.twimg.com/profile_images/1297707929848762368/QZ0QRytv_400x400.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688218.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "SET Televisión Canal 26.2 (HD)",
   "slug": "set-television-canal-26-2-hd",
   "category": "mexico",
@@ -11980,6 +12350,16 @@
   "unverified": true
  },
  {
+  "name": "Sky one",
+  "slug": "sky-one",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/skyone.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716590.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "SNT HD",
   "slug": "snt-hd",
   "category": "paraguay",
@@ -12010,11 +12390,31 @@
   "unverified": true
  },
  {
+  "name": "Sony Channel FHD",
+  "slug": "sony-channel-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/sonychannel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716669.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Sony Movies",
   "slug": "sony-movies",
   "category": "cine",
   "logo": "https://logo.m3uassets.com/sonymovies.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/841851.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Sony Movies FHD",
+  "slug": "sony-movies-fhd",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/sonymovies.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716667.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12030,26 +12430,6 @@
   "unverified": true
  },
  {
-  "name": "SPA Premium · FX MX",
-  "slug": "spa-premium-fx-mx",
-  "category": "mexico",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/FXM_Logo.svg/1280px-FXM_Logo.svg.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716595.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "SPA Premium · Paramount MX UHD",
-  "slug": "spa-premium-paramount-mx-uhd",
-  "category": "mexico",
-  "logo": "https://logo.iptveditor.com/paramount.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716594.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Space",
   "slug": "space",
   "category": "argentina",
@@ -12060,81 +12440,11 @@
   "unverified": true
  },
  {
-  "name": "Sport MAX 1",
-  "slug": "sport-max-1",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/maxsport1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303523.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Sport MAX 2",
-  "slug": "sport-max-2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/maxsport2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303522.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Sport MAX2",
-  "slug": "sport-max2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/sportsmax2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304092.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Sports · Adrenalina Sports Network MX UHD",
-  "slug": "sports-adrenalina-sports-network-mx-uhd",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/adrenalinasportsnetwork.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716596.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Sports · Bein Sport Xtra 4K",
-  "slug": "sports-bein-sport-xtra-4k",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/beinsportsxtra.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/725319.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Sports · Bein Sports Ñ UHD",
-  "slug": "sports-bein-sports-n-uhd",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/0/04/BeIN_Sports_En_Espa%C3%B1ol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/725317.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Sports · Bein Sports Xtra Ñ",
-  "slug": "sports-bein-sports-xtra-n",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/beinsportsxtra.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/725318.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Sports · BOX Epic HD",
-  "slug": "sports-box-epic-hd",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/en/c/c8/BoxNation2014Logo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/725316.m3u8",
+  "name": "Space FHD",
+  "slug": "space-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/space.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716665.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12155,6 +12465,26 @@
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/starchannel.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671010.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "STAR Channel FHD",
+  "slug": "star-channel-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/starchannel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716664.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Star Cinema FHD",
+  "slug": "star-cinema-fhd",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/starcinema.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716663.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12250,21 +12580,21 @@
   "unverified": true
  },
  {
-  "name": "Sur America · DW Noticias MX",
-  "slug": "sur-america-dw-noticias-mx",
-  "category": "noticias",
-  "logo": "https://logo.m3uassets.com/c7noticias.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716593.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Sur TV HD",
   "slug": "sur-tv-hd",
   "category": "paraguay",
   "logo": "https://logo.m3uassets.com/surtv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688146.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Suyapa",
+  "slug": "suyapa",
+  "category": "honduras",
+  "logo": "https://directostv.teleame.com/wp-content/uploads/2018/03/suyapa-tv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688743.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12345,6 +12675,16 @@
   "category": "ecuador",
   "logo": "https://logo.m3uassets.com/tctelevision.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/683454.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TCM FHD",
+  "slug": "tcm-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/tcm.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716660.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12530,6 +12870,16 @@
   "unverified": true
  },
  {
+  "name": "Telecadena",
+  "slug": "telecadena",
+  "category": "honduras",
+  "logo": "https://logo.m3uassets.com/telecadena.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688744.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Telecafe HD",
   "slug": "telecafe-hd",
   "category": "colombia",
@@ -12680,8 +13030,8 @@
   "unverified": true
  },
  {
-  "name": "Teleformula MX UHD",
-  "slug": "teleformula-mx-uhd",
+  "name": "Teleformula UHD",
+  "slug": "teleformula-uhd",
   "category": "mexico",
   "logo": "https://logo.m3uassets.com/teleformula.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/716767.m3u8",
@@ -12715,6 +13065,16 @@
   "category": "dominicana",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/4/46/LogoTFFlat.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688609.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Telehit Música",
+  "slug": "telehit-musica",
+  "category": "musica",
+  "logo": "https://logo.m3uassets.com/telehitmusica.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716604.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12780,11 +13140,21 @@
   "unverified": true
  },
  {
-  "name": "Telemicro RD SD (m)",
-  "slug": "telemicro-rd-sd-m",
+  "name": "Telemicro SD (m)",
+  "slug": "telemicro-sd-m",
   "category": "dominicana",
   "logo": "https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/ff/d4/36/ffd436b1-6274-0e08-7954-1645a69717bd/AppIcon-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688608.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Telemundo HD",
+  "slug": "telemundo-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/telemundo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716765.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12904,7 +13274,7 @@
   "slug": "telesistema",
   "category": "honduras",
   "logo": "https://logo.m3uassets.com/telesistema.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688703.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688745.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12970,11 +13340,11 @@
   "unverified": true
  },
  {
-  "name": "Telesur CR HD",
-  "slug": "telesur-cr-hd",
-  "category": "costarica",
+  "name": "Telesur HD",
+  "slug": "telesur-hd",
+  "category": "argentina",
   "logo": "https://logo.m3uassets.com/telesur.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688538.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/671002.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12982,9 +13352,9 @@
  {
   "name": "Telesur HD",
   "slug": "telesur-hd",
-  "category": "argentina",
+  "category": "costarica",
   "logo": "https://logo.m3uassets.com/telesur.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/671002.m3u8",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688538.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -13060,8 +13430,8 @@
   "unverified": true
  },
  {
-  "name": "Televen (SDT) VE",
-  "slug": "televen-sdt-ve",
+  "name": "Televen (SDT)",
+  "slug": "televen-sdt",
   "category": "venezuela",
   "logo": "https://logo.m3uassets.com/televen.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688482.m3u8",
@@ -13075,6 +13445,66 @@
   "category": "dominicana",
   "logo": "https://i.imgur.com/s2FJJDS.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688630.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Televisa Ciudad Puebla(FHD)",
+  "slug": "televisa-ciudad-puebla-fhd",
+  "category": "mexico",
+  "logo": "https://pbs.twimg.com/profile_images/378800000636492114/8d3e0c97104c58d32019743cf68f00ff_400x400.jpeghttps://pbs.twimg.com/profile_images/378800000636492114/8d3e0c97104c58d32019743cf68f00ff_400x400.jpeg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716856.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Televisa Mexicali HD",
+  "slug": "televisa-mexicali-hd",
+  "category": "mexico",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/34/XHGTV.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716855.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Televisa Monterey (HD)",
+  "slug": "televisa-monterey-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/televisamonterrey.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716854.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Televisa Monterrey HD",
+  "slug": "televisa-monterrey-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/televisamonterrey.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716853.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Televisa Novelas MX HD",
+  "slug": "televisa-novelas-mx-hd",
+  "category": "entretenimiento",
+  "logo": "https://logo.m3uassets.com/telenovelas.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716729.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Televisa Tijuana Canal 12 HD",
+  "slug": "televisa-tijuana-canal-12-hd",
+  "category": "mexico",
+  "logo": "https://static.wikia.nocookie.net/logopedia/images/0/01/XEWT12.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716852.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -13220,6 +13650,16 @@
   "unverified": true
  },
  {
+  "name": "TLR TV UHD",
+  "slug": "tlr-tv-uhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/lrtv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716760.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "TLT Venezuela La Tele Tuya",
   "slug": "tlt-venezuela-la-tele-tuya",
   "category": "venezuela",
@@ -13285,6 +13725,16 @@
   "category": "noticias",
   "logo": "https://logo.m3uassets.com/todonoticias.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/670995.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Todo Noticias HD ARG",
+  "slug": "todo-noticias-hd-arg",
+  "category": "noticias",
+  "logo": "https://logo.m3uassets.com/todonoticias.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/670961.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -13380,6 +13830,26 @@
   "unverified": true
  },
  {
+  "name": "Tudn HD",
+  "slug": "tudn-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/tudn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716730.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Tudn UHD",
+  "slug": "tudn-uhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/tudn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716589.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Tumpis TV (Lima) HD",
   "slug": "tumpis-tv-lima-hd",
   "category": "peru",
@@ -13415,6 +13885,46 @@
   "category": "bolivia",
   "logo": "https://logo.m3uassets.com/tutv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688165.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TV",
+  "slug": "tv",
+  "category": "peru",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Tv_Per%C3%BA_-_Logo_2019_Reducido_%28TVPE%29.svg/1200px-Tv_Per%C3%BA_-_Logo_2019_Reducido_%28TVPE%29.svg.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688412.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TV",
+  "slug": "tv",
+  "category": "chile",
+  "logo": "https://logo.iptveditor.com/tvcarib.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303494.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TV (UHD)",
+  "slug": "tv-uhd",
+  "category": "guatemala",
+  "logo": "https://logo.m3uassets.com/guatv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688675.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TV #2 HD",
+  "slug": "tv-2-hd",
+  "category": "bolivia",
+  "logo": "https://logo.m3uassets.com/tv2.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688193.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -13470,26 +13980,6 @@
   "unverified": true
  },
  {
-  "name": "TV Chile",
-  "slug": "tv-chile",
-  "category": "chile",
-  "logo": "https://logo.iptveditor.com/tvcarib.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303494.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "TV Chile HD",
-  "slug": "tv-chile-hd",
-  "category": "chile",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_de_TV_Chile.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688042.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "TV Color 36 HD",
   "slug": "tv-color-36-hd",
   "category": "ecuador",
@@ -13520,6 +14010,26 @@
   "unverified": true
  },
  {
+  "name": "TV en VIVO (La Liga)",
+  "slug": "tv-en-vivo-la-liga",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/mtvenvivo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716588.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TV Familia",
+  "slug": "tv-familia",
+  "category": "venezuela",
+  "logo": "https://logo.m3uassets.com/tvfamilia.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688491.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "TV Familia (HD)",
   "slug": "tv-familia-hd",
   "category": "venezuela",
@@ -13535,6 +14045,36 @@
   "category": "colombia",
   "logo": "https://logo.m3uassets.com/tvgracia.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687857.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TV HD",
+  "slug": "tv-hd",
+  "category": "bolivia",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/8/8a/BTV_logo_2026.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688179.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TV HD",
+  "slug": "tv-hd",
+  "category": "ecuador",
+  "logo": "https://images.seeklogo.com/logo-png/32/2/ecuador-tv-2017-present-logo-png_seeklogo-320927.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/683450.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TV HD #3",
+  "slug": "tv-hd-3",
+  "category": "bolivia",
+  "logo": "https://logo.m3uassets.com/tv3.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688186.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -13570,6 +14110,16 @@
   "unverified": true
  },
  {
+  "name": "Tv Migrante",
+  "slug": "tv-migrante",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/tvmigrante.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/837279.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "TV Palmeras SDT",
   "slug": "tv-palmeras-sdt",
   "category": "peru",
@@ -13585,16 +14135,6 @@
   "category": "colombia",
   "logo": "https://1.bp.blogspot.com/-BH3L1CotTkI/XxaR1sQZMWI/AAAAAAAAKX4/xlPspK7vBF4veYpTUd-H2mteYYlVzo7FwCLcBGAsYHQ/s1600/tv-penol.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687856.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "TV Peru",
-  "slug": "tv-peru",
-  "category": "peru",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Tv_Per%C3%BA_-_Logo_2019_Reducido_%28TVPE%29.svg/1200px-Tv_Per%C3%BA_-_Logo_2019_Reducido_%28TVPE%29.svg.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688412.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -13860,6 +14400,16 @@
   "unverified": true
  },
  {
+  "name": "Tvmás Xalapa SDT",
+  "slug": "tvmas-xalapa-sdt",
+  "category": "mexico",
+  "logo": "https://images.viaway.com/6798977_640.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716758.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Tvmaya (HD)",
   "slug": "tvmaya-hd",
   "category": "guatemala",
@@ -13895,6 +14445,16 @@
   "category": "chile",
   "logo": "https://logo.m3uassets.com/tvotocopilla.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687951.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "TVP Culiacán - (HD)",
+  "slug": "tvp-culiacan-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/tvpculiacan.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716850.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -14000,16 +14560,6 @@
   "unverified": true
  },
  {
-  "name": "UCI HD",
-  "slug": "uci-hd",
-  "category": "peru",
-  "logo": "https://logo.m3uassets.com/uci.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688268.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Ucsg TV HD",
   "slug": "ucsg-tv-hd",
   "category": "ecuador",
@@ -14070,6 +14620,36 @@
   "unverified": true
  },
  {
+  "name": "Ultra Clasico HD",
+  "slug": "ultra-clasico-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/ultraclasico.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716754.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Ultra HD",
+  "slug": "ultra-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/ultra.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716752.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Ultra Macho (HD)",
+  "slug": "ultra-macho-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/ultramacho.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716753.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "UMAGTV Televisión (Punta Arenas) (HD)",
   "slug": "umagtv-television-punta-arenas-hd",
   "category": "chile",
@@ -14090,21 +14670,21 @@
   "unverified": true
  },
  {
-  "name": "Unicanal HD",
-  "slug": "unicanal-hd",
-  "category": "paraguay",
-  "logo": "https://logo.m3uassets.com/unicanal.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688153.m3u8",
+  "name": "Unicable HD",
+  "slug": "unicable-hd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/unicable.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716851.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
  },
  {
-  "name": "Unitel (Huancayo) HD",
-  "slug": "unitel-huancayo-hd",
-  "category": "peru",
-  "logo": "https://logo.m3uassets.com/unitel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688267.m3u8",
+  "name": "Unicanal HD",
+  "slug": "unicanal-hd",
+  "category": "paraguay",
+  "logo": "https://logo.m3uassets.com/unicanal.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688153.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -14160,6 +14740,16 @@
   "unverified": true
  },
  {
+  "name": "Universal Channel FHD",
+  "slug": "universal-channel-fhd",
+  "category": "mexico",
+  "logo": "https://logo.m3uassets.com/universalchannel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716653.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Universal Crime",
   "slug": "universal-crime",
   "category": "argentina",
@@ -14175,6 +14765,16 @@
   "category": "infantil",
   "logo": "https://logo.m3uassets.com/universalkids.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/303520.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Universal Reality FHD",
+  "slug": "universal-reality-fhd",
+  "category": "entretenimiento",
+  "logo": "https://logo.m3uassets.com/universalreality.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716650.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -14200,708 +14800,8 @@
   "unverified": true
  },
  {
-  "name": "UPP TV/Bolivisión HD",
-  "slug": "upp-tv-bolivision-hd",
-  "category": "bolivia",
-  "logo": "https://www.cadenaa.tv/wp-content/uploads/2019/08/Logo-cabecera-1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688198.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Cine de Horror",
-  "slug": "usa-cine-de-horror",
-  "category": "cine",
-  "logo": "https://worldscreen.com/wp-content/uploads/2025/10/Cine-De-Horror-1025.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707063.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Cine Latino",
-  "slug": "usa-cine-latino",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cine.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3161.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Cinemax Latino",
-  "slug": "usa-cinemax-latino",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinemax.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3160.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA CNN Espanol",
-  "slug": "usa-cnn-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/cnnenespanol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3263.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Discovery Español",
-  "slug": "usa-discovery-espanol",
-  "category": "documentales",
-  "logo": "https://d3hjzzsa8cr26l.cloudfront.net/2f509bab-1252-11e8-a56d-535a4e504290.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3262.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Estrella News",
-  "slug": "usa-estrella-news",
-  "category": "noticias",
-  "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/misc/vod/estrella-news-vod.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/623307.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin A3 Series",
-  "slug": "usa-latin-a3-series",
-  "category": "entretenimiento",
-  "logo": "https://imagenes.atresplayer.com/atp/clipping/cmsimages01/2020/06/26/C374514E-C545-43D0-9482-E0BDF200DB0B//720x540.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3258.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin A3Cine",
-  "slug": "usa-latin-a3cine",
-  "category": "cine",
-  "logo": "https://mma.prnewswire.com/media/629670/Atrescine_Logo.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3257.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin adn Noticias",
-  "slug": "usa-latin-adn-noticias",
-  "category": "noticias",
-  "logo": "https://images.sr.roku.com/idType/roku-trc/context/trc/id/a7ef3da6761e5b768557b00ab1ab85e4/rokuFeed/assets/9b932cd789f35309a15d82fd85d87148.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830243.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin AMC en español",
-  "slug": "usa-latin-amc-en-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/amcenespanol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707033.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Anger Management en espanol",
-  "slug": "usa-latin-anger-management-en-espanol",
-  "category": "espana",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/a663e04f-8322-45f6-a64d-bafe754d4e09/AngrMngmnt_logo_dark_1500x1000_-_Chris_Connors.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830175.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Atres series",
-  "slug": "usa-latin-atres-series",
-  "category": "entretenimiento",
-  "logo": "https://logo.m3uassets.com/a3satreseries1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3251.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin AZ Cinema",
-  "slug": "usa-latin-az-cinema",
-  "category": "cine",
-  "logo": "https://americancable.ec/wp-content/uploads/2021/09/40-logo-azcinema.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3250.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin CBS en español",
-  "slug": "usa-latin-cbs-en-espanol",
-  "category": "espana",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/f/fd/CBS_Corporation_logo.svg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707038.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin CG MMA En Español",
-  "slug": "usa-latin-cg-mma-en-espanol",
-  "category": "espana",
-  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/US4600005ST_20260421T141742SQUARE.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830211.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cheaters en Espanol",
-  "slug": "usa-latin-cheaters-en-espanol",
-  "category": "espana",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/b0328822-b149-4524-ad89-1c87c2543268/FilmRise_CheatersEnEspanol_Logo_ColorRDX.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830169.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Clásico",
-  "slug": "usa-latin-cine-clasico",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinelat.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707067.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Club",
-  "slug": "usa-latin-cine-club",
-  "category": "cine",
-  "logo": "http://p-img.movetv.com/cms/images/875441ad3df2f9d4a680e6db6b08b8e8ac8e7699.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830233.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine de Oro",
-  "slug": "usa-latin-cine-de-oro",
-  "category": "cine",
-  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/USBD2700005KL_20260421T142142SQUARE.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830237.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Estelar",
-  "slug": "usa-latin-cine-estelar",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/plutotvcineestelar.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707072.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine EstrellaTV",
-  "slug": "usa-latin-cine-estrellatv",
-  "category": "cine",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/09f86900-5fce-4b68-944a-a52733ca2ec2/cine-logo_color_-_Erick_Ramirez1500x1000.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830228.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Mexicano",
-  "slug": "usa-latin-cine-mexicano",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/tempcs1315cinemexicano.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707071.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Nostalgia",
-  "slug": "usa-latin-cine-nostalgia",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinenostalgia.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707070.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Retro",
-  "slug": "usa-latin-cine-retro",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/plutotvcineretro.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707069.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Romantico",
-  "slug": "usa-latin-cine-romantico",
-  "category": "cine",
-  "logo": "https://mma.prnewswire.com/media/1321479/UP_Entertainment_Cine_Romantico_Logo.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707064.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Vault",
-  "slug": "usa-latin-cine-vault",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinelatino.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707062.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Vault Classics",
-  "slug": "usa-latin-cine-vault-classics",
-  "category": "cine",
-  "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLYfObIZurdmgdtQSeLWZGvB47XOC7RmbWwg&s",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707061.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cine Vault Westerns",
-  "slug": "usa-latin-cine-vault-westerns",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinevaultwesterns.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707060.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cinema Dinamita",
-  "slug": "usa-latin-cinema-dinamita",
-  "category": "cine",
-  "logo": "https://images.squarespace-cdn.com/content/v1/5ea862a8804f7204dfbb35fb/1588706493698-9FZI0PVBWD50JVE24B0K/network_cinemadinamita.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3237.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin CINEVAULT",
-  "slug": "usa-latin-cinevault",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinelatino.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707066.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin CNN Noticias",
-  "slug": "usa-latin-cnn-noticias",
-  "category": "noticias",
-  "logo": "https://images.pluto.tv/channels/673248f9030a2c0008033af8/featuredImage_1777908720377.jpg?fill=blur&fit=fill&fm=jpg&h=562&q=75&w=1000",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707008.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Comedy Central en español",
-  "slug": "usa-latin-comedy-central-en-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/comedycentralenespanol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707028.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Cops en Espanol",
-  "slug": "usa-latin-cops-en-espanol",
-  "category": "espana",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/59b63843-4b98-42fd-bf78-c269ce56cdb5/COPS_en_espanol_-_channel_logo_colour_-_1500x1000.png_James_Roebuck.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830178.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin CSI en Español",
-  "slug": "usa-latin-csi-en-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/csienespanol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707037.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin CSI Miami en español",
-  "slug": "usa-latin-csi-miami-en-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/csienespanol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707036.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin CSI NY en español",
-  "slug": "usa-latin-csi-ny-en-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/csienespanol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707035.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Curiosity Animales",
-  "slug": "usa-latin-curiosity-animales",
-  "category": "documentales",
-  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/US2200001IY_20240910T003736SQUARE.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830187.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Discovery",
-  "slug": "usa-latin-discovery",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discovery.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707016.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Discovery Familia",
-  "slug": "usa-latin-discovery-familia",
-  "category": "documentales",
-  "logo": "https://www.dishpromotions.com/wp-content/uploads/DSFAM-logo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3231.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin DP De Pelicula",
-  "slug": "usa-latin-dp-de-pelicula",
-  "category": "cine",
-  "logo": "https://www.dishpromotions.com/wp-content/uploads/PELIC-logo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3229.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin DP De Pelicula Clasico",
-  "slug": "usa-latin-dp-de-pelicula-clasico",
-  "category": "cine",
-  "logo": "https://www.dishpromotions.com/wp-content/uploads/PCLAS-logo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3230.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin ElectricNOW en Espanol",
-  "slug": "usa-latin-electricnow-en-espanol",
-  "category": "espana",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/2ba8f950-5d83-4adb-8fd5-e0bf4426de43/ENow_ES_Logo_-_Dark_Backgrounds_1500x1000RDX.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830166.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Estrella News",
-  "slug": "usa-latin-estrella-news",
-  "category": "noticias",
-  "logo": "https://logo.m3uassets.com/estrellanews.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707026.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Grjngo vs Peliculas Del Oeste",
-  "slug": "usa-latin-grjngo-vs-peliculas-del-oeste",
-  "category": "cine",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/76964e60-8756-4551-8748-dbd7852bd0bd/Grjngo-Westernfilme_logo_light_-_Toni_Newesil__1_.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830176.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Hallmark en español",
-  "slug": "usa-latin-hallmark-en-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/hallmark.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707045.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin History en ESPANOL",
-  "slug": "usa-latin-history-en-espanol",
-  "category": "documentales",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/8/83/History_en_Espa%C3%B1ol_Logo.svg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/267603.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Iron Chef en espanol",
-  "slug": "usa-latin-iron-chef-en-espanol",
-  "category": "espana",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/7e7e0544-7004-46ac-bea2-b21a2a7ab166/Plex_xumoTile_FilmRise_IronChefEnEspanol_logo_color_white_text.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830163.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Meganoticias",
-  "slug": "usa-latin-meganoticias",
-  "category": "noticias",
-  "logo": "https://logowik.com/content/uploads/images/meganoticias7444.logowik.com.webp",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707053.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin MTV en español",
-  "slug": "usa-latin-mtv-en-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/mtvenespanol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707030.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Nat Geo Mundo",
-  "slug": "usa-latin-nat-geo-mundo",
-  "category": "documentales",
-  "logo": "https://p1.hiclipart.com/preview/323/20/6/tv-channel-icons-pack-nat-geo-mundo-color-png-icon.jpg",
-  "url": "http://iptvgo.cc/live/Will1/Will1/3207.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Noticias Telemundo AHORA",
-  "slug": "usa-latin-noticias-telemundo-ahora",
-  "category": "noticias",
-  "logo": "https://provider-static.plex.tv/a/epg/channels/logos/gracenote/a88b95413ac88f1f1147ea1d00692653.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830265.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Novelas de Siempre",
-  "slug": "usa-latin-novelas-de-siempre",
-  "category": "entretenimiento",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/4104a44f-21ec-4ee6-8eca-7d151cfbd85d/Novelas_de_Siempre_Channel-Icon_ColorRDX.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830197.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Novelas Turcas",
-  "slug": "usa-latin-novelas-turcas",
-  "category": "entretenimiento",
-  "logo": "https://logo.m3uassets.com/tlnovelaslatinamerica.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707042.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin RCN Noticias",
-  "slug": "usa-latin-rcn-noticias",
-  "category": "noticias",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/9150537f-f9e4-4f21-b5e2-bc57b7a5ea35/RCN_NOTICIAS_WHITE_-_JuanMa_VelasquezRDX.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830250.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Runtime Espanol",
-  "slug": "usa-latin-runtime-espanol",
-  "category": "espana",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/158f2ae8-032e-4f0e-8143-b9939c2fd5a2/Runtime_USH_Light_Logo_-_JP_Garcia.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830156.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Somos Novelas",
-  "slug": "usa-latin-somos-novelas",
-  "category": "entretenimiento",
-  "logo": "https://logo.m3uassets.com/tringnovelas.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707051.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Sony Cine",
-  "slug": "usa-latin-sony-cine",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinesony.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707050.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Spectrum Noticias",
-  "slug": "usa-latin-spectrum-noticias",
-  "category": "noticias",
-  "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKzl-DLmv2YLRooqsDeWoE7UcDe9XXqjeUHQ&s",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707046.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Telemundo Noticias California",
-  "slug": "usa-latin-telemundo-noticias-california",
-  "category": "noticias",
-  "logo": "https://image.xumo.com/v1/channels/channel/99951225/168x168.webp?type=color_onBlack",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830255.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Telemundo Noticias Florida",
-  "slug": "usa-latin-telemundo-noticias-florida",
-  "category": "noticias",
-  "logo": "https://image.xumo.com/v1/channels/channel/99951227/168x168.webp?type=color_onBlack",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830254.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Telemundo Noticias Noreste",
-  "slug": "usa-latin-telemundo-noticias-noreste",
-  "category": "noticias",
-  "logo": "https://image.xumo.com/v1/channels/channel/99951228/168x168.webp?type=color_onBlack",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830249.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Telemundo Noticias Texas",
-  "slug": "usa-latin-telemundo-noticias-texas",
-  "category": "noticias",
-  "logo": "https://image.xumo.com/v1/channels/channel/99951226/168x168.webp?type=color_onBlack",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830251.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin The Walking Dead en español",
-  "slug": "usa-latin-the-walking-dead-en-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/thewalkingdead.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707034.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Todo Cine",
-  "slug": "usa-latin-todo-cine",
-  "category": "cine",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/afe5cd54-0d6d-4b60-a4df-91a8d7ac7960/TodoCine_-_White_Fernando_Fraderdx.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830236.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Todo Novelas, mas Pasiones",
-  "slug": "usa-latin-todo-novelas-mas-pasiones",
-  "category": "entretenimiento",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/f768af86-c0ca-40fa-b79a-bdfe22b54ab3/TN_MP_LOGO_TRANSP_1500x1000_Attribution_White.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830235.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin TV Chile",
-  "slug": "usa-latin-tv-chile",
-  "category": "chile",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Logotipo_de_TV_Chile.svg/1280px-Logotipo_de_TV_Chile.svg.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707055.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin Univision Tlnovelas",
-  "slug": "usa-latin-univision-tlnovelas",
-  "category": "entretenimiento",
-  "logo": "https://logo.m3uassets.com/univisiontlnovelas.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/707047.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin ViX Novelas de romance",
-  "slug": "usa-latin-vix-novelas-de-romance",
-  "category": "entretenimiento",
-  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/USBB44000099N_20260421T141646SQUARE.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830242.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Latin ViX Villanos de Novela",
-  "slug": "usa-latin-vix-villanos-de-novela",
-  "category": "entretenimiento",
-  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/USBC2100011WI_20260421T142351SQUARE.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/830241.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "USA Univision Noticias",
-  "slug": "usa-univision-noticias",
+  "name": "Univision Noticias",
+  "slug": "univision-noticias",
   "category": "noticias",
   "logo": "https://bostonglobe-prod.cdn.arcpublishing.com/resizer/Bd5dGQpgq11xtNELGWUhAiM0r7Y=/960x0/arc-anglerfish-arc2-prod-bostonglobe.s3.amazonaws.com/public/VW4KDLVCKII6JFOT2S7WAIOUGA.jpg",
   "url": "http://iptvgo.cc/live/Will1/Will1/3390.m3u8",
@@ -14910,11 +14810,21 @@
   "unverified": true
  },
  {
-  "name": "USA Univision TLnovelas",
-  "slug": "usa-univision-tlnovelas",
+  "name": "Univision TLnovelas",
+  "slug": "univision-tlnovelas",
   "category": "entretenimiento",
   "logo": "https://bostonglobe-prod.cdn.arcpublishing.com/resizer/Bd5dGQpgq11xtNELGWUhAiM0r7Y=/960x0/arc-anglerfish-arc2-prod-bostonglobe.s3.amazonaws.com/public/VW4KDLVCKII6JFOT2S7WAIOUGA.jpg",
   "url": "http://iptvgo.cc/live/Will1/Will1/3382.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "UPP TV/Bolivisión HD",
+  "slug": "upp-tv-bolivision-hd",
+  "category": "bolivia",
+  "logo": "https://www.cadenaa.tv/wp-content/uploads/2019/08/Logo-cabecera-1.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688198.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -14935,6 +14845,16 @@
   "category": "chile",
   "logo": "",
   "url": "http://iptvgo.cc/live/Will1/Will1/687981.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Vale TV",
+  "slug": "vale-tv",
+  "category": "venezuela",
+  "logo": "https://logo.m3uassets.com/valetv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688487.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -14995,46 +14915,6 @@
   "category": "chile",
   "logo": "https://logo.m3uassets.com/vconline.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/687969.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "Ve Plus (SDT)",
-  "slug": "ve-plus-sdt",
-  "category": "venezuela",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688479.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "VE Plus UHD",
-  "slug": "ve-plus-uhd",
-  "category": "venezuela",
-  "logo": "https://static.wikia.nocookie.net/logopedia/images/0/07/Logo_de_Ve_Plus_TV_biselado.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688451.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "VE TV Familia",
-  "slug": "ve-tv-familia",
-  "category": "venezuela",
-  "logo": "https://logo.m3uassets.com/tvfamilia.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688491.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "VE Vale TV",
-  "slug": "ve-vale-tv",
-  "category": "venezuela",
-  "logo": "https://logo.m3uassets.com/valetv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/688487.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true

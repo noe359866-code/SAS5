@@ -76,7 +76,7 @@ const cleanName = (name) => String(name || '')
   .replace(/[▀-▟]+/gu, '')                          // bloques decorativos «▂ ▄ ▅»
   .replace(/^\|?[A-Z]{2,6}\|\s*/u, '')           // etiqueta de grupo «|LAM| »
   .replace(/^\d{1,3}\s*\|\s*/, '')              // número de parrilla «14 | »
-  .replace(/^(?:ARG|MEX|CHI|COL|PER|VEN|ECU|GUA|GTM|HON|HND|SLV|SAL|NIC|COS|PAN|DOM|PUR|BOL|PAR|URU|ESP|SPA|LAT|LAM)\s*:\s*/i, '') // prefijo país «ARG: »
+  .replace(/^(?:ARG|MEX|CHI|COL|PER|VEN|ECU|GUA|GTM|HON|HND|SLV|SAL|NIC|COS|PAN|DOM|PUR|BOL|PAR|URU|ESP|SPA|LAT|LAM|CAR|CINE)\s*:\s*/i, '') // prefijo país «ARG: »
   .replace(/[\u1D00-\u1DBF]+/gu, '')               // calidad en superíndice «ᵁᴴᴰ»
   .replace(/\s*[*+]+\s*$/, '')                    // « (HD) *» → « (HD)»
   .replace(/\s+/g, ' ')

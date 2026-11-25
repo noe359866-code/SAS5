@@ -75,5 +75,7 @@ function liveSeedUrls() {
   const unverified = require('../lib/data/liveChannelsUnverifiedSeed.json');
   let mega = [];
   try { mega = require('../lib/data/liveChannelsMegaSeed.json'); } catch {}
-  return verified.length + unverified.length + mega.length;
+  let tvclub = [];
+  try { tvclub = require('../lib/data/liveChannelsTvclubSeed.json'); } catch {}
+  return verified.length + unverified.length + mega.length + tvclub.length;
 }

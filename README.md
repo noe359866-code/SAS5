@@ -50,6 +50,7 @@ https://raw.githubusercontent.com/noe359866-code/SAS5/main/listas/ramdonlatam-tv
 [`listas/ramdonlatam-tv.m3u`](listas/ramdonlatam-tv.m3u) — **ordenada por país** (`group-title` = EE. UU., España, Latinoamérica, México, Nicaragua…; los canales internacionales sin país van en grupos temáticos al final: «Deportes», «Cine», «Música»…). Une:
 
 - los canales **verificados por sonda** (cadena HLS completa: maestra → variante → segmento) de Magma TV/tvcluboficial + Cinecity,
+- el **panel completo de tvcluboficial** (sonda semanal con la credencial pública de sus propias URLs; todo lo latino que no sea adulto),
 - los **+13.000 canales de iptvgo.cc** (LATAM, Brasil, España, EE. UU., eventos/PPV, bloques 24/7 y plataformas tipo Netflix, HBO Max, Disney+, Apple TV+, Prime Video, Hulu, Peacock, Paramount+, Tubi, Samsung TV+, Plex, Hallmark y Navidad) — sus segmentos dan 403 desde datacenter y no se pueden comprobar desde CI; en redes normales suelen cargar,
 - y los 20 **deportes curados** (ESPN, Fox Sports, DSports, DAZN, TNT Sports, TyC, Win Sports, Claro Sports…).
 

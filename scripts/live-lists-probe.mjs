@@ -2,14 +2,16 @@
 /**
  * Sonda 12 (24-11-2026): listas de canales en vivo por categorías.
  *
- * Proveedor ÚNICO: m3u.tvcluboficial.com, vía la lista Magma TV
- * (repo JMigue85/IPTV-SV). La sonda 13 demostró que ese host no exige
- * User-Agent y sirve CORS abierto; IPTVSV (IP:puerto rotativos) y
- * m3uts.xyz (tokens caducos) quedaron descartados como fuentes.
+ * Fuentes elegidas (petición del usuario, 24-11-2026):
+ *  - Magma TV (repo JMigue85/IPTV-SV): nombra los canales del host
+ *    m3u.tvcluboficial.com (sonda 13: no exige UA, CORS abierto).
+ *  - Cinecity (repo CINECITY2023/cinecity, principal.m3u): 513 canales,
+ *    todos con logo propio, grupos temáticos y 17 países (incl. Nicaragua).
+ *  m3uts.xyz (tokens caducos) sigue fuera: sus URLs mueren en horas.
  *
  * Cada canal se verifica con el User-Agent que declara la lista
  * (#EXTVLCOPT:http-user-agent) y, si falla, con el UA genérico de la sonda.
- * Se considera VÁLIDO solo si la cadena completa reproduce: maestra (200 + #EXTM3U) → variante → primer segmento con bytes MPEG-TS/fMP4 (HTTP 200/206). No se imprimen credenciales;
+ * Se considera VÁLIDO solo si la cadena completa reproduce: maestra (200 o 206 + #EXTM3U) → variante → primer segmento con bytes MPEG-TS/fMP4 (HTTP 200/206). No se imprimen credenciales;
  * las URLs se redactan. Además del informe, se escribe .probe/live-channels.json
  * con la ficha completa de los canales válidos (semilla para el addon).
  */
@@ -20,33 +22,46 @@ const fs = require('node:fs');
 const { enrichSeedWithLogos } = require('./live-logos.cjs');
 
 const GENERIC_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
-const TIMEOUT = 10_000;
+const TIMEOUT = 20_000; // los Xtream IP:puerto tardan >10 s en generar la playlist
 const CONCURRENCY = 12;
 
 const SOURCES = [
   { id: 'magma', url: 'https://raw.githubusercontent.com/JMigue85/IPTV-SV/main/Magma%20TV%20-Titan2022_XD.m3u' },
+  { id: 'cinecity', url: 'https://raw.githubusercontent.com/CINECITY2023/cinecity/cinecity.net/principal.m3u' },
 ];
 
-/** Proveedor único de señales: solo se verifican URLs de este host. */
-const PROVIDER_HOST = /(^|\.)m3u\.tvcluboficial\.com$/;
+/** Host bloqueado: sus URLs llevan token que caduca en horas (sonda 13). */
+const BLOCKED_HOST = /(^|\.)m3uts\.xyz$/;
 
 /** group-title → categoría del addon (null = no entra en catálogo propio). */
 const CATEGORY_BY_GROUP = [
   [/^(ESPN|FOX Sports|DSports|Deportes)$/i, 'deportes'],
   [/deport/i, 'deportes'],
   [/infantil|kids|niñ/i, 'infantil'],
-  [/anime/i, 'anime'],
-  [/m[uú]sica|music/i, 'musica'],
+  [/anime|animaci/i, 'anime'],
+  [/m[uú]sica|music|radio/i, 'musica'],
   [/informativ|noticias|news/i, 'noticias'],
   [/documental|cultura/i, 'documentales'],
-  [/cine|pel[ií]cula|movie/i, 'cine'],
-  [/entretenimiento|entreten|series|general|variedades/i, 'entretenimiento'],
-  [/^(España|Spain)/i, 'espana'],
-  [/^(México|Mexico)/i, 'mexico'],
-  [/^(Argentina)/i, 'argentina'],
-  [/^(Colombia)/i, 'colombia'],
-  [/^(Chile)/i, 'chile'],
-  [/^(Per[uú])/i, 'peru'],
+  [/religi/i, 'religion'],
+  [/cine|pel[ií]cula|movies?/i, 'cine'],
+  [/novela|reality|comedia|entretenimiento|entreten|series|general|variedades/i, 'entretenimiento'],
+  [/españa|spain/i, 'espana'],
+  [/méxico|mexico/i, 'mexico'],
+  [/argentina|buenos aires|provincia/i, 'argentina'],
+  [/colombia/i, 'colombia'],
+  [/chile/i, 'chile'],
+  [/per[uú]/i, 'peru'],
+  [/bolivia/i, 'bolivia'],
+  [/costa rica/i, 'costarica'],
+  [/dominicana/i, 'dominicana'],
+  [/ecuador/i, 'ecuador'],
+  [/el salvador/i, 'elsalvador'],
+  [/guatemala/i, 'guatemala'],
+  [/honduras/i, 'honduras'],
+  [/nicaragua/i, 'nicaragua'],
+  [/paraguay/i, 'paraguay'],
+  [/puerto rico/i, 'puertorico'],
+  [/venezuela/i, 'venezuela'],
 ];
 
 const categoryOf = (group) => {
@@ -78,6 +93,12 @@ async function get(url, headers = {}) {
   } finally { clearTimeout(timer); }
 }
 
+/** Quita marcas de la lista («✔️», banderas, «🎬») del nombre visible. */
+const cleanName = (name) => String(name || '')
+  .replace(/^(?:[\u{1F1E6}-\u{1F1FF}]{2}|[\u{2600}-\u{27BF}]|[\u{1F300}-\u{1FAFF}]|\u200D|\uFE0F|\s)+/u, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
 function parseM3U(text, source) {
   const entries = [];
   const lines = text.split('\n');
@@ -99,30 +120,31 @@ function parseM3U(text, source) {
       break;
     }
     pendingUa = '';
-    if (name && /^https?:\/\//i.test(url)) entries.push({ name, logo, group, url, ua, source });
+    if (name && /^https?:\/\//i.test(url)) entries.push({ name: cleanName(name), logo, group, url, ua, source });
   }
   return entries;
 }
 
 /**
- * Verifica un canal: primero con su UA declarado; si falla, con el genérico.
- * La sonda 13 mostró playlists vivas con segmentos muertos (canal fantasma),
- * así que «válido» exige la cadena completa: maestra → variante → segmento
- * con bytes de vídeo (MPEG-TS o fMP4).
+ * Verifica un canal: UA declarado → genérico → genérico + Referer del origen
+ * (los servidores que responden 403 suelen pedirlo). La sonda 13 mostró
+ * playlists vivas con segmentos muertos (canal fantasma), así que «válido»
+ * exige la cadena completa: maestra → variante → segmento con bytes de vídeo
+ * (MPEG-TS o fMP4).
  */
 async function verify(entry) {
   const tries = entry.ua && entry.ua !== GENERIC_UA
     ? [{ 'User-Agent': entry.ua }, { 'User-Agent': GENERIC_UA }]
     : [{ 'User-Agent': GENERIC_UA }];
   let last = 'sin respuesta';
-  for (const headers of tries) {
+
+  const attempt = async (headers) => {
     const t0 = Date.now();
-    const res = await get(entry.url, { Range: 'bytes=0-3000', ...headers });
+    const res = await get(entry.url, { Range: 'bytes=0-8192', ...headers });
     const ms = Date.now() - t0;
-    const head = (res.body || '').slice(0, 3000);
-    if (res.status !== 200 || !/#EXTM3U/.test(head)) {
-      last = `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${ms} ms`;
-      continue;
+    const head = (res.body || '').slice(0, 8192);
+    if ((res.status !== 200 && res.status !== 206) || !/#EXTM3U/.test(head)) {
+      return { fail: `HTTP ${res.status}${res.error ? ` ${res.error}` : ''} · ${ms} ms` };
     }
     // Maestra con variantes → bajar a la primera variante
     let mediaUrl = entry.url, body = head;
@@ -131,28 +153,43 @@ async function verify(entry) {
       const lines = head.split('\n');
       const idx = lines.findIndex((l) => /#EXT-X-STREAM-INF/.test(l));
       const rel = (lines[idx + 1] || '').trim();
-      if (!rel) { last = 'maestra sin variante legible'; continue; }
-      try { mediaUrl = new URL(rel, entry.url).toString(); } catch { last = 'variante malformada'; continue; }
-      const media = await get(mediaUrl, { Range: 'bytes=0-3000', ...headers });
-      if (media.status !== 200 || !/#EXTM3U/.test(media.body)) { last = `variante HTTP ${media.status}`; continue; }
+      if (!rel) return { fail: 'maestra sin variante legible' };
+      try { mediaUrl = new URL(rel, entry.url).toString(); } catch { return { fail: 'variante malformada' }; }
+      const media = await get(mediaUrl, { Range: 'bytes=0-8192', ...headers });
+      if ((media.status !== 200 && media.status !== 206) || !/#EXTM3U/.test(media.body)) return { fail: `variante HTTP ${media.status}` };
       body = media.body;
     }
     // Primer segmento con bytes de vídeo
     const segLine = body.split('\n').map((l) => l.trim()).find((l) => l && !l.startsWith('#'));
-    if (!segLine) { last = 'playlist sin segmentos'; continue; }
+    if (!segLine) return { fail: 'playlist sin segmentos' };
     let segUrl;
-    try { segUrl = new URL(segLine, mediaUrl).toString(); } catch { last = 'segmento malformado'; continue; }
+    try { segUrl = new URL(segLine, mediaUrl).toString(); } catch { return { fail: 'segmento malformado' }; }
     const seg = await get(segUrl, { Range: 'bytes=0-188', ...headers });
     const bh = seg.body || '';
     const looksTs = bh.charCodeAt(0) === 0x47;
     const looksFmp4 = bh.slice(4, 8) === 'ftyp' || bh.slice(0, 12).includes('ftyp');
     if ((seg.status === 200 || seg.status === 206) && (looksTs || looksFmp4)) {
-      return { ok: true, ua: headers['User-Agent'] === entry.ua ? entry.ua : '',
-        state: `HLS VÁLIDO${variants ? ` ${variants}v` : ''} · ${looksTs ? 'TS' : 'fMP4'} · ${ms} ms` };
+      return { ok: true, state: `HLS VÁLIDO${variants ? ` ${variants}v` : ''} · ${looksTs ? 'TS' : 'fMP4'} · ${ms} ms` };
     }
-    last = `segmento HTTP ${seg.status} (fantasma)`;
+    return { fail: `segmento HTTP ${seg.status} (fantasma)` };
+  };
+
+  for (let i = 0; i < tries.length; i++) {
+    const headers = tries[i];
+    const r = await attempt(headers);
+    if (r.ok) {
+      return { ok: true,
+        ua: headers['User-Agent'] === entry.ua ? entry.ua : '',
+        ref: headers.Referer || '',
+        state: r.state };
+    }
+    last = r.fail;
+    // Un 403 suele pedir Referer: un intento extra con el origen del propio stream
+    if (/^HTTP 403/.test(last) && !tries.some((t) => t.Referer)) {
+      try { tries.push({ 'User-Agent': headers['User-Agent'], Referer: `${new URL(entry.url).origin}/` }); } catch { /* URL rara */ }
+    }
   }
-  return { ok: false, ua: '', state: last };
+  return { ok: false, ua: '', ref: '', state: last };
 }
 
 async function mapLimit(items, limit, fn) {
@@ -169,7 +206,7 @@ async function mapLimit(items, limit, fn) {
 
 (async () => {
  try {
-  say('# Sonda 12: canales en vivo por categorías (proveedor único: m3u.tvcluboficial.com)');
+  say('# Sonda 12: canales en vivo por categorías (Magma TV · tvcluboficial + Cinecity)');
   say('');
   say(`Fecha: ${new Date().toISOString()}`);
   say('');
@@ -189,7 +226,7 @@ async function mapLimit(items, limit, fn) {
     if (!category) continue;
     let host = '';
     try { host = new URL(e.url).hostname; } catch { continue; }
-    if (!PROVIDER_HOST.test(host)) continue; // solo el proveedor elegido
+    if (BLOCKED_HOST.test(host)) continue; // tokens que caducan en horas
     const key = e.url.split('?')[0];
     if (seen.has(key)) continue;
     seen.add(key);
@@ -207,11 +244,12 @@ async function mapLimit(items, limit, fn) {
   const rows = { ok: [], bad: [] };
   for (let i = 0; i < wanted.length; i++) {
     const { category, name, logo, group, source } = wanted[i];
-    const { ok, ua, state } = checks[i].r;
-    const line = `| ${name} | ${category} | ${group || '—'} | ${source} | ${redact(wanted[i].url)} | ${state}${ua ? ' · UA propio' : ''} |`;
+    const { ok, ua, ref, state } = checks[i].r;
+    const line = `| ${name} | ${category} | ${group || '—'} | ${source} | ${redact(wanted[i].url)} | ${state}${ua ? ' · UA propio' : ''}${ref ? ' · +Referer' : ''} |`;
     (ok ? rows.ok : rows.bad).push(line);
-    // tvcluboficial no exige UA (sonda 13): la semilla nunca arrastra UA
-    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: '' });
+    // tvcluboficial no exige UA (sonda 13): no arrastrarlo; el resto, sí
+    const isTvclub = /(^|\.)m3u\.tvcluboficial\.com$/.test(new URL(wanted[i].url).hostname);
+    if (ok) valid.push({ name, slug: slugOf(name), category, logo, url: wanted[i].url, ua: isTvclub ? '' : (ua || ''), ref: ref || '' });
   }
 
   say(`## Válidos (${rows.ok.length})`);
@@ -234,11 +272,12 @@ async function mapLimit(items, limit, fn) {
   say('');
   for (const [cat, n] of Object.entries(sumCat).sort((a, b) => b[1] - a[1])) say(`- ${cat}: ${n}`);
 
-  // Semilla para el addon: solo válidos, sin duplicar slug por categoría.
+  // Semilla para el addon: solo válidos. Se conservan las distintas URL del
+  // mismo canal (la UI las fusiona en una tarjeta con varias señales).
   fs.mkdirSync('.probe', { recursive: true });
   const seedSeen = new Set();
   const seed = valid.filter((v) => {
-    const k = `${v.category}:${v.slug}`;
+    const k = `${v.category}:${v.slug}:${v.url.split('?')[0]}`;
     if (seedSeen.has(k)) return false;
     seedSeen.add(k);
     return true;
@@ -258,7 +297,9 @@ async function mapLimit(items, limit, fn) {
   }
 
   // Orden estable del catálogo: por categoría y nombre alfabético.
-  const CAT_ORDER = ['deportes', 'entretenimiento', 'cine', 'infantil', 'anime', 'musica', 'noticias', 'documentales', 'espana', 'mexico', 'argentina', 'colombia', 'chile', 'peru'];
+  const CAT_ORDER = ['deportes', 'entretenimiento', 'cine', 'infantil', 'anime', 'musica', 'noticias', 'documentales', 'religion',
+    'espana', 'mexico', 'argentina', 'bolivia', 'chile', 'colombia', 'costarica', 'dominicana', 'ecuador',
+    'elsalvador', 'guatemala', 'honduras', 'nicaragua', 'paraguay', 'peru', 'puertorico', 'venezuela'];
   seed.sort((a, b) => CAT_ORDER.indexOf(a.category) - CAT_ORDER.indexOf(b.category)
     || String(a.name).localeCompare(String(b.name), 'es'));
 

@@ -137,7 +137,9 @@ async function enrichSeedWithLogos(seed, previous = [], texts = null) {
   }
   let withLogo = 0;
   for (const ch of seed) {
-    const logo = pickLogo(idx, ch) || prevLogo.get(`${ch.category}:${ch.slug}`) || '';
+    // Prioridad: el logo que declara la lista (Cinecity trae todos), luego
+    // iptv-org, luego el logo que ya tenía la semilla anterior.
+    const logo = ch.logo || pickLogo(idx, ch) || prevLogo.get(`${ch.category}:${ch.slug}`) || '';
     ch.logo = logo;
     if (logo) withLogo++;
   }

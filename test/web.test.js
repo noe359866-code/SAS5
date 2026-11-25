@@ -336,7 +336,7 @@ test('/configure: el contador de catálogos cuenta lo mismo que el manifest', ()
   // El contador se mide contra la config explícita: el manifest por defecto
   // (cfg null) omite los catálogos de países para no pasarse de los 8 KB.
   assert.equal(total(everything), buildDefs(everything).length);
-  const countryKeys = userConfig.BASE_KEYS.filter((k) => /^live_(espana|mexico|argentina|colombia|chile|peru)$/.test(k));
+  const countryKeys = userConfig.BASE_KEYS.filter((k) => /^live_(espana|mexico|argentina|bolivia|chile|colombia|costarica|dominicana|ecuador|elsalvador|guatemala|honduras|nicaragua|paraguay|peru|puertorico|venezuela)$/.test(k));
   assert.ok(countryKeys.length > 0, 'catálogos de países presentes');
   // Un país sin señales del proveedor pesa 0 (su catálogo se oculta solo):
   // se resta el peso real de cada clave, no el número de claves.

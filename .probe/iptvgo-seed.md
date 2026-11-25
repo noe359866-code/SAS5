@@ -1,6 +1,6 @@
 # Semilla iptvgo.cc (SIN VERIFICAR, player_api Xtream)
 
-Fecha: 2026-11-25T03:33:36.990Z
+Fecha: 2026-11-25T13:24:28.415Z
 
 login: HTTP 200 · status Active
 panel: 33020 canales · 355 categorías

@@ -459,6 +459,15 @@
   "ref": ""
  },
  {
+  "name": "Tigo Sports",
+  "slug": "tigo-sports",
+  "category": "deportes",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHtigosports.png",
+  "url": "http://45.170.130.224:8000/play/a04i/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "TNT Sports (Argentina)",
   "slug": "tnt-sports-argentina",
   "category": "deportes",
@@ -1085,6 +1094,15 @@
   "category": "infantil",
   "logo": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Discovery%20Kids.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/264.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Disney Channel",
+  "slug": "disney-channel",
+  "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
   "ua": "",
   "ref": ""
  },

@@ -1,6 +1,6 @@
 #EXTM3U
 # Generada por scripts/m3u-export.mjs — no editar a mano
-# Fecha: 2026-11-25T16:37:40.296Z
+# Fecha: 2026-11-25T16:50:40.070Z
 #EXTINF:-1 tvg-id="aym-sports" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHaymsports.png" group-title="Deportes",AYM Sports
 https://aym-as.otteravision.com/aym/as/as_1080p.m3u8
 #EXTINF:-1 tvg-id="aym-sports-senal-2" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHaymsports.png" group-title="Deportes",AYM Sports · señal 2
@@ -57,6 +57,10 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/1069.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1104.m3u8
 #EXTINF:-1 tvg-id="espn-5-hd-senal-2" tvg-logo="" group-title="Deportes",ESPN 5 HD · señal 2
 http://iptvgo.cc/live/Will1/Will1/725306.m3u8
+#EXTINF:-1 tvg-id="espn-6-hd" tvg-logo="" group-title="Deportes",ESPN 6 HD
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/1105.m3u8
+#EXTINF:-1 tvg-id="espn-6-hd-senal-2" tvg-logo="" group-title="Deportes",ESPN 6 HD · señal 2
+http://iptvgo.cc/live/Will1/Will1/725305.m3u8
 #EXTINF:-1 tvg-id="espn-7-hd" tvg-logo="" group-title="Deportes",ESPN 7 HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1106.m3u8
 #EXTINF:-1 tvg-id="espn-7-hd-senal-2" tvg-logo="" group-title="Deportes",ESPN 7 HD · señal 2
@@ -125,6 +129,8 @@ http://iptvgo.cc/live/Will1/Will1/716768.m3u8
 http://iptvgo.cc/live/Will1/Will1/716767.m3u8
 #EXTINF:-1 tvg-id="tennis-channel" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHtennischannel.png" group-title="Deportes",Tennis Channel
 https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01444-tennischannelth-tennischannelnl-samsungnl/playlist.m3u8
+#EXTINF:-1 tvg-id="tigo-sports" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHtigosports.png" group-title="Deportes",Tigo Sports
+http://45.170.130.224:8000/play/a04i/index.m3u8
 #EXTINF:-1 tvg-id="tnt-sports-argentina" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png" group-title="Deportes",TNT Sports (Argentina)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/934.m3u8
 #EXTINF:-1 tvg-id="tyc-sports" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png" group-title="Deportes",TyC Sports
@@ -309,8 +315,6 @@ http://iptvgo.cc/live/Will1/Will1/716599.m3u8
 http://iptvgo.cc/live/Will1/Will1/687917.m3u8
 #EXTINF:-1 tvg-id="espn-6-fox-3-hd" tvg-logo="https://barrettmedia.com/wp-content/uploads/2022/10/BIG-12-ESPN-FOX-SPORTS.jpg" group-title="Deportes",Espn 6 Fox 3 HD ⚠️
 http://iptvgo.cc/live/Will1/Will1/688064.m3u8
-#EXTINF:-1 tvg-id="espn-6-hd" tvg-logo="https://logo.m3uassets.com/espn6.png" group-title="Deportes",ESPN 6 HD ⚠️
-http://iptvgo.cc/live/Will1/Will1/725305.m3u8
 #EXTINF:-1 tvg-id="espn-c" tvg-logo="https://logo.m3uassets.com/espnco.png" group-title="Deportes",ESPN C ⚠️
 http://iptvgo.cc/live/Will1/Will1/304053.m3u8
 #EXTINF:-1 tvg-id="espn-caribbean" tvg-logo="https://logo.m3uassets.com/espncaribbean.png" group-title="Deportes",ESPN Caribbean ⚠️
@@ -453,6 +457,8 @@ http://iptvgo.cc/live/Will1/Will1/303939.m3u8
 http://iptvgo.cc/live/Will1/Will1/716588.m3u8
 #EXTINF:-1 tvg-id="10-microvision" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CH10microvisionrepdominicana.png" group-title="Entretenimiento",10 Microvision (Rep. Dominicana)
 https://streaming.telecablecentral.com.do/live/MicroHD/playlist.m3u8
+#EXTINF:-1 tvg-id="5tv-corrientes" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CH5tvcorrientes.png" group-title="Entretenimiento",5TV (Corrientes) (Argentina)
+http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8
 #EXTINF:-1 tvg-id="a3-series" tvg-logo="" group-title="Entretenimiento",A3 Series (España)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/17.m3u8
 #EXTINF:-1 tvg-id="adn" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHadnchile.png" group-title="Entretenimiento",ADN (Chile)
@@ -559,6 +565,8 @@ https://vivo.solumedia.com:19360/cooperativa/cooperativa.m3u8
 https://stream.arcast.com.ar/envivo/castv/playlist.m3u8
 #EXTINF:-1 tvg-id="canal-8-tv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanal8tv+colombia.png" group-title="Entretenimiento",Canal 8 TV (Colombia)
 https://movil.ejeserver.com/live/canal8tv.m3u8
+#EXTINF:-1 tvg-id="canal-9-chaco" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal9chaco.png" group-title="Entretenimiento",Canal 9 (Chaco) (Argentina)
+http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="canal-9-bio-bio-television" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanal9biobiotelevisionchile.png" group-title="Entretenimiento",Canal 9 Bio Bio Television (Chile)
 https://unlimited6-cl.dps.live/c9/c9.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="canal-9-bio-bio-television-senal-2" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcanal9biobiotelevisionchile.png" group-title="Entretenimiento",Canal 9 Bio Bio Television (Chile) · señal 2
@@ -744,8 +752,6 @@ http://iptvgo.cc/live/Will1/Will1/688592.m3u8
 http://televisa-televisa-1-it.samsung.wurl.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="tnt-novelas" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/novelas/CHtntnovelas.png" group-title="Entretenimiento",TNT Novelas
 http://45.70.168.162:12316/play/a00l/index.m3u8
-#EXTINF:-1 tvg-id="trt" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrtvenezuela.png" group-title="Entretenimiento",TRT (Venezuela)
-https://vcp12.myplaytv.com/trt/trt/playlist.m3u8
 #EXTINF:-1 tvg-id="tv-migrante" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvmigrantemexico.png" group-title="Entretenimiento",TV Migrante (México)
 https://s5.mexside.net:1936/tvmigrante/tvmigrante/playlist.m3u8
 #EXTINF:-1 tvg-id="tv-migrante-senal-2" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvmigrantemexico.png" group-title="Entretenimiento",TV Migrante (México) · señal 2
@@ -3094,9 +3100,11 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/264.m3u8
 http://iptvgo.cc/live/Will1/Will1/304049.m3u8
 #EXTINF:-1 tvg-id="discovery-kids-senal-3" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Discovery%20Kids.png" group-title="Infantil",Discovery Kids · señal 3
 http://iptvgo.cc/live/Will1/Will1/716624.m3u8
-#EXTINF:-1 tvg-id="disney-channel" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png" group-title="Infantil",Disney Channel
+#EXTINF:-1 tvg-id="disney-channel" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg" group-title="Infantil",Disney Channel
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8
+#EXTINF:-1 tvg-id="disney-channel-senal-2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg" group-title="Infantil",Disney Channel · señal 2
 http://45.70.168.162:12316/play/a009/index.m3u8
-#EXTINF:-1 tvg-id="disney-channel-senal-2" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png" group-title="Infantil",Disney Channel · señal 2
+#EXTINF:-1 tvg-id="disney-channel-senal-3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg" group-title="Infantil",Disney Channel · señal 3
 http://iptvgo.cc/live/Will1/Will1/671075.m3u8
 #EXTINF:-1 tvg-id="disney-junior" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e3/2024_Disney_Jr._Logo.svg" group-title="Infantil",Disney Junior
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/284.m3u8
@@ -3150,8 +3158,6 @@ http://45.70.168.162:12316/play/a001/index.m3u8
 http://iptvgo.cc/live/Will1/Will1/716617.m3u8
 #EXTINF:-1 tvg-id="nicktoons" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Nicktoons_Logo_2023.svg/1920px-Nicktoons_Logo_2023.svg.png" group-title="Infantil",Nicktoons
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/735.m3u8
-#EXTINF:-1 tvg-id="pakapaka" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Paka-Paka-2025.svg/1920px-Paka-Paka-2025.svg.png" group-title="Infantil",Pakapaka
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/748.m3u8
 #EXTINF:-1 tvg-id="patoaventuras" tvg-logo="" group-title="Infantil",Patoaventuras
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/758.m3u8
 #EXTINF:-1 tvg-id="peppa-pig" tvg-logo="https://images.pluto.tv/channels/5d14fb6c84dd37df3b4290c5/colorLogoPNG_1730733871298.png" group-title="Infantil",Peppa Pig
@@ -3246,8 +3252,6 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/357.m3u8
 https://cdn.energeek.cl/hls/energeekfan.m3u8
 #EXTINF:-1 tvg-id="energeek-retro" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHenergeek.png" group-title="Anime",EnerGeek Retro
 https://cdn.energeek.cl/hls/energeekretro.m3u8
-#EXTINF:-1 tvg-id="locomotion" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHlocomotion.png" group-title="Anime",Locomotion
-http://146.19.49.197:81/live/loco_hi/index.m3u8
 #EXTINF:-1 tvg-id="max-anime" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHmaxanime.png" group-title="Anime",Max Anime
 https://cdnlive.klicgo.net/maxanime/live/playlist_dvr.m3u8
 #EXTINF:-1 tvg-id="naruto" tvg-logo="https://i.imgur.com/M8X3Kvc.png" group-title="Anime",Naruto
@@ -3293,6 +3297,8 @@ https://videostream.shockmedia.com.ar:19360/quanticatv/quanticatv.m3u8
 http://stream.mediawork.cz/retrotv/smil:retrotv2.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="rne-para-todos" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/radio-en-vivo/CHrneparatodos.png" group-title="Música",RNE para todos
 https://ztnr.rtve.es/ztnr/6688753.m3u8
+#EXTINF:-1 tvg-id="telpin-tv-pinamar" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtelpintvpinamar.png" group-title="Música",Telpin TV Pinamar
+https://mistserver.telpin.com.ar:8443/hls/telpinlive/main_stream.m3u8
 #EXTINF:-1 tvg-id="tierramia-tv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtierramiatv.png" group-title="Música",Tierramia TV (Argentina)
 http://stream-gtlc.telecentro.net.ar/hls/tierramiahls/main.m3u8
 #EXTINF:-1 tvg-id="tierramia-tv-senal-2" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtierramiatv.png" group-title="Música",Tierramia TV (Argentina) · señal 2

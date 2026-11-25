@@ -1,8 +1,8 @@
 # Sonda 10: wss de capo, thetvapp y daddylive
 
-Fecha: 2026-11-25T16:33:57.125Z
+Fecha: 2026-11-25T16:40:10.869Z
 
-## capoespn — HTTP 200 · 10827 B
+## capoespn — HTTP 200 · 11012 B
 - ch=capoespn: HTTP 200 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional/
@@ -23,4 +23,5 @@ Fecha: 2026-11-25T16:33:57.125Z
 ## https://daddylive.dad/24-7-channels.php — HTTP 0 (TypeError:UNABLE_TO_GET_ISSUER_CERT_LOCALLY) · 0 B
 ## https://daddylivehd.com/24-7-channels.php — HTTP 0 (TypeError:UND_ERR_CONNECT_TIMEOUT) · 0 B
 ## https://dlhd.dad/24-7-channels.php — HTTP 0 (TypeError:ENOTFOUND) · 0 B
-## https://daddyhd.com/24-7-channels.php — HTTP 200 · 114 B
+## https://daddyhd.com/24-7-channels.php — HTTP 0 (TypeError:ECONNRESET) · 0 B
+## https://daddylive.sx/24-7-channels.php — HTTP 0 (TypeError:ENOTFOUND) · 0 B

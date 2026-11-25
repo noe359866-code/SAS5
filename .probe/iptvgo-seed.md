@@ -1,36 +1,36 @@
 # Semilla iptvgo.cc (SIN VERIFICAR, player_api Xtream)
 
-Fecha: 2026-11-25T00:16:33.032Z
+Fecha: 2026-11-25T15:20:46.178Z
 
 login: HTTP 200 · status Active
 panel: 33020 canales · 355 categorías
 
 ## Semilla resultante (sin verificar)
 
-- mexico: 80
-- argentina: 80
-- chile: 80
-- puertorico: 80
-- deportes: 80
-- peru: 80
+- mexico: 150
+- puertorico: 150
+- deportes: 150
+- peru: 150
+- argentina: 112
+- chile: 106
 - dominicana: 74
-- colombia: 60
+- colombia: 62
 - musica: 56
-- cine: 51
-- honduras: 50
-- noticias: 47
+- honduras: 48
+- cine: 47
+- noticias: 46
 - bolivia: 46
 - venezuela: 44
 - costarica: 41
-- documentales: 40
 - ecuador: 40
 - paraguay: 34
-- infantil: 32
+- documentales: 34
 - guatemala: 28
-- elsalvador: 23
+- infantil: 28
 - entretenimiento: 23
-- espana: 22
+- elsalvador: 23
+- espana: 21
 - nicaragua: 14
 - anime: 1
 - religion: 1
-- total: 1207
+- total: 1529

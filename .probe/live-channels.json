@@ -207,15 +207,6 @@
   "ref": ""
  },
  {
-  "name": "ESPN 6 HD",
-  "slug": "espn-6-hd",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1105.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "ESPN 7 HD",
   "slug": "espn-7-hd",
   "category": "deportes",
@@ -432,15 +423,6 @@
   "ref": ""
  },
  {
-  "name": "Real Madrid TV",
-  "slug": "real-madrid-tv",
-  "category": "deportes",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHrealmadridtv.png",
-  "url": "https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/master.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Red Bull TV",
   "slug": "red-bull-tv",
   "category": "deportes",
@@ -500,6 +482,15 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHwinsports.png",
   "url": "http://45.70.168.162:12316/play/a013/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Xtrema TV Cna Deportes 2",
+  "slug": "xtrema-tv-cna-deportes-2",
+  "category": "deportes",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHxtremadeportes.png",
+  "url": "https://stmv6.voxtvhd.com.br/cnardeportes/cnardeportes/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1092,15 +1083,6 @@
   "name": "Disney Channel",
   "slug": "disney-channel",
   "category": "infantil",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Disney Channel",
-  "slug": "disney-channel",
-  "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png",
   "url": "http://45.70.168.162:12316/play/a009/index.m3u8",
   "ua": "",
@@ -1530,6 +1512,24 @@
   "ref": ""
  },
  {
+  "name": "EnerGeek Retro",
+  "slug": "energeek-retro",
+  "category": "anime",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHenergeek.png",
+  "url": "https://cdn.energeek.cl/hls/energeekretro.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Locomotion",
+  "slug": "locomotion",
+  "category": "anime",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHlocomotion.png",
+  "url": "http://146.19.49.197:81/live/loco_hi/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Max Anime",
   "slug": "max-anime",
   "category": "anime",
@@ -1647,15 +1647,6 @@
   "ref": ""
  },
  {
-  "name": "CM",
-  "slug": "cm",
-  "category": "musica",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHcm.png",
-  "url": "https://g5.vxral-hor.transport.edge-access.net/b08/ngrp:CM_CanaldelaMusica-100044_all/Playlist.m3u8?sense=true",
-  "ua": "Android 8.0.0",
-  "ref": ""
- },
- {
   "name": "Conecta TV",
   "slug": "conecta-tv",
   "category": "musica",
@@ -1719,15 +1710,6 @@
   "ref": ""
  },
  {
-  "name": "Telpin TV Pinamar",
-  "slug": "telpin-tv-pinamar",
-  "category": "musica",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtelpintvpinamar.png",
-  "url": "https://mistserver.telpin.com.ar:8443/hls/telpinlive/main_stream.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Tierramia TV",
   "slug": "tierramia-tv",
   "category": "musica",
@@ -1761,15 +1743,6 @@
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias/CH247.png",
   "url": "https://panel.host-live.com:19360/cn247tv/Source.m3u8",
   "ua": "",
-  "ref": ""
- },
- {
-  "name": "A24",
-  "slug": "a24",
-  "category": "noticias",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/noticias/CHa24.png",
-  "url": "https://g3.mc-hor.transport.edge-access.net/a15/ngrp:a24-100056_all/Playlist.m3u8?sense=true",
-  "ua": "Android 8.0.0",
   "ref": ""
  },
  {
@@ -2178,6 +2151,15 @@
   "ref": ""
  },
  {
+  "name": "StarTVE",
+  "slug": "startve",
+  "category": "espana",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/838.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "TeleSafor",
   "slug": "telesafor",
   "category": "espana",
@@ -2291,15 +2273,6 @@
   "category": "mexico",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvunammexico.png",
   "url": "https://5e50264bd6766.streamlock.net/tvunam/videotvunam/chunklist_w1404092117_DVR.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "5TV (Corrientes)",
-  "slug": "5tv-corrientes",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CH5tvcorrientes.png",
-  "url": "http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2466,6 +2439,15 @@
   "ref": ""
  },
  {
+  "name": "Canal 34 (San Juan)",
+  "slug": "canal-34-san-juan",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal34sanjuan.png",
+  "url": "https://streamyes.alsolnet.com/canal34hd/live/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Canal 4 (Chubut)",
   "slug": "canal-4-chubut",
   "category": "argentina",
@@ -2543,15 +2525,6 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7santiagodelestero.png",
   "url": "https://stream.arcast.com.ar/envivo/castv/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Canal 9 (Chaco)",
-  "slug": "canal-9-chaco",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal9chaco.png",
-  "url": "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2966,6 +2939,15 @@
   "category": "guatemala",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHvisiontvguatemala.png",
   "url": "https://cdn.streamhispanatv.net:3076/live/visiontvlive.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "GEN TV",
+  "slug": "gen-tv",
+  "category": "paraguay",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHgenparaguay.png",
+  "url": "http://45.170.130.224:8000/play/a04j/index.m3u8",
   "ua": "",
   "ref": ""
  },

@@ -46,8 +46,8 @@ test('healthz: reporta runtime cloudflare-workers', async () => {
   assert.equal(body.runtime, 'cloudflare-workers');
   assert.deepEqual(body.streamProviders, ['fanpelis', 'spinflix',
     'cuevanas3', 'allpeliculas', 'lamovie', 'hackstore', 'allcalidad',
-    'animeflv', 'animeav1', 'otakustv', 'seriesbl', 'fuegocine', 'pelisjuanita', 'videoapi']);
-  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, cuevanas3: true, allpeliculas: true, lamovie: true, hackstore: true, allcalidad: true, videoapi: true, animeflv: true, animeav1: true, otakustv: true, seriesbl: true, fuegocine: true, pelisjuanita: true });
+    'animeflv', 'animeav1', 'otakustv', 'seriesbl', 'fuegocine', 'pelisjuanita', 'doramasyt', 'videoapi']);
+  assert.deepEqual(body.sources, { tmdb: false, tvmaze: true, omdb: false, fanpelis: true, spinflix: true, cuevanas3: true, allpeliculas: true, lamovie: true, hackstore: true, allcalidad: true, videoapi: true, animeflv: true, animeav1: true, otakustv: true, seriesbl: true, fuegocine: true, pelisjuanita: true, doramasyt: true });
 });
 
 test('catalog: sin TMDB key devuelve metas=[] con 200', async () => {
@@ -321,7 +321,7 @@ test('Worker: /stream publica el HLS original de Fanpelis sin retransmitir ni re
   assert.equal(body.streams.length, 1);
   const [stream] = body.streams;
   assert.equal(stream.name, 'Serie del fixture');
-  assert.match(stream.title, /T1E2.*Fanpelis.*Latino/);
+  assert.match(stream.title, /T1E2 · 🎧 Latino/);
   assert.equal(stream.behaviorHints.notWebReady, true);
   assert.deepEqual(stream.behaviorHints.proxyHeaders, { request: { Origin: 'https://vimeos.net', Referer: 'https://vimeos.net/' } });
   assert.equal(stream.url, master);

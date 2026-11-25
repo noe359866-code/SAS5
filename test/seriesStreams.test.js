@@ -64,7 +64,7 @@ test('una ficha TMDB personal permite pedir el stream de su episodio a una fuent
   const { streams } = await streamResponse.json();
   assert.deepEqual(streams.map((stream) => stream.url), [master]);
   assert.equal(streams[0].name, 'Serie de prueba');
-  assert.match(streams[0].title, /T1E1.*SpinFlix.*Lat/);
+  assert.match(streams[0].title, /T1E1 · 🎧 Lat/);
   assert.deepEqual(requests.filter((url) => url.origin === provider).map((url) => url.pathname), [
     '/search', '/serie/serie-de-prueba', providerPath, '/streamurl',
   ]);

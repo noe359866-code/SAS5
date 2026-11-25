@@ -1,22 +1,16 @@
 # Sonda: candidatas de canales de deportes
 
-Fecha: 2026-11-25T00:05:57.255Z
+Fecha: 2026-11-25T15:10:12.389Z
 
 | Sitio | Paso | HTTP | Estado | Detalle |
 |---|---|---|---|---|---|
-| tarjetarojatv.app | portada | 200 | ok | 243421 B |
-| tarjetarojatv.app | canales | 200 | ok | 5 enlaces deportivos |
-| tarjetarojatv.app | canal | 200 | vacío | tarjetaroja.si/pirlotv-canales · sin señales |
-| tarjetarojatv.app | canal | 200 | señal | tarjetaroja.si/pirlotv-canales/watch-tyc-sports-1 · iframes=1 cfg=1 |
-| tarjetarojatv.app | iframe | 200 | vacío | la14hd.com/vivo/canales.php?(17 B) · m3u8=0 iframes=0 cfg=0 |
-| tarjetarojatv.app | canal | 200 | señal | tarjetaroja.si/pirlotv-canales/watch-directv-sports-2 · iframes=1 cfg=1 |
-| tarjetarojatv.app | iframe | 200 | vacío | la14hd.com/vivo/canal.php?(15 B) · m3u8=0 iframes=0 cfg=0 |
+| tarjetarojatv.app | portada | 503 | error |  |
 | pirlotv.bz | portada | 200 | ok | 5922 B |
 | pirlotv.bz | canales | 200 | ok | 2 enlaces deportivos |
 | pirlotv.bz | canal | 200 | vacío | pirlotv.fyi/canales/ · sin señales |
 | pirlotv.bz | canal | 200 | señal | pirlotv.fyi/canales/formula-1-en-vivo/ · iframes=1 cfg=1 |
 | pirlotv.bz | iframe | 200 | vacío | playcapo.st/update/capof1.php · m3u8=0 iframes=0 cfg=0 |
-| futboltv.mx | portada | 200 | ok | 32192 B |
+| futboltv.mx | portada | 200 | ok | 32194 B |
 | futboltv.mx | canales | 200 | ok | 6 enlaces deportivos |
 | futboltv.mx | canal | 200 | señal | www.futboltv.mx/canal-5-televisa-en-vivo.php · iframes=1 cfg=1 |
 | futboltv.mx | iframe | 0 | vacío | capoplay.icu/player/canal5m.php · m3u8=0 iframes=0 cfg=0 |

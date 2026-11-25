@@ -14,8 +14,8 @@
 | doramasmp4.io | portada | 200 | OK | 8 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData |
 | doramasmp4.io | buscador | 200 | HTML | 8 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData |
 | doramasmp4.io | fichas | — | 1 | doramasmp4.io/doramas/the-blue-road |
-| doramasmp4.io | episodios | — | 2 | doramasmp4.io/capitulos/extraordinary-attorney-minami-1x6 doramasmp4.io/capitulos/tamed-1x6 |
-| doramasmp4.io | episodio | 200 | 8 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData | doramasmp4.io/capitulos/extraordinary-attorney-minami-1x6 |
+| doramasmp4.io | episodios | — | 2 | doramasmp4.io/capitulos/fool-in-love-1x14 doramasmp4.io/capitulos/love-in-disguise-1x12 |
+| doramasmp4.io | episodio | 200 | 8 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData | doramasmp4.io/capitulos/fool-in-love-1x14 |
 | doramasmp4.io | · visor | — | señal | doramasmp4.io/ |
 | doramasmp4.io | · visor | — | señal | assets.seriesapi.co/brands/doramasmp4/logo/logo-1782339627025.png |
 | doramasmp4.io | · visor | — | señal | doramasmp4.io/ |
@@ -25,10 +25,10 @@
 | doramasflix.io | portada | 200 | OK | 0 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData |
 | doramasflix.io | buscador | 200 | HTML | 0 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData |
 | doramasflix.io | fichas | — | 1 | doramasflix.io/doramas/the-blue-road |
-| doramasflix.io | episodios | — | 2 | doramasflix.io/capitulos/extraordinary-attorney-minami-1x6 doramasflix.io/capitulos/tamed-1x6 |
-| doramasflix.io | episodio | 200 | 6 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData | doramasflix.io/capitulos/extraordinary-attorney-minami-1x6 |
+| doramasflix.io | episodios | — | 2 | doramasflix.io/capitulos/fool-in-love-1x14 doramasflix.io/capitulos/love-in-disguise-1x12 |
+| doramasflix.io | episodio | 200 | 3 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData | doramasflix.io/capitulos/fool-in-love-1x14 |
 | doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTl3Y21sdFpXeHZZ |
-| doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTlrYnpkbmJ5NWpi |
+| doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTlpZVhObFpuVnFa |
 | doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTkyYjJVdWMzZ3Za |
 | doramastv.to | portada | 0 | TypeError | 0 urls, 0 iframes, 0 data-*, señales=— |
 | doramasqueen.com | portada | 200 | OK | 0 urls, 0 iframes, 0 data-*, señales=— |

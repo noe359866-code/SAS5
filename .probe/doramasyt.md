@@ -11,7 +11,7 @@
 | our-sticky-love-episodio-12 | episodio | 200 | jugadores=9 | título="Our Sticky Love Capítulo 12 Online en Español | DoramasYT" año=2024 |
 | our-sticky-love-episodio-12 | token eyJpdiI6 | 200 | sin-extractor | mega.nz/embed/37gijRIJ |
 | our-sticky-love-episodio-12 | token eyJpdiI6 | 200 | byse | bysekoze.com/e/96tjakpk36qn/ |
-| our-sticky-love-episodio-12 |  medio | 200 | HLS · hls | edge1-madrid-sprintcdn.r66nv9ed.com/hls2/04/11963/96tjakpk36qn_x/master.m3u8?(108 B) |
+| our-sticky-love-episodio-12 |  medio | 200 | HLS · hls | edge1-waw-sprintcdn.r66nv9ed.com/hls2/04/11963/96tjakpk36qn_x/master.m3u8?(108 B) |
 | our-sticky-love-episodio-12 | token eyJpdiI6 | 200 | opaque | voe.sx/e/4pjbwkawtmnw |
 | our-sticky-love-episodio-12 | token eyJpdiI6 | 200 | sin-extractor | luluvdo.com/e/9523xkvbzahk |
 | our-sticky-love-episodio-12 | token eyJpdiI6 | 200 | mixdrop | mixdrop.top/e/q1lo39o9bon7lk |

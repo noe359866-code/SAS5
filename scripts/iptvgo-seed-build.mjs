@@ -62,7 +62,8 @@ const OUR_CATEGORY = [
   [/venezu/i, 'venezuela'],
 ];
 
-const CAP_PER_CATEGORY = 80;
+// 150 por categoría (petición del usuario: «más canales», 25-11-2026).
+const CAP_PER_CATEGORY = 150;
 
 const out = [];
 const say = (line) => { out.push(line); console.log(line); };
@@ -71,16 +72,9 @@ const slugOf = (name) => String(name || '')
   .normalize('NFD').replace(/[̀-ͯ]/g, '')
   .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
 
-const cleanName = (name) => String(name || '')
-  .replace(/^(?:[🇦-🇿]{2}|[☀-➿]|[🌀-🫿]|\u200D|️|\s)+/u, '') // banderas y emoji
-  .replace(/[▀-▟]+/gu, '')                          // bloques decorativos «▂ ▄ ▅»
-  .replace(/^\|?[A-Z]{2,6}\|\s*/u, '')           // etiqueta de grupo «|LAM| »
-  .replace(/^\d{1,3}\s*\|\s*/, '')              // número de parrilla «14 | »
-  .replace(/^(?:ARG|MEX|CHI|COL|PER|VEN|ECU|GUA|GTM|HON|HND|SLV|SAL|NIC|COS|PAN|DOM|PUR|BOL|PAR|URU|ESP|SPA|LAT|LAM|CAR|CINE)\s*:\s*/i, '') // prefijo país «ARG: »
-  .replace(/[\u1D00-\u1DBF]+/gu, '')               // calidad en superíndice «ᵁᴴᴰ»
-  .replace(/\s*[*+]+\s*$/, '')                    // « (HD) *» → « (HD)»
-  .replace(/\s+/g, ' ')
-  .trim();
+// Limpieza compartida con el addon (lib/liveChannelNames.js): letras
+// pequeñas del panel, prefijos de sección/país/operador, MAYÚSCULAS fijas.
+const { cleanChannelName: cleanName } = require('../lib/liveChannelNames');
 
 /** Filas decorativas del panel («===|||-Puerto Rico-|||===», «▂ ▄ ☆ PAÍS ☆ ▄ ▂»). */
 const BANNER = /[☆▁▂▄▅▆▇█▀]|={3,}|\|{3,}|-{4,}/;
@@ -136,7 +130,7 @@ async function api(action = '') {
     for (const [re, ours] of OUR_CATEGORY) if (re.test(cat) || re.test(ch.name)) { category = ours; break; }
     if (!category) continue;
     if (isDecoration(ch.name)) continue;
-    const name = cleanName(ch.name);
+    const name = cleanName(ch.name, category);
     // Al menos dos letras: sin eso no es un canal («=== ===», «| |»…)
     if (!name || (name.match(/[a-záéíóúñ]/gi) || []).length < 2) continue;
     const key = `${category}:${slugOf(name)}`;

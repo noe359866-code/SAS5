@@ -207,6 +207,15 @@
   "ref": ""
  },
  {
+  "name": "ESPN 6 HD",
+  "slug": "espn-6-hd",
+  "category": "deportes",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1105.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "ESPN 7 HD",
   "slug": "espn-7-hd",
   "category": "deportes",
@@ -446,6 +455,15 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHtennischannel.png",
   "url": "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01444-tennischannelth-tennischannelnl-samsungnl/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Tigo Sports",
+  "slug": "tigo-sports",
+  "category": "deportes",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHtigosports.png",
+  "url": "http://45.170.130.224:8000/play/a04i/index.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1083,6 +1101,15 @@
   "name": "Disney Channel",
   "slug": "disney-channel",
   "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Disney Channel",
+  "slug": "disney-channel",
+  "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png",
   "url": "http://45.70.168.162:12316/play/a009/index.m3u8",
   "ua": "",
@@ -1292,15 +1319,6 @@
   "category": "infantil",
   "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Nicktoons_Logo_2023.svg/1920px-Nicktoons_Logo_2023.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/735.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Pakapaka",
-  "slug": "pakapaka",
-  "category": "infantil",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Paka-Paka-2025.svg/1920px-Paka-Paka-2025.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/748.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1521,15 +1539,6 @@
   "ref": ""
  },
  {
-  "name": "Locomotion",
-  "slug": "locomotion",
-  "category": "anime",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHlocomotion.png",
-  "url": "http://146.19.49.197:81/live/loco_hi/index.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Max Anime",
   "slug": "max-anime",
   "category": "anime",
@@ -1706,6 +1715,15 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/radio-en-vivo/CHrneparatodos.png",
   "url": "https://ztnr.rtve.es/ztnr/6688753.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Telpin TV Pinamar",
+  "slug": "telpin-tv-pinamar",
+  "category": "musica",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtelpintvpinamar.png",
+  "url": "https://mistserver.telpin.com.ar:8443/hls/telpinlive/main_stream.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2277,6 +2295,15 @@
   "ref": ""
  },
  {
+  "name": "5TV (Corrientes)",
+  "slug": "5tv-corrientes",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CH5tvcorrientes.png",
+  "url": "http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "A24",
   "slug": "a24",
   "category": "argentina",
@@ -2525,6 +2552,15 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7santiagodelestero.png",
   "url": "https://stream.arcast.com.ar/envivo/castv/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Canal 9 (Chaco)",
+  "slug": "canal-9-chaco",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal9chaco.png",
+  "url": "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2916,6 +2952,15 @@
   "ref": ""
  },
  {
+  "name": "Ecuavisa",
+  "slug": "ecuavisa",
+  "category": "ecuador",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png",
+  "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Wuan+",
   "slug": "wuan",
   "category": "ecuador",
@@ -2957,15 +3002,6 @@
   "category": "paraguay",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHnextparaguay.png",
   "url": "https://live.enhdtv.com:19360/nexthd/nexthd.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Latina",
-  "slug": "latina",
-  "category": "peru",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHlatinatvPeru.png",
-  "url": "https://redirector.rudo.video/hls-video/567ffde3fa319fadf3419efda25619456231dfea/latina/latina.smil/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -3020,15 +3056,6 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtelearaguavenezuela.png",
   "url": "http://45.173.198.59:8080/hls/nginx3.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "TRT",
-  "slug": "trt",
-  "category": "venezuela",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrtvenezuela.png",
-  "url": "https://vcp12.myplaytv.com/trt/trt/playlist.m3u8",
   "ua": "",
   "ref": ""
  },

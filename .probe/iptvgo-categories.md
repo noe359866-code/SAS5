@@ -1,11 +1,11 @@
 # Categorías del panel iptvgo.cc (player_api)
 
-Fecha: 2026-11-25T15:20:50.311Z
+Fecha: 2026-11-25T16:50:39.627Z
 
 | Categoría | Canales | ¿Entra al filtro? |
 |---|---|---|
-| ❄ Xmas Channels ❄ | 21 | no |
-| ❄ Xmas Hallmark Channels ❄ | 13 | no |
+| ❄ Xmas Channels ❄ | 21 | SÍ |
+| ❄ Xmas Hallmark Channels ❄ | 13 | SÍ |
 | 24/7 | ACTION & ADVENTURE | 132 | no |
 | 24/7 | Arabic | 399 | no |
 | 24/7 | CARTOON | 108 | no |
@@ -90,7 +90,7 @@ Fecha: 2026-11-25T15:20:50.311Z
 | Canada | Local | 98 | no |
 | Canada | Movies | 22 | no |
 | Canada | News | 53 | no |
-| Canada | SAMSUNG TV+ | 281 | no |
+| Canada | SAMSUNG TV+ | 281 | SÍ |
 | Canada | Sports | 85 | no |
 | Canada | Sportsnet + | 50 | no |
 | Canada | TSN + | 150 | no |
@@ -253,7 +253,7 @@ Fecha: 2026-11-25T15:20:50.311Z
 | Serbia | 177 | no |
 | SPFL Teams | 19 | no |
 | Sweden | 88 | no |
-| Sweden | Disney+ | 50 | no |
+| Sweden | Disney+ | 50 | SÍ |
 | Sweden | Expressen Play | 50 | no |
 | Sweden | Hockeyettan | 50 | no |
 | Sweden | max sports | 100 | no |
@@ -283,13 +283,13 @@ Fecha: 2026-11-25T15:20:50.311Z
 | Ukraine | 181 | no |
 | Uruguay | 37 | SÍ |
 | USA | AHL | 78 | no |
-| USA | AppleTV + | 11 | no |
+| USA | AppleTV + | 11 | SÍ |
 | USA | BTN+ | 100 | no |
 | USA | College Baseball | 40 | no |
 | USA | DAZN | 50 | no |
 | USA | Dirtvision | 11 | no |
-| USA | Disney+ Originals | 13 | no |
-| USA | Disney+ Sports | 300 | no |
+| USA | Disney+ Originals | 13 | SÍ |
+| USA | Disney+ Sports | 300 | SÍ |
 | USA | Documentaries | 46 | no |
 | USA | Entertainment | 228 | no |
 | USA | ESPN+ | 399 | no |
@@ -303,8 +303,8 @@ Fecha: 2026-11-25T15:20:50.311Z
 | USA | Flo Racing | 50 | no |
 | USA | Flo Wrestling | 200 | no |
 | USA | Fox One Sports | 50 | no |
-| USA | HBOMax Original | 18 | no |
-| USA | Hulu Originals | 20 | no |
+| USA | HBOMax Original | 18 | SÍ |
+| USA | Hulu Originals | 20 | SÍ |
 | USA | LATIN | 239 | SÍ |
 | USA | LATIN Telemundo | 78 | SÍ |
 | USA | LATIN UniMás | 39 | SÍ |
@@ -331,8 +331,8 @@ Fecha: 2026-11-25T15:20:50.311Z
 | USA | NCAAB M | 130 | no |
 | USA | NCAAB W | 130 | no |
 | USA | NCAAF | 150 | no |
-| USA | Netflix Premiere Originals | 14 | no |
-| USA | Netflix Series Originals | 11 | no |
+| USA | Netflix Premiere Originals | 14 | SÍ |
+| USA | Netflix Series Originals | 11 | SÍ |
 | USA | News | 115 | no |
 | USA | NFL | 19 | no |
 | USA | NFL Game Pass | 16 | no |
@@ -343,16 +343,16 @@ Fecha: 2026-11-25T15:20:50.311Z
 | USA | NHL Teams | 32 | no |
 | USA | NLL | 15 | no |
 | USA | Paramount + | 100 | no |
-| USA | Paramount+ Original | 11 | no |
-| USA | Peacock Events | 50 | no |
-| USA | Peacock Series Originals | 13 | no |
-| USA | PLEX | 304 | no |
-| USA | PrimeVideo Series | 11 | no |
-| USA | SAMSUNG TV+ | 280 | no |
+| USA | Paramount+ Original | 11 | SÍ |
+| USA | Peacock Events | 50 | SÍ |
+| USA | Peacock Series Originals | 13 | SÍ |
+| USA | PLEX | 304 | SÍ |
+| USA | PrimeVideo Series | 11 | SÍ |
+| USA | SAMSUNG TV+ | 280 | SÍ |
 | USA | SEC+ & ACCNX | 200 | no |
 | USA | SOFTBALL | 50 | no |
 | USA | Sports | 151 | no |
-| USA | Tubi Tv | 179 | no |
+| USA | Tubi Tv | 179 | SÍ |
 | USA | Ultra HD Exclusive | 177 | no |
 | USA | VIX+ | 45 | no |
 | USA | WNBA | 15 | no |

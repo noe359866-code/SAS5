@@ -64,10 +64,11 @@ describe('canales en vivo por categorías: semilla', () => {
     const withLogo = seed.filter((c) => c.logo);
     assert.ok(withLogo.length >= seed.length * 0.4, `pocos logos: ${withLogo.length}/${seed.length}`);
     for (const c of withLogo) assert.match(c.logo, /^https:\/\//, c.name);
-    // Género y descripción llevan la etiqueta de la categoría
+    // Género y descripción llevan la etiqueta de la categoría (y el país
+    // como género secundario cuando la semilla lo conoce)
     const meta = live.liveMetas('anime')[0];
-    assert.deepEqual(meta.genres, ['TV en vivo', 'Anime']);
-    assert.match(meta.description, /· Anime\./);
+    assert.deepEqual(meta.genres.slice(0, 2), ['TV en vivo', 'Anime']);
+    assert.match(meta.description, /· Anime(\.| ·)/);
   });
 
   test('cada meta tiene id rlch:lv:, póster y tipo tv', () => {
@@ -93,29 +94,32 @@ describe('canales en vivo por categorías: semilla', () => {
 });
 
 describe('canales en vivo por categorías: catálogos y manifest', () => {
-  test('el manifest por defecto trae las temáticas y no los países (margen 8 KB)', () => {
+  test('el manifest por defecto trae los temas y ya no hay países (margen 8 KB)', () => {
     const manifest = core.buildManifest();
     const tvIds = manifest.catalogs.filter((c) => c.type === 'tv').map((c) => c.id);
     assert.ok(tvIds.includes('tv_deportes'), 'falta tv_deportes');
-    // Las temáticas activas entran por defecto; los países siempre son opt-in
+    // «deportes» vive dentro de tv_deportes (curados + vivos), sin fila aparte
+    assert.ok(!tvIds.includes('tv_live_deportes'), 'tv_live_deportes no debería existir');
+    // Todos los temas activos entran por defecto; ningún país es catálogo
     for (const cat of live.activeCategories()) {
       const id = `tv_live_${cat.key}`;
-      if (/^(espana|mexico|argentina|bolivia|chile|colombia|costarica|dominicana|ecuador|elsalvador|guatemala|honduras|nicaragua|paraguay|peru|puertorico|venezuela)$/.test(cat.key)) {
-        assert.ok(!tvIds.includes(id), `${id} debería ser opt-in`);
-      } else {
-        assert.ok(tvIds.includes(id), `falta ${id}`);
-      }
+      if (cat.key === 'deportes') continue;
+      assert.ok(tvIds.includes(id), `falta ${id}`);
     }
+    assert.ok(!tvIds.some((id) => /^tv_live_(espana|mexico|argentina|bolivia|chile|colombia|costarica|dominicana|ecuador|elsalvador|guatemala|honduras|nicaragua|paraguay|peru|puertorico|venezuela)$/.test(id)),
+      'queda un catálogo por país en el manifest');
     assert.ok(JSON.stringify(manifest).length <= 8000, 'manifest por encima del margen');
   });
 
-  test('los países aparecen cuando el usuario los marca', () => {
+  test('una config vieja con live_<país> no rompe ni crea catálogos de país', () => {
+    // Compatibilidad: las instalaciones previas guardaban live_mexico etc.;
+    // ahora esas claves son inertes y el usuario ve los temas que marcó
     const manifest = core.buildManifest(null, {
       lang: 'es', region: 'MX', platforms: null, studios: null,
-      base: ['live_mexico'], streams: null, isDefault: false,
+      base: ['live_mexico', 'live_cine'], streams: null, isDefault: false,
     });
     const tvIds = manifest.catalogs.filter((c) => c.type === 'tv').map((c) => c.id);
-    assert.deepEqual(tvIds, ['tv_live_mexico']);
+    assert.deepEqual(tvIds, ['tv_live_cine']);
   });
 
   test('tv_deportes mezcla curados y canales vivos sin duplicar', async () => {
@@ -139,17 +143,42 @@ describe('canales en vivo por categorías: catálogos y manifest', () => {
     assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_live_infantil', null, { skip: 20 }), []);
   });
 
-  test('una categoría sin señales verificadas no aparece en el manifest', async () => {
-    // Mecanismo, no dato: toda categoría activa tiene canales en alguna semilla
-    // (verificada o sin verificar) y toda categoría sin canales queda inactiva
-    const withChannels = new Set([...seed, ...unverifiedSeed].map((c) => c.category));
-    for (const cat of live.LIVE_CATEGORIES) {
-      const activa = live.activeCategories().some((a) => a.key === cat.key);
-      assert.equal(activa, withChannels.has(cat.key), `estado de ${cat.key}`);
-      if (!activa) {
-        assert.deepEqual(await catalogs.resolveCatalog('tv', `tv_live_${cat.key}`, null, {}), []);
-      }
+  test('una categoría sin canales reclasificados no aparece en el manifest', async () => {
+    // Mecanismo, no dato: activeCategories mira los temas YA reclasificados
+    // (la semilla guarda países; liveTopics los reparte). Todo tema activo
+    // tiene canales; un catálogo inexistente resuelve a vacío sin lanzar.
+    for (const cat of live.activeCategories()) {
+      assert.ok(live.liveMetas(cat.key).length > 0, `${cat.key} activa sin canales`);
     }
+    assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_live_narnia', null, {}), []);
+  });
+
+  test('los canales etiquetados por país se reparten por tema y guardan el país', () => {
+    // Canal 20 WTV: nombre único en toda la semilla (sin homónimos regionales)
+    const nicaragua = unverifiedSeed.find((c) => c.category === 'nicaragua' && c.slug === 'canal-20-wtv-hd');
+    assert.ok(nicaragua, 'la semilla ya no trae Canal 20 WTV de Nicaragua');
+    const ch = live.liveChannelById(`rlch:lv:nicaragua:${live.baseSlugOf(nicaragua.slug)}`);
+    assert.ok(ch, `id legado sin resolver: ${nicaragua.slug}`);
+    assert.notEqual(ch.category, 'nicaragua', 'el país no debe quedar como tema');
+    assert.ok(live.LIVE_CATEGORIES.some((c) => c.key === ch.category), `tema desconocido: ${ch.category}`);
+    assert.equal(ch.country, 'Nicaragua');
+    // El país aparece como género secundario de la tarjeta
+    const meta = live.liveMeta(ch);
+    assert.ok(meta.genres.includes('Nicaragua'), JSON.stringify(meta.genres));
+  });
+
+  test('el clasificador temático compartido (liveTopics)', () => {
+    const { thematicCategoryOf } = live;
+    // Tema válido de la semilla se respeta
+    assert.equal(thematicCategoryOf('La 1', 'cine'), 'cine');
+    assert.equal(thematicCategoryOf('Tigo Sports', 'deportes'), 'deportes');
+    // Categoría-país se reparte por nombre
+    assert.equal(thematicCategoryOf('ESPN 2', 'mexico'), 'deportes');
+    assert.equal(thematicCategoryOf('Cartoon Network', 'peru'), 'infantil');
+    assert.equal(thematicCategoryOf('CNN en Español', 'espana'), 'noticias');
+    assert.equal(thematicCategoryOf('Canal 10', 'nicaragua'), 'entretenimiento');
+    // Deporte manda sobre cine aunque la categoría del panel diga «cine»
+    assert.equal(thematicCategoryOf('TNT Sports', 'cine'), 'deportes');
   });
 });
 
@@ -176,7 +205,12 @@ describe('canales en vivo por categorías: streams', () => {
 describe('canales sin verificar (iptvgo.cc)', () => {
   test('la semilla sin verificar tiene la forma esperada', () => {
     assert.ok(Array.isArray(unverifiedSeed));
-    const cats = new Set([...live.LIVE_CATEGORIES.map((c) => c.key), 'deportes']);
+    // La semilla cruda puede traer temas O países; la reclasificación por
+    // tema ocurre al cargarla (liveTopics), no aquí.
+    const cats = new Set([...live.LIVE_CATEGORIES.map((c) => c.key),
+      'espana', 'mexico', 'argentina', 'bolivia', 'chile', 'colombia', 'costarica',
+      'dominicana', 'ecuador', 'elsalvador', 'guatemala', 'honduras', 'nicaragua',
+      'paraguay', 'peru', 'puertorico', 'venezuela']);
     for (const ch of unverifiedSeed) {
       assert.equal(ch.unverified, true, ch.name);
       assert.match(ch.url, /^http:\/\/iptvgo\.cc\/live\/[^/]+\/[^/]+\/\d+\.m3u8$/, ch.name);

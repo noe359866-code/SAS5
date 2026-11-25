@@ -162,15 +162,6 @@
   "ref": ""
  },
  {
-  "name": "ESPN 3 (México)",
-  "slug": "espn-3-mexico",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1110.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "ESPN 3 (Sur)",
   "slug": "espn-3-sur",
   "category": "deportes",
@@ -365,15 +356,6 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/468.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "FOX Sports 3 HD",
-  "slug": "fox-sports-3-hd",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/446.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -711,6 +693,15 @@
   "ref": ""
  },
  {
+  "name": "Cine Infantil HD",
+  "slug": "cine-infantil-hd",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/170.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Cine Marvel",
   "slug": "cine-marvel",
   "category": "cine",
@@ -869,15 +860,6 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/622.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Los Expedientes Secretos X",
-  "slug": "los-expedientes-secretos-x",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/623.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1319,15 +1301,6 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/758.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Peppa Pig",
-  "slug": "peppa-pig",
-  "category": "infantil",
-  "logo": "https://images.pluto.tv/channels/5d14fb6c84dd37df3b4290c5/colorLogoPNG_1730733871298.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/760.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2286,15 +2259,6 @@
   "ref": ""
  },
  {
-  "name": "5TV (Corrientes)",
-  "slug": "5tv-corrientes",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CH5tvcorrientes.png",
-  "url": "http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "A24",
   "slug": "a24",
   "category": "argentina",
@@ -2538,15 +2502,6 @@
   "ref": ""
  },
  {
-  "name": "Canal 9 (Chaco)",
-  "slug": "canal-9-chaco",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal9chaco.png",
-  "url": "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Canal de la Ciudad",
   "slug": "canal-de-la-ciudad",
   "category": "argentina",
@@ -2786,15 +2741,6 @@
   "category": "chile",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvn3chile.png",
   "url": "https://mdstrm.com/live-stream-playlist/5653641561b4eba30a7e4929.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Alpavisión Neiva",
-  "slug": "alpavision-neiva",
-  "category": "colombia",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHalpavisiónneivacolombia.png",
-  "url": "https://stmv1.voxtvhd.com.br/alpavision/alpavision/playlist.m3u8",
   "ua": "",
   "ref": ""
  },

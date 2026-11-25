@@ -1,6 +1,6 @@
 #EXTM3U
 # Generada por scripts/m3u-export.mjs — no editar a mano
-# Fecha: 2026-11-25T21:04:36.530Z
+# Fecha: 2026-11-25T21:18:32.701Z
 #EXTINF:-1 tvg-id="24-7-100-percent-hotter" tvg-logo="" group-title="24/7",24/7 100 Percent Hotter
 http://iptvgo.cc/live/Will1/Will1/291390.m3u8
 #EXTINF:-1 tvg-id="24-7-12-oz-mouse" tvg-logo="https://i.postimg.cc/hPyNXnz4/shows.png" group-title="24/7",24/7 12 oz Mouse
@@ -5683,8 +5683,6 @@ http://iptvgo.cc/live/Will1/Will1/671000.m3u8
 http://iptvgo.cc/live/Will1/Will1/670995.m3u8
 #EXTINF:-1 tvg-id="todo-noticias-hd-arg" tvg-logo="https://logo.m3uassets.com/todonoticias.png" group-title="Argentina",Todo Noticias HD ARG
 http://iptvgo.cc/live/Will1/Will1/670961.m3u8
-#EXTINF:-1 tvg-id="5tv-corrientes" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CH5tvcorrientes.png" group-title="Argentina",5TV (Corrientes)
-http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8
 #EXTINF:-1 tvg-id="america-tv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHamericatv.png" group-title="Argentina",America TV
 #EXTVLCOPT:http-user-agent=Android 8.0.0
 https://dai.google.com/linear/hls/event/OY2i_lL4SMyXE5Zaj4ULEg/master.m3u8
@@ -5747,8 +5745,6 @@ https://stream.arcast.com.ar/c7nq/ngrp:c7nq_all/playlist.m3u8
 https://vivo.solumedia.com:19360/cooperativa/cooperativa.m3u8
 #EXTINF:-1 tvg-id="canal-7-santiago-del-estero" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal7santiagodelestero.png" group-title="Argentina",Canal 7 (Santiago del Estero)
 https://stream.arcast.com.ar/envivo/castv/playlist.m3u8
-#EXTINF:-1 tvg-id="canal-9-chaco" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal9chaco.png" group-title="Argentina",Canal 9 (Chaco)
-http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="canal-de-la-ciudad" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHelcanaldelaciudad.png" group-title="Argentina",Canal de la Ciudad
 #EXTVLCOPT:http-user-agent=Android 8.0.0
 https://g3.proy-slo.transport.edge-access.net/a06/ngrp:gcba_video4-100042_all/Playlist.m3u8?sense=true
@@ -10283,8 +10279,6 @@ http://iptvgo.cc/live/Will1/Will1/687895.m3u8
 http://iptvgo.cc/live/Will1/Will1/687907.m3u8
 #EXTINF:-1 tvg-id="red-noticias" tvg-logo="https://es.wikipedia.org/wiki/Red%2B#/media/Archivo:Red+_2018_logo.png" group-title="Colombia",RED+ Noticias
 http://iptvgo.cc/live/Will1/Will1/841862.m3u8
-#EXTINF:-1 tvg-id="alpavision-neiva" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHalpavisiónneivacolombia.png" group-title="Colombia",Alpavisión Neiva
-https://stmv1.voxtvhd.com.br/alpavision/alpavision/playlist.m3u8
 #EXTINF:-1 tvg-id="bum-television" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHbumtelevisioncolombia.png" group-title="Colombia",Bum Televisión
 https://movil.ejeserver.com/live/visiondorada.m3u8
 #EXTINF:-1 tvg-id="cali-tv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHcalitvcolombia.png" group-title="Colombia",Cali TV
@@ -11995,6 +11989,8 @@ http://iptvgo.cc/live/Will1/Will1/696827.m3u8
 http://iptvgo.cc/live/Will1/Will1/696826.m3u8
 #EXTINF:-1 tvg-id="flo-racing-50" tvg-logo="https://gotrialpro.com/wp-content/uploads/edd/2024/08/Floracing-Free-Trial-2048x946.png" group-title="EE. UU.",Flo Racing 50
 http://iptvgo.cc/live/Will1/Will1/696825.m3u8
+#EXTINF:-1 tvg-id="flohockey-247" tvg-logo="https://d2779tscntxxsw.cloudfront.net/68f1338d10c7b.png" group-title="EE. UU.",FloHockey 247
+http://iptvgo.cc/live/Will1/Will1/808382.m3u8
 #EXTINF:-1 tvg-id="floracing-24-7-flo-racing-01" tvg-logo="https://gotrialpro.com/wp-content/uploads/edd/2024/08/Floracing-Free-Trial-2048x946.png" group-title="EE. UU.",FloRacing 24/7 :Flo Racing 01
 http://iptvgo.cc/live/Will1/Will1/696874.m3u8
 #EXTINF:-1 tvg-id="florida-a-m-vs-kennesaw-state-nov-25-1-00-pm-disney-usa-31" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/960px-Disney%2B_logo.svg.png" group-title="EE. UU.",Florida A&M vs Kennesaw State @ Nov 25 1:00 PM :Disney+ USA 31
@@ -13663,8 +13659,6 @@ http://iptvgo.cc/live/Will1/Will1/831694.m3u8
 http://iptvgo.cc/live/Will1/Will1/831697.m3u8
 #EXTINF:-1 tvg-id="superior-cw-knhl" tvg-logo="https://logo.m3uassets.com/cw35sanantonio.png" group-title="EE. UU.",Superior · CW Knhl
 http://iptvgo.cc/live/Will1/Will1/642116.m3u8
-#EXTINF:-1 tvg-id="surfer-tv" tvg-logo="https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/USBB10000058A_20250826T234505SQUARE.png" group-title="EE. UU.",Surfer TV
-http://iptvgo.cc/live/Will1/Will1/808382.m3u8
 #EXTINF:-1 tvg-id="swerve-combat" tvg-logo="https://images.fubo.tv/station_logos/Swerve-combat23_c.png" group-title="EE. UU.",Swerve Combat
 http://iptvgo.cc/live/Will1/Will1/808377.m3u8
 #EXTINF:-1 tvg-id="tampa-bay-lightning" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW_kjEXTXyGGsytdSE1QKmVRGdjRhRJxI48g&s" group-title="EE. UU.",Tampa BAY Lightning
@@ -23721,6 +23715,8 @@ http://iptvgo.cc/live/Will1/Will1/295792.m3u8
 http://iptvgo.cc/live/Will1/Will1/295772.m3u8
 #EXTINF:-1 tvg-id="fmc-family-movie-classics-uhd" tvg-logo="https://logo.m3uassets.com/fmcfamilymovieclassics.png" group-title="EE. UU.",FMC Family Movie Classics UHD
 http://iptvgo.cc/live/Will1/Will1/268837.m3u8
+#EXTINF:-1 tvg-id="frndly-christmas-plus" tvg-logo="https://d229kpbsb5jevy.cloudfront.net/frndlytv/content/common/logos/channel/logos/frndly-christmas-plus.png" group-title="EE. UU.",Frndly Christmas Plus
+http://iptvgo.cc/live/Will1/Will1/808437.m3u8
 #EXTINF:-1 tvg-id="fx-east" tvg-logo="https://logo.m3uassets.com/fx.png" group-title="EE. UU.",FX East
 http://iptvgo.cc/live/Will1/Will1/798.m3u8
 #EXTINF:-1 tvg-id="fx-uhd" tvg-logo="https://logo.m3uassets.com/fx.png" group-title="EE. UU.",FX UHD
@@ -23989,8 +23985,6 @@ http://iptvgo.cc/live/Will1/Will1/756.m3u8
 http://iptvgo.cc/live/Will1/Will1/808425.m3u8
 #EXTINF:-1 tvg-id="sundance" tvg-logo="https://logo.m3uassets.com/sundance.png" group-title="EE. UU.",Sundance
 http://iptvgo.cc/live/Will1/Will1/754.m3u8
-#EXTINF:-1 tvg-id="surf-cinema" tvg-logo="https://images.fubo.tv/channel-config-ui/station-logos/on-dark/surfcinemastacked-white.png?ch=width&auto=format%2Ccompress" group-title="EE. UU.",Surf Cinema
-http://iptvgo.cc/live/Will1/Will1/808437.m3u8
 #EXTINF:-1 tvg-id="the-life-and-legend-of-wyatt-earp" tvg-logo="http://p-img.movetv.com/1280x720/f268d24ac8952a7279b196022928976e.png" group-title="EE. UU.",The Life and Legend of Wyatt Earp
 http://iptvgo.cc/live/Will1/Will1/835874.m3u8
 #EXTINF:-1 tvg-id="the-movie-channel" tvg-logo="https://logo.m3uassets.com/themoviechannel.png" group-title="EE. UU.",The Movie Channel
@@ -24301,8 +24295,6 @@ http://iptvgo.cc/live/Will1/Will1/468.m3u8
 http://iptvgo.cc/live/Will1/Will1/467.m3u8
 #EXTINF:-1 tvg-id="documentary" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/7/78/DocumentaryPlusSignBlac.png" group-title="EE. UU.",Documentary
 http://iptvgo.cc/live/Will1/Will1/807764.m3u8
-#EXTINF:-1 tvg-id="envoy" tvg-logo="https://d229kpbsb5jevy.cloudfront.net/frndlytv/content/common/logos/channel/logos/wsfqiu.png" group-title="EE. UU.",Envoy
-http://iptvgo.cc/live/Will1/Will1/807771.m3u8
 #EXTINF:-1 tvg-id="food-network-uhd" tvg-logo="https://logo.m3uassets.com/foodnetwork.png" group-title="EE. UU.",Food Network UHD
 http://iptvgo.cc/live/Will1/Will1/268977.m3u8
 #EXTINF:-1 tvg-id="historian" tvg-logo="http://p-img.movetv.com/1280x721/f0b0d3c740601e1c540c06b9f73d6fe5.png" group-title="EE. UU.",Historian
@@ -28137,6 +28129,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/166.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/168.m3u8
 #EXTINF:-1 tvg-id="cine-infantil" tvg-logo="" group-title="Cine",Cine Infantil
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/169.m3u8
+#EXTINF:-1 tvg-id="cine-infantil-hd" tvg-logo="" group-title="Cine",Cine Infantil HD
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/170.m3u8
 #EXTINF:-1 tvg-id="cine-marvel" tvg-logo="" group-title="Cine",Cine Marvel
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/176.m3u8
 #EXTINF:-1 tvg-id="cine-marvel-hd" tvg-logo="" group-title="Cine",Cine Marvel HD
@@ -28173,8 +28167,6 @@ https://imagenuniversaltv.net/p/3771/hybrid/play.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/619.m3u8
 #EXTINF:-1 tvg-id="los-chicos-del-barrio" tvg-logo="" group-title="Cine",Los Chicos del Barrio
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/622.m3u8
-#EXTINF:-1 tvg-id="los-expedientes-secretos-x" tvg-logo="" group-title="Cine",Los Expedientes Secretos X
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/623.m3u8
 #EXTINF:-1 tvg-id="los-simpson" tvg-logo="" group-title="Cine",Los Simpson
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/635.m3u8
 #EXTINF:-1 tvg-id="malcolm" tvg-logo="" group-title="Cine",Malcolm
@@ -28353,8 +28345,6 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/372.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/375.m3u8
 #EXTINF:-1 tvg-id="espn-2-hd-senal-2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png" group-title="Deportes",ESPN 2 HD · señal 2
 http://iptvgo.cc/live/Will1/Will1/716745.m3u8
-#EXTINF:-1 tvg-id="espn-3-mexico" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Deportes",ESPN 3 (México)
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/1110.m3u8
 #EXTINF:-1 tvg-id="espn-3-sur" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Deportes",ESPN 3 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1127.m3u8
 #EXTINF:-1 tvg-id="espn-3-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Deportes",ESPN 3 HD
@@ -28431,10 +28421,6 @@ http://iptvgo.cc/live/Will1/Will1/716738.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3-sur" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png" group-title="Deportes",FOX Sports 3 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/468.m3u8
-#EXTINF:-1 tvg-id="fox-sports-3-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png" group-title="Deportes",FOX Sports 3 HD
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/446.m3u8
-#EXTINF:-1 tvg-id="fox-sports-3-hd-senal-2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png" group-title="Deportes",FOX Sports 3 HD · señal 2
-http://iptvgo.cc/live/Will1/Will1/716736.m3u8
 #EXTINF:-1 tvg-id="fox-sports-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/FOX_Sports_logo.svg/960px-FOX_Sports_logo.svg.png" group-title="Deportes",FOX Sports HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/454.m3u8
 #EXTINF:-1 tvg-id="fox-sports-hd-senal-2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/FOX_Sports_logo.svg/960px-FOX_Sports_logo.svg.png" group-title="Deportes",FOX Sports HD · señal 2
@@ -28727,6 +28713,8 @@ http://iptvgo.cc/live/Will1/Will1/725359.m3u8
 http://iptvgo.cc/live/Will1/Will1/716731.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3-col" tvg-logo="https://logo.m3uassets.com/sfoxsportsnorth.png" group-title="Deportes",FOX Sports 3 (COL)
 http://iptvgo.cc/live/Will1/Will1/725294.m3u8
+#EXTINF:-1 tvg-id="fox-sports-3-hd" tvg-logo="https://logo.m3uassets.com/foxsports.png" group-title="Deportes",FOX Sports 3 HD
+http://iptvgo.cc/live/Will1/Will1/716736.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3-hd-arg" tvg-logo="https://logo.m3uassets.com/foxsports3arg.png" group-title="Deportes",FOX Sports 3 HD ARG
 http://iptvgo.cc/live/Will1/Will1/670969.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3-primera-hd" tvg-logo="https://logo.m3uassets.com/foxsports3.png" group-title="Deportes",FOX Sports 3 Primera HD
@@ -28993,8 +28981,6 @@ http://iptvgo.cc/live/Will1/Will1/716617.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/735.m3u8
 #EXTINF:-1 tvg-id="patoaventuras" tvg-logo="" group-title="Infantil",Patoaventuras
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/758.m3u8
-#EXTINF:-1 tvg-id="peppa-pig" tvg-logo="https://images.pluto.tv/channels/5d14fb6c84dd37df3b4290c5/colorLogoPNG_1730733871298.png" group-title="Infantil",Peppa Pig
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/760.m3u8
 #EXTINF:-1 tvg-id="pinky-y-cerebro" tvg-logo="" group-title="Infantil",Pinky y Cerebro
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/771.m3u8
 #EXTINF:-1 tvg-id="plim-plim-tv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHplimplim.png" group-title="Infantil",Plim Plim TV

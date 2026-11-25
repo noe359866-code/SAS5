@@ -1,6 +1,6 @@
 # Categorías del panel iptvgo.cc (player_api)
 
-Fecha: 2026-11-25T19:42:14.514Z
+Fecha: 2026-11-25T21:18:28.549Z
 
 | Categoría | Canales | ¿Entra al filtro? |
 |---|---|---|
@@ -290,7 +290,7 @@ Fecha: 2026-11-25T19:42:14.514Z
 | USA | Dirtvision | 11 | no |
 | USA | Disney+ Originals | 13 | SÍ |
 | USA | Disney+ Sports | 300 | SÍ |
-| USA | Documentaries | 46 | no |
+| USA | Documentaries | 45 | no |
 | USA | Entertainment | 228 | no |
 | USA | ESPN+ | 399 | no |
 | USA | Family & Kids | 25 | no |

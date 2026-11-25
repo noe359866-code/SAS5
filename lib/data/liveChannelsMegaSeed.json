@@ -104912,11 +104912,11 @@
   "url": "http://iptvgo.cc/live/Will1/Will1/835867.m3u8"
  },
  {
-  "name": "Surf Cinema",
-  "slug": "surf-cinema",
+  "name": "Frndly Christmas Plus",
+  "slug": "frndly-christmas-plus",
   "topic": "cine",
   "country": "EE. UU.",
-  "logo": "https://images.fubo.tv/channel-config-ui/station-logos/on-dark/surfcinemastacked-white.png?ch=width&auto=format%2Ccompress",
+  "logo": "https://d229kpbsb5jevy.cloudfront.net/frndlytv/content/common/logos/channel/logos/frndly-christmas-plus.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/808437.m3u8"
  },
  {
@@ -105168,14 +105168,6 @@
   "url": "http://iptvgo.cc/live/Will1/Will1/835886.m3u8"
  },
  {
-  "name": "Envoy",
-  "slug": "envoy",
-  "topic": "documentales",
-  "country": "EE. UU.",
-  "logo": "https://d229kpbsb5jevy.cloudfront.net/frndlytv/content/common/logos/channel/logos/wsfqiu.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/807771.m3u8"
- },
- {
   "name": "American Crimes",
   "slug": "american-crimes",
   "topic": "documentales",
@@ -105368,11 +105360,11 @@
   "url": "http://iptvgo.cc/live/Will1/Will1/808383.m3u8"
  },
  {
-  "name": "Surfer TV",
-  "slug": "surfer-tv",
+  "name": "FloHockey 247",
+  "slug": "flohockey-247",
   "topic": "deportes",
   "country": "EE. UU.",
-  "logo": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/USBB10000058A_20250826T234505SQUARE.png",
+  "logo": "https://d2779tscntxxsw.cloudfront.net/68f1338d10c7b.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/808382.m3u8"
  },
  {

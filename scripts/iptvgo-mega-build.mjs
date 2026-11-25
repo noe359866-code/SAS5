@@ -35,6 +35,18 @@ const OUT_MD = '.probe/iptvgo-mega.md';
 /** Adulto: nunca entra a la lista. */
 const EXCLUDE_ADULT = /xxx|adult|porn|playboy|hustler|brazzers|onlyfans|red ?light|venus|erotic|babes|private ?tv|\bsex\b|mature|hot ?tv/i;
 
+/** Prefijos de región fuera de la petición (vistos en el volcado real del
+ *  panel, .probe/iptvgo-categories.md: DE = Alemania, AR = países árabes,
+ *  PT = Portugal, LIVE/REPLAY = deporte europeo en directo/repetición). */
+const EXCLUDE_PREFIX = new Set([
+  'DE', 'AR', 'PT', 'LIVE', 'REPLAY', 'UK', 'FR', 'IT', 'IN', 'PK', 'TR', 'NL',
+  'BE', 'PL', 'RU', 'RO', 'GR', 'IL', 'IR', 'AF', 'AU', 'NZ', 'SE', 'NO', 'DK',
+  'FI', 'CZ', 'HU', 'HR', 'RS', 'BG', 'UA', 'AL', 'ZA', 'NG', 'GH', 'KE', 'CN',
+  'JP', 'KR', 'TH', 'VN', 'ID', 'MY', 'SG', 'PH', 'BD', 'IQ', 'EG', 'SA', 'AE',
+  'QA', 'KW', 'MA', 'DZ', 'TN', 'LY', 'JO', 'LB', 'SY', 'YE', 'OM', 'BH', 'PS',
+  'SD', 'EE', 'LV', 'LT', 'IE', 'MT', 'CY', 'IS',
+]);
+
 /** Regiones fuera de la petición (LATAM + Brasil + España + USA/Canadá). */
 const EXCLUDE_REGION = /united kingdom|\buk\b|ireland|irish|german|deutsch|france|french|\bfr\b|ital|\bit\b|portugal|arab|turk|india|pakistan|bangla|philip|indones|korea|japan|china|viet|thai|russia|poland|dutch|netherland|belgi|africa|albania|romania|greek|greece|israel|iran|afghan|australia|\bnz\b|swiss|austria|hungary|czech|serbia|croatia|bulgaria|ukraine|sweden|norway|denmark|finland|exyu|balkan|persia|hebrew|malay|singapore|south africa|nigeria|ghana|kenya/i;
 
@@ -42,30 +54,32 @@ const EXCLUDE_REGION = /united kingdom|\buk\b|ireland|irish|german|deutsch|franc
 const INCLUDE = /spain|espa|latin|latam|mexic|argentin|bolivia|chile|chili|colombia|costa.?rica|dominic|ecuador|salvador|guatemal|hondura|nicaragua|panam|paraguay|peru|per[uú]|puerto|caraib|caribbean|uruguay|venezu|brasil|brazil|\busa\b|united states|canad|24\/7|247|ppv|event|netflix|hbomax|hbo max|prime ?video|disney\+|disneyplus|apple ?tv|appletv|hulu|peacock|paramount\+|tubi|samsung ?tv|plex|xmas|christmas|hallmark|movies?|cine|pel[ií]cula|deport|sport|music|m[uú]sica|kids|infantil|anime|news|noticia|documental|docu|novela|series|reality|entertainment|entreten/i;
 
 /** Alias de prefijo de categoría → etiqueta de país/región de la lista. */
+// Las claves van SIN acentos: el prefijo se normaliza (NFD) antes de mirar.
 const PREFIX_COUNTRY = {
   USA: 'EE. UU.', US: 'EE. UU.', 'UNITED STATES': 'EE. UU.',
   CANADA: 'Canadá', CAN: 'Canadá',
   LATINO: 'Latinoamérica', LATIN: 'Latinoamérica', LATAM: 'Latinoamérica', LATINOS: 'Latinoamérica',
-  SPAIN: 'España', ESPANA: 'España', 'ESPAÑA': 'España',
-  MEXICO: 'México', MEX: 'México',
+  SPAIN: 'España', ESPANA: 'España', ES: 'España',
+  MEXICO: 'México', MEX: 'México', MX: 'México',
   ARGENTINA: 'Argentina', ARG: 'Argentina',
-  BOLIVIA: 'Bolivia', BOL: 'Bolivia',
-  CHILE: 'Chile', CHI: 'Chile',
-  COLOMBIA: 'Colombia', COL: 'Colombia',
-  'COSTA RICA': 'Costa Rica', CRI: 'Costa Rica',
-  DOMINICANA: 'Rep. Dominicana', DOMINICAN: 'Rep. Dominicana', 'REP DOM': 'Rep. Dominicana', RD: 'Rep. Dominicana',
-  ECUADOR: 'Ecuador', ECU: 'Ecuador',
-  'EL SALVADOR': 'El Salvador', SALVADOR: 'El Salvador', SLV: 'El Salvador',
-  GUATEMALA: 'Guatemala', GTM: 'Guatemala', GUA: 'Guatemala',
-  HONDURAS: 'Honduras', HND: 'Honduras', HON: 'Honduras',
-  NICARAGUA: 'Nicaragua', NIC: 'Nicaragua',
-  PANAMA: 'Panamá', PAN: 'Panamá',
-  PARAGUAY: 'Paraguay', PRY: 'Paraguay',
-  PERU: 'Perú', PER: 'Perú',
-  'PUERTO RICO': 'Puerto Rico', PRI: 'Puerto Rico',
-  URUGUAY: 'Uruguay', URY: 'Uruguay',
-  VENEZUELA: 'Venezuela', VEN: 'Venezuela',
-  BRASIL: 'Brasil', BRAZIL: 'Brasil', BRA: 'Brasil',
+  BOLIVIA: 'Bolivia', BOL: 'Bolivia', BO: 'Bolivia',
+  CHILE: 'Chile', CHI: 'Chile', CL: 'Chile',
+  COLOMBIA: 'Colombia', COL: 'Colombia', CO: 'Colombia',
+  'COSTA RICA': 'Costa Rica', CRI: 'Costa Rica', CR: 'Costa Rica',
+  DOMINICANA: 'Rep. Dominicana', DOMINICAN: 'Rep. Dominicana', 'REP DOM': 'Rep. Dominicana',
+  'REPUBLICA DOMINICANA': 'Rep. Dominicana', RD: 'Rep. Dominicana', DO: 'Rep. Dominicana',
+  ECUADOR: 'Ecuador', ECU: 'Ecuador', EC: 'Ecuador',
+  'EL SALVADOR': 'El Salvador', SALVADOR: 'El Salvador', SLV: 'El Salvador', SV: 'El Salvador',
+  GUATEMALA: 'Guatemala', GTM: 'Guatemala', GUA: 'Guatemala', GT: 'Guatemala',
+  HONDURAS: 'Honduras', HND: 'Honduras', HON: 'Honduras', HN: 'Honduras',
+  NICARAGUA: 'Nicaragua', NIC: 'Nicaragua', NI: 'Nicaragua',
+  PANAMA: 'Panamá', PAN: 'Panamá', PA: 'Panamá',
+  PARAGUAY: 'Paraguay', PRY: 'Paraguay', PY: 'Paraguay',
+  PERU: 'Perú', PER: 'Perú', PE: 'Perú',
+  'PUERTO RICO': 'Puerto Rico', PRI: 'Puerto Rico', PR: 'Puerto Rico',
+  URUGUAY: 'Uruguay', URY: 'Uruguay', UY: 'Uruguay',
+  VENEZUELA: 'Venezuela', VEN: 'Venezuela', VE: 'Venezuela',
+  BRASIL: 'Brasil', BRAZIL: 'Brasil', BRA: 'Brasil', BR: 'Brasil',
   CARIBBEAN: 'Caribe', CARIBE: 'Caribe',
 };
 
@@ -79,11 +93,15 @@ function countryOfCategory(cat) {
   if (/XMAS|CHRISTMAS|NAVIDAD/.test(upper)) return 'Navidad';
   if (/NETFLIX|HBO ?MAX|PRIME ?VIDEO|DISNEY\+|APPLE ?TV|HULU|PEACOCK|PARAMOUNT\+|TUBI|PLEX|SAMSUNG ?TV|HALLMARK/.test(upper)
       && !/USA|LATIN|MEXIC|SPAIN|ESPA/.test(upper)) return 'Plataformas';
-  const prefix = (raw.split(/[|:]/)[0] || raw).trim().toUpperCase().replace(/[.\-_]+/g, ' ').replace(/\s+/g, ' ');
+  const prefix = (raw.split(/[|:]/)[0] || raw).trim().toUpperCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[.\-_]+/g, ' ').replace(/\s+/g, ' ');
   if (PREFIX_COUNTRY[prefix]) return PREFIX_COUNTRY[prefix];
-  // Prefijo con pinta de nombre propio corto: se respeta como grupo
-  if (/^[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ &']{1,23}$/.test(prefix)) {
-    return prefix.toLowerCase().replace(/\b[a-záéíóúñ]/g, (c) => c.toUpperCase());
+  // Prefijo con pinta de nombre propio corto: se respeta como grupo,
+  // con capitalización palabra a palabra (sin romper acentos)
+  if (/^[A-Z][A-Z &']{1,23}$/.test(prefix)) {
+    return prefix.toLowerCase().split(' ')
+      .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w)).join(' ');
   }
   return 'Otros';
 }
@@ -153,6 +171,9 @@ async function api(action = '') {
     for (const ch of all) {
       const cat = catName.get(String(ch.category_id)) || '';
       if (EXCLUDE_ADULT.test(cat) || EXCLUDE_ADULT.test(ch.name) || String(ch.is_adult) === '1') { skippedAdult += 1; continue; }
+      const prefixKey = (cat.split(/[|:]/)[0] || cat).trim().toUpperCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[.\-_]+/g, ' ').replace(/\s+/g, ' ');
+      if (EXCLUDE_PREFIX.has(prefixKey)) { skippedRegion += 1; continue; }
       if (EXCLUDE_REGION.test(cat)) { skippedRegion += 1; continue; }
       if (!INCLUDE.test(cat)) { skippedRegion += 1; continue; }
       if (isDecoration(ch.name)) { skippedJunk += 1; continue; }

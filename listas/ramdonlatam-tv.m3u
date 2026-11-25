@@ -1,6 +1,6 @@
 #EXTM3U
 # Generada por scripts/m3u-export.mjs — no editar a mano
-# Fecha: 2026-11-25T23:41:01.581Z
+# Fecha: 2026-11-25T23:53:01.772Z
 #EXTINF:-1 tvg-id="24-7-100-percent-hotter" tvg-logo="" group-title="24/7",24/7 100 Percent Hotter
 http://iptvgo.cc/live/Will1/Will1/291390.m3u8
 #EXTINF:-1 tvg-id="24-7-12-oz-mouse" tvg-logo="https://i.postimg.cc/hPyNXnz4/shows.png" group-title="24/7",24/7 12 oz Mouse
@@ -5776,10 +5776,6 @@ https://unlimited1-saopaulo.dps.live/nettv/nettv.smil/playlist.m3u8
 https://unlimited1-us.dps.live/nettv/nettv.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="net-tv-senal-3" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHnettv.png" group-title="Argentina",Net TV · señal 3
 http://iptvgo.cc/live/Will1/Will1/671022.m3u8
-#EXTINF:-1 tvg-id="rtn-neuquen" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHrtnneuquen.png" group-title="Argentina",RTN (Neuquen)
-http://media.neuquen.gov.ar/rtn/television/playlist.m3u8
-#EXTINF:-1 tvg-id="sicardi-tv-la-plata" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHsicarditv.png" group-title="Argentina",Sicardi TV (La pLata)
-https://vivo.solumedia.com:19360/sicarditv/sicarditv.m3u8
 #EXTINF:-1 tvg-id="telecreativa-lanus" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHtelecreativa.png" group-title="Argentina",Telecreativa (Lanus)
 https://panel.host-live.com:19360/8012/8012.m3u8
 #EXTINF:-1 tvg-id="telefe" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png" group-title="Argentina",Telefe
@@ -10553,6 +10549,8 @@ http://iptvgo.cc/live/Will1/Will1/683413.m3u8
 http://iptvgo.cc/live/Will1/Will1/683414.m3u8
 #EXTINF:-1 tvg-id="austral-tv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHaustraltvecuador.png" group-title="Ecuador",Austral TV
 https://stmv3.voxtvhd.com.br/australtv/australtv/playlist.m3u8
+#EXTINF:-1 tvg-id="ecuavisa" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png" group-title="Ecuador",Ecuavisa
+https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e
 #EXTINF:-1 tvg-id="wuan" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHwuan+ecuador.png" group-title="Ecuador",Wuan
 https://7.innovatestream.pe:19360/ecuadortest/ecuadortest.m3u8
 #EXTINF:-1 tvg-id="asomavision-hd" tvg-logo="https://logo.m3uassets.com/asomavision.png" group-title="Ecuador",Asomavisión HD
@@ -11895,8 +11893,6 @@ http://iptvgo.cc/live/Will1/Will1/637145.m3u8
 http://iptvgo.cc/live/Will1/Will1/814.m3u8
 #EXTINF:-1 tvg-id="fanduel-tv" tvg-logo="https://logo.m3uassets.com/fandueltv.png" group-title="EE. UU.",FanDuel TV
 http://iptvgo.cc/live/Will1/Will1/815.m3u8
-#EXTINF:-1 tvg-id="fight-network" tvg-logo="https://logo.m3uassets.com/fightnetwork.png" group-title="EE. UU.",Fight Network
-http://iptvgo.cc/live/Will1/Will1/918.m3u8
 #EXTINF:-1 tvg-id="fite-by-triller-24-7" tvg-logo="https://media.distractify.com/brand-img/WenvtmOPc/0x0/triller-1613155829506.png" group-title="EE. UU.",FITE by Triller 24/7
 http://iptvgo.cc/live/Will1/Will1/294382.m3u8
 #EXTINF:-1 tvg-id="flames-central-flames-central-nov-25-2-00-pm-espn-36" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/ESPN_Plus.svg/512px-ESPN_Plus.svg.png" group-title="EE. UU.",Flames Central: Flames Central @ Nov 25 2:00 PM :ESPN+ 36
@@ -11995,6 +11991,8 @@ http://iptvgo.cc/live/Will1/Will1/696827.m3u8
 http://iptvgo.cc/live/Will1/Will1/696826.m3u8
 #EXTINF:-1 tvg-id="flo-racing-50" tvg-logo="https://gotrialpro.com/wp-content/uploads/edd/2024/08/Floracing-Free-Trial-2048x946.png" group-title="EE. UU.",Flo Racing 50
 http://iptvgo.cc/live/Will1/Will1/696825.m3u8
+#EXTINF:-1 tvg-id="flohockey-247" tvg-logo="https://d2779tscntxxsw.cloudfront.net/68f1338d10c7b.png" group-title="EE. UU.",FloHockey 247
+http://iptvgo.cc/live/Will1/Will1/808382.m3u8
 #EXTINF:-1 tvg-id="floracing-24-7-flo-racing-01" tvg-logo="https://gotrialpro.com/wp-content/uploads/edd/2024/08/Floracing-Free-Trial-2048x946.png" group-title="EE. UU.",FloRacing 24/7 :Flo Racing 01
 http://iptvgo.cc/live/Will1/Will1/696874.m3u8
 #EXTINF:-1 tvg-id="florida-a-m-vs-kennesaw-state-nov-25-1-00-pm-disney-usa-31" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/960px-Disney%2B_logo.svg.png" group-title="EE. UU.",Florida A&M vs Kennesaw State @ Nov 25 1:00 PM :Disney+ USA 31
@@ -13663,8 +13661,6 @@ http://iptvgo.cc/live/Will1/Will1/831694.m3u8
 http://iptvgo.cc/live/Will1/Will1/831697.m3u8
 #EXTINF:-1 tvg-id="superior-cw-knhl" tvg-logo="https://logo.m3uassets.com/cw35sanantonio.png" group-title="EE. UU.",Superior · CW Knhl
 http://iptvgo.cc/live/Will1/Will1/642116.m3u8
-#EXTINF:-1 tvg-id="surfer-tv" tvg-logo="https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/USBB10000058A_20250826T234505SQUARE.png" group-title="EE. UU.",Surfer TV
-http://iptvgo.cc/live/Will1/Will1/808382.m3u8
 #EXTINF:-1 tvg-id="swerve-combat" tvg-logo="https://images.fubo.tv/station_logos/Swerve-combat23_c.png" group-title="EE. UU.",Swerve Combat
 http://iptvgo.cc/live/Will1/Will1/808377.m3u8
 #EXTINF:-1 tvg-id="tampa-bay-lightning" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW_kjEXTXyGGsytdSE1QKmVRGdjRhRJxI48g&s" group-title="EE. UU.",Tampa BAY Lightning
@@ -23721,6 +23717,8 @@ http://iptvgo.cc/live/Will1/Will1/295792.m3u8
 http://iptvgo.cc/live/Will1/Will1/295772.m3u8
 #EXTINF:-1 tvg-id="fmc-family-movie-classics-uhd" tvg-logo="https://logo.m3uassets.com/fmcfamilymovieclassics.png" group-title="EE. UU.",FMC Family Movie Classics UHD
 http://iptvgo.cc/live/Will1/Will1/268837.m3u8
+#EXTINF:-1 tvg-id="frndly-christmas-plus" tvg-logo="https://d229kpbsb5jevy.cloudfront.net/frndlytv/content/common/logos/channel/logos/frndly-christmas-plus.png" group-title="EE. UU.",Frndly Christmas Plus
+http://iptvgo.cc/live/Will1/Will1/808437.m3u8
 #EXTINF:-1 tvg-id="fx-east" tvg-logo="https://logo.m3uassets.com/fx.png" group-title="EE. UU.",FX East
 http://iptvgo.cc/live/Will1/Will1/798.m3u8
 #EXTINF:-1 tvg-id="fx-uhd" tvg-logo="https://logo.m3uassets.com/fx.png" group-title="EE. UU.",FX UHD
@@ -23989,8 +23987,6 @@ http://iptvgo.cc/live/Will1/Will1/756.m3u8
 http://iptvgo.cc/live/Will1/Will1/808425.m3u8
 #EXTINF:-1 tvg-id="sundance" tvg-logo="https://logo.m3uassets.com/sundance.png" group-title="EE. UU.",Sundance
 http://iptvgo.cc/live/Will1/Will1/754.m3u8
-#EXTINF:-1 tvg-id="surf-cinema" tvg-logo="https://images.fubo.tv/channel-config-ui/station-logos/on-dark/surfcinemastacked-white.png?ch=width&auto=format%2Ccompress" group-title="EE. UU.",Surf Cinema
-http://iptvgo.cc/live/Will1/Will1/808437.m3u8
 #EXTINF:-1 tvg-id="the-life-and-legend-of-wyatt-earp" tvg-logo="http://p-img.movetv.com/1280x720/f268d24ac8952a7279b196022928976e.png" group-title="EE. UU.",The Life and Legend of Wyatt Earp
 http://iptvgo.cc/live/Will1/Will1/835874.m3u8
 #EXTINF:-1 tvg-id="the-movie-channel" tvg-logo="https://logo.m3uassets.com/themoviechannel.png" group-title="EE. UU.",The Movie Channel
@@ -24301,8 +24297,6 @@ http://iptvgo.cc/live/Will1/Will1/468.m3u8
 http://iptvgo.cc/live/Will1/Will1/467.m3u8
 #EXTINF:-1 tvg-id="documentary" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/7/78/DocumentaryPlusSignBlac.png" group-title="EE. UU.",Documentary
 http://iptvgo.cc/live/Will1/Will1/807764.m3u8
-#EXTINF:-1 tvg-id="envoy" tvg-logo="https://d229kpbsb5jevy.cloudfront.net/frndlytv/content/common/logos/channel/logos/wsfqiu.png" group-title="EE. UU.",Envoy
-http://iptvgo.cc/live/Will1/Will1/807771.m3u8
 #EXTINF:-1 tvg-id="food-network-uhd" tvg-logo="https://logo.m3uassets.com/foodnetwork.png" group-title="EE. UU.",Food Network UHD
 http://iptvgo.cc/live/Will1/Will1/268977.m3u8
 #EXTINF:-1 tvg-id="historian" tvg-logo="http://p-img.movetv.com/1280x721/f0b0d3c740601e1c540c06b9f73d6fe5.png" group-title="EE. UU.",Historian
@@ -27949,12 +27943,8 @@ https://5bf8041cb3fed.streamlock.net:443/AlcanceTV/AlcanceTV/playlist.m3u8
 https://vcp.myplaytv.com/promar/promar/playlist.m3u8
 #EXTINF:-1 tvg-id="reforma-tv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHreformatvvenezuela.png" group-title="Venezuela",Reforma TV
 https://5bf8041cb3fed.streamlock.net:443/ReformaTV/ReformaTV/playlist.m3u8
-#EXTINF:-1 tvg-id="telearagua" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtelearaguavenezuela.png" group-title="Venezuela",Telearagua
-http://45.173.198.59:8080/hls/nginx3.m3u8
 #EXTINF:-1 tvg-id="trt" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrtvenezuela.png" group-title="Venezuela",TRT
 https://vcp12.myplaytv.com/trt/trt/playlist.m3u8
-#EXTINF:-1 tvg-id="trv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrvvenezuela.png" group-title="Venezuela",TRV
-https://streaming5.globalhostla.com/rtplive/trvnetve/playlist.m3u8
 #EXTINF:-1 tvg-id="tvs-maracay" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtvsmaracayvenezuela.png" group-title="Venezuela",TVS Maracay
 https://vcp10.myplaytv.com/tvs/tvs/playlist.m3u8
 #EXTINF:-1 tvg-id="aguacate-tv-uhd" tvg-logo="https://pbs.twimg.com/profile_images/1529841677644570625/lSmfq581_400x400.jpg" group-title="Venezuela",Aguacate TV UHD
@@ -28137,14 +28127,14 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/166.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/168.m3u8
 #EXTINF:-1 tvg-id="cine-infantil" tvg-logo="" group-title="Cine",Cine Infantil
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/169.m3u8
+#EXTINF:-1 tvg-id="cine-infantil-hd" tvg-logo="" group-title="Cine",Cine Infantil HD
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/170.m3u8
 #EXTINF:-1 tvg-id="cine-marvel" tvg-logo="" group-title="Cine",Cine Marvel
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/176.m3u8
 #EXTINF:-1 tvg-id="cine-marvel-hd" tvg-logo="" group-title="Cine",Cine Marvel HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/177.m3u8
 #EXTINF:-1 tvg-id="cine-romance" tvg-logo="" group-title="Cine",Cine Romance
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/178.m3u8
-#EXTINF:-1 tvg-id="cine-romance-hd" tvg-logo="" group-title="Cine",Cine Romance HD
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/179.m3u8
 #EXTINF:-1 tvg-id="cine-zombis-hd" tvg-logo="" group-title="Cine",Cine Zombis HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/184.m3u8
 #EXTINF:-1 tvg-id="distrito-comedia" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/DistritoComediaLOGO2018.png/960px-DistritoComediaLOGO2018.png" group-title="Cine",Distrito Comedia
@@ -28419,8 +28409,6 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/456.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/435.m3u8
 #EXTINF:-1 tvg-id="fox-sports-1-hd-sur" tvg-logo="https://i.imgur.com/O9BapV9.png" group-title="Deportes",FOX Sports 1 HD (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/452.m3u8
-#EXTINF:-1 tvg-id="fox-sports-2-mexico" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg" group-title="Deportes",FOX Sports 2 (México)
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8
 #EXTINF:-1 tvg-id="fox-sports-2-sur" tvg-logo="" group-title="Deportes",FOX Sports 2 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/436.m3u8
 #EXTINF:-1 tvg-id="fox-sports-2-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png" group-title="Deportes",FOX Sports 2 HD
@@ -28933,11 +28921,9 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/244.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/264.m3u8
 #EXTINF:-1 tvg-id="discovery-kids-senal-2" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Discovery%20Kids.png" group-title="Infantil",Discovery Kids · señal 2
 http://iptvgo.cc/live/Will1/Will1/304049.m3u8
-#EXTINF:-1 tvg-id="disney-channel" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg" group-title="Infantil",Disney Channel
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8
-#EXTINF:-1 tvg-id="disney-channel-senal-2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg" group-title="Infantil",Disney Channel · señal 2
+#EXTINF:-1 tvg-id="disney-channel" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png" group-title="Infantil",Disney Channel
 http://45.70.168.162:12316/play/a009/index.m3u8
-#EXTINF:-1 tvg-id="disney-channel-senal-3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg" group-title="Infantil",Disney Channel · señal 3
+#EXTINF:-1 tvg-id="disney-channel-senal-2" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png" group-title="Infantil",Disney Channel · señal 2
 http://iptvgo.cc/live/Will1/Will1/671075.m3u8
 #EXTINF:-1 tvg-id="disney-junior" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e3/2024_Disney_Jr._Logo.svg" group-title="Infantil",Disney Junior
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/284.m3u8

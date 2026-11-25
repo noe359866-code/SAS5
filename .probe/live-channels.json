@@ -324,15 +324,6 @@
   "ref": ""
  },
  {
-  "name": "FOX Sports 2 (México)",
-  "slug": "fox-sports-2-mexico",
-  "category": "deportes",
-  "logo": "https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "FOX Sports 2 (Sur)",
   "slug": "fox-sports-2-sur",
   "category": "deportes",
@@ -711,6 +702,15 @@
   "ref": ""
  },
  {
+  "name": "Cine Infantil HD",
+  "slug": "cine-infantil-hd",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/170.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Cine Marvel",
   "slug": "cine-marvel",
   "category": "cine",
@@ -734,15 +734,6 @@
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/178.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Cine Romance HD",
-  "slug": "cine-romance-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/179.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1085,15 +1076,6 @@
   "category": "infantil",
   "logo": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Discovery%20Kids.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/264.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Disney Channel",
-  "slug": "disney-channel",
-  "category": "infantil",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2646,24 +2628,6 @@
   "ref": ""
  },
  {
-  "name": "RTN (Neuquen)",
-  "slug": "rtn-neuquen",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHrtnneuquen.png",
-  "url": "http://media.neuquen.gov.ar/rtn/television/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Sicardi TV (La pLata)",
-  "slug": "sicardi-tv-la-plata",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHsicarditv.png",
-  "url": "https://vivo.solumedia.com:19360/sicarditv/sicarditv.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Telecreativa (Lanus)",
   "slug": "telecreativa-lanus",
   "category": "argentina",
@@ -2934,6 +2898,15 @@
   "ref": ""
  },
  {
+  "name": "Ecuavisa",
+  "slug": "ecuavisa",
+  "category": "ecuador",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png",
+  "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Wuan+",
   "slug": "wuan",
   "category": "ecuador",
@@ -3033,29 +3006,11 @@
   "ref": ""
  },
  {
-  "name": "Telearagua",
-  "slug": "telearagua",
-  "category": "venezuela",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtelearaguavenezuela.png",
-  "url": "http://45.173.198.59:8080/hls/nginx3.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "TRT",
   "slug": "trt",
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrtvenezuela.png",
   "url": "https://vcp12.myplaytv.com/trt/trt/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "TRV",
-  "slug": "trv",
-  "category": "venezuela",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtrvvenezuela.png",
-  "url": "https://streaming5.globalhostla.com/rtplive/trvnetve/playlist.m3u8",
   "ua": "",
   "ref": ""
  },

@@ -29,37 +29,32 @@ const BASE = 'http://iptvgo.cc';
 const AUTH = 'Will1/Will1';
 const qs = 'username=Will1&password=Will1';
 
-/** Categorías del panel que entran: Latinoamérica, España y afines. */
-const CATEGORY_INCLUDE = /spain|espa|latino|latam|latin|mexic|argentin|chile|chili|colombia|peru|per[uú]|venezu|ecuador|guatemal|hondura|salvador|nicaragua|costa.?rica|panam|dominic|puerto|bolivia|paraguay|uruguay|caraib|caribbean|cine|pel[ií]cula|novela|deportes?.*(latin|esp|mx)|dwho/i;
+/** Categorías del panel que entran: Latinoamérica, España, canales de
+ *  plataforma («USA | Netflix Series Originals», «USA | HBOMax Original»…),
+ *  FAST (Tubi, Samsung TV+, Plex) y la tanda navideña (Xmas) — petición del
+ *  usuario, 25-11-2026: «más canales como el canal de Netflix». */
+const CATEGORY_INCLUDE = /spain|espa|latino|latam|latin|mexic|argentin|chile|chili|colombia|peru|per[uú]|venezu|ecuador|guatemal|hondura|salvador|nicaragua|costa.?rica|panam|dominic|puerto|bolivia|paraguay|uruguay|caraib|caribbean|cine|pel[ií]cula|novela|deportes?.*(latin|esp|mx)|dwho|netflix|hbomax|hbo max|prime ?video|disney\+|disneyplus|apple ?tv|appletv|hulu|peacock|paramount\+|tubi|samsung ?tv\+?|plex|xmas|hallmark/i;
 
-/** Categoría del panel → categoría del addon. */
-const OUR_CATEGORY = [
-  [/deport|sport|futbol|fútbol|dwho|espn|fox|bein|dsports|tnt|tyc/i, 'deportes'],
-  [/infantil|kids|niñ|cartoon|disney|nick/i, 'infantil'],
-  [/anime|animaci/i, 'anime'],
-  [/m[uú]sica|music|radio/i, 'musica'],
-  [/noticia|news|informativ/i, 'noticias'],
-  [/documental|cultura|discovery|history|natgeo|nat.?geo|animal/i, 'documentales'],
-  [/religi/i, 'religion'],
-  [/cine|pel[ií]cula|movie/i, 'cine'],
-  [/novela|reality|comedia|entreten|series|show/i, 'entretenimiento'],
-  [/espa|spain/i, 'espana'],
-  [/mexic/i, 'mexico'],
-  [/argentin/i, 'argentina'],
-  [/bolivia/i, 'bolivia'],
-  [/chile|chili/i, 'chile'],
-  [/colombia/i, 'colombia'],
-  [/costa.?rica/i, 'costarica'],
-  [/dominic/i, 'dominicana'],
-  [/ecuador/i, 'ecuador'],
-  [/salvador/i, 'elsalvador'],
-  [/guatemal/i, 'guatemala'],
-  [/hondura/i, 'honduras'],
-  [/nicaragua/i, 'nicaragua'],
-  [/paraguay/i, 'paraguay'],
-  [/peru|per[uú]/i, 'peru'],
-  [/puerto|caraib|caribbean/i, 'puertorico'],
-  [/venezu/i, 'venezuela'],
+/** Categoría del panel → etiqueta de país (va como género de la tarjeta). */
+const PANEL_COUNTRY = [
+  [/espa|spain/i, 'España'], [/mexic/i, 'México'], [/argentin/i, 'Argentina'],
+  [/bolivia/i, 'Bolivia'], [/chile|chili/i, 'Chile'], [/colombia/i, 'Colombia'],
+  [/costa.?rica/i, 'Costa Rica'], [/dominic/i, 'Rep. Dominicana'],
+  [/ecuador/i, 'Ecuador'], [/salvador/i, 'El Salvador'], [/guatemal/i, 'Guatemala'],
+  [/hondura/i, 'Honduras'], [/nicaragua/i, 'Nicaragua'], [/paraguay/i, 'Paraguay'],
+  [/peru|per[uú]/i, 'Perú'], [/puerto|caraib|caribbean/i, 'Puerto Rico'],
+  [/venezu/i, 'Venezuela'], [/panam/i, 'Panamá'], [/uruguay/i, 'Uruguay'],
+  [/^usa|\busa\b/i, 'EE. UU.'], [/canada/i, 'Canadá'],
+];
+
+/**
+ * Tema del addon: la sonda de plataformas («USA | Netflix Series Originals»)
+ * y 24/7 se reparten entre cine y entretenimiento; el resto lo decide
+ * lib/liveTopics.js por el nombre del canal (regla compartida con el addon).
+ */
+const PANEL_TOPIC = [
+  [/premiere|movies|movie|cinema|hallmark/i, 'cine'],
+  [/netflix|hbomax|hbo max|prime ?video|disney\+|apple ?tv|appletv|hulu|peacock|paramount\+|tubi|samsung ?tv|plex|series|original|xmas|24\/7|247/i, 'entretenimiento'],
 ];
 
 // 150 por categoría (petición del usuario: «más canales», 25-11-2026).
@@ -75,6 +70,7 @@ const slugOf = (name) => String(name || '')
 // Limpieza compartida con el addon (lib/liveChannelNames.js): letras
 // pequeñas del panel, prefijos de sección/país/operador, MAYÚSCULAS fijas.
 const { cleanChannelName: cleanName } = require('../lib/liveChannelNames');
+const { thematicCategoryOf } = require('../lib/liveTopics');
 
 /** Filas decorativas del panel («===|||-Puerto Rico-|||===», «▂ ▄ ☆ PAÍS ☆ ▄ ▂»). */
 const BANNER = /[☆▁▂▄▅▆▇█▀]|={3,}|\|{3,}|-{4,}/;
@@ -126,20 +122,26 @@ async function api(action = '') {
   for (const ch of all) {
     const cat = catName.get(String(ch.category_id)) || '';
     if (!CATEGORY_INCLUDE.test(cat)) continue;
+    // País como etiqueta (género), ya no como estante
+    let country = '';
+    for (const [re, label] of PANEL_COUNTRY) if (re.test(cat)) { country = label; break; }
+    // Tema: primero la regla de la categoría del panel (plataformas, Xmas…),
+    // luego el clasificador compartido por nombre del canal
     let category = '';
-    for (const [re, ours] of OUR_CATEGORY) if (re.test(cat) || re.test(ch.name)) { category = ours; break; }
-    if (!category) continue;
+    for (const [re, topic] of PANEL_TOPIC) if (re.test(cat)) { category = topic; break; }
     if (isDecoration(ch.name)) continue;
-    const name = cleanName(ch.name, category);
+    const name = cleanName(ch.name, category || undefined);
+    if (!category) category = thematicCategoryOf(name, cat);
     // Al menos dos letras: sin eso no es un canal («=== ===», «| |»…)
     if (!name || (name.match(/[a-záéíóúñ]/gi) || []).length < 2) continue;
     const key = `${category}:${slugOf(name)}`;
-    if (seen.has(key)) continue; // un canal por nombre y categoría
+    if (seen.has(key)) continue; // un canal por nombre y tema
     seen.add(key);
     picked.push({
       name,
       slug: slugOf(name),
       category,
+      country,
       logo: /^https?:\/\//.test(ch.stream_icon || '') ? ch.stream_icon : '',
       url: `${BASE}/live/${AUTH}/${ch.stream_id}.m3u8`,
       ua: '',

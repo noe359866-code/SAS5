@@ -333,16 +333,14 @@ test('/configure: el contador de catálogos cuenta lo mismo que el manifest', ()
     + cfg.platforms.length * weights.platform
     + cfg.studios.length * weights.studio;
   const everything = { platforms: PLATFORM_KEYS, studios: STUDIO_KEYS, base: userConfig.BASE_KEYS };
-  // El contador se mide contra la config explícita: el manifest por defecto
-  // (cfg null) omite los catálogos de países para no pasarse de los 8 KB.
+  // El contador se mide contra la config explícita; ya no hay catálogos por
+  // país (25-11-2026): los canales de cada país viven en los temas y el país
+  // es un género de la tarjeta.
   assert.equal(total(everything), buildDefs(everything).length);
   const countryKeys = userConfig.BASE_KEYS.filter((k) => /^live_(espana|mexico|argentina|bolivia|chile|colombia|costarica|dominicana|ecuador|elsalvador|guatemala|honduras|nicaragua|paraguay|peru|puertorico|venezuela)$/.test(k));
-  assert.ok(countryKeys.length > 0, 'catálogos de países presentes');
-  // Un país sin señales del proveedor pesa 0 (su catálogo se oculta solo):
-  // se resta el peso real de cada clave, no el número de claves.
-  const countryWeight = countryKeys.reduce((n, k) => n + weights.base[k], 0);
-  assert.ok(countryWeight > 0, 'al menos un país con catálogo activo');
-  assert.equal(total(everything) - countryWeight, buildDefs(null).length);
+  assert.equal(countryKeys.length, 0, 'no deben quedar claves live_<país> en el configurador');
+  // Sin países opt-in, el manifest por defecto cuenta exactamente todo.
+  assert.equal(total(everything), buildDefs(null).length);
   for (const cfg of [
     { platforms: ['netflix', 'hulu'], studios: ['marvel'], base: ['tendencias', 'generos_series'] },
     { platforms: [], studios: [], base: ['tvmaze_hoy'] },

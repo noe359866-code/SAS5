@@ -1,10 +1,10 @@
 # Sonda: candidatas de canales de deportes
 
-Fecha: 2026-11-24T23:37:58.598Z
+Fecha: 2026-11-24T23:52:03.530Z
 
 | Sitio | Paso | HTTP | Estado | Detalle |
 |---|---|---|---|---|---|
-| tarjetarojatv.app | portada | 200 | ok | 243765 B |
+| tarjetarojatv.app | portada | 200 | ok | 243421 B |
 | tarjetarojatv.app | canales | 200 | ok | 5 enlaces deportivos |
 | tarjetarojatv.app | canal | 200 | vacío | tarjetaroja.si/pirlotv-canales · sin señales |
 | tarjetarojatv.app | canal | 200 | señal | tarjetaroja.si/pirlotv-canales/watch-tyc-sports-1 · iframes=1 cfg=1 |

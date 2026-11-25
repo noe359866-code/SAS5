@@ -432,6 +432,15 @@
   "ref": ""
  },
  {
+  "name": "Tigo Sports",
+  "slug": "tigo-sports",
+  "category": "deportes",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHtigosports.png",
+  "url": "http://45.170.130.224:8000/play/a04i/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "TNT Sports (Argentina)",
   "slug": "tnt-sports-argentina",
   "category": "deportes",
@@ -1611,15 +1620,6 @@
   "ref": ""
  },
  {
-  "name": "Canal VM Latino",
-  "slug": "canal-vm-latino",
-  "category": "musica",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHcanalvmlatino.png",
-  "url": "https://59ef525c24caa.streamlock.net/vmtv/vmlatino/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "CM",
   "slug": "cm",
   "category": "musica",
@@ -1688,6 +1688,15 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/radio-en-vivo/CHrneparatodos.png",
   "url": "https://ztnr.rtve.es/ztnr/6688753.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Telpin TV Pinamar",
+  "slug": "telpin-tv-pinamar",
+  "category": "musica",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtelpintvpinamar.png",
+  "url": "https://mistserver.telpin.com.ar:8443/hls/telpinlive/main_stream.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2417,15 +2426,6 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal3santacruz.png",
   "url": "https://stream.arcast.com.ar/canal3/canal3/playlist.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Canal 34 (San Juan)",
-  "slug": "canal-34-san-juan",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal34sanjuan.png",
-  "url": "https://streamyes.alsolnet.com/canal34hd/live/playlist.m3u8",
   "ua": "",
   "ref": ""
  },

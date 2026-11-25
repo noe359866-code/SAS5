@@ -1,6 +1,6 @@
 # Sonda 11: canales de deportes en listas públicas (iptv-org)
 
-Fecha: 2026-11-24T23:38:24.626Z
+Fecha: 2026-11-24T23:52:28.713Z
 
 lista categories/sports.m3u: HTTP 200 · 132605 B
 lista countries/ar.m3u: HTTP 200 · 53128 B
@@ -19,25 +19,24 @@ canales que coinciden: 161 de 3909 entradas
 
 | Canal | Lista | Grupo | URL | Verificación |
 |---|---|---|---|---|
-| Claro Sports (1080p) | categories/sports.m3u | Sports | 45.171.64.30/play/a00w/index.m3u8 | HLS VÁLIDO 1v · 174 ms |
-| DAZN Combat (684p) | categories/sports.m3u | Sports | jmp2.uk/plu-64d626ac9b414d000820e2fc.m3u8 | HLS VÁLIDO · 837 ms |
-| DAZN Darts x Pluto TV | categories/sports.m3u | Sports | jmp2.uk/plu-64b67f0424ade50008a3be17.m3u8 | HLS VÁLIDO · 168 ms |
-| DAZN Heldinnen x Pluto TV | categories/sports.m3u | Sports | jmp2.uk/plu-64afe50c5dc16600087f3227.m3u8 | HLS VÁLIDO · 210 ms |
-| ESPN 2 Latin America Colombia (1080p) | categories/sports.m3u | Sports | 38.211.118.56/play/a0fa/index.m3u8 | HLS VÁLIDO 1v · 232 ms |
-| ESPN 4 (Brazil) (1080p) | categories/sports.m3u | Sports | 181.78.197.59/play/a07n/index.m3u8 | HLS VÁLIDO 1v · 230 ms |
-| ESPN (Brazil) (1080p) | categories/sports.m3u | Sports | 181.78.197.59/play/a07z/index.m3u8 | HLS VÁLIDO 1v · 243 ms |
-| ESPN Latin America Colombia (1080p) | categories/sports.m3u | Sports | 181.78.211.244/play/a08q/index.m3u8 | HLS VÁLIDO 1v · 213 ms |
-| ESPN Latin America Mexico (1080p) | categories/sports.m3u | Sports | 168.228.44.241/play/a06p/index.m3u8 | HLS VÁLIDO 1v · 152 ms |
-| Fox Deportes (720p) | categories/sports.m3u | Sports | live-manifest.production-public.tubi.io/live/d906efca-1302-4e29-b0d9-9a1d7a305d69/playlist.m3u | HLS VÁLIDO 1v · 410 ms |
-| Fox Sports (1080p) | categories/sports.m3u | Sports | 138.59.227.20/play/a085/index.m3u8 | HLS VÁLIDO 1v · 1503 ms |
-| Fox Sports HD | categories/sports.m3u | Sports | 45.184.109.10/live/69393EAE6ADBC65A68F942022362A202/1552.m3u8 | HLS VÁLIDO · 749 ms |
-| Fox Sports News (1080p) | categories/sports.m3u | News;Sports | skynewsau-live-premium.akamaized.net/hls/live/2105307/foxsportsnews/live_1080p.m3u8 | HLS VÁLIDO · 762 ms |
-| Pluto TV Deportes | categories/sports.m3u | Sports | jmp2.uk/plu-5dcde07af1c85b0009b18651.m3u8 | HLS VÁLIDO · 175 ms |
-| Teledeporte (720p) [Geo-blocked] | categories/sports.m3u | Sports | rtvelivestream.rtve.es/rtvesec/tdp/tdp_main.m3u8 | HLS VÁLIDO · 553 ms |
-| TNT Sports (Argentina) | categories/sports.m3u | Sports | 45.184.109.10/live/69393EAE6ADBC65A68F942022362A202/86.m3u8 | HLS VÁLIDO · 552 ms |
-| TNT Sports (Chile) (480p) | categories/sports.m3u | Sports | 205.235.6.29/play/a0xa/index.m3u8 | HLS VÁLIDO 1v · 262 ms |
-| TyC Sports (1080p) | categories/sports.m3u | Sports | amg26268-amg26268c14-freelivesports-emea-10267.playouts.now.amagi.tv/ts-us-e2-n2/playlist/amg26268-sportsstudio-tycsports-f | HLS VÁLIDO 1v · 149 ms |
-| TyC Sports USA | categories/sports.m3u | Sports | 45.170.130.224/play/a020/index.m3u8 | HLS VÁLIDO 1v · 356 ms |
+| Claro Sports (1080p) | categories/sports.m3u | Sports | 45.171.64.30/play/a00w/index.m3u8 | HLS VÁLIDO 1v · 221 ms |
+| DAZN Combat (684p) | categories/sports.m3u | Sports | jmp2.uk/plu-64d626ac9b414d000820e2fc.m3u8 | HLS VÁLIDO · 292 ms |
+| DAZN Darts x Pluto TV | categories/sports.m3u | Sports | jmp2.uk/plu-64b67f0424ade50008a3be17.m3u8 | HLS VÁLIDO · 728 ms |
+| DAZN Heldinnen x Pluto TV | categories/sports.m3u | Sports | jmp2.uk/plu-64afe50c5dc16600087f3227.m3u8 | HLS VÁLIDO · 742 ms |
+| ESPN 2 Latin America Colombia (1080p) | categories/sports.m3u | Sports | 38.211.118.56/play/a0fa/index.m3u8 | HLS VÁLIDO 1v · 213 ms |
+| ESPN 4 (Brazil) (1080p) | categories/sports.m3u | Sports | 181.78.197.59/play/a07n/index.m3u8 | HLS VÁLIDO 1v · 235 ms |
+| ESPN (Brazil) (1080p) | categories/sports.m3u | Sports | 181.78.197.59/play/a07z/index.m3u8 | HLS VÁLIDO 1v · 233 ms |
+| ESPN Latin America Colombia (1080p) | categories/sports.m3u | Sports | 181.78.211.244/play/a08q/index.m3u8 | HLS VÁLIDO 1v · 225 ms |
+| ESPN Latin America Mexico (1080p) | categories/sports.m3u | Sports | 168.228.44.241/play/a06p/index.m3u8 | HLS VÁLIDO 1v · 138 ms |
+| Fox Deportes (720p) | categories/sports.m3u | Sports | live-manifest.production-public.tubi.io/live/d906efca-1302-4e29-b0d9-9a1d7a305d69/playlist.m3u | HLS VÁLIDO 1v · 858 ms |
+| Fox Sports (1080p) | categories/sports.m3u | Sports | 138.59.227.20/play/a085/index.m3u8 | HLS VÁLIDO 1v · 2819 ms |
+| Fox Sports HD | categories/sports.m3u | Sports | 45.184.109.10/live/69393EAE6ADBC65A68F942022362A202/1552.m3u8 | HLS VÁLIDO · 661 ms |
+| Fox Sports News (1080p) | categories/sports.m3u | News;Sports | skynewsau-live-premium.akamaized.net/hls/live/2105307/foxsportsnews/live_1080p.m3u8 | HLS VÁLIDO · 327 ms |
+| Pluto TV Deportes | categories/sports.m3u | Sports | jmp2.uk/plu-5dcde07af1c85b0009b18651.m3u8 | HLS VÁLIDO · 847 ms |
+| Teledeporte (720p) [Geo-blocked] | categories/sports.m3u | Sports | rtvelivestream.rtve.es/rtvesec/tdp/tdp_main.m3u8 | HLS VÁLIDO · 394 ms |
+| TNT Sports (Argentina) | categories/sports.m3u | Sports | 45.184.109.10/live/69393EAE6ADBC65A68F942022362A202/86.m3u8 | HLS VÁLIDO · 500 ms |
+| TNT Sports (Chile) (480p) | categories/sports.m3u | Sports | 205.235.6.29/play/a0xa/index.m3u8 | HLS VÁLIDO 1v · 226 ms |
+| TyC Sports (1080p) | categories/sports.m3u | Sports | amg26268-amg26268c14-freelivesports-emea-10267.playouts.now.amagi.tv/ts-us-e2-n2/playlist/amg26268-sportsstudio-tycsports-f | HLS VÁLIDO 1v · 215 ms |
 | Azteca Deportes Network (720p) | categories/sports.m3u | Sports | 38.194.226.190/play/a02r/index.m3u8 | HTTP 0 TypeError:ECONNREFUSED · — |
 | beIN Sports 1 | categories/sports.m3u | Sports | vg162.adcdsd123321.shop/7.m3u8 | HTTP 403 · <!DOCTYPE html>
 <html class="no-js" lang |
@@ -124,6 +123,7 @@ canales que coinciden: 161 de 3909 entradas
 | TNT Sports (Argentina) SD (576p) | categories/sports.m3u | Sports | 181.78.79.131/play/a0mo | HTTP 0 AbortError: · — |
 | TNT Sports Premium ArgentinaHD (1080p) | categories/sports.m3u | Sports | 181.78.79.131/play/a0q9 | HTTP 0 AbortError: · — |
 | TNT Sports Premium HD | categories/sports.m3u | Sports | play-fulltv.com.ar/playtvpre/tntsportschile.m3u8 | HTTP 404 · Canal no encontrado |
+| TyC Sports USA | categories/sports.m3u | Sports | 45.170.130.224/play/a020/index.m3u8 | HTTP 0 TypeError:UND_ERR_CONNECT_TIMEOUT · — |
 | Win Sports (1080p) | categories/sports.m3u | Sports | 138.121.15.230/WIN-SPORT/index.m3u8 | HTTP 206 · #EXTM3U
 #EXT-X-STREAM-INF:AVERAGE-BANDWI |
 | TUDN (Mexico) (1080p) | countries/mx.m3u | Undefined | streaming.alwaysdata.net/tudn.php | HTTP 200 · <!DOCTYPE html>

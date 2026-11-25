@@ -28,7 +28,7 @@
 | doramasflix.io | episodios | — | 2 | doramasflix.io/capitulos/fool-in-love-1x14 doramasflix.io/capitulos/love-in-disguise-1x12 |
 | doramasflix.io | episodio | 200 | 3 urls, 0 iframes, 0 data-*, señales=latino,castellano,sub,jsonld,nextData | doramasflix.io/capitulos/fool-in-love-1x14 |
 | doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTl3Y21sdFpXeHZZ |
-| doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTlrYnpkbmJ5NWpi |
+| doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTlpZVhObFpuVnFa |
 | doramasflix.io | · visor | — | señal | embedshortener.co/e/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaW5rIjoiYUhSMGNITTZMeTkyYjJVdWMzZ3Za |
 | doramastv.to | portada | 0 | TypeError | 0 urls, 0 iframes, 0 data-*, señales=— |
 | doramasqueen.com | portada | 200 | OK | 0 urls, 0 iframes, 0 data-*, señales=— |

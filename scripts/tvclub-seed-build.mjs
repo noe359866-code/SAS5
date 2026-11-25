@@ -1,20 +1,27 @@
 #!/usr/bin/env node
 /**
- * Sonda de m3u.tvcluboficial.com para la LISTA M3U (petición del usuario,
- * 25-11-2026: «añade canales… sonda a tvcluboficial y a iptvgo.cc»).
+ * Sonda-barrido de m3u.tvcluboficial.com para la LISTA M3U (petición del
+ * usuario, 25-11-2026: «añade canales… sonda a tvcluboficial y a iptvgo.cc»).
  *
  * Corre en GitHub Actions (desde el sandbox local no hay ruta al host).
- * Las credenciales Xtream salen de las propias URLs públicas de la semilla
- * verificada (`/free/ReachBot/Kip/<id>.m3u8`). Estrategia:
  *
- *   1. player_api (login → categorías → todos los streams);
- *   2. si falla, get.php?type=m3u_plus parseada con lib/liveChannels.js.
+ * El host NO es un panel Xtream (player_api y get.php dan 404 — comprobado
+ * el 25-11-2026): solo sirve HLS por id numérico en la ruta pública
+ * `/free/ReachBot/Kip/<id>.m3u8`. La sonda 13 midió que los ids vivos son
+ * dispersos (33 de 83 muestreados, hasta ~1180) y que no exige User-Agent.
  *
- * El panel es latino: se incluye todo lo que no sea adulto o región ajena
- * (mismo filtro de prefijos que la mega-sonda iptvgo). Sin prefijo de país,
- * el canal cae en el grupo «Latinoamérica». Escribe
- * `lib/data/liveChannelsTvclubSeed.json` con guarda del 80 % y el informe
- * en `.probe/tvclub-mega.md`. No se imprimen credenciales.
+ * Estrategia:
+ *   1. intento rápido de player_api (por si el panel abre algún día);
+ *   2. barrido 1..MAX_ID: maestra 200 + #EXTM3U + primer segmento con bytes
+ *      (la misma barra de calidad que la sonda 13);
+ *   3. nombres: los ids ya conocidos (semillas del addon / listas Magma y
+ *      Cinecity) traen nombre, país y logo; los nuevos entran como
+ *      «tvclub <id>» en el grupo «Latinoamérica» (panel latino) hasta que
+ *      una lista los nombre.
+ *
+ * Escribe `lib/data/liveChannelsTvclubSeed.json` con guarda del 80 % y el
+ * informe en `.probe/tvclub-mega.md`. No se imprimen credenciales (la de la
+ * ruta es pública: va en todas las URLs del propio servicio).
  */
 
 import { createRequire } from 'node:module';
@@ -22,169 +29,143 @@ const require = createRequire(import.meta.url);
 const fs = require('node:fs');
 
 const GENERIC_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
-const TIMEOUT = 60_000;
+const TIMEOUT = 8_000;
+const CONCURRENCY = 32;
 
-// Credencial pública embebida en las URLs de la semilla verificada.
 const BASE = 'http://m3u.tvcluboficial.com';
-const USER = 'ReachBot';
-const PASS = 'Kip';
+const PATH_PREFIX = '/free/ReachBot/Kip/'; // ruta pública del propio servicio
 
 const OUT_JSON = 'lib/data/liveChannelsTvclubSeed.json';
 const OUT_MD = '.probe/tvclub-mega.md';
 
-/** Adulto: nunca entra a la lista. */
-const EXCLUDE_ADULT = /xxx|adult|porn|playboy|hustler|brazzers|onlyfans|red ?light|venus|erotic|babes|private ?tv|\bsex\b|mature|hot ?tv|\+\s?18/i;
-
-/** Prefijos de región ajenos (panel latino: todo lo demás entra). */
-const EXCLUDE_PREFIX = new Set([
-  'DE', 'AR', 'PT', 'LIVE', 'REPLAY', 'UK', 'FR', 'IT', 'IN', 'PK', 'TR', 'NL',
-  'BE', 'PL', 'RU', 'RO', 'GR', 'IL', 'IR', 'AF', 'AU', 'NZ', 'SE', 'NO', 'DK',
-  'FI', 'CZ', 'HU', 'HR', 'RS', 'BG', 'UA', 'AL', 'ZA', 'NG', 'GH', 'KE', 'CN',
-  'JP', 'KR', 'TH', 'VN', 'ID', 'MY', 'SG', 'PH', 'BD', 'IQ', 'EG', 'SA', 'AE',
-  'QA', 'KW', 'MA', 'DZ', 'TN', 'LY', 'JO', 'LB', 'SY', 'YE', 'OM', 'BH', 'PS',
-  'SD', 'EE', 'LV', 'LT', 'IE', 'MT', 'CY', 'IS', 'USA', 'CANADA', 'CAN', 'US',
-]);
-// Nota: USA/Canadá tampoco entran desde tvclub — ese bloque ya lo cubre la
-// mega-sonda de iptvgo con miles de señales; aquí sumamos lo latino.
-
-/** Prefijo de categoría → país (claves sin acentos, normalizadas). */
-const PREFIX_COUNTRY = {
-  LATINO: 'Latinoamérica', LATIN: 'Latinoamérica', LATAM: 'Latinoamérica', LATINOS: 'Latinoamérica',
-  SPAIN: 'España', ESPANA: 'España', ES: 'España',
-  MEXICO: 'México', MEX: 'México', MX: 'México',
-  ARGENTINA: 'Argentina', ARG: 'Argentina',
-  BOLIVIA: 'Bolivia', BOL: 'Bolivia', BO: 'Bolivia',
-  CHILE: 'Chile', CHI: 'Chile', CL: 'Chile',
-  COLOMBIA: 'Colombia', COL: 'Colombia', CO: 'Colombia',
-  'COSTA RICA': 'Costa Rica', CRI: 'Costa Rica', CR: 'Costa Rica',
-  DOMINICANA: 'Rep. Dominicana', DOMINICAN: 'Rep. Dominicana', 'REP DOM': 'Rep. Dominicana',
-  'REPUBLICA DOMINICANA': 'Rep. Dominicana', RD: 'Rep. Dominicana', DO: 'Rep. Dominicana',
-  ECUADOR: 'Ecuador', ECU: 'Ecuador', EC: 'Ecuador',
-  'EL SALVADOR': 'El Salvador', SALVADOR: 'El Salvador', SLV: 'El Salvador', SV: 'El Salvador',
-  GUATEMALA: 'Guatemala', GTM: 'Guatemala', GUA: 'Guatemala', GT: 'Guatemala',
-  HONDURAS: 'Honduras', HND: 'Honduras', HON: 'Honduras', HN: 'Honduras',
-  NICARAGUA: 'Nicaragua', NIC: 'Nicaragua', NI: 'Nicaragua',
-  PANAMA: 'Panamá', PAN: 'Panamá', PA: 'Panamá',
-  PARAGUAY: 'Paraguay', PRY: 'Paraguay', PY: 'Paraguay',
-  PERU: 'Perú', PER: 'Perú', PE: 'Perú',
-  'PUERTO RICO': 'Puerto Rico', PRI: 'Puerto Rico', PR: 'Puerto Rico',
-  URUGUAY: 'Uruguay', URY: 'Uruguay', UY: 'Uruguay',
-  VENEZUELA: 'Venezuela', VEN: 'Venezuela', VE: 'Venezuela',
-  BRASIL: 'Brasil', BRAZIL: 'Brasil', BRA: 'Brasil', BR: 'Brasil',
-  CARIBBEAN: 'Caribe', CARIBE: 'Caribe',
-};
-
-/** Tema por nombre de categoría (manda sobre el nombre del canal). */
-const CATEGORY_TOPIC = [
-  [/sport|deport|futbol|soccer|espn|fox sports|bein|dazn|tyc|dsports|nba|nfl|mlb|nhl|mls|ufc|wwe|box/i, 'deportes'],
-  [/news|noticia|informativ/i, 'noticias'],
-  [/kids|infantil|cartoon|disney junior|nickelodeon|\bnick\b|baby/i, 'infantil'],
-  [/anime|crunchyroll|animax/i, 'anime'],
-  [/music|m[uú]sica|radio|\bmtv\b|karaoke/i, 'musica'],
-  [/docu|discovery|nat ?geo|history|animal planet|cultura/i, 'documentales'],
-  [/relig|church|god tv|enlace|ewtn|catolic|cristian/i, 'religion'],
-  [/cine|movie|pel[ií]cula|cinema|hallmark|\bfilm/i, 'cine'],
-  [/series|novela|entreten|entertain|reality|show|variedad/i, 'entretenimiento'],
-];
-
 const { cleanChannelName: cleanName } = require('../lib/liveChannelNames');
-const { thematicCategoryOf } = require('../lib/liveTopics');
-const { parseM3U } = require('../lib/liveChannels');
-
-const BANNER = /[☆▁▂▄▅▆▇█▀]|={3,}|\|{3,}|-{4,}/;
-const isDecoration = (raw) => BANNER.test(String(raw || ''));
-
-const normPrefix = (value) => String(value || '').trim().toUpperCase()
-  .normalize('NFD').replace(/[̀-ͯ]/g, '')
-  .replace(/[.\-_]+/g, ' ').replace(/\s+/g, ' ');
+const { thematicCategoryOf, countryLabelOf } = require('../lib/liveTopics');
 
 const slugOf = (name) => String(name || '')
   .normalize('NFD').replace(/[̀-ͯ]/g, '')
   .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
 
-async function get(url) {
+/** Ids ya conocidos → nombre/país/tema/logo (de las semillas del addon). */
+function knownChannels() {
+  const map = new Map();
+  const seeds = [
+    ['../lib/data/liveChannelsSeed.json', false],
+    ['../lib/data/liveChannelsUnverifiedSeed.json', true],
+  ];
+  for (const [rel, unverified] of seeds) {
+    let seed = [];
+    try { seed = require(rel); } catch { continue; }
+    for (const raw of seed) {
+      const m = /tvcluboficial\.com\/[^/]+\/[^/]+\/[^/]+\/(\d+)\.m3u8/.exec(raw.url || '');
+      if (!m) continue;
+      const id = Number(m[1]);
+      if (map.has(id)) continue;
+      map.set(id, {
+        name: raw.name,
+        country: raw.country || countryLabelOf(raw.category) || 'Latinoamérica',
+        topic: raw.topic || thematicCategoryOf(raw.name, raw.category),
+        logo: raw.logo || '',
+        unverified,
+      });
+    }
+  }
+  return map;
+}
+
+async function fetchBytes(url, { range = false } = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT);
   try {
-    const res = await fetch(url, { headers: { 'User-Agent': GENERIC_UA }, signal: controller.signal });
-    return { status: res.status, text: await res.text() };
+    const res = await fetch(url, {
+      headers: {
+        'User-Agent': GENERIC_UA,
+        ...(range ? { Range: 'bytes=0-2047' } : {}),
+      },
+      signal: controller.signal,
+    });
+    const buf = Buffer.from(await res.arrayBuffer());
+    return { status: res.status, buf };
   } finally { clearTimeout(timer); }
+}
+
+/** Maestra 200 + #EXTM3U + primer tramo (variante→segmento) con bytes. */
+async function isAlive(id) {
+  const url = `${BASE}${PATH_PREFIX}${id}.m3u8`;
+  let master;
+  try {
+    master = await fetchBytes(url);
+  } catch { return false; }
+  if (master.status !== 200 || !master.buf.includes('#EXTM3U')) return false;
+  // Primer tramo de la cadena: variante (maestra) o segmento (media playlist)
+  const lines = master.buf.toString('utf8').split('\n').map((l) => l.trim()).filter(Boolean);
+  const first = lines.find((l) => !l.startsWith('#'));
+  if (!first) return false;
+  const nextUrl = first.startsWith('http') ? first : new URL(first, url).href;
+  const isSegment = !/\.m3u8/i.test(first);
+  try {
+    const part = await fetchBytes(nextUrl, { range: isSegment });
+    if (![200, 206].includes(part.status) || part.buf.length < 100) return false;
+    if (!isSegment && !part.buf.includes('#EXTM3U')) return false;
+  } catch { return false; }
+  return true;
 }
 
 (async () => {
   const out = [];
   const say = (line) => { out.push(line); console.log(line); };
+  const t0 = Date.now();
   try {
-    say('# Sonda m3u.tvcluboficial.com (panel Xtream, para la lista M3U)');
+    say('# Sonda-barrido m3u.tvcluboficial.com (para la lista M3U)');
     say('');
     say(`Fecha: ${new Date().toISOString()}`);
     say('');
 
-    // 1) player_api
-    let channels = []; // {name, group, logo, url}
-    let mode = 'player_api';
-    const login = await get(`${BASE}/player_api.php?username=${USER}&password=${PASS}`);
-    let status = '—';
-    try { status = JSON.parse(login.text)?.user_info?.status || '—'; } catch {}
-    say(`login: HTTP ${login.status} · status ${status}`);
+    // 1) ¿Abrió el panel Xtream algún día? (un intento barato)
+    const login = await fetchBytes(`${BASE}/player_api.php?username=x&password=x`).catch(() => null);
+    say(`player_api: HTTP ${login ? login.status : 'sin ruta'} (404 = host de solo-streams, se barre por ids)`);
 
-    if (String(status).toLowerCase() === 'active') {
-      const [cats, streams] = await Promise.all([
-        get(`${BASE}/player_api.php?username=${USER}&password=${PASS}&action=get_live_categories`),
-        get(`${BASE}/player_api.php?username=${USER}&password=${PASS}&action=get_live_streams`),
-      ]);
-      const catName = new Map((JSON.parse(cats.text) || []).map((c) => [String(c.category_id), c.category_name]));
-      const all = JSON.parse(streams.text) || [];
-      say(`panel: ${all.length} canales · ${catName.size} categorías`);
-      for (const ch of all) {
-        channels.push({
-          name: ch.name,
-          group: catName.get(String(ch.category_id)) || '',
-          logo: ch.stream_icon || '',
-          url: `${BASE}/free/${USER}/${PASS}/${ch.stream_id}.m3u8`,
-        });
+    // 2) Barrido de ids
+    const known = knownChannels();
+    const maxKnown = Math.max(0, ...known.keys());
+    const MAX_ID = Math.max(1600, maxKnown + 400);
+    say(`ids conocidos con nombre: ${known.size} · máximo conocido: ${maxKnown} · barrido: 1..${MAX_ID}`);
+    say('');
+
+    const alive = [];
+    let next = 1;
+    async function worker() {
+      while (next <= MAX_ID) {
+        const id = next++;
+        if (await isAlive(id)) alive.push(id);
       }
-    } else {
-      // 2) get.php m3u_plus de respaldo
-      mode = 'get.php';
-      const pl = await get(`${BASE}/get.php?username=${USER}&password=${PASS}&type=m3u_plus&output=ts`);
-      say(`get.php: HTTP ${pl.status} · ${pl.text.length} bytes`);
-      if (!/^#EXTM3U/.test(pl.text.trim())) throw new Error('ni player_api ni get.php respondieron con canales');
-      for (const e of parseM3U(pl.text)) {
-        channels.push({ name: e.name, group: e.group, logo: e.logo, url: e.url });
-      }
-      say(`playlist: ${channels.length} entradas`);
     }
+    await Promise.all(Array.from({ length: CONCURRENCY }, worker));
+    alive.sort((a, b) => a - b);
+    say(`barrido: ${alive.length} ids vivos de ${MAX_ID} (${((Date.now() - t0) / 1000).toFixed(0)} s)`);
+    say('');
 
-    const seen = new Set();
     const picked = [];
     const byGroup = new Map();
-    let skippedAdult = 0;
-    let skippedRegion = 0;
-    let skippedJunk = 0;
-
-    for (const ch of channels) {
-      const group = String(ch.group || '').trim();
-      if (EXCLUDE_ADULT.test(group) || EXCLUDE_ADULT.test(ch.name)) { skippedAdult += 1; continue; }
-      const prefix = normPrefix(group.split(/[|:]/)[0] || group);
-      if (EXCLUDE_PREFIX.has(prefix)) { skippedRegion += 1; continue; }
-      if (isDecoration(ch.name)) { skippedJunk += 1; continue; }
-
-      const country = PREFIX_COUNTRY[prefix] || 'Latinoamérica';
-      let topic = '';
-      for (const [re, t] of CATEGORY_TOPIC) if (re.test(group)) { topic = t; break; }
-      const name = cleanName(ch.name, topic || undefined);
-      if (!topic) topic = thematicCategoryOf(name, '');
-      if (!name || (name.match(/[a-záéíóúñ]/gi) || []).length < 2) { skippedJunk += 1; continue; }
-
-      const key = `${country}|${slugOf(name)}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      picked.push({ name, slug: slugOf(name), topic, country, logo: ch.logo || '', url: ch.url });
+    let withName = 0;
+    for (const id of alive) {
+      const k = known.get(id);
+      const name = k ? cleanName(k.name, k.topic) : `tvclub ${id}`;
+      if (!name || (name.match(/[a-záéíóúñ]/gi) || []).length < 2) continue;
+      const topic = k?.topic || 'entretenimiento';
+      const country = k?.country || 'Latinoamérica';
+      if (k) withName += 1;
+      picked.push({
+        name,
+        slug: slugOf(name) || `tvclub-${id}`,
+        topic,
+        country,
+        logo: k?.logo || '',
+        url: `${BASE}${PATH_PREFIX}${id}.m3u8`,
+      });
       byGroup.set(country, (byGroup.get(country) || 0) + 1);
     }
 
-    say(`modo: ${mode} · filtrado: ${skippedAdult} adulto · ${skippedRegion} otras regiones · ${skippedJunk} basura`);
+    say(`con nombre conocido: ${withName} · nuevos sin nombre («tvclub <id>»): ${picked.length - withName}`);
     say('');
     say('## Canales por grupo');
     say('');
@@ -194,7 +175,7 @@ async function get(url) {
 
     let current = [];
     try { current = JSON.parse(fs.readFileSync(OUT_JSON, 'utf8')); } catch {}
-    const floor = current.length ? Math.floor(current.length * 0.8) : 50;
+    const floor = current.length ? Math.floor(current.length * 0.8) : 30;
     if (picked.length >= floor) {
       fs.writeFileSync(OUT_JSON, JSON.stringify(picked, null, 1) + '\n');
       say(`semilla tvclub escrita: ${current.length} -> ${picked.length}`);

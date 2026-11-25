@@ -60,6 +60,26 @@
   "unverified": true
  },
  {
+  "name": "3ABN",
+  "slug": "3abn",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/3abn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303979.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "3ABN CARIBBEAN",
+  "slug": "3abn-caribbean",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/3abn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/280213.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "4DmásNoticias TV F",
   "slug": "4dmasnoticias-tv-f",
   "category": "noticias",
@@ -80,6 +100,16 @@
   "unverified": true
  },
  {
+  "name": "A Wealth of Entertainment PLUS (AWE Plus)",
+  "slug": "a-wealth-of-entertainment-plus-awe-plus",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/awealthofentertainment.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303692.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "A&E",
   "slug": "a-e",
   "category": "argentina",
@@ -90,11 +120,41 @@
   "unverified": true
  },
  {
+  "name": "A&E",
+  "slug": "a-e",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/ae.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303700.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "A&E LA",
+  "slug": "a-e-la",
+  "category": "puertorico",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303699.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "A+ Guate TV (HD)",
   "slug": "a-guate-tv-hd",
   "category": "guatemala",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/A%2B_Guate_logo2023.webp/640px-A%2B_Guate_logo2023.webp.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688677.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ABC",
+  "slug": "abc",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/abc.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304007.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -120,6 +180,26 @@
   "unverified": true
  },
  {
+  "name": "ACTN",
+  "slug": "actn",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/ctn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304030.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ACTS",
+  "slug": "acts",
+  "category": "puertorico",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303489.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "ADN Radio (UHD)",
   "slug": "adn-radio-uhd",
   "category": "musica",
@@ -135,6 +215,36 @@
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/adrenalinasportsnetwork.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/7902.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "AETV",
+  "slug": "aetv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/zaetv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303972.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "AFRCA",
+  "slug": "afrca",
+  "category": "puertorico",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304002.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "AFRICA",
+  "slug": "africa",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/africa7.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303770.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -190,6 +300,26 @@
   "unverified": true
  },
  {
+  "name": "ALJAZEERA",
+  "slug": "aljazeera",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/aljazeera.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303697.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ALJZENG",
+  "slug": "aljzeng",
+  "category": "puertorico",
+  "logo": "https://logo.iptveditor.com/aljazeeraeng.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304061.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Alternativa TV (Huasco) (HD)",
   "slug": "alternativa-tv-huasco-hd",
   "category": "chile",
@@ -235,6 +365,16 @@
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/amc.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671126.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "AMC",
+  "slug": "amc",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/amc.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303696.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -310,11 +450,41 @@
   "unverified": true
  },
  {
+  "name": "ANDTV",
+  "slug": "andtv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/andtv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304078.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "ANIMAL PLANET",
   "slug": "animal-planet",
   "category": "documentales",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Animal_Planet.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671122.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Animal Planet Latin",
+  "slug": "animal-planet-latin",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/animalplanetlat.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303769.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Animal Plannet",
+  "slug": "animal-plannet",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/animalplanet.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303695.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -380,6 +550,26 @@
   "unverified": true
  },
  {
+  "name": "ARC1 TT",
+  "slug": "arc1-tt",
+  "category": "puertorico",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303475.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ARC2 TT",
+  "slug": "arc2-tt",
+  "category": "puertorico",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303485.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "ARGENTINISIMA",
   "slug": "argentinisima",
   "category": "argentina",
@@ -395,6 +585,16 @@
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/argentinisimasatelital.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671119.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ARTS",
+  "slug": "arts",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/arts.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/280212.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -510,6 +710,16 @@
   "unverified": true
  },
  {
+  "name": "ATV (ANGUILLA TV)",
+  "slug": "atv-anguilla-tv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/atv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303693.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "ATV DIGITAL HD",
   "slug": "atv-digital-hd",
   "category": "honduras",
@@ -590,6 +800,16 @@
   "unverified": true
  },
  {
+  "name": "AWE",
+  "slug": "awe",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/awe.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303965.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "AXN",
   "slug": "axn",
   "category": "argentina",
@@ -600,11 +820,31 @@
   "unverified": true
  },
  {
+  "name": "AXN",
+  "slug": "axn",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/axn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304044.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Aysén TV (HD)",
   "slug": "aysen-tv-hd",
   "category": "chile",
   "logo": "",
   "url": "http://iptvgo.cc/live/Will1/Will1/688009.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Az Cinema MX UHD®",
+  "slug": "az-cinema-mx-uhd",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/azcinema.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716721.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -630,11 +870,51 @@
   "unverified": true
  },
  {
+  "name": "BA TV",
+  "slug": "ba-tv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/tv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303766.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Baby Tv",
   "slug": "baby-tv",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/babytv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671118.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BBC America",
+  "slug": "bbc-america",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bbcamerica.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304008.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BBC World",
+  "slug": "bbc-world",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bbcworld.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303980.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BBC WORLD NEWS",
+  "slug": "bbc-world-news",
+  "category": "noticias",
+  "logo": "https://logo.m3uassets.com/bbcworldnews.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303771.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -730,6 +1010,56 @@
   "unverified": true
  },
  {
+  "name": "BET",
+  "slug": "bet",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bet.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303966.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BET Gospel",
+  "slug": "bet-gospel",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/betgospel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303689.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BET Her",
+  "slug": "bet-her",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bether.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303973.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BET SOUL",
+  "slug": "bet-soul",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/betsoul.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303688.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BFTV",
+  "slug": "bftv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/ftv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303687.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "BH TV HD",
   "slug": "bh-tv-hd",
   "category": "peru",
@@ -745,6 +1075,36 @@
   "category": "peru",
   "logo": "https://logo.m3uassets.com/bht1.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688370.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Bizz TV",
+  "slug": "bizz-tv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/biztv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304080.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Bloomberg",
+  "slug": "bloomberg",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bloomberg.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303685.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "bMobile TV",
+  "slug": "bmobile-tv",
+  "category": "puertorico",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304014.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -830,6 +1190,16 @@
   "unverified": true
  },
  {
+  "name": "BRAVO",
+  "slug": "bravo",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bravo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303683.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "BRAVO TV",
   "slug": "bravo-tv",
   "category": "argentina",
@@ -855,6 +1225,46 @@
   "category": "venezuela",
   "logo": "https://logo.m3uassets.com/btatv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688459.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BTCTV Bahamas",
+  "slug": "btctv-bahamas",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/tctv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303682.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "BVN",
+  "slug": "bvn",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bvn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303681.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "C Sport",
+  "slug": "c-sport",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/sport.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304067.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "C Sport 2",
+  "slug": "c-sport-2",
+  "category": "deportes",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304066.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -935,6 +1345,56 @@
   "category": "peru",
   "logo": "https://logo.m3uassets.com/cajamarcatv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688369.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CALA ACTION",
+  "slug": "cala-action",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/calaaction.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303753.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CALA BASH",
+  "slug": "cala-bash",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/calabashtv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303680.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CALA CLASSIC",
+  "slug": "cala-classic",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/calaclassics.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303679.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CALA WEATHER",
+  "slug": "cala-weather",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/calaweather.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303678.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CALA WESTERN",
+  "slug": "cala-western",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/calawesterns.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303677.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -1035,6 +1495,16 @@
   "category": "guatemala",
   "logo": "https://logo.m3uassets.com/canal11.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688696.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CANAL 11",
+  "slug": "canal-11",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/canal11.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/280209.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -2380,1501 +2850,11 @@
   "unverified": true
  },
  {
-  "name": "CAR : Ceen TV",
-  "slug": "car-ceen-tv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/ceentv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/295495.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR : Dancehall",
-  "slug": "car-dancehall",
-  "category": "puertorico",
-  "logo": "http://logo.protv.cc/picons/logos/DENCEHALL-REGGAE.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/295496.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR : DANCEHALL REGGAE ORIGINS",
-  "slug": "car-dancehall-reggae-origins",
-  "category": "puertorico",
-  "logo": "https://lo1.in/car/dncha.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/295522.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR : Feva TV",
-  "slug": "car-feva-tv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/fevatv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/295497.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "Car Sports Max 1",
   "slug": "car-sports-max-1",
   "category": "deportes",
   "logo": "https://logo.m3uassets.com/sportsmax.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/304093.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: 3ABN",
-  "slug": "car-3abn",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/3abn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303979.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: 3ABN CARIBBEAN",
-  "slug": "car-3abn-caribbean",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/3abn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280213.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: A Wealth of Entertainment PLUS (AWE Plus)",
-  "slug": "car-a-wealth-of-entertainment-plus-awe-plus",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/awealthofentertainment.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303692.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: A&E",
-  "slug": "car-a-e",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/ae.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303700.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: A&E LA",
-  "slug": "car-a-e-la",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303699.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ABC",
-  "slug": "car-abc",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/abc.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304007.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ACTN",
-  "slug": "car-actn",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/ctn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304030.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ACTS",
-  "slug": "car-acts",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303489.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: AETV",
-  "slug": "car-aetv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/zaetv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303972.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: AFRCA",
-  "slug": "car-afrca",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304002.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: AFRICA",
-  "slug": "car-africa",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/africa7.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303770.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ALJAZEERA",
-  "slug": "car-aljazeera",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/aljazeera.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303697.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ALJZENG",
-  "slug": "car-aljzeng",
-  "category": "puertorico",
-  "logo": "https://logo.iptveditor.com/aljazeeraeng.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304061.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: AMC",
-  "slug": "car-amc",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/amc.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303696.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ANDTV",
-  "slug": "car-andtv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/andtv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304078.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Animal Planet",
-  "slug": "car-animal-planet",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/animalplanet.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304043.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Animal Planet Latin",
-  "slug": "car-animal-planet-latin",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/animalplanetlat.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303769.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Animal Plannet",
-  "slug": "car-animal-plannet",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/animalplanet.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303695.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ARC1 TT",
-  "slug": "car-arc1-tt",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303475.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ARC2 TT",
-  "slug": "car-arc2-tt",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303485.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ARTS",
-  "slug": "car-arts",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/arts.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280212.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ATV (ANGUILLA TV)",
-  "slug": "car-atv-anguilla-tv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/atv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303693.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: AWE",
-  "slug": "car-awe",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/awe.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303965.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: AXN",
-  "slug": "car-axn",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/axn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304044.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BA TV",
-  "slug": "car-ba-tv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/tv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303766.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BBC America",
-  "slug": "car-bbc-america",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/bbcamerica.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304008.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BBC World",
-  "slug": "car-bbc-world",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/bbcworld.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303980.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BBC WORLD NEWS",
-  "slug": "car-bbc-world-news",
-  "category": "noticias",
-  "logo": "https://logo.m3uassets.com/bbcworldnews.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303771.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BET",
-  "slug": "car-bet",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/bet.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303966.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BET Gospel",
-  "slug": "car-bet-gospel",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/betgospel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303689.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BET Her",
-  "slug": "car-bet-her",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/bether.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303973.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BET SOUL",
-  "slug": "car-bet-soul",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/betsoul.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303688.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BFTV",
-  "slug": "car-bftv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/ftv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303687.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Bizz TV",
-  "slug": "car-bizz-tv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/biztv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304080.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Bloomberg",
-  "slug": "car-bloomberg",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/bloomberg.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303685.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: bMobile TV",
-  "slug": "car-bmobile-tv",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304014.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BRAVO",
-  "slug": "car-bravo",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/bravo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303683.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BTCTV Bahamas",
-  "slug": "car-btctv-bahamas",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/tctv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303682.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: BVN",
-  "slug": "car-bvn",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/bvn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303681.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: C Sport",
-  "slug": "car-c-sport",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/sport.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304067.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: C Sport 2",
-  "slug": "car-c-sport-2",
-  "category": "deportes",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304066.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CALA ACTION",
-  "slug": "car-cala-action",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/calaaction.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303753.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CALA BASH",
-  "slug": "car-cala-bash",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/calabashtv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303680.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CALA CLASSIC",
-  "slug": "car-cala-classic",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/calaclassics.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303679.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CALA WEATHER",
-  "slug": "car-cala-weather",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/calaweather.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303678.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CALA WESTERN",
-  "slug": "car-cala-western",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/calawesterns.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303677.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CANAL 11",
-  "slug": "car-canal-11",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/canal11.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280209.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CARIBVISION",
-  "slug": "car-caribvision",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/caribvision.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280208.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CARS",
-  "slug": "car-cars",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cars.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303676.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CARS TV",
-  "slug": "car-cars-tv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/carstv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280207.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Cartoon Network",
-  "slug": "car-cartoon-network",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/cartoonnetwork.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304045.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Cartoonito",
-  "slug": "car-cartoonito",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/cartoonito.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303684.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CAS",
-  "slug": "car-cas",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/casa.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304031.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CBC BARBADOS",
-  "slug": "car-cbc-barbados",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cbctvbarbadoscar.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303675.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CBC TV 8",
-  "slug": "car-cbc-tv-8",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cbctv8.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280206.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CBN",
-  "slug": "car-cbn",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cbn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303763.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CBN TV BVI",
-  "slug": "car-cbn-tv-bvi",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cbntvbvi.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280205.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CBS",
-  "slug": "car-cbs",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cbs.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304009.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CCN TV6",
-  "slug": "car-ccn-tv6",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/ccntv6.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303672.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CCTV4",
-  "slug": "car-cctv4",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cctv4.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304041.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CDM INTERNATIONAL",
-  "slug": "car-cdm-international",
-  "category": "puertorico",
-  "logo": "https://asiagrandiptv.us/logo//CDMINTERNATIONAL.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280204.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CGTN",
-  "slug": "car-cgtn",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cgtn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303671.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CGTN DOCUMENTARY",
-  "slug": "car-cgtn-documentary",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cgtndocumentary.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280203.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CGTN9",
-  "slug": "car-cgtn9",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cgtn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303985.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CGTV",
-  "slug": "car-cgtv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/ccgtv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304091.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CIG TV",
-  "slug": "car-cig-tv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cigtv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303767.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CINECHE",
-  "slug": "car-cineche",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/becine.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304057.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CINEMAX",
-  "slug": "car-cinemax",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/cinemax.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303670.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CITY",
-  "slug": "car-city",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/city.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303669.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: City TV",
-  "slug": "car-city-tv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/citytv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304046.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CLEO",
-  "slug": "car-cleo",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/leo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303756.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CLUBBING",
-  "slug": "car-clubbing",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/clubbing.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303668.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CNBC",
-  "slug": "car-cnbc",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cnbc.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303997.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CNC3",
-  "slug": "car-cnc3",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cnc3.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303666.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CNMG TT",
-  "slug": "car-cnmg-tt",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303496.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CNN",
-  "slug": "car-cnn",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cnn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304015.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CNN ESPAÑOL",
-  "slug": "car-cnn-espanol",
-  "category": "espana",
-  "logo": "https://logo.m3uassets.com/cnnenespaol.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303664.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CNN International",
-  "slug": "car-cnn-international",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cnninternational.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304016.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CNS 6 GUYANA",
-  "slug": "car-cns-6-guyana",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cns6guyana.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280201.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CNSJM",
-  "slug": "car-cnsjm",
-  "category": "puertorico",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303662.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: COMEDY CENTRAL",
-  "slug": "car-comedy-central",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/comedycentral.pngvvvv",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303661.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: COMEDY TV",
-  "slug": "car-comedy-tv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/comedytv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303660.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Cooking Channel",
-  "slug": "car-cooking-channel",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cookingchannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303659.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CTV",
-  "slug": "car-ctv",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/ctv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304017.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CUBAVISION",
-  "slug": "car-cubavision",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cubavision.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280200.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Curiosity Stream",
-  "slug": "car-curiosity-stream",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/curiositystream.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303658.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: CVM",
-  "slug": "car-cvm",
-  "category": "puertorico",
-  "logo": "https://logo.m3uassets.com/cvmtv.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303657.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Depelicula",
-  "slug": "car-depelicula",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/depelicula.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303651.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Discovery Channel",
-  "slug": "car-discovery-channel",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoverychannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304047.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Discovery Home & Health",
-  "slug": "car-discovery-home-health",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoveryhomehealth.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304048.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Discovery Kids",
-  "slug": "car-discovery-kids",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/discoverykids.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304049.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Discovery Science",
-  "slug": "car-discovery-science",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoveryscience.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303643.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Discovery THEATER",
-  "slug": "car-discovery-theater",
-  "category": "documentales",
-  "logo": "https://logo.iptveditor.com/discoverytheater.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303507.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: DISCOVERY TURBO",
-  "slug": "car-discovery-turbo",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoveryturbo.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303495.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Discovery World",
-  "slug": "car-discovery-world",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/discoveryworld.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303647.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: DISNEY",
-  "slug": "car-disney",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/disney.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303646.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Disney Channel",
-  "slug": "car-disney-channel",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/disneychannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304050.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Disney Jr",
-  "slug": "car-disney-jr",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/disneyjr.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304051.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ESPN",
-  "slug": "car-espn",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/espn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303636.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ESPN 2 CARIBBEAN",
-  "slug": "car-espn-2-caribbean",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/espn2caribbean.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280198.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ESPN 2C",
-  "slug": "car-espn-2c",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/espn2co.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304052.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ESPN C",
-  "slug": "car-espn-c",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/espnco.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304053.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ESPN CARIBBEAN",
-  "slug": "car-espn-caribbean",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/espncaribbean.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280197.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ESPN DOS",
-  "slug": "car-espn-dos",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/espn.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303635.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ESPN1",
-  "slug": "car-espn1",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/espn1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304097.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ESPN2",
-  "slug": "car-espn2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/espn2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304096.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ESPNU",
-  "slug": "car-espnu",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/espnu.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303971.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Euronews",
-  "slug": "car-euronews",
-  "category": "noticias",
-  "logo": "https://logo.m3uassets.com/euronews.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303762.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: EUROSPORT",
-  "slug": "car-eurosport",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/eurosport.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303768.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: EUROSPORT 2",
-  "slug": "car-eurosport-2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/eurosport2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303631.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Flow Sports",
-  "slug": "car-flow-sports",
-  "category": "deportes",
-  "logo": "https://logo.iptveditor.com/flowsportscar.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303702.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: FLOW SPORTS 1",
-  "slug": "car-flow-sports-1",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/flowsports.pngv",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280196.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Flowsports",
-  "slug": "car-flowsports",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/flowsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304070.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: FOX",
-  "slug": "car-fox",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/fox.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303616.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: FOX 7",
-  "slug": "car-fox-7",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/fox7.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280195.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Fox Business Network",
-  "slug": "car-fox-business-network",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/foxbusinessnetwork.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303989.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Fox News",
-  "slug": "car-fox-news",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/foxnews.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303981.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Fox Sports 2",
-  "slug": "car-fox-sports-2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/foxsports2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303614.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Game Show Network",
-  "slug": "car-game-show-network",
-  "category": "entretenimiento",
-  "logo": "https://logo.m3uassets.com/gameshownetwork.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303990.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: GIS Dominica",
-  "slug": "car-gis-dominica",
-  "category": "dominicana",
-  "logo": "",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303743.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: HISTORY",
-  "slug": "car-history",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/history.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303594.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: History Channel",
-  "slug": "car-history-channel",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/historychannel.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303991.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Investigation Discovery",
-  "slug": "car-investigation-discovery",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/investigationdiscovery.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304058.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Lifetime Movie Network",
-  "slug": "car-lifetime-movie-network",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/lifetimemovienetwork.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303992.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: MUCH MUSIC",
-  "slug": "car-much-music",
-  "category": "musica",
-  "logo": "https://logo.m3uassets.com/muchmusic.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303561.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Nat Geo Wild",
-  "slug": "car-nat-geo-wild",
-  "category": "documentales",
-  "logo": "https://logo.m3uassets.com/natgeowild.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303968.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: News 18",
-  "slug": "car-news-18",
-  "category": "noticias",
-  "logo": "https://logo.m3uassets.com/news18.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304084.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: NEWSMX",
-  "slug": "car-newsmx",
-  "category": "noticias",
-  "logo": "https://logo.m3uassets.com/news.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303996.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: NICK",
-  "slug": "car-nick",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/nick.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303555.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Nickelodeon",
-  "slug": "car-nickelodeon",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/nickelodeon.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303999.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: SKY NEWS",
-  "slug": "car-sky-news",
-  "category": "noticias",
-  "logo": "https://logo.m3uassets.com/skynews.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303529.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: SPORT MAX 1",
-  "slug": "car-sport-max-1",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/maxsport1.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303523.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: SPORT MAX 2",
-  "slug": "car-sport-max-2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/maxsport2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303522.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: SPORTS MAX",
-  "slug": "car-sports-max",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/sportsmax.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280173.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: SPORTS MAX 2",
-  "slug": "car-sports-max-2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/sportsmax2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280172.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: SPORTS MAX PLUS",
-  "slug": "car-sports-max-plus",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/sportsmaxplus.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/280171.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Sportsmax 1",
-  "slug": "car-sportsmax-1",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/sportsmax.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304062.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Sportsmax2",
-  "slug": "car-sportsmax2",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/sportsmax2.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304063.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: TNT",
-  "slug": "car-tnt",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tnt.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/304073.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: TNT Series",
-  "slug": "car-tnt-series",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tntseries.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303504.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: TNTI",
-  "slug": "car-tnti",
-  "category": "deportes",
-  "logo": "https://logo.iptveditor.com/tnt.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303505.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: TV CHILE",
-  "slug": "car-tv-chile",
-  "category": "chile",
-  "logo": "https://logo.iptveditor.com/tvcarib.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303494.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: TVJ Sports",
-  "slug": "car-tvj-sports",
-  "category": "deportes",
-  "logo": "https://logo.m3uassets.com/tvjsports.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303487.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: Universal Kids",
-  "slug": "car-universal-kids",
-  "category": "infantil",
-  "logo": "https://logo.m3uassets.com/universalkids.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303520.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CAR: ZEE CINEMA",
-  "slug": "car-zee-cinema",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/zeecinema.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/303471.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -3950,11 +2930,201 @@
   "unverified": true
  },
  {
+  "name": "Carib 3ABN",
+  "slug": "carib-3abn",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/3abn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303921.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib 5 ??",
+  "slug": "carib-5",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/tvcarib.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303733.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib 6 ??",
+  "slug": "carib-6",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/tvcarib.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303734.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Carib 99_Music_FM",
   "slug": "carib-99-music-fm",
   "category": "musica",
   "logo": "",
   "url": "http://iptvgo.cc/live/Will1/Will1/303920.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib A Wealth of Entertainment (AWE)",
+  "slug": "carib-a-wealth-of-entertainment-awe",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/awealthofentertainment.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303917.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib ABS TV (TG)",
+  "slug": "carib-abs-tv-tg",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/abstv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303929.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Africa_Channel",
+  "slug": "carib-africa-channel",
+  "category": "puertorico",
+  "logo": "https://logo.iptveditor.com/africachannel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303919.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Arts",
+  "slug": "carib-arts",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/arts.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303918.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib AXN",
+  "slug": "carib-axn",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/axn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303916.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib AXSTV",
+  "slug": "carib-axstv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/axstv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303915.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Baby_First",
+  "slug": "carib-baby-first",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/babyfirst.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303913.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib BBO",
+  "slug": "carib-bbo",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bbo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303912.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib BET_Gospel",
+  "slug": "carib-bet-gospel",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/betgospel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303911.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib BET_Her",
+  "slug": "carib-bet-her",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bethercaribbean.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303910.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Bet_Jams",
+  "slug": "carib-bet-jams",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/betjams.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303909.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib BET_Soul",
+  "slug": "carib-bet-soul",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/betsoul.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303908.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Boomerang",
+  "slug": "carib-boomerang",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/boomerang.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303907.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Bravo",
+  "slug": "carib-bravo",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/bbravo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303906.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Canal_Sony",
+  "slug": "carib-canal-sony",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/canalsony.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303904.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CarsTV",
+  "slug": "carib-carstv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/carstv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303903.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -3970,11 +3140,211 @@
   "unverified": true
  },
  {
+  "name": "Carib CBC",
+  "slug": "carib-cbc",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cbc.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303901.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CCTV4",
+  "slug": "carib-cctv4",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cctv4.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303900.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CGTN",
+  "slug": "carib-cgtn",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cgtn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303858.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CGTN_Documentary",
+  "slug": "carib-cgtn-documentary",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cgtndocumentary.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303899.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Champions Leauge 1",
+  "slug": "carib-champions-leauge-1",
+  "category": "puertorico",
+  "logo": "https://seeklogo.com/vector-logo/298537/uefa-champions-league",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303728.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Champions Leauge 2",
+  "slug": "carib-champions-leauge-2",
+  "category": "puertorico",
+  "logo": "https://seeklogo.com/vector-logo/298537/uefa-champions-league",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303729.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Champions Leauge 3",
+  "slug": "carib-champions-leauge-3",
+  "category": "puertorico",
+  "logo": "https://seeklogo.com/vector-logo/298537/uefa-champions-league",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303730.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Champions Leauge 4",
+  "slug": "carib-champions-leauge-4",
+  "category": "puertorico",
+  "logo": "https://seeklogo.com/vector-logo/298537/uefa-champions-league",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303731.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Carib Cinecanal",
   "slug": "carib-cinecanal",
   "category": "cine",
   "logo": "https://logo.m3uassets.com/cinecanal.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/303897.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CityTV",
+  "slug": "carib-citytv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/citytvca.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303896.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CNBC",
+  "slug": "carib-cnbc",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cnbc.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303895.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CNN",
+  "slug": "carib-cnn",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cnn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303894.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CNN_International",
+  "slug": "carib-cnn-international",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cnninternational.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303893.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CNS",
+  "slug": "carib-cns",
+  "category": "puertorico",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303892.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Cooking_Channel",
+  "slug": "carib-cooking-channel",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cookingchannel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303891.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CTV_Comedy",
+  "slug": "carib-ctv-comedy",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/ctvcomedy.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303890.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CubaV",
+  "slug": "carib-cubav",
+  "category": "puertorico",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303889.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CVM TV",
+  "slug": "carib-cvm-tv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cvmtv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303888.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib CVMTV",
+  "slug": "carib-cvmtv",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/cvmtv.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303887.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Daystar",
+  "slug": "carib-daystar",
+  "category": "puertorico",
+  "logo": "https://logo.m3uassets.com/daystar.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303886.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Carib Dencehall_Reggae",
+  "slug": "carib-dencehall-reggae",
+  "category": "puertorico",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303885.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -4910,51 +4280,21 @@
   "unverified": true
  },
  {
-  "name": "CINE: Az Cinema MX UHD®",
-  "slug": "cine-az-cinema-mx-uhd",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/azcinema.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716721.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CINE: EUROPA EUROPA MX UHD®",
-  "slug": "cine-europa-europa-mx-uhd",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/europaeuropa.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716712.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CINE: PARAMOUNT NETWORK MX HD®",
-  "slug": "cine-paramount-network-mx-hd",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/paramountnetwork.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716705.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
-  "name": "CINE: SYFY MX UHD",
-  "slug": "cine-syfy-mx-uhd",
-  "category": "cine",
-  "logo": "https://logo.m3uassets.com/syfy.png",
-  "url": "http://iptvgo.cc/live/Will1/Will1/716661.m3u8",
-  "ua": "",
-  "ref": "",
-  "unverified": true
- },
- {
   "name": "CINEAR",
   "slug": "cinear",
   "category": "cine",
   "logo": "https://logo.m3uassets.com/cinear.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671094.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "CINECHE",
+  "slug": "cineche",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/becine.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304057.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5530,6 +4870,16 @@
   "unverified": true
  },
  {
+  "name": "Depelicula",
+  "slug": "depelicula",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/depelicula.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303651.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Deportes TIGO Bolivia",
   "slug": "deportes-tigo-bolivia",
   "category": "deportes",
@@ -5720,11 +5070,31 @@
   "unverified": true
  },
  {
+  "name": "Discovery Channel",
+  "slug": "discovery-channel",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/discoverychannel.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304047.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Discovery Home & Health",
   "slug": "discovery-home-health",
   "category": "documentales",
   "logo": "https://logo.m3uassets.com/discoveryhomehealth.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671072.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Discovery Kids",
+  "slug": "discovery-kids",
+  "category": "infantil",
+  "logo": "https://logo.m3uassets.com/discoverykids.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304049.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5750,6 +5120,16 @@
   "unverified": true
  },
  {
+  "name": "DISCOVERY TURBO",
+  "slug": "discovery-turbo",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/discoveryturbo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303495.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Discovery World",
   "slug": "discovery-world",
   "category": "documentales",
@@ -5760,11 +5140,31 @@
   "unverified": true
  },
  {
+  "name": "DISNEY",
+  "slug": "disney",
+  "category": "infantil",
+  "logo": "https://logo.m3uassets.com/disney.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303646.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "DISNEY CHANNEL",
   "slug": "disney-channel",
   "category": "infantil",
   "logo": "https://logo.m3uassets.com/disneychannel.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671075.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Disney Jr",
+  "slug": "disney-jr",
+  "category": "infantil",
+  "logo": "https://logo.m3uassets.com/disneyjr.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304051.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5805,6 +5205,16 @@
   "category": "noticias",
   "logo": "https://logo.m3uassets.com/dnews.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/841859.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "DTV PLAY DEPORTE TOTAL",
+  "slug": "dtv-play-deporte-total",
+  "category": "deportes",
+  "logo": "https://deportetotal.com.bo/wp-content/uploads/2018/09/dt-horizontal-logo.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688217.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -5930,6 +5340,16 @@
   "unverified": true
  },
  {
+  "name": "EL CANAL DEL FUTBOL Eʳ",
+  "slug": "el-canal-del-futbol-e",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/elcanaldelfutbol.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/683416.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "EL DESTAPE",
   "slug": "el-destape",
   "category": "argentina",
@@ -6010,6 +5430,96 @@
   "unverified": true
  },
  {
+  "name": "Eʟɪɪɴʀɪs 2026 | BOLIVIA (Only Event)",
+  "slug": "e-s-2026-bolivia-only-event",
+  "category": "deportes",
+  "logo": "https://png.pngtree.com/png-clipart/20191121/original/pngtree-bolivia-icon-circle-png-image_5144440.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725336.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Eʟɪɪɴʀɪs 2026 | BRASIL (Only Event)",
+  "slug": "e-s-2026-brasil-only-event",
+  "category": "deportes",
+  "logo": "https://png.pngtree.com/png-clipart/20220821/ourmid/pngtree-brazil-flag-png-image_6118899.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725335.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Eʟɪɪɴʀɪs 2026 | CHILE (Only Event)",
+  "slug": "e-s-2026-chile-only-event",
+  "category": "deportes",
+  "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-chile-flag-png-with-transparent-background-png-image_6731949.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725334.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Eʟɪɪɴʀɪs 2026 | COLOMBIA (Only Event)",
+  "slug": "e-s-2026-colombia-only-event",
+  "category": "deportes",
+  "logo": "https://png.pngtree.com/png-clipart/20191121/original/pngtree-colombia-icon-circle-png-image_5144432.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725332.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Eʟɪɪɴʀɪs 2026 | ECUADOR (Only Event)",
+  "slug": "e-s-2026-ecuador-only-event",
+  "category": "deportes",
+  "logo": "https://png.pngtree.com/png-clipart/20210620/original/pngtree-d-soccer-ball-with-the-national-flag-of-ecuador-isolated-on-png-image_6431696.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725329.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Eʟɪɪɴʀɪs 2026 | PARAGUAY (Only Event)",
+  "slug": "e-s-2026-paraguay-only-event",
+  "category": "deportes",
+  "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-paraguay-flag-png-with-transparent-background-png-image_6731971.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725327.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Eʟɪɪɴʀɪs 2026 | PERU (Only Event)",
+  "slug": "e-s-2026-peru-only-event",
+  "category": "deportes",
+  "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-peru-flag-png-with-transparent-background-png-image_6732174.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725326.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Eʟɪɪɴʀɪs 2026 | URUGUAY (Only Event)",
+  "slug": "e-s-2026-uruguay-only-event",
+  "category": "deportes",
+  "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-uruguay-flag-png-with-transparent-background-png-image_6731957.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725323.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Eʟɪɪɴʀɪs 2026 | VENEZUELA (Only Event)",
+  "slug": "e-s-2026-venezuela-only-event",
+  "category": "deportes",
+  "logo": "https://png.pngtree.com/png-clipart/20210912/original/pngtree-venezuela-flag-png-with-transparent-background-png-image_6731977.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725321.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "ENCUENTRO",
   "slug": "encuentro",
   "category": "argentina",
@@ -6050,6 +5560,196 @@
   "unverified": true
  },
  {
+  "name": "ESPN",
+  "slug": "espn",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/7906.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 1",
+  "slug": "espn-1",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn1.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/671145.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 2",
+  "slug": "espn-2",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn2.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/7905.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 2 CARIBBEAN",
+  "slug": "espn-2-caribbean",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn2caribbean.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/280198.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 2 F",
+  "slug": "espn-2-f",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn2.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/687919.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 2 HD",
+  "slug": "espn-2-hd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn2.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716745.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 2C",
+  "slug": "espn-2c",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn2co.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304052.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 3",
+  "slug": "espn-3",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn3.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/7904.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 4",
+  "slug": "espn-4",
+  "category": "deportes",
+  "logo": "https://www.izzigo.tv/images/repository/895/15603895-LOGO-m.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/7903.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 4 F",
+  "slug": "espn-4-f",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn4.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/687917.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN 4 HD",
+  "slug": "espn-4-hd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn4.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716743.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Espn 6 Fox 3",
+  "slug": "espn-6-fox-3",
+  "category": "deportes",
+  "logo": "https://barrettmedia.com/wp-content/uploads/2022/10/BIG-12-ESPN-FOX-SPORTS.jpg",
+  "url": "http://iptvgo.cc/live/Will1/Will1/688064.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN C",
+  "slug": "espn-c",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espnco.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304053.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN CARIBBEAN",
+  "slug": "espn-caribbean",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espncaribbean.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/280197.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN Deportes",
+  "slug": "espn-deportes",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espndeportes.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/725344.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN DOS",
+  "slug": "espn-dos",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303635.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN EXTRA SUR",
+  "slug": "espn-extra-sur",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espnextra.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/671141.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN F",
+  "slug": "espn-f",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/espn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/687920.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ESPN HD",
+  "slug": "espn-hd",
+  "category": "deportes",
+  "logo": "https://logo.m3uassets.com/01espn.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716746.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Esquipulas TV",
   "slug": "esquipulas-tv",
   "category": "guatemala",
@@ -6070,11 +5770,31 @@
   "unverified": true
  },
  {
+  "name": "Euronews",
+  "slug": "euronews",
+  "category": "noticias",
+  "logo": "https://logo.m3uassets.com/euronews.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303762.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "EUROPA EUROPA",
   "slug": "europa-europa",
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/europaeuropa.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671058.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "EUROPA EUROPA MX UHD®",
+  "slug": "europa-europa-mx-uhd",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/europaeuropa.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716712.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6270,6 +5990,16 @@
   "unverified": true
  },
  {
+  "name": "Game Show Network",
+  "slug": "game-show-network",
+  "category": "entretenimiento",
+  "logo": "https://logo.m3uassets.com/gameshownetwork.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303990.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "GARAGE TV",
   "slug": "garage-tv",
   "category": "argentina",
@@ -6325,6 +6055,16 @@
   "category": "chile",
   "logo": "https://logo.m3uassets.com/girovisual.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688023.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "GIS Dominica",
+  "slug": "gis-dominica",
+  "category": "dominicana",
+  "logo": "",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303743.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -6635,6 +6375,16 @@
   "category": "argentina",
   "logo": "https://lastunasong.org.ar/wp-content/uploads/2019/12/Logos_0000s_0005_Logo-Hipo%CC%81dromo-Arg-de-Palermo.jpg",
   "url": "http://iptvgo.cc/live/Will1/Will1/671041.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "HISTORY",
+  "slug": "history",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/history.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303594.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -7280,6 +7030,16 @@
   "unverified": true
  },
  {
+  "name": "Lifetime Movie Network",
+  "slug": "lifetime-movie-network",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/lifetimemovienetwork.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303992.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "LIGA 1 HD ¹",
   "slug": "liga-1-hd",
   "category": "peru",
@@ -7715,6 +7475,16 @@
   "category": "peru",
   "logo": "https://logo.m3uassets.com/mtv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688324.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "MUCH MUSIC",
+  "slug": "much-music",
+  "category": "musica",
+  "logo": "https://logo.m3uassets.com/muchmusic.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303561.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -8810,6 +8580,16 @@
   "unverified": true
  },
  {
+  "name": "Nat Geo Wild",
+  "slug": "nat-geo-wild",
+  "category": "documentales",
+  "logo": "https://logo.m3uassets.com/natgeowild.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303968.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "Net TV",
   "slug": "net-tv",
   "category": "argentina",
@@ -8830,6 +8610,26 @@
   "unverified": true
  },
  {
+  "name": "News 18",
+  "slug": "news-18",
+  "category": "noticias",
+  "logo": "https://logo.m3uassets.com/news18.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/304084.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "NEWSMX",
+  "slug": "newsmx",
+  "category": "noticias",
+  "logo": "https://logo.m3uassets.com/news.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303996.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "NEX TV",
   "slug": "nex-tv",
   "category": "paraguay",
@@ -8845,6 +8645,16 @@
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/ngfederal.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671025.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "NICK",
+  "slug": "nick",
+  "category": "infantil",
+  "logo": "https://logo.m3uassets.com/nick.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303555.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -9085,6 +8895,16 @@
   "category": "argentina",
   "logo": "https://logo.m3uassets.com/paramountnetwork.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/671019.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "PARAMOUNT NETWORK MX HD®",
+  "slug": "paramount-network-mx-hd",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/paramountnetwork.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716705.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -9770,6 +9590,16 @@
   "unverified": true
  },
  {
+  "name": "SKY NEWS",
+  "slug": "sky-news",
+  "category": "noticias",
+  "logo": "https://logo.m3uassets.com/skynews.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303529.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "SNT",
   "slug": "snt",
   "category": "paraguay",
@@ -9855,6 +9685,16 @@
   "category": "paraguay",
   "logo": "https://logo.m3uassets.com/surtv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688146.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "SYFY MX UHD",
+  "slug": "syfy-mx-uhd",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/syfy.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/716661.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -10790,6 +10630,16 @@
   "unverified": true
  },
  {
+  "name": "TV CHILE",
+  "slug": "tv-chile",
+  "category": "chile",
+  "logo": "https://logo.iptveditor.com/tvcarib.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303494.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
   "name": "TV CHILE HD",
   "slug": "tv-chile-hd",
   "category": "chile",
@@ -11115,6 +10965,16 @@
   "category": "venezuela",
   "logo": "https://logo.m3uassets.com/unitv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/688463.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "Universal Kids",
+  "slug": "universal-kids",
+  "category": "infantil",
+  "logo": "https://logo.m3uassets.com/universalkids.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303520.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true
@@ -12175,6 +12035,16 @@
   "category": "ecuador",
   "logo": "https://logo.m3uassets.com/zaracaytv.png",
   "url": "http://iptvgo.cc/live/Will1/Will1/683429.m3u8",
+  "ua": "",
+  "ref": "",
+  "unverified": true
+ },
+ {
+  "name": "ZEE CINEMA",
+  "slug": "zee-cinema",
+  "category": "cine",
+  "logo": "https://logo.m3uassets.com/zeecinema.png",
+  "url": "http://iptvgo.cc/live/Will1/Will1/303471.m3u8",
   "ua": "",
   "ref": "",
   "unverified": true

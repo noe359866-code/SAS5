@@ -43,18 +43,15 @@ describe('lista M3U del repo por países (listas/ramdonlatam-tv.m3u)', () => {
     }
   });
 
-  test('los canales se agrupan por PAÍS y el ⚠️ solo en las no verificadas', () => {
+  test('los canales se agrupan por PAÍS y los nombres van limpios (sin ⚠️)', () => {
     const channels = playlistChannels();
     // Canal 20 WTV: nombre único de la semilla sin verificar de Nicaragua
     const nic = channels.find((c) => c.slug === 'canal-20-wtv-hd');
     assert.ok(nic, 'falta Canal 20 WTV');
     assert.equal(nic.group, 'Nicaragua');
-    assert.match(nic.name, /⚠️/); // viene de la semilla sin verificar
     assert.doesNotMatch(nic.name, /\(Nicaragua\)/, 'el país va en el grupo, no en el nombre');
-    // Los verificados no llevan ⚠️
-    const verificados = channels.filter((c) => !c.unverified);
-    assert.ok(verificados.length > 100, 'pocos verificados');
-    for (const c of verificados) assert.doesNotMatch(c.name, /⚠️/, c.name);
+    // Ningún nombre lleva marcas (petición del usuario, 25-11-2026)
+    for (const c of channels) assert.doesNotMatch(c.name, /⚠️|sin verificar/i, c.name);
     // Los grupos de país van primero; los temáticos («Deportes», «Cine»…) al final
     const topicIdx = channels.findIndex((c) => ['Deportes', 'Cine', 'Música'].includes(c.group));
     const countryIdx = channels.findIndex((c) => c.group === 'Nicaragua');

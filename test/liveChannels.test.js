@@ -185,11 +185,11 @@ describe('canales sin verificar (iptvgo.cc)', () => {
     }
   });
 
-  test('la tarjeta sin verificar avisa en la descripción', () => {
+  test('la descripción va limpia, sin avisos de verificación (petición del usuario)', () => {
     const meta = live.liveMeta({ name: 'Prueba', slug: 'prueba', category: 'cine', logo: '', urls: [{ url: 'http://iptvgo.cc/live/u/p/1.m3u8' }], unverified: true });
-    assert.match(meta.description, /⚠️ Señal sin verificar/);
+    assert.doesNotMatch(meta.description, /⚠️|sin verificar/i);
     const okMeta = live.liveMeta({ name: 'Prueba', slug: 'prueba', category: 'cine', logo: '', urls: [] });
-    assert.doesNotMatch(okMeta.description, /sin verificar/);
+    assert.doesNotMatch(okMeta.description, /⚠️|sin verificar/i);
   });
 
   test('un canal sin verificar resuelve solo sus URLs de semilla', async () => {

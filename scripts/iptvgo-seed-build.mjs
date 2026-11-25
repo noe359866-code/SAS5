@@ -130,7 +130,7 @@ async function api(action = '') {
     for (const [re, ours] of OUR_CATEGORY) if (re.test(cat) || re.test(ch.name)) { category = ours; break; }
     if (!category) continue;
     if (isDecoration(ch.name)) continue;
-    const name = cleanName(ch.name);
+    const name = cleanName(ch.name, category);
     // Al menos dos letras: sin eso no es un canal («=== ===», «| |»…)
     if (!name || (name.match(/[a-záéíóúñ]/gi) || []).length < 2) continue;
     const key = `${category}:${slugOf(name)}`;

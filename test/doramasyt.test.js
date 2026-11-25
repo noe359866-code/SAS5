@@ -1,6 +1,7 @@
 'use strict';
 
-/** Proveedor de doramas incorporado el 25-11-2026 (sonda: `.probe/doramasyt.md`). */
+/** Proveedor de doramas incorporado el 25-11-2026 (sondas: `.probe/doramasyt.md`,
+ *  `.probe/doramasyt-search.md`: el buscador enlaza directo a los capítulos). */
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const doramasyt = require('../lib/sites/doramasyt');
@@ -8,11 +9,12 @@ const doramasyt = require('../lib/sites/doramasyt');
 const HLS = 'https://edge1-waw-sprintcdn.r66nv9ed.com/hls2/10/12047/abc_x/master.m3u8';
 const RESOLVED = { title: "What's Wrong with Secretary Kim", altTitle: null, year: '2018', mediaType: 'series', season: 1, episode: 16 };
 
-const LIST = '<html><body><a href="/dorama/whats-wrong-with-secretary-kim-latino/" title="What\'s Wrong with Secretary Kim Latino">Whats Wrong</a></body></html>';
-const DETAIL = `<html><body><h1>What's Wrong with Secretary Kim Latino | DoramasYT</h1>
-<p>2018</p>
-<a href="/ver/whats-wrong-with-secretary-kim-latino-episodio-16">Capítulo 16</a>
-<a href="/ver/whats-wrong-with-secretary-kim-episodio-16">Capítulo 16 sub</a></body></html>`;
+// El buscador enlaza los capítulos directamente (medido el 25-11-2026).
+const LIST = `<html><body>
+<a href="/ver/whats-wrong-with-secretary-kim-latino-episodio-16" title="Qué le ocurre a la secretaria Kim Latino Capítulo 16">c16 latino</a>
+<a href="/ver/whats-wrong-with-secretary-kim-latino-episodio-15">c15</a>
+<a href="/ver/whats-wrong-with-secretary-kim-episodio-16">c16 sub</a>
+</body></html>`;
 const EPISODE = '<html><body><button data-player="TOKEN1"></button><button data-player="TOKEN2"></button></body></html>';
 const PLAYER = '<html><body><iframe src="https://bysebuho.com/e/abc123"></iframe></body></html>';
 
@@ -34,40 +36,25 @@ function stub(routes) {
   return { calls, restore: () => { global.fetch = original; } };
 }
 
-test('doramasyt: parsing de ficha, capítulos con audio y botones data-player', () => {
-  assert.equal(doramasyt.detailTitle(DETAIL), "What's Wrong with Secretary Kim");
-  assert.equal(doramasyt.detailYear(DETAIL), 2018);
-  assert.equal(doramasyt.listingMatches(LIST, RESOLVED).length, 1);
-  const episodes = doramasyt.episodesOf(DETAIL, doramasyt.BASE);
-  assert.equal(episodes.length, 2);
-  assert.deepEqual(episodes.find((e) => e.latino), { season: 1, episode: 16, url: `${doramasyt.BASE}/ver/whats-wrong-with-secretary-kim-latino-episodio-16`, latino: true });
+test('doramasyt: enlaces /ver/ con serie, capítulo y audio deducidos', () => {
+  const links = doramasyt.verLinksOf(LIST);
+  assert.equal(links.length, 3);
+  const latino = links.find((l) => l.latino);
+  assert.deepEqual({ showSlug: latino.showSlug, season: latino.season, episode: latino.episode },
+    { showSlug: 'whats-wrong-with-secretary-kim', season: 1, episode: 16 });
+  assert.equal(latino.label, 'Qué le ocurre a la secretaria Kim');
   assert.deepEqual(doramasyt.playersOf(EPISODE), ['TOKEN1', 'TOKEN2']);
   assert.equal(doramasyt.embedFromPlayer(PLAYER), 'https://bysebuho.com/e/abc123');
 });
 
-test('doramasyt: el slug de la ficha también identifica la obra', () => {
-  assert.ok(doramasyt.slugMatches('/dorama/whats-wrong-with-secretary-kim-latino/', ["What's Wrong with Secretary Kim"]));
-  assert.ok(!doramasyt.slugMatches('/dorama/otra-cosa/', ["What's Wrong with Secretary Kim"]));
+test('doramasyt: el slug de la ruta también identifica la obra', () => {
+  assert.ok(doramasyt.slugMatches('whats-wrong-with-secretary-kim', ["What's Wrong with Secretary Kim"]));
+  assert.ok(!doramasyt.slugMatches('otra-cosa', ["What's Wrong with Secretary Kim"]));
 });
 
-test('doramasyt: data-player → reproductor → byse → HLS latino', async () => {
+test('doramasyt: búsqueda → capítulo → data-player → reproductor → HLS latino', async () => {
   const stubbed = stub([
     ['/?s=', () => html(LIST)],
-    ['/dorama/whats-wrong-with-secretary-kim-latino/', () => html(DETAIL)],
-    ['/ver/whats-wrong-with-secretary-kim', () => html(EPISODE)],
-    ['/reproductor?video=TOKEN1', () => html(PLAYER)],
-    ['bysebuho.com/e/abc123', () => json({ /* el extractor real se prueba aparte */ })],
-  ]);
-  try {
-    const out = await doramasyt.searchDoramasYt('secretary kim', RESOLVED, RESOLVED.title, 5000);
-    // Sin el backend de Byse en el fixture, el extractor no da fuentes…
-    assert.ok(out.hits || out.reason);
-  } finally { stubbed.restore(); }
-
-  // …pero con un embed directo sí se publica la fila con su audio.
-  const direct = stub([
-    ['/?s=', () => html(LIST)],
-    ['/dorama/whats-wrong-with-secretary-kim-latino/', () => html(DETAIL)],
     ['/ver/whats-wrong-with-secretary-kim', () => html(EPISODE)],
     ['/reproductor?video=', () => html(`<html><body><iframe src="${HLS}"></iframe></body></html>`)],
   ]);
@@ -78,6 +65,17 @@ test('doramasyt: data-player → reproductor → byse → HLS latino', async () 
     assert.equal(out.hits[0].url, HLS);
     assert.equal(out.hits[0].audioLabel, 'Latino');
     assert.match(out.hits[0].title, /S1E16 Latino DoramasYT$/);
-    assert.ok(direct.calls.some((url) => url.includes('/reproductor?video=TOKEN1')));
-  } finally { direct.restore(); }
+    // Solo el capítulo pedido: el 15 no se visita
+    assert.ok(!stubbed.calls.some((url) => url.includes('episodio-15')));
+    assert.ok(stubbed.calls.some((url) => url.includes('/reproductor?video=TOKEN1')));
+  } finally { stubbed.restore(); }
+});
+
+test('doramasyt: sin coincidencia de título responde no-match sin tocar capítulos', async () => {
+  const stubbed = stub([['/?s=', () => html(LIST)]]);
+  try {
+    const out = await doramasyt.searchDoramasYt('xyz', { ...RESOLVED, title: 'Una Serie Que No Existe' }, 'Una Serie Que No Existe', 5000);
+    assert.deepEqual(out, { hits: [], reason: 'no-match' });
+    assert.ok(stubbed.calls.every((url) => url.includes('/?s=')));
+  } finally { stubbed.restore(); }
 });

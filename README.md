@@ -39,13 +39,21 @@ Omite `STREAM_PROVIDERS` o usa `STREAM_PROVIDERS=all` para cargar el registro po
 
 **Instalaciones existentes:** las claves se guardan por nombre. Se descartan las fuentes retiradas sin añadir otras a una selección que aún contenga claves vigentes. Las claves `gnulahd`, `videoapp`, `pelisplus`, `gnulaone`, `ultra`, `tubeonline` y `mirandogratis` se retiraron el 19-11-2026: una configuración antigua que las incluya las descarta sin tocar las vigentes. Si una lista antigua solo contiene fuentes retiradas, se aplica el valor por defecto, como antes: las fuentes que permite el despliegue para un enlace personal y el registro actual para `STREAM_PROVIDERS`. Una selección personal vacía (`streams: []`) y `STREAM_PROVIDERS=off` siguen apagando todas las fuentes.
 
-## TV en vivo: deportes, entretenimiento y más
+## TV en vivo: toda en la lista M3U del repo
 
-Canales de TV en vivo (tipo `tv` de Stremio) de **dos fuentes elegidas**, todas con HLS verificado por sonda (cadena completa: maestra → variante → segmento):
+**Decisión del 25-11-2026**: el addon ya no muestra canales (solo películas y series). Toda la TV en vivo vive en una lista M3U aparte, importable en VLC, Kodi, TiviMate, IPTV Smarters…:
 
-- **«⚽ Deportes en vivo»** (`tv_deportes`): los 20 canales curados (ESPN, ESPN 2/3/Premium/Deportes, Fox Sports/1/2/Deportes, DSports/DSports 2/DSports+ (DGO), DAZN y DAZN Combat, TNT Sports, TyC Sports, Win Sports, Claro Sports, beIN XTRA ES y Pluto TV Deportes) **más ~26 canales vivos adicionales** (ESPN 4-7, Claro Sports 2, Azteca Deportes, CombaTV…). Los curados se resuelven contra iptv-org y además ganan las señales «Opc. 2/3» del proveedor único.
-- **Catálogos por tema** (activados por defecto): 📺 Entretenimiento, 🎬 Cine, 🧸 Infantil, 🎌 Anime, 🎵 Música, 📰 Noticias, 🌍 Documentales y 🙏 Religión en vivo. **Ya no hay estantes por país** (decisión del 25-11-2026): los canales que la semilla etiqueta por país se reparten por tema con el clasificador de `lib/liveTopics.js` y el país queda como género de la tarjeta («TV en vivo · Entretenimiento · Nicaragua»). Las que ninguna fuente cubre se ocultan solas.
-- **Lista M3U del repo**: [`listas/ramdonlatam-tv.m3u`](listas/ramdonlatam-tv.m3u) trae **todos** los canales (verificados, «⚠️ sin verificar» y los deportes curados) en formato M3U estándar, con logo, grupo por tema, país en el nombre y las señales de respaldo como «· señal N» — importable en cualquier reproductor IPTV. La regenera `scripts/m3u-export.mjs` y la Action semanal la mantiene al día con las semillas.
+```
+https://raw.githubusercontent.com/noe359866-code/SAS5/main/listas/ramdonlatam-tv.m3u
+```
+
+[`listas/ramdonlatam-tv.m3u`](listas/ramdonlatam-tv.m3u) — **ordenada por país** (`group-title` = EE. UU., España, Latinoamérica, México, Nicaragua…; los canales internacionales sin país van en grupos temáticos al final: «Deportes», «Cine», «Música»…). Une:
+
+- los canales **verificados por sonda** (cadena HLS completa: maestra → variante → segmento) de Magma TV/tvcluboficial + Cinecity,
+- los **+13.000 canales de iptvgo.cc** (LATAM, Brasil, España, EE. UU., eventos/PPV, bloques 24/7 y plataformas tipo Netflix, HBO Max, Disney+, Apple TV+, Prime Video, Hulu, Peacock, Paramount+, Tubi, Samsung TV+, Plex, Hallmark y Navidad), marcados **⚠️ sin verificar** — sus segmentos dan 403 desde datacenter y no se pueden comprobar desde CI; en redes normales suelen cargar,
+- y los 20 **deportes curados** (ESPN, Fox Sports, DSports, DAZN, TNT Sports, TyC, Win Sports, Claro Sports…).
+
+Las señales alternativas del mismo canal aparecen como «Nombre · señal N». La regenera `scripts/m3u-export.mjs` desde las semillas (`lib/data/liveChannels*.json`) y la **Action semanal** la actualiza sola: `scripts/iptvgo-mega-build.mjs` vuelve a descargar el panel completo (33.020 canales) y `m3u-export` rehace la lista, con guarda del 80 % para no empeorarla en un mal día de red. Los ids antiguos `rlch:*` siguen resolviendo streams dentro del addon para no romper bibliotecas ya guardadas.
 
 **Fuentes**: la lista pública de [iptv-org](https://iptv-org.github.io/iptv) para los curados y, para las categorías en vivo, **dos listas elegidas** (cacheadas 12 h por isolate): la lista Magma TV del repo [JMigue85/IPTV-SV](https://github.com/JMigue85/IPTV-SV), que nombra los canales de `m3u.tvcluboficial.com` (la sonda 13 verificó que ese host no exige User-Agent y sirve CORS abierto), y la lista Cinecity del repo [CINECITY2023/cinecity](https://github.com/CINECITY2023/cinecity) (`principal.m3u`: +500 canales, todos con logo propio). IPTVSV (IP:puerto rotativos) y m3uts.xyz (tokens caducos) quedaron descartados. `lib/data/liveChannelsSeed.json` es la semilla con las señales que la sonda verificó reproduciendo la cadena completa (maestra → variante → segmento MPEG-TS/fMP4; `.probe/live-lists.md`): el catálogo se renderiza siempre desde la semilla y la resolución refresca la URL desde las listas vivas.
 

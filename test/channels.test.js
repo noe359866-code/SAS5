@@ -59,33 +59,21 @@ describe('canales de deportes: definiciones', () => {
   });
 });
 
-describe('canales de deportes: catálogo y manifest', () => {
-  test('el manifest por defecto incluye el catálogo tv_deportes de tipo tv', () => {
+describe('canales de deportes: fuera del manifest, fichas y streams vivos', () => {
+  // Decisión del usuario (25-11-2026): la TV en vivo salió del addon; todos
+  // los canales viven en la lista M3U del repo (listas/ramdonlatam-tv.m3u).
+  test('el manifest ya no trae catálogos de canales, pero conserva el tipo tv', () => {
     const manifest = core.buildManifest();
-    const cat = manifest.catalogs.find((c) => c.id === 'tv_deportes');
-    assert.ok(cat, 'falta tv_deportes');
-    assert.equal(cat.type, 'tv');
-    assert.ok(manifest.idPrefixes.includes('rlch:'));
-    assert.ok(manifest.types.includes('tv'));
-    assert.equal(cat.extraSupported, undefined, 'el catálogo de canales no pagina');
-  });
-
-  test('sin la opción base deportes el catálogo no aparece', () => {
-    const coreFresh = require('../lib/core');
-    const manifest = coreFresh.buildManifest(null, {
-      lang: 'es', region: 'MX', platforms: null, studios: null,
-      base: ['top'], streams: null, isDefault: false,
-    });
     assert.equal(manifest.catalogs.find((c) => c.id === 'tv_deportes'), undefined);
-    assert.ok(manifest.idPrefixes.includes('rlch:'), 'el prefijo debe quedar para configs previas');
+    assert.ok(!manifest.catalogs.some((c) => c.type === 'tv'), 'no debe quedar ningún catálogo tv');
+    assert.ok(manifest.idPrefixes.includes('rlch:'), 'el prefijo queda para bibliotecas previas');
+    assert.ok(manifest.types.includes('tv'), 'el tipo tv queda para meta/stream de ids guardados');
   });
 
-  test('resolveCatalog devuelve los metas de canales para tv_deportes y [] con skip', async () => {
+  test('los catálogos de canales antiguos resuelven a vacío sin lanzar', async () => {
     const catalogs = require('../lib/catalogs');
-    const metas = await catalogs.resolveCatalog('tv', 'tv_deportes', null, {});
-    assert.ok(metas.length >= 15);
-    assert.ok(metas.every((m) => m.type === 'tv'));
-    assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_deportes', null, { skip: 20 }), []);
+    assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_deportes', null, {}), []);
+    assert.deepEqual(await catalogs.resolveCatalog('tv', 'tv_live_cine', null, {}), []);
   });
 
   test('handleMeta responde fichas de canales sin TMDB', async () => {

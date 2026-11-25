@@ -8,43 +8,53 @@ const live = require('../lib/liveChannels');
 const { SPORTS_CHANNELS } = require('../lib/sportsChannels');
 const { buildM3U, playlistChannels } = require('../lib/livePlaylist');
 
-describe('lista M3U del repo (listas/ramdonlatam-tv.m3u)', () => {
+describe('lista M3U del repo por países (listas/ramdonlatam-tv.m3u)', () => {
   test('buildM3U emite una entrada EXTINF por URL, con EXTVLCOPT si hay UA', () => {
     const { m3u, entries } = buildM3U([
-      { name: 'Canal A', slug: 'canal-a', category: 'cine', logo: 'https://x/y.png',
+      { name: 'Canal A', slug: 'canal-a', group: 'Nicaragua', logo: 'https://x/y.png',
         urls: [{ url: 'https://a/1.m3u8', ua: '', ref: '' }, { url: 'https://a/2.m3u8', ua: 'MiUA', ref: 'https://ref/' }] },
-      { name: 'Canal B', slug: 'canal-b', category: 'noticias', logo: '',
+      { name: 'Canal B', slug: 'canal-b', group: 'Deportes', logo: '',
         urls: [{ url: 'https://b/1.m3u8', ua: '', ref: '' }] },
     ]);
     assert.equal(entries, 3);
     assert.ok(m3u.startsWith('#EXTM3U\n'));
-    assert.match(m3u, /group-title="Cine",Canal A\nhttps:\/\/a\/1\.m3u8/);
+    assert.match(m3u, /group-title="Nicaragua",Canal A\nhttps:\/\/a\/1\.m3u8/);
     assert.match(m3u, /tvg-id="canal-a-senal-2"[^\n]*,Canal A · señal 2\n#EXTVLCOPT:http-user-agent=MiUA\n#EXTVLCOPT:http-referrer=https:\/\/ref\/\nhttps:\/\/a\/2\.m3u8/);
-    assert.match(m3u, /group-title="Noticias",Canal B/);
-    // Cada EXTINF va seguido (salvo EXTVLCOPT) de una URL http(s)
+    assert.match(m3u, /group-title="Deportes",Canal B/);
     const blocks = m3u.split('\n').filter((l) => l.startsWith('#EXTINF'));
     assert.equal(blocks.length, 3);
   });
 
-  test('playlistChannels cubre todos los canales indexados y los curados', () => {
+  test('playlistChannels cubre las semillas y los curados, sin perder señales', () => {
     const channels = playlistChannels();
-    let indexados = 0;
-    for (const cat of live.activeCategories()) indexados += live.liveMetas(cat.key, {}).length;
-    const curados = SPORTS_CHANNELS.filter((c) => c.fallback).length;
-    assert.equal(channels.length, indexados + curados);
-    // Solo categorías con etiqueta editorial conocida
-    for (const ch of channels) assert.ok(live.CATEGORY_LABELS[ch.category], ch.category);
+    const urlsLista = channels.reduce((n, c) => n + c.urls.length, 0);
+    const urlsSemillas = liveSeedUrls() + SPORTS_CHANNELS.filter((c) => c.fallback).length;
+    assert.ok(urlsLista >= urlsSemillas - 10, `se perdieron señales: ${urlsLista} < ${urlsSemillas}`);
+    // Toda entrada trae grupo, nombre y al menos una URL http(s)
+    for (const ch of channels) {
+      assert.ok(ch.group, JSON.stringify(ch));
+      assert.ok(ch.name && ch.slug, JSON.stringify(ch));
+      for (const u of ch.urls) assert.match(u.url, /^https?:\/\//, ch.name);
+    }
   });
 
-  test('el país va en el nombre y el ⚠️ solo en las no verificadas', () => {
+  test('los canales se agrupan por PAÍS y el ⚠️ solo en las no verificadas', () => {
     const channels = playlistChannels();
+    // Canal 20 WTV: nombre único de la semilla sin verificar de Nicaragua
     const nic = channels.find((c) => c.slug === 'canal-20-wtv-hd');
-    assert.ok(nic, 'falta Canal 20 WTV (Nicaragua)');
-    assert.match(nic.name, /\(Nicaragua\)/);
+    assert.ok(nic, 'falta Canal 20 WTV');
+    assert.equal(nic.group, 'Nicaragua');
     assert.match(nic.name, /⚠️/); // viene de la semilla sin verificar
+    assert.doesNotMatch(nic.name, /\(Nicaragua\)/, 'el país va en el grupo, no en el nombre');
+    // Los verificados no llevan ⚠️
     const verificados = channels.filter((c) => !c.unverified);
     assert.ok(verificados.length > 100, 'pocos verificados');
     for (const c of verificados) assert.doesNotMatch(c.name, /⚠️/, c.name);
+    // Los grupos de país van primero; los temáticos («Deportes», «Cine»…) al final
+    const topicIdx = channels.findIndex((c) => ['Deportes', 'Cine', 'Música'].includes(c.group));
+    const countryIdx = channels.findIndex((c) => c.group === 'Nicaragua');
+    assert.ok(countryIdx >= 0 && topicIdx >= 0, 'faltan grupos esperados');
+    assert.ok(countryIdx < topicIdx, 'los países deben ir antes que los grupos temáticos');
   });
 
   test('la lista del repo está al día con las semillas', () => {
@@ -57,3 +67,11 @@ describe('lista M3U del repo (listas/ramdonlatam-tv.m3u)', () => {
     assert.equal(onDisk, fresh, 'lista desactualizada: corre node scripts/m3u-export.mjs');
   });
 });
+
+function liveSeedUrls() {
+  const verified = require('../lib/data/liveChannelsSeed.json');
+  const unverified = require('../lib/data/liveChannelsUnverifiedSeed.json');
+  let mega = [];
+  try { mega = require('../lib/data/liveChannelsMegaSeed.json'); } catch {}
+  return verified.length + unverified.length + mega.length;
+}

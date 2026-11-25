@@ -17,6 +17,7 @@ on:
       - 'scripts/tvclub-source-probe.mjs'
       - 'scripts/iptvgo-source-probe.mjs'
       - 'scripts/iptvgo-seed-build.mjs'
+      - 'scripts/iptvgo-mega-build.mjs'
       - 'scripts/m3u-export.mjs'
       - 'lib/liveChannelNames.js'
       - 'lib/liveTopics.js'
@@ -99,6 +100,9 @@ jobs:
             console.log('semilla iptvgo NO actualizada:', fresh.length, '< 80% de', current.length);
           }
           "
+      - name: Mega-semilla iptvgo por países (LATAM+Brasil+España+USA+eventos)
+        if: always()
+        run: node scripts/iptvgo-mega-build.mjs
       - name: Regenerar la lista M3U del repo
         if: always()
         run: node scripts/m3u-export.mjs
@@ -108,7 +112,7 @@ jobs:
           test -s .probe/sports-candidates.md || exit 0
           git config user.name "sonda"
           git config user.email "sonda@users.noreply.github.com"
-          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv .probe/live-lists.md .probe/live-channels.json .probe/tvclub-source.md .probe/iptvgo-source.md .probe/iptvgo-seed.md .probe/iptvgo-categories.md .probe/iptvgo-channels.json lib/data/liveChannelsSeed.json lib/data/liveChannelsUnverifiedSeed.json listas/ramdonlatam-tv.m3u; do
+          for f in .probe/sports-candidates.md .probe/sports-players.md .probe/sports-decode.md .probe/sports-chain.md .probe/sports-lists.md .probe/sports-logos.tsv .probe/live-lists.md .probe/live-channels.json .probe/tvclub-source.md .probe/iptvgo-source.md .probe/iptvgo-seed.md .probe/iptvgo-categories.md .probe/iptvgo-channels.json lib/data/liveChannelsSeed.json lib/data/liveChannelsUnverifiedSeed.json lib/data/liveChannelsMegaSeed.json .probe/iptvgo-mega.md listas/ramdonlatam-tv.m3u; do
             test -s "$f" && git add -f "$f"
           done
           git diff --cached --quiet || git commit -m "sonda: candidatas de canales deportivos $(date -u +%FT%TZ) [skip ci]"

@@ -140,7 +140,8 @@ describe('canales de deportes: streams en vivo', () => {
       { name: 'ESPN Latin America (1080p) [Not 24/7]', url: 'https://x.example/b.m3u8' },
     ]);
     assert.equal(hits.length, 1, `solo debe quedar el fallback: ${JSON.stringify(hits)}`);
-    assert.match(hits[0].title, /verificada/);
+    assert.equal(hits[0].verified, true);
+    assert.equal(hits[0].channelName, channelById('rlch:espn').name);
     void original;
   });
 

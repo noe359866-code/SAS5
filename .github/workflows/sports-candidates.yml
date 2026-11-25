@@ -17,6 +17,7 @@ on:
       - 'scripts/tvclub-source-probe.mjs'
       - 'scripts/iptvgo-source-probe.mjs'
       - 'scripts/iptvgo-seed-build.mjs'
+      - 'lib/liveChannelNames.js'
 
 permissions:
   contents: write

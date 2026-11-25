@@ -24,7 +24,9 @@ test('el nombre del stream es el título de la obra y la calidad va debajo', () 
     quality: 'HLS', provider: 'fanpelis' };
   const stream = streams.toStream({ ...base, resolution: '1080p' }, null);
   assert.equal(stream.name, 'Interestelar');
-  assert.equal(stream.title, 'Fanpelis · 🎧 Latino\n1080p · WEB-DL · LAT');
+  // El proveedor ya no se muestra: solo episodio/audio y los distintivos.
+  assert.equal(stream.title, '🎧 Latino\n1080p · WEB-DL · LAT');
+  assert.doesNotMatch(stream.title, /Fanpelis/);
   // Sin resolución declarada no se inventa una: se anuncia el formato.
   const sinResolucion = streams.toStream({ ...base, resolution: null }, { badges: [] });
   assert.equal(sinResolucion.name, 'Interestelar');
@@ -41,7 +43,7 @@ test('el nombre del stream es la obra también en series y anime, nunca la calid
     title: 'Breaking Bad 2008 S05E14 1080p WEB-DL Latino Fanpelis',
   }, null);
   assert.equal(serie.name, 'Breaking Bad');
-  assert.match(serie.title, /^T5E14 · Fanpelis · 🎧 Latino\n/);
+  assert.match(serie.title, /^T5E14 · 🎧 Latino\n/);
 
   // Anime: el nombre conserva el título completo, con dos puntos y todo.
   const anime = streams.toDirectStream({

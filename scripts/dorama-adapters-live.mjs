@@ -4,9 +4,11 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const fs = require('node:fs');
 const { searchSeriesBl } = require('../lib/sites/seriesbl');
+const { searchDoramasYt } = require('../lib/sites/doramasyt');
 
 const CONTROLS = [
   { provider: 'seriesbl', search: searchSeriesBl, resolved: { title: 'ABO Desire', altTitle: null, year: '2025', mediaType: 'series', season: 1, episode: 1 } },
+  { provider: 'doramasyt', search: searchDoramasYt, resolved: { title: "What's Wrong with Secretary Kim", altTitle: null, year: '2018', mediaType: 'series', season: 1, episode: 16 } },
 ];
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';

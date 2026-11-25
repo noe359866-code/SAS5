@@ -421,7 +421,7 @@ async function handleRequest(request, env, ctx) {
         {
           ok: true,
           addon: 'net.ramdonlatam.catalogos',
-          version: '1.7.0',
+          version: '1.9.0',
           runtime: 'cloudflare-workers',
           configurable: true,
           catalogs: core.CATALOGS.length,

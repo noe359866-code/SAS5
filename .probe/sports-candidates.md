@@ -1,6 +1,6 @@
 # Sonda: candidatas de canales de deportes
 
-Fecha: 2026-11-25T15:10:12.389Z
+Fecha: 2026-11-25T16:33:57.076Z
 
 | Sitio | Paso | HTTP | Estado | Detalle |
 |---|---|---|---|---|---|

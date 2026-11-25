@@ -29,7 +29,12 @@ describe('lista M3U del repo por países (listas/ramdonlatam-tv.m3u)', () => {
     const channels = playlistChannels();
     const urlsLista = channels.reduce((n, c) => n + c.urls.length, 0);
     const urlsSemillas = liveSeedUrls() + SPORTS_CHANNELS.filter((c) => c.fallback).length;
-    assert.ok(urlsLista >= urlsSemillas - 10, `se perdieron señales: ${urlsLista} < ${urlsSemillas}`);
+    // La fusión deduplica URLs repetidas entre semillas y descarta nombres
+    // basura: margen del 20 % sobre el bruto, nunca una pérdida masiva.
+    assert.ok(urlsLista >= Math.floor(urlsSemillas * 0.8),
+      `se perdieron demasiadas señales: ${urlsLista} < 80% de ${urlsSemillas}`);
+    assert.ok(channels.length >= Math.floor(urlsSemillas * 0.5),
+      `pocos canales: ${channels.length} de ${urlsSemillas} señales brutas`);
     // Toda entrada trae grupo, nombre y al menos una URL http(s)
     for (const ch of channels) {
       assert.ok(ch.group, JSON.stringify(ch));

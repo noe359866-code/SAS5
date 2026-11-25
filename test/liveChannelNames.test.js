@@ -51,3 +51,33 @@ test('es idempotente: un nombre ya limpio no cambia', () => {
     assert.equal(cleanChannelName(clean), clean, clean);
   }
 });
+
+test('prefijos de país con espacio simple desaparecen («MX HBO HD»)', () => {
+  assert.equal(cleanChannelName('MX HBO HD', 'mexico'), 'HBO HD');
+  assert.equal(cleanChannelName('MX AMC Series HD', 'entretenimiento'), 'AMC Series HD');
+  assert.equal(cleanChannelName('USA CNN Espanol', 'noticias'), 'CNN Espanol');
+  assert.equal(cleanChannelName('MX SPORTs · Fox Sports 1', 'deportes'), 'Fox Sports 1');
+  assert.equal(cleanChannelName('MX Pack Futbol HD · ESPN 4 MX (SOLO Eventos)', 'deportes'), 'ESPN 4 MX (solo eventos)');
+});
+
+test('secciones con «·» y calidad en medio desaparecen', () => {
+  assert.equal(cleanChannelName('Cultura · Garage TV MX UHD', 'mexico'), 'Garage TV UHD');
+  assert.equal(cleanChannelName('SPA Premium · FX MX', 'mexico'), 'FX');
+  assert.equal(cleanChannelName('MUsIC HD · Bandamax MX', 'mexico'), 'Bandamax');
+  assert.equal(cleanChannelName('NEWs · Milenio Noticias MX', 'noticias'), 'Milenio Noticias MX'); // «MX» final se conserva fuera del catálogo de México
+  assert.equal(cleanChannelName('LᴵGA Mx · Claro SPORTS (La Liga) MX', 'deportes'), 'Claro SPORTS (La Liga) MX');
+  assert.equal(cleanChannelName('Pack Futbol HD · Bein Sports Xtra Ñ MX', 'deportes'), 'Bein Sports Xtra Ñ MX'); // «MX» final se conserva fuera del catálogo de México
+});
+
+test('prefijos de país con «:» o «·» ampliados (PRI, Panamá, Sur America)', () => {
+  assert.equal(cleanChannelName('PRI: Wapa DEPORTES HD', 'deportes'), 'Wapa DEPORTES HD');
+  assert.equal(cleanChannelName('Panamá · Cable Onda Sports', 'deportes'), 'Cable Onda Sports');
+  assert.equal(cleanChannelName('Sur America · DW Noticias MX', 'noticias'), 'DW Noticias MX'); // «MX» se conserva: no es catálogo de México
+});
+
+test('sufijo de país según la categoría del canal', () => {
+  assert.equal(cleanChannelName('Telefe (ARG)', 'argentina'), 'Telefe');
+  assert.equal(cleanChannelName('BBC World News MX', 'mexico'), 'BBC World News');
+  assert.equal(cleanChannelName('Bandamax UHD', 'mexico'), 'Bandamax UHD'); // sin país: intacto
+  assert.equal(cleanChannelName('ELIMINATORIAs 2026 HD · Bolivia (solo eventos)', 'deportes'), 'Eliminatorias 2026 HD · Bolivia (solo eventos)');
+});

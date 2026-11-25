@@ -495,6 +495,15 @@
   "ref": ""
  },
  {
+  "name": "Win Sports",
+  "slug": "win-sports",
+  "category": "deportes",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHwinsports.png",
+  "url": "http://45.70.168.162:12316/play/a013/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Xtrema TV Cna Deportes 2",
   "slug": "xtrema-tv-cna-deportes-2",
   "category": "deportes",
@@ -522,6 +531,15 @@
   "ref": ""
  },
  {
+  "name": "MTV",
+  "slug": "mtv",
+  "category": "entretenimiento",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/reality/CHmtv.png",
+  "url": "http://45.70.168.162:12316/play/a01p/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Novelas Turcas",
   "slug": "novelas-turcas",
   "category": "entretenimiento",
@@ -545,6 +563,15 @@
   "category": "entretenimiento",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/novelas/CHtllnovelas.png",
   "url": "http://televisa-televisa-1-it.samsung.wurl.tv/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "TNT Novelas",
+  "slug": "tnt-novelas",
+  "category": "entretenimiento",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/novelas/CHtntnovelas.png",
+  "url": "http://45.70.168.162:12316/play/a00l/index.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -684,20 +711,20 @@
   "ref": ""
  },
  {
-  "name": "Cine Infantil HD",
-  "slug": "cine-infantil-hd",
-  "category": "cine",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/170.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Cine Marvel",
   "slug": "cine-marvel",
   "category": "cine",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/176.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Cine Marvel HD",
+  "slug": "cine-marvel-hd",
+  "category": "cine",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/177.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -788,6 +815,15 @@
   "category": "cine",
   "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Friends_TV.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/470.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "FX",
+  "slug": "fx",
+  "category": "cine",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHfx.png",
+  "url": "http://45.70.168.162:12316/play/a011/index.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -945,6 +981,15 @@
   "ref": ""
  },
  {
+  "name": "Universal TV",
+  "slug": "universal-tv",
+  "category": "cine",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cine/CHuniversaltv.png",
+  "url": "http://45.70.168.162:12316/play/a005/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Xtrema TV Cine Accion",
   "slug": "xtrema-tv-cine-accion",
   "category": "cine",
@@ -959,6 +1004,15 @@
   "category": "infantil",
   "logo": "https://i.imgur.com/fWRs1gX.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/28.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Baby First",
+  "slug": "baby-first",
+  "category": "infantil",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHbabyfirst.png",
+  "url": "http://45.70.168.162:12316/play/a01i/index.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1040,6 +1094,15 @@
   "category": "infantil",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Disney Channel",
+  "slug": "disney-channel",
+  "category": "infantil",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png",
+  "url": "http://45.70.168.162:12316/play/a009/index.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1206,6 +1269,15 @@
   "ref": ""
  },
  {
+  "name": "Nick JR",
+  "slug": "nick-jr",
+  "category": "infantil",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHnickjr.png",
+  "url": "http://45.70.168.162:12316/play/a015/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Nick Jr.",
   "slug": "nick-jr",
   "category": "infantil",
@@ -1220,6 +1292,15 @@
   "category": "infantil",
   "logo": "https://i.imgur.com/08ZUI9k.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/736.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Nickelodeon",
+  "slug": "nickelodeon",
+  "category": "infantil",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHnickelodeon.png",
+  "url": "http://45.70.168.162:12316/play/a001/index.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1256,6 +1337,15 @@
   "category": "infantil",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/771.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Plim Plim TV",
+  "slug": "plim-plim-tv",
+  "category": "infantil",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHplimplim.png",
+  "url": "http://45.70.168.162:12316/play/a02a/index.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1391,6 +1481,15 @@
   "category": "anime",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/307.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Dreiko TV",
+  "slug": "dreiko-tv",
+  "category": "anime",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHdreikotv.png",
+  "url": "https://cloudvideo.servers10.com:8081/8020/tracks-v1a1/mono.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1872,6 +1971,15 @@
   "ref": ""
  },
  {
+  "name": "El Gourmet",
+  "slug": "el-gourmet",
+  "category": "documentales",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cultura/CHelgourmet.png",
+  "url": "http://45.70.168.162:12316/play/a024/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "H2",
   "slug": "h2",
   "category": "documentales",
@@ -1895,6 +2003,15 @@
   "category": "documentales",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/InvestigationDiscoveryLogo2020.svg/960px-InvestigationDiscoveryLogo2020.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/579.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Love Nature",
+  "slug": "love-nature",
+  "category": "documentales",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/cultura/CHlovenature.png",
+  "url": "http://45.70.168.162:12316/play/a02c/index.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2619,6 +2736,15 @@
   "ref": ""
  },
  {
+  "name": "ADN",
+  "slug": "adn",
+  "category": "chile",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHadnchile.png",
+  "url": "https://redirector.rudo.video/hls-video/931b584451fa6dd1313ee66efbfd5802e3f3bcea/adntv/adntv.smil/.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Canal 1 Ñuble",
   "slug": "canal-1-nuble",
   "category": "chile",
@@ -2700,6 +2826,15 @@
   "ref": ""
  },
  {
+  "name": "RCN",
+  "slug": "rcn",
+  "category": "colombia",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHrcncolombia.png",
+  "url": "http://45.70.168.162:12316/play/a00p/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "RCN Mas",
   "slug": "rcn-mas",
   "category": "colombia",
@@ -2713,7 +2848,25 @@
   "slug": "senal-colombia",
   "category": "colombia",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHseñalcolombia.png",
+  "url": "http://45.70.168.162:12316/play/a00s/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Señal Colombia",
+  "slug": "senal-colombia",
+  "category": "colombia",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHseñalcolombia.png",
   "url": "https://streaming.rtvc.gov.co/TV_Senal_Colombia_live/smil:live.smil/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Telepacifico",
+  "slug": "telepacifico",
+  "category": "colombia",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/telepacificocolombia.png",
+  "url": "http://45.70.168.162:12316/play/a014/index.m3u8",
   "ua": "",
   "ref": ""
  },

@@ -1,6 +1,6 @@
 # Sonda 13: m3u.tvcluboficial.com a fondo
 
-Fecha: 2026-11-25T19:24:41.019Z
+Fecha: 2026-11-25T19:40:16.580Z
 
 ## 1. Acceso al canal de ejemplo (id 293)
 

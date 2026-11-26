@@ -1,6 +1,6 @@
 # Mega-semilla iptvgo.cc por países (SIN VERIFICAR, player_api Xtream)
 
-Fecha: 2026-11-25T23:52:57.042Z
+Fecha: 2026-11-26T00:08:34.412Z
 
 login: HTTP 200 · status Active
 panel: 33019 canales · 355 categorías
@@ -39,4 +39,4 @@ filtrado: 13 adulto · 18809 otras regiones · 15 decoración/basura
 - Nicaragua: 14
 
 total: 13686 canales
-mega-semilla escrita: 13688 -> 13686
+mega-semilla escrita: 13686 -> 13686

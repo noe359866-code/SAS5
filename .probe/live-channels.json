@@ -234,15 +234,6 @@
   "ref": ""
  },
  {
-  "name": "ESPN Deportes",
-  "slug": "espn-deportes",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/ESPN_Deportes.svg/960px-ESPN_Deportes.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1165.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "ESPN HD",
   "slug": "espn-hd",
   "category": "deportes",
@@ -324,6 +315,15 @@
   "ref": ""
  },
  {
+  "name": "FOX Sports 2 (México)",
+  "slug": "fox-sports-2-mexico",
+  "category": "deportes",
+  "logo": "https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "FOX Sports 2 (Sur)",
   "slug": "fox-sports-2-sur",
   "category": "deportes",
@@ -338,15 +338,6 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "FOX Sports 3 (México)",
-  "slug": "fox-sports-3-mexico",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1083,6 +1074,15 @@
   "name": "Disney Channel",
   "slug": "disney-channel",
   "category": "infantil",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3d/2022_Disney_Channel_logo.svg",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/280.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Disney Channel",
+  "slug": "disney-channel",
+  "category": "infantil",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/infantil/CHdisneychannel.png",
   "url": "http://45.70.168.162:12316/play/a009/index.m3u8",
   "ua": "",
@@ -1472,15 +1472,6 @@
   "category": "anime",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/animacion/CHdreikotv.png",
   "url": "https://cloudvideo.servers10.com:8081/8020/tracks-v1a1/mono.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "Duelo Xiaolin",
-  "slug": "duelo-xiaolin",
-  "category": "anime",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/330.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2547,15 +2538,6 @@
   "ref": ""
  },
  {
-  "name": "Catamarca TV",
-  "slug": "catamarca-tv",
-  "category": "argentina",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcatamarcatv.png",
-  "url": "https://stream.arcast.com.ar/canal7catamarca/ngrp:canal7catamarca_all/playlist.m3u8?DVR=",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Celt TV",
   "slug": "celt-tv",
   "category": "argentina",
@@ -2624,6 +2606,15 @@
   "category": "argentina",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHnettv.png",
   "url": "https://unlimited1-us.dps.live/nettv/nettv.smil/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "RTN (Neuquen)",
+  "slug": "rtn-neuquen",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHrtnneuquen.png",
+  "url": "http://media.neuquen.gov.ar/rtn/television/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2898,15 +2889,6 @@
   "ref": ""
  },
  {
-  "name": "Ecuavisa",
-  "slug": "ecuavisa",
-  "category": "ecuador",
-  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHecuavisaecuador.png",
-  "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist_dvr.m3u8?did=b2163355050067fdfde47773e",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Wuan+",
   "slug": "wuan",
   "category": "ecuador",
@@ -3002,6 +2984,15 @@
   "category": "venezuela",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHreformatvvenezuela.png",
   "url": "https://5bf8041cb3fed.streamlock.net:443/ReformaTV/ReformaTV/playlist.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Telearagua",
+  "slug": "telearagua",
+  "category": "venezuela",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHtelearaguavenezuela.png",
+  "url": "http://45.173.198.59:8080/hls/nginx3.m3u8",
   "ua": "",
   "ref": ""
  },

@@ -85,7 +85,7 @@ class ProvidersMobileFragment : Fragment() {
 
         val currentCode = (UserPreferences.currentProvider as? TmdbProvider)?.language
             ?: UserPreferences.providerLanguage
-            ?: Provider.defaultCatalogProvider(requireContext()).language
+            ?: Provider.defaultCatalogProvider(Locale.getDefault().language).language
         val initialIndex = languages.indexOfFirst { it.code == currentCode }.coerceAtLeast(0)
         binding.sCatalogLanguage.setSelection(initialIndex, false)
 
@@ -241,7 +241,7 @@ class ProvidersMobileFragment : Fragment() {
 
     private fun openCatalog() {
         if (UserPreferences.currentProvider == null) {
-            UserPreferences.currentProvider = Provider.defaultCatalogProvider(requireContext())
+            UserPreferences.currentProvider = Provider.defaultCatalogProvider(Locale.getDefault().language)
         }
         UserPreferences.pluginSetupCompleted = true
 

@@ -354,7 +354,7 @@ class MovieViewHolder(
         }
 
         binding.btnSwiperWatchNow.setOnClickListener {
-            findNavController().navigate(
+            binding.btnSwiperWatchNow.findNavController().navigate(
                 HomeMobileFragmentDirections.actionHomeToMovie(id = movie.id)
             )
         }

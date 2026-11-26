@@ -39,6 +39,12 @@ class PluginRuntimeAndManagerTest {
     fun `install manifest and execute QuickJS scrapers with fetch cheerio CryptoJS axios headers and subtitles`() = runBlocking {
         val baseUrl = mockServer.url("/").toString().removeSuffix("/")
 
+        val moviePlainUrl = "$baseUrl/hls/master.m3u8?type=movie&id=550"
+        val tvPlainUrl = "$baseUrl/hls/master.m3u8?type=tv&id=1396&s=2&e=5"
+        val movieCipher = encryptWithCryptoJs(moviePlainUrl, "streamflix-secret")
+        val tvCipher = encryptWithCryptoJs(tvPlainUrl, "streamflix-secret")
+        assertTrue("Expected OpenSSL Salted__ base64 ciphertext", movieCipher.startsWith("U2FsdGVkX1"))
+
         val vidsrcScript = """
             const cheerio = require('cheerio');
             const CryptoJS = require('crypto-js');
@@ -97,7 +103,6 @@ class PluginRuntimeAndManagerTest {
             };
         """.trimIndent()
 
-        // Encrypt the target m3u8 URL inside a small helper evaluation or use a self-encrypted page:
         val runtime = PluginRuntime(
             httpClient = httpClient,
             tmdbApiKeyProvider = { "test-tmdb-key-123" },
@@ -146,12 +151,7 @@ class PluginRuntimeAndManagerTest {
                         .setBody(axiosScript)
 
                     path.startsWith("/embed/") -> {
-                        // Compute valid CryptoJS OpenSSL passphrase ciphertext via CryptoJS itself?
-                        // Even simpler: serve an endpoint that echoes encrypted value or precomputed CryptoJS ciphertext.
-                        // Let's return HTML with a dynamically valid ciphertext generated on the JS side if needed,
-                        // or precompute with QuickJs!
-                        val targetM3u8 = "$baseUrl/hls/master.m3u8?path=${request.path}"
-                        val cipher = encryptWithCryptoJs(targetM3u8, "streamflix-secret")
+                        val cipher = if (path.startsWith("/embed/tv/")) tvCipher else movieCipher
                         val tmdbHeader = request.getHeader("X-Tmdb-Key").orEmpty()
                         MockResponse()
                             .setResponseCode(200)
@@ -208,27 +208,27 @@ class PluginRuntimeAndManagerTest {
         assertEquals(2, manager.scrapers.value.size)
         assertTrue(manager.hasEnabledScrapers())
 
-        // Movie execution should run BOTH vidsrc_aes and cine_axios concurrently and filter out magnet links
+        // Movie execution runs BOTH vidsrc_aes and cine_axios concurrently and filters out magnet links
         val movieServers = manager.getServersForMedia(
             tmdbId = "550",
             mediaType = "movie",
         )
-        assertEquals(2, movieServers.size)
+        assertEquals("Movie servers=${movieServers.map { it.name }}", 2, movieServers.size)
 
         val vidsrcServer = movieServers.first { it.name.contains("VidSrc") }
         assertTrue(vidsrcServer.name.contains("test-tmdb-key-123"))
         val vidsrcVideo = vidsrcServer.video
         assertNotNull(vidsrcVideo)
-        assertTrue(vidsrcVideo!!.source.startsWith("$baseUrl/hls/master.m3u8"))
+        assertEquals(moviePlainUrl, vidsrcVideo!!.source)
         assertEquals("$baseUrl/", vidsrcVideo.headers?.get("Referer"))
         assertEquals(1, vidsrcVideo.subtitles.size)
         assertEquals("$baseUrl/subs/es.vtt", vidsrcVideo.subtitles.first().file)
 
-        val axiosServer = movieServers.first { it.name.contains("Cine Axios") }
+        val axiosServer = movieServers.first { it.name.contains("Cine Axios") || it.name.contains("Direct CDN") }
         assertEquals("$baseUrl/mp4/movie-720p.mp4", axiosServer.video?.source)
         assertEquals("CustomMobileAgent/1.0", axiosServer.video?.headers?.get("User-Agent"))
 
-        // TV episode execution should only run vidsrc_aes (cine_axios only supports "movie")
+        // TV episode execution only runs vidsrc_aes (cine_axios only supports "movie")
         val tvServers = manager.getServersForMedia(
             tmdbId = "1396",
             mediaType = "tv",
@@ -236,7 +236,7 @@ class PluginRuntimeAndManagerTest {
             episode = 5,
         )
         assertEquals(1, tvServers.size)
-        assertTrue(tvServers.first().video!!.source.contains("s=2&e=5"))
+        assertEquals(tvPlainUrl, tvServers.first().video!!.source)
 
         // Disabling scraper persists across a fresh PluginManager reload
         val vidsrcKey = manager.scrapers.value.first { it.id == "vidsrc_aes" }.uniqueKey
@@ -257,13 +257,19 @@ class PluginRuntimeAndManagerTest {
     }
 
     private fun encryptWithCryptoJs(plainText: String, passphrase: String): String = runBlocking {
-        val cryptoSource = javaClass.classLoader!!
-            .getResourceAsStream("META-INF/resources/webjars/crypto-js/4.2.0/crypto-js.min.js")!!
-            .bufferedReader()
-            .use { it.readText() }
+        val cl = javaClass.classLoader!!
+        val candidates = listOf(
+            "META-INF/resources/webjars/crypto-js/4.2.0/crypto-js.min.js",
+            "META-INF/resources/webjars/crypto-js/4.2.0/crypto-js.js",
+            "META-INF/resources/webjars/crypto-js/4.2.0/crypto-js/crypto-js.min.js",
+            "META-INF/resources/webjars/crypto-js/4.2.0/crypto-js/crypto-js.js",
+        )
+        val cryptoSource = candidates.firstNotNullOfOrNull { path ->
+            cl.getResourceAsStream(path)?.bufferedReader()?.use { it.readText() }
+        } ?: error("crypto-js resource not found on classpath")
 
         com.dokar.quickjs.quickJs {
-            evaluate<Any?>(cryptoSource, "crypto-js.min.js")
+            evaluate<Any?>(cryptoSource, "crypto-js.js")
             evaluate<String>(
                 "CryptoJS.AES.encrypt(${org.json.JSONObject.quote(plainText)}, ${org.json.JSONObject.quote(passphrase)}).toString()"
             )

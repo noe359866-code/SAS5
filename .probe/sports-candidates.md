@@ -1,6 +1,6 @@
 # Sonda: candidatas de canales de deportes
 
-Fecha: 2026-11-26T00:57:39.778Z
+Fecha: 2026-11-26T08:37:18.997Z
 
 | Sitio | Paso | HTTP | Estado | Detalle |
 |---|---|---|---|---|---|
@@ -10,7 +10,7 @@ Fecha: 2026-11-26T00:57:39.778Z
 | pirlotv.bz | canal | 200 | vacío | pirlotv.fyi/canales/ · sin señales |
 | pirlotv.bz | canal | 200 | señal | pirlotv.fyi/canales/formula-1-en-vivo/ · iframes=1 cfg=1 |
 | pirlotv.bz | iframe | 200 | vacío | playcapo.st/update/capof1.php · m3u8=0 iframes=0 cfg=0 |
-| futboltv.mx | portada | 200 | ok | 32194 B |
+| futboltv.mx | portada | 200 | ok | 32193 B |
 | futboltv.mx | canales | 200 | ok | 6 enlaces deportivos |
 | futboltv.mx | canal | 200 | señal | www.futboltv.mx/canal-5-televisa-en-vivo.php · iframes=1 cfg=1 |
 | futboltv.mx | iframe | 0 | vacío | capoplay.icu/player/canal5m.php · m3u8=0 iframes=0 cfg=0 |

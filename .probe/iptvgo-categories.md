@@ -1,6 +1,6 @@
 # Categorías del panel iptvgo.cc (player_api)
 
-Fecha: 2026-11-26T01:08:14.175Z
+Fecha: 2026-11-26T08:47:55.193Z
 
 | Categoría | Canales | ¿Entra al filtro? |
 |---|---|---|

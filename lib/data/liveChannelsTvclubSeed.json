@@ -52,7 +52,7 @@
   "slug": "alf",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/fWRs1gX.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/28.m3u8"
  },
  {
@@ -84,7 +84,7 @@
   "slug": "animal-planet",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/2018_Animal_Planet_logo.svg/960px-2018_Animal_Planet_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/41.m3u8"
  },
  {
@@ -196,13 +196,13 @@
   "slug": "baby-tv",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/he/b/b8/LogoBabyIsrael.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/79.m3u8"
  },
  {
-  "name": "247 Bayblade",
-  "slug": "247-bayblade",
-  "topic": "entretenimiento",
+  "name": "Beyblade",
+  "slug": "beyblade",
+  "topic": "anime",
   "country": "Latinoamérica",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/85.m3u8"
@@ -224,19 +224,11 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/90.m3u8"
  },
  {
-  "name": "Bit Me",
-  "slug": "bit-me",
-  "topic": "entretenimiento",
-  "country": "Latinoamérica",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/92.m3u8"
- },
- {
   "name": "Bob Esponja",
   "slug": "bob-esponja",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://images.pluto.tv/channels/5f1aca0b4e448e00075e7c5e/colorLogoPNG.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/96.m3u8"
  },
  {
@@ -292,7 +284,7 @@
   "slug": "las-estrellas",
   "topic": "entretenimiento",
   "country": "México",
-  "logo": "https://i.imgur.com/g5ShxZ7.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/118.m3u8"
  },
  {
@@ -324,7 +316,7 @@
   "slug": "cartoon-network",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Cartoon_Network_2010_logo.svg/960px-Cartoon_Network_2010_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/128.m3u8"
  },
  {
@@ -340,7 +332,7 @@
   "slug": "cartoonito",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/6vYWCD0.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/134.m3u8"
  },
  {
@@ -404,7 +396,7 @@
   "slug": "cine-comedia",
   "topic": "cine",
   "country": "Latinoamérica",
-  "logo": "https://images.pluto.tv/channels/5f12101f0b12f00007844c7c/colorLogoPNG_1732662798298.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/161.m3u8"
  },
  {
@@ -652,7 +644,7 @@
   "slug": "discovery-channel",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Discovery_Channel_-_Logo_2019.svg/960px-Discovery_Channel_-_Logo_2019.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/247.m3u8"
  },
  {
@@ -668,7 +660,7 @@
   "slug": "discovery-civilization",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/41eTvi8.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/252.m3u8"
  },
  {
@@ -692,7 +684,7 @@
   "slug": "discovery-kids",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Discovery%20Kids.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/264.m3u8"
  },
  {
@@ -716,7 +708,7 @@
   "slug": "discovery-theater-hd",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/T07gvEb.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/271.m3u8"
  },
  {
@@ -724,7 +716,7 @@
   "slug": "discovery-turbo",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/osCVMop.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/274.m3u8"
  },
  {
@@ -740,7 +732,7 @@
   "slug": "discovery-world",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/yNFmUkE.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/276.m3u8"
  },
  {
@@ -756,7 +748,7 @@
   "slug": "disney-junior",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e3/2024_Disney_Jr._Logo.svg",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/284.m3u8"
  },
  {
@@ -772,7 +764,7 @@
   "slug": "distrito-comedia",
   "topic": "cine",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/DistritoComediaLOGO2018.png/960px-DistritoComediaLOGO2018.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/293.m3u8"
  },
  {
@@ -780,7 +772,7 @@
   "slug": "doraemon",
   "topic": "anime",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/0/01/Doraemon_Merch_EN_Logo.svg",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/297.m3u8"
  },
  {
@@ -828,7 +820,7 @@
   "slug": "dsports",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/312.m3u8"
  },
  {
@@ -836,7 +828,7 @@
   "slug": "dsports-2",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/DIRECTV_Sports_2_Latin_America_%282018%29.svg/960px-DIRECTV_Sports_2_Latin_America_%282018%29.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/315.m3u8"
  },
  {
@@ -844,7 +836,7 @@
   "slug": "dsports-2-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/DIRECTV_Sports_2_Latin_America_%282018%29.svg/960px-DIRECTV_Sports_2_Latin_America_%282018%29.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/317.m3u8"
  },
  {
@@ -852,7 +844,7 @@
   "slug": "dsports-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/324.m3u8"
  },
  {
@@ -928,11 +920,19 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/347.m3u8"
  },
  {
+  "name": "El Gourmet",
+  "slug": "el-gourmet",
+  "topic": "entretenimiento",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/349.m3u8"
+ },
+ {
   "name": "El Nueve (9)",
   "slug": "el-nueve-9",
   "topic": "entretenimiento",
   "country": "Argentina",
-  "logo": "https://i.imgur.com/cJHP7bU.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/353.m3u8"
  },
  {
@@ -964,14 +964,14 @@
   "slug": "el-trece-13",
   "topic": "entretenimiento",
   "country": "Chile",
-  "logo": "https://i.imgur.com/TrgBAdA.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/360.m3u8"
  },
  {
-  "name": "AR El Trece",
-  "slug": "ar-el-trece",
+  "name": "El Trece",
+  "slug": "el-trece",
   "topic": "entretenimiento",
-  "country": "Latinoamérica",
+  "country": "Argentina",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/362.m3u8"
  },
@@ -988,7 +988,7 @@
   "slug": "espn-1-sur",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/368.m3u8"
  },
  {
@@ -996,7 +996,7 @@
   "slug": "espn-2-sur",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/372.m3u8"
  },
  {
@@ -1004,7 +1004,7 @@
   "slug": "espn-2-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/375.m3u8"
  },
  {
@@ -1012,7 +1012,7 @@
   "slug": "espn-2-mexico",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/960px-ESPN2_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/378.m3u8"
  },
  {
@@ -1028,7 +1028,7 @@
   "slug": "espn-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/400.m3u8"
  },
  {
@@ -1036,7 +1036,7 @@
   "slug": "espn-1-mexico",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/401.m3u8"
  },
  {
@@ -1124,7 +1124,7 @@
   "slug": "fox-sports-1-sur",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/O9BapV9.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/435.m3u8"
  },
  {
@@ -1140,7 +1140,7 @@
   "slug": "fox-sports-2-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8"
  },
  {
@@ -1148,7 +1148,7 @@
   "slug": "fox-sports-2-mexico",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8"
  },
  {
@@ -1156,7 +1156,7 @@
   "slug": "fox-sports-3-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/446.m3u8"
  },
  {
@@ -1164,7 +1164,7 @@
   "slug": "fox-sports-3-mexico",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8"
  },
  {
@@ -1172,7 +1172,7 @@
   "slug": "fox-sports-1-hd-sur",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/O9BapV9.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/452.m3u8"
  },
  {
@@ -1180,7 +1180,7 @@
   "slug": "fox-sports-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/FOX_Sports_logo.svg/960px-FOX_Sports_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/454.m3u8"
  },
  {
@@ -1188,7 +1188,7 @@
   "slug": "fox-sports-1-mexico",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/O9BapV9.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/456.m3u8"
  },
  {
@@ -1196,7 +1196,7 @@
   "slug": "fox-sports-premium",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/3lOZWeD.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/461.m3u8"
  },
  {
@@ -1204,7 +1204,7 @@
   "slug": "fox-sports-premium-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/3lOZWeD.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/463.m3u8"
  },
  {
@@ -1228,7 +1228,7 @@
   "slug": "fox-sports-3-sur",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/468.m3u8"
  },
  {
@@ -1236,7 +1236,7 @@
   "slug": "friends",
   "topic": "cine",
   "country": "Latinoamérica",
-  "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Friends_TV.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/470.m3u8"
  },
  {
@@ -1300,7 +1300,7 @@
   "slug": "garfield",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/9AMWllZ.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/486.m3u8"
  },
  {
@@ -1460,7 +1460,7 @@
   "slug": "hey-arnold",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://images.pluto.tv/channels/66c79221b1a34600087e264d/colorLogoPNG.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/551.m3u8"
  },
  {
@@ -1476,7 +1476,7 @@
   "slug": "history-channel",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/History_Logo.svg/500px-History_Logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/558.m3u8"
  },
  {
@@ -1516,7 +1516,7 @@
   "slug": "investigation-discovery",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/InvestigationDiscoveryLogo2020.svg/960px-InvestigationDiscoveryLogo2020.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/579.m3u8"
  },
  {
@@ -1539,9 +1539,17 @@
   "name": "La 1 HD",
   "slug": "la-1-hd",
   "topic": "entretenimiento",
-  "country": "Latinoamérica",
+  "country": "España",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8"
+ },
+ {
+  "name": "La 2 HD",
+  "slug": "la-2-hd",
+  "topic": "entretenimiento",
+  "country": "España",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/589.m3u8"
  },
  {
   "name": "La Casa de los Dibujos",
@@ -1764,7 +1772,7 @@
   "slug": "mr-bean",
   "topic": "cine",
   "country": "Latinoamérica",
-  "logo": "https://static.wikia.nocookie.net/logopedia/images/2/25/Mr._Bean_Animated_Series_stacked_logo.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/670.m3u8"
  },
  {
@@ -1812,7 +1820,7 @@
   "slug": "naruto",
   "topic": "anime",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/M8X3Kvc.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/702.m3u8"
  },
  {
@@ -1820,7 +1828,7 @@
   "slug": "nat-geo",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Natgeologo.svg/960px-Natgeologo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/703.m3u8"
  },
  {
@@ -1836,7 +1844,7 @@
   "slug": "nat-geo-wild",
   "topic": "documentales",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/National_Geographic_Wild_logo.svg/960px-National_Geographic_Wild_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/709.m3u8"
  },
  {
@@ -1876,7 +1884,7 @@
   "slug": "nick-jr",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nick_Jr._logo_2023_(outline).svg/960px-Nick_Jr._logo_2023_(outline).svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/729.m3u8"
  },
  {
@@ -1884,7 +1892,7 @@
   "slug": "nicktoons",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Nicktoons_Logo_2023.svg/1920px-Nicktoons_Logo_2023.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/735.m3u8"
  },
  {
@@ -1892,7 +1900,7 @@
   "slug": "nickelodeon",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/08ZUI9k.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/736.m3u8"
  },
  {
@@ -1940,7 +1948,7 @@
   "slug": "peppa-pig",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://images.pluto.tv/channels/5d14fb6c84dd37df3b4290c5/colorLogoPNG_1730733871298.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/760.m3u8"
  },
  {
@@ -1964,7 +1972,7 @@
   "slug": "pokemon",
   "topic": "anime",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/GEbRABE.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/773.m3u8"
  },
  {
@@ -1996,7 +2004,7 @@
   "slug": "rugrats",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://images.pluto.tv/channels/5ea7215005d66d0007e8128a/colorLogoPNG.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/797.m3u8"
  },
  {
@@ -2164,7 +2172,7 @@
   "slug": "telefe",
   "topic": "entretenimiento",
   "country": "Argentina",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/874.m3u8"
  },
  {
@@ -2268,7 +2276,7 @@
   "slug": "tnt-sports-argentina",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TNT_Sports_2021_logo.svg/960px-TNT_Sports_2021_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/934.m3u8"
  },
  {
@@ -2284,7 +2292,7 @@
   "slug": "tooncast",
   "topic": "infantil",
   "country": "Latinoamérica",
-  "logo": "https://i.imgur.com/3yXRbQy.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/941.m3u8"
  },
  {
@@ -2328,6 +2336,14 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/953.m3u8"
  },
  {
+  "name": "CH TVChile",
+  "slug": "ch-tvchile",
+  "topic": "entretenimiento",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/958.m3u8"
+ },
+ {
   "name": "TVCDeportes",
   "slug": "tvcdeportes",
   "topic": "deportes",
@@ -2356,7 +2372,7 @@
   "slug": "tyc-sports",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/974.m3u8"
  },
  {
@@ -2390,14 +2406,6 @@
   "country": "Latinoamérica",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/988.m3u8"
- },
- {
-  "name": "Universal Comedy HD",
-  "slug": "universal-comedy-hd",
-  "topic": "entretenimiento",
-  "country": "Latinoamérica",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/992.m3u8"
  },
  {
   "name": "Universal Crime HD",
@@ -2516,7 +2524,7 @@
   "slug": "yu-gi-oh",
   "topic": "anime",
   "country": "Latinoamérica",
-  "logo": "https://provider-static.plex.tv/epg/cms/production/e10f9ed3-8112-4287-8355-cc00be4413a8/Wurl_Yu-Gi-Oh_Channel_Logo_light_Astridrdx.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1052.m3u8"
  },
  {
@@ -2540,7 +2548,7 @@
   "slug": "espn-4-sur",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1069.m3u8"
  },
  {
@@ -2724,7 +2732,7 @@
   "slug": "espn-1-colombia",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1107.m3u8"
  },
  {
@@ -2740,7 +2748,7 @@
   "slug": "espn-3-mexico",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1110.m3u8"
  },
  {
@@ -2748,7 +2756,7 @@
   "slug": "espn-1-argentina",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1111.m3u8"
  },
  {
@@ -2788,7 +2796,7 @@
   "slug": "espn-3-sur",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1127.m3u8"
  },
  {
@@ -2804,7 +2812,7 @@
   "slug": "espn-1-chile",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1132.m3u8"
  },
  {
@@ -2824,11 +2832,19 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1137.m3u8"
  },
  {
+  "name": "Vix Deportes 7",
+  "slug": "vix-deportes-7",
+  "topic": "deportes",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1138.m3u8"
+ },
+ {
   "name": "TyC Sports HD",
   "slug": "tyc-sports-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1143.m3u8"
  },
  {
@@ -2836,7 +2852,7 @@
   "slug": "dsports-hd-opc-2",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/DirecTV_Sports_Latin_America_%282018%29.png/960px-DirecTV_Sports_Latin_America_%282018%29.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1144.m3u8"
  },
  {
@@ -2900,7 +2916,7 @@
   "slug": "espn-hd-colombia",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1161.m3u8"
  },
  {
@@ -2908,7 +2924,7 @@
   "slug": "c5n",
   "topic": "entretenimiento",
   "country": "Argentina",
-  "logo": "https://i.imgur.com/5ZNZYjO.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1162.m3u8"
  },
  {
@@ -2916,7 +2932,7 @@
   "slug": "espn-deportes",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/ESPN_Deportes.svg/960px-ESPN_Deportes.svg.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1165.m3u8"
  },
  {
@@ -2924,7 +2940,7 @@
   "slug": "telefe-internacional",
   "topic": "entretenimiento",
   "country": "Argentina",
-  "logo": "https://i.imgur.com/HNcCX3h.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1166.m3u8"
  },
  {
@@ -2964,7 +2980,7 @@
   "slug": "telefe-hd",
   "topic": "entretenimiento",
   "country": "Argentina",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Telefe_%28nuevo_logo%29.png/960px-Telefe_%28nuevo_logo%29.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1172.m3u8"
  },
  {

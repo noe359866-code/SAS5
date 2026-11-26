@@ -149,7 +149,7 @@ data class PluginStreamResult(
                 it.isNotBlank() && !primaryName.contains(it, ignoreCase = true)
             }?.let { add(it.uppercase(Locale.ROOT)) }
 
-            size?.trim()?.takeIf {
+            this@PluginStreamResult.size?.trim()?.takeIf {
                 it.isNotBlank() && !primaryName.contains(it, ignoreCase = true)
             }?.let { add(it) }
         }

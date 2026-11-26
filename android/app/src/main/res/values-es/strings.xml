@@ -227,6 +227,7 @@
     <string name="player_settings_speed_2">× 2</string>
     <string name="player_settings_servers_title">Servidores</string>
     <string name="player_settings_servers_label">Cambiar stream</string>
+    <string name="player_auto_stream_badge">%1$s · auto</string>
 
     <string name="settings_about">Acerca de</string>
     <string name="settings_about_version">Versión</string>

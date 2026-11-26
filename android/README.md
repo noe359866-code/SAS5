@@ -12,6 +12,12 @@ Aplicación Android **exclusiva para móvil (`APP_LAYOUT=mobile`)** basada en [S
   - Ejecución aislada en `QuickJS` con soporte nativo para `fetch`, `axios` (`get`/`post`/`request`), `cheerio` (puente DOM respaldado por Jsoup), `CryptoJS` (`crypto-js` 4.2.0), `URL`, `URLSearchParams`, `atob`/`btoa`, `TextEncoder`/`TextDecoder`, `SCRAPER_ID`, `SCRAPER_SETTINGS` y `TMDB_API_KEY`.
   - Soporte completo en Media3/ExoPlayer para cabeceras HTTP personalizadas por enlace (`Referer`, `Origin`, `User-Agent`, `Cookie`, etc.), pistas de subtítulos externas devueltas por el plugin y detección automática HLS/DASH/MP4/MKV/WebM.
   - Gestión completa desde la pantalla **Plugins y Catálogo** (accesible desde el icono superior en Inicio o desde **Ajustes → Plugins externos (`manifest.json`)**): añadir, actualizar, activar/desactivar repositorios o scrapers individuales y eliminar repositorios.
+- **Reproducción en un solo toque**: el usuario sólo pulsa **Ver ahora** / **Watch**; `StreamAutoSelector` ordena los streams del plugin y el reproductor abre el primero, encadenando el siguiente si falla. Orden automático:
+  1. **Formato**: MP4 > MKV > WebM > HLS > DASH > endpoint directo sin extensión > página `/embed/` o `/e/` (siempre al final, porque ExoPlayer no la abre sin extractor). Se usa el MIME declarado por el plugin (`type`) y, si falta, la extensión/patrón de la URL.
+  2. **Calidad**: 4K > 1080p > 720p > SD.
+  3. **Idioma**: latino > castellano > subtitulado.
+  4. **HTTPS** y hosts que ya funcionaron antes; los que fallan en la sesión se hunden al final.
+  El encabezado del reproductor muestra lo elegido (`S2 E5 • Título • MP4 1080p · auto`). Elegir un servidor a mano en **Ajustes → Servidores** sigue disponible como override, pero nunca es obligatorio.
 
 ## Formato compatible de `manifest.json`
 

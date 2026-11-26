@@ -13,6 +13,65 @@ class StreamAutoSelectorTest {
 
     private fun server(id: String, name: String, src: String = id) = Video.Server(id, name, src)
 
+    /** Servidor tal como lo entrega un plugin: con el `video` ya resuelto. */
+    private fun resolvedServer(id: String, name: String, src: String, type: String? = null) =
+        Video.Server(id, name, src).apply {
+            video = Video(source = src, type = type)
+        }
+
+    @Test
+    fun `sin tocar nada se elige MP4 antes que HLS y DASH`() {
+        val dash = resolvedServer("1", "Servidor", "https://cdn.example.com/manifest.mpd")
+        val hls = resolvedServer("2", "Servidor", "https://cdn.example.com/master.m3u8?token=abc")
+        val mp4 = resolvedServer("3", "Servidor", "https://cdn.example.com/movie-1080p.mp4")
+
+        assertEquals(
+            listOf(mp4, hls, dash),
+            StreamAutoSelector.order(listOf(dash, hls, mp4))
+        )
+        assertEquals("MP4", StreamAutoSelector.formatLabel(mp4))
+        assertEquals("HLS", StreamAutoSelector.formatLabel(hls))
+        assertEquals("DASH", StreamAutoSelector.formatLabel(dash))
+    }
+
+    @Test
+    fun `el mime que declara el plugin manda sobre la extension de la url`() {
+        // URL sin extensión, pero el plugin declara HLS: no debe quedar como "Enlace".
+        val declaredHls = resolvedServer(
+            "1",
+            "Plugin",
+            "https://cdn.example.com/live/uuid-1234",
+            type = "hls",
+        )
+        val unknownLink = resolvedServer("2", "Plugin", "https://otro.example.com/e/abc")
+        assertEquals("HLS", StreamAutoSelector.formatLabel(declaredHls))
+        assertEquals(listOf(declaredHls, unknownLink), StreamAutoSelector.order(listOf(unknownLink, declaredHls)))
+    }
+
+    @Test
+    fun `un m3u8 directo gana a un mp4 de menos calidad`() {
+        val mp4Sd = resolvedServer("1", "Servidor 480p", "https://cdn.example.com/movie-480p.mp4")
+        val hlsHd = resolvedServer("2", "Servidor 1080p", "https://cdn.example.com/master.m3u8")
+        // El formato pesa, pero la calidad puede compensar: este caso documenta la
+        // decisión (1080p HLS por delante de 480p MP4).
+        assertEquals(listOf(hlsHd, mp4Sd), StreamAutoSelector.order(listOf(mp4Sd, hlsHd)))
+    }
+
+    @Test
+    fun `la descripcion automatica muestra formato y calidad`() {
+        val full = resolvedServer("1", "Direct CDN - 1080p", "https://cdn.example.com/movie.mp4")
+        val noQuality = resolvedServer("2", "Servidor", "https://cdn.example.com/master.m3u8")
+        assertEquals("MP4 1080p", StreamAutoSelector.autoDescription(full))
+        assertEquals("HLS", StreamAutoSelector.autoDescription(noQuality))
+    }
+
+    @Test
+    fun `una pagina embed queda por detras de cualquier stream directo`() {
+        val embed = resolvedServer("1", "Filemoon 1080p latino", "https://filemoon.sx/e/abc123")
+        val plainHls = resolvedServer("2", "Player 480p", "https://cdn.example.com/master.m3u8")
+        assertEquals(listOf(plainHls, embed), StreamAutoSelector.order(listOf(embed, plainHls)))
+    }
+
     @Test
     fun `un HLS directo gana a un enlace de player`() {
         val embed = server("1", "Filemoon", "https://filemoon.sx/e/abc123")

@@ -2,24 +2,47 @@ package com.streamflixreborn.streamflix.fragments.player
 
 import com.streamflixreborn.streamflix.models.Video
 import com.streamflixreborn.streamflix.plugins.StreamFormatHelper
+import java.util.Locale
 
 /**
  * Elige el stream que se va a reproducir sin preguntar nada al usuario.
  *
- * Antes el reproductor hacía `getVideo(servers.first())`: el orden lo decidía la
- * web del proveedor (a veces alfabético, a veces el último añadido), así que el
- * primer intento caía muchas veces en un 480p o en un host muerto y el usuario
- * tenía que abrir Ajustes → Servidores y elegir a mano.
+ * El usuario sólo pulsa "Ver ahora" / "Watch": el reproductor abre el primer
+ * servidor de esta lista y, si falla, encadena el siguiente. Aquí se decide ese
+ * orden sin conocer ningún proveedor concreto, usando sólo lo que ya viene en
+ * `Video.Server` (`name`, `src` y el `video` ya resuelto por el plugin).
  *
- * Aquí se puntúa cada servidor con señales que ya vienen en `Video.Server`
- * (id/name/src), sin conocer ningún proveedor concreto, y se ordena de mejor a
- * peor. Como el reproductor ya reintenta con el siguiente de la lista cuando uno
- * falla, el orden es también la cadena de respaldo.
+ * Prioridades, de más a menos peso:
+ *
+ * 1. **Formato**: MP4/MKV (progresivo, sin manifiesto) > HLS > DASH > endpoint
+ *    directo sin extensión > página `/embed/` o `/e/` que necesitaría extractor.
+ *    ExoPlayer abre los tres primeros sin ayuda y son los que menos fallan a
+ *    mitad de reproducción.
+ * 2. **Calidad** anunciada en el nombre o en la URL (4K > 1080p > 720p > SD).
+ * 3. **Idioma** (latino > castellano > subtitulado).
+ * 4. **HTTPS** (con HTTP plano muchos hosts fallan por cleartext).
+ * 5. **Host que ya funcionó** con este proveedor y hosts que fallaron en esta
+ *    sesión (se hunden al final para que el reintento elija otro).
  */
 object StreamAutoSelector {
 
-    /** Puntaje mínimo para considerar que un servidor es "bueno". */
-    private const val SCORE_DIRECT = 120
+    /**
+     * Formatos que el reproductor sabe abrir, con el peso que reciben al
+     * ordenar. El valor es positivo para lo que se reproduce directamente y
+     * negativo para lo que obliga a pasar por una página intermedia.
+     */
+    enum class StreamFormat(val label: String, val score: Int) {
+        MP4("MP4", 70),
+        MKV("MKV", 66),
+        WEBM("WEBM", 60),
+        HLS("HLS", 55),
+        DASH("DASH", 40),
+        DIRECT("Directo", 25),
+        // Página intermedia (`/embed/`, `/e/`): ExoPlayer no la abre sin un extractor,
+        // así que queda siempre por detrás de cualquier stream reproducible.
+        LINK("Enlace", -100),
+    }
+
     private const val SCORE_4K = 45
     private const val SCORE_1080 = 35
     private const val SCORE_720 = 20
@@ -45,6 +68,56 @@ object StreamAutoSelector {
             )
             .map { it.value }
 
+    /** URL que realmente se va a reproducir (el plugin ya resuelve `video`). */
+    fun streamUrl(server: Video.Server): String =
+        server.video?.source?.takeIf { it.isNotBlank() } ?: server.src.ifBlank { server.id }
+
+    /**
+     * Formato de un servidor. Se apoya en el MIME declarado por el plugin
+     * (`video.type`) y, si no lo hay, en la extensión/patrón de la URL, así que
+     * funciona igual con `master.m3u8?token=…` o con URLs sin extensión.
+     */
+    fun formatOf(server: Video.Server): StreamFormat {
+        val url = streamUrl(server)
+        val mime = StreamFormatHelper.inferMimeType(url, server.video?.type)?.lowercase(Locale.ROOT)
+        return when {
+            mime == null ->
+                if (StreamFormatHelper.isDirectMedia(url)) StreamFormat.DIRECT else StreamFormat.LINK
+
+            mime.contains("mpegurl") || mime.contains("m3u8") -> StreamFormat.HLS
+            mime.contains("dash") || mime.contains("mpd") -> StreamFormat.DASH
+            mime.contains("matroska") || mime.contains("mkv") -> StreamFormat.MKV
+            mime.contains("webm") -> StreamFormat.WEBM
+            mime.contains("mp4") || mime.contains("m4v") || mime.contains("quicktime") -> StreamFormat.MP4
+            else -> StreamFormat.DIRECT
+        }
+    }
+
+    /** Etiqueta corta del formato: `MP4`, `HLS`, `DASH`, ... */
+    fun formatLabel(server: Video.Server): String = formatOf(server).label
+
+    /** Calidad anunciada en el nombre o la URL, si el plugin la incluye. */
+    fun qualityLabel(server: Video.Server): String? {
+        val haystack = "${server.name} ${streamUrl(server)}".lowercase(Locale.ROOT)
+        return when {
+            haystack.contains("2160") || haystack.contains("4k") -> "4K"
+            haystack.contains("1080") || haystack.contains("fullhd") -> "1080p"
+            haystack.contains("720") || haystack.contains(" hd") -> "720p"
+            haystack.contains("480") -> "480p"
+            haystack.contains("360") -> "360p"
+            else -> null
+        }
+    }
+
+    /**
+     * Texto para el encabezado del reproductor, p. ej. `MP4 1080p`, para que se
+     * vea qué eligió el modo automático sin abrir Ajustes.
+     */
+    fun autoDescription(server: Video.Server): String =
+        listOfNotNull(formatLabel(server), qualityLabel(server))
+            .joinToString(" ")
+            .trim()
+
     /** Identificador estable de un servidor para recordar "este funcionó". */
     fun hostKey(server: Video.Server): String =
         (server.src.ifBlank { server.id })
@@ -54,22 +127,18 @@ object StreamAutoSelector {
             .lowercase()
 
     internal fun score(server: Video.Server, lastGoodHost: String?): Int {
-        val url = server.src.ifBlank { server.id }
-        val haystack = "${server.name} $url".lowercase()
-        var score = 0
+        val url = streamUrl(server)
+        val haystack = "${server.name} $url".lowercase(Locale.ROOT)
 
-        // 1. Un HLS/MP4 directo se reproduce sin pasar por un extractor: es lo
-        //    más fiable y lo más rápido (nada que pueda romperse a mitad).
-        if (StreamFormatHelper.isDirectMedia(url)) score += SCORE_DIRECT
-        if (endsWithMedia(url, ".mp4")) score += 15
+        // 1. Formato: un MP4/HLS directo se reproduce sin pasar por un extractor.
+        var score = formatOf(server).score
 
         // 2. Calidad anunciada en el nombre o en la URL.
-        score += when {
-            haystack.contains("2160") || haystack.contains("4k") -> SCORE_4K
-            haystack.contains("1080") || haystack.contains("fullhd") -> SCORE_1080
-            haystack.contains("720") || haystack.contains("hd") -> SCORE_720
-            haystack.contains("480") || haystack.contains("360") ||
-                haystack.contains(" sd") -> SCORE_SD
+        score += when (qualityLabel(server)) {
+            "4K" -> SCORE_4K
+            "1080p" -> SCORE_1080
+            "720p" -> SCORE_720
+            "480p", "360p" -> SCORE_SD
             else -> 0
         }
 
@@ -95,9 +164,6 @@ object StreamAutoSelector {
 
         return score
     }
-
-    private fun endsWithMedia(url: String, ext: String) =
-        url.substringBefore('?').lowercase().endsWith(ext)
 
     /**
      * Hosts que fallaron al reproducir en esta sesión. Vive en memoria: si el

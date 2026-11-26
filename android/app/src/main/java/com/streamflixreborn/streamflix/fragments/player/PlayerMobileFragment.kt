@@ -129,6 +129,8 @@ class PlayerMobileFragment : Fragment() {
 
     private var currentVideo: Video? = null
     private var currentServer: Video.Server? = null
+    /** `true` sólo si el usuario cambió de servidor a mano en Ajustes → Servidores. */
+    private var isManualServerSelection = false
     private var isIgnoringPip = false
     private var nextEpisodePrefetchTargetId: String? = null
     private var nextEpisodePrefetchJob: Job? = null
@@ -279,6 +281,8 @@ class PlayerMobileFragment : Fragment() {
                             })
                             .build()
                         binding.settings.setOnServerSelectedListener { server ->
+                            // Elegir a mano desactiva el modo automático sólo para esta reproducción.
+                            isManualServerSelection = true
                             viewModel.getVideo(state.servers.find { server.id == it.id }!!)
                         }
                         viewModel.getVideo(state.servers.first())
@@ -1213,7 +1217,25 @@ class PlayerMobileFragment : Fragment() {
 
     private fun updatePlayerHeader(videoType: Video.Type = currentVideoTypeForUi()) {
         binding.pvPlayer.controller.binding.tvExoTitle.text = resolvePlayerTitle(videoType)
-        binding.pvPlayer.controller.binding.tvExoSubtitle.text = resolvePlayerSubtitle(videoType)
+        binding.pvPlayer.controller.binding.tvExoSubtitle.text = resolvePlayerSubtitleWithFormat(videoType)
+    }
+
+    /**
+     * Subtítulo del controlador + el formato que eligió el modo automático
+     * (`MP4 1080p · auto`), para que no haga falta abrir Ajustes para saber qué
+     * se está reproduciendo.
+     */
+    private fun resolvePlayerSubtitleWithFormat(videoType: Video.Type = currentVideoTypeForUi()): String {
+        val base = resolvePlayerSubtitle(videoType)
+        val server = currentServer ?: return base
+        val description = StreamAutoSelector.autoDescription(server)
+        if (description.isEmpty()) return base
+        val suffix = if (isManualServerSelection) {
+            description
+        } else {
+            getString(R.string.player_auto_stream_badge, description)
+        }
+        return "$base  •  $suffix"
     }
 
     private fun queueNextEpisodeForContinueWatching(provider: com.streamflixreborn.streamflix.providers.Provider) {

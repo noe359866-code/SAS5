@@ -19,6 +19,9 @@ const config = require('../lib/config');
 const core = require('../lib/core');
 const { renderHome } = require('../lib/homePage');
 const { renderConfigure } = require('../lib/configurePage');
+const { renderWatch } = require('../lib/watchPage');
+const watchApi = require('../lib/watchApi');
+const skipSegments = require('../lib/skipSegments');
 const tmdb = require('../lib/tmdb');
 const { branding } = require('../lib/branding');
 const userConfig = require('../lib/userConfig');
@@ -122,6 +125,72 @@ app.get('/healthz', (req, res) => {
   });
 });
 
+// 4b. Reproductor web (/watch) + API interna de búsqueda/catálogos
+app.get(['/watch', '/watch/'], (req, res) => {
+  const { baseUrl, host } = requestBase(req);
+  res.setHeader('Cache-Control', buildCacheControl(1800, 86400));
+  res.setHeader('Referrer-Policy', 'no-referrer');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(renderWatch({ origin: baseUrl, host, region: config.watchRegion }));
+});
+
+app.get('/internal/watch/catalogs', (req, res) => {
+  res.setHeader('Cache-Control', buildCacheControl(3600, 21600));
+  res.json(watchApi.buildWatchCatalogs(null));
+});
+
+app.get('/internal/watch/search', async (req, res) => {
+  const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.ip || 'unknown';
+  if (!rateLimit.allow(`watch-search:${clientIp}`, { limit: 30, windowMs: 60_000 })) {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(429).json({ error: 'rate_limited', message: 'Demasiadas búsquedas seguidas. Espera un momento.' });
+  }
+  const result = await watchApi.searchWatch({
+    query: req.query.q || '',
+    type: req.query.type || 'all',
+    page: Number(req.query.page) || 1,
+    lang: config.tmdbLanguage,
+  });
+  res.setHeader('Cache-Control', buildCacheControl(result.results.length ? 600 : 120, 3600));
+  return res.json(result);
+});
+
+app.get('/internal/watch/skip', async (req, res) => {
+  const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.ip || 'unknown';
+  if (!rateLimit.allow(`watch-skip:${clientIp}`, { limit: 60, windowMs: 60_000 })) {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(429).json({ ok: false, error: 'rate_limited', segments: [], sources: {} });
+  }
+  const result = await skipSegments.getSkipSegments({
+    type: req.query.type || 'movie',
+    id: req.query.id || '',
+    imdbId: req.query.imdb || req.query.imdb_id || '',
+    tmdbId: req.query.tmdb || req.query.tmdb_id || '',
+    season: req.query.season || '',
+    episode: req.query.episode || '',
+    duration: req.query.duration || '',
+    anime: req.query.anime || '',
+  });
+  res.setHeader('Cache-Control', buildCacheControl(result.segments.length ? 3600 : 600, 21600));
+  return res.json(result);
+});
+
+app.get('/internal/watch/fallback/:type/:id', (req, res) => {
+  const type = req.params.type === 'series' ? 'series' : 'movie';
+  res.setHeader('Cache-Control', buildCacheControl(3600, 21600));
+  res.json(watchApi.getWatchFallbackCatalog(type, req.params.id));
+});
+
+app.get('/internal/watch/meta/:type/:id.json', async (req, res) => {
+  let id;
+  try { id = decodeURIComponent(req.params.id); } catch (_) { return res.status(400).json({ error: 'invalid_id' }); }
+  const type = req.params.type === 'series' ? 'series' : 'movie';
+  const result = await watchApi.getWatchMeta(type, id, null);
+  res.setHeader('Cache-Control', buildCacheControl(result.cacheMaxAge ?? 1800));
+  return res.json(result);
+});
+
 // 4b. Página de configuración + branding (logos vía TMDB)
 app.get('/configure', async (req, res) => {
   const { baseUrl, host } = requestBase(req);
@@ -187,6 +256,17 @@ app.get('/:cfg/configure', async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.send(renderConfigure({ origin: baseUrl, host, trendingMovies: trending.movies, trendingSeries: trending.series, initialCfg: cfg }));
+});
+
+app.get(['/:cfg/watch', '/:cfg/watch/'], (req, res) => {
+  const cfg = decodeUserConfig(req, res);
+  if (!cfg) return;
+  const { baseUrl, host } = requestBase(req);
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Referrer-Policy', 'no-referrer');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(renderWatch({ origin: baseUrl, host, cfgPrefix: `/${req.params.cfg}`, region: cfg.region }));
 });
 
 app.get('/:cfg/manifest.json', (req, res) => {

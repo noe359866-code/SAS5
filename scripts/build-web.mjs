@@ -52,6 +52,8 @@ const tmdbClient = require(libPath('tmdb.js'));
 const { branding } = require(libPath('branding.js'));
 const { renderHome } = require(libPath('homePage.js'));
 const { renderConfigure } = require(libPath('configurePage.js'));
+const { renderWatch } = require(libPath('watchPage.js'));
+const watchApi = require(libPath('watchApi.js'));
 
 let trending = { movies: null, series: null, anime: null };
 if (config.tmdbConfigured) {
@@ -100,14 +102,20 @@ const brandingJson = JSON.stringify(await branding(config.tmdbLanguage));
 
 const outDir = path.join(ROOT, 'public');
 await mkdir(path.join(outDir, 'configure'), { recursive: true });
-await mkdir(path.join(outDir, 'internal'), { recursive: true });
+await mkdir(path.join(outDir, 'watch'), { recursive: true });
+await mkdir(path.join(outDir, 'internal', 'watch'), { recursive: true });
+const watchHtml = renderWatch({ origin, host, region: config.watchRegion });
+const watchCatalogsJson = JSON.stringify(watchApi.buildWatchCatalogs(null));
 await writeFile(path.join(outDir, 'index.html'), home, 'utf8');
 await writeFile(path.join(outDir, 'configure', 'index.html'), configure, 'utf8');
+await writeFile(path.join(outDir, 'watch', 'index.html'), watchHtml, 'utf8');
 await writeFile(path.join(outDir, 'manifest.json'), manifestJson, 'utf8');
 await writeFile(path.join(outDir, 'internal', 'branding.json'), brandingJson, 'utf8');
+await writeFile(path.join(outDir, 'internal', 'watch', 'catalogs'), watchCatalogsJson, 'utf8');
 console.log(
   `[build-web] Web y assets estáticos pregenerados para ${origin}: ` +
   `index.html ${(Buffer.byteLength(home) / 1024).toFixed(0)} KB · ` +
   `configure/index.html ${(Buffer.byteLength(configure) / 1024).toFixed(0)} KB · ` +
+  `watch/index.html ${(Buffer.byteLength(watchHtml) / 1024).toFixed(0)} KB · ` +
   `manifest.json ${(Buffer.byteLength(manifestJson) / 1024).toFixed(1)} KB`
 );

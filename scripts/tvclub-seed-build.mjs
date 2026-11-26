@@ -144,6 +144,21 @@ async function isAlive(id) {
     say(`barrido: ${alive.length} ids vivos de ${MAX_ID} (${((Date.now() - t0) / 1000).toFixed(0)} s)`);
     say('');
 
+    // Muestra cruda de maestras de ids SIN nombre conocido: si el playlist
+    // lleva el nombre del canal en algún comentario, la próxima iteración
+    // del script lo aprovecha para nombrarlos.
+    const unknownAlive = alive.filter((id) => !known.has(id)).slice(0, 3);
+    for (const id of unknownAlive) {
+      try {
+        const sample = await fetchBytes(`${BASE}${PATH_PREFIX}${id}.m3u8`);
+        say(`maestra id ${id} (sin nombre conocido):`);
+        say('```');
+        say(sample.buf.toString('utf8').slice(0, 400).trim());
+        say('```');
+      } catch {}
+    }
+    say('');
+
     const picked = [];
     const byGroup = new Map();
     let withName = 0;

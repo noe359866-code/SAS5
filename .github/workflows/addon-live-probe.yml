@@ -1,0 +1,35 @@
+name: Sonda en vivo del addon desplegado
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/addon-live-probe.yml'
+      - 'scripts/addon-live-probe.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Hacer fetch al addon en vivo
+        run: node scripts/addon-live-probe.mjs
+      - name: Guardar diagnóstico en la rama
+        if: always()
+        run: |
+          test -s .probe/addon-live.md || exit 0
+          git config user.name "sonda"
+          git config user.email "sonda@users.noreply.github.com"
+          git add -f .probe/addon-live.md
+          git diff --cached --quiet || git commit -m "sonda: diagnóstico en vivo del addon $(date -u +%FT%TZ) [skip ci]"
+          git fetch origin || true
+          git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true
+          git push origin HEAD:refs/heads/${{ github.ref_name }} || true

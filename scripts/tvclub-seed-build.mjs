@@ -91,7 +91,9 @@ async function fetchBytes(url, { range = false } = {}) {
 /** «A3Cine» → «A3 Cine», «Eventos3» → «Eventos 3», «AE» → «AE». */
 const humanizeSlug = (slug) => String(slug || '')
   .replace(/([a-záéíóúñ0-9])([A-ZÁÉÍÓÚÑ])/g, '$1 $2')
-  .replace(/([A-Za-zÁÉÍÓÚÑáéíóúñ])(\d)/g, '$1 $2')
+  // letra→dígito solo si la palabra tiene 2+ letras: «A3Cine» → «A3 Cine»,
+  // pero «Eventos3» → «Eventos 3»
+  .replace(/([A-Za-zÁÉÍÓÚÑáéíóúñ]{2,})(\d)/g, '$1 $2')
   .trim();
 
 /**

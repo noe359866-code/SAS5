@@ -100,10 +100,15 @@ test('robustez: secuencias URI malformadas (%E0%A4%A) responden 400 limpio sin U
   assert.equal(body.error, 'invalid_id');
 });
 
-test('escala: /internal/watch/* ya no existe (se eliminó la web de reproductor)', async () => {
+test('escala: /internal/watch/catalogs responde con caché pública y estructura de secciones', async () => {
   const worker = await loadWorker();
   const res = await worker.fetch(new Request('https://scale.example/internal/watch/catalogs'), {}, {});
-  assert.equal(res.status, 404);
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('cache-control') || '', /public, max-age=3600/);
+  const body = await res.json();
+  assert.equal(body.ok, true);
+  assert.ok(Array.isArray(body.sections.inicio) && body.sections.inicio.length > 0);
+  assert.ok(Array.isArray(body.sections.anime) && body.sections.anime.length > 0);
 });
 
 test('escala: /internal/streams-test.json aplica rate limit por IP para impedir amplificación de búsquedas', async () => {

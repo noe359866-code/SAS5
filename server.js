@@ -8,6 +8,7 @@ const config = require('./lib/config');
 const server = app.listen(config.port, '0.0.0.0', () => {
   console.log(`\n🚀 ${config.addonName} escuchando en http://localhost:${config.port}`);
   console.log(`   Landing:   http://localhost:${config.port}/`);
+  console.log(`   Watch:     http://localhost:${config.port}/watch`);
   console.log(`   Manifest:  http://localhost:${config.port}/manifest.json`);
   console.log(`   Health:    http://localhost:${config.port}/healthz`);
   console.log(`\n   Fuentes de datos: TMDB=${config.tmdbConfigured ? '✓' : '✗ (define TMDB_API_KEY)'} · TVMaze=✓ · OMDB=${config.omdbConfigured ? '✓' : '✗ (define OMDB_API_KEY)'} · Watchmode=${config.watchmodeConfigured ? '✓' : '✗ (define WATCHMODE_API_KEY)'}\n`);

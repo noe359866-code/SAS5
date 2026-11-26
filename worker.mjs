@@ -25,6 +25,9 @@ import responseCache from './lib/responseCache.js';
 import core from './lib/core.js';
 import { renderHome } from './lib/homePage.js';
 import { renderConfigure } from './lib/configurePage.js';
+import { renderWatch } from './lib/watchPage.js';
+import watchApi from './lib/watchApi.js';
+import skipSegments from './lib/skipSegments.js';
 import tmdbClient from './lib/tmdb.js';
 import { branding } from './lib/branding.js';
 import userConfig from './lib/userConfig.js';
@@ -59,6 +62,8 @@ const SITE_MANIFEST = JSON.stringify({
 const CATALOG_RE = /^\/catalog\/(movie|series|anime|tv)\/([^/]+?)(?:\/([^/]+))?\.json$/;
 const META_RE = /^\/meta\/(movie|series|tv)\/(.+)\.json$/;
 const STREAM_RE = /^\/stream\/(movie|series|tv)\/(.+)\.json$/;
+const WATCH_META_RE = /^\/internal\/watch\/meta\/(movie|series)\/(.+)\.json$/;
+const WATCH_FALLBACK_RE = /^\/internal\/watch\/fallback\/(movie|series)\/([^/]+)$/;
 // Mismo límite que lib/userConfig.js: una config "completa" generada por
 // /configure ocupa ~600 caracteres, así que un tope de 512 la rechazaba
 // (404 invalid_config → Stremio sin manifest ni streams).
@@ -91,12 +96,13 @@ function jsonResponse(data, status = 200, cacheSeconds = 3600, explicitCacheCont
   });
 }
 
-function htmlResponse(html, cacheSeconds = 0) {
+function htmlResponse(html, cacheSeconds = 0, extraHeaders = {}) {
   return new Response(html, {
     status: 200,
     headers: corsHeaders({
       'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': cacheSeconds > 0 ? buildCacheControl(cacheSeconds, 86400) : 'no-store',
+      ...extraHeaders,
     }),
   });
 }
@@ -354,6 +360,102 @@ async function handleRequest(request, env, ctx) {
       }, `${origin}/__edge/home.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}`);
     }
 
+    // ── Reproductor web (/watch) ──────────────────────────────
+    if (path === '/watch') {
+      return edgeCached(
+        request,
+        ctx,
+        async () => htmlResponse(
+          renderWatch({ origin, host, region: config.watchRegion }),
+          1800,
+          { 'Referrer-Policy': 'no-referrer', 'X-Content-Type-Options': 'nosniff' }
+        ),
+        `${origin}/__edge/watch.html?region=${encodeURIComponent(config.watchRegion)}`
+      );
+    }
+
+    if (path === '/internal/watch/catalogs') {
+      return edgeCached(
+        request,
+        ctx,
+        async () => jsonResponse(watchApi.buildWatchCatalogs(null), 200, 3600),
+        `${origin}/__edge/watch-catalogs.json?region=${encodeURIComponent(config.watchRegion)}&tmdb=${config.tmdbConfigured ? 1 : 0}`
+      );
+    }
+
+    if (path === '/internal/watch/search') {
+      const clientIp = request.headers.get('cf-connecting-ip') ||
+        (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
+      if (!rateLimit.allow(`watch-search:${clientIp}`, { limit: 30, windowMs: 60_000 })) {
+        return jsonResponse({ error: 'rate_limited', message: 'Demasiadas búsquedas seguidas. Espera un momento.' }, 429, 0);
+      }
+      const query = url.searchParams.get('q') || '';
+      const type = url.searchParams.get('type') || 'all';
+      const page = Number(url.searchParams.get('page')) || 1;
+      const cacheKey = `${origin}/__edge/watch-search.json?q=${encodeURIComponent(query.trim().toLowerCase())}&type=${encodeURIComponent(type)}&p=${page}&tmdb=${config.tmdbConfigured ? 1 : 0}`;
+      return edgeCached(
+        request,
+        ctx,
+        async () => {
+          const result = await watchApi.searchWatch({ query, type, page, lang: config.tmdbLanguage });
+          return jsonResponse(result, 200, result.results.length ? 600 : 120);
+        },
+        cacheKey
+      );
+    }
+
+    if (path === '/internal/watch/skip') {
+      const clientIp = request.headers.get('cf-connecting-ip') ||
+        (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
+      if (!rateLimit.allow(`watch-skip:${clientIp}`, { limit: 60, windowMs: 60_000 })) {
+        return jsonResponse({ ok: false, error: 'rate_limited', segments: [], sources: {} }, 429, 0);
+      }
+      const skipQuery = {
+        type: url.searchParams.get('type') || 'movie',
+        id: url.searchParams.get('id') || '',
+        imdbId: url.searchParams.get('imdb') || url.searchParams.get('imdb_id') || '',
+        tmdbId: url.searchParams.get('tmdb') || url.searchParams.get('tmdb_id') || '',
+        season: url.searchParams.get('season') || '',
+        episode: url.searchParams.get('episode') || '',
+        duration: url.searchParams.get('duration') || '',
+        anime: url.searchParams.get('anime') || '',
+      };
+      const parsed = skipSegments.parseSkipQuery(skipQuery);
+      const durBucket = parsed.duration ? Math.round(parsed.duration / 15) * 15 : 0;
+      const cacheKey = `${origin}/__edge/watch-skip.json?t=${parsed.type}&im=${encodeURIComponent(parsed.imdbId)}&tm=${parsed.tmdbId || 0}&al=${parsed.anilistId || 0}&ml=${parsed.malId || 0}&s=${parsed.season || 0}&e=${parsed.episode || 0}&d=${durBucket}&a=${parsed.anime ? 1 : 0}`;
+      return edgeCached(
+        request,
+        ctx,
+        async () => {
+          const result = await skipSegments.getSkipSegments(skipQuery);
+          return jsonResponse(result, 200, result.segments.length ? 3600 : 600);
+        },
+        cacheKey
+      );
+    }
+
+    let watchMatch = path.match(WATCH_FALLBACK_RE);
+    if (watchMatch) {
+      const fbId = safeDecode(watchMatch[2]);
+      if (fbId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
+      return jsonResponse(watchApi.getWatchFallbackCatalog(watchMatch[1], fbId), 200, 3600);
+    }
+
+    watchMatch = path.match(WATCH_META_RE);
+    if (watchMatch) {
+      const metaId = safeDecode(watchMatch[2]);
+      if (metaId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
+      return edgeCached(
+        request,
+        ctx,
+        async () => {
+          const result = await watchApi.getWatchMeta(watchMatch[1], metaId, null);
+          return jsonResponse(result, 200, result.cacheMaxAge ?? 1800);
+        },
+        `${origin}/__edge/watch-meta/${watchMatch[1]}/${encodeURIComponent(metaId)}?tmdb=${config.tmdbConfigured ? 1 : 0}`
+      );
+    }
+
     // ── Página de configuración ───────────────────────────────
     if (path === '/configure') {
       const createConfigure = async () => {
@@ -520,6 +622,13 @@ async function handleRequest(request, env, ctx) {
         if (rest === '/configure') {
           const trending = await loadTrending();
           return htmlResponse(renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series, initialCfg: cfg }));
+        }
+        if (rest === '/watch') {
+          return htmlResponse(
+            renderWatch({ origin, host, cfgPrefix: `/${prefixed[1]}`, region: cfg.region }),
+            0,
+            { 'Referrer-Policy': 'no-referrer', 'X-Content-Type-Options': 'nosniff' }
+          );
         }
         if (rest === '/manifest.json') {
           const createManifest = () => jsonResponse(core.buildManifest(logoUrl, cfg), 200, 300);

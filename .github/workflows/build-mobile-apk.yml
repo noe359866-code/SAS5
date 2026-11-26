@@ -75,13 +75,16 @@ jobs:
           encoded = snippet.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
           print(f"::error title=GradleTestFailure::{encoded[:3800]}")
           PY
-            # Also dump XML test reports if tests ran and failed
+            # Also dump XML test reports (both failure header and system-out/system-err tail)
             python3 - <<'PY'
           import pathlib
           for p in sorted(pathlib.Path("app/build/test-results").rglob("*.xml")):
               txt = p.read_text(errors="replace")
               if "<failure" in txt or "<error" in txt:
-                  enc = txt[:3500].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+                  head = txt[:1500]
+                  tail = txt[-2000:] if len(txt) > 1500 else ""
+                  combined = head + ("\n--- XML TAIL ---\n" + tail if tail else "")
+                  enc = combined.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
                   print(f"::error title=TestReport-{p.name}::{enc}")
           PY
             exit 1

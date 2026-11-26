@@ -249,8 +249,7 @@ class PluginRuntime(
                 evaluate<Any?>(getCompiledPolyfillBytecode(this))
                 getCompiledCryptoJsBytecode(this)?.let { evaluate<Any?>(it) }
 
-                val scriptBytecode = compileScraperScript(this, code, "${scraper.id}.js")
-                evaluate<Any?>(scriptBytecode)
+                evaluateScraperScript(this, code, "${scraper.id}.js")
                 evaluate<Any?>(getCompiledCallBytecode(this))
             }
         } catch (ce: CancellationException) {
@@ -285,13 +284,13 @@ class PluginRuntime(
         append("})(module, module.exports, globalThis.require);")
     }
 
-    private fun compileScraperScript(qjs: QuickJs, rawCode: String, filename: String): ByteArray {
-        return try {
-            qjs.compile(wrapPluginModule(rawCode), filename, asModule = false)
+    private suspend fun evaluateScraperScript(qjs: QuickJs, rawCode: String, filename: String) {
+        try {
+            qjs.evaluate<Any?>(wrapPluginModule(rawCode), filename)
         } catch (firstError: QuickJsException) {
             val transformed = transformEsmExportsIfNeeded(rawCode)
             if (transformed != rawCode) {
-                qjs.compile(wrapPluginModule(transformed), filename, asModule = false)
+                qjs.evaluate<Any?>(wrapPluginModule(transformed), filename)
             } else {
                 throw firstError
             }
@@ -978,6 +977,13 @@ class PluginRuntime(
                     }
                     return new TextDecoder().decode(b);
                 };
+                b.readInt32LE = function(offset) {
+                    var o = offset || 0;
+                    return (b[o]) | (b[o + 1] << 8) | (b[o + 2] << 16) | (b[o + 3] << 24);
+                };
+                b.readUInt32LE = function(offset) {
+                    return b.readInt32LE(offset) >>> 0;
+                };
                 return b;
             }
             var BufferPolyfill = {
@@ -1502,6 +1508,16 @@ class PluginRuntime(
             if (name === 'crypto-js') {
                 if (globalThis.CryptoJS) return globalThis.CryptoJS;
                 throw new Error("Module 'crypto-js' is not loaded");
+            }
+            if (name === 'crypto' || name === 'node:crypto') {
+                return {
+                    randomBytes: function(size) {
+                        return globalThis.Buffer.from(__crypto_random_bytes(size || 16), 'base64');
+                    },
+                    randomUUID: function() { return globalThis.crypto.randomUUID(); },
+                    getRandomValues: function(arr) { return globalThis.crypto.getRandomValues(arr); },
+                    webcrypto: globalThis.crypto
+                };
             }
             if (name === 'axios') return globalThis.axios;
             if (name === 'buffer') return { Buffer: globalThis.Buffer };

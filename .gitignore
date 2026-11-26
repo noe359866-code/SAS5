@@ -23,3 +23,12 @@ public/*/catalog/
 # de los workflows y no forman parte del addon. Los workflows los siguen
 # subiendo a la rama con `git add -f`.
 .probe/
+
+# Android build & local signing artifacts
+android/.gradle/
+android/.idea/
+android/local.properties
+android/ci-signing/
+android/out/
+android/**/build/
+

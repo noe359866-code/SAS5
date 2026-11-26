@@ -75,24 +75,24 @@ class PluginManifestParserTest {
     }
 
     @Test
-    fun `resolveRelativeUrl resolves relative scraper paths against manifest base URL`() {
+    fun `resolveScriptUrl resolves relative scraper paths against manifest base URL`() {
         val manifestUrl = "https://raw.githubusercontent.com/example/repo/main/sub/manifest.json"
-        val baseUrl = PluginManifestParser.deriveBaseUrl(manifestUrl)
-        assertEquals("https://raw.githubusercontent.com/example/repo/main/sub/", baseUrl)
+        val baseUrl = PluginManifestParser.computeBaseUrl(manifestUrl)
+        assertEquals("https://raw.githubusercontent.com/example/repo/main/sub", baseUrl)
         assertEquals(
             "https://raw.githubusercontent.com/example/repo/main/sub/providers/vidsrc.js",
-            PluginManifestParser.resolveRelativeUrl(baseUrl, "./providers/vidsrc.js")
+            PluginManifestParser.resolveScriptUrl(baseUrl, "./providers/vidsrc.js")
         )
     }
 
     @Test
     fun `StreamFormatHelper detects HLS DASH MP4 and rejects magnet or torrent links`() {
         assertNull(StreamFormatHelper.inferMimeType("magnet:?xt=urn:btih:123456"))
-        assertFalse(StreamFormatHelper.isPlayableHttpStream("magnet:?xt=urn:btih:123456"))
-        assertFalse(StreamFormatHelper.isPlayableHttpStream("https://example.com/file.torrent"))
+        assertFalse(StreamFormatHelper.isPlayableHttpUrl("magnet:?xt=urn:btih:123456"))
+        assertFalse(StreamFormatHelper.isPlayableHttpUrl("https://example.com/file.torrent"))
 
-        assertTrue(StreamFormatHelper.isPlayableHttpStream("https://cdn.example.com/live/master.m3u8?token=abc"))
-        assertTrue(StreamFormatHelper.isPlayableHttpStream("https://cdn.example.com/stream/opaque-endpoint"))
+        assertTrue(StreamFormatHelper.isPlayableHttpUrl("https://cdn.example.com/live/master.m3u8?token=abc"))
+        assertTrue(StreamFormatHelper.isPlayableHttpUrl("https://cdn.example.com/stream/opaque-endpoint"))
         assertNotNull(StreamFormatHelper.inferMimeType("https://cdn.example.com/live/master.m3u8?token=abc"))
     }
 }

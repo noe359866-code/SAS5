@@ -80,6 +80,8 @@ object StreamFormatHelper {
         ) {
             return false
         }
+        val cleanPath = trimmed.substringBefore('#').substringBefore('?').lowercase(Locale.ROOT)
+        if (cleanPath.endsWith(".torrent")) return false
         val lower = trimmed.lowercase(Locale.ROOT)
         return NON_STREAM_PATTERNS.none { lower.contains(it) }
     }

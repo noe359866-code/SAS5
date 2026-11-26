@@ -65,6 +65,19 @@ async function getStreams(tmdbId, mediaType, season, episode) {
 module.exports = { getStreams };
 ```
 
+## Nota sobre el motor QuickJS
+
+`quickjs-kt` guarda la referencia `JavaVM` en un estático nativo **global del proceso** que se borra en
+cuanto se libera *cualquier* runtime (`clear_java_vm_cache()` en `releaseGlobals`). Si dos scrapers se
+ejecutaban en paralelo, el runtime que terminaba primero invalidaba el de los demás: las llamadas
+Kotlin (`fetch`, `cheerio`, `__capture_result`, ...) fallaban en silencio con
+`Cannot get jni env because the vm is not cached.` y el scraper devolvía cero fuentes.
+
+Por eso `PluginRuntime` serializa las sesiones QuickJS con un `Mutex` compartido
+(`PluginRuntime.withQuickJsSession`): el `PluginManager` sigue lanzando los scrapers en corrutinas
+paralelas, pero solo hay un runtime vivo a la vez. El *timeout* de cada scraper se aplica después de
+obtener el turno, así que la espera en cola no consume su presupuesto.
+
 ## Compilación y pruebas
 
 Desde el directorio `android/`:

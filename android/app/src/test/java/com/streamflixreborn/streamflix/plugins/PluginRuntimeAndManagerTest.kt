@@ -269,23 +269,27 @@ class PluginRuntimeAndManagerTest {
             cl.getResourceAsStream(path)?.bufferedReader()?.use { it.readText() }
         } ?: error("crypto-js resource not found on classpath")
 
-        com.dokar.quickjs.quickJs {
-            evaluate<Any?>(
-                """
-                globalThis.crypto = {
-                    getRandomValues: function(typedArray) {
-                        var u8 = new Uint8Array(typedArray.buffer, typedArray.byteOffset, typedArray.byteLength);
-                        for (var i = 0; i < u8.length; i++) u8[i] = (i * 37 + 13) & 0xff;
-                        return typedArray;
-                    }
-                };
-                """.trimIndent(),
-                "crypto-polyfill.js"
-            )
-            evaluate<Any?>(cryptoSource, "crypto-js.js")
-            evaluate<String>(
-                "CryptoJS.AES.encrypt(${org.json.JSONObject.quote(plainText)}, ${org.json.JSONObject.quote(passphrase)}).toString()"
-            )
+        // Must share the process-wide QuickJS session lock used by PluginRuntime: two live runtimes
+        // clear each other's cached JavaVM in the native library.
+        PluginRuntime.withQuickJsSession {
+            com.dokar.quickjs.quickJs {
+                evaluate<Any?>(
+                    """
+                    globalThis.crypto = {
+                        getRandomValues: function(typedArray) {
+                            var u8 = new Uint8Array(typedArray.buffer, typedArray.byteOffset, typedArray.byteLength);
+                            for (var i = 0; i < u8.length; i++) u8[i] = (i * 37 + 13) & 0xff;
+                            return typedArray;
+                        }
+                    };
+                    """.trimIndent(),
+                    "crypto-polyfill.js"
+                )
+                evaluate<Any?>(cryptoSource, "crypto-js.js")
+                evaluate<String>(
+                    "CryptoJS.AES.encrypt(${org.json.JSONObject.quote(plainText)}, ${org.json.JSONObject.quote(passphrase)}).toString()"
+                )
+            }
         }
     }
 }

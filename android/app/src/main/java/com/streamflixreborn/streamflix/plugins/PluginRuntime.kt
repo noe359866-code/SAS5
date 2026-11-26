@@ -11,6 +11,8 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeout
 import okhttp3.Call
 import okhttp3.Headers
@@ -80,6 +82,19 @@ class PluginRuntime(
             .followRedirects(true)
             .followSslRedirects(true)
             .build()
+
+        /**
+         * quickjs-kt caches the `JavaVM` in a process-wide native static that is cleared as soon as
+         * *any* runtime of the process is released (`clear_java_vm_cache()` in `releaseGlobals`).
+         * Two runtimes alive at the same time therefore break each other's Kotlin bindings with
+         * `Cannot get jni env because the vm is not cached.`, and the affected calls
+         * (`__native_fetch`, `__cheerio_*`, `__capture_result`, ...) fail silently returning no
+         * streams. Keeping only one live QuickJS session per process avoids the library bug.
+         */
+        private val quickJsSessionLock = Mutex()
+
+        internal suspend fun <T> withQuickJsSession(block: suspend () -> T): T =
+            quickJsSessionLock.withLock { block() }
     }
 
     private val gson: Gson = GsonBuilder().disableHtmlEscaping().create()
@@ -107,17 +122,20 @@ class PluginRuntime(
         episode: Int?,
         imdbId: String? = null,
         scraperSettings: Map<String, Any?> = emptyMap(),
-    ): List<PluginStreamResult> = withTimeout(pluginTimeoutMs) {
-        executeScraperInternal(
-            scraper = scraper,
-            code = code,
-            tmdbId = tmdbId,
-            mediaType = scraper.preferredMediaTypeArg(mediaType),
-            season = season,
-            episode = episode,
-            imdbId = imdbId,
-            scraperSettings = scraperSettings,
-        )
+    ): List<PluginStreamResult> = withQuickJsSession {
+        // The timeout only covers the session itself, not the queueing time of the lock above.
+        withTimeout(pluginTimeoutMs) {
+            executeScraperInternal(
+                scraper = scraper,
+                code = code,
+                tmdbId = tmdbId,
+                mediaType = scraper.preferredMediaTypeArg(mediaType),
+                season = season,
+                episode = episode,
+                imdbId = imdbId,
+                scraperSettings = scraperSettings,
+            )
+        }
     }
 
     private suspend fun executeScraperInternal(

@@ -3,7 +3,6 @@ package com.streamflixreborn.streamflix.plugins
 import android.util.Log
 import com.dokar.quickjs.QuickJs
 import com.dokar.quickjs.QuickJsException
-import com.dokar.quickjs.binding.asyncFunction
 import com.dokar.quickjs.binding.define
 import com.dokar.quickjs.binding.function
 import com.dokar.quickjs.quickJs
@@ -159,7 +158,7 @@ class PluginRuntime(
         )
         val settingsJson = gson.toJson(scraperSettings)
         val dispatcher: CoroutineDispatcher =
-            (coroutineContext[ContinuationInterceptor] as? CoroutineDispatcher) ?: Dispatchers.Default
+            (coroutineContext[ContinuationInterceptor] as? CoroutineDispatcher) ?: Dispatchers.IO
 
         try {
             quickJs(dispatcher) {
@@ -199,19 +198,23 @@ class PluginRuntime(
                     null
                 }
 
-                asyncFunction("__plugin_sleep") { args ->
+                function("__plugin_sleep") { args ->
                     val rawMs = when (val v = args.getOrNull(0)) {
                         is Number -> v.toLong()
                         is String -> v.toLongOrNull() ?: 0L
                         else -> 0L
                     }.coerceIn(0L, 15_000L)
                     if (rawMs > 0L) {
-                        delay(rawMs)
+                        try {
+                            Thread.sleep(rawMs)
+                        } catch (_: InterruptedException) {
+                            Thread.currentThread().interrupt()
+                        }
                     }
                     null
                 }
 
-                asyncFunction("__native_fetch") { args ->
+                function("__native_fetch") { args ->
                     val url = args.getOrNull(0)?.toString().orEmpty()
                     val method = args.getOrNull(1)?.toString() ?: "GET"
                     val headersJson = args.getOrNull(2)?.toString() ?: "{}"
@@ -221,17 +224,15 @@ class PluginRuntime(
                         !it.equals("false", ignoreCase = true)
                     } ?: true
 
-                    withContext(Dispatchers.IO) {
-                        performNativeFetch(
-                            url = url,
-                            method = method,
-                            headersJson = headersJson,
-                            bodyKind = bodyKind,
-                            body = bodyValue,
-                            followRedirects = followRedirects,
-                            inFlightCalls = inFlightCalls,
-                        )
-                    }
+                    performNativeFetch(
+                        url = url,
+                        method = method,
+                        headersJson = headersJson,
+                        bodyKind = bodyKind,
+                        body = bodyValue,
+                        followRedirects = followRedirects,
+                        inFlightCalls = inFlightCalls,
+                    )
                 }
 
                 function("__parse_url") { args ->
@@ -265,13 +266,20 @@ class PluginRuntime(
         return parseStreamsJson(capturedResultJson, scraper)
     }
 
+    private fun wrapPluginModule(body: String): String = buildString(body.length + 320) {
+        append("(function(module, exports, require) {\n")
+        append(body)
+        append("\nif (typeof getStreams === 'function' && (!module.exports || (typeof module.exports === 'object' && !module.exports.getStreams)) && !globalThis.getStreams) { module.exports.getStreams = getStreams; }\n")
+        append("})(globalThis.module, globalThis.module.exports, globalThis.require);")
+    }
+
     private fun compileScraperScript(qjs: QuickJs, rawCode: String, filename: String): ByteArray {
         return try {
-            qjs.compile(rawCode, filename, asModule = false)
+            qjs.compile(wrapPluginModule(rawCode), filename, asModule = false)
         } catch (firstError: QuickJsException) {
             val transformed = transformEsmExportsIfNeeded(rawCode)
             if (transformed != rawCode) {
-                qjs.compile(transformed, filename, asModule = false)
+                qjs.compile(wrapPluginModule(transformed), filename, asModule = false)
             } else {
                 throw firstError
             }
@@ -814,6 +822,7 @@ class PluginRuntime(
     """.trimIndent()
 
     private fun buildPolyfillJs(): String = """
+        (function() {
         if (typeof globalThis.global === 'undefined') globalThis.global = globalThis;
         if (typeof globalThis.window === 'undefined') globalThis.window = globalThis;
         if (typeof globalThis.self === 'undefined') globalThis.self = globalThis;
@@ -1525,6 +1534,7 @@ class PluginRuntime(
                 return this.split(String(search)).join(String(replacement));
             };
         }
+        })();
     """.trimIndent()
 
     private fun parseStreamsJson(json: String, scraper: InstalledScraper): List<PluginStreamResult> {

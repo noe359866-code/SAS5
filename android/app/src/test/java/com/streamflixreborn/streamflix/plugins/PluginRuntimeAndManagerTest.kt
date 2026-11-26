@@ -59,7 +59,8 @@ class PluginRuntimeAndManagerTest {
                 const label = ${'$'}('.server-label').text().trim();
 
                 const bytes = CryptoJS.AES.decrypt(encryptedUrl, 'streamflix-secret');
-                const streamUrl = bytes.toString(CryptoJS.enc.Utf8);
+                const roundTrip = CryptoJS.AES.encrypt(bytes.toString(CryptoJS.enc.Utf8), 'ephemeral-key').toString();
+                const streamUrl = CryptoJS.AES.decrypt(roundTrip, 'ephemeral-key').toString(CryptoJS.enc.Utf8);
 
                 return [
                     {
@@ -269,6 +270,18 @@ class PluginRuntimeAndManagerTest {
         } ?: error("crypto-js resource not found on classpath")
 
         com.dokar.quickjs.quickJs {
+            evaluate<Any?>(
+                """
+                globalThis.crypto = {
+                    getRandomValues: function(typedArray) {
+                        var u8 = new Uint8Array(typedArray.buffer, typedArray.byteOffset, typedArray.byteLength);
+                        for (var i = 0; i < u8.length; i++) u8[i] = (i * 37 + 13) & 0xff;
+                        return typedArray;
+                    }
+                };
+                """.trimIndent(),
+                "crypto-polyfill.js"
+            )
             evaluate<Any?>(cryptoSource, "crypto-js.js")
             evaluate<String>(
                 "CryptoJS.AES.encrypt(${org.json.JSONObject.quote(plainText)}, ${org.json.JSONObject.quote(passphrase)}).toString()"

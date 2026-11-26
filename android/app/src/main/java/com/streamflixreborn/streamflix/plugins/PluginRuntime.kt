@@ -242,8 +242,8 @@ class PluginRuntime(
                 registerDomBindings(documentCache, loadedDocIds, elementCache)
                 registerCryptoBindings()
 
-                getCompiledCryptoJsBytecode(this)?.let { evaluate<Any?>(it) }
                 evaluate<Any?>(getCompiledPolyfillBytecode(this))
+                getCompiledCryptoJsBytecode(this)?.let { evaluate<Any?>(it) }
 
                 val scriptBytecode = compileScraperScript(this, code, "${scraper.id}.js")
                 evaluate<Any?>(scriptBytecode)
@@ -266,11 +266,15 @@ class PluginRuntime(
         return parseStreamsJson(capturedResultJson, scraper)
     }
 
-    private fun wrapPluginModule(body: String): String = buildString(body.length + 320) {
+    private fun wrapPluginModule(body: String): String = buildString(body.length + 420) {
+        append("var module = { exports: {} };\n")
+        append("var exports = module.exports;\n")
+        append("globalThis.module = module;\n")
+        append("globalThis.exports = exports;\n")
         append("(function(module, exports, require) {\n")
         append(body)
         append("\nif (typeof getStreams === 'function' && (!module.exports || (typeof module.exports === 'object' && !module.exports.getStreams)) && !globalThis.getStreams) { module.exports.getStreams = getStreams; }\n")
-        append("})(globalThis.module, globalThis.module.exports, globalThis.require);")
+        append("})(module, module.exports, globalThis.require);")
     }
 
     private fun compileScraperScript(qjs: QuickJs, rawCode: String, filename: String): ByteArray {
@@ -826,11 +830,6 @@ class PluginRuntime(
         if (typeof globalThis.global === 'undefined') globalThis.global = globalThis;
         if (typeof globalThis.window === 'undefined') globalThis.window = globalThis;
         if (typeof globalThis.self === 'undefined') globalThis.self = globalThis;
-
-        var module = { exports: {} };
-        var exports = module.exports;
-        globalThis.module = module;
-        globalThis.exports = exports;
 
         globalThis.SCRAPER_ID = __get_scraper_id();
         globalThis.SCRAPER_SETTINGS = JSON.parse(__get_scraper_settings() || '{}');

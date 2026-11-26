@@ -180,15 +180,6 @@
   "ref": ""
  },
  {
-  "name": "ESPN 3 HD",
-  "slug": "espn-3-hd",
-  "category": "deportes",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/386.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "ESPN 4 (Sur)",
   "slug": "espn-4-sur",
   "category": "deportes",
@@ -324,6 +315,15 @@
   "ref": ""
  },
  {
+  "name": "FOX Sports 2 (México)",
+  "slug": "fox-sports-2-mexico",
+  "category": "deportes",
+  "logo": "https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "FOX Sports 2 (Sur)",
   "slug": "fox-sports-2-sur",
   "category": "deportes",
@@ -338,6 +338,15 @@
   "category": "deportes",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "FOX Sports 3 (México)",
+  "slug": "fox-sports-3-mexico",
+  "category": "deportes",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -482,6 +491,15 @@
   "category": "deportes",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHwinsports.png",
   "url": "http://45.70.168.162:12316/play/a013/index.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Xtrema TV Cna Deportes 2",
+  "slug": "xtrema-tv-cna-deportes-2",
+  "category": "deportes",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHxtremadeportes.png",
+  "url": "https://stmv6.voxtvhd.com.br/cnardeportes/cnardeportes/playlist.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -1098,6 +1116,15 @@
   "ref": ""
  },
  {
+  "name": "El Gallo Claudio",
+  "slug": "el-gallo-claudio",
+  "category": "infantil",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/347.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "El Pájaro Loco",
   "slug": "el-pajaro-loco",
   "category": "infantil",
@@ -1377,15 +1404,6 @@
   "ref": ""
  },
  {
-  "name": "Beyblade",
-  "slug": "beyblade",
-  "category": "anime",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/85.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "Caballeros del Zodiaco",
   "slug": "caballeros-del-zodiaco",
   "category": "anime",
@@ -1661,6 +1679,15 @@
   "category": "musica",
   "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/radio-en-vivo/CHrneparatodos.png",
   "url": "https://ztnr.rtve.es/ztnr/6688753.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
+  "name": "Telpin TV Pinamar",
+  "slug": "telpin-tv-pinamar",
+  "category": "musica",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtelpintvpinamar.png",
+  "url": "https://mistserver.telpin.com.ar:8443/hls/telpinlive/main_stream.m3u8",
   "ua": "",
   "ref": ""
  },
@@ -2079,15 +2106,6 @@
   "ref": ""
  },
  {
-  "name": "La 1 HD",
-  "slug": "la-1-hd",
-  "category": "espana",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/La_1_2026.svg/500px-La_1_2026.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
   "name": "La 2 HD",
   "slug": "la-2-hd",
   "category": "espana",
@@ -2313,6 +2331,15 @@
   "ref": ""
  },
  {
+  "name": "Canal 12 Metro TV (Tucumán)",
+  "slug": "canal-12-metro-tv-tucuman",
+  "category": "argentina",
+  "logo": "https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal12metrotvtucuman.png",
+  "url": "https://streamtv12.ddns.net:5443/LiveApp/streams/193945633734205616732920.m3u8",
+  "ua": "",
+  "ref": ""
+ },
+ {
   "name": "Canal 13 (La Rioja)",
   "slug": "canal-13-la-rioja",
   "category": "argentina",
@@ -2525,15 +2552,6 @@
   "category": "argentina",
   "logo": "https://i.imgur.com/cJHP7bU.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/353.m3u8",
-  "ua": "",
-  "ref": ""
- },
- {
-  "name": "El Trece",
-  "slug": "el-trece",
-  "category": "argentina",
-  "logo": "https://i.imgur.com/TrgBAdA.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/362.m3u8",
   "ua": "",
   "ref": ""
  },

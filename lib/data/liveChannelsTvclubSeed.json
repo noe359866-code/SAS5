@@ -16,8 +16,8 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/6.m3u8"
  },
  {
-  "name": "A 3 Cine",
-  "slug": "a-3-cine",
+  "name": "A3 Cine",
+  "slug": "a3-cine",
   "topic": "cine",
   "country": "Latinoamérica",
   "logo": "",
@@ -200,9 +200,9 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/79.m3u8"
  },
  {
-  "name": "Beyblade",
-  "slug": "beyblade",
-  "topic": "anime",
+  "name": "247 Bayblade",
+  "slug": "247-bayblade",
+  "topic": "entretenimiento",
   "country": "Latinoamérica",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/85.m3u8"
@@ -406,6 +406,14 @@
   "country": "Latinoamérica",
   "logo": "https://images.pluto.tv/channels/5f12101f0b12f00007844c7c/colorLogoPNG_1732662798298.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/161.m3u8"
+ },
+ {
+  "name": "Cine Comedia 1 HD",
+  "slug": "cine-comedia-1-hd",
+  "topic": "cine",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/162.m3u8"
  },
  {
   "name": "Cine Comedia 2",
@@ -914,18 +922,10 @@
  {
   "name": "El Gallo Claudio",
   "slug": "el-gallo-claudio",
-  "topic": "entretenimiento",
+  "topic": "infantil",
   "country": "Latinoamérica",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/347.m3u8"
- },
- {
-  "name": "El Gourmet",
-  "slug": "el-gourmet",
-  "topic": "entretenimiento",
-  "country": "Latinoamérica",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/349.m3u8"
  },
  {
   "name": "El Nueve (9)",
@@ -968,11 +968,11 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/360.m3u8"
  },
  {
-  "name": "El Trece",
-  "slug": "el-trece",
+  "name": "AR El Trece",
+  "slug": "ar-el-trece",
   "topic": "entretenimiento",
-  "country": "Argentina",
-  "logo": "https://i.imgur.com/TrgBAdA.png",
+  "country": "Latinoamérica",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/362.m3u8"
  },
  {
@@ -1020,7 +1020,7 @@
   "slug": "espn-3-hd",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/386.m3u8"
  },
  {
@@ -1096,9 +1096,9 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/424.m3u8"
  },
  {
-  "name": "F 1 TV",
-  "slug": "f-1-tv",
-  "topic": "entretenimiento",
+  "name": "F1 TV",
+  "slug": "f1-tv",
+  "topic": "deportes",
   "country": "Latinoamérica",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/426.m3u8"
@@ -1110,6 +1110,14 @@
   "country": "Latinoamérica",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/429.m3u8"
+ },
+ {
+  "name": "Fox ES HD",
+  "slug": "fox-es-hd",
+  "topic": "entretenimiento",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/430.m3u8"
  },
  {
   "name": "FOX Sports 1 (Sur)",
@@ -1136,11 +1144,11 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8"
  },
  {
-  "name": "Fox Sports 2 MX",
-  "slug": "fox-sports-2-mx",
+  "name": "FOX Sports 2 (México)",
+  "slug": "fox-sports-2-mexico",
   "topic": "deportes",
   "country": "Latinoamérica",
-  "logo": "",
+  "logo": "https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8"
  },
  {
@@ -1150,6 +1158,14 @@
   "country": "Latinoamérica",
   "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/446.m3u8"
+ },
+ {
+  "name": "FOX Sports 3 (México)",
+  "slug": "fox-sports-3-mexico",
+  "topic": "deportes",
+  "country": "Latinoamérica",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8"
  },
  {
   "name": "FOX Sports 1 HD (Sur)",
@@ -1523,17 +1539,9 @@
   "name": "La 1 HD",
   "slug": "la-1-hd",
   "topic": "entretenimiento",
-  "country": "España",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/La_1_2026.svg/500px-La_1_2026.svg.png",
+  "country": "Latinoamérica",
+  "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8"
- },
- {
-  "name": "La 2 HD",
-  "slug": "la-2-hd",
-  "topic": "entretenimiento",
-  "country": "España",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/La_2_2026.svg/500px-La_2_2026.svg.png",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/589.m3u8"
  },
  {
   "name": "La Casa de los Dibujos",
@@ -2040,6 +2048,14 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/815.m3u8"
  },
  {
+  "name": "Sony HD",
+  "slug": "sony-hd",
+  "topic": "entretenimiento",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/818.m3u8"
+ },
+ {
   "name": "Space",
   "slug": "space",
   "topic": "cine",
@@ -2216,22 +2232,6 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/912.m3u8"
  },
  {
-  "name": "TLR",
-  "slug": "tlr",
-  "topic": "entretenimiento",
-  "country": "Latinoamérica",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/916.m3u8"
- },
- {
-  "name": "TLR HD",
-  "slug": "tlr-hd",
-  "topic": "entretenimiento",
-  "country": "Latinoamérica",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/918.m3u8"
- },
- {
   "name": "TNT",
   "slug": "tnt",
   "topic": "cine",
@@ -2328,14 +2328,6 @@
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/953.m3u8"
  },
  {
-  "name": "CH TVChile",
-  "slug": "ch-tvchile",
-  "topic": "entretenimiento",
-  "country": "Latinoamérica",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/958.m3u8"
- },
- {
   "name": "TVCDeportes",
   "slug": "tvcdeportes",
   "topic": "deportes",
@@ -2398,6 +2390,14 @@
   "country": "Latinoamérica",
   "logo": "",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/988.m3u8"
+ },
+ {
+  "name": "Universal Comedy HD",
+  "slug": "universal-comedy-hd",
+  "topic": "entretenimiento",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/992.m3u8"
  },
  {
   "name": "Universal Crime HD",
@@ -2518,14 +2518,6 @@
   "country": "Latinoamérica",
   "logo": "https://provider-static.plex.tv/epg/cms/production/e10f9ed3-8112-4287-8355-cc00be4413a8/Wurl_Yu-Gi-Oh_Channel_Logo_light_Astridrdx.png",
   "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1052.m3u8"
- },
- {
-  "name": "Gol TVEC",
-  "slug": "gol-tvec",
-  "topic": "deportes",
-  "country": "Latinoamérica",
-  "logo": "",
-  "url": "http://m3u.tvcluboficial.com/free/ReachBot/Kip/1060.m3u8"
  },
  {
   "name": "PE ATV HD",

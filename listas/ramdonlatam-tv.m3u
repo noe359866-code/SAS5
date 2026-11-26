@@ -1,6 +1,6 @@
 #EXTM3U
 # Generada por scripts/m3u-export.mjs — no editar a mano
-# Fecha: 2026-11-26T00:35:17.529Z
+# Fecha: 2026-11-26T00:47:57.315Z
 #EXTINF:-1 tvg-id="24-7-100-percent-hotter" tvg-logo="" group-title="24/7",24/7 100 Percent Hotter
 http://iptvgo.cc/live/Will1/Will1/291390.m3u8
 #EXTINF:-1 tvg-id="24-7-12-oz-mouse" tvg-logo="https://i.postimg.cc/hPyNXnz4/shows.png" group-title="24/7",24/7 12 oz Mouse
@@ -5709,6 +5709,8 @@ https://g5.mc-slo.transport.edge-access.net/a12/ngrp:canal10mdq-100044_all/Playl
 #EXTINF:-1 tvg-id="canal-11-de-la-costa" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal11delacosta.png" group-title="Argentina",Canal 11 de la Costa
 #EXTVLCOPT:http-user-agent=Android 8.0.0
 https://vivo.solumedia.com:19360/dadaproductora/dadaproductora.m3u8
+#EXTINF:-1 tvg-id="canal-12-metro-tv-tucuman" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal12metrotvtucuman.png" group-title="Argentina",Canal 12 Metro TV (Tucumán)
+https://streamtv12.ddns.net:5443/LiveApp/streams/193945633734205616732920.m3u8
 #EXTINF:-1 tvg-id="canal-13-la-rioja" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/provincias/CHcanal13larioja.png" group-title="Argentina",Canal 13 (La Rioja)
 http://arcast.net:1935/mp/mp/playlist.m3u8
 #EXTINF:-1 tvg-id="canal-2-mar-del-plata" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHcanal2mardelplata.png" group-title="Argentina",Canal 2 (Mar del Plata)
@@ -5759,9 +5761,7 @@ http://190.103.192.6:8080/hls/mystreamkey.m3u8
 https://vivo.solumedia.com:19360/celta/celta.m3u8
 #EXTINF:-1 tvg-id="el-nueve-9" tvg-logo="https://i.imgur.com/cJHP7bU.png" group-title="Argentina",El Nueve (9)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/353.m3u8
-#EXTINF:-1 tvg-id="el-trece" tvg-logo="https://i.imgur.com/TrgBAdA.png" group-title="Argentina",El Trece
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/362.m3u8
-#EXTINF:-1 tvg-id="el-trece-senal-2" tvg-logo="https://i.imgur.com/TrgBAdA.png" group-title="Argentina",El Trece · señal 2
+#EXTINF:-1 tvg-id="el-trece" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHeltrece.png" group-title="Argentina",El Trece
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36
 https://livetrx01.vodgc.net/eltrecetv/index.m3u8
 #EXTINF:-1 tvg-id="neo-tv-florencio-varela" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/buenos-aires/CHneotv.png" group-title="Argentina",Neo TV (Florencio Varela)
@@ -25035,8 +25035,6 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/17.m3u8
 https://stream-us-east-1.getpublica.com/playlist.m3u8?cb=[CACHEBUSTER]&network_id=12685&live=1&avod=1&hls_marker=1&pod_duration=[POD_DURATION]&min_ad_duration=6&max_ad_duration=120&site_page=[SITE_PAGE]&site_name=
 #EXTINF:-1 tvg-id="el-toro-tv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHeltorotvespaña.png" group-title="España",El Toro TV
 https://edge-nodo-001.streaming.hitcloser.net/eltorotv-streaming-web/index.m3u8
-#EXTINF:-1 tvg-id="la-1-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/La_1_2026.svg/500px-La_1_2026.svg.png" group-title="España",La 1 HD
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8
 #EXTINF:-1 tvg-id="la-2-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/La_2_2026.svg/500px-La_2_2026.svg.png" group-title="España",La 2 HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/589.m3u8
 #EXTINF:-1 tvg-id="star-tve" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/canales-internacionales/CHstartvespaña.png" group-title="España",Star TVE
@@ -25487,7 +25485,7 @@ http://iptvgo.cc/live/Will1/Will1/725350.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1110.m3u8
 #EXTINF:-1 tvg-id="espn-3-sur" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Latinoamérica",ESPN 3 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1127.m3u8
-#EXTINF:-1 tvg-id="espn-3-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Latinoamérica",ESPN 3 HD
+#EXTINF:-1 tvg-id="espn-3-hd" tvg-logo="" group-title="Latinoamérica",ESPN 3 HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/386.m3u8
 #EXTINF:-1 tvg-id="espn-3-sur-sd" tvg-logo="https://logo.m3uassets.com/espn3sur.png" group-title="Latinoamérica",ESPN 3 SUR SD
 http://iptvgo.cc/live/Will1/Will1/725230.m3u8
@@ -25555,6 +25553,8 @@ http://iptvgo.cc/live/Will1/Will1/725297.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1131.m3u8
 #EXTINF:-1 tvg-id="eventos-star-hd" tvg-logo="https://i.blogs.es/2ec255/star-_logo.svg/original.png" group-title="Latinoamérica",Eventos Star+ HD
 http://iptvgo.cc/live/Will1/Will1/725296.m3u8
+#EXTINF:-1 tvg-id="f1-tv" tvg-logo="" group-title="Latinoamérica",F1 TV
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/426.m3u8
 #EXTINF:-1 tvg-id="formula-1-fhd" tvg-logo="https://logo.m3uassets.com/formula1.png" group-title="Latinoamérica",Formula 1 FHD
 http://iptvgo.cc/live/Will1/Will1/725295.m3u8
 #EXTINF:-1 tvg-id="fox-deportes-hd" tvg-logo="" group-title="Latinoamérica",Fox Deportes HD
@@ -25575,18 +25575,20 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/471.m3u8
 http://iptvgo.cc/live/Will1/Will1/725358.m3u8
 #EXTINF:-1 tvg-id="fox-sports-2-senal-2" tvg-logo="https://logo.m3uassets.com/foxsports2lam.png" group-title="Latinoamérica",Fox Sports 2 · señal 2
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/467.m3u8
+#EXTINF:-1 tvg-id="fox-sports-2-mexico" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg" group-title="Latinoamérica",FOX Sports 2 (México)
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8
 #EXTINF:-1 tvg-id="fox-sports-2-sur" tvg-logo="" group-title="Latinoamérica",FOX Sports 2 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/436.m3u8
 #EXTINF:-1 tvg-id="fox-sports-2-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png" group-title="Latinoamérica",FOX Sports 2 HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8
-#EXTINF:-1 tvg-id="fox-sports-2-mx" tvg-logo="" group-title="Latinoamérica",Fox Sports 2 MX
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8
 #EXTINF:-1 tvg-id="fox-sports-2-uhd" tvg-logo="https://logo.m3uassets.com/foxsports2lam.png" group-title="Latinoamérica",FOX Sports 2 UHD
 http://iptvgo.cc/live/Will1/Will1/725359.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3" tvg-logo="https://logo.m3uassets.com/foxsports3lam.png" group-title="Latinoamérica",Fox Sports 3
 http://iptvgo.cc/live/Will1/Will1/725356.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3-col" tvg-logo="https://logo.m3uassets.com/sfoxsportsnorth.png" group-title="Latinoamérica",FOX Sports 3 (COL)
 http://iptvgo.cc/live/Will1/Will1/725294.m3u8
+#EXTINF:-1 tvg-id="fox-sports-3-mexico" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png" group-title="Latinoamérica",FOX Sports 3 (México)
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3-sur" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png" group-title="Latinoamérica",FOX Sports 3 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/468.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png" group-title="Latinoamérica",FOX Sports 3 HD
@@ -25621,8 +25623,6 @@ http://iptvgo.cc/live/Will1/Will1/725290.m3u8
 http://iptvgo.cc/live/Will1/Will1/725224.m3u8
 #EXTINF:-1 tvg-id="gol-tv-hd" tvg-logo="https://logo.m3uassets.com/goltv.png" group-title="Latinoamérica",Gol TV HD
 http://iptvgo.cc/live/Will1/Will1/725289.m3u8
-#EXTINF:-1 tvg-id="gol-tvec" tvg-logo="" group-title="Latinoamérica",Gol TVEC
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/1060.m3u8
 #EXTINF:-1 tvg-id="gol-tvhd" tvg-logo="" group-title="Latinoamérica",Gol TVHD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/492.m3u8
 #EXTINF:-1 tvg-id="golf-channel-hd" tvg-logo="" group-title="Latinoamérica",Golf Channel HD
@@ -25789,6 +25789,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/1091.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/429.m3u8
 #EXTINF:-1 tvg-id="rcnnovelas" tvg-logo="" group-title="Latinoamérica",RCNNovelas
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/788.m3u8
+#EXTINF:-1 tvg-id="247-bayblade" tvg-logo="" group-title="Latinoamérica",247 Bayblade
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/85.m3u8
 #EXTINF:-1 tvg-id="adn-40" tvg-logo="" group-title="Latinoamérica",ADN 40
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/20.m3u8
 #EXTINF:-1 tvg-id="ae" tvg-logo="" group-title="Latinoamérica",AE
@@ -25797,6 +25799,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/5.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/27.m3u8
 #EXTINF:-1 tvg-id="amc-hd" tvg-logo="" group-title="Latinoamérica",AMC HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/33.m3u8
+#EXTINF:-1 tvg-id="ar-el-trece" tvg-logo="" group-title="Latinoamérica",AR El Trece
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/362.m3u8
 #EXTINF:-1 tvg-id="ar-tv-publica" tvg-logo="" group-title="Latinoamérica",AR Tv Publica
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1171.m3u8
 #EXTINF:-1 tvg-id="axn-es-hd" tvg-logo="" group-title="Latinoamérica",AXN ES HD
@@ -25835,8 +25839,6 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/126.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/127.m3u8
 #EXTINF:-1 tvg-id="ch-mega" tvg-logo="" group-title="Latinoamérica",CH Mega
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/651.m3u8
-#EXTINF:-1 tvg-id="ch-tvchile" tvg-logo="" group-title="Latinoamérica",CH TVChile
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/958.m3u8
 #EXTINF:-1 tvg-id="co-telemedellin" tvg-logo="" group-title="Latinoamérica",CO Telemedellin
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/884.m3u8
 #EXTINF:-1 tvg-id="co-trece" tvg-logo="" group-title="Latinoamérica",CO Trece
@@ -25869,10 +25871,6 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/861.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/867.m3u8
 #EXTINF:-1 tvg-id="eentertainment" tvg-logo="" group-title="Latinoamérica",EEntertainment
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/333.m3u8
-#EXTINF:-1 tvg-id="el-gallo-claudio" tvg-logo="" group-title="Latinoamérica",El Gallo Claudio
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/347.m3u8
-#EXTINF:-1 tvg-id="el-gourmet" tvg-logo="" group-title="Latinoamérica",El Gourmet
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/349.m3u8
 #EXTINF:-1 tvg-id="estrella-tv-hd" tvg-logo="" group-title="Latinoamérica",Estrella TV HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/409.m3u8
 #EXTINF:-1 tvg-id="europa" tvg-logo="" group-title="Latinoamérica",Europa
@@ -25885,8 +25883,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/325.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/6.m3u8
 #EXTINF:-1 tvg-id="eventos-6" tvg-logo="" group-title="Latinoamérica",Eventos 6
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1121.m3u8
-#EXTINF:-1 tvg-id="f-1-tv" tvg-logo="" group-title="Latinoamérica",F 1 TV
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/426.m3u8
+#EXTINF:-1 tvg-id="fox-es-hd" tvg-logo="" group-title="Latinoamérica",Fox ES HD
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/430.m3u8
 #EXTINF:-1 tvg-id="fx-hd" tvg-logo="" group-title="Latinoamérica",FX HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/477.m3u8
 #EXTINF:-1 tvg-id="gala-tv" tvg-logo="" group-title="Latinoamérica",Gala TV
@@ -25907,6 +25905,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/564.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/576.m3u8
 #EXTINF:-1 tvg-id="kenan-ykel" tvg-logo="" group-title="Latinoamérica",Kenan YKel
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1169.m3u8
+#EXTINF:-1 tvg-id="la-1-hd" tvg-logo="" group-title="Latinoamérica",La 1 HD
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/588.m3u8
 #EXTINF:-1 tvg-id="la-granja-vip" tvg-logo="" group-title="Latinoamérica",La Granja VIP
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1181.m3u8
 #EXTINF:-1 tvg-id="la-sexta-hd" tvg-logo="" group-title="Latinoamérica",La Sexta HD
@@ -25965,6 +25965,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/1080.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1081.m3u8
 #EXTINF:-1 tvg-id="sony" tvg-logo="" group-title="Latinoamérica",Sony
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/815.m3u8
+#EXTINF:-1 tvg-id="sony-hd" tvg-logo="" group-title="Latinoamérica",Sony HD
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/818.m3u8
 #EXTINF:-1 tvg-id="star" tvg-logo="" group-title="Latinoamérica",Star
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/832.m3u8
 #EXTINF:-1 tvg-id="star-hd" tvg-logo="" group-title="Latinoamérica",Star HD
@@ -25981,10 +25983,6 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/1108.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/911.m3u8
 #EXTINF:-1 tvg-id="tlnovelas" tvg-logo="" group-title="Latinoamérica",Tlnovelas
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/912.m3u8
-#EXTINF:-1 tvg-id="tlr" tvg-logo="" group-title="Latinoamérica",TLR
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/916.m3u8
-#EXTINF:-1 tvg-id="tlr-hd" tvg-logo="" group-title="Latinoamérica",TLR HD
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/918.m3u8
 #EXTINF:-1 tvg-id="tnt-hd" tvg-logo="" group-title="Latinoamérica",TNT HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/926.m3u8
 #EXTINF:-1 tvg-id="tntnovelas" tvg-logo="" group-title="Latinoamérica",TNTNovelas
@@ -26007,6 +26005,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/978.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/981.m3u8
 #EXTINF:-1 tvg-id="universal" tvg-logo="" group-title="Latinoamérica",Universal
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/984.m3u8
+#EXTINF:-1 tvg-id="universal-comedy-hd" tvg-logo="" group-title="Latinoamérica",Universal Comedy HD
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/992.m3u8
 #EXTINF:-1 tvg-id="universal-crime-hd" tvg-logo="" group-title="Latinoamérica",Universal Crime HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/996.m3u8
 #EXTINF:-1 tvg-id="universal-premiere-hd" tvg-logo="" group-title="Latinoamérica",Universal Premiere HD
@@ -26025,7 +26025,7 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/1016.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1032.m3u8
 #EXTINF:-1 tvg-id="warner-channel-hd" tvg-logo="" group-title="Latinoamérica",Warner Channel HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1034.m3u8
-#EXTINF:-1 tvg-id="a-3-cine" tvg-logo="" group-title="Latinoamérica",A 3 Cine
+#EXTINF:-1 tvg-id="a3-cine" tvg-logo="" group-title="Latinoamérica",A3 Cine
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/14.m3u8
 #EXTINF:-1 tvg-id="amc" tvg-logo="" group-title="Latinoamérica",AMC
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/29.m3u8
@@ -26053,6 +26053,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/157.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/160.m3u8
 #EXTINF:-1 tvg-id="cine-comedia" tvg-logo="https://images.pluto.tv/channels/5f12101f0b12f00007844c7c/colorLogoPNG_1732662798298.png" group-title="Latinoamérica",Cine Comedia
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/161.m3u8
+#EXTINF:-1 tvg-id="cine-comedia-1-hd" tvg-logo="" group-title="Latinoamérica",Cine Comedia 1 HD
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/162.m3u8
 #EXTINF:-1 tvg-id="cine-comedia-2" tvg-logo="" group-title="Latinoamérica",Cine Comedia 2
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/163.m3u8
 #EXTINF:-1 tvg-id="cine-comedia-2-hd" tvg-logo="" group-title="Latinoamérica",Cine Comedia 2 HD
@@ -26219,6 +26221,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/287.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/298.m3u8
 #EXTINF:-1 tvg-id="edd-y-eddy" tvg-logo="" group-title="Latinoamérica",Edd y Eddy
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/339.m3u8
+#EXTINF:-1 tvg-id="el-gallo-claudio" tvg-logo="" group-title="Latinoamérica",El Gallo Claudio
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/347.m3u8
 #EXTINF:-1 tvg-id="el-pajaro-loco" tvg-logo="" group-title="Latinoamérica",El Pájaro Loco
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/355.m3u8
 #EXTINF:-1 tvg-id="el-pato-darkwing" tvg-logo="" group-title="Latinoamérica",El Pato Darkwing
@@ -26275,8 +26279,6 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/941.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/945.m3u8
 #EXTINF:-1 tvg-id="yogui" tvg-logo="" group-title="Latinoamérica",Yogui
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1051.m3u8
-#EXTINF:-1 tvg-id="beyblade" tvg-logo="" group-title="Latinoamérica",Beyblade
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/85.m3u8
 #EXTINF:-1 tvg-id="caballeros-del-zodiaco" tvg-logo="" group-title="Latinoamérica",Caballeros del Zodiaco
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/100.m3u8
 #EXTINF:-1 tvg-id="doraemon" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/0/01/Doraemon_Merch_EN_Logo.svg" group-title="Latinoamérica",Doraemon
@@ -28781,8 +28783,6 @@ http://iptvgo.cc/live/Will1/Will1/688452.m3u8
 http://iptvgo.cc/live/Will1/Will1/688488.m3u8
 #EXTINF:-1 tvg-id="reforma-tv-4k-religion" tvg-logo="https://logo.m3uassets.com/reformatv.png" group-title="Venezuela",Reforma TV 4K (Religión)
 http://iptvgo.cc/live/Will1/Will1/688460.m3u8
-#EXTINF:-1 tvg-id="beyblade" tvg-logo="" group-title="Anime",Beyblade
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/85.m3u8
 #EXTINF:-1 tvg-id="caballeros-del-zodiaco" tvg-logo="" group-title="Anime",Caballeros del Zodiaco
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/100.m3u8
 #EXTINF:-1 tvg-id="doraemon" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/0/01/Doraemon_Merch_EN_Logo.svg" group-title="Anime",Doraemon
@@ -29073,10 +29073,6 @@ http://iptvgo.cc/live/Will1/Will1/716745.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1110.m3u8
 #EXTINF:-1 tvg-id="espn-3-sur" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Deportes",ESPN 3 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1127.m3u8
-#EXTINF:-1 tvg-id="espn-3-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Deportes",ESPN 3 HD
-http://m3u.tvcluboficial.com/free/ReachBot/Kip/386.m3u8
-#EXTINF:-1 tvg-id="espn-3-hd-senal-2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ESPN3_Logo.png/960px-ESPN3_Logo.png" group-title="Deportes",ESPN 3 HD · señal 2
-http://iptvgo.cc/live/Will1/Will1/716744.m3u8
 #EXTINF:-1 tvg-id="espn-4-sur" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/ESPN_4_logo.svg/960px-ESPN_4_logo.svg.png" group-title="Deportes",ESPN 4 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/1069.m3u8
 #EXTINF:-1 tvg-id="espn-5-hd" tvg-logo="https://logo.m3uassets.com/espn5.png" group-title="Deportes",ESPN 5 HD
@@ -29135,12 +29131,16 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/456.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/435.m3u8
 #EXTINF:-1 tvg-id="fox-sports-1-hd-sur" tvg-logo="https://i.imgur.com/O9BapV9.png" group-title="Deportes",FOX Sports 1 HD (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/452.m3u8
+#EXTINF:-1 tvg-id="fox-sports-2-mexico" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/7/73/Fox_Sports_2_MX.svg" group-title="Deportes",FOX Sports 2 (México)
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/441.m3u8
 #EXTINF:-1 tvg-id="fox-sports-2-sur" tvg-logo="" group-title="Deportes",FOX Sports 2 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/436.m3u8
 #EXTINF:-1 tvg-id="fox-sports-2-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png" group-title="Deportes",FOX Sports 2 HD
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/439.m3u8
 #EXTINF:-1 tvg-id="fox-sports-2-hd-senal-2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/960px-FS2_logo_2015.svg.png" group-title="Deportes",FOX Sports 2 HD · señal 2
 http://iptvgo.cc/live/Will1/Will1/716738.m3u8
+#EXTINF:-1 tvg-id="fox-sports-3-mexico" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png" group-title="Deportes",FOX Sports 3 (México)
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/448.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3-sur" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png" group-title="Deportes",FOX Sports 3 (Sur)
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/468.m3u8
 #EXTINF:-1 tvg-id="fox-sports-3-hd" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Fox_sports_3_logo.svg/960px-Fox_sports_3_logo.svg.png" group-title="Deportes",FOX Sports 3 HD
@@ -29191,6 +29191,8 @@ http://m3u.tvcluboficial.com/free/ReachBot/Kip/1143.m3u8
 http://45.70.168.162:12316/play/a013/index.m3u8
 #EXTINF:-1 tvg-id="win-sports-senal-2" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHwinsports.png" group-title="Deportes",Win Sports · señal 2
 http://138.121.15.230/WIN-SPORT/index.m3u8
+#EXTINF:-1 tvg-id="xtrema-tv-cna-deportes-2" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/deportes/CHxtremadeportes.png" group-title="Deportes",Xtrema TV Cna Deportes 2
+https://stmv6.voxtvhd.com.br/cnardeportes/cnardeportes/playlist.m3u8
 #EXTINF:-1 tvg-id="adrenalina-sports-network" tvg-logo="https://logo.m3uassets.com/adrenalinasportsnetwork.png" group-title="Deportes",Adrenalina Sports Network
 http://iptvgo.cc/live/Will1/Will1/7902.m3u8
 #EXTINF:-1 tvg-id="adrenalina-sports-network-mx-uhd" tvg-logo="https://logo.m3uassets.com/adrenalinasportsnetwork.png" group-title="Deportes",Adrenalina Sports Network MX UHD
@@ -29327,6 +29329,8 @@ http://iptvgo.cc/live/Will1/Will1/725351.m3u8
 http://iptvgo.cc/live/Will1/Will1/304052.m3u8
 #EXTINF:-1 tvg-id="espn-3" tvg-logo="https://logo.m3uassets.com/espn3.png" group-title="Deportes",ESPN 3
 http://iptvgo.cc/live/Will1/Will1/7904.m3u8
+#EXTINF:-1 tvg-id="espn-3-hd" tvg-logo="https://logo.m3uassets.com/espn3.png" group-title="Deportes",ESPN 3 HD
+http://iptvgo.cc/live/Will1/Will1/716744.m3u8
 #EXTINF:-1 tvg-id="espn-3-primera-hd" tvg-logo="https://logo.m3uassets.com/espn3.png" group-title="Deportes",ESPN 3 Primera HD
 http://iptvgo.cc/live/Will1/Will1/687918.m3u8
 #EXTINF:-1 tvg-id="espn-3-sur-sd" tvg-logo="https://logo.m3uassets.com/espn3sur.png" group-title="Deportes",ESPN 3 SUR SD
@@ -29655,6 +29659,8 @@ http://iptvgo.cc/live/Will1/Will1/671074.m3u8
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/298.m3u8
 #EXTINF:-1 tvg-id="edd-y-eddy" tvg-logo="" group-title="Infantil",Edd y Eddy
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/339.m3u8
+#EXTINF:-1 tvg-id="el-gallo-claudio" tvg-logo="" group-title="Infantil",El Gallo Claudio
+http://m3u.tvcluboficial.com/free/ReachBot/Kip/347.m3u8
 #EXTINF:-1 tvg-id="el-pajaro-loco" tvg-logo="" group-title="Infantil",El Pájaro Loco
 http://m3u.tvcluboficial.com/free/ReachBot/Kip/355.m3u8
 #EXTINF:-1 tvg-id="el-pato-darkwing" tvg-logo="" group-title="Infantil",El Pato Darkwing
@@ -29787,6 +29793,8 @@ https://videostream.shockmedia.com.ar:19360/quanticatv/quanticatv.m3u8
 http://stream.mediawork.cz/retrotv/smil:retrotv2.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="rne-para-todos" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/radio-en-vivo/CHrneparatodos.png" group-title="Música",RNE para todos
 https://ztnr.rtve.es/ztnr/6688753.m3u8
+#EXTINF:-1 tvg-id="telpin-tv-pinamar" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtelpintvpinamar.png" group-title="Música",Telpin TV Pinamar
+https://mistserver.telpin.com.ar:8443/hls/telpinlive/main_stream.m3u8
 #EXTINF:-1 tvg-id="tierramia-tv" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtierramiatv.png" group-title="Música",Tierramia TV
 http://stream-gtlc.telecentro.net.ar/hls/tierramiahls/main.m3u8
 #EXTINF:-1 tvg-id="total-music-dance" tvg-logo="https://raw.githubusercontent.com/CINECITY2023/cinecity/refs/heads/cinecity.net/logos/musica/CHtotalmusicdance.png" group-title="Música",Total Music Dance

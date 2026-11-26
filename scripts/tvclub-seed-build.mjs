@@ -88,26 +88,41 @@ async function fetchBytes(url, { range = false } = {}) {
   } finally { clearTimeout(timer); }
 }
 
-/** Maestra 200 + #EXTM3U + primer tramo (variante→segmento) con bytes. */
-async function isAlive(id) {
+/** «A3Cine» → «A3 Cine», «Eventos3» → «Eventos 3», «AE» → «AE». */
+const humanizeSlug = (slug) => String(slug || '')
+  .replace(/([a-záéíóúñ0-9])([A-ZÁÉÍÓÚÑ])/g, '$1 $2')
+  .replace(/([A-Za-zÁÉÍÓÚÑáéíóúñ])(\d)/g, '$1 $2')
+  .trim();
+
+/**
+ * Maestra 200 + #EXTM3U + primer tramo (variante→segmento) con bytes.
+ * Devuelve { slug } con el nombre interno del canal (los segmentos van a
+ * `get_ts/…/<SLUG>/_<n>.ts`: «AE», «A3Cine», «Eventos3»…) o null si muerto.
+ */
+async function probe(id) {
   const url = `${BASE}${PATH_PREFIX}${id}.m3u8`;
   let master;
   try {
     master = await fetchBytes(url);
-  } catch { return false; }
-  if (master.status !== 200 || !master.buf.includes('#EXTM3U')) return false;
-  // Primer tramo de la cadena: variante (maestra) o segmento (media playlist)
+  } catch { return null; }
+  if (master.status !== 200 || !master.buf.includes('#EXTM3U')) return null;
+  const slugFrom = (text) => {
+    const m = /get_ts\/[^/]+\/[^/]+\/([^/]+)\//.exec(text);
+    return m ? m[1] : '';
+  };
   const lines = master.buf.toString('utf8').split('\n').map((l) => l.trim()).filter(Boolean);
   const first = lines.find((l) => !l.startsWith('#'));
-  if (!first) return false;
-  const nextUrl = first.startsWith('http') ? first : new URL(first, url).href;
+  if (!first) return null;
+  // Media playlist directa: el primer tramo ya es un segmento
   const isSegment = !/\.m3u8/i.test(first);
+  const nextUrl = first.startsWith('http') ? first : new URL(first, url).href;
   try {
     const part = await fetchBytes(nextUrl, { range: isSegment });
-    if (![200, 206].includes(part.status) || part.buf.length < 100) return false;
-    if (!isSegment && !part.buf.includes('#EXTM3U')) return false;
-  } catch { return false; }
-  return true;
+    if (![200, 206].includes(part.status) || part.buf.length < 100) return null;
+    if (!isSegment && !part.buf.includes('#EXTM3U')) return null;
+    const slug = slugFrom(isSegment ? first : part.buf.toString('utf8'));
+    return { slug };
+  } catch { return null; }
 }
 
 (async () => {
@@ -131,24 +146,25 @@ async function isAlive(id) {
     say(`ids conocidos con nombre: ${known.size} · máximo conocido: ${maxKnown} · barrido: 1..${MAX_ID}`);
     say('');
 
-    const alive = [];
+    const alive = []; // { id, slug }
     let next = 1;
     async function worker() {
       while (next <= MAX_ID) {
         const id = next++;
-        if (await isAlive(id)) alive.push(id);
+        const hit = await probe(id);
+        if (hit) alive.push({ id, slug: hit.slug });
       }
     }
     await Promise.all(Array.from({ length: CONCURRENCY }, worker));
-    alive.sort((a, b) => a - b);
+    alive.sort((a, b) => a.id - b.id);
     say(`barrido: ${alive.length} ids vivos de ${MAX_ID} (${((Date.now() - t0) / 1000).toFixed(0)} s)`);
     say('');
 
     // Muestra cruda de maestras de ids SIN nombre conocido: si el playlist
     // lleva el nombre del canal en algún comentario, la próxima iteración
     // del script lo aprovecha para nombrarlos.
-    const unknownAlive = alive.filter((id) => !known.has(id)).slice(0, 3);
-    for (const id of unknownAlive) {
+    const unknownAlive = alive.filter((a) => !known.has(a.id)).slice(0, 3);
+    for (const { id } of unknownAlive) {
       try {
         const sample = await fetchBytes(`${BASE}${PATH_PREFIX}${id}.m3u8`);
         say(`maestra id ${id} (sin nombre conocido):`);
@@ -162,13 +178,21 @@ async function isAlive(id) {
     const picked = [];
     const byGroup = new Map();
     let withName = 0;
-    for (const id of alive) {
+    let withSlug = 0;
+    const usedKeys = new Set();
+    for (const { id, slug } of alive) {
       const k = known.get(id);
-      const name = k ? cleanName(k.name, k.topic) : `tvclub ${id}`;
+      // Sin nombre conocido, el slug interno del segmento basta («A3Cine»
+      // → «A3 Cine»); sin slug, «tvclub <id>».
+      const rawName = k ? k.name : (humanizeSlug(slug) || `tvclub ${id}`);
+      const topic = k?.topic || thematicCategoryOf(rawName, '');
+      const name = cleanName(rawName, topic);
       if (!name || (name.match(/[a-záéíóúñ]/gi) || []).length < 2) continue;
-      const topic = k?.topic || 'entretenimiento';
       const country = k?.country || 'Latinoamérica';
-      if (k) withName += 1;
+      const key = `${country}|${slugOf(name)}`;
+      if (usedKeys.has(key)) continue; // mismo canal en dos ids: gana el menor
+      usedKeys.add(key);
+      if (k) withName += 1; else if (slug) withSlug += 1;
       picked.push({
         name,
         slug: slugOf(name) || `tvclub-${id}`,
@@ -180,7 +204,7 @@ async function isAlive(id) {
       byGroup.set(country, (byGroup.get(country) || 0) + 1);
     }
 
-    say(`con nombre conocido: ${withName} · nuevos sin nombre («tvclub <id>»): ${picked.length - withName}`);
+    say(`con nombre conocido: ${withName} · nombrados por slug interno: ${withSlug} · genéricos: ${picked.length - withName - withSlug}`);
     say('');
     say('## Canales por grupo');
     say('');

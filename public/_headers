@@ -1,52 +1,33 @@
-# Cabeceras para los static assets del Worker.
-#
-# Cloudflare sirve estos archivos SIN ejecutar worker.mjs, así que sus
-# peticiones son gratuitas e ilimitadas (no consumen las 100.000/día del plan
-# free). Los catálogos y endpoints estáticos generados por build-web.mjs y
-# prerender-catalogs.mjs caen aquí con 0 invocaciones de Worker.
-
-/catalog/*
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
-  Access-Control-Allow-Headers: *
-  Cache-Control: public, max-age=3600, s-maxage=21600, stale-while-revalidate=86400, stale-if-error=604800
-
-/meta/*
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
-  Access-Control-Allow-Headers: *
-  Cache-Control: public, max-age=3600, s-maxage=21600, stale-while-revalidate=86400, stale-if-error=604800
+# Endpoints del addon de Stremio.
 
 /manifest.json
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Methods: GET, HEAD, OPTIONS
   Access-Control-Allow-Headers: *
-  Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=604800
+  Cache-Control: public, max-age=300
 
-/internal/branding.json
+/catalog/*
   Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Allow-Headers: *
+  Cache-Control: public, max-age=300
 
-/internal/watch/catalogs
+/meta/*
   Access-Control-Allow-Origin: *
-  Content-Type: application/json; charset=utf-8
-  Cache-Control: public, max-age=3600, s-maxage=21600, stale-while-revalidate=86400
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Allow-Headers: *
+  Cache-Control: public, max-age=300
 
-/assets/*
+/stream/*
   Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=604800, immutable
+  Cache-Control: no-store
 
-/site.webmanifest
+/__channel/*
   Access-Control-Allow-Origin: *
-  Content-Type: application/manifest+json; charset=utf-8
-  Cache-Control: public, max-age=86400
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Allow-Headers: Range, Origin, Accept, User-Agent
+  Cache-Control: no-store
 
-/logo.png
+/assets/logo.png
   Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=604800, immutable
-
-/watch/*
-  Referrer-Policy: no-referrer
-  X-Content-Type-Options: nosniff
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
-
+  Cache-Control: public, max-age=86400, immutable

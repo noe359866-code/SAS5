@@ -110,3 +110,30 @@ test('la lista M3U del repositorio sigue disponible como archivo de canales', ()
   const m3uGroups = [...new Set([...playlist.matchAll(/group-title="([^"]+)"/g)].map((match) => match[1]))];
   assert.deepEqual(m3uGroups, require('../lib/livePlaylist').playlistGroups().map((group) => group.name));
 });
+
+test('Worker /stream devuelve opciones directas sin M3U_PROXY_SECRET y cifradas cuando está configurado', async () => {
+  const path = require('node:path');
+  const { pathToFileURL } = require('node:url');
+  const workerUrl = pathToFileURL(path.join(__dirname, '..', 'worker.mjs')).href;
+  const { default: worker } = await import(workerUrl);
+  const playlist = require('../lib/livePlaylist');
+  const channel = playlist.playlistMetas('Nicaragua', { limit: 1 })[0];
+  assert.ok(channel);
+  const reqUrl = `https://ramdonlatam.noe359866.workers.dev/stream/tv/${encodeURIComponent(channel.id)}.json`;
+
+  // Sin M3U_PROXY_SECRET: entrega señales directas (nunca vacío)
+  const directRes = await worker.fetch(new Request(reqUrl), {}, { waitUntil() {} });
+  assert.equal(directRes.status, 200);
+  const directJson = await directRes.json();
+  assert.ok(directJson.streams.length >= 1, 'sin secreto debe entregar señales directas');
+  assert.match(directJson.streams[0].url, /^https?:\/\//);
+  assert.ok(!directJson.proxySecretRequired);
+
+  // Con M3U_PROXY_SECRET válido: entrega señales cifradas vía /__channel/
+  const secret = 'test-secret-that-is-long-enough-for-aes-gcm';
+  const proxiedRes = await worker.fetch(new Request(reqUrl), { M3U_PROXY_SECRET: secret }, { waitUntil() {} });
+  assert.equal(proxiedRes.status, 200);
+  const proxiedJson = await proxiedRes.json();
+  assert.ok(proxiedJson.streams.length >= 1);
+  assert.match(proxiedJson.streams[0].url, /^https:\/\/ramdonlatam\.noe359866\.workers\.dev\/__channel\//);
+});

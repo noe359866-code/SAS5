@@ -42,9 +42,7 @@ async function streamResult(type, id, request, env, ctx) {
   const result = await core.handleStream(type, id, null, workerRuntime(ctx));
   if (!id.startsWith('rlch:m3u:')) return result;
   const secret = env?.M3U_PROXY_SECRET;
-  if (!secret) {
-    result.streams = [];
-    result.proxySecretRequired = true;
+  if (!secret || String(secret).length < 24) {
     return result;
   }
   try {
@@ -52,9 +50,8 @@ async function streamResult(type, id, request, env, ctx) {
       origin: new URL(request.url).origin,
       secret,
     });
-  } catch {
-    result.streams = [];
-    result.proxySecretRequired = true;
+  } catch (error) {
+    console.error('[Worker m3uProxy]', error?.message);
   }
   return result;
 }

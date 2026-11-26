@@ -1,6 +1,6 @@
 # Sonda ENT Pack / Totalmusic (40media Group)
 
-Fecha: 2026-11-26T01:08:23.977Z
+Fecha: 2026-11-26T09:08:59.148Z
 
 | Canal | cdn.40mediagroup.com | cdn.global.elektamedia.com |
 |---|---|---|
@@ -19,4 +19,4 @@ Fecha: 2026-11-26T01:08:23.977Z
 | Totalmusic Dance | ✅ viva | ✅ viva |
 
 verificados: 11/13 canales (22 señales)
-semilla ENT escrita: 0 -> 22 filas
+semilla ENT escrita: 22 -> 22 filas

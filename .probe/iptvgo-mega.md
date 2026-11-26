@@ -1,6 +1,6 @@
 # Mega-semilla iptvgo.cc por países (SIN VERIFICAR, player_api Xtream)
 
-Fecha: 2026-11-26T01:08:14.453Z
+Fecha: 2026-11-26T09:08:52.148Z
 
 login: HTTP 200 · status Active
 panel: 33019 canales · 355 categorías

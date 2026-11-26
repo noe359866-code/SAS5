@@ -10,11 +10,8 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.withTimeout
 import okhttp3.Call
 import okhttp3.Headers
@@ -36,6 +33,7 @@ import java.util.Collections
 import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.zip.GZIPInputStream
 import java.util.zip.InflaterInputStream
@@ -46,7 +44,6 @@ import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
-import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.coroutineContext
 
 /**
@@ -157,11 +154,15 @@ class PluginRuntime(
             )
         )
         val settingsJson = gson.toJson(scraperSettings)
-        val dispatcher: CoroutineDispatcher =
-            (coroutineContext[ContinuationInterceptor] as? CoroutineDispatcher) ?: Dispatchers.IO
+        val qjsExecutor = Executors.newSingleThreadExecutor { runnable ->
+            Thread(runnable, "streamflix-qjs-${scraper.id}").apply {
+                isDaemon = true
+            }
+        }
+        val qjsDispatcher = qjsExecutor.asCoroutineDispatcher()
 
         try {
-            quickJs(dispatcher) {
+            quickJs(qjsDispatcher) {
                 memoryLimit = QUICKJS_MEMORY_LIMIT
                 maxStackSize = QUICKJS_MAX_STACK_SIZE
 
@@ -179,7 +180,10 @@ class PluginRuntime(
                         null
                     }
                     function("error") { args ->
-                        Log.e("Plugin:${scraper.id}", args.joinToString(" ") { it?.toString() ?: "null" })
+                        val msg = args.joinToString(" ") { it?.toString() ?: "null" }
+                        if (Log.e("Plugin:${scraper.id}", msg) == 0) {
+                            System.err.println("[Plugin:${scraper.id}] $msg")
+                        }
                         null
                     }
                     function("debug") { args ->
@@ -252,9 +256,13 @@ class PluginRuntime(
         } catch (ce: CancellationException) {
             throw ce
         } catch (t: Throwable) {
-            Log.e(TAG, "Plugin '${scraper.name}' (${scraper.id}) failed: ${t.message}", t)
+            if (Log.e(TAG, "Plugin '${scraper.name}' (${scraper.id}) failed: ${t.message}", t) == 0) {
+                System.err.println("[$TAG] Plugin '${scraper.name}' (${scraper.id}) failed: ${t.message}")
+            }
             return emptyList()
         } finally {
+            runCatching { qjsDispatcher.close() }
+            runCatching { qjsExecutor.shutdownNow() }
             cancelHandle?.dispose()
             inFlightCalls.forEach { call -> runCatching { call.cancel() } }
             inFlightCalls.clear()

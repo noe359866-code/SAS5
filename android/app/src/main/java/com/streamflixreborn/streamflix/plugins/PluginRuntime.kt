@@ -3,7 +3,6 @@ package com.streamflixreborn.streamflix.plugins
 import android.util.Log
 import com.dokar.quickjs.QuickJs
 import com.dokar.quickjs.QuickJsException
-import com.dokar.quickjs.binding.define
 import com.dokar.quickjs.binding.function
 import com.dokar.quickjs.quickJs
 import com.google.gson.Gson
@@ -166,30 +165,22 @@ class PluginRuntime(
                 memoryLimit = QUICKJS_MEMORY_LIMIT
                 maxStackSize = QUICKJS_MAX_STACK_SIZE
 
-                define("console") {
-                    function("log") { args ->
-                        Log.d("Plugin:${scraper.id}", args.joinToString(" ") { it?.toString() ?: "null" })
-                        null
+                function("__console_log") { args ->
+                    val msg = args.getOrNull(0)?.toString().orEmpty()
+                    Log.d("Plugin:${scraper.id}", msg)
+                    ""
+                }
+                function("__console_warn") { args ->
+                    val msg = args.getOrNull(0)?.toString().orEmpty()
+                    Log.w("Plugin:${scraper.id}", msg)
+                    ""
+                }
+                function("__console_error") { args ->
+                    val msg = args.getOrNull(0)?.toString().orEmpty()
+                    if (Log.e("Plugin:${scraper.id}", msg) == 0) {
+                        System.err.println("[Plugin:${scraper.id}] $msg")
                     }
-                    function("info") { args ->
-                        Log.i("Plugin:${scraper.id}", args.joinToString(" ") { it?.toString() ?: "null" })
-                        null
-                    }
-                    function("warn") { args ->
-                        Log.w("Plugin:${scraper.id}", args.joinToString(" ") { it?.toString() ?: "null" })
-                        null
-                    }
-                    function("error") { args ->
-                        val msg = args.joinToString(" ") { it?.toString() ?: "null" }
-                        if (Log.e("Plugin:${scraper.id}", msg) == 0) {
-                            System.err.println("[Plugin:${scraper.id}] $msg")
-                        }
-                        null
-                    }
-                    function("debug") { args ->
-                        Log.d("Plugin:${scraper.id}", args.joinToString(" ") { it?.toString() ?: "null" })
-                        null
-                    }
+                    ""
                 }
 
                 function("__get_scraper_id") { scraper.id }
@@ -199,7 +190,7 @@ class PluginRuntime(
                 function("__get_call_args") { callArgsJson }
                 function("__capture_result") { args ->
                     capturedResultJson = args.getOrNull(0)?.toString() ?: "[]"
-                    null
+                    ""
                 }
 
                 function("__plugin_sleep") { args ->
@@ -268,6 +259,13 @@ class PluginRuntime(
             elementCache.clear()
             documentCache.clear()
             loadedDocIds.clear()
+        }
+
+        if (capturedResultJson.isBlank() || capturedResultJson == "[]") {
+            val message = "Plugin '${scraper.name}' (${scraper.id}) returned no streams for $mediaType/$tmdbId"
+            if (Log.e(TAG, message) == 0) {
+                System.err.println("[$TAG] $message")
+            }
         }
 
         return parseStreamsJson(capturedResultJson, scraper)
@@ -837,6 +835,26 @@ class PluginRuntime(
         if (typeof globalThis.global === 'undefined') globalThis.global = globalThis;
         if (typeof globalThis.window === 'undefined') globalThis.window = globalThis;
         if (typeof globalThis.self === 'undefined') globalThis.self = globalThis;
+
+        function __fmtConsoleArgs(argsLike) {
+            var parts = [];
+            for (var i = 0; i < argsLike.length; i++) {
+                var a = argsLike[i];
+                if (typeof a === 'string') parts.push(a);
+                else if (a instanceof Error) parts.push(a.stack || a.message || String(a));
+                else {
+                    try { parts.push(JSON.stringify(a)); } catch (_) { parts.push(String(a)); }
+                }
+            }
+            return parts.join(' ');
+        }
+        globalThis.console = {
+            log: function() { __console_log(__fmtConsoleArgs(arguments)); },
+            info: function() { __console_log(__fmtConsoleArgs(arguments)); },
+            debug: function() { __console_log(__fmtConsoleArgs(arguments)); },
+            warn: function() { __console_warn(__fmtConsoleArgs(arguments)); },
+            error: function() { __console_error(__fmtConsoleArgs(arguments)); }
+        };
 
         globalThis.SCRAPER_ID = __get_scraper_id();
         globalThis.SCRAPER_SETTINGS = JSON.parse(__get_scraper_settings() || '{}');
@@ -1566,9 +1584,18 @@ class PluginRuntime(
             val listType = object : TypeToken<List<Map<String, Any?>>>() {}.type
             val rawItems: List<Map<String, Any?>> = gson.fromJson(json, listType) ?: return emptyList()
 
-            rawItems.mapNotNull { item ->
-                val rawUrl = extractStreamUrl(item) ?: return@mapNotNull null
-                if (!StreamFormatHelper.isPlayableHttpUrl(rawUrl)) return@mapNotNull null
+            val dropped = mutableListOf<String>()
+
+            val parsed = rawItems.mapNotNull { item ->
+                val rawUrl = extractStreamUrl(item)
+                if (rawUrl == null) {
+                    dropped.add("missing url: ${gson.toJson(item).take(160)}")
+                    return@mapNotNull null
+                }
+                if (!StreamFormatHelper.isPlayableHttpUrl(rawUrl)) {
+                    dropped.add("unplayable url: ${rawUrl.take(160)}")
+                    return@mapNotNull null
+                }
 
                 val mergedHeaders = extractHeaders(item)
                 val subtitles = extractSubtitles(item["subtitles"], scraper.name)
@@ -1595,8 +1622,20 @@ class PluginRuntime(
                     subtitles = subtitles,
                 )
             }
+
+            if (dropped.isNotEmpty()) {
+                val message = "Dropped ${dropped.size} stream(s) from ${scraper.id}: ${dropped.take(3)}"
+                if (Log.e(TAG, message) == 0) {
+                    System.err.println("[$TAG] $message")
+                }
+            }
+
+            parsed
         } catch (e: Exception) {
-            Log.e(TAG, "Failed parsing stream JSON from ${scraper.id}: ${e.message}")
+            val message = "Failed parsing stream JSON from ${scraper.id}: ${e.message}"
+            if (Log.e(TAG, message) == 0) {
+                System.err.println("[$TAG] $message :: ${json.take(500)}")
+            }
             emptyList()
         }
     }

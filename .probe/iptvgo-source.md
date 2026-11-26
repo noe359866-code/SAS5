@@ -1,6 +1,6 @@
 # Sonda 14: iptvgo.cc a fondo (patrón Xtream /live/<u>/<p>/<id>.m3u8)
 
-Fecha: 2026-11-25T19:40:18.581Z
+Fecha: 2026-11-26T01:06:20.115Z
 
 ## 1. Acceso al canal de ejemplo (id 1455)
 
@@ -24,8 +24,8 @@ Fecha: 2026-11-25T19:40:18.581Z
 
 login: HTTP 200 · status Active · expira 1802231850 · max conexiones 4
 categorías en vivo: 355
-canales en vivo anunciados: 33020
-con logo: 29341 · muestra de nombres: HC Vita Hästen vs Borås HC @ Nov 25 6:40 PM :Hockeyettan  01 · HC Dalen vs Grästorps IK @ Nov 25 6:45 PM :Hockeyettan  02 · Mjölby HC vs BoroVetlanda HC @ Nov 25 6:50 PM :Hockeyettan  03 · Tyringe SoSS vs Kungälvs IK @ Nov 25 6:50 PM :Hockeyettan  04 ·  :Hockeyettan  05 ·  :Hockeyettan  06 ·  :Hockeyettan  07 ·  :Hockeyettan  08 ·  :Hockeyettan  09 ·  :Hockeyettan  10 ·  :Hockeyettan  11 ·  :Hockeyettan  12
+canales en vivo anunciados: 33019
+con logo: 29340 · muestra de nombres: HC Vita Hästen vs Borås HC @ Nov 25 6:40 PM :Hockeyettan  01 · HC Dalen vs Grästorps IK @ Nov 25 6:45 PM :Hockeyettan  02 · Mjölby HC vs BoroVetlanda HC @ Nov 25 6:50 PM :Hockeyettan  03 · Tyringe SoSS vs Kungälvs IK @ Nov 25 6:50 PM :Hockeyettan  04 ·  :Hockeyettan  05 ·  :Hockeyettan  06 ·  :Hockeyettan  07 ·  :Hockeyettan  08 ·  :Hockeyettan  09 ·  :Hockeyettan  10 ·  :Hockeyettan  11 ·  :Hockeyettan  12
 categorías con canales: 356 · ids máx: 868568
 top categorías: Ex-YU: 1112 · 24/7 | SHOWS: 740 · CARIBBEAN: 649 · Hungary: 592 · INDIA: 519 · 24/7 | COMEDY: 511 · Brazil: 510 · UK-Restream: 506 · 24/7 | DRAMA: 475 · Turkey: 458 · USA | ESPN+: 399 · 24/7 | Arabic: 399 · IT | SPORT: 372 · DE | SPORT: 305 · USA | PLEX: 304 · Albania: 302 · USA | Flo Hockey: 300 · Africa | Locals: 300 · USA | Disney+ Sports: 300 · FR | SPORT: 299 · DE | Kinowelt: 290 · Canada | SAMSUNG TV+: 281 · USA | SAMSUNG TV+: 280 · Thailand: 279
 

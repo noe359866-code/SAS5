@@ -1,0 +1,200 @@
+[
+ {
+  "name": "ENT Channel",
+  "slug": "ent-channel",
+  "topic": "entretenimiento",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-channel.png",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/ENT_Channel/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Channel",
+  "slug": "ent-channel",
+  "topic": "entretenimiento",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-channel.png",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/ENT_Channel/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Family",
+  "slug": "ent-family",
+  "topic": "entretenimiento",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-family.png",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/ENT_Family/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Family",
+  "slug": "ent-family",
+  "topic": "entretenimiento",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-family.png",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/ENT_Family/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Movies",
+  "slug": "ent-movies",
+  "topic": "cine",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-movies.png",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/ENT_Movies/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Movies",
+  "slug": "ent-movies",
+  "topic": "cine",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-movies.png",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/ENT_Movies/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Drama",
+  "slug": "ent-drama",
+  "topic": "cine",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-drama.png",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/ENT_Drama/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Drama",
+  "slug": "ent-drama",
+  "topic": "cine",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-drama.png",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/ENT_Drama/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Classic",
+  "slug": "ent-classic",
+  "topic": "cine",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-classic.png",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/ENT_Classics/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Classic",
+  "slug": "ent-classic",
+  "topic": "cine",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-classic.png",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/ENT_Classics/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Life",
+  "slug": "ent-life",
+  "topic": "cine",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-life.png",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/ENT_Life/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "ENT Life",
+  "slug": "ent-life",
+  "topic": "cine",
+  "country": "Latinoamérica",
+  "logo": "https://www.40mediagroup.com/images/channels/ent-life.png",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/ENT_Life/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic",
+  "slug": "totalmusic",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "https://static.elektamedia.com/ch/tmc_main.png",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/Totalmusic/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic",
+  "slug": "totalmusic",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "https://static.elektamedia.com/ch/tmc_main.png",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/Totalmusic/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic 80s",
+  "slug": "totalmusic-80s",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "https://static.elektamedia.com/ch/tmc_80s.png",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/Totalmusic_80s/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic 80s",
+  "slug": "totalmusic-80s",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "https://static.elektamedia.com/ch/tmc_80s.png",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/Totalmusic_80s/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic 00s",
+  "slug": "totalmusic-00s",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "https://static.elektamedia.com/ch/tmc_00s.png",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/Totalmusic_00s/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic 00s",
+  "slug": "totalmusic-00s",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "https://static.elektamedia.com/ch/tmc_00s.png",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/Totalmusic_00s/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic Concerts",
+  "slug": "totalmusic-concerts",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/Totalmusic_Concerts/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic Concerts",
+  "slug": "totalmusic-concerts",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/Totalmusic_Concerts/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic Dance",
+  "slug": "totalmusic-dance",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "https://cdn.40mediagroup.com/live/c7eds/Totalmusic_Dance/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ },
+ {
+  "name": "Totalmusic Dance",
+  "slug": "totalmusic-dance",
+  "topic": "musica",
+  "country": "Latinoamérica",
+  "logo": "",
+  "url": "https://cdn.global.elektamedia.com/live/c7eds/Totalmusic_Dance/SA_LIVE_hls_enc/master.m3u8",
+  "unverified": false
+ }
+]

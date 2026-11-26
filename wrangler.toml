@@ -1,57 +1,18 @@
-# ─────────────────────────────────────────────────────────────
-#  RamdonLatam · Cloudflare Worker — plan GRATUITO, orden estricto
-#
-#  UN SOLO trabajador: ramdonlatam. Es el que despliega Workers Builds
-#  desde la rama main y el que usa Stremio. No cambiar `name`: desplegar
-#  con otro nombre crearía un segundo worker y partiría el addon.
-#
-#  Las claves de API NO van aquí. Se añaden como secrets:
-#    npx wrangler secret put TMDB_API_KEY
-#    npx wrangler secret put OMDB_API_KEY
-#  (TMDB_ACCESS_TOKEN en lugar de TMDB_API_KEY también vale.)
-# ─────────────────────────────────────────────────────────────
+# RamdonLatam Canales — Cloudflare Worker para el addon de Stremio.
+# Mantener el nombre estable: es el Worker del addon.
+# La clave de cifrado no va en este archivo: configura un secret con
+# `openssl rand -hex 32 | npx wrangler secret put M3U_PROXY_SECRET`.
 
-# 1) Identidad y runtime ──────────────────────────────────────
 name = "ramdonlatam"
 main = "worker.mjs"
 compatibility_date = "2026-11-01"
 compatibility_flags = ["nodejs_compat"]
 
-# 2) Variables NO secretas (puedes editarlas con seguridad) ───
-#  Presupuesto del plan gratuito (workerd free: 10 ms de CPU, ~1 s por
-#  petición, 100.000 peticiones/día). Las fuentes corren en tandas de
-#  STREAM_MAX_CONCURRENT dentro del reloj compartido STREAM_REQUEST_BUDGET_MS;
-#  lo que no cabe se omite. No subir estos techos sin cambiar de plan.
 [vars]
-ADDON_NAME = "RamdonLatam"
-WATCH_REGION = "NI"
-TMDB_MIN_VOTE_COUNT = "500"
+ADDON_NAME = "RamdonLatam Canales"
 CACHE_TTL_SECONDS = "21600"
-STREAM_PROVIDER_TIMEOUT_MS = "5000"
-STREAM_FALLBACK_TIMEOUT_MS = "2000"
-STREAM_MAX_CONCURRENT = "4"
-STREAM_REQUEST_BUDGET_MS = "9000"
-STREAM_PROVIDER_COOLDOWN_SECONDS = "300"
-STREAM_STALE_SECONDS = "0"
-# Enlace de soporte de la web. Por defecto, invitación permanente actual al
-# Discord de RamdonLatam. Actualízalo aquí si el enlace cambia.
-# SUPPORT_URL = "https://discord.gg/J6byqsRUfu"
-# Donaciones: botón de Ko-fi en la barra, tarjeta propia y pie (dentro de Ko-fi
-# se paga con PayPal o tarjeta). Página del proyecto; "off" oculta todo.
-KOFI_USERNAME = "off"
 
-# 3) Assets estáticos: peticiones GRATIS e ILIMITADAS ─────────
-#  Un archivo que existe en ./public se sirve sin ejecutar worker.mjs, así que
-#  no gasta la cuota de 100.000 peticiones/día del plan free. Aquí viven el
-#  logo, public/_headers y los catálogos pregenerados por
-#  `npm run prerender` (public/catalog/<tipo>/<id>.json).
-#  run_worker_first = false → el asset gana; si no existe, atiende el Worker.
+# Solo se conserva el logo requerido por el manifest del addon.
 [assets]
 directory = "./public"
 run_worker_first = false
-
-# 4) Prohibido en el plan gratuito (guardado por test/deploy.test.js) ──
-#  Nada de bindings: kv_namespaces, durable_objects, queues, d1_databases,
-#  r2_buckets, vectorize_indexes, [ai], [workflows], hyperdrive… son de pago
-#  o de cuota mínima. La coordinación entre peticiones se resuelve con
-#  memoria por isolate + Cache API (ver docs/worker-request-lifetime.md).

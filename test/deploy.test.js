@@ -41,15 +41,10 @@ describe('despliegue Cloudflare Workers (plan gratuito)', () => {
     assert.match(toml, /\[assets\][\s\S]*?run_worker_first\s*=\s*false/);
   });
 
-  test('los presupuestos de streams respetan el techo del plan free', () => {
-    const budget = Number((/STREAM_REQUEST_BUDGET_MS\s*=\s*"(\d+)"/.exec(toml) || [])[1]);
-    const timeout = Number((/STREAM_PROVIDER_TIMEOUT_MS\s*=\s*"(\d+)"/.exec(toml) || [])[1]);
-    const fallback = Number((/STREAM_FALLBACK_TIMEOUT_MS\s*=\s*"(\d+)"/.exec(toml) || [])[1]);
-    const conc = Number((/STREAM_MAX_CONCURRENT\s*=\s*"(\d+)"/.exec(toml) || [])[1]);
-    assert.ok(budget > 0 && budget <= 10000, `presupuesto fuera de techo: ${budget} ms`);
-    assert.ok(timeout > 0 && timeout <= 10000, `timeout fuera de techo: ${timeout} ms`);
-    assert.ok(fallback > 0 && fallback < budget, `fallback ${fallback} ms debe ser menor que el presupuesto`);
-    assert.ok(conc >= 1 && conc <= 8, `concurrencia fuera de rango: ${conc}`);
+  test('el secreto del proxy se configura fuera del archivo versionado', () => {
+    assert.match(toml, /wrangler secret put M3U_PROXY_SECRET/);
+    const active = toml.split('\n').filter((line) => !line.trim().startsWith('#')).join('\n');
+    assert.ok(!/^M3U_PROXY_SECRET\s*=/m.test(active), 'el secreto no debe estar en [vars]');
   });
 
   test('la marca pública del worker coincide con su nombre', () => {

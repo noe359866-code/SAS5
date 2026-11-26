@@ -1,29 +1,23 @@
 {
-  "name": "stremio-addon-catalogos",
-  "version": "1.10.0",
-  "description": "Addon de Stremio con catálogos de películas y series: Tendencias, Populares, Top Valoradas, por plataforma de streaming (Netflix, Prime Video, Disney+, Max, Apple TV+, Paramount+, Star+, Crunchyroll) y por estudio (Marvel, Pixar, A24, Ghibli...). TMDB + TVMaze + OMDB.",
+  "name": "stremio-addon-canales",
+  "version": "2.1.0",
+  "description": "Addon de Stremio con listas de canales de TV en vivo organizadas por categoría.",
   "main": "api/index.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
     "dev:worker": "wrangler dev",
-    "deploy": "node scripts/build-web.mjs && node scripts/prerender-catalogs.mjs --from-url && wrangler deploy",
-    "test": "node --test test/*.test.js",
-    "prerender": "node scripts/prerender-catalogs.mjs",
-    "build:web": "node scripts/build-web.mjs",
-    "scale:audit": "node scripts/scale-audit.mjs",
-    "fanpelis:check": "node scripts/fanpelis-check.mjs"
+    "deploy": "wrangler deploy",
+    "test": "node --test test/channel-addon.test.js test/deploy.test.js",
+    "m3u:export": "node scripts/m3u-export.mjs"
   },
   "keywords": [
     "stremio",
     "stremio-addon",
-    "catalogos",
-    "tmdb",
-    "tvmaze",
-    "omdb",
-    "netflix",
-    "series",
-    "peliculas"
+    "canales",
+    "tv-en-vivo",
+    "iptv",
+    "m3u"
   ],
   "author": "Comunidad Stremio",
   "license": "MIT",

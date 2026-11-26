@@ -1,10 +1,5 @@
-TMDB_API_KEY=
-TMDB_ACCESS_TOKEN=
-OMDB_API_KEY=
-WATCH_REGION=NI
-ADDON_NAME=RamdonLatam
-# Todas las fuentes vigentes del registro (ver README.md) por defecto.
-# Para limitar, usa una lista como fanpelis,spinflix; off = ninguna.
-# STREAM_PROVIDERS=all
-STREAM_MAX_RESULTS=30
-KOFI_USERNAME=off
+# Variables locales para `wrangler dev`.
+ADDON_NAME=RamdonLatam Canales
+CACHE_TTL_SECONDS=21600
+# Reemplaza por una clave privada aleatoria (mínimo 24 caracteres).
+M3U_PROXY_SECRET=replace-with-private-random-secret-minimum-24-characters

@@ -1,663 +1,140 @@
-/**
- * RamdonLatam — Addon de Stremio para Cloudflare Workers
- *
- * Rutas:
- *   GET /                               Landing
- *   GET /configure                      Configurar idioma/región/plataformas/estudios
- *   GET /manifest.json                  Manifest por defecto (todo activado)
- *   GET /<config>/manifest.json         Manifest personal (config base64url)
- *   GET /catalog/:type/:id.json         Catálogos (config por defecto)
- *   GET /<config>/catalog/:type/:id.json
- *   GET /meta/:type/:id.json
- *   GET /<config>/meta/:type/:id.json
- *   GET /internal/branding.json         Logos de plataformas/estudios (vía TMDB)
- *   GET /healthz · GET /assets/logo.png
- *
- * Secrets/vars del Worker (ver wrangler.toml y README):
- *   TMDB_API_KEY | TMDB_ACCESS_TOKEN, OMDB_API_KEY
- *   Vars no secretas: WATCH_REGION, ADDON_NAME, TMDB_MIN_VOTE_COUNT, CACHE_TTL_SECONDS,
- *                     SUPPORT_URL (soporte), KOFI_USERNAME (botón de donaciones) y
- */
-
 import config from './lib/config.js';
-import requestScope from './lib/requestScope.js';
-import responseCache from './lib/responseCache.js';
 import core from './lib/core.js';
-import { renderHome } from './lib/homePage.js';
-import { renderConfigure } from './lib/configurePage.js';
-import { renderWatch } from './lib/watchPage.js';
-import watchApi from './lib/watchApi.js';
-import skipSegments from './lib/skipSegments.js';
-import tmdbClient from './lib/tmdb.js';
-import { branding } from './lib/branding.js';
-import userConfig from './lib/userConfig.js';
-import catalogs from './lib/catalogs.js';
-import streams from './lib/streams.js';
 import cache from './lib/cache.js';
-import rateLimit from './lib/rateLimit.js';
 import logoData from './lib/logoData.js';
-import configRegistry from './lib/configRegistry.js';
+import m3uProxy from './lib/m3uProxy.js';
 
-const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (c) => c.charCodeAt(0));
+const LOGO_BYTES = Uint8Array.from(atob(logoData.base64), (char) => char.charCodeAt(0));
+const RUNTIME_HEADER = 'X-Catalogos-Runtime';
 
-// Manifest web (iconos y color de la marca). El archivo gemelo vive en
-// public/site.webmanifest, que el edge sirve gratis; esto es solo la red de
-// seguridad cuando la petición llega al Worker.
-const SITE_MANIFEST = JSON.stringify({
-  name: 'RamdonLatam · Addon de Stremio',
-  short_name: 'RamdonLatam',
-  description: 'Catálogos de películas y series por plataforma y estudio para Stremio, en español latino.',
-  start_url: '/',
-  scope: '/',
-  display: 'standalone',
-  background_color: '#060f1a',
-  theme_color: '#060f1a',
-  lang: 'es',
-  icons: [
-    { src: '/assets/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-    { src: '/assets/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-    { src: '/assets/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
-  ],
-});
-const CATALOG_RE = /^\/catalog\/(movie|series|anime|tv)\/([^/]+?)(?:\/([^/]+))?\.json$/;
-const META_RE = /^\/meta\/(movie|series|tv)\/(.+)\.json$/;
-const STREAM_RE = /^\/stream\/(movie|series|tv)\/(.+)\.json$/;
-const WATCH_META_RE = /^\/internal\/watch\/meta\/(movie|series)\/(.+)\.json$/;
-const WATCH_FALLBACK_RE = /^\/internal\/watch\/fallback\/(movie|series)\/([^/]+)$/;
-// Mismo límite que lib/userConfig.js: una config "completa" generada por
-// /configure ocupa ~600 caracteres, así que un tope de 512 la rechazaba
-// (404 invalid_config → Stremio sin manifest ni streams).
-const CONFIG_SEGMENT_MAX = userConfig.MAX_CONFIG_SEGMENT || 4096;
-const CONFIG_PREFIX_RE = new RegExp(`^/([A-Za-z0-9_-]{8,${CONFIG_SEGMENT_MAX}})(/.*)$`);
-
-function corsHeaders(extra = {}) {
+function headers(extra = {}) {
   return {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, HEAD, POST, DELETE, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
     'Access-Control-Allow-Headers': '*',
     'Access-Control-Max-Age': '86400',
+    [RUNTIME_HEADER]: 'worker',
     ...extra,
   };
 }
 
-function buildCacheControl(cacheSeconds, staleSeconds = 86400) {
-  if (!cacheSeconds || cacheSeconds <= 0) return 'no-store';
-  const swr = Math.max(cacheSeconds, staleSeconds);
-  return `public, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}, stale-while-revalidate=${swr}, stale-if-error=604800`;
-}
-
-function jsonResponse(data, status = 200, cacheSeconds = 3600, explicitCacheControl) {
-  return new Response(JSON.stringify(data), {
+function json(data, status = 200, cacheSeconds = 0, method = 'GET') {
+  return new Response(method === 'HEAD' ? null : JSON.stringify(data), {
     status,
-    headers: corsHeaders({
+    headers: headers({
       'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': explicitCacheControl || buildCacheControl(cacheSeconds),
+      'Cache-Control': cacheSeconds > 0 ? `public, max-age=${cacheSeconds}` : 'no-store',
     }),
   });
-}
-
-function htmlResponse(html, cacheSeconds = 0, extraHeaders = {}) {
-  return new Response(html, {
-    status: 200,
-    headers: corsHeaders({
-      'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': cacheSeconds > 0 ? buildCacheControl(cacheSeconds, 86400) : 'no-store',
-      ...extraHeaders,
-    }),
-  });
-}
-
-/**
- * Cache compartida de Cloudflare para las respuestas públicas repetidas.
- * Permite pasar una URL canónica (`cacheUrl`) para que usuarios con distinto
- * prefijo `/<cfg>/` (distintas preferencias de catálogo y presentación)
- * compartan la misma entrada de catálogo/meta/stream-público en el PoP local.
- */
-/**
- * Segundos de vida de una respuesta según el `Cache-Control` que publicamos.
- * Así la caché en memoria y la Cache API no contradicen la promesa pública.
- */
-function cacheTtl(policy) {
-  const swr = /(?:^|,\s*)stale-while-revalidate=(\d+)/i.exec(policy || '');
-  const fresh = /(?:^|,\s*)s-maxage=(\d+)/i.exec(policy || '')
-    || /(?:^|,\s*)max-age=(\d+)/i.exec(policy || '');
-  return {
-    ttl: fresh ? Number(fresh[1]) : 0,
-    stale: swr ? Number(swr[1]) : 0,
-  };
-}
-
-/**
- * Tres niveles, en orden de coste:
- *  1. Memoria del isolate (funciona siempre, incluido `*.workers.dev`).
- *  2. Cache API del borde (solo opera en dominio propio).
- *  3. Ejecutar el handler (fan-out real: TMDB, indexadores…).
- *
- * Las respuestas `no-store`/`private` nunca se guardan.
- */
-async function edgeCached(request, ctx, createResponse, cacheUrl) {
-  const edge = globalThis.caches && globalThis.caches.default;
-  const key = cacheUrl || request.url;
-  if (request.method !== 'GET') return createResponse();
-
-  // 1) Memoria del isolate (gratis: ni CPU ni subpeticiones).
-  const fromMemory = responseCache.get(key);
-  if (fromMemory) return rebuildResponse(fromMemory);
-
-  // 1b) Caducado pero en su ventana de gracia: se sirve y se recalcula en
-  //     segundo plano (stale-while-revalidate), como promete la cabecera.
-  const stale = responseCache.getStale(key);
-  if (stale) {
-    const refresh = responseCache.coalesce(key, () => runAndCache(key, createResponse, ctx, edge)).catch(() => {});
-    if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(refresh);
-    return rebuildResponse(stale);
-  }
-
-  // 2) Cache API del borde. `match` cuenta como subpetición, así que solo se
-  //    consulta cuando la memoria no tiene nada.
-  if (!edge) return loadMiss();
-
-  try {
-    const cached = await edge.match(new Request(key, { method: 'GET' }));
-    if (cached) {
-      try {
-        cached.headers.set('X-Catalogos-Cache', 'edge');
-      } catch (_) { /* cabeceras inmutables: solo instrumentación */ }
-      return cached;
-    }
-  } catch (_) { /* Cache API no disponible (p. ej. en local) */ }
-
-  // 3) Ejecutar el handler una sola vez para las peticiones concurrentes.
-  return loadMiss();
-
-  async function loadMiss() {
-    // Compartir datos, no el ReadableStream de una petición con otra app.
-    const entry = await responseCache.coalesce(key, () => runAndCache(key, createResponse, ctx, edge));
-    return rebuildResponse(entry, 'miss');
-  }
-}
-
-/** Reconstruye una respuesta guardada como texto + cabeceras. */
-function rebuildResponse(entry, level = 'memory') {
-  const stored = JSON.parse(entry);
-  const response = new Response(stored.body, { status: stored.status, headers: stored.headers });
-  try {
-    response.headers.set('X-Catalogos-Cache', level);
-  } catch (_) { /* cabeceras inmutables: solo instrumentación */ }
-  return response;
-}
-
-/** Serializa una respuesta para guardarla en la memoria del isolate. */
-async function serializeResponse(response) {
-  const body = await response.text();
-  return JSON.stringify({
-    status: response.status,
-    headers: [...response.headers],
-    body,
-  });
-}
-
-async function runAndCache(key, createResponse, ctx, edge) {
-  const response = await createResponse();
-  try {
-    response.headers.set('X-Catalogos-Cache', 'miss');
-  } catch (_) { /* cabeceras inmutables: solo instrumentación */ }
-  const policy = response.headers.get('Cache-Control') || '';
-  const cacheable = response.status === 200 && !/(?:no-store|private)/i.test(policy);
-  const entry = await serializeResponse(response);
-  if (!cacheable) return entry;
-  const { ttl, stale } = cacheTtl(policy);
-  if (edge) {
-    const put = Promise.resolve()
-      .then(() => edge.put(new Request(key, { method: 'GET' }), rebuildResponse(entry, 'miss')))
-      .catch(() => {});
-    if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(put);
-    else await put;
-  }
-  if (ttl > 0) {
-    responseCache.set(key, entry, ttl, { staleSeconds: stale });
-  }
-  return entry;
-}
-
-function workerRuntime(ctx) {
-  return {
-    waitUntil: ctx && typeof ctx.waitUntil === 'function' ? (promise) => ctx.waitUntil(promise) : undefined,
-  };
-}
-
-function canonicalCatalogCacheUrl(requestUrl, type, id, cfg, extra) {
-  const u = new URL(requestUrl);
-  const lang = (cfg && cfg.lang) || config.tmdbLanguage || 'es';
-  const region = (cfg && cfg.region) || config.watchRegion || 'NI';
-  const skip = Number(extra && extra.skip ? extra.skip : 0) || 0;
-  return `${u.origin}/__edge/catalog-v2/${type}/${encodeURIComponent(id)}?lang=${encodeURIComponent(lang)}&region=${encodeURIComponent(region)}&skip=${skip}`;
-}
-
-function canonicalMetaCacheUrl(requestUrl, type, id, cfg) {
-  const u = new URL(requestUrl);
-  const lang = (cfg && cfg.lang) || config.tmdbLanguage || 'es';
-  const region = (cfg && cfg.region) || config.watchRegion || 'NI';
-  return `${u.origin}/__edge/meta/${type}/${encodeURIComponent(id)}?lang=${encodeURIComponent(lang)}&region=${encodeURIComponent(region)}`;
-}
-
-function canonicalStreamCacheUrl(requestUrl, type, id, cfg) {
-  const u = new URL(requestUrl);
-  const active = streams.activeProviders(cfg).slice().sort().join(',');
-  const badges = Array.isArray(cfg && cfg.badges) ? cfg.badges.slice().sort().join(',') : 'all';
-  // No reutilizar JSON del transporte retirado, incluso para una config ya instalada.
-  return `${u.origin}/__edge/stream-v5/${type}/${encodeURIComponent(id)}?p=${encodeURIComponent(active)}&b=${encodeURIComponent(badges)}`;
 }
 
 function safeDecode(value) {
-  try { return decodeURIComponent(value); } catch (_) { return null; }
+  try { return decodeURIComponent(value); } catch { return null; }
 }
 
-async function serveCatalog(type, id, cfg, request, ctx, extraPath = '') {
-  const decodedId = safeDecode(id);
-  if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
-  if (cfg) {
-    const visible = catalogs.buildDefs(cfg);
-    if (!visible.some((d) => d.id === decodedId && d.type === type)) {
-      const empty = await core.handleCatalog(type, decodedId, cfg, {});
-      return jsonResponse(empty, 200, 0);
-    }
+function workerRuntime(ctx) {
+  return ctx && typeof ctx.waitUntil === 'function'
+    ? { waitUntil: (promise) => ctx.waitUntil(promise) }
+    : {};
+}
+
+async function streamResult(type, id, request, env, ctx) {
+  const result = await core.handleStream(type, id, null, workerRuntime(ctx));
+  if (!id.startsWith('rlch:m3u:')) return result;
+  const secret = env?.M3U_PROXY_SECRET;
+  if (!secret) {
+    result.streams = [];
+    result.proxySecretRequired = true;
+    return result;
   }
-  const extra = { ...Object.fromEntries(new URL(request.url).searchParams), ...Object.fromEntries(new URLSearchParams(extraPath)) };
-  const cacheUrl = canonicalCatalogCacheUrl(request.url, type, decodedId, cfg, extra);
-  return edgeCached(request, ctx, async () => {
-    const result = await core.handleCatalog(type, decodedId, cfg, extra);
-    return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
-  }, cacheUrl);
-}
-
-async function serveMeta(type, id, cfg, request, ctx) {
-  const decodedId = safeDecode(id);
-  if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
-  const cacheUrl = canonicalMetaCacheUrl(request.url, type, decodedId, cfg);
-  return edgeCached(request, ctx, async () => {
-    const result = await core.handleMeta(type, decodedId, cfg);
-    return jsonResponse(result, 200, result.cacheMaxAge ?? 0);
-  }, cacheUrl);
-}
-
-async function serveStream(type, id, cfg, request, ctx) {
-  const decodedId = safeDecode(id);
-  if (decodedId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
-  const create = async () => {
-    const result = await core.handleStream(type, decodedId, cfg, workerRuntime(ctx));
-    return jsonResponse(result, 200, 0, core.streamCacheControl(result.cacheMaxAge));
-  };
-  const cacheUrl = canonicalStreamCacheUrl(request.url, type, decodedId, cfg);
-  return edgeCached(request, ctx, create, cacheUrl);
-}
-
-/** Tendencias semanales TMDB (solo si hay clave; si no, estáticos). */
-async function loadTrending() {
-  if (!config.tmdbConfigured) return { movies: null, series: null, anime: null };
   try {
-    const [movies, series, anime] = await Promise.all([
-      tmdbClient.trending('movie', config.tmdbLanguage),
-      tmdbClient.trending('tv', config.tmdbLanguage),
-      tmdbClient.animeTrending(config.tmdbLanguage),
-    ]);
-    return { movies, series, anime };
-  } catch (err) {
-    console.error('[Trending] ->', err && err.message);
-    return { movies: null, series: null, anime: null };
+    result.streams = await m3uProxy.maskedStreams(result.streams, {
+      origin: new URL(request.url).origin,
+      secret,
+    });
+  } catch {
+    result.streams = [];
+    result.proxySecretRequired = true;
   }
+  return result;
 }
 
-/**
- * Todas las respuestas del Worker llevan `X-Catalogos-Runtime: worker`. Los
- * static assets de `public/` se sirven sin pasar por aquí, así que una
- * respuesta SIN esa cabecera no consumió invocación: es la forma de auditar
- * desde fuera qué parte del tráfico es gratis (scripts/scale-audit.mjs).
- */
-async function handleRequest(request, env, ctx) {
-    try {
-      config.reload(env || {});
-    } catch (err) {
-      console.error('[Worker] reload config ->', err && err.message);
-    }
+async function route(request, env, ctx) {
+  try { config.reload(env || {}); } catch (error) { console.error('[Worker config]', error?.message); }
+  const url = new URL(request.url);
+  const pathname = url.pathname.replace(/\/+$/, '') || '/';
+  if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: headers() });
+  if (!['GET', 'HEAD'].includes(request.method)) return json({ error: 'method_not_allowed' }, 405);
+  const origin = url.origin;
 
-    const url = new URL(request.url);
-    const path = url.pathname.replace(/\/+$/, '') || '/';
+  const token = m3uProxy.tokenFromPath(pathname);
+  if (token) {
+    return m3uProxy.proxyRequest(request, token, { secret: env?.M3U_PROXY_SECRET, origin });
+  }
 
-    if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: corsHeaders() });
-    }
+  if (pathname === '/' || pathname === '/api') {
+    return new Response(null, { status: 302, headers: headers({ Location: `${origin}/manifest.json` }) });
+  }
+  if (pathname === '/healthz') {
+    return json({
+      ok: true,
+      addon: 'net.ramdonlatam.catalogos',
+      version: '2.1.0',
+      runtime: 'cloudflare-workers',
+      channelsOnly: true,
+      configurable: false,
+      catalogs: core.CATALOGS.length,
+      m3uProxyConfigured: Boolean(env?.M3U_PROXY_SECRET),
+      cache: cache.stats(),
+    }, 200, 0, request.method);
+  }
+  if (pathname === '/assets/logo.png') {
+    return new Response(request.method === 'HEAD' ? null : LOGO_BYTES, {
+      status: 200,
+      headers: headers({ 'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400' }),
+    });
+  }
+  if (pathname === '/manifest.json') {
+    return json(core.buildManifest(`${origin}/assets/logo.png`), 200, 300, request.method);
+  }
 
-    if (request.method !== 'GET' && request.method !== 'HEAD') {
-      return jsonResponse({ error: 'method_not_allowed' }, 405, 0);
-    }
+  const catalogMatch = /^\/catalog\/([^/]+)\/([^/]+?)(?:\/(.+?))?\.json$/.exec(pathname);
+  if (catalogMatch) {
+    const type = safeDecode(catalogMatch[1]);
+    const id = safeDecode(catalogMatch[2]);
+    if (!type || !id) return json({ error: 'invalid_id' }, 400);
+    const extra = Object.fromEntries(url.searchParams);
+    if (catalogMatch[3]) Object.assign(extra, Object.fromEntries(new URLSearchParams(catalogMatch[3])));
+    const result = await core.handleCatalog(type, id, null, extra);
+    return json(result, 200, result.cacheMaxAge || 60, request.method);
+  }
 
-    const origin = url.origin;
-    const host = url.host;
+  const metaMatch = /^\/meta\/([^/]+)\/(.+)\.json$/.exec(pathname);
+  if (metaMatch) {
+    const type = safeDecode(metaMatch[1]);
+    const id = safeDecode(metaMatch[2]);
+    if (!type || !id) return json({ error: 'invalid_id' }, 400);
+    const result = await core.handleMeta(type, id);
+    return json(result, 200, result.cacheMaxAge || 60, request.method);
+  }
 
-    // ── Portada estilo streaming (tendencias en vivo si hay TMDB) ─
-    if (path === '/' || path === '/api') {
-      const accept = request.headers.get('accept') || '';
-      if (!accept.includes('text/html') && accept.includes('application/json')) {
-        return edgeCached(
-          request,
-          ctx,
-          async () => jsonResponse(core.buildManifest(`${origin}/assets/logo.png`), 200, 300),
-          `${origin}/__edge/root-manifest.json`
-        );
-      }
-      return edgeCached(request, ctx, async () => {
-        const trending = await loadTrending();
-        const html = renderHome({
-          origin,
-          host,
-          trendingMovies: trending.movies,
-          trendingSeries: trending.series,
-          trendingAnime: trending.anime,
-          apiStatus: { tmdb: config.tmdbConfigured },
-        });
-        return htmlResponse(html, 1800);
-      }, `${origin}/__edge/home.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}`);
-    }
+  const streamMatch = /^\/stream\/([^/]+)\/(.+)\.json$/.exec(pathname);
+  if (streamMatch) {
+    const type = safeDecode(streamMatch[1]);
+    const id = safeDecode(streamMatch[2]);
+    if (!type || !id) return json({ error: 'invalid_id' }, 400);
+    const result = await streamResult(type, id, request, env, ctx);
+    return json(result, 200, 0, request.method);
+  }
 
-    // ── Reproductor web (/watch) ──────────────────────────────
-    if (path === '/watch') {
-      return edgeCached(
-        request,
-        ctx,
-        async () => htmlResponse(
-          renderWatch({ origin, host, region: config.watchRegion }),
-          1800,
-          { 'Referrer-Policy': 'no-referrer', 'X-Content-Type-Options': 'nosniff' }
-        ),
-        `${origin}/__edge/watch.html?region=${encodeURIComponent(config.watchRegion)}`
-      );
-    }
-
-    if (path === '/internal/watch/catalogs') {
-      return edgeCached(
-        request,
-        ctx,
-        async () => jsonResponse(watchApi.buildWatchCatalogs(null), 200, 3600),
-        `${origin}/__edge/watch-catalogs.json?region=${encodeURIComponent(config.watchRegion)}&tmdb=${config.tmdbConfigured ? 1 : 0}`
-      );
-    }
-
-    if (path === '/internal/watch/search') {
-      const clientIp = request.headers.get('cf-connecting-ip') ||
-        (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
-      if (!rateLimit.allow(`watch-search:${clientIp}`, { limit: 30, windowMs: 60_000 })) {
-        return jsonResponse({ error: 'rate_limited', message: 'Demasiadas búsquedas seguidas. Espera un momento.' }, 429, 0);
-      }
-      const query = url.searchParams.get('q') || '';
-      const type = url.searchParams.get('type') || 'all';
-      const page = Number(url.searchParams.get('page')) || 1;
-      const cacheKey = `${origin}/__edge/watch-search.json?q=${encodeURIComponent(query.trim().toLowerCase())}&type=${encodeURIComponent(type)}&p=${page}&tmdb=${config.tmdbConfigured ? 1 : 0}`;
-      return edgeCached(
-        request,
-        ctx,
-        async () => {
-          const result = await watchApi.searchWatch({ query, type, page, lang: config.tmdbLanguage });
-          return jsonResponse(result, 200, result.results.length ? 600 : 120);
-        },
-        cacheKey
-      );
-    }
-
-    if (path === '/internal/watch/skip') {
-      const clientIp = request.headers.get('cf-connecting-ip') ||
-        (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
-      if (!rateLimit.allow(`watch-skip:${clientIp}`, { limit: 60, windowMs: 60_000 })) {
-        return jsonResponse({ ok: false, error: 'rate_limited', segments: [], sources: {} }, 429, 0);
-      }
-      const skipQuery = {
-        type: url.searchParams.get('type') || 'movie',
-        id: url.searchParams.get('id') || '',
-        imdbId: url.searchParams.get('imdb') || url.searchParams.get('imdb_id') || '',
-        tmdbId: url.searchParams.get('tmdb') || url.searchParams.get('tmdb_id') || '',
-        season: url.searchParams.get('season') || '',
-        episode: url.searchParams.get('episode') || '',
-        duration: url.searchParams.get('duration') || '',
-        anime: url.searchParams.get('anime') || '',
-      };
-      const parsed = skipSegments.parseSkipQuery(skipQuery);
-      const durBucket = parsed.duration ? Math.round(parsed.duration / 15) * 15 : 0;
-      const cacheKey = `${origin}/__edge/watch-skip.json?t=${parsed.type}&im=${encodeURIComponent(parsed.imdbId)}&tm=${parsed.tmdbId || 0}&al=${parsed.anilistId || 0}&ml=${parsed.malId || 0}&s=${parsed.season || 0}&e=${parsed.episode || 0}&d=${durBucket}&a=${parsed.anime ? 1 : 0}`;
-      return edgeCached(
-        request,
-        ctx,
-        async () => {
-          const result = await skipSegments.getSkipSegments(skipQuery);
-          return jsonResponse(result, 200, result.segments.length ? 3600 : 600);
-        },
-        cacheKey
-      );
-    }
-
-    let watchMatch = path.match(WATCH_FALLBACK_RE);
-    if (watchMatch) {
-      const fbId = safeDecode(watchMatch[2]);
-      if (fbId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
-      return jsonResponse(watchApi.getWatchFallbackCatalog(watchMatch[1], fbId), 200, 3600);
-    }
-
-    watchMatch = path.match(WATCH_META_RE);
-    if (watchMatch) {
-      const metaId = safeDecode(watchMatch[2]);
-      if (metaId === null) return jsonResponse({ error: 'invalid_id' }, 400, 0);
-      return edgeCached(
-        request,
-        ctx,
-        async () => {
-          const result = await watchApi.getWatchMeta(watchMatch[1], metaId, null);
-          return jsonResponse(result, 200, result.cacheMaxAge ?? 1800);
-        },
-        `${origin}/__edge/watch-meta/${watchMatch[1]}/${encodeURIComponent(metaId)}?tmdb=${config.tmdbConfigured ? 1 : 0}`
-      );
-    }
-
-    // ── Página de configuración ───────────────────────────────
-    if (path === '/configure') {
-      const createConfigure = async () => {
-        const trending = await loadTrending();
-        return htmlResponse(
-          renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series }),
-          1800
-        );
-      };
-      return edgeCached(
-        request,
-        ctx,
-        createConfigure,
-        `${origin}/__edge/configure.html?lang=${encodeURIComponent(config.tmdbLanguage)}&region=${encodeURIComponent(config.watchRegion)}&kofi=${encodeURIComponent(config.kofiUrl || '')}&sup=${encodeURIComponent(config.supportUrl || '')}&streams=${encodeURIComponent(streams.activeProviders(null).join(','))}`
-      );
-    }
-
-    // ── Estado agregado de la caché (sin claves ni datos por usuario) ──
-    if (path === '/internal/cache.json') {
-      // `configs` es el registro de configuraciones vistas: qué pregenerar.
-      // Solo lleva el segmento base64url (que ya viaja en la URL del manifest)
-      // y la selección de cada configuración; no incluye credenciales.
-      const limit = Math.min(200, Math.max(1, Number(url.searchParams.get('configs')) || 40));
-      return jsonResponse(
-        { ...cache.stats(), responseCache: responseCache.stats(), configs: configRegistry.report({ limit }) },
-        200,
-        0
-      );
-    }
-
-    // ── Branding (logos de plataformas/estudios vía TMDB) ─────
-    if (path === '/internal/branding.json') {
-      const lang = url.searchParams.get('lang') || config.tmdbLanguage || 'es';
-      return edgeCached(
-        request,
-        ctx,
-        async () => jsonResponse(await branding(lang), 200, 86400),
-        `${origin}/__edge/branding.json?lang=${encodeURIComponent(lang)}`
-      );
-    }
-
-    // ── Diagnóstico de streams (¿por qué no aparecen resultados?) ──
-    if (path === '/internal/streams-test.json') {
-      const clientIp = request.headers.get('cf-connecting-ip') ||
-        (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
-      if (!rateLimit.allow(`streams-test:${clientIp}`, { limit: 6, windowMs: 60_000 })) {
-        return jsonResponse({ error: 'rate_limited', message: 'Demasiadas pruebas seguidas. Espera un minuto.' }, 429, 0);
-      }
-      const type = url.searchParams.get('type') === 'series' ? 'series' : 'movie';
-      const testId = url.searchParams.get('id') || 'tt1160419';
-      const diagKey = `diag:${type}:${testId}`;
-      const diag = await cache.coalesce(diagKey, async () => {
-        const cached = cache.get(diagKey);
-        if (cached) return cached;
-        const fresh = await streams.diagnose(type, testId, null);
-        cache.set(diagKey, fresh, 30);
-        return fresh;
-      });
-      return jsonResponse(diag, 200, 0);
-    }
-
-    // ── Healthcheck ───────────────────────────────────────────
-    if (path === '/healthz') {
-      return jsonResponse(
-        {
-          ok: true,
-          addon: 'net.ramdonlatam.catalogos',
-          version: '1.9.0',
-          runtime: 'cloudflare-workers',
-          configurable: true,
-          catalogs: core.CATALOGS.length,
-          platforms: catalogs.PLATFORMS.length,
-          studios: 0,
-          sources: {
-            tmdb: config.tmdbConfigured,
-            tvmaze: true,
-            omdb: config.omdbConfigured,
-            ...Object.fromEntries(
-              streams.PROVIDER_KEYS.map((key) => [key, streams.activeProviders(null).includes(key)])
-            ),
-          },
-          streamProviders: streams.activeProviders(null),
-          // Donaciones: enlace a la página de Ko-fi (se paga allí con PayPal o tarjeta).
-          donations: { provider: 'kofi', enabled: config.kofiEnabled, page: config.kofiUrl || null },
-          cache: cache.stats(),
-          // Caché de respuestas del isolate: la única que funciona en
-          // *.workers.dev, donde la Cache API de Cloudflare no hace nada.
-          responseCache: responseCache.stats(),
-          // Ahorro de cuota: cuánto del plan de estáticos está en marcha.
-          // `configsTracked` son las configuraciones vistas desde este isolate;
-          // `npm run prerender -- --from-url` las usa para pregenerar.
-          quota: {
-            freeDailyInvocations: 100_000,
-            configsTracked: configRegistry.report({ limit: 1 }).totalSegments,
-            staticPlan: 'static-assets + _redirects + por-configuracion',
-            hint: 'npm run prerender -- --from-url=https://tu-dominio',
-          },
-          watchRegion: config.watchRegion,
-          watchRegionFallback: config.watchRegionFallback,
-        },
-        200,
-        0
-      );
-    }
-
-    // ── Marca embebida ────────────────────────────────────────
-    // El logo va en memoria (lib/logoData.js) para que el manifest y las
-    // cabeceras OG nunca apunten a un archivo que falte. Los demás derivados
-    // (iconos, favicon, tarjeta social) los sirve el edge desde public/assets.
-    if (path === '/assets/logo.png' || path === '/logo.png') {
-      return new Response(LOGO_BYTES, {
-        status: 200,
-        headers: corsHeaders({
-          'Content-Type': 'image/png',
-          'Cache-Control': 'public, max-age=604800, immutable',
-        }),
-      });
-    }
-
-    // Manifest web del sitio: sin esto el navegador pediría /site.webmanifest
-    // al Worker en cada visita (y gastaría cuota). Se responde desde memoria.
-    if (path === '/site.webmanifest') {
-      return new Response(SITE_MANIFEST, {
-        status: 200,
-        headers: corsHeaders({
-          'Content-Type': 'application/manifest+json; charset=utf-8',
-          'Cache-Control': 'public, max-age=86400',
-        }),
-      });
-    }
-
-    // ── Manifest por defecto ──────────────────────────────────
-    if (path === '/manifest.json') {
-      return edgeCached(request, ctx, async () => jsonResponse(core.buildManifest(`${origin}/assets/logo.png`), 200, 300));
-    }
-
-    // ── Catálogos / Metadatos con config por defecto ──────────
-    let match = path.match(CATALOG_RE);
-    if (match) return serveCatalog(match[1], match[2], null, request, ctx, match[3]);
-    match = path.match(META_RE);
-    if (match) return serveMeta(match[1], match[2], null, request, ctx);
-    match = path.match(STREAM_RE);
-    if (match) return serveStream(match[1], match[2], null, request, ctx);
-
-    // ── Rutas con prefijo de config de usuario: /<cfg>/... ────
-    const prefixed = path.match(CONFIG_PREFIX_RE);
-    if (prefixed) {
-      const cfg = userConfig.decodeConfig(prefixed[1], catalogs.PLATFORM_KEYS, catalogs.STUDIO_KEYS, streams.PROVIDER_KEYS);
-      if (cfg) {
-        const rest = prefixed[2].replace(/\/+$/, '') || '/';
-        const logoUrl = `${origin}/assets/logo.png`;
-        // Registro de configuraciones vistas: alimenta el planificador de
-        // estáticos (`npm run prerender -- --from-url` lo lee de
-        // /internal/cache.json). Se anota en las rutas de Stremio (manifest,
-        // catálogo, ficha y stream) porque son las que se repiten en cada
-        // sesión; /configure es una visita humana y no aporta señal.
-        if (rest !== '/configure') configRegistry.note(prefixed[1], cfg);
-
-        // Si alguna de estas rutas está pregenerada en public/, la petición ni
-        // siquiera llega aquí (los static assets van primero): llegar significa
-        // que el archivo falta y hay que resolverlo en caliente, como siempre.
-        // Stremio abre /<tu-config>/configure al pulsar "Configurar":
-        // debe abrir el configurador con TU región/selección ya cargada.
-        if (rest === '/configure') {
-          const trending = await loadTrending();
-          return htmlResponse(renderConfigure({ origin, host, trendingMovies: trending.movies, trendingSeries: trending.series, initialCfg: cfg }));
-        }
-        if (rest === '/watch') {
-          return htmlResponse(
-            renderWatch({ origin, host, cfgPrefix: `/${prefixed[1]}`, region: cfg.region }),
-            0,
-            { 'Referrer-Policy': 'no-referrer', 'X-Content-Type-Options': 'nosniff' }
-          );
-        }
-        if (rest === '/manifest.json') {
-          const createManifest = () => jsonResponse(core.buildManifest(logoUrl, cfg), 200, 300);
-          return edgeCached(request, ctx, createManifest);
-        }
-        let m2 = rest.match(CATALOG_RE);
-        if (m2) return serveCatalog(m2[1], m2[2], cfg, request, ctx, m2[3]);
-        m2 = rest.match(META_RE);
-        if (m2) return serveMeta(m2[1], m2[2], cfg, request, ctx);
-        m2 = rest.match(STREAM_RE);
-        if (m2) return serveStream(m2[1], m2[2], cfg, request, ctx);
-      }
-      // Prefijo con pinta de config pero inválida → 404 limpio
-      return jsonResponse({ error: 'invalid_config', message: 'Config inválida. Vuelve a /configure' }, 404, 0);
-    }
-
-    return jsonResponse(
-      { error: 'not_found', message: 'Ruta no encontrada. Prueba /manifest.json o /configure' },
-      404,
-      0
-    );
+  return json({ error: 'not_found' }, 404, 0, request.method);
 }
 
 export default {
-  async fetch(request, env, ctx) {
-    const response = await requestScope.run(() => handleRequest(request, env, ctx));
-    try {
-      response.headers.set('X-Catalogos-Runtime', 'worker');
-    } catch (_) { /* cabeceras inmutables: no pasa nada, es solo instrumentación */ }
-    return response;
+  fetch(request, env, ctx) {
+    return route(request, env, ctx).catch((error) => {
+      console.error('[Worker request]', error?.message);
+      return json({ error: 'internal_error' }, 500);
+    });
   },
 };

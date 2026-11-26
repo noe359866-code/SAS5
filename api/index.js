@@ -43,16 +43,13 @@ async function streamResult(type, id, req) {
   const result = await core.handleStream(type, id, null);
   if (!id.startsWith('rlch:m3u:')) return result;
   const secret = process.env.M3U_PROXY_SECRET;
-  if (!secret) {
-    result.streams = [];
-    result.proxySecretRequired = true;
+  if (!secret || String(secret).length < 24) {
     return result;
   }
   try {
     result.streams = await m3uProxy.maskedStreams(result.streams, { origin: requestOrigin(req), secret });
-  } catch {
-    result.streams = [];
-    result.proxySecretRequired = true;
+  } catch (error) {
+    console.error('[API m3uProxy]', error?.message);
   }
   return result;
 }

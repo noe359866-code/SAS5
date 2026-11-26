@@ -34,7 +34,7 @@ object StreamRequestHeaders {
     /**
      * Cabeceras para una petición de media (vídeo, HLS, DASH, subtítulos).
      *
-     * Diferencia clave con una petición de página: `Accept: */*`,
+     * Diferencia clave con una petición de página: `Accept` comodín,
      * `Sec-Fetch-Dest: video` y `Sec-Fetch-Mode: no-cors`, que es lo que envía
      * el elemento `<video>` del navegador. `Referer`/`Origin` salen de las
      * cabeceras del plugin; si no las trae, se derivan del propio host del

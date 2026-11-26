@@ -1,39 +1,39 @@
 # Sonda-barrido m3u.tvcluboficial.com (para la lista M3U)
 
-Fecha: 2026-11-26T00:22:16.559Z
+Fecha: 2026-11-26T00:35:12.000Z
 
 player_api: HTTP 404 (404 = host de solo-streams, se barre por ids)
-ids conocidos con nombre: 162 · máximo conocido: 1173 · barrido: 1..1600
+ids conocidos con nombre: 160 · máximo conocido: 1173 · barrido: 1..1600
 
-barrido: 419 ids vivos de 1600 (6 s)
+barrido: 418 ids vivos de 1600 (5 s)
 
 maestra id 5 (sin nombre conocido):
 ```
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-TARGETDURATION:6
-#EXT-X-MEDIA-SEQUENCE:468897
-#EXTINF:6.033489,
-http://ts0.tvcluboficial.com/get_ts/ReachBot/Kip/AE/_468897.ts
-#EXTINF:6.016833,
-http://ts0.tvcluboficial.com/get_ts/ReachBot/Kip/AE/_468898.ts
-#EXTINF:6.033500,
-http://ts0.tvcluboficial.com/get_ts/ReachBot/Kip/AE/_468899.ts
-#EXTINF:6.016800,
-http://ts0.tvcluboficial.com/get_ts/ReachBot/Kip/AE/_468900.t
+#EXT-X-MEDIA-SEQUENCE:469026
+#EXTINF:6.033467,
+http://ts0.tvcluboficial.com/get_ts/ReachBot/Kip/AE/_469026.ts
+#EXTINF:6.016811,
+http://ts0.tvcluboficial.com/get_ts/ReachBot/Kip/AE/_469027.ts
+#EXTINF:6.033456,
+http://ts0.tvcluboficial.com/get_ts/ReachBot/Kip/AE/_469028.ts
+#EXTINF:6.016789,
+http://ts0.tvcluboficial.com/get_ts/ReachBot/Kip/AE/_469029.t
 ```
 maestra id 6 (sin nombre conocido):
 ```
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-TARGETDURATION:7
-#EXT-X-MEDIA-SEQUENCE:2395215
+#EXT-X-MEDIA-SEQUENCE:2395343
 #EXTINF:5.605600,
-http://ts4.tvcluboficial.com/get_ts/ReachBot/Kip/Eventos3/_2395215.ts
+http://ts4.tvcluboficial.com/get_ts/ReachBot/Kip/Eventos3/_2395343.ts
 #EXTINF:5.605600,
-http://ts4.tvcluboficial.com/get_ts/ReachBot/Kip/Eventos3/_2395216.ts
+http://ts4.tvcluboficial.com/get_ts/ReachBot/Kip/Eventos3/_2395344.ts
 #EXTINF:7.007000,
-http://ts4.tvcluboficial.com/get_ts/ReachBot/Kip/Eventos3/_2395217.ts
+http://ts4.tvcluboficial.com/get_ts/ReachBot/Kip/Eventos3/_2395345.ts
 #EXTINF:5.605600,
 http://ts4.tvcluboficial.com/get_ts/Rea
 ```
@@ -42,26 +42,26 @@ maestra id 14 (sin nombre conocido):
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-TARGETDURATION:6
-#EXT-X-MEDIA-SEQUENCE:57872
-#EXTINF:2.535856,
-http://ts6.tvcluboficial.com/get_ts/ReachBot/Kip/A3Cine/_57872.ts
-#EXTINF:5.672356,
-http://ts6.tvcluboficial.com/get_ts/ReachBot/Kip/A3Cine/_57873.ts
-#EXTINF:4.304300,
-http://ts6.tvcluboficial.com/get_ts/ReachBot/Kip/A3Cine/_57874.ts
-#EXTINF:5.972633,
+#EXT-X-MEDIA-SEQUENCE:57925
+#EXTINF:4.938278,
+http://ts6.tvcluboficial.com/get_ts/ReachBot/Kip/A3Cine/_57925.ts
+#EXTINF:6.039378,
+http://ts6.tvcluboficial.com/get_ts/ReachBot/Kip/A3Cine/_57926.ts
+#EXTINF:3.937267,
+http://ts6.tvcluboficial.com/get_ts/ReachBot/Kip/A3Cine/_57927.ts
+#EXTINF:5.672333,
 http://ts6.tvcluboficial.com/get_ts/ReachBot/Kip/A3Ci
 ```
 
-con nombre conocido: 159 · nuevos sin nombre («tvclub <id>»): 258
+con nombre conocido: 156 · nombrados por slug interno: 220 · genéricos: 0
 
 ## Canales por grupo
 
-- Latinoamérica: 406
+- Latinoamérica: 364
 - Argentina: 6
-- España: 3
+- España: 4
 - México: 1
 - Chile: 1
 
-total: 417 canales
-semilla tvclub escrita: 411 -> 417
+total: 376 canales
+semilla tvclub escrita: 417 -> 376

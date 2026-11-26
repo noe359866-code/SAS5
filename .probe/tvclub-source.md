@@ -1,6 +1,6 @@
 # Sonda 13: m3u.tvcluboficial.com a fondo
 
-Fecha: 2026-11-26T00:20:07.449Z
+Fecha: 2026-11-26T00:33:15.997Z
 
 ## 1. Acceso al canal de ejemplo (id 293)
 
@@ -21,7 +21,7 @@ Fecha: 2026-11-26T00:20:07.449Z
 | id 155 | falla | segmento HTTP 404 · 548 B |
 | id 118 | OK | segmento HTTP 206 · MPEG-TS |
 | id 45 | falla | segmento HTTP 404 · 548 B |
-| id 588 | OK | segmento HTTP 206 · MPEG-TS |
+| id 588 | falla | segmento HTTP 404 · 548 B |
 
 ## 3. Enumeración de IDs (/free/ReachBot/Kip/<n>.m3u8)
 

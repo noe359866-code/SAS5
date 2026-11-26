@@ -77,5 +77,7 @@ function liveSeedUrls() {
   try { mega = require('../lib/data/liveChannelsMegaSeed.json'); } catch {}
   let tvclub = [];
   try { tvclub = require('../lib/data/liveChannelsTvclubSeed.json'); } catch {}
-  return verified.length + unverified.length + mega.length + tvclub.length;
+  let ent = [];
+  try { ent = require('../lib/data/liveChannelsEntSeed.json'); } catch {}
+  return verified.length + unverified.length + mega.length + tvclub.length + ent.length;
 }

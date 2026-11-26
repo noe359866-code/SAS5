@@ -63,6 +63,19 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: Warm up Gradle plugin resolution (retry on transient Maven failures)
+        run: |
+          for attempt in 1 2 3 4; do
+            if ./gradlew help --no-daemon; then
+              echo "Gradle plugin resolution OK on attempt ${attempt}"
+              exit 0
+            fi
+            echo "Gradle warm-up attempt ${attempt} failed; retrying in 20s"
+            sleep 20
+          done
+          echo "Gradle plugin resolution failed after 4 attempts"
+          exit 1
+
       - name: Run JVM unit tests (QuickJS plugin runtime & manifest parser)
         run: |
           set -o pipefail

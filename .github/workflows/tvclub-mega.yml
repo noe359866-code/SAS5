@@ -1,0 +1,45 @@
+name: Mega-sonda tvcluboficial.com
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/tvclub-mega.yml'
+      - 'scripts/tvclub-mega-probe.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  mega-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Ejecutar mega-sonda tvcluboficial.com
+        run: node scripts/tvclub-mega-probe.mjs
+      - name: Regenerar lista M3U con la semilla actualizada
+        if: always()
+        run: node scripts/m3u-export.mjs
+      - name: Verificar pruebas del addon
+        if: always()
+        run: npm test
+      - name: Guardar resultados en la rama
+        if: always()
+        run: |
+          test -s .probe/tvclub-mega.md || exit 0
+          git config user.name "sonda"
+          git config user.email "sonda@users.noreply.github.com"
+          for f in .probe/tvclub-mega.md lib/data/liveChannelsTvclubSeed.json listas/ramdonlatam-tv.m3u; do
+            test -s "$f" && git add -f "$f"
+          done
+          git diff --cached --quiet || git commit -m "sonda: mega-barrido tvcluboficial.com $(date -u +%FT%TZ) [skip ci]"
+          git fetch origin || true
+          git rebase -X theirs origin/${{ github.ref_name }} || git rebase --abort || true
+          git push origin HEAD:refs/heads/${{ github.ref_name }} || true

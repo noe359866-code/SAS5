@@ -8,6 +8,8 @@ import com.dokar.quickjs.quickJs
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import com.streamflixreborn.streamflix.utils.NetworkClient
+import com.streamflixreborn.streamflix.utils.StreamRequestHeaders
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -35,7 +37,6 @@ import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 import java.util.zip.GZIPInputStream
 import java.util.zip.InflaterInputStream
 import javax.crypto.Cipher
@@ -72,16 +73,9 @@ class PluginRuntime(
         private const val MAX_FETCH_BODY_CHARS = 2 * 1024 * 1024
         private const val QUICKJS_MEMORY_LIMIT = 64L * 1024 * 1024
         private const val QUICKJS_MAX_STACK_SIZE = 1024L * 1024
-        private const val DEFAULT_USER_AGENT =
-            "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36"
 
-        fun defaultHttpClient(): OkHttpClient = OkHttpClient.Builder()
-            .connectTimeout(20, TimeUnit.SECONDS)
-            .readTimeout(25, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
-            .followRedirects(true)
-            .followSslRedirects(true)
-            .build()
+        /** Cabeceras de navegador + cookies compartidas con la WebView (ver [NetworkClient.browser]). */
+        fun defaultHttpClient(): OkHttpClient = NetworkClient.browser
 
         /**
          * quickjs-kt caches the `JavaVM` in a process-wide native static that is cleared as soon as
@@ -595,15 +589,16 @@ class PluginRuntime(
                 gson.fromJson<Map<String, Any?>>(headersJson, mapType)
             }.getOrNull().orEmpty()
 
-            val headersMap = LinkedHashMap<String, String>()
+            val pluginHeaders = LinkedHashMap<String, String>()
             rawHeaders.forEach { (k, v) ->
                 if (k.isNotBlank() && v != null) {
-                    headersMap[k] = v.toString()
+                    pluginHeaders[k] = v.toString()
                 }
             }
-            if (headersMap.keys.none { it.equals("User-Agent", ignoreCase = true) }) {
-                headersMap["User-Agent"] = DEFAULT_USER_AGENT
-            }
+            // Cabeceras de navegador móvil + Referer/Origin derivados del host:
+            // evita los 403 por fingerprint y por hotlink cuando el scraper no
+            // las define. Las del plugin siempre mandan.
+            val headersMap = StreamRequestHeaders.forPluginFetch(url, method, pluginHeaders)
 
             val requestBuilder = Request.Builder().url(url)
             headersMap.forEach { (k, v) -> requestBuilder.header(k, v) }

@@ -19,6 +19,38 @@ Aplicación Android **exclusiva para móvil (`APP_LAYOUT=mobile`)** basada en [S
   4. **HTTPS** y hosts que ya funcionaron antes; los que fallan en la sesión se hunden al final.
   El encabezado del reproductor muestra lo elegido (`S2 E5 • Título • MP4 1080p · auto`). Elegir un servidor a mano en **Ajustes → Servidores** sigue disponible como override, pero nunca es obligatorio.
 
+## Cómo se evitan los `403` de los hosts
+
+Los 403 de los hosts de streaming casi nunca son un bloqueo del contenido: son *hotlink check*
+(la petición de vídeo debe venir "desde" el sitio que la publica) y *fingerprint* (la petición debe
+parecerse a la de un navegador). Eso se ataca en tres capas:
+
+1. **Un solo UA y un solo juego de cabeceras de navegador** (`utils/StreamRequestHeaders.kt`):
+   - Media (MP4/HLS/DASH/subtítulos): `User-Agent` de Chrome móvil, `Accept: */*`,
+     `Accept-Language`, `Sec-Fetch-Dest: video`, `Sec-Fetch-Mode: no-cors`,
+     `Sec-Fetch-Site: cross-site`.
+   - `fetch`/`axios` de los plugins: `Sec-Fetch-Dest: empty`, `Sec-Fetch-Mode: cors` y `Origin`
+     en `POST/PUT/PATCH/DELETE` (como un XHR real).
+   - `Referer`/`Origin` se derivan del host del stream cuando el plugin no los devuelve; si el
+     plugin los devuelve, **mandan los del plugin** (y el `Origin` se recalcula a partir de su
+     `Referer`). Sin duplicados `Referer`/`referer`.
+   - Antes el vídeo se pedía con `User-Agent: okhttp/4.x` y `Accept: text/html`, que es la firma
+     clásica de bot y la causa más habitual del 403.
+2. **Sesión compartida** (`NetworkClient.browser`): el motor de plugins y el `OkHttpDataSource` del
+   reproductor usan el mismo `OkHttpClient`, con:
+   - el *cookie jar* respaldado por `CookieManager` (la WebView y OkHttp comparten cookies), así el
+     `cf_clearance`/cookies de sesión que se obtienen al abrir la página viajan también al
+     `manifest.json` y al propio stream;
+   - `ConnectionSpec` con TLS 1.0–1.3 y, en Android < 9, el certificado ISRG Root X1 empaquetado;
+   - redirecciones seguidas (y una variante sin redirecciones para los `fetch(..., {redirect:'manual'})`).
+   El cliente del reproductor añade además DoH (`DnsResolver`) para evitar DNS bloqueados.
+3. **Si aun así hay 403, no se queda colgado**: `StreamAutoSelector` marca el host como caído, el
+   reproductor salta solo al siguiente stream (y si el contenedor era desconocido lo reintenta como
+   HLS) y en la siguiente reproducción ese host va al final. Nunca hay que abrir Ajustes a mano.
+
+Todo esto está cubierto por `StreamRequestHeadersTest` (cabeceras de media, prioridad de las del
+plugin, deduplicado de `Referer`, `Origin` solo en métodos con cuerpo, `originOf` con `magnet:`/`data:`).
+
 ## Formato compatible de `manifest.json`
 
 ```json

@@ -17,10 +17,10 @@ import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
+import com.streamflixreborn.streamflix.utils.NetworkClient
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.File
-import java.util.concurrent.TimeUnit
 
 /**
  * Central coordinator for external Nuvio-compatible JS plugin repositories (`manifest.json`).
@@ -59,13 +59,13 @@ class PluginManager(
             return initialize(ctx)
         }
 
-        fun defaultHttpClient(): OkHttpClient = OkHttpClient.Builder()
-            .connectTimeout(20, TimeUnit.SECONDS)
-            .readTimeout(25, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
-            .followRedirects(true)
-            .followSslRedirects(true)
-            .build()
+        /**
+         * Mismo cliente que usa el reproductor: UA de Chrome móvil, `Accept` de
+         * XHR, `Sec-Fetch-*`, *cookie jar* compartido con la WebView (Cloudflare)
+         * y TLS compatible con Android antiguo. Es lo que evita los 403 al bajar
+         * `manifest.json` y los scripts de los scrapers.
+         */
+        fun defaultHttpClient(): OkHttpClient = NetworkClient.browser
     }
 
     private val mutex = Mutex()

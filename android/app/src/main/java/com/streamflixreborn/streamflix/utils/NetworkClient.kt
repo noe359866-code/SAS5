@@ -27,8 +27,8 @@ object NetworkClient {
 
     private const val TAG = "Cine24hBypass"
     
-    // User-Agent Mobile standard per massima compatibilità con Cloudflare
-    const val USER_AGENT = "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36"
+    // Un único UA de Chrome móvil para páginas, API y media (ver StreamRequestHeaders).
+    const val USER_AGENT = StreamRequestHeaders.USER_AGENT
 
     private val cookieManager by lazy { CookieManager.getInstance() }
 
@@ -57,6 +57,14 @@ object NetworkClient {
     }
 
     val default: OkHttpClient by lazy { buildClient(DnsResolver.doh) }
+
+    /**
+     * Cliente para peticiones de plugins y API: mismas cabeceras de navegador y
+     * el mismo *cookie jar* (así el `cf_clearance` de la página viaja también al
+     * manifest y al stream), pero con el DNS del sistema para no depender del
+     * proveedor DoH del usuario.
+     */
+    val browser: OkHttpClient by lazy { buildClient(Dns.SYSTEM) }
     val systemDns: OkHttpClient by lazy { buildClient(Dns.SYSTEM) }
     val noRedirects: OkHttpClient by lazy { buildClient(DnsResolver.doh) { it.followRedirects(false).followSslRedirects(false) } }
 

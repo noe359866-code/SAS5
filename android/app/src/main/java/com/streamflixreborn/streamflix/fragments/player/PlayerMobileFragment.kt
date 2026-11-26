@@ -89,6 +89,7 @@ import com.streamflixreborn.streamflix.utils.DnsResolver
 import com.streamflixreborn.streamflix.utils.NetworkClient
 import com.streamflixreborn.streamflix.utils.EpisodeManager
 import com.streamflixreborn.streamflix.utils.PlayerGestureHelper
+import com.streamflixreborn.streamflix.utils.StreamRequestHeaders
 import com.streamflixreborn.streamflix.utils.UserDataCache.toEpisode
 import com.streamflixreborn.streamflix.utils.UserDataCache.toMovie
 import kotlinx.coroutines.Dispatchers
@@ -96,7 +97,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
-import okhttp3.internal.userAgent
 import java.util.Locale
 
 class PlayerMobileFragment : Fragment() {
@@ -913,10 +913,11 @@ class PlayerMobileFragment : Fragment() {
 
         val currentPosition = player.currentPosition
 
+        // Cabeceras de "navegador móvil" para el propio media (UA de Chrome,
+        // Accept */*, Sec-Fetch-Dest: video) + las del plugin, que mandan.
+        // Sin esto los CDN con hotlink check responden 403 al vídeo.
         httpDataSource.setDefaultRequestProperties(
-            mapOf(
-                "User-Agent" to userAgent,
-            ) + (video.headers ?: emptyMap())
+            StreamRequestHeaders.forMedia(video.source, video.headers)
         )
 
         player.setMediaItem(
